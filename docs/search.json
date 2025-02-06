@@ -1,0 +1,196 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "医学统计学习笔记",
+    "section": "",
+    "text": "本书的前身是开始于23年暑假的rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，随用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.)；还有有一部分的项目分享（如果顺利的话）和读书报告。\n按照大类细分的话会有如下架构：\n\n统计学\n\n概率统计\n贝叶斯统计\n最大似然统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nkaggle\n\n读书笔记\n\n本网站/笔记基于Quarto搭建/提供支持。\n\n\nCitationBibTeX citation:@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-02-06},\n  url = {https://github.com/zhoulvbang/Medical-Statistics-Notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nsimonzhou. 2025. “医学统计学习笔记.” February 6, 2025. https://github.com/zhoulvbang/Medical-Statistics-Notes.",
+    "crumbs": [
+      "Home",
+      "主页"
+    ]
+  },
+  {
+    "objectID": "statistics-basic/test.html",
+    "href": "statistics-basic/test.html",
+    "title": "初识医学统计学",
+    "section": "",
+    "text": "rmarkdown",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "初识医学统计学"
+    ]
+  },
+  {
+    "objectID": "Quarto/yaml_settings.html",
+    "href": "Quarto/yaml_settings.html",
+    "title": "YAML设置",
+    "section": "",
+    "text": "Quarto主要由三大部分组成：metadata, text, 和 code。其中metadata是文档开头写在”—“之间的句子，它采用的是YAML语法，所以有时候也被叫做YAML metadata 或者 the YAML frontmatter。YAML定义了Quarto文档的各种属性，比如编译文件类型、主题、代码块的执行行为以及目录等。在YAML metadata中采用正确的缩进十分重要。",
+    "crumbs": [
+      "Home",
+      "Quarto introduction",
+      "YAML设置"
+    ]
+  },
+  {
+    "objectID": "Quarto/yaml_settings.html#sec-dateformat",
+    "href": "Quarto/yaml_settings.html#sec-dateformat",
+    "title": "YAML设置",
+    "section": "\n2.1 date-format的设置",
+    "text": "2.1 date-format的设置\ndate-format通过以下关键词来定义日期格式：\n\n\n\n\n\n\n\nStyle\nDescription\nExample\n\n\n\nfull\nA full date that includes the weekday name\nMonday, March 7, 2005\n\n\nlong\nA long date that includes a wide month name\nMarch 7, 2005\n\n\nmedium\nA medium date\nMar 7, 2005\n\n\nshort\nA short date with a numeric month\n3/7/05\n\n\niso\nA short date in ISO format\n2005-03-07\n\n\n\n也可以通过以下语法更加灵活的定义日期格式：\n\n\n\n\n\n\n\normat String\nOutput\nDescription\n\n\n\nYY\n18\nTwo-digit year\n\n\nYYYY\n2018\n四位数年份\n\n\nM\n1-12\nThe month, beginning at 1\n\n\nMM\n01-12\n两位数月份\n\n\nMMM\nJan-Dec\nThe abbreviated month name\n\n\nMMMM\nJanuary-December\nThe full month name\n\n\nD\n1-31\nThe day of the month\n\n\nDD\n01-31\n两位数日期\n\n\nd\n0-6\nThe day of the week, with Sunday as 0\n\n\ndd\nSu-Sa\nThe min name of the day of the week\n\n\nddd\nSun-Sat\nThe short name of the day of the week\n\n\ndddd\nSunday-Saturday\nThe name of the day of the week\n\n\nH\n0-23\nThe hour\n\n\nHH\n00-23\n两位数小时，24小时制\n\n\nh\n1-12\nThe hour, 12-hour clock\n\n\nhh\n01-12\nThe hour, 12-hour clock, 2-digits\n\n\nm\n0-59\nThe minute\n\n\nmm\n00-59\n两位数分钟\n\n\ns\n0-59\nThe second\n\n\nss\n00-59\nThe second, 2-digits\n\n\nSSS\n000-999\nThe millisecond, 3-digits\n\n\nZ\n+05:00\nThe offset from UTC, ±HH:mm\n\n\nA\nAM PM\n\n\n\na\nam pm\n\n\n\nDo\n1st 2nd … 31st\nDay of Month with ordinal\n\n\n\n可以通过”[]“添加自定义字符。通过这些语法，可以定制符合中文语法的日期格式，如：date-format: \"YYYY[年]M[月]D[日] HH:mm\"\n\n\n\n\n\n\nTip\n\n\n\n关于日期的详细指南，详见：https://quarto.org/docs/reference/dates.html。",
+    "crumbs": [
+      "Home",
+      "Quarto introduction",
+      "YAML设置"
+    ]
+  },
+  {
+    "objectID": "Quarto/yaml_settings.html#编译html",
+    "href": "Quarto/yaml_settings.html#编译html",
+    "title": "YAML设置",
+    "section": "\n10.1 编译HTML",
+    "text": "10.1 编译HTML\n\n---\nformat: \n  html:\n    theme: \n      light: flatly \n      dark: darkly \n    embed-resources: false\n    code-tools: true\n    title-block-banner: images/banner.jpg \n    title-block-banner-color: \"black\"\n    toc: true\n    toc-title: 目录\n    toc-location: left\n    toc-depth: 2\n    toc-expand: 1\n    number-sections: true\n    number-depth: 3\n    anchor-sections: true\n    link-external-icon: true\n    link-external-newwindow: true\n    df-print: kable \n    code-link: true\n---\n\n\ntheme：主题。同 Section 3 。\nembed-resources：是否将所有源文件嵌入HTML文件以方便分享。默认为”false”。\ncode-tools：是否在网页右上角显示”&lt;code&gt;“按钮。点击该按钮可以看到Quarto文档的原始markdown代码。\n\ntitle-block-banner：标题横幅设置。title-block-banner有以下选项：\n\ntrue：将标题以网页横幅的形式展示，样式为them中所选样式的默认样式。\n具体颜色：如title-block-banner: \"#003262\"。\n图片路径：如title-block-banner: images/banner.jpeg。\n\n\ntoc相关设置：同 Section 4 。\nnumber-sections、number-depth：同 Section 5 。\nanchor-sections: 设置为true时，当鼠标移到各级标题上时会显示anchor link，方便我们复制直接定位到该标题的超链接。\nlink-external-icon：设置为true时会在外部链接上显示一个小图标。\nlink-external-newwindow：是否在新标签页打开外部链接。\ndf-print：表格输出样式\n\ncode-copy：设置代码复制按钮：\n\ntrue: 总是在代码块右上角显示代码复制按钮。\nfalse: 隐藏代码复制按钮。\nhover：（默认）当鼠标移过时显示代码复制按钮。\n\n\ncode-fold: 是否折叠代码。\ncode-link: 是否自动为函数加上超链接。该功能基于downlit包，可以自动为识别到的函数加上一个链接到官方文档的超链接。",
+    "crumbs": [
+      "Home",
+      "Quarto introduction",
+      "YAML设置"
+    ]
+  },
+  {
+    "objectID": "Quarto/yaml_settings.html#sec-github-markdown",
+    "href": "Quarto/yaml_settings.html#sec-github-markdown",
+    "title": "YAML设置",
+    "section": "\n10.2 编译GitHub Flavored Markdown（GFM）",
+    "text": "10.2 编译GitHub Flavored Markdown（GFM）\n我们可以将Quarto文档转换为GitHub风格的Markdown文档（GitHub Flavored Markdown，GFM）。这可以用来生成GitHub项目的README.md文档。\n\n---\ntitle: \"My Project\"\nformat: \n  gfm:\n    identifier-prefix: readme # 标识符\n    # preview-mode: raw # 预览原始markdown\n    keep-yaml: true\n    toc: true\n    toc-depth: 1\n    number-sections: true\n    citation-location: document\n    output-file: \"README.md\" # 输出文档的文件名\n---",
+    "crumbs": [
+      "Home",
+      "Quarto introduction",
+      "YAML设置"
+    ]
+  },
+  {
+    "objectID": "Quarto/yaml_settings.html#编译pdf",
+    "href": "Quarto/yaml_settings.html#编译pdf",
+    "title": "YAML设置",
+    "section": "\n10.3 编译PDF",
+    "text": "10.3 编译PDF\n如果要在rmarkdown、bookdown中使用PDF输出功能， 可以在在R中安装tinytex扩展包并安装TinyTeX编译软件：\n\ninstall.packages('tinytex')\ntinytex::install_tinytex()\n\n其中上面第一行命令安装R的tinytex扩展包， 第二行将下载LaTeX编译程序的服务器设置为清华大学tuna镜像站， 第三行安装LaTeX编译程序。\n如果安装成功， TinyTeX软件包在MS Windows系统中一般会安装在 C:\\Users\\用户名\\AppData\\Roaming\\TinyTeX目录中， 其中”用户名”应替换成系统当前用户名。 如果需要删除TinyTeX软件包， 只要直接删除那个子目录就可以。\n为了判断TinyTeX是否安装成功， 在RStudio中运行：\n\ntinytex::is_tinytex()\n\n结果应为TRUE, 出错或者结果为FALSE都说明安装不成功。\n当用户使用RMarkdown和tinytex包转换latex并编译为PDF时， 如果缺少某些latex宏包， tinytex会自动安装缺少的宏包。",
+    "crumbs": [
+      "Home",
+      "Quarto introduction",
+      "YAML设置"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-intro.html",
+    "href": "Guide/SAS/SAS-intro.html",
+    "title": "SAS introduction",
+    "section": "",
+    "text": "SAS introduction",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "SAS introduction"
+    ]
+  },
+  {
+    "objectID": "Guide/R/R-intro.html",
+    "href": "Guide/R/R-intro.html",
+    "title": "R introduction",
+    "section": "",
+    "text": "R的介绍",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "R introduction"
+    ]
+  },
+  {
+    "objectID": "Guide/Guide-intro.html",
+    "href": "Guide/Guide-intro.html",
+    "title": "统计软件使用指南",
+    "section": "",
+    "text": "一些统计软件的使用",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南"
+    ]
+  },
+  {
+    "objectID": "Guide/R/R-install.html",
+    "href": "Guide/R/R-install.html",
+    "title": "R install",
+    "section": "",
+    "text": "R的安装",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Guide/R/R_intro.qmd",
+      "R install"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html",
+    "href": "Guide/SAS/SAS-install.html",
+    "title": "SAS Install",
+    "section": "",
+    "text": "SAS Install",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "SAS introduction",
+      "SAS Install"
+    ]
+  },
+  {
+    "objectID": "Quarto/quarto-intro.html",
+    "href": "Quarto/quarto-intro.html",
+    "title": "Quarto introduction",
+    "section": "",
+    "text": "Quarto introduction",
+    "crumbs": [
+      "Home",
+      "Quarto introduction"
+    ]
+  },
+  {
+    "objectID": "statistics-basic/statistics-basic.html",
+    "href": "statistics-basic/statistics-basic.html",
+    "title": "医学统计学基础",
+    "section": "",
+    "text": "本章主要介绍基本的医学统计学内容，主要参照内容为：人卫第八版《卫生统计学》、科社第二版《医学统计学（基础版）》。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础"
+    ]
+  },
+  {
+    "objectID": "solana/index.html",
+    "href": "solana/index.html",
+    "title": "Sigríður Björndotter",
+    "section": "",
+    "text": "Sigríður Björndotter is a musician, vocalist, and live entertainment consultant living in Buenos Aires, Argentina. Her writing has appeared in Rolling Stone, Billboard, and NME, and she is a frequent contributor to National Public Radio’s All Songs Considered. She has been raising Pembroke Welsh Corgis since the age of six, and she has collected Casio watches since the age of ten."
+  },
+  {
+    "objectID": "solana/index.html#bio",
+    "href": "solana/index.html#bio",
+    "title": "Sigríður Björndotter",
+    "section": "",
+    "text": "Sigríður Björndotter is a musician, vocalist, and live entertainment consultant living in Buenos Aires, Argentina. Her writing has appeared in Rolling Stone, Billboard, and NME, and she is a frequent contributor to National Public Radio’s All Songs Considered. She has been raising Pembroke Welsh Corgis since the age of six, and she has collected Casio watches since the age of ten."
+  },
+  {
+    "objectID": "solana/index.html#education",
+    "href": "solana/index.html#education",
+    "title": "Sigríður Björndotter",
+    "section": "\n2 Education",
+    "text": "2 Education\nINSEAD | Fontainebleau, France\nM.B.A. | August 2014 - June 2015\nThe Juilliard School | New York, NY\nB.F.A. in Music Performance | August 2005 - May 2009"
+  },
+  {
+    "objectID": "solana/index.html#experience",
+    "href": "solana/index.html#experience",
+    "title": "Sigríður Björndotter",
+    "section": "\n3 Experience",
+    "text": "3 Experience\nFreelance | Live Entertainment Consultant | August 2018 - Present\nCercle | Producer | August 2018 - Present\nNational Public Radio | Producer | May 2015 - July 2018\nNME Magazine | Editor | July 2014 - July 2016\nIceland Symphony Orchestra | Cellist | October 2009 - June 2014"
+  }
+]

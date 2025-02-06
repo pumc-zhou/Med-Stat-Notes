@@ -1,0 +1,15 @@
+{
+  "hash": "c9c44522f13797f968249788f62b9aab",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Sigríður Björndotter\"\nimage: \"sigridur.jpg\"\nlinks:\n  - label: Resume\n    url: \"https://linkedin.com/\"\n  - label: Blog\n    url: \"https://medium.com/\"\n  - label: SoundCloud\n    url: \"https://soundcloud.com/\"\n  - label: Twitter\n    url: \"https://twitter.com/\"\noutput:\n  postcards::solana\n---\n\n\n\n\n \n## Bio\n\nSigríður Björndotter is a musician, vocalist, and live entertainment consultant\nliving in Buenos Aires, Argentina. Her writing has appeared in Rolling Stone,\nBillboard, and NME, and she is a frequent contributor to National Public Radio's \n*All Songs Considered*. She has been raising Pembroke Welsh Corgis since the age\nof six, and she has collected Casio watches since the age of ten.\n\n## Education\n\n**INSEAD** | Fontainebleau, France\n\nM.B.A. | August 2014 - June 2015\n\n**The Juilliard School** | New York, NY\n\nB.F.A. in Music Performance | August 2005 - May 2009\n\n## Experience\n\n**Freelance** | Live Entertainment Consultant | August 2018 - Present\n\n**Cercle** | Producer | August 2018 - Present\n\n**National Public Radio** | Producer | May 2015 - July 2018\n\n**NME Magazine** | Editor | July 2014 - July 2016\n\n**Iceland Symphony Orchestra** | Cellist | October 2009 - June 2014\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
