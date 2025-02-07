@@ -1,1 +1,1 @@
-Sitemap: https://github.com/zhoulvbang/Medical-Statistics-Notes/sitemap.xml
+Sitemap: www.lazyzhou.cn/Med-Stat-Notes/sitemap.xml

@@ -30,8 +30,8 @@ website:
   favicon: images/logo.jpg # 网页的logo
   twitter-card: true
   google-analytics: "G-G2HZEXHNCE"
-  site-url: https://github.com/zhoulvbang/Medical-Statistics-Notes
-  repo-url: https://github.com/zhoulvbang/Medical-Statistics-Notes # GitHub仓库的链接
+  site-url: www.lazyzhou.cn/Med-Stat-Notes
+  repo-url: https://github.com/zhoulvbang/Med-Stat-Notes # GitHub仓库的链接
   repo-actions: [source, issue] # 在页面右侧显示导航到GitHub仓库的链接
   open-graph: true
   search:
@@ -48,14 +48,20 @@ website:
     left:
       - text: "Home"
         file: index.qmd
-      - statistics-basic/statistics-basic.qmd
+      - text: "Learn"
+        menu:
+          - text: "Basic"
+            file: Learn/Basic/statistics-basic.qmd
       - text: "Guide"
         menu:
           - text: "Guide"
             file: Guide/Guide-intro.qmd
           - Guide/R/R_intro.qmd
           - Guide/SAS/SAS-intro.qmd
-      - Quarto/quarto-intro.qmd
+      - text: "Quarto"
+        menu:
+          - text: "Intro"
+            file: Quarto/quarto-intro.qmd
 
     right:
       - icon: book-fill
@@ -75,9 +81,12 @@ website:
     contents:
       - text: 主页
         file: index.qmd
-      - section: statistics-basic/statistics-basic.qmd
+      - section: Learn/Basic/statistics-basic.qmd
         contents:
-          - statistics-basic/test.qmd
+          - section: Learn/Basic/statistics-basic.qmd
+            contents:
+              - Learn/Basic/01-preview.qmd
+              - Learn/Basic/test.qmd
       - section: Guide/Guide-intro.qmd
         contents:
           - section: Guide/R/R-intro.qmd
@@ -122,7 +131,7 @@ format:
         showHighlights: always
         enableExperimentalNewNoteButton: true
       giscus:
-        repo: zhoulvbang/Medical-Statistics-Notes
+        repo: zhoulvbang/Med-Stat-Notes
         input-position: top
 
 

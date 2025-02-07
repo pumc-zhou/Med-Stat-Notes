@@ -128,14 +128,43 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="医学统计学基础 – 医学统计学笔记">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://github.com/zhoulvbang/Medical-Statistics-Notes/statistics-basic/images/medical-statistics-cover.jpg">
+<meta property="og:image" content="www.lazyzhou.cn/Med-Stat-Notes/statistics-basic/images/medical-statistics-cover.jpg">
 <meta property="og:site_name" content="医学统计学笔记">
 <meta name="twitter:title" content="医学统计学基础 – 医学统计学笔记">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://github.com/zhoulvbang/Medical-Statistics-Notes/statistics-basic/images/medical-statistics-cover.jpg">
+<meta name="twitter:image" content="www.lazyzhou.cn/Med-Stat-Notes/statistics-basic/images/medical-statistics-cover.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -164,8 +193,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../statistics-basic/statistics-basic.html"> 
-<span class="menu-text">医学统计学基础</span></a>
+    <span class="nav-link">
+<span class="menu-text">statistics-basic/statistics-basic.qmd - statistics-basic/01-preview.qmd</span>
+    </span>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -341,6 +371,29 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 
 <p>本章主要介绍基本的医学统计学内容，主要参照内容为：人卫第八版《卫生统计学》、科社第二版《医学统计学（基础版）》。</p>
 <p><img src="images/medical-statistics-cover.jpg" class="img-fluid"></p>
+<p>章节主要分布如下：</p>
+<ol type="1">
+<li>绪论
+<ul>
+<li><p>医学统计学</p></li>
+<li><p>统计学的基本概念</p></li>
+<li><p>统计学在医学科研中的基本步骤</p></li>
+<li><p>统计学与相关学科的关系</p></li>
+</ul></li>
+<li>描述性统计</li>
+<li>随机事件与概率</li>
+<li>离散型随机变量</li>
+<li>连续型随机变量</li>
+<li>参数估计</li>
+<li>一个正态总体参数的假设检验</li>
+<li>两个正态总体参数的假设检验</li>
+<li>单因素方差分析</li>
+<li>多因素方差分析</li>
+<li><span class="math inline">\(\chi^2\)</span>检验</li>
+<li>基于秩次的非参数检验</li>
+<li>一元线性回归</li>
+<li>相关分析</li>
+</ol>
 
 
 <!-- -->
@@ -632,7 +685,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/github\.com\/zhoulvbang\/Medical-Statistics-Notes");
+      var filterRegex = new RegExp("www\.lazyzhou\.cn\/Med-Stat-Notes");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -964,7 +1017,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://giscus.app/client.js" data-repo="zhoulvbang/Medical-Statistics-Notes" data-repo-id="" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+<script src="https://giscus.app/client.js" data-repo="zhoulvbang/Med-Stat-Notes" data-repo-id="" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
@@ -986,7 +1039,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>本章主要介绍基本的医学统计学内容，主要参照内容为：人卫第八版《卫生统计学》、科社第二版《医学统计学（基础版）》。</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/medical-statistics-cover.jpg)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/medical-statistics-cover.jpg)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>章节主要分布如下：</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>绪论</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>医学统计学</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>统计学的基本概念</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>统计学在医学科研中的基本步骤</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>统计学与相关学科的关系</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>描述性统计</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>随机事件与概率</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>离散型随机变量</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>连续型随机变量</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>参数估计</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>一个正态总体参数的假设检验</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">8.  </span>两个正态总体参数的假设检验</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">9.  </span>单因素方差分析</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">10. </span>多因素方差分析</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">11. </span>$\chi^2$检验</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">12. </span>基于秩次的非参数检验</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">13. </span>一元线性回归</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">14. </span>相关分析</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1000,7 +1077,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Medical-Statistics-Notes/blob/main/statistics-basic/statistics-basic.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/zhoulvbang/Medical-Statistics-Notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/statistics-basic/statistics-basic.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
