@@ -27,13 +27,15 @@ website:
   title: "医学统计学笔记"
   page-navigation: true
   reader-mode: true
-  favicon: images/logo.jpg # 网页的logo
+  description: "This is a Note site."
   twitter-card: true
   google-analytics: "G-G2HZEXHNCE"
   site-url: www.lazyzhou.cn/Med-Stat-Notes
   repo-url: https://github.com/zhoulvbang/Med-Stat-Notes # GitHub仓库的链接
   repo-actions: [source, issue] # 在页面右侧显示导航到GitHub仓库的链接
-  open-graph: true
+  favicon: images/logo.png # 网页的logo
+  open-graph: 
+    image: logo.png
   search:
     location: navbar
     type: textbox # overlay or textbox
@@ -51,22 +53,24 @@ website:
       - text: "Learn"
         menu:
           - text: "Basic"
-            file: Learn/Basic/statistics-basic.qmd
+            file: Learn/Basic/00-basic.qmd
       - text: "Guide"
         menu:
           - text: "Guide"
             file: Guide/Guide-intro.qmd
-          - Guide/R/R_intro.qmd
-          - Guide/SAS/SAS-intro.qmd
+          - text: "R"
+            file: Guide/R/R-intro.qmd
+          - text: "SAS"
+            file: Guide/SAS/SAS-intro.qmd
       - text: "Quarto"
         menu:
           - text: "Intro"
             file: Quarto/quarto-intro.qmd
 
     right:
-      - icon: book-fill
-        text: Bookdown
-        url: https://bookdown.org
+      #- icon: book
+      - text: "Books"
+        file: navbar/book.qmd
 
     tools:
       - icon: github
@@ -81,12 +85,11 @@ website:
     contents:
       - text: 主页
         file: index.qmd
-      - section: Learn/Basic/statistics-basic.qmd
+      - section: Learn/Basic/00-basic.qmd
         contents:
-          - section: Learn/Basic/statistics-basic.qmd
+          - section: Learn/Basic/00-basic.qmd
             contents:
               - Learn/Basic/01-preview.qmd
-              - Learn/Basic/test.qmd
       - section: Guide/Guide-intro.qmd
         contents:
           - section: Guide/R/R-intro.qmd

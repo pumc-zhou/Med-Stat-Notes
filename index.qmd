@@ -36,7 +36,9 @@ about:
 
 现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.)；还有有一部分的项目分享（如果顺利的话）和读书报告。
 
-按照大类细分的话会有如下架构：
+Epidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.
+
+按照大类再细分的话会有如下：
 
 -   统计学
     -   医学统计学（基础篇）
@@ -49,7 +51,5 @@ about:
     -   Stata
     -   Quarto
 -   项目记录
-    -   kaggle
+    -   Kaggle
 -   读书笔记
-
-本网站/笔记基于Quarto搭建/提供支持。

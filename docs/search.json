@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年暑假的rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，随用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.)；还有有一部分的项目分享（如果顺利的话）和读书报告。\n按照大类细分的话会有如下架构：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n最大似然统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nkaggle\n\n读书笔记\n\n本网站/笔记基于Quarto搭建/提供支持。\n\n\nCitationBibTeX citation:@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-02-07},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nsimonzhou. 2025. “医学统计学习笔记.” February 7, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年暑假的rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，随用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.)；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n最大似然统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\nCitationBibTeX citation:@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-02-08},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nsimonzhou. 2025. “医学统计学习笔记.” February 8, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -126,7 +126,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Guide/R/R_intro.qmd",
+      "R introduction",
       "R install"
     ]
   },
@@ -295,6 +295,24 @@
     "crumbs": [
       "Home",
       "Learn/statistics-basic/statistics-basic.qmd",
+      "医学统计学基础"
+    ]
+  },
+  {
+    "objectID": "navbar/book.html",
+    "href": "navbar/book.html",
+    "title": "医学统计学习推荐书籍与网站",
+    "section": "",
+    "text": "读的书有点乱，主要都在微信读书看，部分是纸质书。\n对于刚接触统计的朋友，可以先看看《女士品茶：统计学如何变革了科学和生活》这本书，也会他能激发你的一些对于统计学（家们）的兴趣，通过一些有趣的小故事，带你走进统计学的世界。"
+  },
+  {
+    "objectID": "Learn/Basic/00-basic.html",
+    "href": "Learn/Basic/00-basic.html",
+    "title": "医学统计学基础",
+    "section": "",
+    "text": "本章主要介绍基本的医学统计学内容，主要参照内容为：人卫第八版《卫生统计学》、科社第二版《医学统计学（基础版）》。\n\n章节主要分布如下：\n\n绪论\n\n医学统计学\n统计学的基本概念\n统计学在医学科研中的基本步骤\n统计学与相关学科的关系\n\n描述性统计\n随机事件与概率\n离散型随机变量\n连续型随机变量\n参数估计\n一个正态总体参数的假设检验\n两个正态总体参数的假设检验\n单因素方差分析\n多因素方差分析\n\\(\\chi^2\\)检验\n基于秩次的非参数检验\n一元线性回归\n相关分析",
+    "crumbs": [
+      "Home",
       "医学统计学基础"
     ]
   }

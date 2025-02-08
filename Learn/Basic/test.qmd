@@ -1,9 +1,0 @@
----
-title: "初识医学统计学"
-execute: 
-  eval: false
-editor_options: 
-  chunk_output_type: console
----
-
-rmarkdown
