@@ -58,6 +58,8 @@ website:
         menu:
           - text: "Guide"
             file: Guide/Guide-intro.qmd
+          - text: "Python"
+            file: Guide/Python/2025-02-20-Medical-expenses.qmd
           - text: "R"
             file: Guide/R/R-intro.qmd
           - text: "SAS"
@@ -95,9 +97,12 @@ website:
           - section: Guide/R/R-intro.qmd
             contents:
               - Guide/R/R-install.qmd
+              - Guide/R/2025-02-22-CLHLS.qmd
+          - section: Guide/Python/2025-02-20-Medical-expenses.qmd
           - section: Guide/SAS/SAS-intro.qmd
             contents:
               - Guide/SAS/SAS-install.qmd
+              - Guide/SAS/2025-02-16-CLHLS.qmd
       - section: Quarto/quarto-intro.qmd
         contents:
           - Quarto/yaml_settings.qmd

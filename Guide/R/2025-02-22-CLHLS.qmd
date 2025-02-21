@@ -1,0 +1,152 @@
+---
+title: "CLHLS Data Analysis by R"
+author: "Simonzhou"
+date: "2025-02-22"
+format: 
+  html:           # 输出格式为 HTML
+    self-contained: true  # 生成独立的 HTML 文件
+  # pdf:            # 可选：如果需要 PDF 输出
+  #   default
+execute:
+  echo: true      # 在输出中显示代码
+  eval: true      # 执行代码
+  warning: false  # 隐藏警告信息
+  message: false  # 隐藏消息
+---
+
+# CLHLS 数据分析
+
+这是一个使用 R 语言对 CLHLS 数据进行清洗和分析的工作文档。
+
+## 加载必要的包
+
+```{r setup, include=FALSE}
+# 安装并加载必要的 R 包
+if (!requireNamespace("haven", quietly = TRUE)) {
+  install.packages("haven")
+}
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  install.packages("dplyr")
+}
+if (!requireNamespace("tidyr", quietly = TRUE)) {
+  install.packages("tidyr")
+}
+if (!requireNamespace("writexl", quietly = TRUE)) {
+  install.packages("writexl")
+}
+library(haven)        # 用于读取 SPSS (.sav) 文件
+library(dplyr)        # 用于数据操作
+library(tidyr)        # 用于数据整理
+library(writexl)      # 用于导出 Excel 文件
+# 设置代码块选项
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+本文数据源来自北大开放研究数据平台。[DVN/WBO7LK_2020](#DVN/WBO7LK_2020)
+
+使用SAS逐渐让我失去的耐心，极其臃肿和笨重，Vintage Car，交互页面也很糟糕，用起来很令人烦躁，遂改用R对数据进行分析。
+
+# 数据的导入与变量的生成
+
+```{r}
+# 读取 SPSS 文件（替换路径为实际文件路径）
+raw_data <- read_sav("C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/clhls_2018_15874.sav")
+
+# 预处理：移除 f103a4:f103m4 和 f103a3:f103m3 的 labelled 属性并转换为数值类型
+raw_data <- raw_data %>%
+  mutate(
+    across(f103a4:f103m4, ~ as.numeric(haven::zap_labels(.))),
+    across(f103a3:f103m3, ~ as.numeric(haven::zap_labels(.)))
+  )
+
+# 在计算 last_alive_child_age 前，所有相关列已为数值类型
+selected_data <- raw_data %>%
+  mutate(
+    # 老年人自评健康状况（SHEALTH）
+    SHEALTH = b12,
+    
+    # 生活自理能力（ADL）
+    ADL = rowSums(
+      cbind(
+        ifelse(e1b == 1, e1, ifelse(e1b == 2, e1 * 2, ifelse(e1b == 3, e1 * 3, 0))),
+        ifelse(e2b == 1, e2, ifelse(e2b == 2, e2 * 2, ifelse(e2b == 3, e2 * 3, 0))),
+        ifelse(e3b == 1, e3, ifelse(e3b == 2, e3 * 2, ifelse(e3b == 3, e3 * 3, 0))),
+        ifelse(e4b == 1, e4, ifelse(e4b == 2, e4 * 2, ifelse(e4b == 3, e4 * 3, 0))),
+        ifelse(e5b == 1, e5, ifelse(e5b == 2, e5 * 2, ifelse(e5b == 3, e5 * 3, 0))),
+        ifelse(e6b == 1, e6, ifelse(e6b == 2, e6 * 2, ifelse(e6b == 3, e6 * 3, 0)))
+      ), na.rm = TRUE
+    ),
+    
+    # 生活自理障碍二分类变量 ADL2
+    ADL2 = ifelse(rowSums(cbind(e1, e2, e3, e4, e5, e6) > 1, na.rm = TRUE) > 0, 1, 0),
+    
+    # 工具型生活自理能力（IADL）
+    IADL = rowSums(select(., e7, e8, e9, e10, e11, e12, e13, e14), na.rm = TRUE),
+    
+    # 工具型生活自理障碍二分类变量 IADL2
+    IADL2 = ifelse(rowSums(select(., e7, e8, e9, e10, e11, e12, e13, e14) > 1, na.rm = TRUE) > 0, 1, 0),
+    
+    # 经济支持
+    economic_support = rowSums(
+      cbind(
+        ifelse(f12a == 99998, 10000, ifelse(f12a %in% c(88888, 99999), 0, f12a)),
+        ifelse(f12b == 99998, 10000, ifelse(f12b %in% c(88888, 99999), 0, f12b)),
+        ifelse(f12c == 99998, 10000, ifelse(f12c %in% c(88888, 99999), 0, f12c))
+      ), na.rm = TRUE
+    ),
+    
+    # 照料支持
+    residence = a51,
+    living = a52,
+    visit_fren = ifelse(rowSums(select(., starts_with("f103") & ends_with("5")) == 1, na.rm = TRUE) > 0, 1, 0),
+    
+    # 情感支持
+    emotion_support = ifelse(rowSums(select(., starts_with("f103") & ends_with("6")) == 1, na.rm = TRUE) > 0, 1, 2),
+    
+    # 控制变量
+    age = trueage,
+    gender = a1,
+    education = f1,
+    job_type = f2,
+    marriage_status = ifelse(f41 == 1, 1, 0),
+    hukou_type = hukou,
+    social_insurance = ifelse(nf64a == 0 | f64b == 1 | f64c == 1 | f64i == 1, 1, 0),
+    medical_insurance = ifelse(f64d == 1 | f64e == 1 | f64g == 1 | f64h == 1, 1, 0),
+    
+    # 慢性病
+    chronic_disease = ifelse(rowSums(select(., starts_with("g15") & ends_with("1")) == 1, na.rm = TRUE) > 0, 1, 0),
+    
+    # 抽烟、喝酒、体育锻炼
+    smoking = g151,
+    drinking = g161,
+    exercise = ifelse(d91 == 1 | d92 == 1, 1, 2),
+    
+    # 子女年龄状态
+    last_alive_child_age = apply(
+      select(., f103a4:f103m4) * (select(., f103a3:f103m3) == 1), 1,
+      function(x) max(x, na.rm = TRUE)
+    ),
+    child_elderly_status = ifelse(last_alive_child_age > 60, 1, 0),
+    
+    # 生成 care_support 变量
+    care_support = ifelse(residence == 1 | visit_fren == 1, 1, 0)
+  ) %>%
+  select(
+    SHEALTH, ADL, ADL2, IADL, IADL2, economic_support, residence, living, visit_fren, emotion_support,
+    f10, age, gender, education, job_type, marriage_status, hukou_type,
+    social_insurance, medical_insurance, chronic_disease, smoking, drinking, exercise,
+    child_elderly_status, care_support,
+    f103a3:f103m3
+  )
+
+# 检查结果（可选）
+# print(head(selected_data$last_alive_child_age))
+print(head(selected_data))
+```
+
+## 数据导出
+
+```{r}
+# 导出筛选后的数据到 Excel
+write_xlsx(selected_data, "C:/Users/asus/Desktop/test/CLHLS/CLHLS数据/CLHLS数据/clhls_2018_sort0220.xlsx")
+```
