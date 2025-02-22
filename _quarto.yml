@@ -4,6 +4,16 @@ project:
   execute-dir: project
 editor: visual
 
+jupyter: 
+  path: "C:/ProgramData/anaconda3/python.exe"
+  kernelspec:
+    name: "python3"
+    language: "python"
+    display_name: "Python 3"
+  kernel: python3
+  conda:
+    environment: base
+    
 execute:
   eval: true
   warning: false
@@ -59,7 +69,7 @@ website:
           - text: "Guide"
             file: Guide/Guide-intro.qmd
           - text: "Python"
-            file: Guide/Python/2025-02-20-Medical-expenses.qmd
+            file: Guide/Python/Python-intro.qmd
           - text: "R"
             file: Guide/R/R-intro.qmd
           - text: "SAS"
@@ -98,7 +108,9 @@ website:
             contents:
               - Guide/R/R-install.qmd
               - Guide/R/2025-02-22-CLHLS.qmd
-          - section: Guide/Python/2025-02-20-Medical-expenses.qmd
+          - section: Guide/Python/Python-intro.qmd
+            contents:
+              - Guide/Python/2025-02-20-Medical-expenses.qmd
           - section: Guide/SAS/SAS-intro.qmd
             contents:
               - Guide/SAS/SAS-install.qmd
@@ -139,9 +151,10 @@ format:
         showHighlights: always
         enableExperimentalNewNoteButton: true
       giscus:
-        repo: zhoulvbang/Med-Stat-Notes
+        repo: zhoulvbang/comments
         input-position: top
-
+    includes:
+      after-body: _includes/giscus.html
 
 
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SAS Install – 医学统计学笔记</title>
+<title>Python introduction – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/SAS/2025-02-16-CLHLS.html" rel="next">
-<link href="../../Guide/SAS/SAS-intro.html" rel="prev">
+<link href="../../Guide/Python/2025-02-20-Medical-expenses.html" rel="next">
+<link href="../../Guide/R/2025-02-22-CLHLS.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -129,11 +129,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 
 
-<meta property="og:title" content="SAS Install – 医学统计学笔记">
+<meta property="og:title" content="Python introduction – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
-<meta property="og:image" content="www.lazyzhou.cn/Med-Stat-Notes/Guide/SAS/logo.png">
+<meta property="og:image" content="www.lazyzhou.cn/Med-Stat-Notes/Guide/Python/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="SAS Install – 医学统计学笔记">
+<meta name="twitter:title" content="Python introduction – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -231,7 +231,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-intro.html">SAS introduction</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-install.html">SAS Install</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/Python/Python-intro.html">Python introduction</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -311,13 +311,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Python introduction</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
@@ -330,14 +330,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS Install</span></a>
   </div>
 </li>
@@ -377,9 +377,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-intro.html">SAS introduction</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-install.html">SAS Install</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/Python/Python-intro.html">Python introduction</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">SAS Install</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Python introduction</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -396,7 +396,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>SAS Install</p>
+<p><strong>Python</strong>（英式发音：<a href="https://zh.wikipedia.org/wiki/Help:%E8%8B%B1%E8%AA%9E%E5%9C%8B%E9%9A%9B%E9%9F%B3%E6%A8%99" title="Help:英语国际音标">/ˈpaɪθən/</a>；美式发音：<a href="https://zh.wikipedia.org/wiki/Help:%E8%8B%B1%E8%AA%9E%E5%9C%8B%E9%9A%9B%E9%9F%B3%E6%A8%99" title="Help:英语国际音标">/ˈpaɪθɑːn/</a>），是一种广泛使用的<a href="https://zh.wikipedia.org/wiki/%E7%9B%B4%E8%AD%AF%E8%AA%9E%E8%A8%80" title="解释型语言">解释型</a>、<a href="https://zh.wikipedia.org/wiki/%E9%AB%98%E7%B4%9A%E8%AA%9E%E8%A8%80" title="高级语言">高级</a>和<a href="https://zh.wikipedia.org/wiki/%E9%80%9A%E7%94%A8%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80" title="通用编程语言">通用</a>的<a href="https://zh.wikipedia.org/wiki/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80" title="编程语言">编程语言</a>。Python支持多种编程范型，包括结构化、过程式、反射式、面向对象和函数式编程。它拥有<a href="https://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1" title="类型系统">动态类型系统</a>和<a href="https://zh.wikipedia.org/wiki/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6_(%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A7%91%E5%AD%B8)" title="垃圾回收 (计算机科学)">垃圾回收</a>功能，能够自动管理内存使用，并且其本身拥有一个巨大而广泛的标准库。它的语言结构以及<a href="https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" title="面向对象程序设计">面向对象</a>的方法，旨在帮助程序员为小型的和大型的项目编写逻辑清晰的代码。</p>
 
 
 <!-- -->
@@ -1026,23 +1026,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/SAS-intro.html" class="pagination-link" aria-label="SAS introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SAS introduction</span>
+      <a href="../../Guide/R/2025-02-22-CLHLS.html" class="pagination-link" aria-label="CLHLS Data Analysis by R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">CLHLS Data Analysis by R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="pagination-link" aria-label="使用SAS处理CLHLS数据">
-        <span class="nav-page-text">使用SAS处理CLHLS数据</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Python/2025-02-20-Medical-expenses.html" class="pagination-link" aria-label="用Python处理一份卫生费用数据">
+        <span class="nav-page-text">用Python处理一份卫生费用数据</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "SAS Install"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Python introduction"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>SAS Install</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>**Python**（英式发音：<span class="co">[</span><span class="ot">/ˈpaɪθən/</span><span class="co">](https://zh.wikipedia.org/wiki/Help:%E8%8B%B1%E8%AA%9E%E5%9C%8B%E9%9A%9B%E9%9F%B3%E6%A8%99 "Help:英语国际音标")</span>；美式发音：<span class="co">[</span><span class="ot">/ˈpaɪθɑːn/</span><span class="co">](https://zh.wikipedia.org/wiki/Help:%E8%8B%B1%E8%AA%9E%E5%9C%8B%E9%9A%9B%E9%9F%B3%E6%A8%99 "Help:英语国际音标")</span>），是一种广泛使用的<span class="co">[</span><span class="ot">解释型</span><span class="co">](https://zh.wikipedia.org/wiki/%E7%9B%B4%E8%AD%AF%E8%AA%9E%E8%A8%80 "解释型语言")</span>、<span class="co">[</span><span class="ot">高级</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%AB%98%E7%B4%9A%E8%AA%9E%E8%A8%80 "高级语言")</span>和<span class="co">[</span><span class="ot">通用</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%80%9A%E7%94%A8%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80 "通用编程语言")</span>的<span class="co">[</span><span class="ot">编程语言</span><span class="co">](https://zh.wikipedia.org/wiki/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80 "编程语言")</span>。Python支持多种编程范型，包括结构化、过程式、反射式、面向对象和函数式编程。它拥有<span class="co">[</span><span class="ot">动态类型系统</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%A1%9E%E5%9E%8B%E7%B3%BB%E7%B5%B1 "类型系统")</span>和<span class="co">[</span><span class="ot">垃圾回收</span><span class="co">]</span>(https://zh.wikipedia.org/wiki/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6_(%E8%A8%88%E7%AE%97%E6%A9%9F%E7%A7%91%E5%AD%B8) "垃圾回收 (计算机科学)")功能，能够自动管理内存使用，并且其本身拥有一个巨大而广泛的标准库。它的语言结构以及<span class="co">[</span><span class="ot">面向对象</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1 "面向对象程序设计")</span>的方法，旨在帮助程序员为小型的和大型的项目编写逻辑清晰的代码。</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1056,7 +1056,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/SAS-install.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Python/Python-intro.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

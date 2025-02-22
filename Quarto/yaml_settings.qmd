@@ -40,10 +40,10 @@ project:
 
 ```{r}
 ---
-title: Quarto学习笔记
-subtitle: 面向多编程语言的新一代R Markdown
-author: 杜俊宏
-date: 2023/11/10
+title: Quarto
+subtitle: R Markdown
+author: username
+date: 2025-02-22
 date-modified: now
 date-format: "YYYY[年]M[月]D[日] HH:mm"
 author-title: 作者

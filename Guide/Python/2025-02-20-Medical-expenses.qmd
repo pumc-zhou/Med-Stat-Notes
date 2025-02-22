@@ -1,8 +1,10 @@
 ---
-title: "处理一份卫生费用数据"
+title: "用Python处理一份卫生费用数据"
 number-sections: false
 toc: false
 date: "2025-02-21"
+author: "Simonzhou"
+format: html
 jupyter: python3
 ---
 
@@ -14,7 +16,7 @@ jupyter: python3
 
 运行此文档需要电脑上以安装Python，并且下列包已被安装并且能被调用：
 
-`jupyter-cache`,`pandas`,`openpuxl`
+`numpy jupyter-cache pandas openpyxl`
 
 你可以使用 `pip` 或 `conda` 进行安装： `pip install jupyter-cache`
 
@@ -25,13 +27,14 @@ jupyter: python3
 ```{python, cache=true}
 # 安装并加载必要的包
 import pandas as pd
+import numpy as np
 
 # 导入 Excel 文件
 file_path = "C:/Users/asus/Desktop/test/stata/prepare.xlsx"
-data = pd.read_excel(file_path, sheet_name=0)
+data = pd.read_excel(file_path, sheet_name=0, engine='openpyxl')     
 
 # 随机抽取10个样本数据
-sample_data = data.sample(n=10)
+sample_data = data.sample(n=10, random_state=42)
 
 # 打印样本数据
 print(sample_data)

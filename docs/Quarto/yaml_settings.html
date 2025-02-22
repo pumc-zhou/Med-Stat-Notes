@@ -168,6 +168,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="dropdown-text">Guide</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../Guide/Python/Python-intro.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../Guide/R/R-intro.html">
  <span class="dropdown-text">R</span></a>
   </li>  
@@ -276,12 +280,18 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="menu-text">R install</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CLHLS Data Analysis by R</span></a>
+  </div>
+</li>
       </ul>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SAS introduction</span></a>
+            <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python introduction</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -289,8 +299,31 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python处理一份卫生费用数据</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">SAS introduction</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS Install</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">使用SAS处理CLHLS数据</span></a>
   </div>
 </li>
       </ul>
@@ -301,11 +334,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <div class="sidebar-item-container"> 
             <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Quarto/yaml_settings.html" class="sidebar-item-text sidebar-link active">
@@ -390,17 +423,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p><code>project</code>：项目类型。定义了项目编译后的文档类型，包括”default”, “<strong>website</strong>”（Quarto Websites）和”<strong>book</strong>”（Quarto Book）。这里我们在新建项目时选择了Quarto Books，所以这里自动填写了”books”。</p>
 <p><img src="images/截屏2023-11-22 19.34.34.png" class="img-fluid" width="389"></p>
 </li>
-<li><p><code>output-dir</code>：输出文件夹。编译后的HTML文件、PDF文件以及运行code chunk后产生的图像、数据等的输出文件夹。上面的例子中将输出文件夹指定为”docs”文件夹可以方便将输出的HTML文件<a href="..\quarto_foundation/github_pages.qmd">通过GitHub Pages发布</a>。</p></li>
+<li><p><code>output-dir</code>：输出文件夹。编译后的HTML文件、PDF文件以及运行code chunk后产生的图像、数据等的输出文件夹。上面的例子中将输出文件夹指定为”docs”文件夹可以方便将输出的HTML文件通过GitHub Pages发布。</p></li>
 <li><p><code>execute-dir</code>：<strong>在编译时</strong>，各个qmd文件内的code chunk脚本运行的根目录，默认是”file”，即当前qmd文<strong>档所在目录</strong>，可设置为 “<strong>project</strong>”，这样在编译过程中执行代码块时会将运行根目录设置为项目根目录。</p></li>
 </ul></section><section id="标题作者日期信息" class="level1" data-number="2"><h1 data-number="2">
 <span class="header-section-number">2</span> 标题/作者/日期信息</h1>
 <p>对于HTML的编译，这些信息会展示在文档的开头部分。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> Quarto学习笔记</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>subtitle<span class="sc">:</span> 面向多编程语言的新一代R Markdown</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> 杜俊宏</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>date<span class="sc">:</span> <span class="dv">2023</span><span class="sc">/</span><span class="dv">11</span><span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> Quarto</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>subtitle<span class="sc">:</span> R Markdown</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> username</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>date<span class="sc">:</span> <span class="dv">2025-02-22</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>date<span class="sc">-</span>modified<span class="sc">:</span> now</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>date<span class="sc">-</span>format<span class="sc">:</span> <span class="st">"YYYY[年]M[月]D[日] HH:mm"</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>author<span class="sc">-</span>title<span class="sc">:</span> 作者</span>
@@ -422,8 +455,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p><code>date-format</code>通过以下关键词来定义日期格式：</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 17%">
-<col style="width: 53%">
+<col style="width: 18%">
+<col style="width: 52%">
 <col style="width: 27%">
 </colgroup>
 <thead><tr class="header">
@@ -1565,7 +1598,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script><script src="https://giscus.app/client.js" data-repo="zhoulvbang/Med-Stat-Notes" data-repo-id="" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script><script src="https://giscus.app/client.js" data-repo="zhoulvbang/comments" data-repo-id="R_kgDON9RmWA" data-category="General" data-category-id="DIC_kwDON9RmWM4CnLUH" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../Quarto/quarto-intro.html" class="pagination-link" aria-label="Quarto introduction">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quarto introduction</span>
@@ -1616,10 +1649,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
-<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> Quarto学习笔记</span>
-<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>subtitle<span class="sc">:</span> 面向多编程语言的新一代R Markdown</span>
-<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> 杜俊宏</span>
-<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>date<span class="sc">:</span> <span class="dv">2023</span><span class="sc">/</span><span class="dv">11</span><span class="sc">/</span><span class="dv">10</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>title<span class="sc">:</span> Quarto</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>subtitle<span class="sc">:</span> R Markdown</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>author<span class="sc">:</span> username</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>date<span class="sc">:</span> <span class="dv">2025-02-22</span></span>
 <span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>date<span class="sc">-</span>modified<span class="sc">:</span> now</span>
 <span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>date<span class="sc">-</span>format<span class="sc">:</span> <span class="st">"YYYY[年]M[月]D[日] HH:mm"</span></span>
 <span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>author<span class="sc">-</span>title<span class="sc">:</span> 作者</span>

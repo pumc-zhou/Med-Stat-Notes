@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="simonzhou">
 
-<title>SAS Install – 医学统计学笔记</title>
+<title>Qmd config giscus – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,27 +58,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<link href="../../Guide/SAS/2025-02-16-CLHLS.html" rel="next">
-<link href="../../Guide/SAS/SAS-intro.html" rel="prev">
-<link href="../../images/logo.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -129,26 +128,29 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 
 
-<meta property="og:title" content="SAS Install – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
-<meta property="og:image" content="www.lazyzhou.cn/Med-Stat-Notes/Guide/SAS/logo.png">
+<meta property="og:title" content="Qmd config giscus – 医学统计学笔记">
+<meta property="og:description" content="Qmd生成的网页使用giscus来支持评论">
+<meta property="og:image" content="www.lazyzhou.cn/Med-Stat-Notes/Quarto/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="SAS Install – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Qmd config giscus – 医学统计学笔记">
+<meta name="twitter:description" content="Qmd生成的网页使用giscus来支持评论">
+<meta name="twitter:image" content="www.lazyzhou.cn/Med-Stat-Notes/Quarto/images/create-com-repo.png">
+<meta name="twitter:image-height" content="735">
+<meta name="twitter:image-width" content="857">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/logo.png" alt="" class="navbar-logo">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logo.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">医学统计学笔记</span>
     </a>
   </div>
@@ -159,7 +161,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../../index.html" aria-current="page"> 
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -168,7 +170,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">    
         <li>
-    <a class="dropdown-item" href="../../Learn/Basic/00-basic.html">
+    <a class="dropdown-item" href="../Learn/Basic/00-basic.html">
  <span class="dropdown-text">Basic</span></a>
   </li>  
     </ul>
@@ -179,19 +181,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">    
         <li>
-    <a class="dropdown-item" href="../../Guide/Guide-intro.html">
+    <a class="dropdown-item" href="../Guide/Guide-intro.html">
  <span class="dropdown-text">Guide</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/Python/Python-intro.html">
+    <a class="dropdown-item" href="../Guide/Python/Python-intro.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/R/R-intro.html">
+    <a class="dropdown-item" href="../Guide/R/R-intro.html">
  <span class="dropdown-text">R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.html">
+    <a class="dropdown-item" href="../Guide/SAS/SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
   </li>  
     </ul>
@@ -202,7 +204,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">    
         <li>
-    <a class="dropdown-item" href="../../Quarto/quarto-intro.html">
+    <a class="dropdown-item" href="../Quarto/quarto-intro.html">
  <span class="dropdown-text">Intro</span></a>
   </li>  
     </ul>
@@ -210,7 +212,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../navbar/book.html"> 
+    <a class="nav-link" href="../navbar/book.html"> 
 <span class="menu-text">Books</span></a>
   </li>  
 </ul>
@@ -231,7 +233,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-intro.html">SAS introduction</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-install.html">SAS Install</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Qmd config giscus</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -245,13 +247,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">主页</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+            <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -260,7 +262,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+            <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -269,7 +271,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
+  <a href="../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Preview</span></a>
   </div>
 </li>
@@ -279,7 +281,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">统计软件使用指南</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -288,7 +290,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R introduction</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -297,13 +299,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
+  <a href="../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R install</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
+  <a href="../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">CLHLS Data Analysis by R</span></a>
   </div>
 </li>
@@ -311,7 +313,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python introduction</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -320,7 +322,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
+  <a href="../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python处理一份卫生费用数据</span></a>
   </div>
 </li>
@@ -328,22 +330,22 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link active">
+  <a href="../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS Install</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
+  <a href="../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">使用SAS处理CLHLS数据</span></a>
   </div>
 </li>
@@ -353,7 +355,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -362,7 +364,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Quarto/yaml_settings.html" class="sidebar-item-text sidebar-link">
+  <a href="../Quarto/yaml_settings.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">YAML设置</span></a>
   </div>
 </li>
@@ -373,21 +375,54 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#giscus" id="toc-giscus" class="nav-link active" data-scroll-target="#giscus"><span class="header-section-number">1</span> Giscus</a>
+  <ul class="collapse">
+  <li><a href="#什么是giscus" id="toc-什么是giscus" class="nav-link" data-scroll-target="#什么是giscus"><span class="header-section-number">1.1</span> <strong>什么是giscus？</strong></a></li>
+  <li><a href="#如何使用giscus" id="toc-如何使用giscus" class="nav-link" data-scroll-target="#如何使用giscus"><span class="header-section-number">1.2</span> <strong>如何使用giscus？</strong></a></li>
+  <li><a href="#安装giscus-app" id="toc-安装giscus-app" class="nav-link" data-scroll-target="#安装giscus-app"><span class="header-section-number">1.3</span> 安装<code>giscus app</code></a></li>
+  <li><a href="#配置giscus" id="toc-配置giscus" class="nav-link" data-scroll-target="#配置giscus"><span class="header-section-number">1.4</span> 配置giscus</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Quarto/config-giscus-github.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-intro.html">SAS introduction</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-install.html">SAS Install</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">SAS Install</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Qmd config giscus</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Qmd生成的网页使用giscus来支持评论</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>simonzhou </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2024年2月21日 00:00</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年2月22日 13:23</p>
+    </div>
+  </div>
     
   </div>
   
@@ -396,11 +431,58 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>SAS Install</p>
+<section id="giscus" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Giscus</h1>
+<p>[<a href="https://giscus.app/zh-CN"><strong>giscus</strong></a>](<a href="https://giscus.app/zh-CN" class="uri">https://giscus.app/zh-CN</a>)</p>
+<section id="什么是giscus" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="什么是giscus"><span class="header-section-number">1.1</span> <strong>什么是giscus？</strong></h2>
+<ul>
+<li><p>Giscus是一个基于Github Discussion的评论插件，可以为无服务器端的博客运营者提供简易的部署和拓展。根据官网，其存在以下特性：</p></li>
+<li><p>开源！</p></li>
+<li><p>无跟踪，无广告，永久免费；</p></li>
+<li><p>无需数据库。全部数据均储存在 GitHub Discussions 中；</p></li>
+<li><p>支持自定义主题、多种语言、高度可配置；</p></li>
+<li><p>自动从 GitHub 拉取新评论与编辑；</p></li>
+<li><p>可自建服务！</p></li>
+<li><p><strong>工作原理:</strong><br>
+  Giscus在加载时，会使用 GitHub Discussions 搜索 API 根据选定的映射方式（如 URL、pathname等）来查找与当前页面关联的discussion。如果找不到匹配的discussion，giscus bot就会在第一次有人留下评论或回应时自动创建一个discussion。<br>
+<br>
+  在评论时，访客必须按 GitHub OAuth 流程授权 giscus app 代表他发帖。或者访客也可以直接在 GitHub Discussion 里评论。你可以在 GitHub 上管理评论。</p></li>
+</ul>
+</section>
+<section id="如何使用giscus" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="如何使用giscus"><span class="header-section-number">1.2</span> <strong>如何使用giscus？</strong></h2>
+<p>首先要在<a href="https://github.com">GitHub</a>建一个开放、可以使用Discussion的仓库，命名可以根据自己需要来，不能同网站仓库一致，因为独立存放评论内容。</p>
+<p><img src="images/create-com-repo.png" class="img-fluid"></p>
+<p>创建仓库完成后，请点击仓库最后一个选项<code>setting</code>，往下滑，找到<code>Features</code>功能区中的<code>Discussion</code>，点击勾选，开启仓库的Discussion功能，并安装<a href="https://github.com/apps/giscus">giscus app</a>&nbsp;，点击连接并且install到对应新建的仓库就可以了。</p>
+<p><img src="images/com-repo-setting.png" class="img-fluid"></p>
+<p><img src="images/Features-DIS.png" class="img-fluid"></p>
+</section>
+<section id="安装giscus-app" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="安装giscus-app"><span class="header-section-number">1.3</span> 安装<code>giscus app</code></h2>
+<blockquote class="blockquote">
+<p><a href="https://github.com/apps/giscus" class="uri">https://github.com/apps/giscus</a></p>
+</blockquote>
+<p>Giscus 应用库可以帮助你更方便地管理设置。通过上述链接进入网页进行安装：</p>
+<p><img src="images/install-giscus.png" class="img-fluid"></p>
+<p>安装完成后转到如下页面，选择已创建好的comments仓库作为评论仓库。</p>
+<p><img src="images/select-giscus-repo.png" class="img-fluid"></p>
+</section>
+<section id="配置giscus" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="配置giscus"><span class="header-section-number">1.4</span> 配置giscus</h2>
+<p>进入&lt;<a href="https://giscus.app/zh-CN" class="uri">https://giscus.app/zh-CN</a>&gt;配置页面，在该页面中根据自己的需求，选择配置。</p>
+<p><img src="images/giscus-config.png" class="img-fluid"></p>
+<p>仓库选项是必须的，你需要把你创建好的comments仓库输入其中。</p>
+<p>选择合适的分类：</p>
+<p><img src="images/giscus-class.png" class="img-fluid"></p>
+<p>嵌入到网站，在上述配置完成后，会生成一段script，将其放置在你想要展示评论的位置即可。</p>
+<p><img src="images/activate-giscus.png" class="img-fluid"></p>
 
 
 <!-- -->
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1023,26 +1105,80 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <script src="https://giscus.app/client.js" data-repo="zhoulvbang/comments" data-repo-id="R_kgDON9RmWA" data-category="General" data-category-id="DIC_kwDON9RmWM4CnLUH" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
-<input type="hidden" id="giscus-alt-theme" value="dark">
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/SAS-intro.html" class="pagination-link" aria-label="SAS introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SAS introduction</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="pagination-link" aria-label="使用SAS处理CLHLS数据">
-        <span class="nav-page-text">使用SAS处理CLHLS数据</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<input type="hidden" id="giscus-alt-theme" value="dark"><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "SAS Install"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>SAS Install</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Qmd config giscus</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> Qmd生成的网页使用giscus来支持评论</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> simonzhou</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 2024-02-21</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> now</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">date-format:</span><span class="co"> "YYYY[年]M[月]D[日] HH:mm"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># Giscus</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span><span class="co">[</span><span class="ot">**giscus**</span><span class="co">](https://giscus.app/zh-CN)</span><span class="sc">\]</span>(<span class="ot">&lt;https://giscus.app/zh-CN&gt;</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## **什么是giscus？**</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Giscus是一个基于Github Discussion的评论插件，可以为无服务器端的博客运营者提供简易的部署和拓展。根据官网，其存在以下特性：</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>开源！</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>无跟踪，无广告，永久免费；</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>无需数据库。全部数据均储存在 GitHub Discussions 中；</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>支持自定义主题、多种语言、高度可配置；</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>自动从 GitHub 拉取新评论与编辑；</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>可自建服务！</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>**工作原理:**\</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>      Giscus在加载时，会使用 GitHub Discussions 搜索 API 根据选定的映射方式（如 URL、pathname等）来查找与当前页面关联的discussion。如果找不到匹配的discussion，giscus bot就会在第一次有人留下评论或回应时自动创建一个discussion。\</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    \</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>      在评论时，访客必须按 GitHub OAuth 流程授权 giscus app 代表他发帖。或者访客也可以直接在 GitHub Discussion 里评论。你可以在 GitHub 上管理评论。</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## **如何使用giscus？**</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>首先要在<span class="co">[</span><span class="ot">GitHub</span><span class="co">](https://github.com)</span>建一个开放、可以使用Discussion的仓库，命名可以根据自己需要来，不能同网站仓库一致，因为独立存放评论内容。</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/create-com-repo.png)</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>创建仓库完成后，请点击仓库最后一个选项<span class="in">`setting`</span>，往下滑，找到<span class="in">`Features`</span>功能区中的<span class="in">`Discussion`</span>，点击勾选，开启仓库的Discussion功能，并安装<span class="co">[</span><span class="ot">giscus app</span><span class="co">](https://github.com/apps/giscus)</span>&nbsp;，点击连接并且install到对应新建的仓库就可以了。</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/com-repo-setting.png)</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/Features-DIS.png)</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">## 安装`giscus app`</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; </span><span class="ot">&lt;https://github.com/apps/giscus&gt;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>Giscus 应用库可以帮助你更方便地管理设置。通过上述链接进入网页进行安装：</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/install-giscus.png)</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>安装完成后转到如下页面，选择已创建好的comments仓库作为评论仓库。</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/select-giscus-repo.png)</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配置giscus</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>进入<span class="sc">\&lt;</span><span class="ot">&lt;https://giscus.app/zh-CN&gt;</span><span class="sc">\&gt;</span>配置页面，在该页面中根据自己的需求，选择配置。</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/giscus-config.png)</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>仓库选项是必须的，你需要把你创建好的comments仓库输入其中。</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>选择合适的分类：</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/giscus-class.png)</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>嵌入到网站，在上述配置完成后，会生成一段script，将其放置在你想要展示评论的位置即可。</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/activate-giscus.png)</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1056,7 +1192,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/SAS-install.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Quarto/config-giscus-github.qmd" class="toc-action"><i class="bi bi-github"></i>View source</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
