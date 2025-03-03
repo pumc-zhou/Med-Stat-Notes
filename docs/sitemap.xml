@@ -50,7 +50,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/index.html</loc>
-    <lastmod>2025-02-21T16:35:31.602Z</lastmod>
+    <lastmod>2025-03-03T14:44:22.638Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/statistics-basic/statistics-basic.html</loc>
@@ -90,11 +90,11 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/R/R-install.html</loc>
-    <lastmod>2025-02-21T13:08:25.798Z</lastmod>
+    <lastmod>2025-02-27T08:26:35.371Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Quarto/yaml_settings.html</loc>
-    <lastmod>2025-02-21T14:15:23.280Z</lastmod>
+    <lastmod>2025-03-02T15:22:22.793Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/SAS/SAS-intro.html</loc>
@@ -102,11 +102,11 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/Python/2025-02-20-Medical-expenses.html</loc>
-    <lastmod>2025-02-22T05:11:17.848Z</lastmod>
+    <lastmod>2025-02-22T08:24:05.912Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/R/2025-02-22-CLHLS.html</loc>
-    <lastmod>2025-02-21T13:09:30.808Z</lastmod>
+    <lastmod>2025-03-02T15:22:10.290Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/SAS/2025-02-16-CLHLS.html</loc>
@@ -114,7 +114,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Quarto/config-giscus-github.html</loc>
-    <lastmod>2025-02-21T14:14:05.897Z</lastmod>
+    <lastmod>2025-02-27T08:37:16.082Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/Python/Python-intro.html</loc>
@@ -127,5 +127,29 @@
   <url>
     <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/SAS/SAS-install.html</loc>
     <lastmod>2025-02-06T14:14:54.261Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Med-Stat-Notes/Guide/Python/2025-02-22-Med-Exp-Ana.html</loc>
+    <lastmod>2025-02-22T09:34:31.682Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Med-Stat-Notes/Learn/Basic/10-regression-correlation.html</loc>
+    <lastmod>2025-02-23T16:23:00.245Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Med-Stat-Notes/Quarto/yaml_settings_files/figure-html/quarto-LaTeX.html</loc>
+    <lastmod>2025-02-24T03:56:27.886Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Med-Stat-Notes/Quarto/quarto-LaTeX.html</loc>
+    <lastmod>2025-03-02T15:22:09.281Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Med-Stat-Notes/Learn/Bayes/00-About-Bayes.html</loc>
+    <lastmod>2025-03-03T03:46:58.053Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Med-Stat-Notes/Learn/Bayes/01-Bayes-PGM.html</loc>
+    <lastmod>2025-03-02T15:25:18.575Z</lastmod>
   </url>
 </urlset>
