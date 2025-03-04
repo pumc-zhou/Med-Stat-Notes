@@ -2,16 +2,18 @@
 title: "关于卫生统计学"
 author: "Simonzhou"
 date: "2025-02-16"
-format: 
-  html:           # 输出格式为 HTML
-    self-contained: true  # 生成独立的 HTML 文件
-  pdf:            # 可选：如果需要 PDF 输出
-    default
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 execute:
-  echo: true      # 在输出中显示代码
-  eval: true      # 执行代码
-  warning: false  # 隐藏警告信息
-  message: false  # 隐藏消息
+  echo: true         # 在输出中显示代码
+  eval: true         # 执行代码
+  warning: false     # 隐藏警告信息
+  message: false     # 隐藏消息
+  cache: true        # 启用代码缓存
+  freeze: true       # 冻结代码输出
 ---
 
 # 关于卫生统计学
@@ -45,3 +47,5 @@ execute:
 4.  **公众参与与健康促进：** 卫生统计学将更加注重公众参与和社区健康促进，通过社会行为和环境因素的分析，促进健康政策的制定和实施，推动社会健康公平。
 
 随着社会的发展和健康需求的不断变化，卫生统计学将继续发挥着重要的作用，为促进全民健康、预防疾病、改善医疗服务质量和推动卫生政策提供支持和指导。
+
+end.

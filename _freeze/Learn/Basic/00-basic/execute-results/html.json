@@ -1,0 +1,15 @@
+{
+  "hash": "2ae3a6b0a7f4da6e598a230e29145137",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"医学统计学基础\"\nauthor: \"Simonzhou\"\ndate: \"2025-02-16\"\nformat: \n  html:           # 输出格式为 HTML\n    self-contained: true  # 生成独立的 HTML 文件\n#  pdf:            # 可选：如果需要 PDF 输出\n#    default\nexecute:\n  echo: true             # 在输出中显示代码\n  eval: true             # 执行代码\n  warning: false         # 隐藏警告信息\n  message: false         # 隐藏消息\n  cache: true            # 启用代码缓存\n  freeze: true           # 冻结代码输出\nknitr:\n  opts_chunk: \n    fig.retina: 2         # 在 retina 屏幕上提高图形分辨率\n---\n\n\n\n\n本章主要介绍基本的医学统计学内容，主要参照内容为：人卫第八版《卫生统计学》、科社第二版《医学统计学（基础版）》。\n\n![](images/medical-statistics-cover.jpg)\n\n章节主要分布如下：\n\n1.  绪论\n    -   医学统计学\n\n    -   统计学的基本概念\n\n    -   统计学在医学科研中的基本步骤\n\n    -   统计学与相关学科的关系\n2.  描述性统计\n3.  随机事件与概率\n4.  离散型随机变量\n5.  连续型随机变量\n6.  参数估计\n7.  一个正态总体参数的假设检验\n8.  两个正态总体参数的假设检验\n9.  单因素方差分析\n10. 多因素方差分析\n11. $\\chi^2$检验\n12. 基于秩次的非参数检验\n13. 一元线性回归\n14. 相关分析",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

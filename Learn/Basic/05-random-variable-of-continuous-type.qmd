@@ -2,16 +2,21 @@
 title: "连续型随机变量的概率分布"
 author: "Simonzhou"
 date: "2025-02-23"
-format: 
-  html:           # 输出格式为 HTML
-    self-contained: true  # 生成独立的 HTML 文件
-  pdf:            # 可选：如果需要 PDF 输出
-    default
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 execute:
-  echo: true      # 在输出中显示代码
-  eval: true      # 执行代码
-  warning: false  # 隐藏警告信息
-  message: false  # 隐藏消息
+  echo: true         # 在输出中显示代码
+  eval: true         # 执行代码
+  warning: false     # 隐藏警告信息
+  message: false     # 隐藏消息
+  cache: true        # 启用代码缓存
+  freeze: true       # 冻结代码输出
+knitr:
+  opts_chunk: 
+    fig.retina: 2    # 在 retina 屏幕上提高图形分辨率
 ---
 
 ```{r setup, include=FALSE}
@@ -442,3 +447,5 @@ print(p)
 1.  检验连续变量的分布是否与某种理论分布一致。
 2.  检验某个分类变量各类的出现概率是否等于指定概率。
 3.  检验某两种方法的结果是否一致。
+
+end.

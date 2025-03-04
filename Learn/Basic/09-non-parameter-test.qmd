@@ -2,16 +2,18 @@
 title: "非参数检验"
 author: "Simonzhou"
 date: "2025-02-26"
-format: 
-  html:           # 输出格式为 HTML
-    self-contained: true  # 生成独立的 HTML 文件
-  pdf:            # 可选：如果需要 PDF 输出
-    default
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 execute:
-  echo: true      # 在输出中显示代码
-  eval: true      # 执行代码
-  warning: false  # 隐藏警告信息
-  message: false  # 隐藏消息
+  echo: true         # 在输出中显示代码
+  eval: true         # 执行代码
+  warning: false     # 隐藏警告信息
+  message: false     # 隐藏消息
+  cache: true        # 启用代码缓存
+  freeze: true       # 冻结代码输出
 ---
 
 # 非参数检验
@@ -173,3 +175,5 @@ Wilcoxon符号秩检验的前提条件为数据是连续的且差值分布是对
 
 -   秩和检验是非参数方法，对数据分布假设少，但效率可能低于参数方法（如t检验）在满足条件时的效果，如果满足参数检验的条件，应优先考虑使用参数检验的方法，否则会增加犯二类错误的概率。
 -   数据需要满足独立性假设，否则检验结果可能不准确。
+
+end.

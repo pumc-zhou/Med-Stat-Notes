@@ -2,16 +2,18 @@
 title: "随机事件的概率"
 author: "Simonzhou"
 date: "2025-02-23"
-format: 
-  html:           # 输出格式为 HTML
-    self-contained: true  # 生成独立的 HTML 文件
-  pdf:            # 可选：如果需要 PDF 输出
-    default
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 execute:
-  echo: true      # 在输出中显示代码
-  eval: true      # 执行代码
-  warning: false  # 隐藏警告信息
-  message: false  # 隐藏消息
+  echo: true         # 在输出中显示代码
+  eval: true         # 执行代码
+  warning: false     # 隐藏警告信息
+  message: false     # 隐藏消息
+  cache: true        # 启用代码缓存
+  freeze: true       # 冻结代码输出
 ---
 
 # 随机事件的概率
@@ -138,3 +140,5 @@ Bayes公式的意义在于，它可以改变条件概率结论的方向，即在
 公式中，PPV是阳性预测值，NPV是阴性预测值；SE是灵敏度，SP是特异度，P是患病率。
 
 [流行病学中的贝叶斯方法:简介](https://www.editverse.com/zh-CN/%E6%B5%81%E8%A1%8C%E7%97%85%E5%AD%A6%E4%B8%AD%E7%9A%84%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%96%B9%E6%B3%95%E7%AE%80%E4%BB%8B/)
+
+end.

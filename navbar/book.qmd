@@ -1,8 +1,30 @@
 ---
-title: "医学统计学习推荐书籍与网站"
-comments: false
+title: "公共卫生相关的书籍"
+author: "Simonzhou"
+date: "2025-02-24"
+format: 
+  html:           # 输出格式为 HTML
+    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 ---
 
-读的书有点乱，主要都在微信读书看，部分是纸质书。
+读的书有点乱，主要都在微信读书看，部分是纸质书，介绍主要以我看过或在看的书为主。
+
+# Maybe you will be interested
 
 对于刚接触统计的朋友，可以先看看《[女士品茶：统计学如何变革了科学和生活](https://weread.qq.com/web/reader/997328307239e753997d337#outline?noScroll=1)》这本书，也会他能激发你的一些对于统计学（家们）的兴趣，通过一些有趣的小故事，带你走进统计学的世界。
+
+# Basic
+
+考研的话，除了人卫第八版是一个通用教材，其他的院校各有不同，比如说赵耐青、方积乾和贺佳，根据院校给的参考书目来选择，这几个人的书都买了看过一下，个人主要用过人卫版和姜晶梅的《医学统计学》，各有见长。
+
+# Advance
+
+提升部分可以看看 Springer 出版的 *Mathematical Models in Epidemiology ，*2023年科学出版社出版了中文版 《流行病学中的数学模型》
+
+> The book is a comprehensive, self-contained introduction to the mathematical modeling and analysis of disease transmission models. It includes (i) an introduction to the main concepts of compartmental models including models with heterogeneous mixing of individuals and models for vector-transmitted diseases, (ii) a detailed analysis of models for important specific diseases, including tuberculosis, HIV/AIDS, influenza, Ebola virus disease, malaria, dengue fever and the Zika virus, (iii) an introduction to more advanced mathematical topics, including age structure, spatial structure, and mobility, and (iv) some challenges and opportunities for the future.
+>
+> There are exercises of varying degrees of difficulty, and projects leading to new research directions. For the benefit of public health professionals whose contact with mathematics may not be recent, there is an appendix covering the necessary mathematical background. There are indications which sections require a strong mathematical background so that the book can be useful for both mathematical modelers and public health professionals.
+
+end.

@@ -1,16 +1,25 @@
 ---
-title: "用Python处理一份卫生费用数据"
+title: "用Python和Stata处理一份卫生费用数据"
 number-sections: false
 toc: false
-date: "2025-02-21"
+date: "2025-02-20"
 author: "Simonzhou"
-format: html
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 jupyter: python3
+execute:
+  echo: true      # 在输出中显示代码
+  eval: true      # 执行代码
+  warning: false  # 隐藏警告信息
+  message: false  # 隐藏消息
 ---
 
 # 用Python处理卫生费用数据
 
-本篇博客用来记录2025年1月到2月帮助学弟处理一份某二级医院2018-2023年的医疗费用，最开始用的Stata，但是越往后，越感觉到Stata的难用，以及AI对这种程序的支持程度极其有限，随改用Python来继续完成相关的分析。
+本篇博客用来记录2025年1月到2月帮助学弟处理一份某二级医院2018-2023年的医疗费用，最开始用的Stata，但是越往后，越感觉到Stata的难用，以及AI对这种程序的支持程度极其有限，随改用 `Python + Stata` 来继续完成相关的分析。
 
 ## 必须配置
 
@@ -33,6 +42,10 @@ import numpy as np
 file_path = "C:/Users/asus/Desktop/test/stata/prepare.xlsx"
 data = pd.read_excel(file_path, sheet_name=0, engine='openpyxl')     
 
+# 数据脱敏，删除地方
+columns_to_drop = ["籍贯", "出生地"]
+data = data.drop(columns=columns_to_drop, errors='ignore')  # errors='ignore' 防止列不存在时报错
+
 # 随机抽取10个样本数据
 sample_data = data.sample(n=10, random_state=42)
 
@@ -40,7 +53,7 @@ sample_data = data.sample(n=10, random_state=42)
 print(sample_data)
 ```
 
-我们可以看到，该数据的列很多，第一张表中有220列，我们需要对其进行一些筛选。
+我们可以看到，该数据的列很多，第一张表中有200列，我们需要对其进行一些筛选。
 
 ## 对数据的思考
 
@@ -147,4 +160,430 @@ sample_data = cleaned_data.sample(n=10)
 
 # 打印样本数据
 print(sample_data)
+```
+
+## 筛选变量
+
+经过上述筛选后的变量依然还有很多，其中不乏无用信息变量或无效信息变量，对变量做进一步筛选。
+
+对样本进行筛选，需要满足在当年收治且出院，满足常规医保使用条件，关键变量含有缺失值的样本。
+
+使用 `pandas` 进行处理（根据Excel视图挑选的缺失数据的变量或含有较多缺失值的变量）：
+
+```{python, cache = true , eval = FALSE}
+import pandas as pd
+
+# 文件路径
+input_file = r"C:\Users\asus\Desktop\test\stata\data\cleaned-merge-data.xlsx"
+output_file = r"C:\Users\asus\Desktop\test\stata\data\allclean.xlsx"
+
+# 读取 Excel 文件
+df = pd.read_excel(input_file)
+
+# 要删除的列列表
+columns_to_drop = [
+    "新生儿出生体重", "新生儿入院体重", "国籍", "籍贯", "病室", "病室.1", "是否有出院31天内再住院计划",
+    "病理诊断", "院内感染", "药物过敏", "死亡患者尸检", "血型", "RH",
+    "1手术编码", "1手术时间", "1级别", "1切口", "1愈合", "1麻醉方式",
+    "2手术名称", "2手术编码", "2手术时间", "2级别", "2切口", "2愈合", "2麻醉方式",
+    "3手术名称", "3手术编码", "3手术时间", "3级别", "3切口", "3愈合", "3麻醉方式",
+    "4手术名称", "4手术编码", "4手术时间", "4级别", "4切口", "4愈合", "4麻醉方式",
+    "5手术名称", "5手术编码", "5手术时间", "5级别", "5切口", "5愈合", "5麻醉方式",
+    "6手术名称", "6手术编码", "6手术时间", "6级别", "6切口", "6愈合", "6麻醉方式",
+    "7手术名称", "7手术编码", "7手术时间", "7级别", "7切口", "7愈合", "7麻醉方式",
+    "8手术名称", "8手术编码", "8手术时间", "8级别", "8切口", "8愈合", "8麻醉方式",
+    "目的", "入院前颅脑损伤昏迷时间", "入院后颅脑损伤昏迷时间",
+    "抗菌药物使用天数", "清洁手术预防使用抗菌药物品种数", "是否临床路径", "清洁手术预防使用抗菌药物总天数",
+    "患者入住重症监护室（ICU）情况", "感染情况", "输血反应", "输血反应次数", "输液反应", "输液反应次数",
+    "细菌名称1", "细菌名称2", "细菌名称3", "细菌名称4", "血管介入治疗", "血管介入治疗抗菌药物使用天数",
+    "手术次数1", "手术操作名称1", "手术操作编码1", "手术开始时间1", "手术结束时间1", "择期手术1",
+    "麻醉开始时间1", "麻醉结束时间1", "麻醉方式1", "麻醉分级1", "切口部位1", "切口等级1", "NNIS分级1",
+    "手术部位感染1", "术前住院天数1", "手术持续时间1", "是否非计划重返手术室病例1", "术前使用预防性抗菌药物1",
+    "术前预防性抗菌药物给药时间1", "是否在术后使用预防性抗菌药物1", "术后预防性抗菌药物结束时间1",
+    "手术预防性使用抗菌药物天数1", "是否有使用抗菌药物1", "预防性抗菌药物使用时机1",
+    "断脐后预防性使用抗菌药物给药时间1", "本次住院期间有无重返手术室的计划1", "腔镜手术名称1", "级别1", "愈合1",
+    "是否微创手术1", "手术次数2", "手术操作名称2", "手术操作编码2", "手术开始时间2", "手术结束时间2",
+    "择期手术2", "麻醉开始时间2", "麻醉结束时间2", "麻醉方式2", "麻醉分级2", "切口部位2", "切口等级2",
+    "NNIS分级2", "手术部位感染2", "术前住院天数2", "手术持续时间2", "是否非计划重返手术室病例2",
+    "术前使用预防性抗菌药物2", "术前预防性抗菌药物给药时间2", "是否在术后使用预防性抗菌药物2",
+    "术后预防性抗菌药物结束时间2", "手术预防性使用抗菌药物天数2", "是否有使用抗菌药物2",
+    "预防性抗菌药物使用时机2", "断脐后预防性使用抗菌药物给药时间2", "本次住院期间有无重返手术室的计划2",
+    "腔镜手术名称2", "级别2", "愈合2", "是否微创手术2", "手术次数3", "手术操作名称3", "手术操作编码3", "手术开始时间3",
+    "手术结束时间3", "择期手术3", "麻醉开始时间3", "麻醉结束时间3", "麻醉方式3", "麻醉分级3", "切口部位3", "切口等级3",
+    "NNIS分级3", "手术部位感染3", "术前住院天数3", "手术持续时间3", "4麻醉医师", "出生地", "籍贯"
+]
+
+# 删除指定的列
+df = df.drop(columns=columns_to_drop, errors='ignore')
+
+# 过滤掉 '公安病区'
+if '入院科别' in df.columns and '出院科别' in df.columns:
+    df = df[~df['入院科别'].isin(['公安病区'])]
+    df = df[~df['出院科别'].isin(['公安病区'])]
+
+# 打印随机 10 个样本
+print("随机 10 个样本：")
+print(df.sample(10))
+
+# 将处理后的 DataFrame 写入新的 Excel 文件
+# df.to_excel(output_file, index=False)
+
+# print(f"数据清洗完成，已保存到 {output_file}")
+```
+
+## 使用 Stata 赋值和分析
+
+### ICD-10赋值
+
+因为需要对疾病进行分类与根据诊断信息确定来生成共病信息，根据出院诊断来对疾病进行分类与赋值，这里使用 Stata 来完成。
+
+``` {#ICD .stata style="color"}
+**************
+* 1. 清理环境并导入数据
+**************
+clear all
+
+* 读取 Excel 文件，假设第一行为列名
+import excel "C:\Users\asus\Desktop\test\stata\data\allclean.xlsx", ///
+    firstrow case(lower) clear
+
+* 注意：
+*  - firstrow 表示将第一行作为变量名
+*  - case(lower) 将变量名转换为小写，避免中文或大小写冲突
+*  - 如果您的表格存在中文列名，可能需要手动 rename
+
+************************
+* 2. 处理、提取与分类: 以“出院诊断”列为例
+************************
+
+*------------------
+gen disease = 出院诊断
+*------------------
+
+* 假设您已经将"出院诊断"重命名为了 "disease"
+* 现在要从 disease 里提取 ICD 编码到 icd10 列。
+* 如果原数据已包含 icd10 这列，可跳过此步。
+* 这里只是示例，具体提取逻辑需根据实际字符串格式做 parsing:
+* 例如： 出院诊断 字符串为 "急性化脓性阑尾炎|K35.902|有,高血压病|I10.x00|有"
+
+*（示例）如果 disease 形如 "XXX|K35.902|有,YYY|I10.x00|有"
+* 可以先把逗号换成某种分隔，然后再拆分，这里仅给示例逻辑
+* 注意：以下只是思路示例，可能需正则表达式、substr、split 等更复杂处理
+
+// 对disease进行拆分
+* 1. 按 | 分隔 disease 列，生成多个新变量
+split disease, parse("|") generate(disease_part)
+ 
+// 提取第一个 ICD 编码
+* 2. 提取第二部分（part2）作为 icd10，使用正则表达式剔除多余编码
+* 保留 disease_part2 的前7个字符作为 icd10，形如 C15.900
+gen icd10 = substr(disease_part2, 1, 7)
+gen icd_com = substr(disease_part4, 1, 7)
+* 去除前后的空格
+replace icd10 = trim(icd10)
+
+* 3. 删除所有拆分部分
+drop disease_part1-disease_part55
+
+* 4. 检查结果
+list disease icd10 in 1/10
+
+***************************************
+* 按 ICD 数量判断是否共病
+***************************************
+gen comorbidity = 0  // 初始值为 0
+replace comorbidity = 1 if !missing(icd10) & !missing(icd_com) 
+// 如果ICD10和ICD_com都不为空，则赋值为1
+
+// 查看前10行的数据
+list icd10 icd_com comorbidity in 1/10
+
+***************************************
+* 筛除部分变量
+***************************************
+
+drop 入院日期 入院科别 出院日期 出院科别 出院诊断 disease 离院方式 病案质量
+
+***************************************
+* 按 ICD 编码生成截取变量
+***************************************
+
+* 如果 icd10 是数值型，转换为字符串型
+tostring icd10, replace  
+
+* 检查并创建 icd_3c 变量
+gen icd_3c = ""   // 如果 icd_3c 不存在，创建一个空的字符串变量
+
+* 截取 icd10 的前三位并赋值给 icd_3c
+replace icd_3c = substr(icd10, 1, 3)  
+
+* 如果 icd_3c 是数值型，转换为字符串型
+tostring icd_3c, replace 
+
+* 创建 icd_str1 变量
+gen icd_str1 = ""
+
+* icd_str1: ICD 编码首位
+replace icd_str1 = substr(icd10,1,1)
+
+* 如果 icd_str1 是数值型，转换为字符串型
+tostring icd_str1, replace 
+
+* 使用 trim() 来去除空格
+replace icd_str1 = trim(icd_str1)
+
+* 查看 icd_str1 的数据类型
+describe icd_str1
+
+* 查看是否有空值或特殊字符
+* list icd_str1 if missing(icd_str1)
+
+************************
+* 按照ICD编码归为22类
+************************
+
+* 创建icd分类变量：icd_chapter
+gen icd_chapter = "" 
+
+* 字符转换为数值
+destring icd_chapter,replace
+
+// 为icd_chapter赋值
+
+replace icd_chapter=1 if icd_str1=="A"|icd_str1=="B"
+replace icd_chapter=2 if icd_str1=="C"|(icd_3c>="D00"&icd_3c<="D48")
+replace icd_chapter=3 if icd_3c>="D50"&icd_3c<="D89"
+replace icd_chapter=4 if icd_3c>="E00"&icd_3c<="E90"
+replace icd_chapter=5 if icd_3c>="F00"&icd_3c<="F99"
+replace icd_chapter=6 if icd_3c>="G00"&icd_3c<="G99"
+replace icd_chapter=7 if icd_3c>="H00"&icd_3c<="H59"
+replace icd_chapter=8 if icd_3c>="H60"&icd_3c<="H99"
+replace icd_chapter=9 if icd_str1=="I"
+replace icd_chapter=10 if icd_str1=="J"
+replace icd_chapter=11 if icd_str1=="K"
+replace icd_chapter=12 if icd_str1=="L"
+replace icd_chapter=13 if icd_str1=="M"
+replace icd_chapter=14 if icd_str1=="N"
+replace icd_chapter=15 if icd_str1=="O"
+replace icd_chapter=16 if icd_str1=="P"
+replace icd_chapter=17 if icd_str1=="Q"
+replace icd_chapter=18 if icd_str1=="R"
+replace icd_chapter=19 if icd_str1=="S"| icd_str1=="T"
+replace icd_chapter=20 if icd_str1=="V"| icd_str1=="Y"
+replace icd_chapter=21 if icd_str1=="Z"
+replace icd_chapter=22 if icd_str1=="U"
+replace icd_chapter=20 if icd_str1=="V"| icd_str1=="Y"|icd_str1=="X"|icd_str1=="W"
+replace icd_chapter=21 if icd_str1=="Z"| substr(trim(icd10),1,2)=="WW"
+replace icd_chapter=22 if icd_str1=="U"
+
+***************************************
+* 检查分类缺失
+***************************************
+tab icd_3c if icd_chapter==.
+
+****************************
+* 3. 导出处理后的数据
+****************************
+
+* 导出为 Stata 格式
+save "C:\Users\asus\Desktop\test\stata\data\ICD-result.dta", replace
+```
+
+### 赋值与创建部分变量
+
+``` {#evaluation .stata style="color"}
+// 数据处理
+clear all
+use "C:\Users\asus\Desktop\test\stata\data\ICD-result.dta",clear
+
+capture drop Cost  // 捕获可能发生的错误，如果变量不存在则继续执行
+
+* 创建 id 变量并赋值
+gen id = _n
+
+sort id year
+xtset id year
+
+*- 次均费用，需要查看总费用是否和各项目费用加总一致，此处不一致
+* gen Cost = 总费用 / 次数 
+
+*- 住院天数
+gen Day = 住院天数
+
+*- DIP政策
+gen DIP = .
+replace DIP = 0 if year == 2018
+replace DIP = 0 if year == 2019
+replace DIP = 0 if year == 2020
+replace DIP = 0 if year == 2021
+replace DIP = 1 if year == 2022
+replace DIP = 1 if year == 2023
+
+*- 控制变量序列
+*- 年龄
+gen Age = 年龄
+
+*- 性别（虚拟变量；当受访者性别为女性时，赋值为"0"，否则为"1"）
+gen Gender = 0 if 性别 == "女"
+recode Gender .= 1
+
+*- 婚姻（虚拟变量；当受访者已婚时，赋值为"1"，否则为"0"）
+gen Marriage = 1 if 婚姻 == "已婚"
+recode Marriage .= 0
+
+*- 药物过敏
+gen Sensitive = 1 if 是否药物过敏 == "有"
+recode Sensitive .= 0
+
+*- 是否手术
+gen Opera = 1 if 手术费 > 0
+replace Cmedicine = 0 if 手术费 == 0
+
+*- 职业
+gen Career = 1 if strmatch(职业, "*农*")
+replace Career = 2 if strmatch(职业, "*职*")
+replace Career = 3 if strmatch(职业, "*无业*")
+replace Career = 4 if Career == .
+
+*- 是否共病
+gen Comorbidity = 1 if comorbidity == 1
+replace Comorbidity = 0 if comorbidity == 0
+
+* 疾病类型按照 ICD-10 划分
+gen Disease = icd_chapter
+
+gen Insurance = 1 if strmatch(医疗付费方式, "*自费*")
+replace Insurance = 2 if strmatch(医疗付费方式, "*商业*")
+replace Insurance = 3 if strmatch(医疗付费方式, "*城乡居民*")
+replace Insurance = 3 if strmatch(医疗付费方式, "*城镇居民*")
+replace Insurance = 4 if strmatch(医疗付费方式, "*城镇职工*")
+replace Insurance = 5 if strmatch(医疗付费方式, "*贫困救助*")
+replace Insurance = 6 if strmatch(医疗付费方式, "*新型农村合作*")
+replace Insurance = 7 if strmatch(医疗付费方式, "*全公费*")
+replace Insurance = 2 if Insurance == .
+
+*- 是否使用中药
+gen Cmedicine = 1 if 中成药费 > 0
+replace Cmedicine = 1 if 中草药费 > 0
+replace Cmedicine = 0 if Cmedicine == .
+
+*- 入院途径
+gen category = 1 if 入院途径 == "门诊"
+replace category = 0 if 入院途径 == "急诊"
+
+*- 自付金额
+gen SelfCost = 自付金额 / 次数
+
+*- 除去空值变量
+drop 其他费用 病理诊断费 临床物理治疗费 手术治疗费 康复费 中医治疗费 抗菌药物费用 白蛋白类制品费 球蛋白类制品费 凝血因子类制品费 细胞因子类制品费 检查用一次性医用材料费 治疗用一次性医用材料费 手术用一次性医用材料费
+
+*- 费用变量数据
+gen GService = 一般医疗服务费 / 次数
+* gen GOperate = 一般治疗操作费 / 次数
+gen GSurgery = 手术费 / 次数
+gen GNurse = 护理费 / 次数
+gen GNonoperate = 非手术治疗项目费 / 次数
+gen GNarcosis = 麻醉费 / 次数
+gen GDrug = 西药费 / 次数
+gen GBlood = 血费 / 次数
+gen Others = 其他费 / 次数
+// 计算行总和
+egen temp_total_diagnose = rowtotal(实验室诊断费 影像学诊断费 临床诊断项目费)
+
+// 进行除法运算
+gen GDiagnose = temp_total_diagnose / 次数
+
+// 删除临时变量
+drop temp_total_diagnose
+
+// 计算行总和
+egen temp_total_cdrug = rowtotal(中成药费 中草药费)
+
+// 进行除法运算
+gen GCDrug = temp_total_cdrug / 次数
+
+// 删除临时变量
+drop temp_total_cdrug
+
+*- 次均费用
+egen Cost = rowtotal(GService GSurgery GNurse GNonoperate GNarcosis GDrug GBlood GDiagnose GCDrug Others) 
+
+*- 对变量进行排序
+order id year Cost SelfCost Day DIP Age Gender Marriage Sensitive Opera Career Disease Comorbidity Insurance Cmedicine category GService GSurgery GNurse GNonoperate GNarcosis GDrug GCDrug GBlood GDiagnose Others
+```
+
+## 数据分析
+
+### 描述性统计
+
+``` {#descriptive .stata style="color"}
+// 描述性统计 保留小数点后两位
+estpost summarize Cost SelfCost Day DIP Age Gender Marriage Sensitive Opera Career Disease Comorbidity Insurance Cmedicine category GService GSurgery GNurse GNonoperate GNarcosis GDrug GCDrug GBlood GDiagnose, detail
+esttab, cells("count mean(fmt(2)) sd(fmt(2)) min(fmt(2)) p50(fmt(2)) max(fmt(2))") noobs compress replace title(Descriptive statistics)
+esttab using "C:\Users\asus\Desktop\test\stata\ICD-10\25.02.09\analysis-result\描述性统计0218.rtf", cells("count mean(fmt(2)) sd(fmt(2)) min(fmt(2)) p50(fmt(2)) max(fmt(2))") noobs compress replace title(Descriptive statistics)
+
+
+// 全样本费用指标
+tabstat Cost SelfCost Day GService GSurgery GNurse GNonoperate GNarcosis GDrug GCDrug GBlood GDiagnose Others, s(mean) by(year)
+
+// 变量指标
+tabstat Cost SelfCost Day DIP Age Gender Marriage Sensitive Opera Career Disease Comorbidity Insurance Cmedicine category, s(mean) by(year)
+
+* 计算所有年份的均值
+summarize Cost SelfCost Day GService GSurgery GNurse GNonoperate GNarcosis GDrug GCDrug GBlood GDiagnose Others
+```
+
+### 回归分析
+
+为了稳健性，对因变量进行缩尾处理。
+
+``` {#regression .stata style="color"}
+*- 缩尾处理（目的：剔除异常值；剔除的比例根据研究而定）
+winsor2 Cost Day Age, replace cuts(1, 99)
+
+// 全局暂元
+global Control Age Gender Career Marriage category Disease Opera Comorbidity Cmedicine Insurance 
+
+// 基准模型
+reg Cost DIP $Control, r
+est store m1
+reg SelfCost DIP $Control, r
+est store m2
+reg Day DIP $Control Sensitive, r // Sensitive 只在Day的模型中出现
+est store m3
+reg Cost DIP $Control Day, r
+est store m4
+reg SelfCost DIP $Control Day, r
+est store m5
+
+* 输出基准模型结果
+esttab m1 m2 m3 m4 m5 using "C:\Users\asus\Desktop\test\stata\ICD-10\25.02.09\analysis-result0218\基准模型结果.rtf", replace b(2) t(2) ar2 star(* 0.1 ** 0.05 *** 0.01) nogap
+
+// 调节效应分析
+global Control Age Gender Career Marriage Disease Opera Comorbidity Cmedicine Insurance
+
+reg Cost DIP $Control Day if category == 1, r
+est store m1
+reg Cost DIP $Control Day if category == 0, r
+est store m2
+
+
+*- esttab m1 m2 m3 using 
+esttab m1 m2 using "C:\Users\asus\Desktop\test\stata\ICD-10\25.02.09\analysis-result0218\调节效应结果-cost&dip.rtf", replace b(2) t(2) ar2 star(* 0.1 ** 0.05 *** 0.01) nogap
+
+reg SelfCost DIP $Control Day if category==1, r
+est store m1
+reg SelfCost DIP $Control Day if category==0, r
+est store m2
+
+
+esttab m1 m2 using "C:\Users\asus\Desktop\test\stata\ICD-10\25.02.09\analysis-result0218\调节效应结果-self&dip.rtf", replace b(2) t(2) ar2 star(* 0.1 ** 0.05 *** 0.01) nogap
+
+reg Day DIP $Control Sensitive if category==1, r
+est store m1
+reg Day DIP $Control Sensitive if category==0, r
+est store m2
+
+
+esttab m1 m2 using "C:\Users\asus\Desktop\test\stata\ICD-10\25.02.09\analysis-result0218\调节效应结果-day&dip.rtf", replace b(2) t(2) ar2 star(* 0.1 ** 0.05 *** 0.01) nogap
 ```

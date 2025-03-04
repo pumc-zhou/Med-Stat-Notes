@@ -5,3 +5,21 @@ toc: false
 ---
 
 Quarto introduction
+
+### **An open-source scientific and technical publishing system**
+
+-   Author using [Jupyter](https://jupyter.org/) notebooks or with plain text markdown in your favorite editor.
+
+-   Create dynamic content with [Python](https://quarto.org/docs/computations/python.html), [R](https://quarto.org/docs/computations/r.html), [Julia](https://quarto.org/docs/computations/julia.html), and [Observable](https://quarto.org/docs/computations/ojs.html).
+
+-   Publish reproducible, production quality articles, presentations, dashboards, websites, blogs, and books in HTML, PDF, MS Word, ePub, and more.
+
+-   Share knowledge and insights organization-wide by publishing to [Posit Connect](https://quarto.org/docs/publishing/rstudio-connect.html), [Confluence](https://quarto.org/docs/publishing/confluence.html), or other publishing systems.
+
+-   Write using [Pandoc](https://pandoc.org/) markdown, including equations, citations, crossrefs, figure panels, callouts, advanced layout, and more.
+
+### **Analyze. Share. Reproduce. You have a story to tell with data—tell it with Quarto.**
+
+From <https://quarto.org/>
+
+end.

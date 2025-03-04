@@ -2,9 +2,9 @@
 title: "贝叶斯与概率图模型（PGM）"
 author: "Simonzhou"
 date: "2025-02-28"
-format: 
-  html:           # 输出格式为 HTML
-    self-contained: true  # 生成独立的 HTML 文件
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
 #  pdf:            # 可选：如果需要 PDF 输出
 #    default
 execute:
@@ -246,3 +246,5 @@ BiocManager::install("Rgraphviz", force = TRUE)
     The downloaded binary packages are in
             C:\Users\asus\AppData\Local\Temp\Rtmp2j7SlA\downloaded_packages
     ```
+
+end.

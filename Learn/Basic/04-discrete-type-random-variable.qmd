@@ -2,16 +2,18 @@
 title: "离散型随机变量的概率分布"
 author: "Simonzhou"
 date: "2025-02-23"
-format: 
-  html:           # 输出格式为 HTML
-    self-contained: true  # 生成独立的 HTML 文件
-  pdf:            # 可选：如果需要 PDF 输出
-    default
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 execute:
-  echo: true      # 在输出中显示代码
-  eval: true      # 执行代码
-  warning: false  # 隐藏警告信息
-  message: false  # 隐藏消息
+  echo: true         # 在输出中显示代码
+  eval: true         # 执行代码
+  warning: false     # 隐藏警告信息
+  message: false     # 隐藏消息
+  cache: true        # 启用代码缓存
+  freeze: true       # 冻结代码输出
 ---
 
 ```{r setup, include=FALSE}
@@ -147,3 +149,5 @@ ggplot(data, aes(x = x, y = pmf, shape = symbol, color = factor(lambda))) +
 
 1.  统计描述角度：直接法计算概率 \[ Pr(X=K)=\frac{e^{-\mu}\mu^{k}}{k!},k=0,1,2,\cdots \]
 2.  统计推断角度：区间估计、假设检验
+
+end.

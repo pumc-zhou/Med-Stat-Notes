@@ -1,8 +1,10 @@
 project:
   type: website
+  preview:
+    port: 5000
   output-dir: "docs" # 输出（编译后的HTML文件、PDF文件以及运行code chunk后产生的图像、数据等）文件夹
   execute-dir: project
-editor: visual
+editor: visual # 编辑使用visual模式
 
 jupyter: 
   path: "C:/Users/asus/AppData/Local/Programs/Python/Python312/python.exe"
@@ -41,21 +43,19 @@ website:
   description: "This is a Note site."
   twitter-card: true
   google-analytics: "G-G2HZEXHNCE"
-  site-url: www.lazyzhou.cn/Med-Stat-Notes
+  site-url: www.lazyzhou.cn
   repo-url: https://github.com/zhoulvbang/Med-Stat-Notes # GitHub仓库的链接
   repo-actions: [source, issue] # 在页面右侧显示导航到GitHub仓库的链接
   favicon: images/logo.png # 网页的logo
   open-graph: 
-    image: logo.png
+    image: images/logo.png
   search:
     location: navbar
     type: textbox # overlay or textbox
 
-
-
   navbar:
     logo: images/logo.png
-    title: "医学统计学笔记"
+    title: "一份医学统计学习笔记"
     background: light # 顶栏背景色（默认为primary，网页主色）
     search: true
     left:
@@ -120,15 +120,16 @@ website:
   page-footer:
     left:
       - text: "This website was built with Quarto"
-    center: "Copyright 2025, simonzhou"
+    center: "Copyright 2023-2025, simonzhou"
     right:
       - icon: github
         href: https://github.com/zhoulvbang
     border: true
 
-
 format:
   html:
+    lang: zh
+    smooth-scroll: true
     theme: 
       light: cosmo # 分别设置暗色主题和亮色主题
       dark: darkly
@@ -143,16 +144,8 @@ format:
     toc-depth: 3 # 设置右侧目录显示的最低层级（默认为显示到3级标题）
     toc-expand: 1 # 右侧目录在一开始显示到多少级，默认显示到一级标题。
     comments:
-      hypothesis:
-        theme: classic
-        openSidebar: false
-        showHighlights: always
-        enableExperimentalNewNoteButton: true
       giscus:
         repo: zhoulvbang/comments
         input-position: top
     includes:
       after-body: _includes/giscus.html
-
-
-

@@ -2,16 +2,18 @@
 title: "参数检验"
 author: "Simonzhou"
 date: "2025-02-24"
-format: 
-  html:           # 输出格式为 HTML
-    self-contained: true  # 生成独立的 HTML 文件
-  pdf:            # 可选：如果需要 PDF 输出
-    default
+#format: 
+#  html:           # 输出格式为 HTML
+#    self-contained: true  # 生成独立的 HTML 文件
+#  pdf:            # 可选：如果需要 PDF 输出
+#    default
 execute:
-  echo: true      # 在输出中显示代码
-  eval: true      # 执行代码
-  warning: false  # 隐藏警告信息
-  message: false  # 隐藏消息
+  echo: true         # 在输出中显示代码
+  eval: true         # 执行代码
+  warning: false     # 隐藏警告信息
+  message: false     # 隐藏消息
+  cache: true        # 启用代码缓存
+  freeze: true       # 冻结代码输出
 ---
 
 # 参数检验
@@ -30,7 +32,7 @@ execute:
 ## $t$分布
 
 | 类目 | $t$分布 |
-|:---------------------|:-------------------------------------------------|
+|:-----------------------|:----------------------------------------------|
 | 概念 | 设从正态分布$N(\mu,\sigma^2)$随机抽取含量为n的样本，样本均数为$\bar x$、标准差为$s$、则$t=\frac{\bar x-\mu}{s_{\bar x}}=\frac{\bar x-\mu}{s/\sqrt{n}}$，自由度为$n-1$。 |
 | 图形特点 | 一簇以0为中心，左右对称的单峰曲线；<br> 但随着自由度的增加，$t$分布曲线将越来越接近于标准正态分布曲线 |
 | 统计量值 | $t$的取值范围$-\infty \sim +\infty$ |
@@ -90,3 +92,5 @@ print(t_dist_plot)
 
 1.  样本均数的中心极限定理。从任意均数等于$\mu$，方差等于$\sigma^2$的一个总体中抽取样本量为$n$的简单随机样本，<font color=Red>当样本量$n$很大时，无论总体分布形态如何，样本均数的抽样分布近似服从正态分布</font>。
 2.  样本率的中心极限定理。从“成功”率为$\pi$的总体中随机抽取样本量为$n$的样本，其样本“成功”率用$p$表示，<font color=Red>当$n\pi>5$且$n(1-\pi)>5$时，样本率$p$近似服从正态分布</font>。
+
+end.
