@@ -100,7 +100,7 @@ website:
     contents:
       - text: 主页
         file: index.qmd
-      - section: 
+      - section: Learn/Basic/00-basic.qmd
         contents: 
           - section: Learn/Basic/00-basic.qmd
             contents: Learn/Basic/*.qmd

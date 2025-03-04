@@ -10,3 +10,31 @@ date: "2025-02-19"
 ---
 
 R语言是一种自由软件编程语言与操作环境，主要用于统计分析、绘图以及数据挖掘。R由新西兰奥克兰大学的统计学家罗斯·伊哈卡和罗伯特·杰特曼开发，现在由R核心小组负责开发，同时也有其他用户编写了诸多外挂的软件包。R以S语言为基础，其词法作用域语义来自Scheme。R的后台程序大多由C语言、FORTRAN语言和R自己写成。
+
+R 语言是为数学研究工作者设计的一种数学编程语言，主要用于统计分析、绘图、数据挖掘。
+
+如果你是一个计算机程序的初学者并且急切地想了解计算机的通用编程，R 语言不是一个很理想的选择，可以选择 [Python](https://www.runoob.com/python3/python3-tutorial.html)、[C](https://www.runoob.com/cprogramming/c-tutorial.html) 或 [Java](https://www.runoob.com/java/java-tutorial.html)。
+
+R 语言与 C 语言都是贝尔实验室的研究成果，但两者有不同的侧重领域，R 语言是一种解释型的面向数学理论研究工作者的语言，而 C 语言是为计算机软件工程师设计的。
+
+R 语言是解释运行的语言（与 C 语言的编译运行不同），它的执行速度比 C 语言慢得多，不利于优化。但它在语法层面提供了更加丰富的数据结构操作并且能够十分方便地输出文字和图形信息，所以它广泛应用于数学尤其是统计学领域<https://www.runoob.com/r/r-tutorial.html>
+
+近些年 R 的发展也是极为迅速，在 Rstudio 改名为 Posit 后，R 的生态在快速发展。
+
+本网站就是其中一个分支的成果： **Quarto**
+
+-   An open-source scientific and technical publishing system
+
+其他的还有诸如：
+
+### Posit Workbench（数据科学家协同开发平台）
+
+-   Jupyter, RStudio, and VS Code environments centrally maintained and ready to use
+
+### MLOps（机器学习模型部署）
+
+-   Machine learning operations, or MLOps, is a set of practices to deploy and maintain machine learning models in production reliably and efficiently. The vetiver framework is for MLOps tasks in Python and R.
+
+### Shiny for python
+
+-   **Effortless Python web applications** with the power of reactive programming.
