@@ -6,7 +6,7 @@ date-format: "YYYY[年]M[月]D[日] HH:mm"
 author-title: Author # 作者栏的标签。默认标签为“AUTHOR”。
 published-title: 编译日期
 citation:
-  url: https://github.com/zhoulvbang/
+  url: https://github.com/zhoulvbang/Med-Stat-Notes
 sidebar: false #开启后会在主页面出现sidebar
 toc: false
 number-sections: false
@@ -49,6 +49,6 @@ Epidemiologists, in response to a health emergency or as a result of systematic 
     -   SAS
     -   Stata
     -   Quarto
--   项目记录
+-   实践记录
     -   Kaggle
 -   读书笔记

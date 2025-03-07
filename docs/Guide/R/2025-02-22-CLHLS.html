@@ -508,6 +508,8 @@ window.Quarto = {
 <li><a href="#%E4%BC%98%E5%8A%BF%E6%AF%94" id="toc-优势比" class="nav-link" data-scroll-target="#%E4%BC%98%E5%8A%BF%E6%AF%94"><span class="header-section-number">3.1.1</span> 优势比</a></li>
   <li><a href="#logistic-%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B" id="toc-logistic-回归模型" class="nav-link" data-scroll-target="#logistic-%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B"><span class="header-section-number">3.1.2</span> Logistic 回归模型</a></li>
   <li><a href="#%E5%85%B1%E7%BA%BF%E6%80%A7%E6%A3%80%E9%AA%8C" id="toc-共线性检验" class="nav-link" data-scroll-target="#%E5%85%B1%E7%BA%BF%E6%80%A7%E6%A3%80%E9%AA%8C"><span class="header-section-number">3.1.3</span> 共线性检验</a></li>
+  <li><a href="#%E5%85%B1%E7%BA%BF%E6%80%A7%E6%A3%80%E9%AA%8C-1" id="toc-共线性检验-1" class="nav-link" data-scroll-target="#%E5%85%B1%E7%BA%BF%E6%80%A7%E6%A3%80%E9%AA%8C-1"><span class="header-section-number">3.1.4</span> 2025-03-07 共线性检验</a></li>
+  <li><a href="#logistic-%E5%9B%9E%E5%BD%92" id="toc-logistic-回归" class="nav-link" data-scroll-target="#logistic-%E5%9B%9E%E5%BD%92"><span class="header-section-number">3.1.5</span> logistic 回归</a></li>
   </ul>
 </li>
   </ul>
@@ -990,14 +992,14 @@ window.Quarto = {
 <p>Logistic 回归分析最大的一个优势可能就是广泛涉及优势比（？），在这里介绍一下优势比的概念。</p>
 <section id="优势比" class="level3" data-number="3.1.1"><h3 data-number="3.1.1" class="anchored" data-anchor-id="优势比">
 <span class="header-section-number">3.1.1</span> 优势比</h3>
-<p>优势（Odds）是指某事件的发生概率 <span class="math inline">\(\pi\)</span> 与该事件不发生的概率 <span class="math inline">\(1-\pi\)</span> 之比，亦称为比，记为 <em>Odds</em> ，某事件在两种不同条件下的优势之比称为优势比（Odds Ratio，OR）。优势比在流行病学中的病例对照研究中被普遍应用（当然不仅限于病例对照研究）。</p>
+<p>优势（Odds）是指某事件的发生概率 <span class="math inline">\(\pi\)</span> 与该事件不发生的概率 <span class="math inline">\(1-\pi\)</span> 之比，亦称为比，记为 <em>Odds</em> ，某事件在两种不同条件下的优势之比称为优势比（Odds Ratio，<em>OR</em>）。优势比在流行病学中的病例对照研究中被普遍应用（当然不仅限于病例对照研究）。</p>
 <p>设某事件的两种不同暴露的发生概率分别为 <span class="math inline">\(\pi_1\)</span> 和 <span class="math inline">\(\pi_0\)</span> ，对应的 <span class="math inline">\(Odds_1= \pi_1 /（1-\pi_1）\)</span>，<span class="math inline">\(Odds_0 =\pi_0 /（1-\pi_0）\)</span> ，两个 <span class="math inline">\(Odds\)</span> 之比定义为 <span class="math inline">\(OR=Odds_1/Odds_0\)</span>。</p>
-<p>由于 <span class="math inline">\(Odds=\pi /(1-\pi)=(\pi-1+1)/(1-\pi)=－1+1 /(1-\pi)\)</span> 以及 <span class="math inline">\(0＜ \pi ＜1\)</span>，所以 <span class="math inline">\(\pi\)</span> 越大，<span class="math inline">\(Odds\)</span> 就越大，反之 <span class="math inline">\(\pi\)</span> 越小，<span class="math inline">\(Odds\)</span> 就越小，特別当 <span class="math inline">\(\pi\)</span> 越接近0时，<span class="math inline">\(Odds\)</span> 也越接近0，因此优势和优势比具有下列性质。</p>
+<p>由于 <span class="math inline">\(Odds=\pi /(1-\pi)=(\pi-1+1)/(1-\pi)=－1+1 /(1-\pi)\)</span> 以及 <span class="math inline">\(0＜ \pi ＜1\)</span>，所以 <span class="math inline">\(\pi\)</span> 越大，<span class="math inline">\(Odds\)</span> 就越大，反之 <span class="math inline">\(\pi\)</span> 越小，<span class="math inline">\(Odds\)</span> 就越小，特別当 <span class="math inline">\(\pi\)</span> 越接近 0时，<span class="math inline">\(Odds\)</span> 也越接近 0，因此优势和优势比具有下列性质。</p>
 <ul>
-<li>如果<span class="math inline">\(\pi_1 = \pi_0\)</span>。，对应有$ Odds_1=Odds_0$ , <span class="math inline">\(OR=1\)</span> 。</li>
-<li>如果 <span class="math inline">\(\pi_1&gt;\pi_0\)</span> ，则 <span class="math inline">\(Odds_1&gt;Odds_o\)</span> ，相应有$ OR&gt;1$ 。同理如果<span class="math inline">\(\pi_1&lt;\pi_0\)</span>，则 <span class="math inline">\(Odds_1&lt;Odds_0\)</span> ，相应有 <span class="math inline">\(OR &lt; 1\)</span>。</li>
+<li>如果 <span class="math inline">\(\pi_1 = \pi_0\)</span>。，对应有 <span class="math inline">\(Odds_1=Odds_0\)</span> , <span class="math inline">\(OR=1\)</span> 。</li>
+<li>如果 <span class="math inline">\(\pi_1&gt;\pi_0\)</span> ，则 <span class="math inline">\(Odds_1&gt;Odds_o\)</span> ，相应有 $ OR&gt;1$ 。同理如果 <span class="math inline">\(\pi_1&lt;\pi_0\)</span>，则 <span class="math inline">\(Odds_1&lt;Odds_0\)</span> ，相应有 <span class="math inline">\(OR &lt; 1\)</span>。</li>
 </ul>
-<p>由于概率 <span class="math inline">\(\pi_1\)</span> 也可以用 <span class="math inline">\(Odds\)</span> 表示，<span class="math inline">\(\pi=\frac{Odds}{1+Odds}\)</span> ，所以也可以通过比较 <span class="math inline">\(Odds_1\)</span> 与 <span class="math inline">\(Odds_0\)</span> 的大小来推断<span class="math inline">\(\pi_1\)</span> 和 <span class="math inline">\(\pi_0\)</span>的大小关系，即可以用<span class="math inline">\(OR&gt;1\)</span>, <span class="math inline">\(OR=1\)</span> 或 <span class="math inline">\(OR&lt;1\)</span> 推断 <span class="math inline">\(\pi_1\)</span> 和 <span class="math inline">\(\pi_0\)</span> 的大小关系。</p>
+<p>由于概率 <span class="math inline">\(\pi_1\)</span> 也可以用 <span class="math inline">\(Odds\)</span> 表示，<span class="math inline">\(\pi=\frac{Odds}{1+Odds}\)</span> ，所以也可以通过比较 <span class="math inline">\(Odds_1\)</span> 与 <span class="math inline">\(Odds_0\)</span> 的大小来推断 <span class="math inline">\(\pi_1\)</span> 和 <span class="math inline">\(\pi_0\)</span> 的大小关系，即可以用 <span class="math inline">\(OR&gt;1\)</span>, <span class="math inline">\(OR=1\)</span> 或 <span class="math inline">\(OR&lt;1\)</span> 推断 <span class="math inline">\(\pi_1\)</span> 和 <span class="math inline">\(\pi_0\)</span> 的大小关系。</p>
 </section><section id="logistic-回归模型" class="level3" data-number="3.1.2"><h3 data-number="3.1.2" class="anchored" data-anchor-id="logistic-回归模型">
 <span class="header-section-number">3.1.2</span> Logistic 回归模型</h3>
 <p>Logistic 回归模型的因变量必须为分类变量，主要有三种：二分类 Logistic 回归模型、有序分类 Logistic 回归模型、无序分类 Logistic 回归模型。其中二分类 Logistic 回归模型最为常用。自变量则无要求，可以是定量变量、有序分类变量和无序分类变量。</p>
@@ -1009,7 +1011,97 @@ window.Quarto = {
 <p>共线性(Colinearity)指的是自变量之间存在高度相关性。这种情况会导致回归系数的不稳定，并使得对模型参数 的估计变得不可靠。在 Logistic 回归中，严重的共线性可能导致模型性能下降，甚至可能导致预测结果难以解释</p>
 <p>方差膨胀因子是统计学中用于衡量多元线性回归模型中自变量之间共线性程度的指标，提供了一种定量的方式来评估自变量之间的共线性。</p>
 <p>方差膨胀因子的解释标准通常如下：如果VIF值小于5，表示自变量之间的共线性程度较低，可以接受。如果VIF值在5到10之间， 表示自变量之间存在一定程度的共线性，但尚可接受。如果VIF值大于10，表示自变量之间存在严重的共线性问题， 需要考虑进行变量选择或者采取其他方法来处理共线性。</p>
-<p>自评健康作为 因变量 ，自变量是 经济支持、生活支持和情绪支持，在前序的处理过程，只有原始的的经济支持变量（加总金额）是定量变量，其他两个都是做的二分类变量处理，如何做共线性检验，看起来并不明朗，因为三个变量看起来没有太多的关系，但是控制变量有些可能存在相关性，但是 是否有对控制变量做共线性检验的必要？</p>
+<p>自评健康作为 因变量 ，自变量是 经济支持、生活支持和情绪支持，在前序的处理过程，只有原始的的经济支持变量（加总金额）是定量变量，其他两个都是做的二分类变量处理，如何做共线性检验，看起来并不明朗，因为三个变量看起来没有太多的关系，但是控制变量有些可能存在相关性，但是，是否有对控制变量做共线性检验的必要？</p>
+</section><section id="共线性检验-1" class="level3" data-number="3.1.4"><h3 data-number="3.1.4" class="anchored" data-anchor-id="共线性检验-1">
+<span class="header-section-number">3.1.4</span> 2025-03-07 共线性检验</h3>
+<p>使用<code>car</code>包对共线性进行检验。</p>
+<p>理论上，共线性检验较为简单，但是在处理此数据时，碰壁较多。</p>
+<p>首先核查数据的完整性，删除全NA和单一值变量，再将分类变量转换为因子类型，经济变量这里也是用“经济分组”这一变量处理，即所有的变量都是分类变量。（全部为分类变量在这里处理其实可能有些问题，我暂未找到合适的处理办法，寻找相关的信息也没有较为清晰地答案）</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># library(car)</span></span>
+<span><span class="co"># 数据完整性检查，删除全NA和单一值变量</span></span>
+<span><span class="va">valid_vars</span> <span class="op">&lt;-</span> <span class="va">all_predictors</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">final_data</span><span class="op">[</span>, <span class="va">all_predictors</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">!</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">final_data</span> <span class="op">&lt;-</span> <span class="va">final_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">outcome</span>, <span class="va">valid_vars</span><span class="op">)</span><span class="op">]</span></span>
+<span></span>
+<span><span class="co"># 仅将二分类变量转换为因子类型</span></span>
+<span><span class="va">binary_vars</span> <span class="op">&lt;-</span> <span class="va">valid_vars</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">final_data</span><span class="op">[</span>, <span class="va">valid_vars</span><span class="op">]</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/na.fail.html">na.omit</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">==</span> <span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="va">final_data</span> <span class="op">&lt;-</span> <span class="va">final_data</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/all_of.html">all_of</a></span><span class="op">(</span><span class="va">binary_vars</span><span class="op">)</span>, <span class="va">as.factor</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># VIF计算</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">valid_vars</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">formula_vif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">outcome</span>, <span class="st">"~"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">valid_vars</span>, collapse <span class="op">=</span> <span class="st">" + "</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">lm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">formula_vif</span>, data <span class="op">=</span> <span class="va">final_data</span><span class="op">)</span></span>
+<span>  <span class="va">vif_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/car/man/vif.html">vif</a></span><span class="op">(</span><span class="va">lm_model</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">vif_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    Variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">vif_values</span><span class="op">)</span>,</span>
+<span>    VIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">vif_values</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="va">mean_vif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">vif_values</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>  <span class="co"># 结果保留两位小数</span></span>
+<span>  <span class="va">mean_vif</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean_vif</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># 保存结果</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/writeLines.html">writeLines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"=== 多重共线性检验 (VIF Results) ==="</span>, </span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"平均 VIF 值:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean_vif</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="st">""</span>,</span>
+<span>               <span class="fu"><a href="https://rdrr.io/r/utils/capture.output.html">capture.output</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">vif_df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, con <span class="op">=</span> <span class="va">output_vif_file</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://docs.ropensci.org/writexl//reference/write_xlsx.html">write_xlsx</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>VIF_Results <span class="op">=</span> <span class="va">vif_df</span>, Mean_VIF <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>Statistic <span class="op">=</span> <span class="st">"平均 VIF 值"</span>, Value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mean_vif</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
+<span>             <span class="va">output_vif_excel</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"VIF 检验完成，结果已保存至:"</span>, <span class="va">output_vif_file</span>, <span class="st">"和"</span>, <span class="va">output_vif_excel</span>, <span class="st">"\n"</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"错误：自变量数量不足，无法计算 VIF\n"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section><section id="logistic-回归" class="level3" data-number="3.1.5"><h3 data-number="3.1.5" class="anchored" data-anchor-id="logistic-回归">
+<span class="header-section-number">3.1.5</span> logistic 回归</h3>
+<div class="cell">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># 5. Logistic 回归分析</span></span>
+<span><span class="va">logistic_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">outcome</span> <span class="kw">in</span> <span class="va">outcomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/formula.html">as.formula</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">outcome</span>, <span class="st">"~"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">independents</span>, collapse <span class="op">=</span> <span class="st">" + "</span><span class="op">)</span>, <span class="st">"+"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">controls</span>, collapse <span class="op">=</span> <span class="st">" + "</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">formula</span>, data <span class="op">=</span> <span class="va">final_data</span>, family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="co"># 提取回归结果，保留三位小数</span></span>
+<span>  <span class="va">model_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
+<span>  <span class="va">coef_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">model_summary</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
+<span>      Variable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span>,</span>
+<span>      OR <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">Estimate</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>      OR_Lower <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">Estimate</span> <span class="op">-</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">`Std. Error`</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>      OR_Upper <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">Estimate</span> <span class="op">+</span> <span class="fl">1.96</span> <span class="op">*</span> <span class="va">`Std. Error`</span><span class="op">)</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>      `Wald χ²` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="op">(</span><span class="va">Estimate</span> <span class="op">/</span> <span class="va">`Std. Error`</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>,</span>
+<span>      df <span class="op">=</span> <span class="fl">1</span></span>
+<span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">Variable</span>, <span class="va">df</span>, <span class="va">Estimate</span>, <span class="va">`Std. Error`</span>, <span class="va">`Wald χ²`</span>, <span class="va">`Pr(&gt;|z|)`</span>, <span class="va">OR</span>, <span class="va">OR_Lower</span>, <span class="va">OR_Upper</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span></span>
+<span>      `回归系数` <span class="op">=</span> <span class="va">Estimate</span>,</span>
+<span>      `标准误` <span class="op">=</span> <span class="va">`Std. Error`</span>,</span>
+<span>      `P 值` <span class="op">=</span> <span class="va">`Pr(&gt;|z|)`</span></span>
+<span>    <span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">`回归系数`</span>, <span class="va">`标准误`</span>, <span class="va">`P 值`</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">.x</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">logistic_results</span><span class="op">[[</span><span class="va">outcome</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">coef_table</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># 6. 生成 Word 文档</span></span>
+<span><span class="va">doc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://davidgohel.github.io/officer/reference/read_docx.html">read_docx</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">outcome</span> <span class="kw">in</span> <span class="va">outcomes</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">doc</span> <span class="op">&lt;-</span> <span class="va">doc</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://davidgohel.github.io/officer/reference/body_add_par.html">body_add_par</a></span><span class="op">(</span>value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Logistic 回归分析结果：因变量 ="</span>, <span class="va">outcome</span><span class="op">)</span>, style <span class="op">=</span> <span class="st">"heading 1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/body_add_flextable.html">body_add_flextable</a></span><span class="op">(</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/flextable.html">flextable</a></span><span class="op">(</span><span class="va">logistic_results</span><span class="op">[[</span><span class="va">outcome</span><span class="op">]</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html">%&gt;%</a></span></span>
+<span>                         <span class="fu"><a href="https://davidgohel.github.io/flextable/reference/set_table_properties.html">set_table_properties</a></span><span class="op">(</span>width <span class="op">=</span> <span class="fl">1</span>, layout <span class="op">=</span> <span class="st">"autofit"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">doc</span>, target <span class="op">=</span> <span class="va">output_logistic_file</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Logistic 回归分析结果已保存至:"</span>, <span class="va">output_logistic_file</span>, <span class="st">"\n"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 <!-- -->
@@ -1642,539 +1734,628 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "CLHLS Data Analysis by R"</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-22"</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#format: </span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  html:           # 输出格式为 HTML</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    self-contained: true  # 生成独立的 HTML 文件</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  pdf:            # 可选：如果需要 PDF 输出</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    default</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true      # 在输出中显示代码</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true      # 执行代码</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false  # 隐藏警告信息</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false  # 隐藏消息</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># CLHLS 数据分析</span></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>这是一个使用 R 语言对 CLHLS 数据进行清洗和分析的工作文档。</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 加载必要的包</span></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="in"># 安装并加载必要的 R 包</span></span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("haven", quietly = TRUE)) {</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("haven")</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("dplyr", quietly = TRUE)) {</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("dplyr")</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("tidyr", quietly = TRUE)) {</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("tidyr")</span></span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("writexl", quietly = TRUE)) {</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("writexl")</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="in">library(haven)        # 用于读取 SPSS (.sav) 文件</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)        # 用于数据操作</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyr)        # 用于数据整理</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="in">library(writexl)      # 用于导出 Excel 文件</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="in">library(purrr)      # 函数式编程</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">library(officer)</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">library(flextable)</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in"># 设置代码块选项</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>本文数据源来自北大开放研究数据平台。<span class="co">[</span><span class="ot">DVN/WBO7LK_2020</span><span class="co">](#DVN/WBO7LK_2020)</span></span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>使用 SAS 逐渐让我失去的耐心，极其臃肿和笨重，Vintage Car，交互页面也很糟糕，用起来很令人烦躁，遂改用 R 对数据进行分析。</span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>2025-03-06 R 也没那么好用，反而觉得 Stata 的简便也是一种优势所在。</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="fu"># 数据的导入与变量的生成</span></span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="in"># 1. 导入数据</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="in">raw_data &lt;- read_sav("C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/clhls_2018_15874.sav")</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="in"># 2. 检查数据结构（相当于proc contents）</span></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="in">str(raw_data)</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="in"># 3. 选择变量并创建新变量</span></span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="in">selected_data &lt;- raw_data %&gt;%</span></span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(</span></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="in">    # 因变量</span></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="in">    SHEALTH = ifelse(!b12 %in% c(NA, 8, 9), b12, NA),</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">    # ADL</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">    ADLsum = rowSums(select(., e1:e6), na.rm = TRUE),</span></span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="in">    ADL = (ADLsum == 6),</span></span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="in">    # IADL</span></span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="in">    IADLsum = rowSums(select(., e7:e14), na.rm = TRUE),</span></span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="in">    IADL = (IADLsum == 8),</span></span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="in">    # 自变量 - 经济支持</span></span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="in">    economic_support = pmap_dbl(</span></span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="in">      list(f12a, f12b, f12c),</span></span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="in">      function(a, b, c) {</span></span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="in">        sum = 0</span></span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="in">        for (x in c(a, b, c)) {</span></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="in">          if (!is.na(x)) {</span></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="in">            if (x == 99998) sum = sum + 10000</span></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="in">            else if (!x %in% c(88888, 99999)) sum = sum + x</span></span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="in">          }</span></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="in">        }</span></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="in">        return(sum)</span></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="in">    # 照料支持</span></span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="in">    residence = a51,</span></span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="in">    living = a52,</span></span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="in">    visit_fren = apply(select(., starts_with("f103") &amp; ends_with("5")), 1, </span></span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="in">                      function(x) max(x, na.rm = TRUE) == 1),</span></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="in">    care_support = (residence == 1 | visit_fren),</span></span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="in">    # 情感支持</span></span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="in">    emotion_support = apply(select(., starts_with("f103") &amp; ends_with("6")), 1,</span></span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="in">                           function(x) max(x, na.rm = TRUE) == 1),</span></span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a><span class="in">    # 控制变量</span></span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="in">    age = trueage,</span></span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="in">    gender = a1,</span></span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="in">    education = f1,</span></span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="in">    job_type = f2,</span></span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="in">    marriage_status = (f41 == 1),</span></span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="in">    hukou_type = hukou,</span></span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="in">    social_insurance = (nf64a == 0 | f64b == 1 | f64c == 1 | f64i == 1),</span></span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="in">    medical_insurance = (f64d == 1 | f64e == 1 | f64g == 1 | f64h == 1),</span></span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a><span class="in">    # 慢性病</span></span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="in">    chronic_disease = apply(select(., starts_with("g15") &amp; ends_with("1")), 1,</span></span>
-<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a><span class="in">                           function(x) max(x, na.rm = TRUE) == 1),</span></span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="in">    smoking = g151,</span></span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="in">    drinking = g161,</span></span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a><span class="in">    exercise = (d91 == 1 | d92 == 1)</span></span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="in">  ) %&gt;%</span></span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="in">  select(SHEALTH, ADL, ADLsum, IADL, IADLsum, economic_support, residence, living,</span></span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a><span class="in">         visit_fren, emotion_support, f10, age, gender, education, job_type,</span></span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="in">         marriage_status, hukou_type, social_insurance, medical_insurance,</span></span>
-<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a><span class="in">         chronic_disease, smoking, drinking, exercise, care_support)</span></span>
-<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a><span class="in"># 4. 样本筛选</span></span>
-<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="in">temp_data &lt;- selected_data %&gt;%</span></span>
-<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(</span></span>
-<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a><span class="in">    complete.cases(SHEALTH, ADL, ADLsum, IADL, IADLsum, economic_support,</span></span>
-<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a><span class="in">                  residence, living, visit_fren, emotion_support, age, gender,</span></span>
-<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="in">                  education, job_type, marriage_status, hukou_type,</span></span>
-<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a><span class="in">                  social_insurance, medical_insurance, chronic_disease,</span></span>
-<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="in">                  smoking, drinking, exercise, care_support),</span></span>
-<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a><span class="in">    f10 &gt; 0 &amp; f10 &lt;= 13</span></span>
-<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
-<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="in"># 5. 删除特定条件的样本</span></span>
-<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a><span class="in">final_data &lt;- temp_data %&gt;%</span></span>
-<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(</span></span>
-<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a><span class="in">    SHEALTH &lt;= 8,</span></span>
-<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a><span class="in">    ADLsum &lt;= 18,</span></span>
-<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a><span class="in">    IADLsum &lt;= 24,</span></span>
-<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a><span class="in">    residence &lt;= 3,</span></span>
-<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a><span class="in">    age &gt;= 60,</span></span>
-<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="in">    education &lt;= 22,</span></span>
-<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="in">    smoking &lt;= 2,</span></span>
-<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="in">    drinking &lt;= 2</span></span>
-<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
-<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a><span class="in"># 6. 年龄分组</span></span>
-<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a><span class="in">final_data_grouped &lt;- final_data %&gt;%</span></span>
-<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(</span></span>
-<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="in">    age_group = case_when(</span></span>
-<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a><span class="in">      age &lt; 70 ~ "60-69",</span></span>
-<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a><span class="in">      age &lt; 80 ~ "70-79",</span></span>
-<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a><span class="in">      age &lt; 90 ~ "80-89",</span></span>
-<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a><span class="in">      TRUE ~ "90+"</span></span>
-<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
-<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
-<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a><span class="in"># 7. 计算描述性统计量</span></span>
-<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- final_data_grouped %&gt;%</span></span>
-<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(across(</span></span>
-<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="in">    c(SHEALTH, ADL, ADLsum, IADL, IADLsum, economic_support, care_support,</span></span>
-<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="in">      emotion_support, age, gender, education, marriage_status, hukou_type,</span></span>
-<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="in">      social_insurance, medical_insurance, chronic_disease, smoking,</span></span>
-<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a><span class="in">      drinking, exercise),</span></span>
-<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a><span class="in">    list(</span></span>
-<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a><span class="in">      n = ~sum(!is.na(.)),</span></span>
-<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a><span class="in">      mean = ~mean(., na.rm = TRUE),</span></span>
-<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a><span class="in">      std = ~sd(., na.rm = TRUE),</span></span>
-<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a><span class="in">      min = ~min(., na.rm = TRUE),</span></span>
-<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a><span class="in">      median = ~median(., na.rm = TRUE),</span></span>
-<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a><span class="in">      max = ~max(., na.rm = TRUE)</span></span>
-<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
-<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="in">  )) %&gt;%</span></span>
-<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a><span class="in">  pivot_longer(</span></span>
-<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a><span class="in">    everything(),</span></span>
-<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="in">    names_to = c("var_name", "stat"),</span></span>
-<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="in">    names_sep = "_",</span></span>
-<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a><span class="in">    values_to = "value"</span></span>
-<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a><span class="in">  ) %&gt;%</span></span>
-<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a><span class="in">  pivot_wider(</span></span>
-<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a><span class="in">    names_from = "stat",</span></span>
-<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a><span class="in">    values_from = "value"</span></span>
-<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
-<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a><span class="in"># 8. 创建变量标签映射</span></span>
-<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a><span class="in">label_map &lt;- tibble(</span></span>
-<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a><span class="in">  var_name = c("SHEALTH", "ADL", "ADLsum", "IADL", "IADLsum", "economic_support",</span></span>
-<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a><span class="in">              "care_support", "emotion_support", "age", "gender", "education",</span></span>
-<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a><span class="in">              "marriage_status", "hukou_type", "social_insurance",</span></span>
-<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a><span class="in">              "medical_insurance", "chronic_disease", "smoking", "drinking",</span></span>
-<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a><span class="in">              "exercise"),</span></span>
-<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a><span class="in">  label = c("自评健康状况", "生活自理能力", "生活自理能力总分", "工具型生活自理能力",</span></span>
-<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a><span class="in">           "工具型生活自理能力总分", "经济支持", "照料支持", "情感支持", "年龄", "性别",</span></span>
-<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a><span class="in">           "受教育程度", "婚姻状况", "户口类型", "养老保险", "医疗保险", "慢性病",</span></span>
-<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a><span class="in">           "抽烟", "喝酒", "体育锻炼")</span></span>
-<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a><span class="in"># 9. 合并结果</span></span>
-<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a><span class="in">final_summary &lt;- summary_stats %&gt;%</span></span>
-<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a><span class="in">  left_join(label_map, by = "var_name") %&gt;%</span></span>
-<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a><span class="in">  select(label, n, mean, std, min, median, max)</span></span>
-<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a><span class="in"># 10. 查看结果</span></span>
-<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a><span class="in">print(final_summary)</span></span>
-<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a><span class="in"># 11. 输出描述性统计表格</span></span>
-<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
-<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a><span class="in">kable(final_summary,</span></span>
-<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a><span class="in">      digits = 3,</span></span>
-<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a><span class="in">      col.names = c("变量名", "样本数", "平均数", "标准差", "最小值", "中位数", "最大值"),</span></span>
-<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a><span class="in">      caption = "表3-1 描述性统计分析")</span></span>
-<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据导出</span></span>
-<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a><span class="in">library(writexl)  </span></span>
-<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a><span class="in"># 12. 保存描述性统计表格  </span></span>
-<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a><span class="in">write_xlsx(final_summary, "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/Rsummary0223.xlsx")  </span></span>
-<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a><span class="in"># 13. 保存结果  </span></span>
-<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a><span class="in">write_xlsx(final_data, "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/final_data0223.xlsx")</span></span>
-<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a><span class="fu">## 描述性统计</span></span>
-<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a><span class="fu"># 加载必要的包</span></span>
-<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a><span class="in">library(readxl)</span></span>
-<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
-<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyr)</span></span>
-<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
-<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a><span class="in">library(officer)</span></span>
-<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a><span class="in">library(flextable)</span></span>
-<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a><span class="in">library(car)</span></span>
-<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a><span class="in"># 确认包是否正确加载</span></span>
-<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a><span class="in">if (!require(officer)) stop("请安装 officer 包")</span></span>
-<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a><span class="in">if (!require(flextable)) stop("请安装 flextable 包")</span></span>
-<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a><span class="in">if (!require(dplyr)) stop("请安装 dplyr 包")</span></span>
-<span id="cb4-246"><a href="#cb4-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-247"><a href="#cb4-247" aria-hidden="true" tabindex="-1"></a><span class="in"># 1. 导入数据</span></span>
-<span id="cb4-248"><a href="#cb4-248" aria-hidden="true" tabindex="-1"></a><span class="in">final_data &lt;- read_excel("C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/final_data.xlsx", </span></span>
-<span id="cb4-249"><a href="#cb4-249" aria-hidden="true" tabindex="-1"></a><span class="in">                         sheet = "final_data")</span></span>
-<span id="cb4-250"><a href="#cb4-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-251"><a href="#cb4-251" aria-hidden="true" tabindex="-1"></a><span class="in"># 2. 定义变量列表（描述性统计用）</span></span>
-<span id="cb4-252"><a href="#cb4-252" aria-hidden="true" tabindex="-1"></a><span class="in">varlist &lt;- c("SHEALTH", "ADLsum", "ADL", "IADLsum", "IADL", "economic_support",</span></span>
-<span id="cb4-253"><a href="#cb4-253" aria-hidden="true" tabindex="-1"></a><span class="in">             "residence", "living", "visit_fren", "care_support", "emotion_support",</span></span>
-<span id="cb4-254"><a href="#cb4-254" aria-hidden="true" tabindex="-1"></a><span class="in">             "age", "gender", "education", "job_type", "marriage_status",</span></span>
-<span id="cb4-255"><a href="#cb4-255" aria-hidden="true" tabindex="-1"></a><span class="in">             "hukou_type", "social_insurance", "medical_insurance", "chronic_disease",</span></span>
-<span id="cb4-256"><a href="#cb4-256" aria-hidden="true" tabindex="-1"></a><span class="in">             "smoking", "drinking", "exercise", "f10")</span></span>
-<span id="cb4-257"><a href="#cb4-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-258"><a href="#cb4-258" aria-hidden="true" tabindex="-1"></a><span class="in"># 3. 创建变量标签映射</span></span>
-<span id="cb4-259"><a href="#cb4-259" aria-hidden="true" tabindex="-1"></a><span class="in">label_map &lt;- data.frame(</span></span>
-<span id="cb4-260"><a href="#cb4-260" aria-hidden="true" tabindex="-1"></a><span class="in">  variable = varlist,</span></span>
-<span id="cb4-261"><a href="#cb4-261" aria-hidden="true" tabindex="-1"></a><span class="in">  label = c("自评健康状况", "生活自理能力总分", "生活自理能力", "工具型生活自理能力总分",</span></span>
-<span id="cb4-262"><a href="#cb4-262" aria-hidden="true" tabindex="-1"></a><span class="in">            "工具型生活自理能力", "经济支持", "居住情况", "居住状态", "探访频率",</span></span>
-<span id="cb4-263"><a href="#cb4-263" aria-hidden="true" tabindex="-1"></a><span class="in">            "照料支持", "情感支持", "年龄", "性别", "受教育程度", "工作类型",</span></span>
-<span id="cb4-264"><a href="#cb4-264" aria-hidden="true" tabindex="-1"></a><span class="in">            "婚姻状况", "户口类型", "社会保险", "医疗保险", "慢性病",</span></span>
-<span id="cb4-265"><a href="#cb4-265" aria-hidden="true" tabindex="-1"></a><span class="in">            "吸烟情况", "饮酒情况", "体育锻炼", "子女数")</span></span>
-<span id="cb4-266"><a href="#cb4-266" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
-<span id="cb4-267"><a href="#cb4-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-268"><a href="#cb4-268" aria-hidden="true" tabindex="-1"></a><span class="in"># 4. 生成描述性统计</span></span>
-<span id="cb4-269"><a href="#cb4-269" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- final_data[ , varlist]</span></span>
-<span id="cb4-270"><a href="#cb4-270" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- summarise(summary_stats, across(</span></span>
-<span id="cb4-271"><a href="#cb4-271" aria-hidden="true" tabindex="-1"></a><span class="in">  all_of(varlist),</span></span>
-<span id="cb4-272"><a href="#cb4-272" aria-hidden="true" tabindex="-1"></a><span class="in">  list(</span></span>
-<span id="cb4-273"><a href="#cb4-273" aria-hidden="true" tabindex="-1"></a><span class="in">    count = ~sum(!is.na(.)),</span></span>
-<span id="cb4-274"><a href="#cb4-274" aria-hidden="true" tabindex="-1"></a><span class="in">    mean = ~mean(., na.rm = TRUE),</span></span>
-<span id="cb4-275"><a href="#cb4-275" aria-hidden="true" tabindex="-1"></a><span class="in">    sd = ~sd(., na.rm = TRUE),</span></span>
-<span id="cb4-276"><a href="#cb4-276" aria-hidden="true" tabindex="-1"></a><span class="in">    min = ~min(., na.rm = TRUE),</span></span>
-<span id="cb4-277"><a href="#cb4-277" aria-hidden="true" tabindex="-1"></a><span class="in">    p50 = ~median(., na.rm = TRUE),</span></span>
-<span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a><span class="in">    max = ~max(., na.rm = TRUE)</span></span>
-<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
-<span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a><span class="in">  .names = "{.col}_{.fn}"</span></span>
-<span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
-<span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查 summarise 后的数据</span></span>
-<span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 summarise 后的数据:\n")</span></span>
-<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
-<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 summarise 后的列类型:\n")</span></span>
-<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
-<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a><span class="in"># 转换为长格式，修复分割问题</span></span>
-<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- pivot_longer(summary_stats, </span></span>
-<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a><span class="in">                              cols = everything(), </span></span>
-<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a><span class="in">                              names_to = c("variable", "stat"), </span></span>
-<span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a><span class="in">                              names_pattern = "(.*)_(.*)",  # 使用正则表达式匹配</span></span>
-<span id="cb4-294"><a href="#cb4-294" aria-hidden="true" tabindex="-1"></a><span class="in">                              values_to = "value")</span></span>
-<span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查 pivot_longer 后的数据</span></span>
-<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_longer 后的数据:\n")</span></span>
-<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats, 10))</span></span>
-<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_longer 后的列类型:\n")</span></span>
-<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
-<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a><span class="in"># 检查重复值</span></span>
-<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a><span class="in">duplicates &lt;- summary_stats %&gt;%</span></span>
-<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(variable, stat) %&gt;%</span></span>
-<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(n = n()) %&gt;%</span></span>
-<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(n &gt; 1)</span></span>
-<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查重复值:\n")</span></span>
-<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a><span class="in">print(duplicates)</span></span>
-<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-310"><a href="#cb4-310" aria-hidden="true" tabindex="-1"></a><span class="in"># 转换为宽格式，确保唯一值</span></span>
-<span id="cb4-311"><a href="#cb4-311" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- pivot_wider(summary_stats, </span></span>
-<span id="cb4-312"><a href="#cb4-312" aria-hidden="true" tabindex="-1"></a><span class="in">                             names_from = "stat", </span></span>
-<span id="cb4-313"><a href="#cb4-313" aria-hidden="true" tabindex="-1"></a><span class="in">                             values_from = "value",</span></span>
-<span id="cb4-314"><a href="#cb4-314" aria-hidden="true" tabindex="-1"></a><span class="in">                             values_fn = list(value = mean))  # 如果有重复，取均值</span></span>
-<span id="cb4-315"><a href="#cb4-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-316"><a href="#cb4-316" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查 pivot_wider 后的数据</span></span>
-<span id="cb4-317"><a href="#cb4-317" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_wider 后的数据:\n")</span></span>
-<span id="cb4-318"><a href="#cb4-318" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
-<span id="cb4-319"><a href="#cb4-319" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_wider 后的列类型:\n")</span></span>
-<span id="cb4-320"><a href="#cb4-320" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
-<span id="cb4-321"><a href="#cb4-321" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-322"><a href="#cb4-322" aria-hidden="true" tabindex="-1"></a><span class="in"># 合并标签并选择列</span></span>
-<span id="cb4-323"><a href="#cb4-323" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- left_join(summary_stats, label_map, by = "variable")</span></span>
-<span id="cb4-324"><a href="#cb4-324" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- select(summary_stats, label, count, mean, sd, min, p50, max)</span></span>
-<span id="cb4-325"><a href="#cb4-325" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-326"><a href="#cb4-326" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查合并后的数据</span></span>
-<span id="cb4-327"><a href="#cb4-327" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查合并后的数据:\n")</span></span>
-<span id="cb4-328"><a href="#cb4-328" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
-<span id="cb4-329"><a href="#cb4-329" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查合并后的列类型:\n")</span></span>
-<span id="cb4-330"><a href="#cb4-330" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
-<span id="cb4-331"><a href="#cb4-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-332"><a href="#cb4-332" aria-hidden="true" tabindex="-1"></a><span class="in"># 确保所有列为数值型并四舍五入</span></span>
-<span id="cb4-333"><a href="#cb4-333" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- mutate(summary_stats,</span></span>
-<span id="cb4-334"><a href="#cb4-334" aria-hidden="true" tabindex="-1"></a><span class="in">                        count = as.numeric(count),</span></span>
-<span id="cb4-335"><a href="#cb4-335" aria-hidden="true" tabindex="-1"></a><span class="in">                        mean = as.numeric(mean),</span></span>
-<span id="cb4-336"><a href="#cb4-336" aria-hidden="true" tabindex="-1"></a><span class="in">                        sd = as.numeric(sd),</span></span>
-<span id="cb4-337"><a href="#cb4-337" aria-hidden="true" tabindex="-1"></a><span class="in">                        min = as.numeric(min),</span></span>
-<span id="cb4-338"><a href="#cb4-338" aria-hidden="true" tabindex="-1"></a><span class="in">                        p50 = as.numeric(p50),</span></span>
-<span id="cb4-339"><a href="#cb4-339" aria-hidden="true" tabindex="-1"></a><span class="in">                        max = as.numeric(max))</span></span>
-<span id="cb4-340"><a href="#cb4-340" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- mutate(summary_stats, </span></span>
-<span id="cb4-341"><a href="#cb4-341" aria-hidden="true" tabindex="-1"></a><span class="in">                        across(c(mean, sd, min, p50, max), ~round(., 2)))</span></span>
-<span id="cb4-342"><a href="#cb4-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-343"><a href="#cb4-343" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查最终数据</span></span>
-<span id="cb4-344"><a href="#cb4-344" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查最终 summary_stats 数据:\n")</span></span>
-<span id="cb4-345"><a href="#cb4-345" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
-<span id="cb4-346"><a href="#cb4-346" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查最终 summary_stats 列类型:\n")</span></span>
-<span id="cb4-347"><a href="#cb4-347" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
-<span id="cb4-348"><a href="#cb4-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-349"><a href="#cb4-349" aria-hidden="true" tabindex="-1"></a><span class="in"># 5. 在 R 窗口显示结果</span></span>
-<span id="cb4-350"><a href="#cb4-350" aria-hidden="true" tabindex="-1"></a><span class="in">cat("直接打印 kable 表格:\n")</span></span>
-<span id="cb4-351"><a href="#cb4-351" aria-hidden="true" tabindex="-1"></a><span class="in">print(kable(summary_stats,</span></span>
-<span id="cb4-352"><a href="#cb4-352" aria-hidden="true" tabindex="-1"></a><span class="in">            digits = 2,</span></span>
-<span id="cb4-353"><a href="#cb4-353" aria-hidden="true" tabindex="-1"></a><span class="in">            col.names = c("变量名", "观测数", "均值", "标准差", "最小值", "中位数", "最大值"),</span></span>
-<span id="cb4-354"><a href="#cb4-354" aria-hidden="true" tabindex="-1"></a><span class="in">            caption = "描述性统计"))</span></span>
-<span id="cb4-355"><a href="#cb4-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-356"><a href="#cb4-356" aria-hidden="true" tabindex="-1"></a><span class="in"># 6. 导出描述性统计到 DOCX 文件</span></span>
-<span id="cb4-357"><a href="#cb4-357" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- flextable(summary_stats)</span></span>
-<span id="cb4-358"><a href="#cb4-358" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- set_header_labels(stats_table,</span></span>
-<span id="cb4-359"><a href="#cb4-359" aria-hidden="true" tabindex="-1"></a><span class="in">                                 label = "变量名",</span></span>
-<span id="cb4-360"><a href="#cb4-360" aria-hidden="true" tabindex="-1"></a><span class="in">                                 count = "观测数",</span></span>
-<span id="cb4-361"><a href="#cb4-361" aria-hidden="true" tabindex="-1"></a><span class="in">                                 mean = "均值",</span></span>
-<span id="cb4-362"><a href="#cb4-362" aria-hidden="true" tabindex="-1"></a><span class="in">                                 sd = "标准差",</span></span>
-<span id="cb4-363"><a href="#cb4-363" aria-hidden="true" tabindex="-1"></a><span class="in">                                 min = "最小值",</span></span>
-<span id="cb4-364"><a href="#cb4-364" aria-hidden="true" tabindex="-1"></a><span class="in">                                 p50 = "中位数",</span></span>
-<span id="cb4-365"><a href="#cb4-365" aria-hidden="true" tabindex="-1"></a><span class="in">                                 max = "最大值")</span></span>
-<span id="cb4-366"><a href="#cb4-366" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- colformat_double(stats_table, j = 2:7, digits = 2)</span></span>
-<span id="cb4-367"><a href="#cb4-367" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- set_caption(stats_table, "描述性统计")</span></span>
-<span id="cb4-368"><a href="#cb4-368" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- autofit(stats_table)</span></span>
-<span id="cb4-369"><a href="#cb4-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-370"><a href="#cb4-370" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- read_docx()</span></span>
-<span id="cb4-371"><a href="#cb4-371" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- body_add_flextable(doc, stats_table)</span></span>
-<span id="cb4-372"><a href="#cb4-372" aria-hidden="true" tabindex="-1"></a><span class="in">print(doc, target = "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/描述性统计0218.docx")</span></span>
-<span id="cb4-373"><a href="#cb4-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-374"><a href="#cb4-374" aria-hidden="true" tabindex="-1"></a><span class="in">cat("描述性统计已导出到 C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/描述性统计0218.docx\n")</span></span>
-<span id="cb4-375"><a href="#cb4-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-376"><a href="#cb4-376" aria-hidden="true" tabindex="-1"></a><span class="in"># 后续代码保持不变（分组、频数表、ANOVA）</span></span>
-<span id="cb4-377"><a href="#cb4-377" aria-hidden="true" tabindex="-1"></a><span class="in"># 7. 对年龄和教育进行分组</span></span>
-<span id="cb4-378"><a href="#cb4-378" aria-hidden="true" tabindex="-1"></a><span class="in">final_data$age_group &lt;- cut(final_data$age, breaks = c(60, 70, 80, 150), </span></span>
-<span id="cb4-379"><a href="#cb4-379" aria-hidden="true" tabindex="-1"></a><span class="in">                            labels = c("60-69", "70-79", "80及以上"), </span></span>
-<span id="cb4-380"><a href="#cb4-380" aria-hidden="true" tabindex="-1"></a><span class="in">                            right = FALSE)</span></span>
-<span id="cb4-381"><a href="#cb4-381" aria-hidden="true" tabindex="-1"></a><span class="in">final_data$edu_group &lt;- cut(final_data$education, breaks = c(0, 1, 7, 10, 13, 18, 23),</span></span>
-<span id="cb4-382"><a href="#cb4-382" aria-hidden="true" tabindex="-1"></a><span class="in">                            labels = c("无教育", "小学", "初中", "高中", "大学", "硕博"), </span></span>
-<span id="cb4-383"><a href="#cb4-383" aria-hidden="true" tabindex="-1"></a><span class="in">                            right = FALSE)</span></span>
-<span id="cb4-384"><a href="#cb4-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-385"><a href="#cb4-385" aria-hidden="true" tabindex="-1"></a><span class="in"># 8. 定义因变量和控制变量</span></span>
-<span id="cb4-386"><a href="#cb4-386" aria-hidden="true" tabindex="-1"></a><span class="in">outcomes &lt;- c("SHEALTH", "ADL", "IADL")</span></span>
-<span id="cb4-387"><a href="#cb4-387" aria-hidden="true" tabindex="-1"></a><span class="in">controls &lt;- c("age_group", "gender", "edu_group", "marriage_status", "hukou_type",</span></span>
-<span id="cb4-388"><a href="#cb4-388" aria-hidden="true" tabindex="-1"></a><span class="in">              "social_insurance", "medical_insurance", "chronic_disease",</span></span>
-<span id="cb4-389"><a href="#cb4-389" aria-hidden="true" tabindex="-1"></a><span class="in">              "smoking", "drinking", "exercise")</span></span>
-<span id="cb4-390"><a href="#cb4-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-391"><a href="#cb4-391" aria-hidden="true" tabindex="-1"></a><span class="in"># 9. 更新变量标签映射</span></span>
-<span id="cb4-392"><a href="#cb4-392" aria-hidden="true" tabindex="-1"></a><span class="in">label_map &lt;- rbind(label_map,</span></span>
-<span id="cb4-393"><a href="#cb4-393" aria-hidden="true" tabindex="-1"></a><span class="in">                   data.frame(</span></span>
-<span id="cb4-394"><a href="#cb4-394" aria-hidden="true" tabindex="-1"></a><span class="in">                     variable = c("age_group", "edu_group"),</span></span>
-<span id="cb4-395"><a href="#cb4-395" aria-hidden="true" tabindex="-1"></a><span class="in">                     label = c("年龄组", "教育组")</span></span>
-<span id="cb4-396"><a href="#cb4-396" aria-hidden="true" tabindex="-1"></a><span class="in">                   ))</span></span>
-<span id="cb4-397"><a href="#cb4-397" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-398"><a href="#cb4-398" aria-hidden="true" tabindex="-1"></a><span class="in"># 10. 生成所有控制变量的频数和占比表</span></span>
-<span id="cb4-399"><a href="#cb4-399" aria-hidden="true" tabindex="-1"></a><span class="in">freq_tables &lt;- list()</span></span>
-<span id="cb4-400"><a href="#cb4-400" aria-hidden="true" tabindex="-1"></a><span class="in">for (ctrl in controls) {</span></span>
-<span id="cb4-401"><a href="#cb4-401" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_table &lt;- group_by(final_data, !!sym(ctrl))</span></span>
-<span id="cb4-402"><a href="#cb4-402" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_table &lt;- summarise(freq_table,</span></span>
-<span id="cb4-403"><a href="#cb4-403" aria-hidden="true" tabindex="-1"></a><span class="in">                          freq = n(),</span></span>
-<span id="cb4-404"><a href="#cb4-404" aria-hidden="true" tabindex="-1"></a><span class="in">                          pct = (n() / nrow(final_data)) * 100)</span></span>
-<span id="cb4-405"><a href="#cb4-405" aria-hidden="true" tabindex="-1"></a><span class="in">  colnames(freq_table) &lt;- c(label_map$label[label_map$variable == ctrl], "频数", "占比 (%)")</span></span>
-<span id="cb4-406"><a href="#cb4-406" aria-hidden="true" tabindex="-1"></a><span class="in">  cat("\n频数表 for", ctrl, ":\n")</span></span>
-<span id="cb4-407"><a href="#cb4-407" aria-hidden="true" tabindex="-1"></a><span class="in">  print(freq_table)</span></span>
-<span id="cb4-408"><a href="#cb4-408" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_tables[[ctrl]] &lt;- freq_table</span></span>
-<span id="cb4-409"><a href="#cb4-409" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-410"><a href="#cb4-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-411"><a href="#cb4-411" aria-hidden="true" tabindex="-1"></a><span class="in"># 11. 单因素方差分析</span></span>
-<span id="cb4-412"><a href="#cb4-412" aria-hidden="true" tabindex="-1"></a><span class="in">anova_results &lt;- list()</span></span>
-<span id="cb4-413"><a href="#cb4-413" aria-hidden="true" tabindex="-1"></a><span class="in">for (outcome in outcomes) {</span></span>
-<span id="cb4-414"><a href="#cb4-414" aria-hidden="true" tabindex="-1"></a><span class="in">  anova_results[[outcome]] &lt;- data.frame()</span></span>
-<span id="cb4-415"><a href="#cb4-415" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
-<span id="cb4-416"><a href="#cb4-416" aria-hidden="true" tabindex="-1"></a><span class="in">  for (ctrl in controls) {</span></span>
-<span id="cb4-417"><a href="#cb4-417" aria-hidden="true" tabindex="-1"></a><span class="in">    if (!is.numeric(final_data[[ctrl]])) {</span></span>
-<span id="cb4-418"><a href="#cb4-418" aria-hidden="true" tabindex="-1"></a><span class="in">      final_data[[ctrl]] &lt;- as.factor(final_data[[ctrl]])</span></span>
-<span id="cb4-419"><a href="#cb4-419" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb4-420"><a href="#cb4-420" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-421"><a href="#cb4-421" aria-hidden="true" tabindex="-1"></a><span class="in">    formula &lt;- as.formula(paste(outcome, "~", ctrl))</span></span>
-<span id="cb4-422"><a href="#cb4-422" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_fit &lt;- tryCatch({</span></span>
-<span id="cb4-423"><a href="#cb4-423" aria-hidden="true" tabindex="-1"></a><span class="in">      fit &lt;- aov(formula, data = final_data)</span></span>
-<span id="cb4-424"><a href="#cb4-424" aria-hidden="true" tabindex="-1"></a><span class="in">      summary_fit &lt;- summary(fit)[[1]]</span></span>
-<span id="cb4-425"><a href="#cb4-425" aria-hidden="true" tabindex="-1"></a><span class="in">      result &lt;- data.frame(</span></span>
-<span id="cb4-426"><a href="#cb4-426" aria-hidden="true" tabindex="-1"></a><span class="in">        "控制变量" = label_map$label[label_map$variable == ctrl],</span></span>
-<span id="cb4-427"><a href="#cb4-427" aria-hidden="true" tabindex="-1"></a><span class="in">        "平方和" = summary_fit$"Sum Sq"[1],</span></span>
-<span id="cb4-428"><a href="#cb4-428" aria-hidden="true" tabindex="-1"></a><span class="in">        "自由度" = summary_fit$"Df"[1],</span></span>
-<span id="cb4-429"><a href="#cb4-429" aria-hidden="true" tabindex="-1"></a><span class="in">        "F 值" = summary_fit$"F value"[1],</span></span>
-<span id="cb4-430"><a href="#cb4-430" aria-hidden="true" tabindex="-1"></a><span class="in">        "p 值" = summary_fit$"Pr(&gt;F)"[1]</span></span>
-<span id="cb4-431"><a href="#cb4-431" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
-<span id="cb4-432"><a href="#cb4-432" aria-hidden="true" tabindex="-1"></a><span class="in">      cat("\nANOVA:", outcome, "vs", ctrl, "\n")</span></span>
-<span id="cb4-433"><a href="#cb4-433" aria-hidden="true" tabindex="-1"></a><span class="in">      print(result)</span></span>
-<span id="cb4-434"><a href="#cb4-434" aria-hidden="true" tabindex="-1"></a><span class="in">      result</span></span>
-<span id="cb4-435"><a href="#cb4-435" aria-hidden="true" tabindex="-1"></a><span class="in">    }, error = function(e) {</span></span>
-<span id="cb4-436"><a href="#cb4-436" aria-hidden="true" tabindex="-1"></a><span class="in">      message(paste("ANOVA 失败:", outcome, "vs", ctrl, "错误:", e$message))</span></span>
-<span id="cb4-437"><a href="#cb4-437" aria-hidden="true" tabindex="-1"></a><span class="in">      return(data.frame(</span></span>
-<span id="cb4-438"><a href="#cb4-438" aria-hidden="true" tabindex="-1"></a><span class="in">        "控制变量" = label_map$label[label_map$variable == ctrl],</span></span>
-<span id="cb4-439"><a href="#cb4-439" aria-hidden="true" tabindex="-1"></a><span class="in">        "平方和" = NA,</span></span>
-<span id="cb4-440"><a href="#cb4-440" aria-hidden="true" tabindex="-1"></a><span class="in">        "自由度" = NA,</span></span>
-<span id="cb4-441"><a href="#cb4-441" aria-hidden="true" tabindex="-1"></a><span class="in">        "F 值" = NA,</span></span>
-<span id="cb4-442"><a href="#cb4-442" aria-hidden="true" tabindex="-1"></a><span class="in">        "p 值" = NA</span></span>
-<span id="cb4-443"><a href="#cb4-443" aria-hidden="true" tabindex="-1"></a><span class="in">      ))</span></span>
-<span id="cb4-444"><a href="#cb4-444" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
-<span id="cb4-445"><a href="#cb4-445" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb4-446"><a href="#cb4-446" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_results[[outcome]] &lt;- rbind(anova_results[[outcome]], anova_fit)</span></span>
-<span id="cb4-447"><a href="#cb4-447" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb4-448"><a href="#cb4-448" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-449"><a href="#cb4-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-450"><a href="#cb4-450" aria-hidden="true" tabindex="-1"></a><span class="in"># 12. 创建 Word 文档并输出结果</span></span>
-<span id="cb4-451"><a href="#cb4-451" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- read_docx()</span></span>
-<span id="cb4-452"><a href="#cb4-452" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-453"><a href="#cb4-453" aria-hidden="true" tabindex="-1"></a><span class="in"># 添加所有控制变量的频数和占比表</span></span>
-<span id="cb4-454"><a href="#cb4-454" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- body_add_par(doc, "控制变量的频数和占比表", style = "heading 1")</span></span>
-<span id="cb4-455"><a href="#cb4-455" aria-hidden="true" tabindex="-1"></a><span class="in">for (ctrl in controls) {</span></span>
-<span id="cb4-456"><a href="#cb4-456" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_table &lt;- freq_tables[[ctrl]]</span></span>
-<span id="cb4-457"><a href="#cb4-457" aria-hidden="true" tabindex="-1"></a><span class="in">  if (nrow(freq_table) &gt; 0) {</span></span>
-<span id="cb4-458"><a href="#cb4-458" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- flextable(freq_table)</span></span>
-<span id="cb4-459"><a href="#cb4-459" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- colformat_double(freq_ft, j = 2, digits = 0)</span></span>
-<span id="cb4-460"><a href="#cb4-460" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- colformat_double(freq_ft, j = 3, digits = 2)</span></span>
-<span id="cb4-461"><a href="#cb4-461" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- autofit(freq_ft)</span></span>
-<span id="cb4-462"><a href="#cb4-462" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_par(doc, paste("变量:", label_map$label[label_map$variable == ctrl]), style = "heading 2")</span></span>
-<span id="cb4-463"><a href="#cb4-463" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_flextable(doc, freq_ft)</span></span>
-<span id="cb4-464"><a href="#cb4-464" aria-hidden="true" tabindex="-1"></a><span class="in">  } else {</span></span>
-<span id="cb4-465"><a href="#cb4-465" aria-hidden="true" tabindex="-1"></a><span class="in">    cat("警告: 频数表为空 -", ctrl, "\n")</span></span>
-<span id="cb4-466"><a href="#cb4-466" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb4-467"><a href="#cb4-467" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-468"><a href="#cb4-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-469"><a href="#cb4-469" aria-hidden="true" tabindex="-1"></a><span class="in"># 添加 ANOVA 结果</span></span>
-<span id="cb4-470"><a href="#cb4-470" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- body_add_par(doc, "单因素方差分析结果", style = "heading 1")</span></span>
-<span id="cb4-471"><a href="#cb4-471" aria-hidden="true" tabindex="-1"></a><span class="in">for (outcome in outcomes) {</span></span>
-<span id="cb4-472"><a href="#cb4-472" aria-hidden="true" tabindex="-1"></a><span class="in">  anova_table &lt;- anova_results[[outcome]]</span></span>
-<span id="cb4-473"><a href="#cb4-473" aria-hidden="true" tabindex="-1"></a><span class="in">  if (nrow(anova_table) &gt; 0) {</span></span>
-<span id="cb4-474"><a href="#cb4-474" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- flextable(anova_table)</span></span>
-<span id="cb4-475"><a href="#cb4-475" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 2, digits = 2)</span></span>
-<span id="cb4-476"><a href="#cb4-476" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 3, digits = 0)</span></span>
-<span id="cb4-477"><a href="#cb4-477" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 4, digits = 2)</span></span>
-<span id="cb4-478"><a href="#cb4-478" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 5, digits = 3)</span></span>
-<span id="cb4-479"><a href="#cb4-479" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- autofit(anova_ft)</span></span>
-<span id="cb4-480"><a href="#cb4-480" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_par(doc, paste("因变量:", label_map$label[label_map$variable == outcome], "的单因素方差分析"), style = "heading 2")</span></span>
-<span id="cb4-481"><a href="#cb4-481" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_par(doc, paste("ANOVA 结果表 -", label_map$label[label_map$variable == outcome]))</span></span>
-<span id="cb4-482"><a href="#cb4-482" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_flextable(doc, anova_ft)</span></span>
-<span id="cb4-483"><a href="#cb4-483" aria-hidden="true" tabindex="-1"></a><span class="in">  } else {</span></span>
-<span id="cb4-484"><a href="#cb4-484" aria-hidden="true" tabindex="-1"></a><span class="in">    cat("警告: ANOVA 结果表为空 -", outcome, "\n")</span></span>
-<span id="cb4-485"><a href="#cb4-485" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb4-486"><a href="#cb4-486" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb4-487"><a href="#cb4-487" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-488"><a href="#cb4-488" aria-hidden="true" tabindex="-1"></a><span class="in"># 保存文档</span></span>
-<span id="cb4-489"><a href="#cb4-489" aria-hidden="true" tabindex="-1"></a><span class="in">print(doc, target = "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/anova_results0223.docx")</span></span>
-<span id="cb4-490"><a href="#cb4-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-491"><a href="#cb4-491" aria-hidden="true" tabindex="-1"></a><span class="in">cat("单因素方差分析结果已导出到 C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/anova_results0223.docx\n")</span></span>
-<span id="cb4-492"><a href="#cb4-492" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-493"><a href="#cb4-493" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-494"><a href="#cb4-494" aria-hidden="true" tabindex="-1"></a><span class="fu">## 构建Logistic回归模型</span></span>
-<span id="cb4-495"><a href="#cb4-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-496"><a href="#cb4-496" aria-hidden="true" tabindex="-1"></a>Logistic 回归分析最大的一个优势可能就是广泛涉及优势比（？），在这里介绍一下优势比的概念。</span>
-<span id="cb4-497"><a href="#cb4-497" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-498"><a href="#cb4-498" aria-hidden="true" tabindex="-1"></a><span class="fu">### 优势比</span></span>
-<span id="cb4-499"><a href="#cb4-499" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-500"><a href="#cb4-500" aria-hidden="true" tabindex="-1"></a>优势（Odds）是指某事件的发生概率 $\pi$ 与该事件不发生的概率 $1-\pi$ 之比，亦称为比，记为 *Odds* ，某事件在两种不同条件下的优势之比称为优势比（Odds Ratio，OR）。优势比在流行病学中的病例对照研究中被普遍应用（当然不仅限于病例对照研究）。</span>
-<span id="cb4-501"><a href="#cb4-501" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-502"><a href="#cb4-502" aria-hidden="true" tabindex="-1"></a>设某事件的两种不同暴露的发生概率分别为 $\pi_1$ 和 $\pi_0$ ，对应的 $Odds_1= \pi_1 /（1-\pi_1）$，$Odds_0 =\pi_0 /（1-\pi_0）$ ，两个 $Odds$ 之比定义为 $OR=Odds_1/Odds_0$。</span>
-<span id="cb4-503"><a href="#cb4-503" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-504"><a href="#cb4-504" aria-hidden="true" tabindex="-1"></a>由于 $Odds=\pi /(1-\pi)=(\pi-1+1)/(1-\pi)=－1+1 /(1-\pi)$ 以及 $0＜ \pi ＜1$，所以 $\pi$ 越大，$Odds$ 就越大，反之 $\pi$ 越小，$Odds$ 就越小，特別当 $\pi$ 越接近0时，$Odds$ 也越接近0，因此优势和优势比具有下列性质。</span>
-<span id="cb4-505"><a href="#cb4-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-506"><a href="#cb4-506" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>如果$\pi_1 = \pi_0$。，对应有$ Odds_1=Odds_0$ , $OR=1$ 。</span>
-<span id="cb4-507"><a href="#cb4-507" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>如果 $\pi_1&gt;\pi_0$ ，则 $Odds_1&gt;Odds_o$ ，相应有$ OR&gt;1$ 。同理如果$\pi_1&lt;\pi_0$，则 $Odds_1&lt;Odds_0$ ，相应有 $OR &lt; 1$。</span>
-<span id="cb4-508"><a href="#cb4-508" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-509"><a href="#cb4-509" aria-hidden="true" tabindex="-1"></a>由于概率 $\pi_1$ 也可以用 $Odds$ 表示，$\pi=\frac{Odds}{1+Odds}$ ，所以也可以通过比较 $Odds_1$ 与 $Odds_0$ 的大小来推断$\pi_1$ 和 $\pi_0$的大小关系，即可以用$OR&gt;1$, $OR=1$ 或 $OR&lt;1$ 推断 $\pi_1$ 和 $\pi_0$ 的大小关系。</span>
-<span id="cb4-510"><a href="#cb4-510" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-511"><a href="#cb4-511" aria-hidden="true" tabindex="-1"></a><span class="fu">### Logistic 回归模型</span></span>
-<span id="cb4-512"><a href="#cb4-512" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-513"><a href="#cb4-513" aria-hidden="true" tabindex="-1"></a>Logistic 回归模型的因变量必须为分类变量，主要有三种：二分类 Logistic 回归模型、有序分类 Logistic 回归模型、无序分类 Logistic 回归模型。其中二分类 Logistic 回归模型最为常用。自变量则无要求，可以是定量变量、有序分类变量和无序分类变量。</span>
-<span id="cb4-514"><a href="#cb4-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-515"><a href="#cb4-515" aria-hidden="true" tabindex="-1"></a>假如研究所关注的事件（如死亡或痊愈等）是否发生用因变量 $Y$ 表示，$Y=1$ 表示该结局事件发生，反之，$Y=0$ 表示该结局事件未发生。</span>
-<span id="cb4-516"><a href="#cb4-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-517"><a href="#cb4-517" aria-hidden="true" tabindex="-1"></a>那么可构建如下方程式：</span>
-<span id="cb4-518"><a href="#cb4-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-519"><a href="#cb4-519" aria-hidden="true" tabindex="-1"></a>$$logit(\pi(Y=1))=ln\frac{\pi(Y=1)}{\pi(Y=0)}=ln\frac{\pi(Y=1)}{1-\pi(Y=1)}=\beta_0 + \beta_1 X_1 + \cdot \beta_p X_p$$</span>
-<span id="cb4-520"><a href="#cb4-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-521"><a href="#cb4-521" aria-hidden="true" tabindex="-1"></a><span class="fu">### 共线性检验</span></span>
-<span id="cb4-522"><a href="#cb4-522" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-523"><a href="#cb4-523" aria-hidden="true" tabindex="-1"></a>共线性(Colinearity)指的是自变量之间存在高度相关性。这种情况会导致回归系数的不稳定，并使得对模型参数</span>
-<span id="cb4-524"><a href="#cb4-524" aria-hidden="true" tabindex="-1"></a>的估计变得不可靠。在 Logistic 回归中，严重的共线性可能导致模型性能下降，甚至可能导致预测结果难以解释</span>
-<span id="cb4-525"><a href="#cb4-525" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-526"><a href="#cb4-526" aria-hidden="true" tabindex="-1"></a>方差膨胀因子是统计学中用于衡量多元线性回归模型中自变量之间共线性程度的指标，提供了一种定量的方式来评估自变量之间的共线性。</span>
-<span id="cb4-527"><a href="#cb4-527" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-528"><a href="#cb4-528" aria-hidden="true" tabindex="-1"></a>方差膨胀因子的解释标准通常如下：如果VIF值小于5，表示自变量之间的共线性程度较低，可以接受。如果VIF值在5到10之间，</span>
-<span id="cb4-529"><a href="#cb4-529" aria-hidden="true" tabindex="-1"></a>表示自变量之间存在一定程度的共线性，但尚可接受。如果VIF值大于10，表示自变量之间存在严重的共线性问题，</span>
-<span id="cb4-530"><a href="#cb4-530" aria-hidden="true" tabindex="-1"></a>需要考虑进行变量选择或者采取其他方法来处理共线性。</span>
-<span id="cb4-531"><a href="#cb4-531" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-532"><a href="#cb4-532" aria-hidden="true" tabindex="-1"></a>自评健康作为 因变量 ，自变量是 经济支持、生活支持和情绪支持，在前序的处理过程，只有原始的的经济支持变量（加总金额）是定量变量，其他两个都是做的二分类变量处理，如何做共线性检验，看起来并不明朗，因为三个变量看起来没有太多的关系，但是控制变量有些可能存在相关性，但是</span>
-<span id="cb4-533"><a href="#cb4-533" aria-hidden="true" tabindex="-1"></a>是否有对控制变量做共线性检验的必要？</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "CLHLS Data Analysis by R"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-22"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#format: </span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#  html:           # 输出格式为 HTML</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#    self-contained: true  # 生成独立的 HTML 文件</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#  pdf:            # 可选：如果需要 PDF 输出</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    default</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true      # 在输出中显示代码</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true      # 执行代码</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false  # 隐藏警告信息</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false  # 隐藏消息</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu"># CLHLS 数据分析</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>这是一个使用 R 语言对 CLHLS 数据进行清洗和分析的工作文档。</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 加载必要的包</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in"># 安装并加载必要的 R 包</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("haven", quietly = TRUE)) {</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("haven")</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("dplyr", quietly = TRUE)) {</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("dplyr")</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("tidyr", quietly = TRUE)) {</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("tidyr")</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">if (!requireNamespace("writexl", quietly = TRUE)) {</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">  install.packages("writexl")</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="in">library(haven)        # 用于读取 SPSS (.sav) 文件</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)        # 用于数据操作</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyr)        # 用于数据整理</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">library(writexl)      # 用于导出 Excel 文件</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="in">library(purrr)      # 函数式编程</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">library(officer)</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">library(flextable)</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in"># 设置代码块选项</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>本文数据源来自北大开放研究数据平台。<span class="co">[</span><span class="ot">DVN/WBO7LK_2020</span><span class="co">](#DVN/WBO7LK_2020)</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>使用 SAS 逐渐让我失去的耐心，极其臃肿和笨重，Vintage Car，交互页面也很糟糕，用起来很令人烦躁，遂改用 R 对数据进行分析。</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>2025-03-06 R 也没那么好用，反而觉得 Stata 的简便也是一种优势所在。</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="fu"># 数据的导入与变量的生成</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in"># 1. 导入数据</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="in">raw_data &lt;- read_sav("C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/clhls_2018_15874.sav")</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="in"># 2. 检查数据结构（相当于proc contents）</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="in">str(raw_data)</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="in"># 3. 选择变量并创建新变量</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">selected_data &lt;- raw_data %&gt;%</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="in">    # 因变量</span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="in">    SHEALTH = ifelse(!b12 %in% c(NA, 8, 9), b12, NA),</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="in">    # ADL</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="in">    ADLsum = rowSums(select(., e1:e6), na.rm = TRUE),</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="in">    ADL = (ADLsum == 6),</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="in">    # IADL</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="in">    IADLsum = rowSums(select(., e7:e14), na.rm = TRUE),</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="in">    IADL = (IADLsum == 8),</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="in">    # 自变量 - 经济支持</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="in">    economic_support = pmap_dbl(</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">      list(f12a, f12b, f12c),</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="in">      function(a, b, c) {</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="in">        sum = 0</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="in">        for (x in c(a, b, c)) {</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="in">          if (!is.na(x)) {</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="in">            if (x == 99998) sum = sum + 10000</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="in">            else if (!x %in% c(88888, 99999)) sum = sum + x</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="in">          }</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="in">        }</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="in">        return(sum)</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="in">      }</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="in">    ),</span></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="in">    # 照料支持</span></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="in">    residence = a51,</span></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="in">    living = a52,</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="in">    visit_fren = apply(select(., starts_with("f103") &amp; ends_with("5")), 1, </span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="in">                      function(x) max(x, na.rm = TRUE) == 1),</span></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="in">    care_support = (residence == 1 | visit_fren),</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="in">    # 情感支持</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="in">    emotion_support = apply(select(., starts_with("f103") &amp; ends_with("6")), 1,</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="in">                           function(x) max(x, na.rm = TRUE) == 1),</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="in">    # 控制变量</span></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a><span class="in">    age = trueage,</span></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="in">    gender = a1,</span></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="in">    education = f1,</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="in">    job_type = f2,</span></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a><span class="in">    marriage_status = (f41 == 1),</span></span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="in">    hukou_type = hukou,</span></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="in">    social_insurance = (nf64a == 0 | f64b == 1 | f64c == 1 | f64i == 1),</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="in">    medical_insurance = (f64d == 1 | f64e == 1 | f64g == 1 | f64h == 1),</span></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="in">    # 慢性病</span></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="in">    chronic_disease = apply(select(., starts_with("g15") &amp; ends_with("1")), 1,</span></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="in">                           function(x) max(x, na.rm = TRUE) == 1),</span></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="in">    smoking = g151,</span></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="in">    drinking = g161,</span></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="in">    exercise = (d91 == 1 | d92 == 1)</span></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="in">  ) %&gt;%</span></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="in">  select(SHEALTH, ADL, ADLsum, IADL, IADLsum, economic_support, residence, living,</span></span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="in">         visit_fren, emotion_support, f10, age, gender, education, job_type,</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="in">         marriage_status, hukou_type, social_insurance, medical_insurance,</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="in">         chronic_disease, smoking, drinking, exercise, care_support)</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="in"># 4. 样本筛选</span></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="in">temp_data &lt;- selected_data %&gt;%</span></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(</span></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="in">    complete.cases(SHEALTH, ADL, ADLsum, IADL, IADLsum, economic_support,</span></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a><span class="in">                  residence, living, visit_fren, emotion_support, age, gender,</span></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a><span class="in">                  education, job_type, marriage_status, hukou_type,</span></span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a><span class="in">                  social_insurance, medical_insurance, chronic_disease,</span></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a><span class="in">                  smoking, drinking, exercise, care_support),</span></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="in">    f10 &gt; 0 &amp; f10 &lt;= 13</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="in"># 5. 删除特定条件的样本</span></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a><span class="in">final_data &lt;- temp_data %&gt;%</span></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(</span></span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a><span class="in">    SHEALTH &lt;= 8,</span></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a><span class="in">    ADLsum &lt;= 18,</span></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a><span class="in">    IADLsum &lt;= 24,</span></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a><span class="in">    residence &lt;= 3,</span></span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a><span class="in">    age &gt;= 60,</span></span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a><span class="in">    education &lt;= 22,</span></span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="in">    smoking &lt;= 2,</span></span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a><span class="in">    drinking &lt;= 2</span></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a><span class="in"># 6. 年龄分组</span></span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a><span class="in">final_data_grouped &lt;- final_data %&gt;%</span></span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a><span class="in">  mutate(</span></span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a><span class="in">    age_group = case_when(</span></span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a><span class="in">      age &lt; 70 ~ "60-69",</span></span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a><span class="in">      age &lt; 80 ~ "70-79",</span></span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a><span class="in">      age &lt; 90 ~ "80-89",</span></span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a><span class="in">      TRUE ~ "90+"</span></span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a><span class="in"># 7. 计算描述性统计量</span></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- final_data_grouped %&gt;%</span></span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(across(</span></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a><span class="in">    c(SHEALTH, ADL, ADLsum, IADL, IADLsum, economic_support, care_support,</span></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a><span class="in">      emotion_support, age, gender, education, marriage_status, hukou_type,</span></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a><span class="in">      social_insurance, medical_insurance, chronic_disease, smoking,</span></span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a><span class="in">      drinking, exercise),</span></span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a><span class="in">    list(</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a><span class="in">      n = ~sum(!is.na(.)),</span></span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a><span class="in">      mean = ~mean(., na.rm = TRUE),</span></span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a><span class="in">      std = ~sd(., na.rm = TRUE),</span></span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a><span class="in">      min = ~min(., na.rm = TRUE),</span></span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a><span class="in">      median = ~median(., na.rm = TRUE),</span></span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a><span class="in">      max = ~max(., na.rm = TRUE)</span></span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a><span class="in">    )</span></span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a><span class="in">  )) %&gt;%</span></span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a><span class="in">  pivot_longer(</span></span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a><span class="in">    everything(),</span></span>
+<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a><span class="in">    names_to = c("var_name", "stat"),</span></span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a><span class="in">    names_sep = "_",</span></span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a><span class="in">    values_to = "value"</span></span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a><span class="in">  ) %&gt;%</span></span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a><span class="in">  pivot_wider(</span></span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a><span class="in">    names_from = "stat",</span></span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a><span class="in">    values_from = "value"</span></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a><span class="in"># 8. 创建变量标签映射</span></span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a><span class="in">label_map &lt;- tibble(</span></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="in">  var_name = c("SHEALTH", "ADL", "ADLsum", "IADL", "IADLsum", "economic_support",</span></span>
+<span id="cb6-191"><a href="#cb6-191" aria-hidden="true" tabindex="-1"></a><span class="in">              "care_support", "emotion_support", "age", "gender", "education",</span></span>
+<span id="cb6-192"><a href="#cb6-192" aria-hidden="true" tabindex="-1"></a><span class="in">              "marriage_status", "hukou_type", "social_insurance",</span></span>
+<span id="cb6-193"><a href="#cb6-193" aria-hidden="true" tabindex="-1"></a><span class="in">              "medical_insurance", "chronic_disease", "smoking", "drinking",</span></span>
+<span id="cb6-194"><a href="#cb6-194" aria-hidden="true" tabindex="-1"></a><span class="in">              "exercise"),</span></span>
+<span id="cb6-195"><a href="#cb6-195" aria-hidden="true" tabindex="-1"></a><span class="in">  label = c("自评健康状况", "生活自理能力", "生活自理能力总分", "工具型生活自理能力",</span></span>
+<span id="cb6-196"><a href="#cb6-196" aria-hidden="true" tabindex="-1"></a><span class="in">           "工具型生活自理能力总分", "经济支持", "照料支持", "情感支持", "年龄", "性别",</span></span>
+<span id="cb6-197"><a href="#cb6-197" aria-hidden="true" tabindex="-1"></a><span class="in">           "受教育程度", "婚姻状况", "户口类型", "养老保险", "医疗保险", "慢性病",</span></span>
+<span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a><span class="in">           "抽烟", "喝酒", "体育锻炼")</span></span>
+<span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a><span class="in"># 9. 合并结果</span></span>
+<span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a><span class="in">final_summary &lt;- summary_stats %&gt;%</span></span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a><span class="in">  left_join(label_map, by = "var_name") %&gt;%</span></span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a><span class="in">  select(label, n, mean, std, min, median, max)</span></span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a><span class="in"># 10. 查看结果</span></span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a><span class="in">print(final_summary)</span></span>
+<span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a><span class="in"># 11. 输出描述性统计表格</span></span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a><span class="in">kable(final_summary,</span></span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a><span class="in">      digits = 3,</span></span>
+<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a><span class="in">      col.names = c("变量名", "样本数", "平均数", "标准差", "最小值", "中位数", "最大值"),</span></span>
+<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a><span class="in">      caption = "表3-1 描述性统计分析")</span></span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-216"><a href="#cb6-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-217"><a href="#cb6-217" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据导出</span></span>
+<span id="cb6-218"><a href="#cb6-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-219"><a href="#cb6-219" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb6-220"><a href="#cb6-220" aria-hidden="true" tabindex="-1"></a><span class="in">library(writexl)  </span></span>
+<span id="cb6-221"><a href="#cb6-221" aria-hidden="true" tabindex="-1"></a><span class="in"># 12. 保存描述性统计表格  </span></span>
+<span id="cb6-222"><a href="#cb6-222" aria-hidden="true" tabindex="-1"></a><span class="in">write_xlsx(final_summary, "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/Rsummary0223.xlsx")  </span></span>
+<span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a><span class="in"># 13. 保存结果  </span></span>
+<span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a><span class="in">write_xlsx(final_data, "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/final_data0223.xlsx")</span></span>
+<span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-226"><a href="#cb6-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-227"><a href="#cb6-227" aria-hidden="true" tabindex="-1"></a><span class="fu">## 描述性统计</span></span>
+<span id="cb6-228"><a href="#cb6-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-229"><a href="#cb6-229" aria-hidden="true" tabindex="-1"></a><span class="fu"># 加载必要的包</span></span>
+<span id="cb6-230"><a href="#cb6-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-231"><a href="#cb6-231" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb6-232"><a href="#cb6-232" aria-hidden="true" tabindex="-1"></a><span class="in">library(readxl)</span></span>
+<span id="cb6-233"><a href="#cb6-233" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
+<span id="cb6-234"><a href="#cb6-234" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyr)</span></span>
+<span id="cb6-235"><a href="#cb6-235" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
+<span id="cb6-236"><a href="#cb6-236" aria-hidden="true" tabindex="-1"></a><span class="in">library(officer)</span></span>
+<span id="cb6-237"><a href="#cb6-237" aria-hidden="true" tabindex="-1"></a><span class="in">library(flextable)</span></span>
+<span id="cb6-238"><a href="#cb6-238" aria-hidden="true" tabindex="-1"></a><span class="in">library(car)</span></span>
+<span id="cb6-239"><a href="#cb6-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-240"><a href="#cb6-240" aria-hidden="true" tabindex="-1"></a><span class="in"># 确认包是否正确加载</span></span>
+<span id="cb6-241"><a href="#cb6-241" aria-hidden="true" tabindex="-1"></a><span class="in">if (!require(officer)) stop("请安装 officer 包")</span></span>
+<span id="cb6-242"><a href="#cb6-242" aria-hidden="true" tabindex="-1"></a><span class="in">if (!require(flextable)) stop("请安装 flextable 包")</span></span>
+<span id="cb6-243"><a href="#cb6-243" aria-hidden="true" tabindex="-1"></a><span class="in">if (!require(dplyr)) stop("请安装 dplyr 包")</span></span>
+<span id="cb6-244"><a href="#cb6-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-245"><a href="#cb6-245" aria-hidden="true" tabindex="-1"></a><span class="in"># 1. 导入数据</span></span>
+<span id="cb6-246"><a href="#cb6-246" aria-hidden="true" tabindex="-1"></a><span class="in">final_data &lt;- read_excel("C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/final_data.xlsx", </span></span>
+<span id="cb6-247"><a href="#cb6-247" aria-hidden="true" tabindex="-1"></a><span class="in">                         sheet = "final_data")</span></span>
+<span id="cb6-248"><a href="#cb6-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-249"><a href="#cb6-249" aria-hidden="true" tabindex="-1"></a><span class="in"># 2. 定义变量列表（描述性统计用）</span></span>
+<span id="cb6-250"><a href="#cb6-250" aria-hidden="true" tabindex="-1"></a><span class="in">varlist &lt;- c("SHEALTH", "ADLsum", "ADL", "IADLsum", "IADL", "economic_support",</span></span>
+<span id="cb6-251"><a href="#cb6-251" aria-hidden="true" tabindex="-1"></a><span class="in">             "residence", "living", "visit_fren", "care_support", "emotion_support",</span></span>
+<span id="cb6-252"><a href="#cb6-252" aria-hidden="true" tabindex="-1"></a><span class="in">             "age", "gender", "education", "job_type", "marriage_status",</span></span>
+<span id="cb6-253"><a href="#cb6-253" aria-hidden="true" tabindex="-1"></a><span class="in">             "hukou_type", "social_insurance", "medical_insurance", "chronic_disease",</span></span>
+<span id="cb6-254"><a href="#cb6-254" aria-hidden="true" tabindex="-1"></a><span class="in">             "smoking", "drinking", "exercise", "f10")</span></span>
+<span id="cb6-255"><a href="#cb6-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-256"><a href="#cb6-256" aria-hidden="true" tabindex="-1"></a><span class="in"># 3. 创建变量标签映射</span></span>
+<span id="cb6-257"><a href="#cb6-257" aria-hidden="true" tabindex="-1"></a><span class="in">label_map &lt;- data.frame(</span></span>
+<span id="cb6-258"><a href="#cb6-258" aria-hidden="true" tabindex="-1"></a><span class="in">  variable = varlist,</span></span>
+<span id="cb6-259"><a href="#cb6-259" aria-hidden="true" tabindex="-1"></a><span class="in">  label = c("自评健康状况", "生活自理能力总分", "生活自理能力", "工具型生活自理能力总分",</span></span>
+<span id="cb6-260"><a href="#cb6-260" aria-hidden="true" tabindex="-1"></a><span class="in">            "工具型生活自理能力", "经济支持", "居住情况", "居住状态", "探访频率",</span></span>
+<span id="cb6-261"><a href="#cb6-261" aria-hidden="true" tabindex="-1"></a><span class="in">            "照料支持", "情感支持", "年龄", "性别", "受教育程度", "工作类型",</span></span>
+<span id="cb6-262"><a href="#cb6-262" aria-hidden="true" tabindex="-1"></a><span class="in">            "婚姻状况", "户口类型", "社会保险", "医疗保险", "慢性病",</span></span>
+<span id="cb6-263"><a href="#cb6-263" aria-hidden="true" tabindex="-1"></a><span class="in">            "吸烟情况", "饮酒情况", "体育锻炼", "子女数")</span></span>
+<span id="cb6-264"><a href="#cb6-264" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
+<span id="cb6-265"><a href="#cb6-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-266"><a href="#cb6-266" aria-hidden="true" tabindex="-1"></a><span class="in"># 4. 生成描述性统计</span></span>
+<span id="cb6-267"><a href="#cb6-267" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- final_data[ , varlist]</span></span>
+<span id="cb6-268"><a href="#cb6-268" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- summarise(summary_stats, across(</span></span>
+<span id="cb6-269"><a href="#cb6-269" aria-hidden="true" tabindex="-1"></a><span class="in">  all_of(varlist),</span></span>
+<span id="cb6-270"><a href="#cb6-270" aria-hidden="true" tabindex="-1"></a><span class="in">  list(</span></span>
+<span id="cb6-271"><a href="#cb6-271" aria-hidden="true" tabindex="-1"></a><span class="in">    count = ~sum(!is.na(.)),</span></span>
+<span id="cb6-272"><a href="#cb6-272" aria-hidden="true" tabindex="-1"></a><span class="in">    mean = ~mean(., na.rm = TRUE),</span></span>
+<span id="cb6-273"><a href="#cb6-273" aria-hidden="true" tabindex="-1"></a><span class="in">    sd = ~sd(., na.rm = TRUE),</span></span>
+<span id="cb6-274"><a href="#cb6-274" aria-hidden="true" tabindex="-1"></a><span class="in">    min = ~min(., na.rm = TRUE),</span></span>
+<span id="cb6-275"><a href="#cb6-275" aria-hidden="true" tabindex="-1"></a><span class="in">    p50 = ~median(., na.rm = TRUE),</span></span>
+<span id="cb6-276"><a href="#cb6-276" aria-hidden="true" tabindex="-1"></a><span class="in">    max = ~max(., na.rm = TRUE)</span></span>
+<span id="cb6-277"><a href="#cb6-277" aria-hidden="true" tabindex="-1"></a><span class="in">  ),</span></span>
+<span id="cb6-278"><a href="#cb6-278" aria-hidden="true" tabindex="-1"></a><span class="in">  .names = "{.col}_{.fn}"</span></span>
+<span id="cb6-279"><a href="#cb6-279" aria-hidden="true" tabindex="-1"></a><span class="in">))</span></span>
+<span id="cb6-280"><a href="#cb6-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-281"><a href="#cb6-281" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查 summarise 后的数据</span></span>
+<span id="cb6-282"><a href="#cb6-282" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 summarise 后的数据:\n")</span></span>
+<span id="cb6-283"><a href="#cb6-283" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
+<span id="cb6-284"><a href="#cb6-284" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 summarise 后的列类型:\n")</span></span>
+<span id="cb6-285"><a href="#cb6-285" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
+<span id="cb6-286"><a href="#cb6-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-287"><a href="#cb6-287" aria-hidden="true" tabindex="-1"></a><span class="in"># 转换为长格式，修复分割问题</span></span>
+<span id="cb6-288"><a href="#cb6-288" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- pivot_longer(summary_stats, </span></span>
+<span id="cb6-289"><a href="#cb6-289" aria-hidden="true" tabindex="-1"></a><span class="in">                              cols = everything(), </span></span>
+<span id="cb6-290"><a href="#cb6-290" aria-hidden="true" tabindex="-1"></a><span class="in">                              names_to = c("variable", "stat"), </span></span>
+<span id="cb6-291"><a href="#cb6-291" aria-hidden="true" tabindex="-1"></a><span class="in">                              names_pattern = "(.*)_(.*)",  # 使用正则表达式匹配</span></span>
+<span id="cb6-292"><a href="#cb6-292" aria-hidden="true" tabindex="-1"></a><span class="in">                              values_to = "value")</span></span>
+<span id="cb6-293"><a href="#cb6-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-294"><a href="#cb6-294" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查 pivot_longer 后的数据</span></span>
+<span id="cb6-295"><a href="#cb6-295" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_longer 后的数据:\n")</span></span>
+<span id="cb6-296"><a href="#cb6-296" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats, 10))</span></span>
+<span id="cb6-297"><a href="#cb6-297" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_longer 后的列类型:\n")</span></span>
+<span id="cb6-298"><a href="#cb6-298" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
+<span id="cb6-299"><a href="#cb6-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-300"><a href="#cb6-300" aria-hidden="true" tabindex="-1"></a><span class="in"># 检查重复值</span></span>
+<span id="cb6-301"><a href="#cb6-301" aria-hidden="true" tabindex="-1"></a><span class="in">duplicates &lt;- summary_stats %&gt;%</span></span>
+<span id="cb6-302"><a href="#cb6-302" aria-hidden="true" tabindex="-1"></a><span class="in">  group_by(variable, stat) %&gt;%</span></span>
+<span id="cb6-303"><a href="#cb6-303" aria-hidden="true" tabindex="-1"></a><span class="in">  summarise(n = n()) %&gt;%</span></span>
+<span id="cb6-304"><a href="#cb6-304" aria-hidden="true" tabindex="-1"></a><span class="in">  filter(n &gt; 1)</span></span>
+<span id="cb6-305"><a href="#cb6-305" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查重复值:\n")</span></span>
+<span id="cb6-306"><a href="#cb6-306" aria-hidden="true" tabindex="-1"></a><span class="in">print(duplicates)</span></span>
+<span id="cb6-307"><a href="#cb6-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-308"><a href="#cb6-308" aria-hidden="true" tabindex="-1"></a><span class="in"># 转换为宽格式，确保唯一值</span></span>
+<span id="cb6-309"><a href="#cb6-309" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- pivot_wider(summary_stats, </span></span>
+<span id="cb6-310"><a href="#cb6-310" aria-hidden="true" tabindex="-1"></a><span class="in">                             names_from = "stat", </span></span>
+<span id="cb6-311"><a href="#cb6-311" aria-hidden="true" tabindex="-1"></a><span class="in">                             values_from = "value",</span></span>
+<span id="cb6-312"><a href="#cb6-312" aria-hidden="true" tabindex="-1"></a><span class="in">                             values_fn = list(value = mean))  # 如果有重复，取均值</span></span>
+<span id="cb6-313"><a href="#cb6-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-314"><a href="#cb6-314" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查 pivot_wider 后的数据</span></span>
+<span id="cb6-315"><a href="#cb6-315" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_wider 后的数据:\n")</span></span>
+<span id="cb6-316"><a href="#cb6-316" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
+<span id="cb6-317"><a href="#cb6-317" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查 pivot_wider 后的列类型:\n")</span></span>
+<span id="cb6-318"><a href="#cb6-318" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
+<span id="cb6-319"><a href="#cb6-319" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-320"><a href="#cb6-320" aria-hidden="true" tabindex="-1"></a><span class="in"># 合并标签并选择列</span></span>
+<span id="cb6-321"><a href="#cb6-321" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- left_join(summary_stats, label_map, by = "variable")</span></span>
+<span id="cb6-322"><a href="#cb6-322" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- select(summary_stats, label, count, mean, sd, min, p50, max)</span></span>
+<span id="cb6-323"><a href="#cb6-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-324"><a href="#cb6-324" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查合并后的数据</span></span>
+<span id="cb6-325"><a href="#cb6-325" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查合并后的数据:\n")</span></span>
+<span id="cb6-326"><a href="#cb6-326" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
+<span id="cb6-327"><a href="#cb6-327" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查合并后的列类型:\n")</span></span>
+<span id="cb6-328"><a href="#cb6-328" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
+<span id="cb6-329"><a href="#cb6-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-330"><a href="#cb6-330" aria-hidden="true" tabindex="-1"></a><span class="in"># 确保所有列为数值型并四舍五入</span></span>
+<span id="cb6-331"><a href="#cb6-331" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- mutate(summary_stats,</span></span>
+<span id="cb6-332"><a href="#cb6-332" aria-hidden="true" tabindex="-1"></a><span class="in">                        count = as.numeric(count),</span></span>
+<span id="cb6-333"><a href="#cb6-333" aria-hidden="true" tabindex="-1"></a><span class="in">                        mean = as.numeric(mean),</span></span>
+<span id="cb6-334"><a href="#cb6-334" aria-hidden="true" tabindex="-1"></a><span class="in">                        sd = as.numeric(sd),</span></span>
+<span id="cb6-335"><a href="#cb6-335" aria-hidden="true" tabindex="-1"></a><span class="in">                        min = as.numeric(min),</span></span>
+<span id="cb6-336"><a href="#cb6-336" aria-hidden="true" tabindex="-1"></a><span class="in">                        p50 = as.numeric(p50),</span></span>
+<span id="cb6-337"><a href="#cb6-337" aria-hidden="true" tabindex="-1"></a><span class="in">                        max = as.numeric(max))</span></span>
+<span id="cb6-338"><a href="#cb6-338" aria-hidden="true" tabindex="-1"></a><span class="in">summary_stats &lt;- mutate(summary_stats, </span></span>
+<span id="cb6-339"><a href="#cb6-339" aria-hidden="true" tabindex="-1"></a><span class="in">                        across(c(mean, sd, min, p50, max), ~round(., 2)))</span></span>
+<span id="cb6-340"><a href="#cb6-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-341"><a href="#cb6-341" aria-hidden="true" tabindex="-1"></a><span class="in"># 调试：检查最终数据</span></span>
+<span id="cb6-342"><a href="#cb6-342" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查最终 summary_stats 数据:\n")</span></span>
+<span id="cb6-343"><a href="#cb6-343" aria-hidden="true" tabindex="-1"></a><span class="in">print(head(summary_stats))</span></span>
+<span id="cb6-344"><a href="#cb6-344" aria-hidden="true" tabindex="-1"></a><span class="in">cat("检查最终 summary_stats 列类型:\n")</span></span>
+<span id="cb6-345"><a href="#cb6-345" aria-hidden="true" tabindex="-1"></a><span class="in">print(sapply(summary_stats, class))</span></span>
+<span id="cb6-346"><a href="#cb6-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-347"><a href="#cb6-347" aria-hidden="true" tabindex="-1"></a><span class="in"># 5. 在 R 窗口显示结果</span></span>
+<span id="cb6-348"><a href="#cb6-348" aria-hidden="true" tabindex="-1"></a><span class="in">cat("直接打印 kable 表格:\n")</span></span>
+<span id="cb6-349"><a href="#cb6-349" aria-hidden="true" tabindex="-1"></a><span class="in">print(kable(summary_stats,</span></span>
+<span id="cb6-350"><a href="#cb6-350" aria-hidden="true" tabindex="-1"></a><span class="in">            digits = 2,</span></span>
+<span id="cb6-351"><a href="#cb6-351" aria-hidden="true" tabindex="-1"></a><span class="in">            col.names = c("变量名", "观测数", "均值", "标准差", "最小值", "中位数", "最大值"),</span></span>
+<span id="cb6-352"><a href="#cb6-352" aria-hidden="true" tabindex="-1"></a><span class="in">            caption = "描述性统计"))</span></span>
+<span id="cb6-353"><a href="#cb6-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-354"><a href="#cb6-354" aria-hidden="true" tabindex="-1"></a><span class="in"># 6. 导出描述性统计到 DOCX 文件</span></span>
+<span id="cb6-355"><a href="#cb6-355" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- flextable(summary_stats)</span></span>
+<span id="cb6-356"><a href="#cb6-356" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- set_header_labels(stats_table,</span></span>
+<span id="cb6-357"><a href="#cb6-357" aria-hidden="true" tabindex="-1"></a><span class="in">                                 label = "变量名",</span></span>
+<span id="cb6-358"><a href="#cb6-358" aria-hidden="true" tabindex="-1"></a><span class="in">                                 count = "观测数",</span></span>
+<span id="cb6-359"><a href="#cb6-359" aria-hidden="true" tabindex="-1"></a><span class="in">                                 mean = "均值",</span></span>
+<span id="cb6-360"><a href="#cb6-360" aria-hidden="true" tabindex="-1"></a><span class="in">                                 sd = "标准差",</span></span>
+<span id="cb6-361"><a href="#cb6-361" aria-hidden="true" tabindex="-1"></a><span class="in">                                 min = "最小值",</span></span>
+<span id="cb6-362"><a href="#cb6-362" aria-hidden="true" tabindex="-1"></a><span class="in">                                 p50 = "中位数",</span></span>
+<span id="cb6-363"><a href="#cb6-363" aria-hidden="true" tabindex="-1"></a><span class="in">                                 max = "最大值")</span></span>
+<span id="cb6-364"><a href="#cb6-364" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- colformat_double(stats_table, j = 2:7, digits = 2)</span></span>
+<span id="cb6-365"><a href="#cb6-365" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- set_caption(stats_table, "描述性统计")</span></span>
+<span id="cb6-366"><a href="#cb6-366" aria-hidden="true" tabindex="-1"></a><span class="in">stats_table &lt;- autofit(stats_table)</span></span>
+<span id="cb6-367"><a href="#cb6-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-368"><a href="#cb6-368" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- read_docx()</span></span>
+<span id="cb6-369"><a href="#cb6-369" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- body_add_flextable(doc, stats_table)</span></span>
+<span id="cb6-370"><a href="#cb6-370" aria-hidden="true" tabindex="-1"></a><span class="in">print(doc, target = "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/描述性统计0218.docx")</span></span>
+<span id="cb6-371"><a href="#cb6-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-372"><a href="#cb6-372" aria-hidden="true" tabindex="-1"></a><span class="in">cat("描述性统计已导出到 C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/描述性统计0218.docx\n")</span></span>
+<span id="cb6-373"><a href="#cb6-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-374"><a href="#cb6-374" aria-hidden="true" tabindex="-1"></a><span class="in"># 后续代码保持不变（分组、频数表、ANOVA）</span></span>
+<span id="cb6-375"><a href="#cb6-375" aria-hidden="true" tabindex="-1"></a><span class="in"># 7. 对年龄和教育进行分组</span></span>
+<span id="cb6-376"><a href="#cb6-376" aria-hidden="true" tabindex="-1"></a><span class="in">final_data$age_group &lt;- cut(final_data$age, breaks = c(60, 70, 80, 150), </span></span>
+<span id="cb6-377"><a href="#cb6-377" aria-hidden="true" tabindex="-1"></a><span class="in">                            labels = c("60-69", "70-79", "80及以上"), </span></span>
+<span id="cb6-378"><a href="#cb6-378" aria-hidden="true" tabindex="-1"></a><span class="in">                            right = FALSE)</span></span>
+<span id="cb6-379"><a href="#cb6-379" aria-hidden="true" tabindex="-1"></a><span class="in">final_data$edu_group &lt;- cut(final_data$education, breaks = c(0, 1, 7, 10, 13, 18, 23),</span></span>
+<span id="cb6-380"><a href="#cb6-380" aria-hidden="true" tabindex="-1"></a><span class="in">                            labels = c("无教育", "小学", "初中", "高中", "大学", "硕博"), </span></span>
+<span id="cb6-381"><a href="#cb6-381" aria-hidden="true" tabindex="-1"></a><span class="in">                            right = FALSE)</span></span>
+<span id="cb6-382"><a href="#cb6-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-383"><a href="#cb6-383" aria-hidden="true" tabindex="-1"></a><span class="in"># 8. 定义因变量和控制变量</span></span>
+<span id="cb6-384"><a href="#cb6-384" aria-hidden="true" tabindex="-1"></a><span class="in">outcomes &lt;- c("SHEALTH", "ADL", "IADL")</span></span>
+<span id="cb6-385"><a href="#cb6-385" aria-hidden="true" tabindex="-1"></a><span class="in">controls &lt;- c("age_group", "gender", "edu_group", "marriage_status", "hukou_type",</span></span>
+<span id="cb6-386"><a href="#cb6-386" aria-hidden="true" tabindex="-1"></a><span class="in">              "social_insurance", "medical_insurance", "chronic_disease",</span></span>
+<span id="cb6-387"><a href="#cb6-387" aria-hidden="true" tabindex="-1"></a><span class="in">              "smoking", "drinking", "exercise")</span></span>
+<span id="cb6-388"><a href="#cb6-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-389"><a href="#cb6-389" aria-hidden="true" tabindex="-1"></a><span class="in"># 9. 更新变量标签映射</span></span>
+<span id="cb6-390"><a href="#cb6-390" aria-hidden="true" tabindex="-1"></a><span class="in">label_map &lt;- rbind(label_map,</span></span>
+<span id="cb6-391"><a href="#cb6-391" aria-hidden="true" tabindex="-1"></a><span class="in">                   data.frame(</span></span>
+<span id="cb6-392"><a href="#cb6-392" aria-hidden="true" tabindex="-1"></a><span class="in">                     variable = c("age_group", "edu_group"),</span></span>
+<span id="cb6-393"><a href="#cb6-393" aria-hidden="true" tabindex="-1"></a><span class="in">                     label = c("年龄组", "教育组")</span></span>
+<span id="cb6-394"><a href="#cb6-394" aria-hidden="true" tabindex="-1"></a><span class="in">                   ))</span></span>
+<span id="cb6-395"><a href="#cb6-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-396"><a href="#cb6-396" aria-hidden="true" tabindex="-1"></a><span class="in"># 10. 生成所有控制变量的频数和占比表</span></span>
+<span id="cb6-397"><a href="#cb6-397" aria-hidden="true" tabindex="-1"></a><span class="in">freq_tables &lt;- list()</span></span>
+<span id="cb6-398"><a href="#cb6-398" aria-hidden="true" tabindex="-1"></a><span class="in">for (ctrl in controls) {</span></span>
+<span id="cb6-399"><a href="#cb6-399" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_table &lt;- group_by(final_data, !!sym(ctrl))</span></span>
+<span id="cb6-400"><a href="#cb6-400" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_table &lt;- summarise(freq_table,</span></span>
+<span id="cb6-401"><a href="#cb6-401" aria-hidden="true" tabindex="-1"></a><span class="in">                          freq = n(),</span></span>
+<span id="cb6-402"><a href="#cb6-402" aria-hidden="true" tabindex="-1"></a><span class="in">                          pct = (n() / nrow(final_data)) * 100)</span></span>
+<span id="cb6-403"><a href="#cb6-403" aria-hidden="true" tabindex="-1"></a><span class="in">  colnames(freq_table) &lt;- c(label_map$label[label_map$variable == ctrl], "频数", "占比 (%)")</span></span>
+<span id="cb6-404"><a href="#cb6-404" aria-hidden="true" tabindex="-1"></a><span class="in">  cat("\n频数表 for", ctrl, ":\n")</span></span>
+<span id="cb6-405"><a href="#cb6-405" aria-hidden="true" tabindex="-1"></a><span class="in">  print(freq_table)</span></span>
+<span id="cb6-406"><a href="#cb6-406" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_tables[[ctrl]] &lt;- freq_table</span></span>
+<span id="cb6-407"><a href="#cb6-407" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-408"><a href="#cb6-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-409"><a href="#cb6-409" aria-hidden="true" tabindex="-1"></a><span class="in"># 11. 单因素方差分析</span></span>
+<span id="cb6-410"><a href="#cb6-410" aria-hidden="true" tabindex="-1"></a><span class="in">anova_results &lt;- list()</span></span>
+<span id="cb6-411"><a href="#cb6-411" aria-hidden="true" tabindex="-1"></a><span class="in">for (outcome in outcomes) {</span></span>
+<span id="cb6-412"><a href="#cb6-412" aria-hidden="true" tabindex="-1"></a><span class="in">  anova_results[[outcome]] &lt;- data.frame()</span></span>
+<span id="cb6-413"><a href="#cb6-413" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-414"><a href="#cb6-414" aria-hidden="true" tabindex="-1"></a><span class="in">  for (ctrl in controls) {</span></span>
+<span id="cb6-415"><a href="#cb6-415" aria-hidden="true" tabindex="-1"></a><span class="in">    if (!is.numeric(final_data[[ctrl]])) {</span></span>
+<span id="cb6-416"><a href="#cb6-416" aria-hidden="true" tabindex="-1"></a><span class="in">      final_data[[ctrl]] &lt;- as.factor(final_data[[ctrl]])</span></span>
+<span id="cb6-417"><a href="#cb6-417" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb6-418"><a href="#cb6-418" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-419"><a href="#cb6-419" aria-hidden="true" tabindex="-1"></a><span class="in">    formula &lt;- as.formula(paste(outcome, "~", ctrl))</span></span>
+<span id="cb6-420"><a href="#cb6-420" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_fit &lt;- tryCatch({</span></span>
+<span id="cb6-421"><a href="#cb6-421" aria-hidden="true" tabindex="-1"></a><span class="in">      fit &lt;- aov(formula, data = final_data)</span></span>
+<span id="cb6-422"><a href="#cb6-422" aria-hidden="true" tabindex="-1"></a><span class="in">      summary_fit &lt;- summary(fit)[[1]]</span></span>
+<span id="cb6-423"><a href="#cb6-423" aria-hidden="true" tabindex="-1"></a><span class="in">      result &lt;- data.frame(</span></span>
+<span id="cb6-424"><a href="#cb6-424" aria-hidden="true" tabindex="-1"></a><span class="in">        "控制变量" = label_map$label[label_map$variable == ctrl],</span></span>
+<span id="cb6-425"><a href="#cb6-425" aria-hidden="true" tabindex="-1"></a><span class="in">        "平方和" = summary_fit$"Sum Sq"[1],</span></span>
+<span id="cb6-426"><a href="#cb6-426" aria-hidden="true" tabindex="-1"></a><span class="in">        "自由度" = summary_fit$"Df"[1],</span></span>
+<span id="cb6-427"><a href="#cb6-427" aria-hidden="true" tabindex="-1"></a><span class="in">        "F 值" = summary_fit$"F value"[1],</span></span>
+<span id="cb6-428"><a href="#cb6-428" aria-hidden="true" tabindex="-1"></a><span class="in">        "p 值" = summary_fit$"Pr(&gt;F)"[1]</span></span>
+<span id="cb6-429"><a href="#cb6-429" aria-hidden="true" tabindex="-1"></a><span class="in">      )</span></span>
+<span id="cb6-430"><a href="#cb6-430" aria-hidden="true" tabindex="-1"></a><span class="in">      cat("\nANOVA:", outcome, "vs", ctrl, "\n")</span></span>
+<span id="cb6-431"><a href="#cb6-431" aria-hidden="true" tabindex="-1"></a><span class="in">      print(result)</span></span>
+<span id="cb6-432"><a href="#cb6-432" aria-hidden="true" tabindex="-1"></a><span class="in">      result</span></span>
+<span id="cb6-433"><a href="#cb6-433" aria-hidden="true" tabindex="-1"></a><span class="in">    }, error = function(e) {</span></span>
+<span id="cb6-434"><a href="#cb6-434" aria-hidden="true" tabindex="-1"></a><span class="in">      message(paste("ANOVA 失败:", outcome, "vs", ctrl, "错误:", e$message))</span></span>
+<span id="cb6-435"><a href="#cb6-435" aria-hidden="true" tabindex="-1"></a><span class="in">      return(data.frame(</span></span>
+<span id="cb6-436"><a href="#cb6-436" aria-hidden="true" tabindex="-1"></a><span class="in">        "控制变量" = label_map$label[label_map$variable == ctrl],</span></span>
+<span id="cb6-437"><a href="#cb6-437" aria-hidden="true" tabindex="-1"></a><span class="in">        "平方和" = NA,</span></span>
+<span id="cb6-438"><a href="#cb6-438" aria-hidden="true" tabindex="-1"></a><span class="in">        "自由度" = NA,</span></span>
+<span id="cb6-439"><a href="#cb6-439" aria-hidden="true" tabindex="-1"></a><span class="in">        "F 值" = NA,</span></span>
+<span id="cb6-440"><a href="#cb6-440" aria-hidden="true" tabindex="-1"></a><span class="in">        "p 值" = NA</span></span>
+<span id="cb6-441"><a href="#cb6-441" aria-hidden="true" tabindex="-1"></a><span class="in">      ))</span></span>
+<span id="cb6-442"><a href="#cb6-442" aria-hidden="true" tabindex="-1"></a><span class="in">    })</span></span>
+<span id="cb6-443"><a href="#cb6-443" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-444"><a href="#cb6-444" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_results[[outcome]] &lt;- rbind(anova_results[[outcome]], anova_fit)</span></span>
+<span id="cb6-445"><a href="#cb6-445" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb6-446"><a href="#cb6-446" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-447"><a href="#cb6-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-448"><a href="#cb6-448" aria-hidden="true" tabindex="-1"></a><span class="in"># 12. 创建 Word 文档并输出结果</span></span>
+<span id="cb6-449"><a href="#cb6-449" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- read_docx()</span></span>
+<span id="cb6-450"><a href="#cb6-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-451"><a href="#cb6-451" aria-hidden="true" tabindex="-1"></a><span class="in"># 添加所有控制变量的频数和占比表</span></span>
+<span id="cb6-452"><a href="#cb6-452" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- body_add_par(doc, "控制变量的频数和占比表", style = "heading 1")</span></span>
+<span id="cb6-453"><a href="#cb6-453" aria-hidden="true" tabindex="-1"></a><span class="in">for (ctrl in controls) {</span></span>
+<span id="cb6-454"><a href="#cb6-454" aria-hidden="true" tabindex="-1"></a><span class="in">  freq_table &lt;- freq_tables[[ctrl]]</span></span>
+<span id="cb6-455"><a href="#cb6-455" aria-hidden="true" tabindex="-1"></a><span class="in">  if (nrow(freq_table) &gt; 0) {</span></span>
+<span id="cb6-456"><a href="#cb6-456" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- flextable(freq_table)</span></span>
+<span id="cb6-457"><a href="#cb6-457" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- colformat_double(freq_ft, j = 2, digits = 0)</span></span>
+<span id="cb6-458"><a href="#cb6-458" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- colformat_double(freq_ft, j = 3, digits = 2)</span></span>
+<span id="cb6-459"><a href="#cb6-459" aria-hidden="true" tabindex="-1"></a><span class="in">    freq_ft &lt;- autofit(freq_ft)</span></span>
+<span id="cb6-460"><a href="#cb6-460" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_par(doc, paste("变量:", label_map$label[label_map$variable == ctrl]), style = "heading 2")</span></span>
+<span id="cb6-461"><a href="#cb6-461" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_flextable(doc, freq_ft)</span></span>
+<span id="cb6-462"><a href="#cb6-462" aria-hidden="true" tabindex="-1"></a><span class="in">  } else {</span></span>
+<span id="cb6-463"><a href="#cb6-463" aria-hidden="true" tabindex="-1"></a><span class="in">    cat("警告: 频数表为空 -", ctrl, "\n")</span></span>
+<span id="cb6-464"><a href="#cb6-464" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb6-465"><a href="#cb6-465" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-466"><a href="#cb6-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-467"><a href="#cb6-467" aria-hidden="true" tabindex="-1"></a><span class="in"># 添加 ANOVA 结果</span></span>
+<span id="cb6-468"><a href="#cb6-468" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- body_add_par(doc, "单因素方差分析结果", style = "heading 1")</span></span>
+<span id="cb6-469"><a href="#cb6-469" aria-hidden="true" tabindex="-1"></a><span class="in">for (outcome in outcomes) {</span></span>
+<span id="cb6-470"><a href="#cb6-470" aria-hidden="true" tabindex="-1"></a><span class="in">  anova_table &lt;- anova_results[[outcome]]</span></span>
+<span id="cb6-471"><a href="#cb6-471" aria-hidden="true" tabindex="-1"></a><span class="in">  if (nrow(anova_table) &gt; 0) {</span></span>
+<span id="cb6-472"><a href="#cb6-472" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- flextable(anova_table)</span></span>
+<span id="cb6-473"><a href="#cb6-473" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 2, digits = 2)</span></span>
+<span id="cb6-474"><a href="#cb6-474" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 3, digits = 0)</span></span>
+<span id="cb6-475"><a href="#cb6-475" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 4, digits = 2)</span></span>
+<span id="cb6-476"><a href="#cb6-476" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- colformat_double(anova_ft, j = 5, digits = 3)</span></span>
+<span id="cb6-477"><a href="#cb6-477" aria-hidden="true" tabindex="-1"></a><span class="in">    anova_ft &lt;- autofit(anova_ft)</span></span>
+<span id="cb6-478"><a href="#cb6-478" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_par(doc, paste("因变量:", label_map$label[label_map$variable == outcome], "的单因素方差分析"), style = "heading 2")</span></span>
+<span id="cb6-479"><a href="#cb6-479" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_par(doc, paste("ANOVA 结果表 -", label_map$label[label_map$variable == outcome]))</span></span>
+<span id="cb6-480"><a href="#cb6-480" aria-hidden="true" tabindex="-1"></a><span class="in">    doc &lt;- body_add_flextable(doc, anova_ft)</span></span>
+<span id="cb6-481"><a href="#cb6-481" aria-hidden="true" tabindex="-1"></a><span class="in">  } else {</span></span>
+<span id="cb6-482"><a href="#cb6-482" aria-hidden="true" tabindex="-1"></a><span class="in">    cat("警告: ANOVA 结果表为空 -", outcome, "\n")</span></span>
+<span id="cb6-483"><a href="#cb6-483" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb6-484"><a href="#cb6-484" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-485"><a href="#cb6-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-486"><a href="#cb6-486" aria-hidden="true" tabindex="-1"></a><span class="in"># 保存文档</span></span>
+<span id="cb6-487"><a href="#cb6-487" aria-hidden="true" tabindex="-1"></a><span class="in">print(doc, target = "C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/anova_results0223.docx")</span></span>
+<span id="cb6-488"><a href="#cb6-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-489"><a href="#cb6-489" aria-hidden="true" tabindex="-1"></a><span class="in">cat("单因素方差分析结果已导出到 C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/anova_results0223.docx\n")</span></span>
+<span id="cb6-490"><a href="#cb6-490" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-491"><a href="#cb6-491" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-492"><a href="#cb6-492" aria-hidden="true" tabindex="-1"></a><span class="fu">## 构建Logistic回归模型</span></span>
+<span id="cb6-493"><a href="#cb6-493" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-494"><a href="#cb6-494" aria-hidden="true" tabindex="-1"></a>Logistic 回归分析最大的一个优势可能就是广泛涉及优势比（？），在这里介绍一下优势比的概念。</span>
+<span id="cb6-495"><a href="#cb6-495" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-496"><a href="#cb6-496" aria-hidden="true" tabindex="-1"></a><span class="fu">### 优势比</span></span>
+<span id="cb6-497"><a href="#cb6-497" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-498"><a href="#cb6-498" aria-hidden="true" tabindex="-1"></a>优势（Odds）是指某事件的发生概率 $\pi$ 与该事件不发生的概率 $1-\pi$ 之比，亦称为比，记为 *Odds* ，某事件在两种不同条件下的优势之比称为优势比（Odds Ratio，*OR*）。优势比在流行病学中的病例对照研究中被普遍应用（当然不仅限于病例对照研究）。</span>
+<span id="cb6-499"><a href="#cb6-499" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-500"><a href="#cb6-500" aria-hidden="true" tabindex="-1"></a>设某事件的两种不同暴露的发生概率分别为 $\pi_1$ 和 $\pi_0$ ，对应的 $Odds_1= \pi_1 /（1-\pi_1）$，$Odds_0 =\pi_0 /（1-\pi_0）$ ，两个 $Odds$ 之比定义为 $OR=Odds_1/Odds_0$。</span>
+<span id="cb6-501"><a href="#cb6-501" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-502"><a href="#cb6-502" aria-hidden="true" tabindex="-1"></a>由于 $Odds=\pi /(1-\pi)=(\pi-1+1)/(1-\pi)=－1+1 /(1-\pi)$ 以及 $0＜ \pi ＜1$，所以 $\pi$ 越大，$Odds$ 就越大，反之 $\pi$ 越小，$Odds$ 就越小，特別当 $\pi$ 越接近 0时，$Odds$ 也越接近 0，因此优势和优势比具有下列性质。</span>
+<span id="cb6-503"><a href="#cb6-503" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-504"><a href="#cb6-504" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>如果 $\pi_1 = \pi_0$。，对应有 $Odds_1=Odds_0$ , $OR=1$ 。</span>
+<span id="cb6-505"><a href="#cb6-505" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>如果 $\pi_1&gt;\pi_0$ ，则 $Odds_1&gt;Odds_o$ ，相应有 \$ OR<span class="sc">\&gt;</span>1\$ 。同理如果 $\pi_1&lt;\pi_0$，则 $Odds_1&lt;Odds_0$ ，相应有 $OR &lt; 1$。</span>
+<span id="cb6-506"><a href="#cb6-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-507"><a href="#cb6-507" aria-hidden="true" tabindex="-1"></a>由于概率 $\pi_1$ 也可以用 $Odds$ 表示，$\pi=\frac{Odds}{1+Odds}$ ，所以也可以通过比较 $Odds_1$ 与 $Odds_0$ 的大小来推断 $\pi_1$ 和 $\pi_0$ 的大小关系，即可以用 $OR&gt;1$, $OR=1$ 或 $OR&lt;1$ 推断 $\pi_1$ 和 $\pi_0$ 的大小关系。</span>
+<span id="cb6-508"><a href="#cb6-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-509"><a href="#cb6-509" aria-hidden="true" tabindex="-1"></a><span class="fu">### Logistic 回归模型</span></span>
+<span id="cb6-510"><a href="#cb6-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-511"><a href="#cb6-511" aria-hidden="true" tabindex="-1"></a>Logistic 回归模型的因变量必须为分类变量，主要有三种：二分类 Logistic 回归模型、有序分类 Logistic 回归模型、无序分类 Logistic 回归模型。其中二分类 Logistic 回归模型最为常用。自变量则无要求，可以是定量变量、有序分类变量和无序分类变量。</span>
+<span id="cb6-512"><a href="#cb6-512" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-513"><a href="#cb6-513" aria-hidden="true" tabindex="-1"></a>假如研究所关注的事件（如死亡或痊愈等）是否发生用因变量 $Y$ 表示，$Y=1$ 表示该结局事件发生，反之，$Y=0$ 表示该结局事件未发生。</span>
+<span id="cb6-514"><a href="#cb6-514" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-515"><a href="#cb6-515" aria-hidden="true" tabindex="-1"></a>那么可构建如下方程式：</span>
+<span id="cb6-516"><a href="#cb6-516" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-517"><a href="#cb6-517" aria-hidden="true" tabindex="-1"></a>$$logit(\pi(Y=1))=ln\frac{\pi(Y=1)}{\pi(Y=0)}=ln\frac{\pi(Y=1)}{1-\pi(Y=1)}=\beta_0 + \beta_1 X_1 + \cdot \beta_p X_p$$</span>
+<span id="cb6-518"><a href="#cb6-518" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-519"><a href="#cb6-519" aria-hidden="true" tabindex="-1"></a><span class="fu">### 共线性检验</span></span>
+<span id="cb6-520"><a href="#cb6-520" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-521"><a href="#cb6-521" aria-hidden="true" tabindex="-1"></a>共线性(Colinearity)指的是自变量之间存在高度相关性。这种情况会导致回归系数的不稳定，并使得对模型参数 的估计变得不可靠。在 Logistic 回归中，严重的共线性可能导致模型性能下降，甚至可能导致预测结果难以解释</span>
+<span id="cb6-522"><a href="#cb6-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-523"><a href="#cb6-523" aria-hidden="true" tabindex="-1"></a>方差膨胀因子是统计学中用于衡量多元线性回归模型中自变量之间共线性程度的指标，提供了一种定量的方式来评估自变量之间的共线性。</span>
+<span id="cb6-524"><a href="#cb6-524" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-525"><a href="#cb6-525" aria-hidden="true" tabindex="-1"></a>方差膨胀因子的解释标准通常如下：如果VIF值小于5，表示自变量之间的共线性程度较低，可以接受。如果VIF值在5到10之间， 表示自变量之间存在一定程度的共线性，但尚可接受。如果VIF值大于10，表示自变量之间存在严重的共线性问题， 需要考虑进行变量选择或者采取其他方法来处理共线性。</span>
+<span id="cb6-526"><a href="#cb6-526" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-527"><a href="#cb6-527" aria-hidden="true" tabindex="-1"></a>自评健康作为 因变量 ，自变量是 经济支持、生活支持和情绪支持，在前序的处理过程，只有原始的的经济支持变量（加总金额）是定量变量，其他两个都是做的二分类变量处理，如何做共线性检验，看起来并不明朗，因为三个变量看起来没有太多的关系，但是控制变量有些可能存在相关性，但是，是否有对控制变量做共线性检验的必要？</span>
+<span id="cb6-528"><a href="#cb6-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-529"><a href="#cb6-529" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2025-03-07 共线性检验</span></span>
+<span id="cb6-530"><a href="#cb6-530" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-531"><a href="#cb6-531" aria-hidden="true" tabindex="-1"></a>使用<span class="in">`car`</span>包对共线性进行检验。</span>
+<span id="cb6-532"><a href="#cb6-532" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-533"><a href="#cb6-533" aria-hidden="true" tabindex="-1"></a>理论上，共线性检验较为简单，但是在处理此数据时，碰壁较多。</span>
+<span id="cb6-534"><a href="#cb6-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-535"><a href="#cb6-535" aria-hidden="true" tabindex="-1"></a>首先核查数据的完整性，删除全NA和单一值变量，再将分类变量转换为因子类型，经济变量这里也是用“经济分组”这一变量处理，即所有的变量都是分类变量。（全部为分类变量在这里处理其实可能有些问题，我暂未找到合适的处理办法，寻找相关的信息也没有较为清晰地答案）</span>
+<span id="cb6-536"><a href="#cb6-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-537"><a href="#cb6-537" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
+<span id="cb6-538"><a href="#cb6-538" aria-hidden="true" tabindex="-1"></a><span class="in"># library(car)</span></span>
+<span id="cb6-539"><a href="#cb6-539" aria-hidden="true" tabindex="-1"></a><span class="in"># 数据完整性检查，删除全NA和单一值变量</span></span>
+<span id="cb6-540"><a href="#cb6-540" aria-hidden="true" tabindex="-1"></a><span class="in">valid_vars &lt;- all_predictors[sapply(final_data[, all_predictors, drop = FALSE], function(x) !(all(is.na(x)) || length(unique(na.omit(x))) == 1))]</span></span>
+<span id="cb6-541"><a href="#cb6-541" aria-hidden="true" tabindex="-1"></a><span class="in">final_data &lt;- final_data[, c(outcome, valid_vars)]</span></span>
+<span id="cb6-542"><a href="#cb6-542" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-543"><a href="#cb6-543" aria-hidden="true" tabindex="-1"></a><span class="in"># 仅将二分类变量转换为因子类型</span></span>
+<span id="cb6-544"><a href="#cb6-544" aria-hidden="true" tabindex="-1"></a><span class="in">binary_vars &lt;- valid_vars[sapply(final_data[, valid_vars], function(x) length(unique(na.omit(x))) == 2)]</span></span>
+<span id="cb6-545"><a href="#cb6-545" aria-hidden="true" tabindex="-1"></a><span class="in">final_data &lt;- final_data %&gt;% mutate(across(all_of(binary_vars), as.factor))</span></span>
+<span id="cb6-546"><a href="#cb6-546" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-547"><a href="#cb6-547" aria-hidden="true" tabindex="-1"></a><span class="in"># VIF计算</span></span>
+<span id="cb6-548"><a href="#cb6-548" aria-hidden="true" tabindex="-1"></a><span class="in">if (length(valid_vars) &gt; 1) {</span></span>
+<span id="cb6-549"><a href="#cb6-549" aria-hidden="true" tabindex="-1"></a><span class="in">  formula_vif &lt;- as.formula(paste(outcome, "~", paste(valid_vars, collapse = " + ")))</span></span>
+<span id="cb6-550"><a href="#cb6-550" aria-hidden="true" tabindex="-1"></a><span class="in">  lm_model &lt;- lm(formula_vif, data = final_data)</span></span>
+<span id="cb6-551"><a href="#cb6-551" aria-hidden="true" tabindex="-1"></a><span class="in">  vif_values &lt;- vif(lm_model)</span></span>
+<span id="cb6-552"><a href="#cb6-552" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-553"><a href="#cb6-553" aria-hidden="true" tabindex="-1"></a><span class="in">  vif_df &lt;- data.frame(</span></span>
+<span id="cb6-554"><a href="#cb6-554" aria-hidden="true" tabindex="-1"></a><span class="in">    Variable = names(vif_values),</span></span>
+<span id="cb6-555"><a href="#cb6-555" aria-hidden="true" tabindex="-1"></a><span class="in">    VIF = round(vif_values, 3)</span></span>
+<span id="cb6-556"><a href="#cb6-556" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb6-557"><a href="#cb6-557" aria-hidden="true" tabindex="-1"></a><span class="in">  mean_vif &lt;- mean(vif_values, na.rm = TRUE)</span></span>
+<span id="cb6-558"><a href="#cb6-558" aria-hidden="true" tabindex="-1"></a><span class="in">  # 结果保留两位小数</span></span>
+<span id="cb6-559"><a href="#cb6-559" aria-hidden="true" tabindex="-1"></a><span class="in">  mean_vif &lt;- round(mean_vif, 3)</span></span>
+<span id="cb6-560"><a href="#cb6-560" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-561"><a href="#cb6-561" aria-hidden="true" tabindex="-1"></a><span class="in">  # 保存结果</span></span>
+<span id="cb6-562"><a href="#cb6-562" aria-hidden="true" tabindex="-1"></a><span class="in">  writeLines(c("=== 多重共线性检验 (VIF Results) ===", </span></span>
+<span id="cb6-563"><a href="#cb6-563" aria-hidden="true" tabindex="-1"></a><span class="in">               paste("平均 VIF 值:", round(mean_vif, 3)), "",</span></span>
+<span id="cb6-564"><a href="#cb6-564" aria-hidden="true" tabindex="-1"></a><span class="in">               capture.output(print(vif_df))), con = output_vif_file)</span></span>
+<span id="cb6-565"><a href="#cb6-565" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-566"><a href="#cb6-566" aria-hidden="true" tabindex="-1"></a><span class="in">  write_xlsx(list(VIF_Results = vif_df, Mean_VIF = data.frame(Statistic = "平均 VIF 值", Value = round(mean_vif, 3))), </span></span>
+<span id="cb6-567"><a href="#cb6-567" aria-hidden="true" tabindex="-1"></a><span class="in">             output_vif_excel)</span></span>
+<span id="cb6-568"><a href="#cb6-568" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-569"><a href="#cb6-569" aria-hidden="true" tabindex="-1"></a><span class="in">  cat("VIF 检验完成，结果已保存至:", output_vif_file, "和", output_vif_excel, "\n")</span></span>
+<span id="cb6-570"><a href="#cb6-570" aria-hidden="true" tabindex="-1"></a><span class="in">} else {</span></span>
+<span id="cb6-571"><a href="#cb6-571" aria-hidden="true" tabindex="-1"></a><span class="in">  cat("错误：自变量数量不足，无法计算 VIF\n")</span></span>
+<span id="cb6-572"><a href="#cb6-572" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-573"><a href="#cb6-573" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-574"><a href="#cb6-574" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-575"><a href="#cb6-575" aria-hidden="true" tabindex="-1"></a><span class="fu">### logistic 回归</span></span>
+<span id="cb6-576"><a href="#cb6-576" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-577"><a href="#cb6-577" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval = FALSE}</span></span>
+<span id="cb6-578"><a href="#cb6-578" aria-hidden="true" tabindex="-1"></a><span class="in"># 5. Logistic 回归分析</span></span>
+<span id="cb6-579"><a href="#cb6-579" aria-hidden="true" tabindex="-1"></a><span class="in">logistic_results &lt;- list()</span></span>
+<span id="cb6-580"><a href="#cb6-580" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-581"><a href="#cb6-581" aria-hidden="true" tabindex="-1"></a><span class="in">for (outcome in outcomes) {</span></span>
+<span id="cb6-582"><a href="#cb6-582" aria-hidden="true" tabindex="-1"></a><span class="in">  formula &lt;- as.formula(</span></span>
+<span id="cb6-583"><a href="#cb6-583" aria-hidden="true" tabindex="-1"></a><span class="in">    paste(outcome, "~", paste(independents, collapse = " + "), "+", paste(controls, collapse = " + "))</span></span>
+<span id="cb6-584"><a href="#cb6-584" aria-hidden="true" tabindex="-1"></a><span class="in">  )</span></span>
+<span id="cb6-585"><a href="#cb6-585" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-586"><a href="#cb6-586" aria-hidden="true" tabindex="-1"></a><span class="in">  model &lt;- glm(formula, data = final_data, family = binomial(link = "logit"))</span></span>
+<span id="cb6-587"><a href="#cb6-587" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-588"><a href="#cb6-588" aria-hidden="true" tabindex="-1"></a><span class="in">  # 提取回归结果，保留三位小数</span></span>
+<span id="cb6-589"><a href="#cb6-589" aria-hidden="true" tabindex="-1"></a><span class="in">  model_summary &lt;- summary(model)</span></span>
+<span id="cb6-590"><a href="#cb6-590" aria-hidden="true" tabindex="-1"></a><span class="in">  coef_table &lt;- as.data.frame(coef(model_summary)) %&gt;%</span></span>
+<span id="cb6-591"><a href="#cb6-591" aria-hidden="true" tabindex="-1"></a><span class="in">    mutate(</span></span>
+<span id="cb6-592"><a href="#cb6-592" aria-hidden="true" tabindex="-1"></a><span class="in">      Variable = rownames(.),</span></span>
+<span id="cb6-593"><a href="#cb6-593" aria-hidden="true" tabindex="-1"></a><span class="in">      OR = round(exp(Estimate), 3),</span></span>
+<span id="cb6-594"><a href="#cb6-594" aria-hidden="true" tabindex="-1"></a><span class="in">      OR_Lower = round(exp(Estimate - 1.96 * `Std. Error`), 3),</span></span>
+<span id="cb6-595"><a href="#cb6-595" aria-hidden="true" tabindex="-1"></a><span class="in">      OR_Upper = round(exp(Estimate + 1.96 * `Std. Error`), 3),</span></span>
+<span id="cb6-596"><a href="#cb6-596" aria-hidden="true" tabindex="-1"></a><span class="in">      `Wald χ²` = round((Estimate / `Std. Error`)^2, 3),</span></span>
+<span id="cb6-597"><a href="#cb6-597" aria-hidden="true" tabindex="-1"></a><span class="in">      df = 1</span></span>
+<span id="cb6-598"><a href="#cb6-598" aria-hidden="true" tabindex="-1"></a><span class="in">    ) %&gt;%</span></span>
+<span id="cb6-599"><a href="#cb6-599" aria-hidden="true" tabindex="-1"></a><span class="in">    select(Variable, df, Estimate, `Std. Error`, `Wald χ²`, `Pr(&gt;|z|)`, OR, OR_Lower, OR_Upper) %&gt;%</span></span>
+<span id="cb6-600"><a href="#cb6-600" aria-hidden="true" tabindex="-1"></a><span class="in">    rename(</span></span>
+<span id="cb6-601"><a href="#cb6-601" aria-hidden="true" tabindex="-1"></a><span class="in">      `回归系数` = Estimate,</span></span>
+<span id="cb6-602"><a href="#cb6-602" aria-hidden="true" tabindex="-1"></a><span class="in">      `标准误` = `Std. Error`,</span></span>
+<span id="cb6-603"><a href="#cb6-603" aria-hidden="true" tabindex="-1"></a><span class="in">      `P 值` = `Pr(&gt;|z|)`</span></span>
+<span id="cb6-604"><a href="#cb6-604" aria-hidden="true" tabindex="-1"></a><span class="in">    ) %&gt;%</span></span>
+<span id="cb6-605"><a href="#cb6-605" aria-hidden="true" tabindex="-1"></a><span class="in">    mutate(across(c(`回归系数`, `标准误`, `P 值`), ~ round(.x, 3)))</span></span>
+<span id="cb6-606"><a href="#cb6-606" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb6-607"><a href="#cb6-607" aria-hidden="true" tabindex="-1"></a><span class="in">  logistic_results[[outcome]] &lt;- coef_table</span></span>
+<span id="cb6-608"><a href="#cb6-608" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-609"><a href="#cb6-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-610"><a href="#cb6-610" aria-hidden="true" tabindex="-1"></a><span class="in"># 6. 生成 Word 文档</span></span>
+<span id="cb6-611"><a href="#cb6-611" aria-hidden="true" tabindex="-1"></a><span class="in">doc &lt;- read_docx()</span></span>
+<span id="cb6-612"><a href="#cb6-612" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-613"><a href="#cb6-613" aria-hidden="true" tabindex="-1"></a><span class="in">for (outcome in outcomes) {</span></span>
+<span id="cb6-614"><a href="#cb6-614" aria-hidden="true" tabindex="-1"></a><span class="in">  doc &lt;- doc %&gt;%</span></span>
+<span id="cb6-615"><a href="#cb6-615" aria-hidden="true" tabindex="-1"></a><span class="in">    body_add_par(value = paste("Logistic 回归分析结果：因变量 =", outcome), style = "heading 1") %&gt;%</span></span>
+<span id="cb6-616"><a href="#cb6-616" aria-hidden="true" tabindex="-1"></a><span class="in">    body_add_flextable(flextable(logistic_results[[outcome]]) %&gt;%</span></span>
+<span id="cb6-617"><a href="#cb6-617" aria-hidden="true" tabindex="-1"></a><span class="in">                         set_table_properties(width = 1, layout = "autofit"))</span></span>
+<span id="cb6-618"><a href="#cb6-618" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb6-619"><a href="#cb6-619" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-620"><a href="#cb6-620" aria-hidden="true" tabindex="-1"></a><span class="in">print(doc, target = output_logistic_file)</span></span>
+<span id="cb6-621"><a href="#cb6-621" aria-hidden="true" tabindex="-1"></a><span class="in">cat("Logistic 回归分析结果已保存至:", output_logistic_file, "\n")</span></span>
+<span id="cb6-622"><a href="#cb6-622" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
