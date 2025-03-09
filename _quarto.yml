@@ -55,7 +55,7 @@ website:
 
   navbar:
     logo: images/logo.png
-    title: "一份医学统计学习笔记"
+    title: "医学统计学习笔记"
     background: light # 顶栏背景色（默认为primary，网页主色）
     search: true
     left:

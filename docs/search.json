@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n实践记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-03-07},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” March 7, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n实践记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-03-09},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” March 9, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -1369,6 +1369,71 @@
       "统计软件使用指南",
       "R introduction",
       "CLHLS Data Analysis by R"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-09-cos-reg.html",
+    "href": "Guide/Python/25-03-09-cos-reg.html",
+    "title": "用Python做生存分析和COX回归",
+    "section": "",
+    "text": "{r setup, include=FALSE} # 设置代码块选项 knitr::opts_chunk$set(echo = TRUE)",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python introduction",
+      "用Python做生存分析和COX回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-09-cos-reg.html#生存函数",
+    "href": "Guide/Python/25-03-09-cos-reg.html#生存函数",
+    "title": "用Python做生存分析和COX回归",
+    "section": "生存函数",
+    "text": "生存函数\n生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 \\(S(t)\\) 表示。\n风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 \\(h(t)\\) 表示。\n如果记寿命分布的密度为 \\(f(t)\\)，则有： \\(h(t) = f(t) / S(t)\\) 。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python introduction",
+      "用Python做生存分析和COX回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-09-cos-reg.html#数据集及来源",
+    "href": "Guide/Python/25-03-09-cos-reg.html#数据集及来源",
+    "title": "用Python做生存分析和COX回归",
+    "section": "数据集及来源",
+    "text": "数据集及来源\n这里使用 R 语言 survival 包中的 ovarian 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。\n首先找到 ovarian 数据集，你可以从互联网上寻找相关资源；或者从 R 的 survival 包中导出这一数据集，操作如下：\n# install.packages(\"survival\")\nlibrary(survival)\novarian\ndata(cancer, package=\"survival\")\n\ndf &lt;- ovarian\nwrite.csv(df, \"your-file-path\\\\ovarian.csv\", row.names = FALSE)\n将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：\n\nimport pandas as pd\novarian = pd.read_csv(r\"C:\\Users\\asus\\Desktop\\R\\quarto\\Med-Stat-Notes\\Data\\ovarian.csv\")\novarian.head()\n\n\n\n\n\n\n\n\nfutime\nfustat\nage\nresid.ds\nrx\necog.ps\n\n\n\n\n0\n59\n1\n72.3315\n2\n1\n1\n\n\n1\n115\n1\n74.4932\n2\n1\n1\n\n\n2\n156\n1\n66.4658\n2\n1\n2\n\n\n3\n421\n0\n53.3644\n2\n2\n1\n\n\n4\n431\n1\n50.3397\n2\n1\n1\n\n\n\n\n\n\n\n数据集包括 26 个观测值，6 个变量。变量如下：futime（随访时间），fustat（研究结束时的状态：0 表示存活，1表示死亡），age（患者的年龄），resid.ds（疾病残留情况：1 表示有残留，2 表示没有残留），rx（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 ecog.ps（患者的 ECOG 评分：1 表示较好，2 表示较差）。\n对年龄进行分组，分为 &lt;50 和 &gt;50 两组，并将其他三个变量的各水平加上相应的标签。\n\n# 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别\nprint(ovarian.columns)\n\n# 将 age 列转换为数值类型\novarian['age'] = pd.to_numeric(ovarian['age'], errors='coerce')\n\novarian.age = pd.cut(ovarian.age, [0,50,75], labels = ['&lt;=50','&gt;50'])\n\novarian['resid.ds'] = ovarian['resid.ds'].map({1: \"NO\", 2: \"Yes\"})\novarian['rx'] = ovarian['rx'].map({1: \"A\", 2: \"B\"})\novarian['ecog.ps'] = ovarian['ecog.ps'].map({1: \"Good\", 2: \"Bad\"})\n\nIndex(['futime', 'fustat', 'age', 'resid.ds', 'rx', 'ecog.ps'], dtype='object')",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python introduction",
+      "用Python做生存分析和COX回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-09-cos-reg.html#生存率的-kaplan-meier-估计",
+    "href": "Guide/Python/25-03-09-cos-reg.html#生存率的-kaplan-meier-估计",
+    "title": "用Python做生存分析和COX回归",
+    "section": "生存率的 Kaplan-Meier 估计",
+    "text": "生存率的 Kaplan-Meier 估计\n生存率的 Kaplan-Meier 估计的计算可以调用 lifelines 库中的 KaplanMeierFitter 函数实现。\npip 安装：pip install lifelines conda 安装： condainstall lifelines\n拟合 fit :\n\nfrom lifelines import KaplanMeierFitter\nkmf = KaplanMeierFitter()\nfit = kmf.fit(ovarian.futime,ovarian.fustat)\nfit\n\n&lt;lifelines.KaplanMeierFitter:\"KM_estimate\", fitted with 26 total observations, 14 right-censored observations&gt;\n\n\n拟合结果 fit 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：\n\nfit.median_survival_time_\n\n638.0\n\n\n中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：\n\npd.concat([fit.event_table,fit.survival_function_], axis = 1)\n\n\n\n\n\n\n\n\nremoved\nobserved\ncensored\nentrance\nat_risk\nKM_estimate\n\n\n\n\n0.0\n0\n0\n0\n26\n26\n1.000000\n\n\n59.0\n1\n1\n0\n0\n26\n0.961538\n\n\n115.0\n1\n1\n0\n0\n25\n0.923077\n\n\n156.0\n1\n1\n0\n0\n24\n0.884615\n\n\n268.0\n1\n1\n0\n0\n23\n0.846154\n\n\n329.0\n1\n1\n0\n0\n22\n0.807692\n\n\n353.0\n1\n1\n0\n0\n21\n0.769231\n\n\n365.0\n1\n1\n0\n0\n20\n0.730769\n\n\n377.0\n1\n0\n1\n0\n19\n0.730769\n\n\n421.0\n1\n0\n1\n0\n18\n0.730769\n\n\n431.0\n1\n1\n0\n0\n17\n0.687783\n\n\n448.0\n1\n0\n1\n0\n16\n0.687783\n\n\n464.0\n1\n1\n0\n0\n15\n0.641931\n\n\n475.0\n1\n1\n0\n0\n14\n0.596078\n\n\n477.0\n1\n0\n1\n0\n13\n0.596078\n\n\n563.0\n1\n1\n0\n0\n12\n0.546405\n\n\n638.0\n1\n1\n0\n0\n11\n0.496732\n\n\n744.0\n1\n0\n1\n0\n10\n0.496732\n\n\n769.0\n1\n0\n1\n0\n9\n0.496732\n\n\n770.0\n1\n0\n1\n0\n8\n0.496732\n\n\n803.0\n1\n0\n1\n0\n7\n0.496732\n\n\n855.0\n1\n0\n1\n0\n6\n0.496732\n\n\n1040.0\n1\n0\n1\n0\n5\n0.496732\n\n\n1106.0\n1\n0\n1\n0\n4\n0.496732\n\n\n1129.0\n1\n0\n1\n0\n3\n0.496732\n\n\n1206.0\n1\n0\n1\n0\n2\n0.496732\n\n\n1227.0\n1\n0\n1\n0\n1\n0.496732\n\n\n\n\n\n\n\n\n绘制生存曲线\nKaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：\n\nimport matplotlib.pyplot as plt\nfit.plot(show_censors = True)\nplt.show()",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python introduction",
+      "用Python做生存分析和COX回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-09-cos-reg.html#生存率的比较",
+    "href": "Guide/Python/25-03-09-cos-reg.html#生存率的比较",
+    "title": "用Python做生存分析和COX回归",
+    "section": "生存率的比较",
+    "text": "生存率的比较\n在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：\n\ng1 = ovarian.rx == \"A\"\ng2 = ovarian.rx == \"B\"\nkmf_A = KaplanMeierFitter()\nkmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label = \"Treatmeat A\")\nkmf_B = KaplanMeierFitter()\nkmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = \"Treatmeat B\")\n\n&lt;lifelines.KaplanMeierFitter:\"Treatmeat B\", fitted with 13 total observations, 8 right-censored observations&gt;\n\n\n\nKaplan-Meier 比较图\n\nfig, axes = plt.subplots()\nkmf_A.plot(ax = axes,show_censors = True)\nkmf_B.plot(ax = axes,show_censors = True)\nplt.show()",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python introduction",
+      "用Python做生存分析和COX回归"
     ]
   }
 ]

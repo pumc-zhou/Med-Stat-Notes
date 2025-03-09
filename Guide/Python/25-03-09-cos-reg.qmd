@@ -1,0 +1,137 @@
+---
+title: "用Python做生存分析和COX回归"
+output: 
+  html:
+    code-fold: true
+number-sections: false
+toc: false
+date: "2025-03-09"
+author: "Simonzhou"
+jupyter: python3
+execute:
+  enabled: true
+  echo: true      # 在输出中显示代码
+  eval: true      # 执行代码
+  warning: false  # 隐藏警告信息
+  message: false  # 隐藏消息
+---
+
+```{r setup, include=FALSE}
+# 设置代码块选项
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 生存分析与 Cox 回归
+
+生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析汇中，每个研究对象的结局变量由 "time"（生存时间） 和 "status"（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。
+
+生存分析的主要应用领域是医学、生物学、工程学、经济学等。
+
+## 生存函数
+
+生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 $S(t)$ 表示。
+
+风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 $h(t)$ 表示。
+
+如果记寿命分布的密度为 $f(t)$，则有： $h(t) = f(t) / S(t)$ 。
+
+## 数据集及来源
+
+这里使用 R 语言 `survival` 包中的 `ovarian` 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。
+
+首先找到 `ovarian` 数据集，你可以从互联网上寻找相关资源；或者从 R 的 `survival` 包中导出这一数据集，操作如下：
+
+``` r
+# install.packages("survival")
+library(survival)
+ovarian
+data(cancer, package="survival")
+
+df <- ovarian
+write.csv(df, "your-file-path\\ovarian.csv", row.names = FALSE)
+```
+
+将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：
+
+```{python,cache = true}
+import pandas as pd
+ovarian = pd.read_csv(r"C:\Users\asus\Desktop\R\quarto\Med-Stat-Notes\Data\ovarian.csv")
+ovarian.head()
+```
+
+数据集包括 26 个观测值，6 个变量。变量如下：`futime`（随访时间），`fustat`（研究结束时的状态：0 表示存活，1表示死亡），`age`（患者的年龄），`resid.ds`（疾病残留情况：1 表示有残留，2 表示没有残留），`rx`（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 `ecog.ps`（患者的 ECOG 评分：1 表示较好，2 表示较差）。
+
+对年龄进行分组，分为 `<50` 和 `>50` 两组，并将其他三个变量的各水平加上相应的标签。
+
+```{python, cache = true}
+# 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别
+print(ovarian.columns)
+
+# 将 age 列转换为数值类型
+ovarian['age'] = pd.to_numeric(ovarian['age'], errors='coerce')
+
+ovarian.age = pd.cut(ovarian.age, [0,50,75], labels = ['<=50','>50'])
+
+ovarian['resid.ds'] = ovarian['resid.ds'].map({1: "NO", 2: "Yes"})
+ovarian['rx'] = ovarian['rx'].map({1: "A", 2: "B"})
+ovarian['ecog.ps'] = ovarian['ecog.ps'].map({1: "Good", 2: "Bad"})
+```
+
+## 生存率的 Kaplan-Meier 估计
+
+生存率的 Kaplan-Meier 估计的计算可以调用 `lifelines` 库中的 `KaplanMeierFitter` 函数实现。
+
+`pip` 安装：`pip install lifelines` `conda` 安装： `condainstall lifelines`
+
+拟合 `fit` :
+
+```{python,cache = true}
+from lifelines import KaplanMeierFitter
+kmf = KaplanMeierFitter()
+fit = kmf.fit(ovarian.futime,ovarian.fustat)
+fit
+```
+
+拟合结果 `fit` 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：
+
+```{python, cache= true}
+fit.median_survival_time_
+```
+
+中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：
+
+```{python, cache = true}
+pd.concat([fit.event_table,fit.survival_function_], axis = 1)
+```
+
+### 绘制生存曲线
+
+Kaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：
+
+```{python, cache = true}
+import matplotlib.pyplot as plt
+fit.plot(show_censors = True)
+plt.show()
+```
+
+## 生存率的比较
+
+在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：
+
+```{python,cache = true}
+g1 = ovarian.rx == "A"
+g2 = ovarian.rx == "B"
+kmf_A = KaplanMeierFitter()
+kmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label = "Treatmeat A")
+kmf_B = KaplanMeierFitter()
+kmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = "Treatmeat B")
+```
+
+### Kaplan-Meier 比较图
+
+```{python,cache = true}
+fig, axes = plt.subplots()
+kmf_A.plot(ax = axes,show_censors = True)
+kmf_B.plot(ax = axes,show_censors = True)
+plt.show()
+```
