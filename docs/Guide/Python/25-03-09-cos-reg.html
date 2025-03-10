@@ -175,7 +175,7 @@ window.Quarto = {
     <img src="../../images/logo.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">一份医学统计学习笔记</span>
+    <span class="navbar-title">医学统计学习笔记</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="搜索"></div>
@@ -557,10 +557,9 @@ window.Quarto = {
 </header>
 
 
-<p><code>{r setup, include=FALSE} # 设置代码块选项 knitr::opts_chunk$set(echo = TRUE)</code></p>
-<section id="生存分析与-cox-回归" class="level1">
-<h1>生存分析与 Cox 回归</h1>
-<p>生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析汇中，每个研究对象的结局变量由 “time”（生存时间） 和 “status”（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。</p>
+<section id="生存分析" class="level1">
+<h1>生存分析</h1>
+<p>生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析中，每个研究对象的结局变量由 “time”（生存时间） 和 “status”（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。</p>
 <p>生存分析的主要应用领域是医学、生物学、工程学、经济学等。</p>
 <section id="生存函数" class="level2">
 <h2 class="anchored" data-anchor-id="生存函数">生存函数</h2>
@@ -580,11 +579,11 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ovarian</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">"your-file-path</span><span class="sc">\\</span><span class="st">ovarian.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：</p>
-<div id="6b585199" class="cell" data-execution_count="1">
+<div id="bebfb31e" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ovarian <span class="op">=</span> pd.read_csv(<span class="vs">r"C:\Users\asus\Desktop\R\quarto\Med-Stat-Notes\Data\ovarian.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>ovarian.head()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div class="cell-output cell-output-display" data-execution_count="29">
 <div>
 
 
@@ -654,7 +653,7 @@ window.Quarto = {
 </div>
 <p>数据集包括 26 个观测值，6 个变量。变量如下：<code>futime</code>（随访时间），<code>fustat</code>（研究结束时的状态：0 表示存活，1表示死亡），<code>age</code>（患者的年龄），<code>resid.ds</code>（疾病残留情况：1 表示有残留，2 表示没有残留），<code>rx</code>（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 <code>ecog.ps</code>（患者的 ECOG 评分：1 表示较好，2 表示较差）。</p>
 <p>对年龄进行分组，分为 <code>&lt;50</code> 和 <code>&gt;50</code> 两组，并将其他三个变量的各水平加上相应的标签。</p>
-<div id="2424c5b9" class="cell" data-execution_count="2">
+<div id="1305528c" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ovarian.columns)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -674,28 +673,29 @@ window.Quarto = {
 <section id="生存率的-kaplan-meier-估计" class="level2">
 <h2 class="anchored" data-anchor-id="生存率的-kaplan-meier-估计">生存率的 Kaplan-Meier 估计</h2>
 <p>生存率的 Kaplan-Meier 估计的计算可以调用 <code>lifelines</code> 库中的 <code>KaplanMeierFitter</code> 函数实现。</p>
-<p><code>pip</code> 安装：<code>pip install lifelines</code> <code>conda</code> 安装： <code>condainstall lifelines</code></p>
+<p><code>pip</code> 安装：<code>pip install lifelines</code></p>
+<p><code>conda</code> 安装： <code>conda install lifelines</code></p>
 <p>拟合 <code>fit</code> :</p>
-<div id="d7633f7d" class="cell" data-execution_count="3">
+<div id="1b0e5895" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lifelines <span class="im">import</span> KaplanMeierFitter</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> kmf.fit(ovarian.futime,ovarian.fustat)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>fit</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="19">
+<div class="cell-output cell-output-display" data-execution_count="31">
 <pre><code>&lt;lifelines.KaplanMeierFitter:"KM_estimate", fitted with 26 total observations, 14 right-censored observations&gt;</code></pre>
 </div>
 </div>
 <p>拟合结果 <code>fit</code> 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：</p>
-<div id="993df584" class="cell" data-execution_count="4">
+<div id="b1761677" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>fit.median_survival_time_</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="20">
+<div class="cell-output cell-output-display" data-execution_count="32">
 <pre><code>638.0</code></pre>
 </div>
 </div>
 <p>中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：</p>
-<div id="5679172d" class="cell" data-execution_count="5">
+<div id="70f146cd" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>pd.concat([fit.event_table,fit.survival_function_], axis <span class="op">=</span> <span class="dv">1</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell-output cell-output-display" data-execution_count="33">
 <div>
 
 
@@ -964,7 +964,7 @@ window.Quarto = {
 <section id="绘制生存曲线" class="level3">
 <h3 class="anchored" data-anchor-id="绘制生存曲线">绘制生存曲线</h3>
 <p>Kaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：</p>
-<div id="967fe610" class="cell" data-execution_count="6">
+<div id="0bb61709" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fit.plot(show_censors <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -981,20 +981,21 @@ window.Quarto = {
 <section id="生存率的比较" class="level2">
 <h2 class="anchored" data-anchor-id="生存率的比较">生存率的比较</h2>
 <p>在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：</p>
-<div id="f2a26106" class="cell" data-execution_count="7">
+<div id="0b9fff2d" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> ovarian.rx <span class="op">==</span> <span class="st">"A"</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> ovarian.rx <span class="op">==</span> <span class="st">"B"</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>kmf_A <span class="op">=</span> KaplanMeierFitter()</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>kmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label <span class="op">=</span> <span class="st">"Treatmeat A"</span>)</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>kmf_B <span class="op">=</span> KaplanMeierFitter()</span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>kmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label <span class="op">=</span> <span class="st">"Treatmeat B"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="23">
+<div class="cell-output cell-output-display" data-execution_count="35">
 <pre><code>&lt;lifelines.KaplanMeierFitter:"Treatmeat B", fitted with 13 total observations, 8 right-censored observations&gt;</code></pre>
 </div>
 </div>
 <section id="kaplan-meier-比较图" class="level3">
 <h3 class="anchored" data-anchor-id="kaplan-meier-比较图">Kaplan-Meier 比较图</h3>
-<div id="7ffd6bab" class="cell" data-execution_count="8">
+<p>可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。</p>
+<div id="48a71b19" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots()</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>kmf_A.plot(ax <span class="op">=</span> axes,show_censors <span class="op">=</span> <span class="va">True</span>)</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>kmf_B.plot(ax <span class="op">=</span> axes,show_censors <span class="op">=</span> <span class="va">True</span>)</span>
@@ -1007,15 +1008,447 @@ window.Quarto = {
 </div>
 </div>
 </div>
+<p>从上图中可以看出，治疗方式 “B” 的生存率高于治疗方式 “A” 的生存率，但是这种差异是由随机误差引起还是真是的治疗方式的不同所造成的差异，需要做进一步的统计学检验。</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/Causal-association.jpg" class="img-fluid figure-img"></p>
+<figcaption>因果关联的推断步骤</figcaption>
+</figure>
+</div>
+</section>
+<section id="统计学检验" class="level3">
+<h3 class="anchored" data-anchor-id="统计学检验">统计学检验</h3>
+<p>生存分析中常用的统计学检验是 时序检验（log rank test），其基本思想是先计算出不同时间两种治疗方式的暴露人数和死亡人数，并由此在两种治疗方式效果相同的假设下计算出预期死亡人数，如果不拒绝零假设（ <span class="math inline">\(H_0\)</span> ：两种治疗方式的效果相同，即预期死亡人数一致），则实际观测值和期望值的差异不会很大，如果差异过大则不能认为该差异是由随机误差引起的。</p>
+<p>对此，用 <span class="math inline">\(\chi^2\)</span> 检验做判断。时序检验可以用 <code>lifetimes</code> 库的函数 <code>logrank_test</code> 实现。</p>
+<div id="022b8b94" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lifelines.statistics <span class="im">import</span> logrank_test</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> logrank_test(ovarian.futime[g1], ovarian.futime[g2],</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                  ovarian.fustat[g1], ovarian.fustat[g2])</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>lr.p_value</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>0.3025911169890923</code></pre>
+</div>
+</div>
+<p>这里得到的结果为 <span class="math inline">\(P&gt;0.05\)</span> ，在一般情况下，我们会认为这是没有统计学意义的，即无法排除差异是由随机误差引起的。</p>
+<p>这种结果不显著的情况下，我们可以做一些思考，即是否有其他因素干预了结果的显著性，以及是否是样本量过小，导致差异不显著。（样本量的大小会影响检验效能，如果检验效能太低，即使有差异，也很难被检验方法发现）</p>
+<p>这里我们无法改变样本量的大小，但是可以考虑其他混杂因素的影响，并且使用更全面的模型进行检验。</p>
+</section>
+</section>
+</section>
+<section id="cox-回归" class="level1">
+<h1>Cox 回归</h1>
+<p>所有的参数回归模型需要对风险函数做出假设，这些模型可以对每个时间点的生存概率进行估计。而 Cox 回归没有关于风险函数的假设，他所遵循的唯一重要假设是 “比例风险” 。</p>
+<p><span class="math display">\[
+h(t,X)=h_0(t)e^{\sum{\beta_i}{X_i}}
+\]</span></p>
+<p>等式左边表示风险收时间和自变量的影响，等式右边的 <span class="math inline">\(h_0(t)\)</span> 是所有自变量 <span class="math inline">\(X_i\)</span> 都为 0 时的基线风险函数， <span class="math inline">\(e^{\sum{\beta_i}{X_i}}\)</span> 表示所有自变量 <span class="math inline">\(X_i\)</span> 和对应的估计系数 <span class="math inline">\(\beta_i\)</span> 的乘积之和。</p>
+<p>因此有：</p>
+<p><span class="math display">\[
+\frac{h(t,X)}{h_0(t)}=e^{\sum{\beta_i}{X_i}}
+\]</span></p>
+<section id="建立模型" class="level2">
+<h2 class="anchored" data-anchor-id="建立模型">建立模型</h2>
+<p>在建立模型前，需要对分类变量进行哑变量处理：</p>
+<div id="770dcce9" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_dummy <span class="op">=</span> pd.get_dummies(ovarian,drop_first <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>df_dummy.head()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">futime</th>
+<th data-quarto-table-cell-role="th">fustat</th>
+<th data-quarto-table-cell-role="th">age_&gt;50</th>
+<th data-quarto-table-cell-role="th">resid.ds_Yes</th>
+<th data-quarto-table-cell-role="th">rx_B</th>
+<th data-quarto-table-cell-role="th">ecog.ps_Good</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>59</td>
+<td>1</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>115</td>
+<td>1</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>156</td>
+<td>1</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>421</td>
+<td>0</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>431</td>
+<td>1</td>
+<td>True</td>
+<td>True</td>
+<td>False</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>使用 <code>drop_first = True</code> 参数是为了去掉各个参考类别。</p>
+<p>下面将所有的协变量都纳入，建立 Cox 回归模型：</p>
+<div id="24596e12" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> lifelines <span class="im">import</span> CoxPHFitter</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>cox <span class="op">=</span> CoxPHFitter()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>cox.fit(df_dummy,duration_col <span class="op">=</span> <span class="st">'futime'</span>, event_col <span class="op">=</span> <span class="st">'fustat'</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>cox.print_summary()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">model</td>
+<td>lifelines.CoxPHFitter</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">duration col</td>
+<td>'futime'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">event col</td>
+<td>'fustat'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">baseline estimation</td>
+<td>breslow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">number of observations</td>
+<td>26</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">number of events observed</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">partial log-likelihood</td>
+<td>-28.89</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">time fit was run</td>
+<td>2025-03-10 05:46:54 UTC</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="min-width: 12px"></th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">coef</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">exp(coef)</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">se(coef)</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">coef lower 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">coef upper 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">exp(coef) lower 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">exp(coef) upper 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">cmp to</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">z</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">p</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">-log2(p)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">age_&gt;50</td>
+<td>2.20</td>
+<td>9.04</td>
+<td>1.11</td>
+<td>0.03</td>
+<td>4.37</td>
+<td>1.03</td>
+<td>79.10</td>
+<td>0.00</td>
+<td>1.99</td>
+<td>0.05</td>
+<td>4.42</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">resid.ds_Yes</td>
+<td>1.45</td>
+<td>4.25</td>
+<td>0.73</td>
+<td>0.02</td>
+<td>2.88</td>
+<td>1.02</td>
+<td>17.75</td>
+<td>0.00</td>
+<td>1.98</td>
+<td>0.05</td>
+<td>4.40</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">rx_B</td>
+<td>-1.38</td>
+<td>0.25</td>
+<td>0.64</td>
+<td>-2.65</td>
+<td>-0.12</td>
+<td>0.07</td>
+<td>0.89</td>
+<td>0.00</td>
+<td>-2.14</td>
+<td>0.03</td>
+<td>4.96</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">ecog.ps_Good</td>
+<td>-0.59</td>
+<td>0.56</td>
+<td>0.63</td>
+<td>-1.83</td>
+<td>0.65</td>
+<td>0.16</td>
+<td>1.92</td>
+<td>0.00</td>
+<td>-0.93</td>
+<td>0.35</td>
+<td>1.50</td>
+</tr>
+</tbody>
+</table>
+<br><div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Concordance</td>
+<td>0.79</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Partial AIC</td>
+<td>65.78</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">log-likelihood ratio test</td>
+<td>12.19 on 4 df</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">-log2(p) of ll-ratio test</td>
+<td>5.97</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>结果显示，在调整了协变量后，两种治疗方式的死亡风险的差异具有统计学意义（P&lt;0.05）。</p>
+<p>模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：</p>
+<div id="9843a5c7" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>cox.plot()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-03-09-cos-reg_files/figure-html/cell-13-output-1.png" width="643" height="429" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Cox 回归是一种半参数回归模型，也像多元线性回归一样，存在变量选择的问题。通常可以用 AIC 进行变量选择。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<p>查看当前模型的 AIC 值：</p>
+<div id="945210d4" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>cox.AIC_partial_</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>65.77513405570859</code></pre>
+</div>
+</div>
+<p>根据前序的结果，变量 <code>ecog.ps</code> 对应的 <em>P</em> 值最大，对其进行剔除后再次拟合模型：</p>
+<div id="641d27e9" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>cox1 <span class="op">=</span> CoxPHFitter()</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>df_dummy_sub <span class="op">=</span> df_dummy.drop(<span class="st">'ecog.ps_Good'</span>, axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>cox1.fit(df_dummy_sub, duration_col <span class="op">=</span> <span class="st">'futime'</span>, event_col <span class="op">=</span> <span class="st">'fustat'</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>cox1.print_summary()</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>cox1.AIC_partial_</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">model</td>
+<td>lifelines.CoxPHFitter</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">duration col</td>
+<td>'futime'</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">event col</td>
+<td>'fustat'</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">baseline estimation</td>
+<td>breslow</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">number of observations</td>
+<td>26</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">number of events observed</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">partial log-likelihood</td>
+<td>-29.33</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">time fit was run</td>
+<td>2025-03-10 05:46:54 UTC</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="min-width: 12px"></th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">coef</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">exp(coef)</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">se(coef)</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">coef lower 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">coef upper 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">exp(coef) lower 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">exp(coef) upper 95%</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">cmp to</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">z</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">p</th>
+<th data-quarto-table-cell-role="th" style="min-width: 12px">-log2(p)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">age_&gt;50</td>
+<td>2.11</td>
+<td>8.29</td>
+<td>1.09</td>
+<td>-0.02</td>
+<td>4.25</td>
+<td>0.98</td>
+<td>70.32</td>
+<td>0.00</td>
+<td>1.94</td>
+<td>0.05</td>
+<td>4.25</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">resid.ds_Yes</td>
+<td>1.25</td>
+<td>3.50</td>
+<td>0.69</td>
+<td>-0.10</td>
+<td>2.61</td>
+<td>0.90</td>
+<td>13.58</td>
+<td>0.00</td>
+<td>1.81</td>
+<td>0.07</td>
+<td>3.83</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">rx_B</td>
+<td>-1.28</td>
+<td>0.28</td>
+<td>0.62</td>
+<td>-2.50</td>
+<td>-0.06</td>
+<td>0.08</td>
+<td>0.94</td>
+<td>0.00</td>
+<td>-2.06</td>
+<td>0.04</td>
+<td>4.67</td>
+</tr>
+</tbody>
+</table>
+<br><div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">Concordance</td>
+<td>0.77</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">Partial AIC</td>
+<td>64.66</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">log-likelihood ratio test</td>
+<td>11.31 on 3 df</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">-log2(p) of ll-ratio test</td>
+<td>6.62</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>64.65793573545281</code></pre>
+</div>
+</div>
+<p>剔除 <code>ecog_ps</code> 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。</p>
 
 
 <!-- -->
 
 </section>
 </section>
-</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
+
+<ol>
+<li id="fn1"><p>赤池信息量准则，即Akaike information criterion，简称AIC，是衡量统计模型拟合优良性的一种标准，是由日本统计学家赤池弘次创立和发展的。赤池信息量准则建立在熵的概念基础上。<br>
+<strong>AIC越小，模型越好，通常选择AIC最小的模型</strong><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1649,143 +2082,232 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "用Python做生存分析和COX回归"</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">  enabled: true</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true      # 在输出中显示代码</span></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true      # 执行代码</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false  # 隐藏警告信息</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false  # 隐藏消息</span></span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup, include=FALSE}</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a><span class="in"># 设置代码块选项</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="in">knitr::opts_chunk$set(echo = TRUE)</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="fu"># 生存分析与 Cox 回归</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析汇中，每个研究对象的结局变量由 "time"（生存时间） 和 "status"（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>生存分析的主要应用领域是医学、生物学、工程学、经济学等。</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生存函数</span></span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 $S(t)$ 表示。</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 $h(t)$ 表示。</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>如果记寿命分布的密度为 $f(t)$，则有： $h(t) = f(t) / S(t)$ 。</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据集及来源</span></span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>这里使用 R 语言 <span class="in">`survival`</span> 包中的 <span class="in">`ovarian`</span> 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>首先找到 <span class="in">`ovarian`</span> 数据集，你可以从互联网上寻找相关资源；或者从 R 的 <span class="in">`survival`</span> 包中导出这一数据集，操作如下：</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a><span class="in">``` r</span></span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("survival")</span></span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>ovarian</span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cancer, <span class="at">package=</span><span class="st">"survival"</span>)</span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ovarian</span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">"your-file-path</span><span class="sc">\\</span><span class="st">ovarian.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a><span class="in">import pandas as pd</span></span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian = pd.read_csv(r"C:\Users\asus\Desktop\R\quarto\Med-Stat-Notes\Data\ovarian.csv")</span></span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian.head()</span></span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>数据集包括 26 个观测值，6 个变量。变量如下：<span class="in">`futime`</span>（随访时间），<span class="in">`fustat`</span>（研究结束时的状态：0 表示存活，1表示死亡），<span class="in">`age`</span>（患者的年龄），<span class="in">`resid.ds`</span>（疾病残留情况：1 表示有残留，2 表示没有残留），<span class="in">`rx`</span>（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 <span class="in">`ecog.ps`</span>（患者的 ECOG 评分：1 表示较好，2 表示较差）。</span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>对年龄进行分组，分为 <span class="in">`&lt;50`</span> 和 <span class="in">`&gt;50`</span> 两组，并将其他三个变量的各水平加上相应的标签。</span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache = true}</span></span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a><span class="in"># 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别</span></span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a><span class="in">print(ovarian.columns)</span></span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="in"># 将 age 列转换为数值类型</span></span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['age'] = pd.to_numeric(ovarian['age'], errors='coerce')</span></span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian.age = pd.cut(ovarian.age, [0,50,75], labels = ['&lt;=50','&gt;50'])</span></span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['resid.ds'] = ovarian['resid.ds'].map({1: "NO", 2: "Yes"})</span></span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['rx'] = ovarian['rx'].map({1: "A", 2: "B"})</span></span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['ecog.ps'] = ovarian['ecog.ps'].map({1: "Good", 2: "Bad"})</span></span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生存率的 Kaplan-Meier 估计</span></span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>生存率的 Kaplan-Meier 估计的计算可以调用 <span class="in">`lifelines`</span> 库中的 <span class="in">`KaplanMeierFitter`</span> 函数实现。</span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="in">`pip`</span> 安装：<span class="in">`pip install lifelines`</span> <span class="in">`conda`</span> 安装： <span class="in">`condainstall lifelines`</span></span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>拟合 <span class="in">`fit`</span> :</span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a><span class="in">from lifelines import KaplanMeierFitter</span></span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="in">kmf = KaplanMeierFitter()</span></span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a><span class="in">fit = kmf.fit(ovarian.futime,ovarian.fustat)</span></span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a><span class="in">fit</span></span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>拟合结果 <span class="in">`fit`</span> 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：</span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache= true}</span></span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a><span class="in">fit.median_survival_time_</span></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：</span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache = true}</span></span>
-<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="in">pd.concat([fit.event_table,fit.survival_function_], axis = 1)</span></span>
-<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a><span class="fu">### 绘制生存曲线</span></span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>Kaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：</span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache = true}</span></span>
-<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="in">fit.plot(show_censors = True)</span></span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a><span class="in">plt.show()</span></span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生存率的比较</span></span>
-<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：</span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
-<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a><span class="in">g1 = ovarian.rx == "A"</span></span>
-<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a><span class="in">g2 = ovarian.rx == "B"</span></span>
-<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_A = KaplanMeierFitter()</span></span>
-<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label = "Treatmeat A")</span></span>
-<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_B = KaplanMeierFitter()</span></span>
-<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = "Treatmeat B")</span></span>
-<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a><span class="fu">### Kaplan-Meier 比较图</span></span>
-<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
-<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a><span class="in">fig, axes = plt.subplots()</span></span>
-<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_A.plot(ax = axes,show_censors = True)</span></span>
-<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_B.plot(ax = axes,show_censors = True)</span></span>
-<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a><span class="in">plt.show()</span></span>
-<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "用Python做生存分析和COX回归"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="an">output:</span><span class="co"> </span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">  enabled: true</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true      # 在输出中显示代码</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true      # 执行代码</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false  # 隐藏警告信息</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false  # 隐藏消息</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="fu"># 生存分析</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析中，每个研究对象的结局变量由 "time"（生存时间） 和 "status"（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>生存分析的主要应用领域是医学、生物学、工程学、经济学等。</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生存函数</span></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 $S(t)$ 表示。</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 $h(t)$ 表示。</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>如果记寿命分布的密度为 $f(t)$，则有： $h(t) = f(t) / S(t)$ 。</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a><span class="fu">## 数据集及来源</span></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>这里使用 R 语言 <span class="in">`survival`</span> 包中的 <span class="in">`ovarian`</span> 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。</span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>首先找到 <span class="in">`ovarian`</span> 数据集，你可以从互联网上寻找相关资源；或者从 R 的 <span class="in">`survival`</span> 包中导出这一数据集，操作如下：</span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a><span class="in">``` r</span></span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("survival")</span></span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>ovarian</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(cancer, <span class="at">package=</span><span class="st">"survival"</span>)</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-45"><a href="#cb23-45" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> ovarian</span>
+<span id="cb23-46"><a href="#cb23-46" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(df, <span class="st">"your-file-path</span><span class="sc">\\</span><span class="st">ovarian.csv"</span>, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb23-47"><a href="#cb23-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-48"><a href="#cb23-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-49"><a href="#cb23-49" aria-hidden="true" tabindex="-1"></a>将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：</span>
+<span id="cb23-50"><a href="#cb23-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-51"><a href="#cb23-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-52"><a href="#cb23-52" aria-hidden="true" tabindex="-1"></a><span class="in">import pandas as pd</span></span>
+<span id="cb23-53"><a href="#cb23-53" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian = pd.read_csv(r"C:\Users\asus\Desktop\R\quarto\Med-Stat-Notes\Data\ovarian.csv")</span></span>
+<span id="cb23-54"><a href="#cb23-54" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian.head()</span></span>
+<span id="cb23-55"><a href="#cb23-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-56"><a href="#cb23-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-57"><a href="#cb23-57" aria-hidden="true" tabindex="-1"></a>数据集包括 26 个观测值，6 个变量。变量如下：<span class="in">`futime`</span>（随访时间），<span class="in">`fustat`</span>（研究结束时的状态：0 表示存活，1表示死亡），<span class="in">`age`</span>（患者的年龄），<span class="in">`resid.ds`</span>（疾病残留情况：1 表示有残留，2 表示没有残留），<span class="in">`rx`</span>（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 <span class="in">`ecog.ps`</span>（患者的 ECOG 评分：1 表示较好，2 表示较差）。</span>
+<span id="cb23-58"><a href="#cb23-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-59"><a href="#cb23-59" aria-hidden="true" tabindex="-1"></a>对年龄进行分组，分为 <span class="in">`&lt;50`</span> 和 <span class="in">`&gt;50`</span> 两组，并将其他三个变量的各水平加上相应的标签。</span>
+<span id="cb23-60"><a href="#cb23-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-61"><a href="#cb23-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache = true}</span></span>
+<span id="cb23-62"><a href="#cb23-62" aria-hidden="true" tabindex="-1"></a><span class="in"># 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别</span></span>
+<span id="cb23-63"><a href="#cb23-63" aria-hidden="true" tabindex="-1"></a><span class="in">print(ovarian.columns)</span></span>
+<span id="cb23-64"><a href="#cb23-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-65"><a href="#cb23-65" aria-hidden="true" tabindex="-1"></a><span class="in"># 将 age 列转换为数值类型</span></span>
+<span id="cb23-66"><a href="#cb23-66" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['age'] = pd.to_numeric(ovarian['age'], errors='coerce')</span></span>
+<span id="cb23-67"><a href="#cb23-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-68"><a href="#cb23-68" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian.age = pd.cut(ovarian.age, [0,50,75], labels = ['&lt;=50','&gt;50'])</span></span>
+<span id="cb23-69"><a href="#cb23-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-70"><a href="#cb23-70" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['resid.ds'] = ovarian['resid.ds'].map({1: "NO", 2: "Yes"})</span></span>
+<span id="cb23-71"><a href="#cb23-71" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['rx'] = ovarian['rx'].map({1: "A", 2: "B"})</span></span>
+<span id="cb23-72"><a href="#cb23-72" aria-hidden="true" tabindex="-1"></a><span class="in">ovarian['ecog.ps'] = ovarian['ecog.ps'].map({1: "Good", 2: "Bad"})</span></span>
+<span id="cb23-73"><a href="#cb23-73" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-74"><a href="#cb23-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-75"><a href="#cb23-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生存率的 Kaplan-Meier 估计</span></span>
+<span id="cb23-76"><a href="#cb23-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-77"><a href="#cb23-77" aria-hidden="true" tabindex="-1"></a>生存率的 Kaplan-Meier 估计的计算可以调用 <span class="in">`lifelines`</span> 库中的 <span class="in">`KaplanMeierFitter`</span> 函数实现。</span>
+<span id="cb23-78"><a href="#cb23-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-79"><a href="#cb23-79" aria-hidden="true" tabindex="-1"></a><span class="in">`pip`</span> 安装：<span class="in">`pip install lifelines`</span></span>
+<span id="cb23-80"><a href="#cb23-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-81"><a href="#cb23-81" aria-hidden="true" tabindex="-1"></a><span class="in">`conda`</span> 安装： <span class="in">`conda install lifelines`</span></span>
+<span id="cb23-82"><a href="#cb23-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-83"><a href="#cb23-83" aria-hidden="true" tabindex="-1"></a>拟合 <span class="in">`fit`</span> :</span>
+<span id="cb23-84"><a href="#cb23-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-85"><a href="#cb23-85" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-86"><a href="#cb23-86" aria-hidden="true" tabindex="-1"></a><span class="in">from lifelines import KaplanMeierFitter</span></span>
+<span id="cb23-87"><a href="#cb23-87" aria-hidden="true" tabindex="-1"></a><span class="in">kmf = KaplanMeierFitter()</span></span>
+<span id="cb23-88"><a href="#cb23-88" aria-hidden="true" tabindex="-1"></a><span class="in">fit = kmf.fit(ovarian.futime,ovarian.fustat)</span></span>
+<span id="cb23-89"><a href="#cb23-89" aria-hidden="true" tabindex="-1"></a><span class="in">fit</span></span>
+<span id="cb23-90"><a href="#cb23-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-91"><a href="#cb23-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-92"><a href="#cb23-92" aria-hidden="true" tabindex="-1"></a>拟合结果 <span class="in">`fit`</span> 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：</span>
+<span id="cb23-93"><a href="#cb23-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-94"><a href="#cb23-94" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache= true}</span></span>
+<span id="cb23-95"><a href="#cb23-95" aria-hidden="true" tabindex="-1"></a><span class="in">fit.median_survival_time_</span></span>
+<span id="cb23-96"><a href="#cb23-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-97"><a href="#cb23-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-98"><a href="#cb23-98" aria-hidden="true" tabindex="-1"></a>中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：</span>
+<span id="cb23-99"><a href="#cb23-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-100"><a href="#cb23-100" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache = true}</span></span>
+<span id="cb23-101"><a href="#cb23-101" aria-hidden="true" tabindex="-1"></a><span class="in">pd.concat([fit.event_table,fit.survival_function_], axis = 1)</span></span>
+<span id="cb23-102"><a href="#cb23-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-103"><a href="#cb23-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-104"><a href="#cb23-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### 绘制生存曲线</span></span>
+<span id="cb23-105"><a href="#cb23-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-106"><a href="#cb23-106" aria-hidden="true" tabindex="-1"></a>Kaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：</span>
+<span id="cb23-107"><a href="#cb23-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-108"><a href="#cb23-108" aria-hidden="true" tabindex="-1"></a><span class="in">```{python, cache = true}</span></span>
+<span id="cb23-109"><a href="#cb23-109" aria-hidden="true" tabindex="-1"></a><span class="in">import matplotlib.pyplot as plt</span></span>
+<span id="cb23-110"><a href="#cb23-110" aria-hidden="true" tabindex="-1"></a><span class="in">fit.plot(show_censors = True)</span></span>
+<span id="cb23-111"><a href="#cb23-111" aria-hidden="true" tabindex="-1"></a><span class="in">plt.show()</span></span>
+<span id="cb23-112"><a href="#cb23-112" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-113"><a href="#cb23-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-114"><a href="#cb23-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## 生存率的比较</span></span>
+<span id="cb23-115"><a href="#cb23-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-116"><a href="#cb23-116" aria-hidden="true" tabindex="-1"></a>在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：</span>
+<span id="cb23-117"><a href="#cb23-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-118"><a href="#cb23-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-119"><a href="#cb23-119" aria-hidden="true" tabindex="-1"></a><span class="in">g1 = ovarian.rx == "A"</span></span>
+<span id="cb23-120"><a href="#cb23-120" aria-hidden="true" tabindex="-1"></a><span class="in">g2 = ovarian.rx == "B"</span></span>
+<span id="cb23-121"><a href="#cb23-121" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_A = KaplanMeierFitter()</span></span>
+<span id="cb23-122"><a href="#cb23-122" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label = "Treatmeat A")</span></span>
+<span id="cb23-123"><a href="#cb23-123" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_B = KaplanMeierFitter()</span></span>
+<span id="cb23-124"><a href="#cb23-124" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = "Treatmeat B")</span></span>
+<span id="cb23-125"><a href="#cb23-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-126"><a href="#cb23-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-127"><a href="#cb23-127" aria-hidden="true" tabindex="-1"></a><span class="fu">### Kaplan-Meier 比较图</span></span>
+<span id="cb23-128"><a href="#cb23-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-129"><a href="#cb23-129" aria-hidden="true" tabindex="-1"></a>可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。</span>
+<span id="cb23-130"><a href="#cb23-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-131"><a href="#cb23-131" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-132"><a href="#cb23-132" aria-hidden="true" tabindex="-1"></a><span class="in">fig, axes = plt.subplots()</span></span>
+<span id="cb23-133"><a href="#cb23-133" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_A.plot(ax = axes,show_censors = True)</span></span>
+<span id="cb23-134"><a href="#cb23-134" aria-hidden="true" tabindex="-1"></a><span class="in">kmf_B.plot(ax = axes,show_censors = True)</span></span>
+<span id="cb23-135"><a href="#cb23-135" aria-hidden="true" tabindex="-1"></a><span class="in">plt.show()</span></span>
+<span id="cb23-136"><a href="#cb23-136" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-137"><a href="#cb23-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-138"><a href="#cb23-138" aria-hidden="true" tabindex="-1"></a>从上图中可以看出，治疗方式 “B” 的生存率高于治疗方式 “A” 的生存率，但是这种差异是由随机误差引起还是真是的治疗方式的不同所造成的差异，需要做进一步的统计学检验。</span>
+<span id="cb23-139"><a href="#cb23-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-140"><a href="#cb23-140" aria-hidden="true" tabindex="-1"></a><span class="al">![因果关联的推断步骤](images/Causal-association.jpg)</span></span>
+<span id="cb23-141"><a href="#cb23-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-142"><a href="#cb23-142" aria-hidden="true" tabindex="-1"></a><span class="fu">### 统计学检验</span></span>
+<span id="cb23-143"><a href="#cb23-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-144"><a href="#cb23-144" aria-hidden="true" tabindex="-1"></a>生存分析中常用的统计学检验是 时序检验（log rank test），其基本思想是先计算出不同时间两种治疗方式的暴露人数和死亡人数，并由此在两种治疗方式效果相同的假设下计算出预期死亡人数，如果不拒绝零假设（ $H_0$ ：两种治疗方式的效果相同，即预期死亡人数一致），则实际观测值和期望值的差异不会很大，如果差异过大则不能认为该差异是由随机误差引起的。</span>
+<span id="cb23-145"><a href="#cb23-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-146"><a href="#cb23-146" aria-hidden="true" tabindex="-1"></a>对此，用 $\chi^2$ 检验做判断。时序检验可以用 <span class="in">`lifetimes`</span> 库的函数 <span class="in">`logrank_test`</span> 实现。</span>
+<span id="cb23-147"><a href="#cb23-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-148"><a href="#cb23-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-149"><a href="#cb23-149" aria-hidden="true" tabindex="-1"></a><span class="in">from lifelines.statistics import logrank_test</span></span>
+<span id="cb23-150"><a href="#cb23-150" aria-hidden="true" tabindex="-1"></a><span class="in">lr = logrank_test(ovarian.futime[g1], ovarian.futime[g2],</span></span>
+<span id="cb23-151"><a href="#cb23-151" aria-hidden="true" tabindex="-1"></a><span class="in">                  ovarian.fustat[g1], ovarian.fustat[g2])</span></span>
+<span id="cb23-152"><a href="#cb23-152" aria-hidden="true" tabindex="-1"></a><span class="in">lr.p_value</span></span>
+<span id="cb23-153"><a href="#cb23-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-154"><a href="#cb23-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-155"><a href="#cb23-155" aria-hidden="true" tabindex="-1"></a>这里得到的结果为 $P&gt;0.05$ ，在一般情况下，我们会认为这是没有统计学意义的，即无法排除差异是由随机误差引起的。</span>
+<span id="cb23-156"><a href="#cb23-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-157"><a href="#cb23-157" aria-hidden="true" tabindex="-1"></a>这种结果不显著的情况下，我们可以做一些思考，即是否有其他因素干预了结果的显著性，以及是否是样本量过小，导致差异不显著。（样本量的大小会影响检验效能，如果检验效能太低，即使有差异，也很难被检验方法发现）</span>
+<span id="cb23-158"><a href="#cb23-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-159"><a href="#cb23-159" aria-hidden="true" tabindex="-1"></a>这里我们无法改变样本量的大小，但是可以考虑其他混杂因素的影响，并且使用更全面的模型进行检验。</span>
+<span id="cb23-160"><a href="#cb23-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-161"><a href="#cb23-161" aria-hidden="true" tabindex="-1"></a><span class="fu"># Cox 回归</span></span>
+<span id="cb23-162"><a href="#cb23-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-163"><a href="#cb23-163" aria-hidden="true" tabindex="-1"></a>所有的参数回归模型需要对风险函数做出假设，这些模型可以对每个时间点的生存概率进行估计。而 Cox 回归没有关于风险函数的假设，他所遵循的唯一重要假设是 “比例风险” 。</span>
+<span id="cb23-164"><a href="#cb23-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-165"><a href="#cb23-165" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-166"><a href="#cb23-166" aria-hidden="true" tabindex="-1"></a>h(t,X)=h_0(t)e^{\sum{\beta_i}{X_i}}</span>
+<span id="cb23-167"><a href="#cb23-167" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-168"><a href="#cb23-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-169"><a href="#cb23-169" aria-hidden="true" tabindex="-1"></a>等式左边表示风险收时间和自变量的影响，等式右边的 $h_0(t)$ 是所有自变量 $X_i$ 都为 0 时的基线风险函数， $e^{\sum{\beta_i}{X_i}}$ 表示所有自变量 $X_i$ 和对应的估计系数 $\beta_i$ 的乘积之和。</span>
+<span id="cb23-170"><a href="#cb23-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-171"><a href="#cb23-171" aria-hidden="true" tabindex="-1"></a>因此有：</span>
+<span id="cb23-172"><a href="#cb23-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-173"><a href="#cb23-173" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-174"><a href="#cb23-174" aria-hidden="true" tabindex="-1"></a>\frac{h(t,X)}{h_0(t)}=e^{\sum{\beta_i}{X_i}}</span>
+<span id="cb23-175"><a href="#cb23-175" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb23-176"><a href="#cb23-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-177"><a href="#cb23-177" aria-hidden="true" tabindex="-1"></a><span class="fu">## 建立模型</span></span>
+<span id="cb23-178"><a href="#cb23-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-179"><a href="#cb23-179" aria-hidden="true" tabindex="-1"></a>在建立模型前，需要对分类变量进行哑变量处理：</span>
+<span id="cb23-180"><a href="#cb23-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-181"><a href="#cb23-181" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-182"><a href="#cb23-182" aria-hidden="true" tabindex="-1"></a><span class="in">df_dummy = pd.get_dummies(ovarian,drop_first = True)</span></span>
+<span id="cb23-183"><a href="#cb23-183" aria-hidden="true" tabindex="-1"></a><span class="in">df_dummy.head()</span></span>
+<span id="cb23-184"><a href="#cb23-184" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-185"><a href="#cb23-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-186"><a href="#cb23-186" aria-hidden="true" tabindex="-1"></a>使用 <span class="in">`drop_first = True`</span> 参数是为了去掉各个参考类别。</span>
+<span id="cb23-187"><a href="#cb23-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-188"><a href="#cb23-188" aria-hidden="true" tabindex="-1"></a>下面将所有的协变量都纳入，建立 Cox 回归模型：</span>
+<span id="cb23-189"><a href="#cb23-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-190"><a href="#cb23-190" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-191"><a href="#cb23-191" aria-hidden="true" tabindex="-1"></a><span class="in">from lifelines import CoxPHFitter</span></span>
+<span id="cb23-192"><a href="#cb23-192" aria-hidden="true" tabindex="-1"></a><span class="in">cox = CoxPHFitter()</span></span>
+<span id="cb23-193"><a href="#cb23-193" aria-hidden="true" tabindex="-1"></a><span class="in">cox.fit(df_dummy,duration_col = 'futime', event_col = 'fustat')</span></span>
+<span id="cb23-194"><a href="#cb23-194" aria-hidden="true" tabindex="-1"></a><span class="in">cox.print_summary()</span></span>
+<span id="cb23-195"><a href="#cb23-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-196"><a href="#cb23-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-197"><a href="#cb23-197" aria-hidden="true" tabindex="-1"></a>结果显示，在调整了协变量后，两种治疗方式的死亡风险的差异具有统计学意义（P<span class="sc">\&lt;</span>0.05）。</span>
+<span id="cb23-198"><a href="#cb23-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-199"><a href="#cb23-199" aria-hidden="true" tabindex="-1"></a>模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：</span>
+<span id="cb23-200"><a href="#cb23-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-201"><a href="#cb23-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-202"><a href="#cb23-202" aria-hidden="true" tabindex="-1"></a><span class="in">cox.plot()</span></span>
+<span id="cb23-203"><a href="#cb23-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-204"><a href="#cb23-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-205"><a href="#cb23-205" aria-hidden="true" tabindex="-1"></a>Cox 回归是一种半参数回归模型，也像多元线性回归一样，存在变量选择的问题。通常可以用 AIC 进行变量选择。<span class="ot">[^1]</span></span>
+<span id="cb23-206"><a href="#cb23-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-207"><a href="#cb23-207" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>赤池信息量准则，即Akaike information criterion，简称AIC，是衡量统计模型拟合优良性的一种标准，是由日本统计学家赤池弘次创立和发展的。赤池信息量准则建立在熵的概念基础上。\</span>
+<span id="cb23-208"><a href="#cb23-208" aria-hidden="true" tabindex="-1"></a>    **AIC越小，模型越好，通常选择AIC最小的模型**</span>
+<span id="cb23-209"><a href="#cb23-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-210"><a href="#cb23-210" aria-hidden="true" tabindex="-1"></a>查看当前模型的 AIC 值：</span>
+<span id="cb23-211"><a href="#cb23-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-212"><a href="#cb23-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-213"><a href="#cb23-213" aria-hidden="true" tabindex="-1"></a><span class="in">cox.AIC_partial_</span></span>
+<span id="cb23-214"><a href="#cb23-214" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-215"><a href="#cb23-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-216"><a href="#cb23-216" aria-hidden="true" tabindex="-1"></a>根据前序的结果，变量 <span class="in">`ecog.ps`</span> 对应的 *P* 值最大，对其进行剔除后再次拟合模型：</span>
+<span id="cb23-217"><a href="#cb23-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-218"><a href="#cb23-218" aria-hidden="true" tabindex="-1"></a><span class="in">```{python,cache = true}</span></span>
+<span id="cb23-219"><a href="#cb23-219" aria-hidden="true" tabindex="-1"></a><span class="in">cox1 = CoxPHFitter()</span></span>
+<span id="cb23-220"><a href="#cb23-220" aria-hidden="true" tabindex="-1"></a><span class="in">df_dummy_sub = df_dummy.drop('ecog.ps_Good', axis = 1)</span></span>
+<span id="cb23-221"><a href="#cb23-221" aria-hidden="true" tabindex="-1"></a><span class="in">cox1.fit(df_dummy_sub, duration_col = 'futime', event_col = 'fustat')</span></span>
+<span id="cb23-222"><a href="#cb23-222" aria-hidden="true" tabindex="-1"></a><span class="in">cox1.print_summary()</span></span>
+<span id="cb23-223"><a href="#cb23-223" aria-hidden="true" tabindex="-1"></a><span class="in">cox1.AIC_partial_</span></span>
+<span id="cb23-224"><a href="#cb23-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb23-225"><a href="#cb23-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-226"><a href="#cb23-226" aria-hidden="true" tabindex="-1"></a>剔除 <span class="in">`ecog_ps`</span> 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

@@ -49,6 +49,6 @@ Epidemiologists, in response to a health emergency or as a result of systematic 
     -   SAS
     -   Stata
     -   Quarto
--   实践记录
+-   项目记录
     -   Kaggle
 -   读书笔记

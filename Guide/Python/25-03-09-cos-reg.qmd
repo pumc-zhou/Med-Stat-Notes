@@ -3,8 +3,8 @@ title: "用Python做生存分析和COX回归"
 output: 
   html:
     code-fold: true
-number-sections: false
-toc: false
+number-sections: true
+toc: true
 date: "2025-03-09"
 author: "Simonzhou"
 jupyter: python3
@@ -16,14 +16,9 @@ execute:
   message: false  # 隐藏消息
 ---
 
-```{r setup, include=FALSE}
-# 设置代码块选项
-knitr::opts_chunk$set(echo = TRUE)
-```
+# 生存分析
 
-# 生存分析与 Cox 回归
-
-生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析汇中，每个研究对象的结局变量由 "time"（生存时间） 和 "status"（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。
+生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析中，每个研究对象的结局变量由 "time"（生存时间） 和 "status"（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。
 
 生存分析的主要应用领域是医学、生物学、工程学、经济学等。
 
@@ -81,7 +76,9 @@ ovarian['ecog.ps'] = ovarian['ecog.ps'].map({1: "Good", 2: "Bad"})
 
 生存率的 Kaplan-Meier 估计的计算可以调用 `lifelines` 库中的 `KaplanMeierFitter` 函数实现。
 
-`pip` 安装：`pip install lifelines` `conda` 安装： `condainstall lifelines`
+`pip` 安装：`pip install lifelines`
+
+`conda` 安装： `conda install lifelines`
 
 拟合 `fit` :
 
@@ -129,9 +126,101 @@ kmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = "Treatmeat B")
 
 ### Kaplan-Meier 比较图
 
+可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。
+
 ```{python,cache = true}
 fig, axes = plt.subplots()
 kmf_A.plot(ax = axes,show_censors = True)
 kmf_B.plot(ax = axes,show_censors = True)
 plt.show()
 ```
+
+从上图中可以看出，治疗方式 “B” 的生存率高于治疗方式 “A” 的生存率，但是这种差异是由随机误差引起还是真是的治疗方式的不同所造成的差异，需要做进一步的统计学检验。
+
+![因果关联的推断步骤](images/Causal-association.jpg)
+
+### 统计学检验
+
+生存分析中常用的统计学检验是 时序检验（log rank test），其基本思想是先计算出不同时间两种治疗方式的暴露人数和死亡人数，并由此在两种治疗方式效果相同的假设下计算出预期死亡人数，如果不拒绝零假设（ $H_0$ ：两种治疗方式的效果相同，即预期死亡人数一致），则实际观测值和期望值的差异不会很大，如果差异过大则不能认为该差异是由随机误差引起的。
+
+对此，用 $\chi^2$ 检验做判断。时序检验可以用 `lifetimes` 库的函数 `logrank_test` 实现。
+
+```{python,cache = true}
+from lifelines.statistics import logrank_test
+lr = logrank_test(ovarian.futime[g1], ovarian.futime[g2],
+                  ovarian.fustat[g1], ovarian.fustat[g2])
+lr.p_value
+```
+
+这里得到的结果为 $P>0.05$ ，在一般情况下，我们会认为这是没有统计学意义的，即无法排除差异是由随机误差引起的。
+
+这种结果不显著的情况下，我们可以做一些思考，即是否有其他因素干预了结果的显著性，以及是否是样本量过小，导致差异不显著。（样本量的大小会影响检验效能，如果检验效能太低，即使有差异，也很难被检验方法发现）
+
+这里我们无法改变样本量的大小，但是可以考虑其他混杂因素的影响，并且使用更全面的模型进行检验。
+
+# Cox 回归
+
+所有的参数回归模型需要对风险函数做出假设，这些模型可以对每个时间点的生存概率进行估计。而 Cox 回归没有关于风险函数的假设，他所遵循的唯一重要假设是 “比例风险” 。
+
+$$
+h(t,X)=h_0(t)e^{\sum{\beta_i}{X_i}}
+$$
+
+等式左边表示风险收时间和自变量的影响，等式右边的 $h_0(t)$ 是所有自变量 $X_i$ 都为 0 时的基线风险函数， $e^{\sum{\beta_i}{X_i}}$ 表示所有自变量 $X_i$ 和对应的估计系数 $\beta_i$ 的乘积之和。
+
+因此有：
+
+$$
+\frac{h(t,X)}{h_0(t)}=e^{\sum{\beta_i}{X_i}}
+$$
+
+## 建立模型
+
+在建立模型前，需要对分类变量进行哑变量处理：
+
+```{python,cache = true}
+df_dummy = pd.get_dummies(ovarian,drop_first = True)
+df_dummy.head()
+```
+
+使用 `drop_first = True` 参数是为了去掉各个参考类别。
+
+下面将所有的协变量都纳入，建立 Cox 回归模型：
+
+```{python,cache = true}
+from lifelines import CoxPHFitter
+cox = CoxPHFitter()
+cox.fit(df_dummy,duration_col = 'futime', event_col = 'fustat')
+cox.print_summary()
+```
+
+结果显示，在调整了协变量后，两种治疗方式的死亡风险的差异具有统计学意义（P\<0.05）。
+
+模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：
+
+```{python,cache = true}
+cox.plot()
+```
+
+Cox 回归是一种半参数回归模型，也像多元线性回归一样，存在变量选择的问题。通常可以用 AIC 进行变量选择。[^1]
+
+[^1]: 赤池信息量准则，即Akaike information criterion，简称AIC，是衡量统计模型拟合优良性的一种标准，是由日本统计学家赤池弘次创立和发展的。赤池信息量准则建立在熵的概念基础上。\
+    **AIC越小，模型越好，通常选择AIC最小的模型**
+
+查看当前模型的 AIC 值：
+
+```{python,cache = true}
+cox.AIC_partial_
+```
+
+根据前序的结果，变量 `ecog.ps` 对应的 *P* 值最大，对其进行剔除后再次拟合模型：
+
+```{python,cache = true}
+cox1 = CoxPHFitter()
+df_dummy_sub = df_dummy.drop('ecog.ps_Good', axis = 1)
+cox1.fit(df_dummy_sub, duration_col = 'futime', event_col = 'fustat')
+cox1.print_summary()
+cox1.AIC_partial_
+```
+
+剔除 `ecog_ps` 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。
