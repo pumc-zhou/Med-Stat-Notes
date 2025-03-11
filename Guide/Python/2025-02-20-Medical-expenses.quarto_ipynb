@@ -6,8 +6,8 @@
       "source": [
         "---\n",
         "title: \"用Python和Stata处理一份卫生费用数据\"\n",
-        "number-sections: false\n",
-        "toc: false\n",
+        "number-sections: true\n",
+        "toc: true\n",
         "date: \"2025-02-20\"\n",
         "author: \"Simonzhou\"\n",
         "#format: \n",
@@ -40,7 +40,7 @@
         "\n",
         "我们可以使用`pandas`包来查看部分原始数据，数据的基本样式如下：\n"
       ],
-      "id": "e1523960"
+      "id": "1df857c5"
     },
     {
       "cell_type": "code",
@@ -64,7 +64,7 @@
         "# 打印样本数据\n",
         "print(sample_data)"
       ],
-      "id": "476f2f12",
+      "id": "d7fb77a7",
       "execution_count": null,
       "outputs": []
     },
@@ -86,7 +86,7 @@
         "\n",
         "这份Excel文件有6张sheet，分别是2018-2023年，首先需要检查这六张sheet中的变量是否一致：\n"
       ],
-      "id": "a529c285"
+      "id": "bd197aac"
     },
     {
       "cell_type": "code",
@@ -120,7 +120,7 @@
         "for sheet, columns in sheets_columns.items():\n",
         "    print(f\"\\n{sheet} 的变量: {columns}\")"
       ],
-      "id": "283d51c0",
+      "id": "c8141fea",
       "execution_count": null,
       "outputs": []
     },
@@ -138,7 +138,7 @@
         "\n",
         "同时为了节省时间，因为在Quarto中运行Python代码很慢，暂时还不知道原因，待以后调试一下。所以最后用一个程序解决上述这些问题，节省时间。\n"
       ],
-      "id": "63d40764"
+      "id": "697031ac"
     },
     {
       "cell_type": "code",
@@ -197,7 +197,7 @@
         "# 打印样本数据\n",
         "print(sample_data)"
       ],
-      "id": "a15dd0e8",
+      "id": "d50f91a0",
       "execution_count": null,
       "outputs": []
     },
@@ -213,7 +213,7 @@
         "\n",
         "使用 `pandas` 进行处理（根据Excel视图挑选的缺失数据的变量或含有较多缺失值的变量）：\n"
       ],
-      "id": "43d48892"
+      "id": "62f9752b"
     },
     {
       "cell_type": "code",
@@ -278,7 +278,7 @@
         "\n",
         "# print(f\"数据清洗完成，已保存到 {output_file}\")"
       ],
-      "id": "ec853b25",
+      "id": "11344159",
       "execution_count": null,
       "outputs": []
     },
@@ -643,7 +643,7 @@
         "esttab m1 m2 using \"C:\\Users\\asus\\Desktop\\test\\stata\\ICD-10\\25.02.09\\analysis-result0218\\调节效应结果-day&dip.rtf\", replace b(2) t(2) ar2 star(* 0.1 ** 0.05 *** 0.01) nogap\n",
         "```"
       ],
-      "id": "a50b4b92"
+      "id": "e5f51a73"
     }
   ],
   "metadata": {

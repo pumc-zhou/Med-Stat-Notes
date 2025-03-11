@@ -126,7 +126,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -137,7 +137,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <img src="../../images/logo.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">一份医学统计学习笔记</span>
+    <span class="navbar-title">医学统计学习笔记</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="搜索"></div>
@@ -185,6 +185,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
         <li>
     <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Guide/Stata/Stata-intro.html">
+ <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
   </li>
@@ -448,17 +452,40 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Guide/Stata/Satat-intro.qmd</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata 做 ITSA 分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">关于 Stata 的碎碎念</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
@@ -484,7 +511,34 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#用python处理卫生费用数据" id="toc-用python处理卫生费用数据" class="nav-link active" data-scroll-target="#用python处理卫生费用数据"><span class="header-section-number">1</span> 用Python处理卫生费用数据</a>
+  <ul class="collapse">
+  <li><a href="#必须配置" id="toc-必须配置" class="nav-link" data-scroll-target="#必须配置"><span class="header-section-number">1.1</span> 必须配置</a></li>
+  <li><a href="#初步认识数据" id="toc-初步认识数据" class="nav-link" data-scroll-target="#初步认识数据"><span class="header-section-number">1.2</span> 初步认识数据</a></li>
+  <li><a href="#对数据的思考" id="toc-对数据的思考" class="nav-link" data-scroll-target="#对数据的思考"><span class="header-section-number">1.3</span> 对数据的思考</a>
+  <ul class="collapse">
+  <li><a href="#合并数据" id="toc-合并数据" class="nav-link" data-scroll-target="#合并数据"><span class="header-section-number">1.3.1</span> 合并数据</a></li>
+  </ul></li>
+  <li><a href="#筛选变量" id="toc-筛选变量" class="nav-link" data-scroll-target="#筛选变量"><span class="header-section-number">1.4</span> 筛选变量</a></li>
+  <li><a href="#使用-stata-赋值和分析" id="toc-使用-stata-赋值和分析" class="nav-link" data-scroll-target="#使用-stata-赋值和分析"><span class="header-section-number">1.5</span> 使用 Stata 赋值和分析</a>
+  <ul class="collapse">
+  <li><a href="#icd-10赋值" id="toc-icd-10赋值" class="nav-link" data-scroll-target="#icd-10赋值"><span class="header-section-number">1.5.1</span> ICD-10赋值</a></li>
+  <li><a href="#赋值与创建部分变量" id="toc-赋值与创建部分变量" class="nav-link" data-scroll-target="#赋值与创建部分变量"><span class="header-section-number">1.5.2</span> 赋值与创建部分变量</a></li>
+  </ul></li>
+  <li><a href="#数据分析" id="toc-数据分析" class="nav-link" data-scroll-target="#数据分析"><span class="header-section-number">1.6</span> 数据分析</a>
+  <ul class="collapse">
+  <li><a href="#描述性统计" id="toc-描述性统计" class="nav-link" data-scroll-target="#描述性统计"><span class="header-section-number">1.6.1</span> 描述性统计</a></li>
+  <li><a href="#回归分析" id="toc-回归分析" class="nav-link" data-scroll-target="#回归分析"><span class="header-section-number">1.6.2</span> 回归分析</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Python/2025-02-20-Medical-expenses.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -519,17 +573,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<section id="用python处理卫生费用数据" class="level1">
-<h1>用Python处理卫生费用数据</h1>
+<section id="用python处理卫生费用数据" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 用Python处理卫生费用数据</h1>
 <p>本篇博客用来记录2025年1月到2月帮助学弟处理一份某二级医院2018-2023年的医疗费用，最开始用的Stata，但是越往后，越感觉到Stata的难用，以及AI对这种程序的支持程度极其有限，随改用 <code>Python + Stata</code> 来继续完成相关的分析。</p>
-<section id="必须配置" class="level2">
-<h2 class="anchored" data-anchor-id="必须配置">必须配置</h2>
+<section id="必须配置" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="必须配置"><span class="header-section-number">1.1</span> 必须配置</h2>
 <p>运行此文档需要电脑上以安装Python，并且下列包已被安装并且能被调用：</p>
 <p><code>numpy jupyter-cache pandas openpyxl</code></p>
 <p>你可以使用 <code>pip</code> 或 <code>conda</code> 进行安装： <code>pip install jupyter-cache</code></p>
 </section>
-<section id="初步认识数据" class="level2">
-<h2 class="anchored" data-anchor-id="初步认识数据">初步认识数据</h2>
+<section id="初步认识数据" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="初步认识数据"><span class="header-section-number">1.2</span> 初步认识数据</h2>
 <p>我们可以使用<code>pandas</code>包来查看部分原始数据，数据的基本样式如下：</p>
 <div id="aa970758" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 安装并加载必要的包</span></span>
@@ -591,13 +645,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 <p>我们可以看到，该数据的列很多，第一张表中有200列，我们需要对其进行一些筛选。</p>
 </section>
-<section id="对数据的思考" class="level2">
-<h2 class="anchored" data-anchor-id="对数据的思考">对数据的思考</h2>
+<section id="对数据的思考" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="对数据的思考"><span class="header-section-number">1.3</span> 对数据的思考</h2>
 <p>从哪里开始是一个需要思考的问题，对于数据的认识决定了你处理问题的方向和效率。首先，理解数据的来源至关重要，这包括了解数据是如何收集的、收集过程中可能出现的偏差或错误。其次，明确数据的类型与结构也是关键步骤之一，不同类型的数据（如定量数据、定性数据）需要采用不同的分析方法。再者，对数据进行初步探索，比如通过可视化手段观察数据分布特征，或是计算一些基本统计量来了解数据的基本情况，能够帮助你更好地制定数据处理策略。</p>
 <p>在真正开始处理数据之前，还需要考虑你的目标是什么。是为了回答一个具体的问题，还是为了探索潜在的模式？明确了目标之后，才能有针对性地选择合适的工具和技术。此外，考虑到数据质量的问题，数据清洗是不可跳过的一步，它包括去除异常值、填补缺失值等操作，这对于提高分析结果的准确性非常关键。</p>
 <p>最后，保持对数据伦理的关注同样重要，在整个数据分析的过程中，确保遵循相关的隐私保护法规和道德标准，这样才能确保你的工作不仅有效，而且负责任。通过对数据全面而深刻的理解，你可以更加自信地从数据中提取有价值的信息，并为决策提供有力支持。</p>
-<section id="合并数据" class="level3">
-<h3 class="anchored" data-anchor-id="合并数据">合并数据</h3>
+<section id="合并数据" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="合并数据"><span class="header-section-number">1.3.1</span> 合并数据</h3>
 <p>这份Excel文件有6张sheet，分别是2018-2023年，首先需要检查这六张sheet中的变量是否一致：</p>
 <div id="3b94a9f8" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -748,8 +802,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 </section>
 </section>
-<section id="筛选变量" class="level2">
-<h2 class="anchored" data-anchor-id="筛选变量">筛选变量</h2>
+<section id="筛选变量" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="筛选变量"><span class="header-section-number">1.4</span> 筛选变量</h2>
 <p>经过上述筛选后的变量依然还有很多，其中不乏无用信息变量或无效信息变量，对变量做进一步筛选。</p>
 <p>对样本进行筛选，需要满足在当年收治且出院，满足常规医保使用条件，关键变量含有缺失值的样本。</p>
 <p>使用 <code>pandas</code> 进行处理（根据Excel视图挑选的缺失数据的变量或含有较多缺失值的变量）：</p>
@@ -866,10 +920,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 </div>
 </section>
-<section id="使用-stata-赋值和分析" class="level2">
-<h2 class="anchored" data-anchor-id="使用-stata-赋值和分析">使用 Stata 赋值和分析</h2>
-<section id="icd-10赋值" class="level3">
-<h3 class="anchored" data-anchor-id="icd-10赋值">ICD-10赋值</h3>
+<section id="使用-stata-赋值和分析" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="使用-stata-赋值和分析"><span class="header-section-number">1.5</span> 使用 Stata 赋值和分析</h2>
+<section id="icd-10赋值" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="icd-10赋值"><span class="header-section-number">1.5.1</span> ICD-10赋值</h3>
 <p>因为需要对疾病进行分类与根据诊断信息确定来生成共病信息，根据出院诊断来对疾病进行分类与赋值，这里使用 Stata 来完成。</p>
 <div class="sourceCode" id="ICD" style="color"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="ICD-1"><a href="#ICD-1" aria-hidden="true" tabindex="-1"></a>**************</span>
 <span id="ICD-2"><a href="#ICD-2" aria-hidden="true" tabindex="-1"></a>* 1. 清理环境并导入数据</span>
@@ -1021,8 +1075,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="ICD-148"><a href="#ICD-148" aria-hidden="true" tabindex="-1"></a>* 导出为 Stata 格式</span>
 <span id="ICD-149"><a href="#ICD-149" aria-hidden="true" tabindex="-1"></a><span class="kw">save</span> <span class="st">"C:\Users</span><span class="ch">\a</span><span class="st">sus\Desktop</span><span class="ch">\t</span><span class="st">est\stata\data\ICD-result.dta"</span>, <span class="kw">replace</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="赋值与创建部分变量" class="level3">
-<h3 class="anchored" data-anchor-id="赋值与创建部分变量">赋值与创建部分变量</h3>
+<section id="赋值与创建部分变量" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="赋值与创建部分变量"><span class="header-section-number">1.5.2</span> 赋值与创建部分变量</h3>
 <div class="sourceCode" id="evaluation" style="color"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="evaluation-1"><a href="#evaluation-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 数据处理</span></span>
 <span id="evaluation-2"><a href="#evaluation-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
 <span id="evaluation-3"><a href="#evaluation-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> <span class="st">"C:\Users</span><span class="ch">\a</span><span class="st">sus\Desktop</span><span class="ch">\t</span><span class="st">est\stata\data\ICD-result.dta"</span>,<span class="kw">clear</span></span>
@@ -1143,10 +1197,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="evaluation-118"><a href="#evaluation-118" aria-hidden="true" tabindex="-1"></a><span class="kw">order</span> id <span class="fu">year</span> Cost SelfCost Day DIP Age Gender Marriage Sensitive Opera Career Disease Comorbidity Insurance Cmedicine category GService GSurgery GNurse GNonoperate GNarcosis GDrug GCDrug GBlood GDiagnose Others</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="数据分析" class="level2">
-<h2 class="anchored" data-anchor-id="数据分析">数据分析</h2>
-<section id="描述性统计" class="level3">
-<h3 class="anchored" data-anchor-id="描述性统计">描述性统计</h3>
+<section id="数据分析" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="数据分析"><span class="header-section-number">1.6</span> 数据分析</h2>
+<section id="描述性统计" class="level3" data-number="1.6.1">
+<h3 data-number="1.6.1" class="anchored" data-anchor-id="描述性统计"><span class="header-section-number">1.6.1</span> 描述性统计</h3>
 <div class="sourceCode" id="descriptive" style="color"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="descriptive-1"><a href="#descriptive-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 描述性统计 保留小数点后两位</span></span>
 <span id="descriptive-2"><a href="#descriptive-2" aria-hidden="true" tabindex="-1"></a>estpost <span class="kw">summarize</span> Cost SelfCost Day DIP Age Gender Marriage Sensitive Opera Career Disease Comorbidity Insurance Cmedicine category GService GSurgery GNurse GNonoperate GNarcosis GDrug GCDrug GBlood GDiagnose, <span class="kw">detail</span></span>
 <span id="descriptive-3"><a href="#descriptive-3" aria-hidden="true" tabindex="-1"></a>esttab, cells(<span class="st">"count mean(fmt(2)) sd(fmt(2)) min(fmt(2)) p50(fmt(2)) max(fmt(2))"</span>) <span class="kw">noobs</span> <span class="kw">compress</span> <span class="kw">replace</span> <span class="bn">title</span>(Descriptive <span class="kw">statistics</span>)</span>
@@ -1162,8 +1216,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="descriptive-13"><a href="#descriptive-13" aria-hidden="true" tabindex="-1"></a>* 计算所有年份的均值</span>
 <span id="descriptive-14"><a href="#descriptive-14" aria-hidden="true" tabindex="-1"></a><span class="kw">summarize</span> Cost SelfCost Day GService GSurgery GNurse GNonoperate GNarcosis GDrug GCDrug GBlood GDiagnose Others</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="回归分析" class="level3">
-<h3 class="anchored" data-anchor-id="回归分析">回归分析</h3>
+<section id="回归分析" class="level3" data-number="1.6.2">
+<h3 data-number="1.6.2" class="anchored" data-anchor-id="回归分析"><span class="header-section-number">1.6.2</span> 回归分析</h3>
 <p>为了稳健性，对因变量进行缩尾处理。</p>
 <div class="sourceCode" id="regression" style="color"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="regression-1"><a href="#regression-1" aria-hidden="true" tabindex="-1"></a>*- 缩尾处理（目的：剔除异常值；剔除的比例根据研究而定）</span>
 <span id="regression-2"><a href="#regression-2" aria-hidden="true" tabindex="-1"></a>winsor2 Cost Day Age, <span class="kw">replace</span> cuts(1, 99)</span>
@@ -1857,8 +1911,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb9" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "用Python和Stata处理一份卫生费用数据"</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> true</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-20"</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#format: </span></span>
@@ -2457,7 +2511,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Python/2025-02-20-Medical-expenses.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Python/2025-02-20-Medical-expenses.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

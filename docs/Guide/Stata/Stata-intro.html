@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SAS introduction – 医学统计学笔记</title>
+<title>关于 Stata 的碎碎念 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/SAS/2025-02-16-CLHLS.html" rel="next">
-<link href="../../Guide/Python/25-03-09-cos-reg.html" rel="prev">
+<link href="../../Quarto/quarto-intro.html" rel="next">
+<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,11 +116,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="SAS introduction – 医学统计学笔记">
+<meta property="og:title" content="关于 Stata 的碎碎念 – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
-<meta property="og:image" content="www.lazyzhou.cn/Guide/SAS/images/logo.png">
+<meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="SAS introduction – 医学统计学笔记">
+<meta name="twitter:title" content="关于 Stata 的碎碎念 – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -226,7 +226,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-intro.html">SAS introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-11-ITSA.html">Guide/Stata/Satat-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">关于 Stata 的碎碎念</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -424,13 +424,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link active">
+            <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
@@ -445,7 +445,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS introduction</span></a>
   </div>
 </li>
@@ -453,13 +453,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
  <span class="menu-text">Guide/Stata/Satat-intro.qmd</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
@@ -468,7 +468,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">关于 Stata 的碎碎念</span></a>
   </div>
 </li>
@@ -514,9 +514,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/SAS-intro.html">SAS introduction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-11-ITSA.html">Guide/Stata/Satat-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">关于 Stata 的碎碎念</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">SAS introduction</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">关于 Stata 的碎碎念</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
 </div>
 
 
@@ -533,20 +533,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>SAS introduction</p>
-<p>SAS的历史很长，很强大，但是现代化做的一般（交互界面）。</p>
-<p>使用场景也是有限的，至少一般情况下用不上这么高级的工具。</p>
-<p>但是在某些领域又是极其重要的，像银行和药企，他们要追求足够的稳定和严谨，那么多年不曾有重大改变且一向以稳定著称的 SAS 自然可以很好的满足这一需求。</p>
-<ol type="1">
-<li>SAS 对学术研究的支持是比较不友好的。正版太贵，除非学校有提供，个人基本不可能使用正版，这里下载破解版，搞SID(SAS的授权证书)需要时间成本，还容易有安装问题，没错你可以选择使用SAS的教育版，不过谁用谁知道。</li>
-<li>安装比较麻烦，尤其是在Linux上，我曾用两周的时间折腾在 Linux 上安装一个 SAS ，最后以失败告终，且在互联网上找不到解决的方案，AI也束手无策。</li>
-<li>SAS不开源，意味着你看到某些论文，里面使用一些比较新的统计分析方法，SAS不大可能有现成代码可以使用，而 Python 和 R 则大几率有现成的包可以调用，这里也会节省不少时间。</li>
-<li>SAS的强大一方面是性能稳定，可以处理几十上百GB的数据而不容易崩溃，但是医学数据一般容量比较小，并不是非得SAS才能跑的动。</li>
-<li>SAS相比其他编程语言来说是独树一帜(奇葩)的存在（<code>proc</code>和<code>data</code>步独步天下），从语法上面来说并没有什么和它相接近的语言，相反 R 和 Python 则会和一般的编程语言例如 Java, C 等有一些类似的地方，对以后万一还需要学习其他语言或者学习以后新诞生的编程软件诞有一定帮助。</li>
-<li>SAS 的支持有限，互联网上关于 SAS 的使用信息较少，一般都在出版的书中有可复现的内容，也没有像 Python 和 R 等活跃的社区可以提供较多的互动和支持，编程遇上问题不容易找到答案。</li>
-</ol>
-<p>用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。</p>
-<p>每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。</p>
+<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
+<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
+<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
+<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力，现在看来可以理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
+<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
+<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
+<p>然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。</p>
 
 
 <!-- -->
@@ -1176,40 +1169,35 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/Python/25-03-09-cos-reg.html" class="pagination-link" aria-label="用Python做生存分析和COX回归">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">用Python做生存分析和COX回归</span>
+      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="Stata 做 ITSA 分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Stata 做 ITSA 分析</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="pagination-link" aria-label="使用SAS处理CLHLS数据">
-        <span class="nav-page-text">使用SAS处理CLHLS数据</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Quarto/quarto-intro.html" class="pagination-link" aria-label="Quarto introduction">
+        <span class="nav-page-text">Quarto introduction</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "SAS introduction"</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "关于 Stata 的碎碎念"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>SAS introduction</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>SAS的历史很长，很强大，但是现代化做的一般（交互界面）。</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>使用场景也是有限的，至少一般情况下用不上这么高级的工具。</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>但是在某些领域又是极其重要的，像银行和药企，他们要追求足够的稳定和严谨，那么多年不曾有重大改变且一向以稳定著称的 SAS 自然可以很好的满足这一需求。</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力，现在看来可以理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>SAS 对学术研究的支持是比较不友好的。正版太贵，除非学校有提供，个人基本不可能使用正版，这里下载破解版，搞SID(SAS的授权证书)需要时间成本，还容易有安装问题，没错你可以选择使用SAS的教育版，不过谁用谁知道。</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>安装比较麻烦，尤其是在Linux上，我曾用两周的时间折腾在 Linux 上安装一个 SAS ，最后以失败告终，且在互联网上找不到解决的方案，AI也束手无策。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>SAS不开源，意味着你看到某些论文，里面使用一些比较新的统计分析方法，SAS不大可能有现成代码可以使用，而 Python 和 R 则大几率有现成的包可以调用，这里也会节省不少时间。</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>SAS的强大一方面是性能稳定，可以处理几十上百GB的数据而不容易崩溃，但是医学数据一般容量比较小，并不是非得SAS才能跑的动。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>SAS相比其他编程语言来说是独树一帜(奇葩)的存在（<span class="in">`proc`</span>和<span class="in">`data`</span>步独步天下），从语法上面来说并没有什么和它相接近的语言，相反 R 和 Python 则会和一般的编程语言例如 Java, C 等有一些类似的地方，对以后万一还需要学习其他语言或者学习以后新诞生的编程软件诞有一定帮助。</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>SAS 的支持有限，互联网上关于 SAS 的使用信息较少，一般都在出版的书中有可复现的内容，也没有像 Python 和 R 等活跃的社区可以提供较多的互动和支持，编程遇上问题不容易找到答案。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1223,7 +1211,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/SAS-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

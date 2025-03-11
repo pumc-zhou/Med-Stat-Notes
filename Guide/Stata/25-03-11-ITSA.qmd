@@ -1,0 +1,58 @@
+---
+title: "Stata 做 ITSA 分析"
+output: 
+  html:
+    code-fold: true
+number-sections: true
+toc: true
+date: "2025-03-11"
+author: "Simonzhou"
+# jupyter: python3
+execute:
+  enabled: true
+  echo: true      # 在输出中显示代码
+  eval: true      # 执行代码
+  warning: false  # 隐藏警告信息
+  message: false  # 隐藏消息
+---
+
+# ITSA 分析
+
+Interrupted Time Series Analysis (ITSA) 是一种常用的时间序列分析方法，用于评估某个干预措施对某个事件或趋势的影响。
+
+## STSA 公式
+
+ITSA 模型的基本形式如下：
+
+$$
+Y_t = \beta_0 + \beta_1 \cdot T_t + \beta_2 \cdot X_t + \beta_3 \cdot T_t \cdot X_t + \epsilon_t
+$$
+
+公式中各代码的含义分别为：
+
+-   $Y_t$：因变量，时间序列的观测值
+-   $T_t$：时间变量（序列），表示时间点 $t$ 距离干预前的时间长度
+-   $X_t$：干预变量（哑变量），表示干预措施的状态，通常为 0 或 1
+-   $\beta_0$：截距，即常数项
+-   $\beta_1$：时间变量的系数，表示时间的趋势（改革前的变化趋势）
+-   $\beta_2$：干预变量的系数，表示干预的效应
+-   $\beta_3$：交互项系数，表示改革后与改革前斜率的差值，故改革后的斜率值为 $\beta_1 + \beta_3$
+-   $\epsilon_t$：误差项
+
+## 数据集及来源
+
+这里使用 Stata 中的 `nlswork` 数据集，该数据集包含了 1987 年和 1988 年的 个体数据。 首先找到 `nlswork` 数据集，你可以从互联网上寻找相关资源；或者从 Stata 的 `nlswork` 包中导出这一数据集，操作如下：
+
+``` stata
+sysuse nlswork, clear
+save "your-file-path\nlswork.dta", replace
+```
+
+## Stata 准备
+
+### 安装对应的包
+
+``` stata
+ssc install itsa
+ssc install actest
+```

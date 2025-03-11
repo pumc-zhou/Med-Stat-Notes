@@ -1440,8 +1440,8 @@
     "objectID": "Guide/Python/25-03-09-cos-reg.html#建立模型",
     "href": "Guide/Python/25-03-09-cos-reg.html#建立模型",
     "title": "用Python做生存分析和COX回归",
-    "section": "建立模型",
-    "text": "建立模型\n在建立模型前，需要对分类变量进行哑变量处理：\n\ndf_dummy = pd.get_dummies(ovarian,drop_first = True)\ndf_dummy.head()\n\n\n\n\n\n\n\n\nfutime\nfustat\nage_&gt;50\nresid.ds_Yes\nrx_B\necog.ps_Good\n\n\n\n\n0\n59\n1\nTrue\nTrue\nFalse\nTrue\n\n\n1\n115\n1\nTrue\nTrue\nFalse\nTrue\n\n\n2\n156\n1\nTrue\nTrue\nFalse\nFalse\n\n\n3\n421\n0\nTrue\nTrue\nTrue\nTrue\n\n\n4\n431\n1\nTrue\nTrue\nFalse\nTrue\n\n\n\n\n\n\n\n使用 drop_first = True 参数是为了去掉各个参考类别。\n下面将所有的协变量都纳入，建立 Cox 回归模型：\n\nfrom lifelines import CoxPHFitter\ncox = CoxPHFitter()\ncox.fit(df_dummy,duration_col = 'futime', event_col = 'fustat')\ncox.print_summary()\n\n\n\n\n\n\n\nmodel\nlifelines.CoxPHFitter\n\n\nduration col\n'futime'\n\n\nevent col\n'fustat'\n\n\nbaseline estimation\nbreslow\n\n\nnumber of observations\n26\n\n\nnumber of events observed\n12\n\n\npartial log-likelihood\n-28.89\n\n\ntime fit was run\n2025-03-10 05:46:54 UTC\n\n\n\n\n\n\n\n\n\ncoef\nexp(coef)\nse(coef)\ncoef lower 95%\ncoef upper 95%\nexp(coef) lower 95%\nexp(coef) upper 95%\ncmp to\nz\np\n-log2(p)\n\n\n\n\nage_&gt;50\n2.20\n9.04\n1.11\n0.03\n4.37\n1.03\n79.10\n0.00\n1.99\n0.05\n4.42\n\n\nresid.ds_Yes\n1.45\n4.25\n0.73\n0.02\n2.88\n1.02\n17.75\n0.00\n1.98\n0.05\n4.40\n\n\nrx_B\n-1.38\n0.25\n0.64\n-2.65\n-0.12\n0.07\n0.89\n0.00\n-2.14\n0.03\n4.96\n\n\necog.ps_Good\n-0.59\n0.56\n0.63\n-1.83\n0.65\n0.16\n1.92\n0.00\n-0.93\n0.35\n1.50\n\n\n\n\n\n\n\n\n\nConcordance\n0.79\n\n\nPartial AIC\n65.78\n\n\nlog-likelihood ratio test\n12.19 on 4 df\n\n\n-log2(p) of ll-ratio test\n5.97\n\n\n\n\n\n\n\n结果显示，在调整了协变量后，两种治疗方式的死亡风险的差异具有统计学意义（P&lt;0.05）。\n模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：\n\ncox.plot()\n\n\n\n\n\n\n\n\nCox 回归是一种半参数回归模型，也像多元线性回归一样，存在变量选择的问题。通常可以用 AIC 进行变量选择。1\n查看当前模型的 AIC 值：\n\ncox.AIC_partial_\n\n65.77513405570859\n\n\n根据前序的结果，变量 ecog.ps 对应的 P 值最大，对其进行剔除后再次拟合模型：\n\ncox1 = CoxPHFitter()\ndf_dummy_sub = df_dummy.drop('ecog.ps_Good', axis = 1)\ncox1.fit(df_dummy_sub, duration_col = 'futime', event_col = 'fustat')\ncox1.print_summary()\ncox1.AIC_partial_\n\n\n\n\n\n\n\nmodel\nlifelines.CoxPHFitter\n\n\nduration col\n'futime'\n\n\nevent col\n'fustat'\n\n\nbaseline estimation\nbreslow\n\n\nnumber of observations\n26\n\n\nnumber of events observed\n12\n\n\npartial log-likelihood\n-29.33\n\n\ntime fit was run\n2025-03-10 05:46:54 UTC\n\n\n\n\n\n\n\n\n\ncoef\nexp(coef)\nse(coef)\ncoef lower 95%\ncoef upper 95%\nexp(coef) lower 95%\nexp(coef) upper 95%\ncmp to\nz\np\n-log2(p)\n\n\n\n\nage_&gt;50\n2.11\n8.29\n1.09\n-0.02\n4.25\n0.98\n70.32\n0.00\n1.94\n0.05\n4.25\n\n\nresid.ds_Yes\n1.25\n3.50\n0.69\n-0.10\n2.61\n0.90\n13.58\n0.00\n1.81\n0.07\n3.83\n\n\nrx_B\n-1.28\n0.28\n0.62\n-2.50\n-0.06\n0.08\n0.94\n0.00\n-2.06\n0.04\n4.67\n\n\n\n\n\n\n\n\n\nConcordance\n0.77\n\n\nPartial AIC\n64.66\n\n\nlog-likelihood ratio test\n11.31 on 3 df\n\n\n-log2(p) of ll-ratio test\n6.62\n\n\n\n\n\n\n\n64.65793573545281\n\n\n剔除 ecog_ps 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。",
+    "section": "2.1 建立模型",
+    "text": "2.1 建立模型\n在建立模型前，需要对分类变量进行哑变量处理：\n\ndf_dummy = pd.get_dummies(ovarian,drop_first = True)\ndf_dummy.head()\n\n\n\n\n\n\n\n\nfutime\nfustat\nage_&gt;50\nresid.ds_Yes\nrx_B\necog.ps_Good\n\n\n\n\n0\n59\n1\nTrue\nTrue\nFalse\nTrue\n\n\n1\n115\n1\nTrue\nTrue\nFalse\nTrue\n\n\n2\n156\n1\nTrue\nTrue\nFalse\nFalse\n\n\n3\n421\n0\nTrue\nTrue\nTrue\nTrue\n\n\n4\n431\n1\nTrue\nTrue\nFalse\nTrue\n\n\n\n\n\n\n\n使用 drop_first = True 参数是为了去掉各个参考类别。\n下面将所有的协变量都纳入，建立 Cox 回归模型：\n\nfrom lifelines import CoxPHFitter\ncox = CoxPHFitter()\ncox.fit(df_dummy,duration_col = 'futime', event_col = 'fustat')\ncox.print_summary()\n\n\n\n\n\n\n\nmodel\nlifelines.CoxPHFitter\n\n\nduration col\n'futime'\n\n\nevent col\n'fustat'\n\n\nbaseline estimation\nbreslow\n\n\nnumber of observations\n26\n\n\nnumber of events observed\n12\n\n\npartial log-likelihood\n-28.89\n\n\ntime fit was run\n2025-03-10 05:46:54 UTC\n\n\n\n\n\n\n\n\n\ncoef\nexp(coef)\nse(coef)\ncoef lower 95%\ncoef upper 95%\nexp(coef) lower 95%\nexp(coef) upper 95%\ncmp to\nz\np\n-log2(p)\n\n\n\n\nage_&gt;50\n2.20\n9.04\n1.11\n0.03\n4.37\n1.03\n79.10\n0.00\n1.99\n0.05\n4.42\n\n\nresid.ds_Yes\n1.45\n4.25\n0.73\n0.02\n2.88\n1.02\n17.75\n0.00\n1.98\n0.05\n4.40\n\n\nrx_B\n-1.38\n0.25\n0.64\n-2.65\n-0.12\n0.07\n0.89\n0.00\n-2.14\n0.03\n4.96\n\n\necog.ps_Good\n-0.59\n0.56\n0.63\n-1.83\n0.65\n0.16\n1.92\n0.00\n-0.93\n0.35\n1.50\n\n\n\n\n\n\n\n\n\nConcordance\n0.79\n\n\nPartial AIC\n65.78\n\n\nlog-likelihood ratio test\n12.19 on 4 df\n\n\n-log2(p) of ll-ratio test\n5.97\n\n\n\n\n\n\n\n结果显示，在调整了协变量后，两种治疗方式的死亡风险的差异具有统计学意义（P&lt;0.05）。\n模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：\n\ncox.plot()\n\n\n\n\n\n\n\n\nCox 回归是一种半参数回归模型，也像多元线性回归一样，存在变量选择的问题。通常可以用 AIC 进行变量选择。1\n查看当前模型的 AIC 值：\n\ncox.AIC_partial_\n\n65.77513405570859\n\n\n根据前序的结果，变量 ecog.ps 对应的 P 值最大，对其进行剔除后再次拟合模型：\n\ncox1 = CoxPHFitter()\ndf_dummy_sub = df_dummy.drop('ecog.ps_Good', axis = 1)\ncox1.fit(df_dummy_sub, duration_col = 'futime', event_col = 'fustat')\ncox1.print_summary()\ncox1.AIC_partial_\n\n\n\n\n\n\n\nmodel\nlifelines.CoxPHFitter\n\n\nduration col\n'futime'\n\n\nevent col\n'fustat'\n\n\nbaseline estimation\nbreslow\n\n\nnumber of observations\n26\n\n\nnumber of events observed\n12\n\n\npartial log-likelihood\n-29.33\n\n\ntime fit was run\n2025-03-10 05:46:54 UTC\n\n\n\n\n\n\n\n\n\ncoef\nexp(coef)\nse(coef)\ncoef lower 95%\ncoef upper 95%\nexp(coef) lower 95%\nexp(coef) upper 95%\ncmp to\nz\np\n-log2(p)\n\n\n\n\nage_&gt;50\n2.11\n8.29\n1.09\n-0.02\n4.25\n0.98\n70.32\n0.00\n1.94\n0.05\n4.25\n\n\nresid.ds_Yes\n1.25\n3.50\n0.69\n-0.10\n2.61\n0.90\n13.58\n0.00\n1.81\n0.07\n3.83\n\n\nrx_B\n-1.28\n0.28\n0.62\n-2.50\n-0.06\n0.08\n0.94\n0.00\n-2.06\n0.04\n4.67\n\n\n\n\n\n\n\n\n\nConcordance\n0.77\n\n\nPartial AIC\n64.66\n\n\nlog-likelihood ratio test\n11.31 on 3 df\n\n\n-log2(p) of ll-ratio test\n6.62\n\n\n\n\n\n\n\n64.65793573545281\n\n\n剔除 ecog_ps 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
@@ -1460,6 +1460,71 @@
       "统计软件使用指南",
       "Python introduction",
       "用Python做生存分析和COX回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/Stata-intro.html",
+    "href": "Guide/Stata/Stata-intro.html",
+    "title": "关于 Stata 的碎碎念",
+    "section": "",
+    "text": "关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。\n想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。\n等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。\n老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力，现在看来可以理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。\n回归正题，Stata 是一款用于数据科学的统计软件，其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。\nStata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。\n然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Guide/Stata/Satat-intro.qmd",
+      "关于 Stata 的碎碎念"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-03-11-ITSA.html",
+    "href": "Guide/Stata/25-03-11-ITSA.html",
+    "title": "Stata 做 ITSA 分析",
+    "section": "",
+    "text": "Interrupted Time Series Analysis (ITSA) 是一种常用的时间序列分析方法，用于评估某个干预措施对某个事件或趋势的影响。\n\n\nITSA 模型的基本形式如下：\n\\[\nY_t = \\beta_0 + \\beta_1 \\cdot T_t + \\beta_2 \\cdot X_t + \\beta_3 \\cdot T_t \\cdot X_t + \\epsilon_t\n\\]\n公式中各代码的含义分别为：\n\n\\(Y_t\\)：因变量，时间序列的观测值\n\\(T_t\\)：时间变量（序列），表示时间点 \\(t\\) 距离干预前的时间长度\n\\(X_t\\)：干预变量（哑变量），表示干预措施的状态，通常为 0 或 1\n\\(\\beta_0\\)：截距，即常数项\n\\(\\beta_1\\)：时间变量的系数，表示时间的趋势（改革前的变化趋势）\n\\(\\beta_2\\)：干预变量的系数，表示干预的效应\n\\(\\beta_3\\)：交互项系数，表示改革后与改革前斜率的差值，故改革后的斜率值为 \\(\\beta_1 + \\beta_3\\)\n\\(\\epsilon_t\\)：误差项\n\n\n\n\n这里使用 Stata 中的 nlswork 数据集，该数据集包含了 1987 年和 1988 年的 个体数据。 首先找到 nlswork 数据集，你可以从互联网上寻找相关资源；或者从 Stata 的 nlswork 包中导出这一数据集，操作如下：\nsysuse nlswork, clear\nsave \"your-file-path\\nlswork.dta\", replace\n\n\n\n\n\nssc install itsa\nssc install actest",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Guide/Stata/Satat-intro.qmd",
+      "Stata 做 ITSA 分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-03-11-ITSA.html#stsa-公式",
+    "href": "Guide/Stata/25-03-11-ITSA.html#stsa-公式",
+    "title": "Stata 做 ITSA 分析",
+    "section": "",
+    "text": "ITSA 模型的基本形式如下：\n\\[\nY_t = \\beta_0 + \\beta_1 \\cdot T_t + \\beta_2 \\cdot X_t + \\beta_3 \\cdot T_t \\cdot X_t + \\epsilon_t\n\\]\n公式中各代码的含义分别为：\n\n\\(Y_t\\)：因变量，时间序列的观测值\n\\(T_t\\)：时间变量（序列），表示时间点 \\(t\\) 距离干预前的时间长度\n\\(X_t\\)：干预变量（哑变量），表示干预措施的状态，通常为 0 或 1\n\\(\\beta_0\\)：截距，即常数项\n\\(\\beta_1\\)：时间变量的系数，表示时间的趋势（改革前的变化趋势）\n\\(\\beta_2\\)：干预变量的系数，表示干预的效应\n\\(\\beta_3\\)：交互项系数，表示改革后与改革前斜率的差值，故改革后的斜率值为 \\(\\beta_1 + \\beta_3\\)\n\\(\\epsilon_t\\)：误差项",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Guide/Stata/Satat-intro.qmd",
+      "Stata 做 ITSA 分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-03-11-ITSA.html#数据集及来源",
+    "href": "Guide/Stata/25-03-11-ITSA.html#数据集及来源",
+    "title": "Stata 做 ITSA 分析",
+    "section": "",
+    "text": "这里使用 Stata 中的 nlswork 数据集，该数据集包含了 1987 年和 1988 年的 个体数据。 首先找到 nlswork 数据集，你可以从互联网上寻找相关资源；或者从 Stata 的 nlswork 包中导出这一数据集，操作如下：\nsysuse nlswork, clear\nsave \"your-file-path\\nlswork.dta\", replace",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Guide/Stata/Satat-intro.qmd",
+      "Stata 做 ITSA 分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-03-11-ITSA.html#stata-准备",
+    "href": "Guide/Stata/25-03-11-ITSA.html#stata-准备",
+    "title": "Stata 做 ITSA 分析",
+    "section": "",
+    "text": "ssc install itsa\nssc install actest",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Guide/Stata/Satat-intro.qmd",
+      "Stata 做 ITSA 分析"
     ]
   }
 ]

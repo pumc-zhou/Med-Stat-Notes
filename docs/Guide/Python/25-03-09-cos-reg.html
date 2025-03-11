@@ -164,7 +164,7 @@ window.Quarto = {
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -223,6 +223,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Guide/Stata/Stata-intro.html">
+ <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
   </li>
@@ -486,17 +490,40 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">Guide/Stata/Satat-intro.qmd</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata 做 ITSA 分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">关于 Stata 的碎碎念</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
@@ -522,7 +549,32 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#生存分析" id="toc-生存分析" class="nav-link active" data-scroll-target="#生存分析"><span class="header-section-number">1</span> 生存分析</a>
+  <ul class="collapse">
+  <li><a href="#生存函数" id="toc-生存函数" class="nav-link" data-scroll-target="#生存函数"><span class="header-section-number">1.1</span> 生存函数</a></li>
+  <li><a href="#数据集及来源" id="toc-数据集及来源" class="nav-link" data-scroll-target="#数据集及来源"><span class="header-section-number">1.2</span> 数据集及来源</a></li>
+  <li><a href="#生存率的-kaplan-meier-估计" id="toc-生存率的-kaplan-meier-估计" class="nav-link" data-scroll-target="#生存率的-kaplan-meier-估计"><span class="header-section-number">1.3</span> 生存率的 Kaplan-Meier 估计</a>
+  <ul class="collapse">
+  <li><a href="#绘制生存曲线" id="toc-绘制生存曲线" class="nav-link" data-scroll-target="#绘制生存曲线"><span class="header-section-number">1.3.1</span> 绘制生存曲线</a></li>
+  </ul></li>
+  <li><a href="#生存率的比较" id="toc-生存率的比较" class="nav-link" data-scroll-target="#生存率的比较"><span class="header-section-number">1.4</span> 生存率的比较</a>
+  <ul class="collapse">
+  <li><a href="#kaplan-meier-比较图" id="toc-kaplan-meier-比较图" class="nav-link" data-scroll-target="#kaplan-meier-比较图"><span class="header-section-number">1.4.1</span> Kaplan-Meier 比较图</a></li>
+  <li><a href="#统计学检验" id="toc-统计学检验" class="nav-link" data-scroll-target="#统计学检验"><span class="header-section-number">1.4.2</span> 统计学检验</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#cox-回归" id="toc-cox-回归" class="nav-link" data-scroll-target="#cox-回归"><span class="header-section-number">2</span> Cox 回归</a>
+  <ul class="collapse">
+  <li><a href="#建立模型" id="toc-建立模型" class="nav-link" data-scroll-target="#建立模型"><span class="header-section-number">2.1</span> 建立模型</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Python/25-03-09-cos-reg.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -557,18 +609,18 @@ window.Quarto = {
 </header>
 
 
-<section id="生存分析" class="level1">
-<h1>生存分析</h1>
+<section id="生存分析" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 生存分析</h1>
 <p>生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析中，每个研究对象的结局变量由 “time”（生存时间） 和 “status”（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。</p>
 <p>生存分析的主要应用领域是医学、生物学、工程学、经济学等。</p>
-<section id="生存函数" class="level2">
-<h2 class="anchored" data-anchor-id="生存函数">生存函数</h2>
+<section id="生存函数" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="生存函数"><span class="header-section-number">1.1</span> 生存函数</h2>
 <p>生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 <span class="math inline">\(S(t)\)</span> 表示。</p>
 <p>风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 <span class="math inline">\(h(t)\)</span> 表示。</p>
 <p>如果记寿命分布的密度为 <span class="math inline">\(f(t)\)</span>，则有： <span class="math inline">\(h(t) = f(t) / S(t)\)</span> 。</p>
 </section>
-<section id="数据集及来源" class="level2">
-<h2 class="anchored" data-anchor-id="数据集及来源">数据集及来源</h2>
+<section id="数据集及来源" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="数据集及来源"><span class="header-section-number">1.2</span> 数据集及来源</h2>
 <p>这里使用 R 语言 <code>survival</code> 包中的 <code>ovarian</code> 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。</p>
 <p>首先找到 <code>ovarian</code> 数据集，你可以从互联网上寻找相关资源；或者从 R 的 <code>survival</code> 包中导出这一数据集，操作如下：</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("survival")</span></span>
@@ -670,8 +722,8 @@ window.Quarto = {
 </div>
 </div>
 </section>
-<section id="生存率的-kaplan-meier-估计" class="level2">
-<h2 class="anchored" data-anchor-id="生存率的-kaplan-meier-估计">生存率的 Kaplan-Meier 估计</h2>
+<section id="生存率的-kaplan-meier-估计" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="生存率的-kaplan-meier-估计"><span class="header-section-number">1.3</span> 生存率的 Kaplan-Meier 估计</h2>
 <p>生存率的 Kaplan-Meier 估计的计算可以调用 <code>lifelines</code> 库中的 <code>KaplanMeierFitter</code> 函数实现。</p>
 <p><code>pip</code> 安装：<code>pip install lifelines</code></p>
 <p><code>conda</code> 安装： <code>conda install lifelines</code></p>
@@ -961,8 +1013,8 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<section id="绘制生存曲线" class="level3">
-<h3 class="anchored" data-anchor-id="绘制生存曲线">绘制生存曲线</h3>
+<section id="绘制生存曲线" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="绘制生存曲线"><span class="header-section-number">1.3.1</span> 绘制生存曲线</h3>
 <p>Kaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：</p>
 <div id="0bb61709" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -978,8 +1030,8 @@ window.Quarto = {
 </div>
 </section>
 </section>
-<section id="生存率的比较" class="level2">
-<h2 class="anchored" data-anchor-id="生存率的比较">生存率的比较</h2>
+<section id="生存率的比较" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="生存率的比较"><span class="header-section-number">1.4</span> 生存率的比较</h2>
 <p>在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：</p>
 <div id="0b9fff2d" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> ovarian.rx <span class="op">==</span> <span class="st">"A"</span></span>
@@ -992,8 +1044,8 @@ window.Quarto = {
 <pre><code>&lt;lifelines.KaplanMeierFitter:"Treatmeat B", fitted with 13 total observations, 8 right-censored observations&gt;</code></pre>
 </div>
 </div>
-<section id="kaplan-meier-比较图" class="level3">
-<h3 class="anchored" data-anchor-id="kaplan-meier-比较图">Kaplan-Meier 比较图</h3>
+<section id="kaplan-meier-比较图" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="kaplan-meier-比较图"><span class="header-section-number">1.4.1</span> Kaplan-Meier 比较图</h3>
 <p>可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。</p>
 <div id="48a71b19" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots()</span>
@@ -1016,8 +1068,8 @@ window.Quarto = {
 </figure>
 </div>
 </section>
-<section id="统计学检验" class="level3">
-<h3 class="anchored" data-anchor-id="统计学检验">统计学检验</h3>
+<section id="统计学检验" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="统计学检验"><span class="header-section-number">1.4.2</span> 统计学检验</h3>
 <p>生存分析中常用的统计学检验是 时序检验（log rank test），其基本思想是先计算出不同时间两种治疗方式的暴露人数和死亡人数，并由此在两种治疗方式效果相同的假设下计算出预期死亡人数，如果不拒绝零假设（ <span class="math inline">\(H_0\)</span> ：两种治疗方式的效果相同，即预期死亡人数一致），则实际观测值和期望值的差异不会很大，如果差异过大则不能认为该差异是由随机误差引起的。</p>
 <p>对此，用 <span class="math inline">\(\chi^2\)</span> 检验做判断。时序检验可以用 <code>lifetimes</code> 库的函数 <code>logrank_test</code> 实现。</p>
 <div id="022b8b94" class="cell" data-execution_count="10">
@@ -1035,8 +1087,8 @@ window.Quarto = {
 </section>
 </section>
 </section>
-<section id="cox-回归" class="level1">
-<h1>Cox 回归</h1>
+<section id="cox-回归" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Cox 回归</h1>
 <p>所有的参数回归模型需要对风险函数做出假设，这些模型可以对每个时间点的生存概率进行估计。而 Cox 回归没有关于风险函数的假设，他所遵循的唯一重要假设是 “比例风险” 。</p>
 <p><span class="math display">\[
 h(t,X)=h_0(t)e^{\sum{\beta_i}{X_i}}
@@ -1046,8 +1098,8 @@ h(t,X)=h_0(t)e^{\sum{\beta_i}{X_i}}
 <p><span class="math display">\[
 \frac{h(t,X)}{h_0(t)}=e^{\sum{\beta_i}{X_i}}
 \]</span></p>
-<section id="建立模型" class="level2">
-<h2 class="anchored" data-anchor-id="建立模型">建立模型</h2>
+<section id="建立模型" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="建立模型"><span class="header-section-number">2.1</span> 建立模型</h2>
 <p>在建立模型前，需要对分类变量进行哑变量处理：</p>
 <div id="770dcce9" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_dummy <span class="op">=</span> pd.get_dummies(ovarian,drop_first <span class="op">=</span> <span class="va">True</span>)</span>
@@ -2321,7 +2373,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Python/25-03-09-cos-reg.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Python/25-03-09-cos-reg.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
