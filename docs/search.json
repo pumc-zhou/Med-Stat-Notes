@@ -703,13 +703,13 @@
   {
     "objectID": "Guide/Python/Python-intro.html",
     "href": "Guide/Python/Python-intro.html",
-    "title": "Python introduction",
+    "title": "Python",
     "section": "",
-    "text": "Python（英式发音：/ˈpaɪθən/；美式发音：/ˈpaɪθɑːn/），是一种广泛使用的解释型、高级和通用的编程语言。Python支持多种编程范型，包括结构化、过程式、反射式、面向对象和函数式编程。它拥有动态类型系统和垃圾回收功能，能够自动管理内存使用，并且其本身拥有一个巨大而广泛的标准库。它的语言结构以及面向对象的方法，旨在帮助程序员为小型的和大型的项目编写逻辑清晰的代码。\n和Python结缘在2020年末，当时朋友正在学，我也跟着一起，跑了几个代码，做了几个图，但是没有啥应用计划，后来就没咋关注了。\n等毕了业，有感觉应该学一学，要是工作了也算有一个技能，于是又捡了起来，还行，随着理解力的提升，逐渐能掌握这一门语言了，当然，AI 的辅助也是功不可没。\nPython 的故事很多，关于它的内容在互联网可能看一年都看不完，全世界的人都在使用它，因此我这里也不做过多的赘述，显得很多余。\n使用Python的第一步，就是来一个电脑，当然没有电脑也行，因为可以用Google的 Colab ，挺好用，如果做机器学习，是一个很好的选择（当然是要开Pro）。\n然后安装，新手就安装普通的 Python 吧，先试试，来个编辑器，用 VS code、vim、pycharm 都可以，个人推荐用 VS code（这个也要学，没那么简单）。\n再然后学会 pip 安装包/库，创建一个文件 .py 开始运行。\nMOOC和B站上有很多教程，市面上的书也很多，选一本自己看得过去/感兴趣的。\n关于书的话，这些可以看看：\n\nPython Cookbook 3rd\nPython编程:从入门到实践\nPython基础教程 \n利用Python进行数据分析（做数据分析的可以着重看这一本）\n\n等逐渐熟悉Python了，可以用下 anaconda ，对环境的管理要好不少，且可以使用 spyder（神器，就是还不支持 AI）。\n画一个玫瑰作为碎碎念的收尾：\n\n#RoseDraw.py\nimport turtle as t\n# 定义一个曲线绘制函数\ndef DegreeCurve(n, r, d=1):\n    for i in range(n):\n        t.left(d)\n        t.circle(r, abs(d))\n# 初始位置设定\ns = 0.2 # size\nt.setup(450*5*s, 750*5*s)\nt.pencolor(\"black\")\nt.fillcolor(\"red\")\nt.speed(100)\nt.penup()\nt.goto(0, 900*s)\nt.pendown()\n# 绘制花朵形状\nt.begin_fill()\nt.circle(200*s,30)\nDegreeCurve(60, 50*s)\nt.circle(200*s,30)\nDegreeCurve(4, 100*s)\nt.circle(200*s,50)\nDegreeCurve(50, 50*s)\nt.circle(350*s,65)\nDegreeCurve(40, 70*s)\nt.circle(150*s,50)\nDegreeCurve(20, 50*s, -1)\nt.circle(400*s,60)\nDegreeCurve(18, 50*s)\nt.fd(250*s)\nt.right(150)\nt.circle(-500*s,12)\nt.left(140)\nt.circle(550*s,110)\nt.left(27)\nt.circle(650*s,100)\nt.left(130)\nt.circle(-300*s,20)\nt.right(123)\nt.circle(220*s,57)\nt.end_fill()\n# 绘制花枝形状\nt.left(120)\nt.fd(280*s)\nt.left(115)\nt.circle(300*s,33)\nt.left(180)\nt.circle(-300*s,33)\nDegreeCurve(70, 225*s, -1)\nt.circle(350*s,104)\nt.left(90)\nt.circle(200*s,105)\nt.circle(-500*s,63)\nt.penup()\nt.goto(170*s,-30*s)\nt.pendown()\nt.left(160)\nDegreeCurve(20, 2500*s)\nDegreeCurve(220, 250*s, -1)\n# 绘制一个绿色叶子\nt.fillcolor('green')\nt.penup()\nt.goto(670*s,-180*s)\nt.pendown()\nt.right(140)\nt.begin_fill()\nt.circle(300*s,120)\nt.left(60)\nt.circle(300*s,120)\nt.end_fill()\nt.penup()\nt.goto(180*s,-550*s)\nt.pendown()\nt.right(85)\nt.circle(600*s,40)\n# 绘制另一个绿色叶子\nt.penup()\nt.goto(-150*s,-1000*s)\nt.pendown()\nt.begin_fill()\nt.rt(120)\nt.circle(300*s,115)\nt.left(75)\nt.circle(300*s,100)\nt.end_fill()\nt.penup()\nt.goto(430*s,-1070*s)\nt.pendown()\nt.right(30)\nt.circle(-600*s,35)\nt.done()\n\nend.",
+    "text": "Python（英式发音：/ˈpaɪθən/；美式发音：/ˈpaɪθɑːn/），是一种广泛使用的解释型、高级和通用的编程语言。Python支持多种编程范型，包括结构化、过程式、反射式、面向对象和函数式编程。它拥有动态类型系统和垃圾回收功能，能够自动管理内存使用，并且其本身拥有一个巨大而广泛的标准库。它的语言结构以及面向对象的方法，旨在帮助程序员为小型的和大型的项目编写逻辑清晰的代码。\n和Python结缘在2020年末，当时朋友正在学，我也跟着一起，跑了几个代码，做了几个图，但是没有啥应用计划，后来就没咋关注了。\n等毕了业，有感觉应该学一学，要是工作了也算有一个技能，于是又捡了起来，还行，随着理解力的提升，逐渐能掌握这一门语言了，当然，AI 的辅助也是功不可没。\nPython 的故事很多，关于它的内容在互联网可能看一年都看不完，全世界的人都在使用它，因此我这里也不做过多的赘述，显得很多余。\n使用Python的第一步，就是来一个电脑，当然没有电脑也行，因为可以用Google的 Colab ，挺好用，如果做机器学习，是一个很好的选择（当然是要开Pro）。\n然后安装，新手就安装普通的 Python 吧，先试试，来个编辑器，用 VS code、vim、pycharm 都可以，个人推荐用 VS code（这个也要学，没那么简单）。\n再然后学会 pip 安装包/库，创建一个文件 .py 开始运行。\nMOOC和B站上有很多教程，市面上的书也很多，选一本自己看得过去/感兴趣的。\n关于书的话，这些可以看看：\n\nPython Cookbook 3rd\nPython编程:从入门到实践\nPython基础教程 \n利用Python进行数据分析（做数据分析的可以着重看这一本）\n\n等逐渐熟悉Python了，可以用下 anaconda ，对环境的管理要好不少，且可以使用 spyder（神器，就是还不支持 AI）。\nend.",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction"
+      "Python"
     ]
   },
   {
@@ -888,7 +888,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "R introduction"
+      "R"
     ]
   },
   {
@@ -1465,14 +1465,13 @@
   {
     "objectID": "Guide/Stata/Stata-intro.html",
     "href": "Guide/Stata/Stata-intro.html",
-    "title": "关于 Stata 的碎碎念",
+    "title": "Stata",
     "section": "",
-    "text": "关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。\n想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。\n等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。\n老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力，现在看来可以理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。\n回归正题，Stata 是一款用于数据科学的统计软件，其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。\nStata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。\n然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。",
+    "text": "关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。\n想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。\n等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。\n老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。\n回归正题，Stata 是一款用于数据科学的统计软件，其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。\nStata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。\n然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Guide/Stata/Satat-intro.qmd",
-      "关于 Stata 的碎碎念"
+      "Stata"
     ]
   },
   {
@@ -1480,11 +1479,11 @@
     "href": "Guide/Stata/25-03-11-ITSA.html",
     "title": "Stata 做 ITSA 分析",
     "section": "",
-    "text": "Interrupted Time Series Analysis (ITSA) 是一种常用的时间序列分析方法，用于评估某个干预措施对某个事件或趋势的影响。\n\n\nITSA 模型的基本形式如下：\n\\[\nY_t = \\beta_0 + \\beta_1 \\cdot T_t + \\beta_2 \\cdot X_t + \\beta_3 \\cdot T_t \\cdot X_t + \\epsilon_t\n\\]\n公式中各代码的含义分别为：\n\n\\(Y_t\\)：因变量，时间序列的观测值\n\\(T_t\\)：时间变量（序列），表示时间点 \\(t\\) 距离干预前的时间长度\n\\(X_t\\)：干预变量（哑变量），表示干预措施的状态，通常为 0 或 1\n\\(\\beta_0\\)：截距，即常数项\n\\(\\beta_1\\)：时间变量的系数，表示时间的趋势（改革前的变化趋势）\n\\(\\beta_2\\)：干预变量的系数，表示干预的效应\n\\(\\beta_3\\)：交互项系数，表示改革后与改革前斜率的差值，故改革后的斜率值为 \\(\\beta_1 + \\beta_3\\)\n\\(\\epsilon_t\\)：误差项\n\n\n\n\n这里使用 Stata 中的 nlswork 数据集，该数据集包含了 1987 年和 1988 年的 个体数据。 首先找到 nlswork 数据集，你可以从互联网上寻找相关资源；或者从 Stata 的 nlswork 包中导出这一数据集，操作如下：\nsysuse nlswork, clear\nsave \"your-file-path\\nlswork.dta\", replace\n\n\n\n\n\nssc install itsa\nssc install actest",
+    "text": "Interrupted Time Series Analysis (ITSA) 是一种常用的时间序列分析方法，用于评估某个干预措施对某个事件或趋势的影响。\n\n\nITSA 模型的基本形式如下：\n\\[\nY_t = \\beta_0 + \\beta_1 \\cdot T_t + \\beta_2 \\cdot X_t + \\beta_3 \\cdot T_t \\cdot X_t + \\epsilon_t\n\\]\n公式中各代码的含义分别为：\n\n\\(Y_t\\)：因变量，时间序列的观测值\n\\(T_t\\)：时间变量（序列），表示时间点 \\(t\\) 距离干预前的时间长度\n\\(X_t\\)：干预变量（哑变量），表示干预措施的状态，通常为 0 或 1\n\\(\\beta_0\\)：截距，即常数项\n\\(\\beta_1\\)：时间变量的系数，表示时间的趋势（改革前的变化趋势）\n\\(\\beta_2\\)：干预变量的系数，表示干预的效应\n\\(\\beta_3\\)：交互项系数，表示改革后与改革前斜率的差值，故改革后的斜率值为 \\(\\beta_1 + \\beta_3\\)\n\\(\\epsilon_t\\)：误差项\n\n\n\n\n这里使用 Stata 中的 nlswork 数据集，该数据集包含了 1987 年和 1988 年的 个体数据。 首先找到 nlswork 数据集，你可以从互联网上寻找相关资源；或者从 Stata 的 nlswork 包中导出这一数据集，操作如下：\nsysuse nlswork, clear\nsave \"your-file-path\\nlswork.dta\", replace\n\n\n\n\n\nssc install itsa\nssc install actest\n\n\n\n\n需要分析的变量很多，但是我们可以首先从次均住院费用开始，这是最直接的一组数据，根据 DIP政策 实施的时间点来划分时间段。\n这里是2018-2023年六年的费用数据，我们首先对其按年进行处理，得到一个费用均数，实际上大多数论文都是按照月份进行处理，这样更合理也更详细一些，这里也可以按月份来，但是需要重新清洗数据，还是按照年份先试一下。\n但是也有个问题就是，2022年开始DIP改革，数据只截止到2023，因此2022-2023无法进行回归，只能用截距代替一下（数据不稳定，谨慎对待）。\n操作代码如下：\nclear all\nuse \"C:\\Users\\asus\\ITSA\\ITSA-PRE.dta\", replace\n\n// 按年份聚合数据，取平均值\ncollapse (mean) Cost, by(year)\n\n// 设置时间变量\ntsset year\n\n// 定义时间变量和干预变量\ngen time = year - 2017\ngen DIP = (year &gt;= 2022) // 2022年及以后为1，之前为0\ngen time_post = (time - 5) * DIP // 干预后时间变量\n\n// 计算政策前的趋势（2018-2021）\nregress Cost time if year &lt;= 2021\nlocal beta0 = _b[_cons]\nlocal beta1 = _b[time]\n\n// 计算 2022 年的预测值\nlocal cost_2022_pred = `beta0' + `beta1' * 5\ngen Cost_pred_2022 = `cost_2022_pred' if year == 2022\n\n// 计算政策前趋势线（2018-2022）\ngenerate Cost_pred_2018_2022 = `beta0' + `beta1' * time if year &lt;= 2022\n\n// 计算 2022 和 2023 年的真实值\ngen cost_2022_actual = Cost if year == 2022\ngen cost_2023_actual = Cost if year == 2023\negen cost_2022_real = max(cost_2022_actual)\negen cost_2023_real = max(cost_2023_actual)\nlocal cost_2022_actual = cost_2022_real\nlocal cost_2023_actual = cost_2023_real\n\n// 计算政策后趋势斜率\nlocal beta_post_1 = (`cost_2023_actual' - `cost_2022_actual') / (6 - 5)\n\n// 计算政策后趋势线（从 2022 真实值开始）\ngenerate Cost_pred_post = `cost_2022_actual' + `beta_post_1' * (time - 5) if year &gt;= 2022\n\n// 显示关键信息\ndisplay \"政策前趋势 β1: `beta1'\"\ndisplay \"2022 预测值: `cost_2022_pred'\"\ndisplay \"2022 真实值: `cost_2022_actual'\"\ndisplay \"2023 真实值: `cost_2023_actual'\"\ndisplay \"政策后斜率 β_post_1: `beta_post_1'\"\n\n// 画图\ntwoway (scatter Cost year, msize(small)) /// 观察值\n       (line Cost_pred_2018_2022 year if year &lt;= 2022, lcolor(blue)) /// 政策前趋势\n       (line Cost_pred_post year if year &gt;= 2022, lcolor(red)) /// 政策后趋势\n       (scatter Cost_pred_2022 year if year == 2022, mcolor(green) msize(medium)) /// 2022预测值\n       (pcarrow Cost_pred_2022 year Cost year if year == 2022, lcolor(green) mcolor(green)), /// \n       xline(2022, lpattern(dash)) ///\n       title(\"Cost Time Series Analysis\") ///\n       subtitle(\"Intervention at 2022\") ///\n       xlabel(2018(1)2023) ///\n       legend(label(1 \"Observed\") label(2 \"Pre-intervention trend\") ///\n              label(3 \"Post-intervention trend\") label(4 \"2022 Prediction\") label(5 \"Level change at 2022\"))\n\n// 保存图形\ngraph save \"C:\\Users\\asus\\test\\cost_time_series_graph.gph\", replace\n\n// 计算回归系数表\nregress Cost time DIP time_post\noutreg2 using \"C:\\Users\\asus\\test\\itsa_results.doc\", replace word\n这里用\n\n2018年的数据作为起始数据（ITSA方程的截距，即 \\(\\beta_0\\) ）；\n2018-2021年的数据拟合政策前 次均费用 随时间变化的趋势，即 \\(\\beta_1\\) ；\n然后用 \\(\\beta_1\\) 计算2022年的预测值(\\(cost_{2022pred} = \\beta_0 +\\beta_1 * 5\\) )；\n2022年到2023年的数据直接使用真实值，得到政策后的趋势直线，如果数据足够多（≥3），则可以对政策后的数据进行回归得到 \\(\\beta_3\\)；\n使用2022年的真实值减去2022年的预测值，得到政策变化对 cost 造成的水平影响，即 \\(\\beta_2\\) 。\n\n\n\n\n上述代码运行后输出 中断时间序列分析 趋势图：\n\n\n\nITSA-TREND\n\n\n\n\n\n代码的最后，做回归系数表，得到如下结果：\n\n\n\n回归系数表\n\n\n\n政策前的时间趋势为：\\(\\beta_1=331.6185\\)；\n政策实施时的瞬时变化为：\\(\\beta_2=-219.9033\\);\n政策实施后的变化趋势为：\\(\\beta_3=-1628.044\\) 。\n\n其他变量也就可以按照此种模式进行一一计算，当然也可以用循环的模式计算，以后再论。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Guide/Stata/Satat-intro.qmd",
+      "Stata",
       "Stata 做 ITSA 分析"
     ]
   },
@@ -1497,7 +1496,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Guide/Stata/Satat-intro.qmd",
+      "Stata",
       "Stata 做 ITSA 分析"
     ]
   },
@@ -1510,7 +1509,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Guide/Stata/Satat-intro.qmd",
+      "Stata",
       "Stata 做 ITSA 分析"
     ]
   },
@@ -1523,7 +1522,46 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Guide/Stata/Satat-intro.qmd",
+      "Stata",
+      "Stata 做 ITSA 分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-03-11-ITSA.html#对次均住院费用进行分析",
+    "href": "Guide/Stata/25-03-11-ITSA.html#对次均住院费用进行分析",
+    "title": "Stata 做 ITSA 分析",
+    "section": "",
+    "text": "需要分析的变量很多，但是我们可以首先从次均住院费用开始，这是最直接的一组数据，根据 DIP政策 实施的时间点来划分时间段。\n这里是2018-2023年六年的费用数据，我们首先对其按年进行处理，得到一个费用均数，实际上大多数论文都是按照月份进行处理，这样更合理也更详细一些，这里也可以按月份来，但是需要重新清洗数据，还是按照年份先试一下。\n但是也有个问题就是，2022年开始DIP改革，数据只截止到2023，因此2022-2023无法进行回归，只能用截距代替一下（数据不稳定，谨慎对待）。\n操作代码如下：\nclear all\nuse \"C:\\Users\\asus\\ITSA\\ITSA-PRE.dta\", replace\n\n// 按年份聚合数据，取平均值\ncollapse (mean) Cost, by(year)\n\n// 设置时间变量\ntsset year\n\n// 定义时间变量和干预变量\ngen time = year - 2017\ngen DIP = (year &gt;= 2022) // 2022年及以后为1，之前为0\ngen time_post = (time - 5) * DIP // 干预后时间变量\n\n// 计算政策前的趋势（2018-2021）\nregress Cost time if year &lt;= 2021\nlocal beta0 = _b[_cons]\nlocal beta1 = _b[time]\n\n// 计算 2022 年的预测值\nlocal cost_2022_pred = `beta0' + `beta1' * 5\ngen Cost_pred_2022 = `cost_2022_pred' if year == 2022\n\n// 计算政策前趋势线（2018-2022）\ngenerate Cost_pred_2018_2022 = `beta0' + `beta1' * time if year &lt;= 2022\n\n// 计算 2022 和 2023 年的真实值\ngen cost_2022_actual = Cost if year == 2022\ngen cost_2023_actual = Cost if year == 2023\negen cost_2022_real = max(cost_2022_actual)\negen cost_2023_real = max(cost_2023_actual)\nlocal cost_2022_actual = cost_2022_real\nlocal cost_2023_actual = cost_2023_real\n\n// 计算政策后趋势斜率\nlocal beta_post_1 = (`cost_2023_actual' - `cost_2022_actual') / (6 - 5)\n\n// 计算政策后趋势线（从 2022 真实值开始）\ngenerate Cost_pred_post = `cost_2022_actual' + `beta_post_1' * (time - 5) if year &gt;= 2022\n\n// 显示关键信息\ndisplay \"政策前趋势 β1: `beta1'\"\ndisplay \"2022 预测值: `cost_2022_pred'\"\ndisplay \"2022 真实值: `cost_2022_actual'\"\ndisplay \"2023 真实值: `cost_2023_actual'\"\ndisplay \"政策后斜率 β_post_1: `beta_post_1'\"\n\n// 画图\ntwoway (scatter Cost year, msize(small)) /// 观察值\n       (line Cost_pred_2018_2022 year if year &lt;= 2022, lcolor(blue)) /// 政策前趋势\n       (line Cost_pred_post year if year &gt;= 2022, lcolor(red)) /// 政策后趋势\n       (scatter Cost_pred_2022 year if year == 2022, mcolor(green) msize(medium)) /// 2022预测值\n       (pcarrow Cost_pred_2022 year Cost year if year == 2022, lcolor(green) mcolor(green)), /// \n       xline(2022, lpattern(dash)) ///\n       title(\"Cost Time Series Analysis\") ///\n       subtitle(\"Intervention at 2022\") ///\n       xlabel(2018(1)2023) ///\n       legend(label(1 \"Observed\") label(2 \"Pre-intervention trend\") ///\n              label(3 \"Post-intervention trend\") label(4 \"2022 Prediction\") label(5 \"Level change at 2022\"))\n\n// 保存图形\ngraph save \"C:\\Users\\asus\\test\\cost_time_series_graph.gph\", replace\n\n// 计算回归系数表\nregress Cost time DIP time_post\noutreg2 using \"C:\\Users\\asus\\test\\itsa_results.doc\", replace word\n这里用\n\n2018年的数据作为起始数据（ITSA方程的截距，即 \\(\\beta_0\\) ）；\n2018-2021年的数据拟合政策前 次均费用 随时间变化的趋势，即 \\(\\beta_1\\) ；\n然后用 \\(\\beta_1\\) 计算2022年的预测值(\\(cost_{2022pred} = \\beta_0 +\\beta_1 * 5\\) )；\n2022年到2023年的数据直接使用真实值，得到政策后的趋势直线，如果数据足够多（≥3），则可以对政策后的数据进行回归得到 \\(\\beta_3\\)；\n使用2022年的真实值减去2022年的预测值，得到政策变化对 cost 造成的水平影响，即 \\(\\beta_2\\) 。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Stata",
+      "Stata 做 ITSA 分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-03-11-ITSA.html#绘制itsa趋势图",
+    "href": "Guide/Stata/25-03-11-ITSA.html#绘制itsa趋势图",
+    "title": "Stata 做 ITSA 分析",
+    "section": "",
+    "text": "上述代码运行后输出 中断时间序列分析 趋势图：\n\n\n\nITSA-TREND",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Stata",
+      "Stata 做 ITSA 分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-03-11-ITSA.html#输出统计结果",
+    "href": "Guide/Stata/25-03-11-ITSA.html#输出统计结果",
+    "title": "Stata 做 ITSA 分析",
+    "section": "",
+    "text": "代码的最后，做回归系数表，得到如下结果：\n\n\n\n回归系数表\n\n\n\n政策前的时间趋势为：\\(\\beta_1=331.6185\\)；\n政策实施时的瞬时变化为：\\(\\beta_2=-219.9033\\);\n政策实施后的变化趋势为：\\(\\beta_3=-1628.044\\) 。\n\n其他变量也就可以按照此种模式进行一一计算，当然也可以用循环的模式计算，以后再论。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Stata",
       "Stata 做 ITSA 分析"
     ]
   }

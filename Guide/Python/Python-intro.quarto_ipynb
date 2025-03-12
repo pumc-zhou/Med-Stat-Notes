@@ -47,7 +47,7 @@
         "\n",
         "画一个玫瑰作为碎碎念的收尾：\n"
       ],
-      "id": "c7eb5e57"
+      "id": "8a4b1280"
     },
     {
       "cell_type": "code",
@@ -146,7 +146,7 @@
         "t.circle(-600*s,35)\n",
         "t.done()"
       ],
-      "id": "1c0c3e35",
+      "id": "323b3332",
       "execution_count": null,
       "outputs": []
     },
@@ -156,7 +156,7 @@
       "source": [
         "end."
       ],
-      "id": "a82c38e1"
+      "id": "0b994709"
     }
   ],
   "metadata": {

@@ -55,7 +55,7 @@
         "\n",
         "将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：\n"
       ],
-      "id": "728706a1"
+      "id": "44433043"
     },
     {
       "cell_type": "code",
@@ -65,7 +65,7 @@
         "ovarian = pd.read_csv(r\"C:\\Users\\asus\\Desktop\\R\\quarto\\Med-Stat-Notes\\Data\\ovarian.csv\")\n",
         "ovarian.head()"
       ],
-      "id": "3052cc61",
+      "id": "ba82cd68",
       "execution_count": null,
       "outputs": []
     },
@@ -77,7 +77,7 @@
         "\n",
         "对年龄进行分组，分为 `<50` 和 `>50` 两组，并将其他三个变量的各水平加上相应的标签。\n"
       ],
-      "id": "3b6c6fa3"
+      "id": "d32e0027"
     },
     {
       "cell_type": "code",
@@ -95,7 +95,7 @@
         "ovarian['rx'] = ovarian['rx'].map({1: \"A\", 2: \"B\"})\n",
         "ovarian['ecog.ps'] = ovarian['ecog.ps'].map({1: \"Good\", 2: \"Bad\"})"
       ],
-      "id": "6f6dbc92",
+      "id": "81e25b12",
       "execution_count": null,
       "outputs": []
     },
@@ -113,7 +113,7 @@
         "\n",
         "拟合 `fit` :\n"
       ],
-      "id": "54025735"
+      "id": "da5e37a0"
     },
     {
       "cell_type": "code",
@@ -124,7 +124,7 @@
         "fit = kmf.fit(ovarian.futime,ovarian.fustat)\n",
         "fit"
       ],
-      "id": "962f1a93",
+      "id": "009f944b",
       "execution_count": null,
       "outputs": []
     },
@@ -134,7 +134,7 @@
       "source": [
         "拟合结果 `fit` 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：\n"
       ],
-      "id": "3c0a6a6f"
+      "id": "88c047de"
     },
     {
       "cell_type": "code",
@@ -142,7 +142,7 @@
       "source": [
         "fit.median_survival_time_"
       ],
-      "id": "477001eb",
+      "id": "0a233f89",
       "execution_count": null,
       "outputs": []
     },
@@ -152,7 +152,7 @@
       "source": [
         "中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：\n"
       ],
-      "id": "f77a51a4"
+      "id": "39db2d72"
     },
     {
       "cell_type": "code",
@@ -160,7 +160,7 @@
       "source": [
         "pd.concat([fit.event_table,fit.survival_function_], axis = 1)"
       ],
-      "id": "789720d5",
+      "id": "a946f347",
       "execution_count": null,
       "outputs": []
     },
@@ -172,7 +172,7 @@
         "\n",
         "Kaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：\n"
       ],
-      "id": "b7d22c86"
+      "id": "d65c4f17"
     },
     {
       "cell_type": "code",
@@ -182,7 +182,7 @@
         "fit.plot(show_censors = True)\n",
         "plt.show()"
       ],
-      "id": "295f04b0",
+      "id": "ae04410c",
       "execution_count": null,
       "outputs": []
     },
@@ -194,7 +194,7 @@
         "\n",
         "在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：\n"
       ],
-      "id": "522f9331"
+      "id": "9caa9f9c"
     },
     {
       "cell_type": "code",
@@ -207,7 +207,7 @@
         "kmf_B = KaplanMeierFitter()\n",
         "kmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = \"Treatmeat B\")"
       ],
-      "id": "5ead5844",
+      "id": "521fa922",
       "execution_count": null,
       "outputs": []
     },
@@ -219,7 +219,7 @@
         "\n",
         "可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。\n"
       ],
-      "id": "ae573bf1"
+      "id": "7bf0eb59"
     },
     {
       "cell_type": "code",
@@ -230,7 +230,7 @@
         "kmf_B.plot(ax = axes,show_censors = True)\n",
         "plt.show()"
       ],
-      "id": "09973c52",
+      "id": "fb459678",
       "execution_count": null,
       "outputs": []
     },
@@ -248,7 +248,7 @@
         "\n",
         "对此，用 $\\chi^2$ 检验做判断。时序检验可以用 `lifetimes` 库的函数 `logrank_test` 实现。\n"
       ],
-      "id": "3085ab28"
+      "id": "5ba4319f"
     },
     {
       "cell_type": "code",
@@ -259,7 +259,7 @@
         "                  ovarian.fustat[g1], ovarian.fustat[g2])\n",
         "lr.p_value"
       ],
-      "id": "19c5c6ca",
+      "id": "42d45e95",
       "execution_count": null,
       "outputs": []
     },
@@ -293,7 +293,7 @@
         "\n",
         "在建立模型前，需要对分类变量进行哑变量处理：\n"
       ],
-      "id": "2977f1c2"
+      "id": "c11a8f48"
     },
     {
       "cell_type": "code",
@@ -302,7 +302,7 @@
         "df_dummy = pd.get_dummies(ovarian,drop_first = True)\n",
         "df_dummy.head()"
       ],
-      "id": "ace3b4d4",
+      "id": "4f5717aa",
       "execution_count": null,
       "outputs": []
     },
@@ -314,7 +314,7 @@
         "\n",
         "下面将所有的协变量都纳入，建立 Cox 回归模型：\n"
       ],
-      "id": "3d123c8c"
+      "id": "50db8792"
     },
     {
       "cell_type": "code",
@@ -325,7 +325,7 @@
         "cox.fit(df_dummy,duration_col = 'futime', event_col = 'fustat')\n",
         "cox.print_summary()"
       ],
-      "id": "03ee1fe7",
+      "id": "f840c9ff",
       "execution_count": null,
       "outputs": []
     },
@@ -337,7 +337,7 @@
         "\n",
         "模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：\n"
       ],
-      "id": "a48fd9ce"
+      "id": "a04be9e4"
     },
     {
       "cell_type": "code",
@@ -345,7 +345,7 @@
       "source": [
         "cox.plot()"
       ],
-      "id": "01d85e40",
+      "id": "dbd90dbb",
       "execution_count": null,
       "outputs": []
     },
@@ -360,7 +360,7 @@
         "\n",
         "查看当前模型的 AIC 值：\n"
       ],
-      "id": "0e980de4"
+      "id": "b22c165b"
     },
     {
       "cell_type": "code",
@@ -368,7 +368,7 @@
       "source": [
         "cox.AIC_partial_"
       ],
-      "id": "e3adcfeb",
+      "id": "9983da99",
       "execution_count": null,
       "outputs": []
     },
@@ -378,7 +378,7 @@
       "source": [
         "根据前序的结果，变量 `ecog.ps` 对应的 *P* 值最大，对其进行剔除后再次拟合模型：\n"
       ],
-      "id": "38a6563d"
+      "id": "c92695aa"
     },
     {
       "cell_type": "code",
@@ -390,7 +390,7 @@
         "cox1.print_summary()\n",
         "cox1.AIC_partial_"
       ],
-      "id": "312b29d3",
+      "id": "4aa9576d",
       "execution_count": null,
       "outputs": []
     },
@@ -400,7 +400,7 @@
       "source": [
         "剔除 `ecog_ps` 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。"
       ],
-      "id": "5b9bed25"
+      "id": "cb89da6a"
     }
   ],
   "metadata": {

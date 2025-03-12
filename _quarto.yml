@@ -116,7 +116,7 @@ website:
             contents: Guide/Python/*.qmd
           - section: Guide/SAS/SAS-intro.qmd
             contents: Guide/SAS/*.qmd
-          - section: Guide/Stata/Satat-intro.qmd
+          - section: Guide/Stata/Stata-intro.qmd
             contents: Guide/Stata/*.qmd
       - section: Quarto/quarto-intro.qmd
         contents: Quarto/*.qmd
