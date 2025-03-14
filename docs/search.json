@@ -600,13 +600,13 @@
   {
     "objectID": "Guide/SAS/SAS-intro.html",
     "href": "Guide/SAS/SAS-intro.html",
-    "title": "SAS introduction",
+    "title": "SAS",
     "section": "",
     "text": "SAS introduction\nSAS的历史很长，很强大，但是现代化做的一般（交互界面）。\n使用场景也是有限的，至少一般情况下用不上这么高级的工具。\n但是在某些领域又是极其重要的，像银行和药企，他们要追求足够的稳定和严谨，那么多年不曾有重大改变且一向以稳定著称的 SAS 自然可以很好的满足这一需求。\n\nSAS 对学术研究的支持是比较不友好的。正版太贵，除非学校有提供，个人基本不可能使用正版，这里下载破解版，搞SID(SAS的授权证书)需要时间成本，还容易有安装问题，没错你可以选择使用SAS的教育版，不过谁用谁知道。\n安装比较麻烦，尤其是在Linux上，我曾用两周的时间折腾在 Linux 上安装一个 SAS ，最后以失败告终，且在互联网上找不到解决的方案，AI也束手无策。\nSAS不开源，意味着你看到某些论文，里面使用一些比较新的统计分析方法，SAS不大可能有现成代码可以使用，而 Python 和 R 则大几率有现成的包可以调用，这里也会节省不少时间。\nSAS的强大一方面是性能稳定，可以处理几十上百GB的数据而不容易崩溃，但是医学数据一般容量比较小，并不是非得SAS才能跑的动。\nSAS相比其他编程语言来说是独树一帜(奇葩)的存在（proc和data步独步天下），从语法上面来说并没有什么和它相接近的语言，相反 R 和 Python 则会和一般的编程语言例如 Java, C 等有一些类似的地方，对以后万一还需要学习其他语言或者学习以后新诞生的编程软件诞有一定帮助。\nSAS 的支持有限，互联网上关于 SAS 的使用信息较少，一般都在出版的书中有可复现的内容，也没有像 Python 和 R 等活跃的社区可以提供较多的互动和支持，编程遇上问题不容易找到答案。\n\n用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。\n每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "SAS introduction"
+      "SAS"
     ]
   },
   {
@@ -618,7 +618,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "SAS introduction",
+      "SAS",
       "使用SAS处理CLHLS数据"
     ]
   },
@@ -626,12 +626,12 @@
     "objectID": "Guide/SAS/2025-02-16-CLHLS.html#因变量的选取",
     "href": "Guide/SAS/2025-02-16-CLHLS.html#因变量的选取",
     "title": "使用SAS处理CLHLS数据",
-    "section": "因变量的选取",
-    "text": "因变量的选取\n老年人自评健康状况（SHEALTH）：对应变量 b12 （self-reported health），为有序变量（Ordinal），可用于衡量老年人对自身健康的主观评价，其赋值为：很好=1，好=2，一般=3，不好=4，很不好=5。\n生活自理能力（ADL）：对应变量 e1 （bathing，洗澡）、e2 （dressing，穿衣）、e3 （toileting，如厕）、e4 （indoor transferring，室内移动）、e5 （continence，大小便控制）、e6 （feeding，进食），均为有序变量（Ordinal）。通过这些变量的得分计算可体现老年人的生活自理能力。\n变量 e1b 、e2b 、e3b 、e4b 、e5b 、e6b 分别记录了在需要他人帮助情况下，这些活动的帮助持续天数，可作为辅助信息进一步分析生活自理能力情况。其变量赋值为：不需要帮扶=1，需要一个帮扶=2，需要多个帮扶=3，将其合并为ADL变量，相加值越低则表示生活自理能力越好，反之越差。\n工具型生活自理能力（IADL）：对应变量 e7 （able to go outside to visit neighbors，能外出拜访邻居）、e8 （able to go shopping by yourself，能自己去购物）、e9 （able to make food by yourself，能自己做饭）、e10 （able to wash clothes，能洗衣服）、e11 （able to walk one kilometer，能步行一公里）、e12 （able to carry 5kg weight，能搬运 5 公斤重物）、e13 （able to crouch and stand three times，能蹲下并站立三次）、e14 （able to take public transportation，能乘坐公共交通工具），均为有序变量（Ordinal）。这些变量可综合反映老年人在更复杂日常生活任务上的能力。其变量赋值为：可以=1，些微困难=2，不能=3，将其合并为IADL变量，相加值越低则表示工具型生活自理能力越好，反之越差。",
+    "section": "2.1 因变量的选取",
+    "text": "2.1 因变量的选取\n老年人自评健康状况（SHEALTH）：对应变量 b12 （self-reported health），为有序变量（Ordinal），可用于衡量老年人对自身健康的主观评价，其赋值为：很好=1，好=2，一般=3，不好=4，很不好=5。\n生活自理能力（ADL）：对应变量 e1 （bathing，洗澡）、e2 （dressing，穿衣）、e3 （toileting，如厕）、e4 （indoor transferring，室内移动）、e5 （continence，大小便控制）、e6 （feeding，进食），均为有序变量（Ordinal）。通过这些变量的得分计算可体现老年人的生活自理能力。\n变量 e1b 、e2b 、e3b 、e4b 、e5b 、e6b 分别记录了在需要他人帮助情况下，这些活动的帮助持续天数，可作为辅助信息进一步分析生活自理能力情况。其变量赋值为：不需要帮扶=1，需要一个帮扶=2，需要多个帮扶=3，将其合并为ADL变量，相加值越低则表示生活自理能力越好，反之越差。\n工具型生活自理能力（IADL）：对应变量 e7 （able to go outside to visit neighbors，能外出拜访邻居）、e8 （able to go shopping by yourself，能自己去购物）、e9 （able to make food by yourself，能自己做饭）、e10 （able to wash clothes，能洗衣服）、e11 （able to walk one kilometer，能步行一公里）、e12 （able to carry 5kg weight，能搬运 5 公斤重物）、e13 （able to crouch and stand three times，能蹲下并站立三次）、e14 （able to take public transportation，能乘坐公共交通工具），均为有序变量（Ordinal）。这些变量可综合反映老年人在更复杂日常生活任务上的能力。其变量赋值为：可以=1，些微困难=2，不能=3，将其合并为IADL变量，相加值越低则表示工具型生活自理能力越好，反之越差。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "SAS introduction",
+      "SAS",
       "使用SAS处理CLHLS数据"
     ]
   },
@@ -639,12 +639,12 @@
     "objectID": "Guide/SAS/2025-02-16-CLHLS.html#自变量的选取",
     "href": "Guide/SAS/2025-02-16-CLHLS.html#自变量的选取",
     "title": "使用SAS处理CLHLS数据",
-    "section": "自变量的选取",
-    "text": "自变量的选取\n经济支持：新设变量为 economic-support，对应的原始变量 f12a （how much did you receive from your son (s) or daughter (s)-in-law last year，去年从儿子或儿媳处收到多少钱）、f12b （how much did you receive from your daughter (s) or son (s)-in-law last year，去年从女儿或女婿处收到多少钱）、f12c （how much did you receive from your grandchild (ren) last year，去年从孙辈处收到多少钱），均为尺度变量（Scale），其中给与物质支持=99998，不知道=88888，缺失=99999，通过统计99998的个数来估计经济支持的程度，如果没有99998则赋值为0,。通过这些变量可衡量子女及孙辈在物质上给予老年人的经济支持。\n照料支持：新设变量为：residence，对应原始变量a51（co-residence of interviewee，受访者居住情况），有人同住=1，独居=2，住在机构=3；新设变量为living，对应变量 a52（how many people are living with you，有多少人居住在一起），数值型变量；新设变量 visit-fren，对应细分变量为f103a5 （frequent visits of the 1st child，第一个孩子的探访频率）、f103b5 （frequent visits of the 2nd child，第二个孩子的探访频率）、f103c5 （frequent visits of the 3rd child，第三个孩子的探访频率）等（一直到 f103k5 等关于各个孩子的探访频率变量），均为有序变量（Ordinal），有探访=1，没有=2，任一一个孩子=1即可认为有探访，同时给新变量赋值为1，如果没有则给新变量赋值为0。\n设置care-support变量，如果residence=1或visit-fren=1则给care-support赋值为1，否则赋值为0。\n用这些变量以老年人与子女相处和见面的频率来间接反映子女对老人的照料支持情况。\n情感支持（emotion support）：对应细分变量 f103a6 （contact with the 1st child，与第一个孩子的联系情况）、f103b6 （contact with the 2nd child，与第二个孩子的联系情况）、f103c6 （contact with the 3rd child，与第三个孩子的联系情况）等（一直到 f103k6 等关于各个孩子的联系情况变量），均为名义变量（Nominal）。根据这些变量所反映的与子女联系的情况来体现子女对老人的情感关怀。有联系=1，没联系=2，任一一个为1即可说明有孩子联系。",
+    "section": "2.2 自变量的选取",
+    "text": "2.2 自变量的选取\n经济支持：新设变量为 economic-support，对应的原始变量 f12a （how much did you receive from your son (s) or daughter (s)-in-law last year，去年从儿子或儿媳处收到多少钱）、f12b （how much did you receive from your daughter (s) or son (s)-in-law last year，去年从女儿或女婿处收到多少钱）、f12c （how much did you receive from your grandchild (ren) last year，去年从孙辈处收到多少钱），均为尺度变量（Scale），其中给与物质支持=99998，不知道=88888，缺失=99999，通过统计99998的个数来估计经济支持的程度，如果没有99998则赋值为0,。通过这些变量可衡量子女及孙辈在物质上给予老年人的经济支持。\n照料支持：新设变量为：residence，对应原始变量a51（co-residence of interviewee，受访者居住情况），有人同住=1，独居=2，住在机构=3；新设变量为living，对应变量 a52（how many people are living with you，有多少人居住在一起），数值型变量；新设变量 visit-fren，对应细分变量为f103a5 （frequent visits of the 1st child，第一个孩子的探访频率）、f103b5 （frequent visits of the 2nd child，第二个孩子的探访频率）、f103c5 （frequent visits of the 3rd child，第三个孩子的探访频率）等（一直到 f103k5 等关于各个孩子的探访频率变量），均为有序变量（Ordinal），有探访=1，没有=2，任一一个孩子=1即可认为有探访，同时给新变量赋值为1，如果没有则给新变量赋值为0。\n设置care-support变量，如果residence=1或visit-fren=1则给care-support赋值为1，否则赋值为0。\n用这些变量以老年人与子女相处和见面的频率来间接反映子女对老人的照料支持情况。\n情感支持（emotion support）：对应细分变量 f103a6 （contact with the 1st child，与第一个孩子的联系情况）、f103b6 （contact with the 2nd child，与第二个孩子的联系情况）、f103c6 （contact with the 3rd child，与第三个孩子的联系情况）等（一直到 f103k6 等关于各个孩子的联系情况变量），均为名义变量（Nominal）。根据这些变量所反映的与子女联系的情况来体现子女对老人的情感关怀。有联系=1，没联系=2，任一一个为1即可说明有孩子联系。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "SAS introduction",
+      "SAS",
       "使用SAS处理CLHLS数据"
     ]
   },
@@ -652,12 +652,12 @@
     "objectID": "Guide/SAS/2025-02-16-CLHLS.html#控制变量的选取",
     "href": "Guide/SAS/2025-02-16-CLHLS.html#控制变量的选取",
     "title": "使用SAS处理CLHLS数据",
-    "section": "控制变量的选取",
-    "text": "控制变量的选取\n年龄：问卷中的 trueage “真实年龄”，用于获取老年人的实际年龄。\n性别：问卷中 a1 “性别”，男性赋值为 1，女性赋值为 2。\n受教育程度：问卷中的 f1 “受教育年限”，数值型变量，但是其中如果赋值为88或99则表示“不知道”或“缺失”。\n退休前的工作类型：问卷中 f2 “60 岁之前的主要职业”，名义变量，专业技术人员=0，政府、机构或管理人员=1，商业、服务或工业工人=2，自雇人士=3，农、林、牧或渔业工人=4，家政工人=5，军事人员=6，从未工作过=7，其他=8。\n婚姻状况：问卷中 f41 “您目前的婚姻状态是？”，将 “已婚或与伴侣同居” 赋值为 1，其他赋值为 0。\n户口类型：问卷中的 hukou “hukou type of the elderly being visited，被访老人的户口类型”， “城镇” 赋值为 1，“农村” 赋值为 2。\n社保和养老保险：问卷中的 nf64a f64b f64c（do you have any social security and social insurance now? 你是否有任何社保和社会保险？），有任何一种社保或养老保险则赋值为 1，没有赋值为 0；。\n医疗保险：问卷中f64d f64e f64f f64h(是否有医疗保险)，有任何一种医疗保险则赋值为 1，没有赋值为 0。\n子女年龄：通过对问卷中的 f103a4 f103b4 到 f103m4 来检查该老人的子女的年龄，如果最后一个还活着的孩子年龄&gt;60，赋值为1，则表示该老人的子女也是老年状态，否则为0。\n慢性病：问卷中 g15a1 g15b1 一直到 g15x1 表示是否患有某种慢性病，有任何一种慢性病赋值为 1，否则为 0。\n抽烟：问卷中 g151 “你24小时内抽烟吗？”，是赋值为 1，否赋值为 2。\n喝酒：问卷中 g161 “你24小时内饮酒吗？”，是赋值为 1，否赋值为 2。\n体育锻炼：问卷中d91 d92 分别表示“目前是否锻炼？”和“过去是否锻炼过？”，是赋值为 1，否赋值为 2。",
+    "section": "2.3 控制变量的选取",
+    "text": "2.3 控制变量的选取\n年龄：问卷中的 trueage “真实年龄”，用于获取老年人的实际年龄。\n性别：问卷中 a1 “性别”，男性赋值为 1，女性赋值为 2。\n受教育程度：问卷中的 f1 “受教育年限”，数值型变量，但是其中如果赋值为88或99则表示“不知道”或“缺失”。\n退休前的工作类型：问卷中 f2 “60 岁之前的主要职业”，名义变量，专业技术人员=0，政府、机构或管理人员=1，商业、服务或工业工人=2，自雇人士=3，农、林、牧或渔业工人=4，家政工人=5，军事人员=6，从未工作过=7，其他=8。\n婚姻状况：问卷中 f41 “您目前的婚姻状态是？”，将 “已婚或与伴侣同居” 赋值为 1，其他赋值为 0。\n户口类型：问卷中的 hukou “hukou type of the elderly being visited，被访老人的户口类型”， “城镇” 赋值为 1，“农村” 赋值为 2。\n社保和养老保险：问卷中的 nf64a f64b f64c（do you have any social security and social insurance now? 你是否有任何社保和社会保险？），有任何一种社保或养老保险则赋值为 1，没有赋值为 0；。\n医疗保险：问卷中f64d f64e f64f f64h(是否有医疗保险)，有任何一种医疗保险则赋值为 1，没有赋值为 0。\n子女年龄：通过对问卷中的 f103a4 f103b4 到 f103m4 来检查该老人的子女的年龄，如果最后一个还活着的孩子年龄&gt;60，赋值为1，则表示该老人的子女也是老年状态，否则为0。\n慢性病：问卷中 g15a1 g15b1 一直到 g15x1 表示是否患有某种慢性病，有任何一种慢性病赋值为 1，否则为 0。\n抽烟：问卷中 g151 “你24小时内抽烟吗？”，是赋值为 1，否赋值为 2。\n喝酒：问卷中 g161 “你24小时内饮酒吗？”，是赋值为 1，否赋值为 2。\n体育锻炼：问卷中d91 d92 分别表示“目前是否锻炼？”和“过去是否锻炼过？”，是赋值为 1，否赋值为 2。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "SAS introduction",
+      "SAS",
       "使用SAS处理CLHLS数据"
     ]
   },
@@ -665,12 +665,12 @@
     "objectID": "Guide/SAS/2025-02-16-CLHLS.html#纳入标准",
     "href": "Guide/SAS/2025-02-16-CLHLS.html#纳入标准",
     "title": "使用SAS处理CLHLS数据",
-    "section": "纳入标准",
-    "text": "纳入标准\n年龄要求：年龄大于 60 岁，通过实际年龄 &gt; 60进行筛选。60 岁以上人群处于老年阶段，其健康、社会角色和代际关系有老年群体特征，符合本研究对老年人的研究范围。\n生育情况：生育过子女，通过反映生育子女数量的变量（如 f10 生育子女数），要求f10 &gt; 0。代际支持模式研究需存在代际关系，生育子女是形成代际关系的前提。\n子女存活情况：所生育子女中至少有一个存活。可通过检查如 f103a3 - f103m3 等表示孩子存活情况的变量，只要有一个值为表示存活的标识即可纳入（原始数据的变量赋值为存活=1，去世=2）。有在世子女才能开展代际支持研究。",
+    "section": "3.1 纳入标准",
+    "text": "3.1 纳入标准\n年龄要求：年龄大于 60 岁，通过实际年龄 &gt; 60进行筛选。60 岁以上人群处于老年阶段，其健康、社会角色和代际关系有老年群体特征，符合本研究对老年人的研究范围。\n生育情况：生育过子女，通过反映生育子女数量的变量（如 f10 生育子女数），要求f10 &gt; 0。代际支持模式研究需存在代际关系，生育子女是形成代际关系的前提。\n子女存活情况：所生育子女中至少有一个存活。可通过检查如 f103a3 - f103m3 等表示孩子存活情况的变量，只要有一个值为表示存活的标识即可纳入（原始数据的变量赋值为存活=1，去世=2）。有在世子女才能开展代际支持研究。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "SAS introduction",
+      "SAS",
       "使用SAS处理CLHLS数据"
     ]
   },
@@ -678,12 +678,12 @@
     "objectID": "Guide/SAS/2025-02-16-CLHLS.html#排除标准",
     "href": "Guide/SAS/2025-02-16-CLHLS.html#排除标准",
     "title": "使用SAS处理CLHLS数据",
-    "section": "排除标准",
-    "text": "排除标准\n关键变量缺失值：排除关键变量存在缺失值和无效值的样本。关键变量涵盖上述控制变量及后续分析的因变量、自变量等。缺失值或无效值会影响数据质量和分析结果准确性。\n不合理生育数量：生育子女数量超过合理上限（结合研究背景和数据确定，上限为 7）或者为缺失值，则需要排除（f10&gt;7 or f10 = null）。不合理生育数量可能是数据录入错误或特殊情况，干扰研究结果。\n通过多次尝试，以下是用于筛选的SAS代码：\n#| eval: false\n/* 导入必要的库 */\nproc import \n    datafile = 'C:\\Users\\asus\\Desktop\\test\\CLHLS\\Analysis-0214\\clhls_2018_15874.sav'  /* 请将这里替换为你的SAV文件的实际路径 */\n    out = raw_data \n    dbms = sav \n    replace;\nrun;\n\n/* 筛选合适的变量并排序 */\ndata selected_data;\n    set raw_data;\n    \n    /* 因变量 */\n    /* 老年人自评健康状况（SHEALTH） */\n    SHEALTH = b12;\n    \n    /* 生活自理能力（ADL） */\n    array adl_vars(*) e1 e2 e3 e4 e5 e6;\n    array adl_help_days(*) e1b e2b e3b e4b e5b e6b;\n    ADL = 0;\n    do i = 1 to dim(adl_vars);\n        if adl_help_days[i] = 1 then ADL = ADL + adl_vars[i];\n        else if adl_help_days[i] = 2 then ADL = ADL + adl_vars[i] * 2;\n        else if adl_help_days[i] = 3 then ADL = ADL + adl_vars[i] * 3;\n    end;\n    \n    /* 新增：生活自理障碍二分类变量 ADL2 */\n    ADL2 = 0;\n    do i = 1 to dim(adl_vars);\n        if adl_vars[i] &gt; 1 then do;\n            ADL2 = 1;\n            leave;\n        end;\n    end;\n    \n    /* 工具型生活自理能力（IADL） */\n    array iadl_vars(*) e7 e8 e9 e10 e11 e12 e13 e14;\n    IADL = 0;\n    do i = 1 to dim(iadl_vars);\n        IADL = IADL + iadl_vars[i];\n    end;\n    \n    /* 新增：工具型生活自理障碍二分类变量 IADL2 */\n    IADL2 = 0;\n    do i = 1 to dim(iadl_vars);\n        if iadl_vars[i] &gt; 1 then do;\n            IADL2 = 1;\n            leave;\n        end;\n    end;\n    \n    /* 自变量 */\n    /* 经济支持 */\n    array economic_vars(*) f12a f12b f12c;\n    economic_support = 0;\n    do i = 1 to dim(economic_vars);\n        if economic_vars[i] = 99998 then\n            economic_support = economic_support + 10000;\n        else if economic_vars[i] in (88888, 99999) then\n            continue; /* 跳过无效值或缺失值 */\n        else\n            economic_support = economic_support + economic_vars[i];\n    end;\n    \n    /* 照料支持 */\n    residence = a51;\n    living = a52;\n    array visit_freq(*) f103a5 f103b5 f103c5 f103d5 f103e5 f103f5 f103g5 f103h5 f103i5 f103j5 f103k5;\n    visit_fren = 0;\n    do i = 1 to dim(visit_freq);\n        if visit_freq[i] = 1 then do;\n            visit_fren = 1;\n            leave;\n        end;\n    end;\n    \n    /* 情感支持 */\n    array contact_vars(*) f103a6 f103b6 f103c6 f103d6 f103e6 f103f6 f103g6 f103h6 f103i6 f103j6 f103k6;\n    emotion_support = 2; /* 先假设没联系 */\n    do i = 1 to dim(contact_vars);\n        if contact_vars[i] = 1 then do;\n            emotion_support = 1;\n            leave;\n        end;\n    end;\n    \n    /* 控制变量 */\n    /* 年龄 */\n    age = trueage;\n    \n    /* 性别 */\n    gender = a1;\n    \n    /* 受教育程度 */\n    education = f1;\n    \n    /* 退休前的工作类型 */\n    job_type = f2;\n    \n    /* 婚姻状况 */\n    if f41 = 1 then marriage_status = 1; /* 假设 1 代表已婚或与伴侣同居 */\n    else marriage_status = 0;\n    \n    /* 户口类型 */\n    hukou_type = hukou;\n    \n    /* 社保和养老保险 */\n    if nf64a = 0 or f64b = 1 or f64c = 1 or f64i = 1 then social_insurance = 1;\n    else social_insurance = 0;\n    \n    /* 医疗保险 */\n    if f64d = 1 or f64e = 1 or f64g = 1 or f64h = 1 then medical_insurance = 1;\n    else medical_insurance = 0;\n    \n    /* 慢性病 */\n    array chronic_vars(*) g15a1 g15b1 g15c1 g15d1 g15e1 g15f1 g15g1 g15h1 g15i1 g15j1 g15k1 g15l1 g15m1 g15n1 g15o1 g15p1 g15q1 g15r1 g15s1 g15t1 g15u1 g15v1 g15w1 g15x1;\n    chronic_disease = 0;\n    do i = 1 to dim(chronic_vars);\n        if chronic_vars[i] = 1 then chronic_disease = 1;\n        if chronic_disease = 1 then leave;\n    end;\n    \n    /* 抽烟 */\n    smoking = g151;\n    \n    /* 喝酒 */\n    drinking = g161;\n    \n    /* 体育锻炼 */\n    if d91 = 1 or d92 = 1 then exercise = 1;\n    else exercise = 2;\n\n    /* 子女年龄状态 */\n    array child_ages(*) f103a4 f103b4 f103c4 f103d4 f103e4 f103f4 f103g4 f103h4 f103i4 f103j4 f103k4 f103l4 f103m4;\n    array child_alive(*) f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\n    last_alive_child_age = .;\n    do i = dim(child_ages) to 1 by -1;\n        if child_alive[i] = 1 then do;\n            last_alive_child_age = child_ages[i];\n            leave;\n        end;\n    end;\n    if last_alive_child_age &gt; 60 then child_elderly_status = 1;\n    else child_elderly_status = 0;\n\n    /* 生成 care - support 变量 */\n    if residence = 1 or visit_fren = 1 then care_support = 1;\n    else care_support = 0;\n    \n    /* 选择需要的变量 */\n    keep SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support \n         f10 age gender education job_type marriage_status hukou_type \n         social_insurance medical_insurance chronic_disease smoking drinking exercise\n         child_elderly_status care_support f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\nrun;\n\n/* 将筛选后的保存为 XLSX 格式文件 */\n/*\nproc export data=selected_data\n    outfile='C:\\Users\\asus\\Desktop\\test\\CLHLS\\CLHLS数据\\CLHLS数据\\clhls_2018_sort0220.xlsx'\n    dbms=xlsx\n    replace;\nrun;\n*/\n\n/*检查f10 生育子女数的分布情况*/\nproc freq data=selected_data;\n    tables f10;\nrun;\n\n/*检查子女存活状态*/\nproc freq data=selected_data;\n    tables f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\nrun;\n\n/* 样本筛选 */\ndata temp_data;\n    set selected_data;\n\n    /* 纳入标准 */\n    /* 年龄要求 */\n    /*age_include = (age &gt; 60);*/\n    /* 生育情况 */\n    fertility_include = (f10 &gt; 0);\n\n    /* 子女存活情况 */\n    array child_alive(*) f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\n    child_alive_include = 0;\n    do i = 1 to dim(child_alive);\n        if child_alive[i] = 1 then do;\n            child_alive_include = 1;\n            leave;\n        end;\n    end;\n    meet_include = fertility_include and child_alive_include;\n\n    /* 排除标准 */ \n    /* 关键变量缺失值检查 */\n    /*array key_vars(*) SHEALTH ADL IADL;*/\n    array key_vars(*) SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support \n                      age gender education job_type marriage_status hukou_type \n                      social_insurance medical_insurance chronic_disease smoking drinking exercise\n                      child_elderly_status care_support;\n    has_missing = 0;\n    do i = 1 to dim(key_vars);\n        if missing(key_vars[i]) then do;\n            has_missing = 1;\n            leave;\n        end;\n    end;\n    /* 不合理生育数量检查 */\n    unreasonable_fertility = (f10 &gt; 7 or missing(f10));\n    meet_exclude = has_missing or unreasonable_fertility;\n\n    /* 筛选符合条件的样本 */\n    if meet_include and not meet_exclude;\n\n\n    /* 移除临时判断变量 */\n    drop fertility_include child_alive_include has_missing unreasonable_fertility meet_include meet_exclude;\n    /*移除部分原始变量*/\n    drop f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\nrun;\n\n/*打印所有变量的频数分布表，检查是否含有异常值*/\n/*\nproc freq data=final_data;\n    tables _all_;\nrun;\n*/\n\n/*还需要删除含有的样本，即某些变量中赋值为9（not applicable）和88（don't know）的样本*/\n/*具体需要剔除变量满足这些条件的样本：SHEALTH&gt;8,ADL&gt;18,IADL&gt;24,residence&gt;3,eudcation&gt;22,smoking&gt;2,drinking&gt;2*/\n/* 删除满足特定条件的样本 */\ndata final_data;\n    set temp_data;\n    if (SHEALTH &lt;= 8) and (ADL &lt;= 18) and (IADL &lt;= 24) and (residence &lt;= 3) and (age&gt;=60) and (education &lt;= 22) and (smoking &lt;= 2) and (drinking &lt;= 2);\nrun;\n\nproc freq data=final_data;\n    tables _all_;\nrun;\n\n/* 保存筛选后的数据为 XLSX 格式 */\nproc export\n    data = final_data\n    outfile = 'C:\\Users\\asus\\Desktop\\test\\CLHLS\\Analysis-0214\\final_data.xlsx' /* 请替换为实际保存路径 */\n    dbms = xlsx\n    replace;\nrun;\n\n/* 对 age 变量进行分组 */\ndata final_data_grouped;\n    set final_data;\n    if age &lt; 70 then age_group = '60 - 69';\n    else if age &lt; 80 then age_group = '70 - 79';\n    else if age &lt; 90 then age_group = '80 - 89';\n    else age_group = '90+';\nrun;\n\n/* 探查每个变量的基本统计信息，查看是否有异常值 */\nproc means data=final_data n nmiss min max mean std;\n    var SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support\n        age gender education job_type marriage_status hukou_type\n        social_insurance medical_insurance chronic_disease smoking drinking exercise\n        child_elderly_status care_support;\nrun;\n\n/* 查看字符型变量的唯一值，看是否有异常字符 */\nproc freq data=final_data_grouped;\n    tables age_group gender education job_type marriage_status hukou_type;\nrun;\n\n/* 打印因变量、自变量和控制变量的频数分布表并汇总 */\nproc freq data=final_data_grouped noprint;\n    tables SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support\n           age_group gender education job_type marriage_status hukou_type\n           social_insurance medical_insurance chronic_disease smoking drinking exercise\n           child_elderly_status care_support / out=freq_summary;\nrun;\n\n/* 导出频数汇总表到 Excel */\nproc export\n    data = freq_summary\n    outfile = 'C:\\Users\\asus\\Desktop\\test\\CLHLS\\Analysis-0214\\frequency_summary.xlsx' /* 请替换为实际保存路径 */\n    dbms = xlsx\n    replace;\nrun;\nNotes:在Qmd中输入SAS代码时，不可以直接使用\n```{sas eval=false} your SAS code here ```\n进行标注，应使用如下形式：\n```{sas} #| eval: false your code here ```\n否则会在输出报错，使用了错误的\n``````````````````` :::\n原因是因为，在 Quarto 中，fenced div 的正确语法是：\n::: {.class-name}  Content here  :::",
+    "section": "3.2 排除标准",
+    "text": "3.2 排除标准\n关键变量缺失值：排除关键变量存在缺失值和无效值的样本。关键变量涵盖上述控制变量及后续分析的因变量、自变量等。缺失值或无效值会影响数据质量和分析结果准确性。\n不合理生育数量：生育子女数量超过合理上限（结合研究背景和数据确定，上限为 7）或者为缺失值，则需要排除（f10&gt;7 or f10 = null）。不合理生育数量可能是数据录入错误或特殊情况，干扰研究结果。\n通过多次尝试，以下是用于筛选的SAS代码：\n#| eval: false\n/* 导入必要的库 */\nproc import \n    datafile = 'C:\\Users\\asus\\Desktop\\test\\CLHLS\\Analysis-0214\\clhls_2018_15874.sav'  /* 请将这里替换为你的SAV文件的实际路径 */\n    out = raw_data \n    dbms = sav \n    replace;\nrun;\n\n/* 筛选合适的变量并排序 */\ndata selected_data;\n    set raw_data;\n    \n    /* 因变量 */\n    /* 老年人自评健康状况（SHEALTH） */\n    SHEALTH = b12;\n    \n    /* 生活自理能力（ADL） */\n    array adl_vars(*) e1 e2 e3 e4 e5 e6;\n    array adl_help_days(*) e1b e2b e3b e4b e5b e6b;\n    ADL = 0;\n    do i = 1 to dim(adl_vars);\n        if adl_help_days[i] = 1 then ADL = ADL + adl_vars[i];\n        else if adl_help_days[i] = 2 then ADL = ADL + adl_vars[i] * 2;\n        else if adl_help_days[i] = 3 then ADL = ADL + adl_vars[i] * 3;\n    end;\n    \n    /* 新增：生活自理障碍二分类变量 ADL2 */\n    ADL2 = 0;\n    do i = 1 to dim(adl_vars);\n        if adl_vars[i] &gt; 1 then do;\n            ADL2 = 1;\n            leave;\n        end;\n    end;\n    \n    /* 工具型生活自理能力（IADL） */\n    array iadl_vars(*) e7 e8 e9 e10 e11 e12 e13 e14;\n    IADL = 0;\n    do i = 1 to dim(iadl_vars);\n        IADL = IADL + iadl_vars[i];\n    end;\n    \n    /* 新增：工具型生活自理障碍二分类变量 IADL2 */\n    IADL2 = 0;\n    do i = 1 to dim(iadl_vars);\n        if iadl_vars[i] &gt; 1 then do;\n            IADL2 = 1;\n            leave;\n        end;\n    end;\n    \n    /* 自变量 */\n    /* 经济支持 */\n    array economic_vars(*) f12a f12b f12c;\n    economic_support = 0;\n    do i = 1 to dim(economic_vars);\n        if economic_vars[i] = 99998 then\n            economic_support = economic_support + 10000;\n        else if economic_vars[i] in (88888, 99999) then\n            continue; /* 跳过无效值或缺失值 */\n        else\n            economic_support = economic_support + economic_vars[i];\n    end;\n    \n    /* 照料支持 */\n    residence = a51;\n    living = a52;\n    array visit_freq(*) f103a5 f103b5 f103c5 f103d5 f103e5 f103f5 f103g5 f103h5 f103i5 f103j5 f103k5;\n    visit_fren = 0;\n    do i = 1 to dim(visit_freq);\n        if visit_freq[i] = 1 then do;\n            visit_fren = 1;\n            leave;\n        end;\n    end;\n    \n    /* 情感支持 */\n    array contact_vars(*) f103a6 f103b6 f103c6 f103d6 f103e6 f103f6 f103g6 f103h6 f103i6 f103j6 f103k6;\n    emotion_support = 2; /* 先假设没联系 */\n    do i = 1 to dim(contact_vars);\n        if contact_vars[i] = 1 then do;\n            emotion_support = 1;\n            leave;\n        end;\n    end;\n    \n    /* 控制变量 */\n    /* 年龄 */\n    age = trueage;\n    \n    /* 性别 */\n    gender = a1;\n    \n    /* 受教育程度 */\n    education = f1;\n    \n    /* 退休前的工作类型 */\n    job_type = f2;\n    \n    /* 婚姻状况 */\n    if f41 = 1 then marriage_status = 1; /* 假设 1 代表已婚或与伴侣同居 */\n    else marriage_status = 0;\n    \n    /* 户口类型 */\n    hukou_type = hukou;\n    \n    /* 社保和养老保险 */\n    if nf64a = 0 or f64b = 1 or f64c = 1 or f64i = 1 then social_insurance = 1;\n    else social_insurance = 0;\n    \n    /* 医疗保险 */\n    if f64d = 1 or f64e = 1 or f64g = 1 or f64h = 1 then medical_insurance = 1;\n    else medical_insurance = 0;\n    \n    /* 慢性病 */\n    array chronic_vars(*) g15a1 g15b1 g15c1 g15d1 g15e1 g15f1 g15g1 g15h1 g15i1 g15j1 g15k1 g15l1 g15m1 g15n1 g15o1 g15p1 g15q1 g15r1 g15s1 g15t1 g15u1 g15v1 g15w1 g15x1;\n    chronic_disease = 0;\n    do i = 1 to dim(chronic_vars);\n        if chronic_vars[i] = 1 then chronic_disease = 1;\n        if chronic_disease = 1 then leave;\n    end;\n    \n    /* 抽烟 */\n    smoking = g151;\n    \n    /* 喝酒 */\n    drinking = g161;\n    \n    /* 体育锻炼 */\n    if d91 = 1 or d92 = 1 then exercise = 1;\n    else exercise = 2;\n\n    /* 子女年龄状态 */\n    array child_ages(*) f103a4 f103b4 f103c4 f103d4 f103e4 f103f4 f103g4 f103h4 f103i4 f103j4 f103k4 f103l4 f103m4;\n    array child_alive(*) f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\n    last_alive_child_age = .;\n    do i = dim(child_ages) to 1 by -1;\n        if child_alive[i] = 1 then do;\n            last_alive_child_age = child_ages[i];\n            leave;\n        end;\n    end;\n    if last_alive_child_age &gt; 60 then child_elderly_status = 1;\n    else child_elderly_status = 0;\n\n    /* 生成 care - support 变量 */\n    if residence = 1 or visit_fren = 1 then care_support = 1;\n    else care_support = 0;\n    \n    /* 选择需要的变量 */\n    keep SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support \n         f10 age gender education job_type marriage_status hukou_type \n         social_insurance medical_insurance chronic_disease smoking drinking exercise\n         child_elderly_status care_support f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\nrun;\n\n/* 将筛选后的保存为 XLSX 格式文件 */\n/*\nproc export data=selected_data\n    outfile='C:\\Users\\asus\\Desktop\\test\\CLHLS\\CLHLS数据\\CLHLS数据\\clhls_2018_sort0220.xlsx'\n    dbms=xlsx\n    replace;\nrun;\n*/\n\n/*检查f10 生育子女数的分布情况*/\nproc freq data=selected_data;\n    tables f10;\nrun;\n\n/*检查子女存活状态*/\nproc freq data=selected_data;\n    tables f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\nrun;\n\n/* 样本筛选 */\ndata temp_data;\n    set selected_data;\n\n    /* 纳入标准 */\n    /* 年龄要求 */\n    /*age_include = (age &gt; 60);*/\n    /* 生育情况 */\n    fertility_include = (f10 &gt; 0);\n\n    /* 子女存活情况 */\n    array child_alive(*) f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\n    child_alive_include = 0;\n    do i = 1 to dim(child_alive);\n        if child_alive[i] = 1 then do;\n            child_alive_include = 1;\n            leave;\n        end;\n    end;\n    meet_include = fertility_include and child_alive_include;\n\n    /* 排除标准 */ \n    /* 关键变量缺失值检查 */\n    /*array key_vars(*) SHEALTH ADL IADL;*/\n    array key_vars(*) SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support \n                      age gender education job_type marriage_status hukou_type \n                      social_insurance medical_insurance chronic_disease smoking drinking exercise\n                      child_elderly_status care_support;\n    has_missing = 0;\n    do i = 1 to dim(key_vars);\n        if missing(key_vars[i]) then do;\n            has_missing = 1;\n            leave;\n        end;\n    end;\n    /* 不合理生育数量检查 */\n    unreasonable_fertility = (f10 &gt; 7 or missing(f10));\n    meet_exclude = has_missing or unreasonable_fertility;\n\n    /* 筛选符合条件的样本 */\n    if meet_include and not meet_exclude;\n\n\n    /* 移除临时判断变量 */\n    drop fertility_include child_alive_include has_missing unreasonable_fertility meet_include meet_exclude;\n    /*移除部分原始变量*/\n    drop f103a3 f103b3 f103c3 f103d3 f103e3 f103f3 f103g3 f103h3 f103i3 f103j3 f103k3 f103l3 f103m3;\nrun;\n\n/*打印所有变量的频数分布表，检查是否含有异常值*/\n/*\nproc freq data=final_data;\n    tables _all_;\nrun;\n*/\n\n/*还需要删除含有的样本，即某些变量中赋值为9（not applicable）和88（don't know）的样本*/\n/*具体需要剔除变量满足这些条件的样本：SHEALTH&gt;8,ADL&gt;18,IADL&gt;24,residence&gt;3,eudcation&gt;22,smoking&gt;2,drinking&gt;2*/\n/* 删除满足特定条件的样本 */\ndata final_data;\n    set temp_data;\n    if (SHEALTH &lt;= 8) and (ADL &lt;= 18) and (IADL &lt;= 24) and (residence &lt;= 3) and (age&gt;=60) and (education &lt;= 22) and (smoking &lt;= 2) and (drinking &lt;= 2);\nrun;\n\nproc freq data=final_data;\n    tables _all_;\nrun;\n\n/* 保存筛选后的数据为 XLSX 格式 */\nproc export\n    data = final_data\n    outfile = 'C:\\Users\\asus\\Desktop\\test\\CLHLS\\Analysis-0214\\final_data.xlsx' /* 请替换为实际保存路径 */\n    dbms = xlsx\n    replace;\nrun;\n\n/* 对 age 变量进行分组 */\ndata final_data_grouped;\n    set final_data;\n    if age &lt; 70 then age_group = '60 - 69';\n    else if age &lt; 80 then age_group = '70 - 79';\n    else if age &lt; 90 then age_group = '80 - 89';\n    else age_group = '90+';\nrun;\n\n/* 探查每个变量的基本统计信息，查看是否有异常值 */\nproc means data=final_data n nmiss min max mean std;\n    var SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support\n        age gender education job_type marriage_status hukou_type\n        social_insurance medical_insurance chronic_disease smoking drinking exercise\n        child_elderly_status care_support;\nrun;\n\n/* 查看字符型变量的唯一值，看是否有异常字符 */\nproc freq data=final_data_grouped;\n    tables age_group gender education job_type marriage_status hukou_type;\nrun;\n\n/* 打印因变量、自变量和控制变量的频数分布表并汇总 */\nproc freq data=final_data_grouped noprint;\n    tables SHEALTH ADL ADL2 IADL IADL2 economic_support residence living visit_fren emotion_support\n           age_group gender education job_type marriage_status hukou_type\n           social_insurance medical_insurance chronic_disease smoking drinking exercise\n           child_elderly_status care_support / out=freq_summary;\nrun;\n\n/* 导出频数汇总表到 Excel */\nproc export\n    data = freq_summary\n    outfile = 'C:\\Users\\asus\\Desktop\\test\\CLHLS\\Analysis-0214\\frequency_summary.xlsx' /* 请替换为实际保存路径 */\n    dbms = xlsx\n    replace;\nrun;\nNotes:在Qmd中输入SAS代码时，不可以直接使用\n```{sas eval=false} your SAS code here ```\n进行标注，应使用如下形式：\n```{sas} #| eval: false your code here ```\n否则会在输出报错，使用了错误的\n``````````````````` :::\n原因是因为，在 Quarto 中，fenced div 的正确语法是：\n::: {.class-name}  Content here  :::",
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "SAS introduction",
+      "SAS",
       "使用SAS处理CLHLS数据"
     ]
   },
@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-03-10},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” March 10, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-03-14},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” March 14, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -1380,7 +1380,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction",
+      "Python",
       "用Python做生存分析和COX回归"
     ]
   },
@@ -1393,7 +1393,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction",
+      "Python",
       "用Python做生存分析和COX回归"
     ]
   },
@@ -1406,7 +1406,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction",
+      "Python",
       "用Python做生存分析和COX回归"
     ]
   },
@@ -1419,7 +1419,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction",
+      "Python",
       "用Python做生存分析和COX回归"
     ]
   },
@@ -1432,7 +1432,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction",
+      "Python",
       "用Python做生存分析和COX回归"
     ]
   },
@@ -1445,7 +1445,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction",
+      "Python",
       "用Python做生存分析和COX回归"
     ]
   },
@@ -1458,7 +1458,7 @@
     "crumbs": [
       "Home",
       "统计软件使用指南",
-      "Python introduction",
+      "Python",
       "用Python做生存分析和COX回归"
     ]
   },
@@ -1467,7 +1467,7 @@
     "href": "Guide/Stata/Stata-intro.html",
     "title": "Stata",
     "section": "",
-    "text": "关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。\n想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。\n等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。\n老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。\n回归正题，Stata 是一款用于数据科学的统计软件，其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。\nStata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。\n然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。",
+    "text": "关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。\n想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。\n等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。\n老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。\n回归正题，Stata 是一款用于数据科学的统计软件，其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。\nStata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。\n然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。",
     "crumbs": [
       "Home",
       "统计软件使用指南",
@@ -1563,6 +1563,84 @@
       "统计软件使用指南",
       "Stata",
       "Stata 做 ITSA 分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-14-Sankey-diagram.html",
+    "href": "Guide/Python/25-03-14-Sankey-diagram.html",
+    "title": "用Python做桑基图",
+    "section": "",
+    "text": "桑基图（Sankey diagram），即桑基能量分流图，也叫桑基能量平衡图。它是一种特定类型的流程图，概述图中延伸的分支的宽度对应数据流量的大小，通常应用于能源、材料成分、金融等数据的可视化分析。因1898年Matthew Henry Phineas Riall Sankey绘制的“蒸汽机的能源效率图”而闻名，此后便以其名字命名为“桑基图”。\nSankey diagrams are a data visualisation technique or flow diagram that emphasizes flow/movement/change from one state to another or one time to another, in which the width of the arrows is proportional to the flow rate of the depicted extensive property. The arrows being connected are called nodes and the connections are called links.\nSankey diagrams can also visualize the energy accounts, material flow accounts on a regional or national level, and cost breakdowns.The diagrams are often used in the visualization of material flow analysis.\nSankey diagrams emphasize the major transfers or flows within a system. They help locate the most important contributions to a flow. They often show conserved quantities within defined system boundaries.(Wikipedia contributors 2025)\n\n\n桑基图常用于可持续能源、物流、人口流动、资源分配等领域的数据可视化。它可以帮助用户直观地理解和分析复杂的流动和关系，从而支持决策和策划过程。\n\n\n\n\n节点：桑基图由一系列节点组成，每个节点代表一个特定的实体或类别。例如，节点可以代表不同的时间、地点和部门等。\n箭头：箭头表示流动的路径，从一个节点流向另一个节点。箭头的宽度通常表示流量或数量的大小。\n流量量级：桑基图可以显示不同节点之间的流量量级，通过箭头的宽度来表示。宽度越大，表示流量或数量越大。\n路径：桑基图可以显示多个节点之间的复杂路径，通过连接不同的节点和箭头来表示。\n颜色编码：桑基图可以使用颜色来编码不同的节点或流动路径，以帮助用户更好地理解和区分不同的实体或类别。\n\n\n\n\n在设计桑基图图表时，以下是一些需要注意的事项：\n\n数据准备：确保数据准备充分，包括节点和流量的数据。节点应该清晰明确，流量数据应该准确可靠。\n简洁明了：桑基图应该保持简洁明了，避免过多的节点和复杂的路径。过多的节点和路径可能会导致图表混乱不清晰，难以理解。\n良好的布局：选择合适的布局方式，使得节点和箭头的排列有一定的逻辑性。可以按照流动的方向或重要性进行布局。\n色彩选择：选择合适的色彩来区分不同的节点和流动路径。颜色应该鲜明对比，以便用户能够清晰地区分不同的实体或类别。\n箭头宽度控制：根据流量的大小，合理调整箭头的宽度。宽度应该能够直观地反映流量的差异，但也不能过于夸张。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python",
+      "用Python做桑基图"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-14-Sankey-diagram.html#桑基图的主要应用场景",
+    "href": "Guide/Python/25-03-14-Sankey-diagram.html#桑基图的主要应用场景",
+    "title": "用Python做桑基图",
+    "section": "",
+    "text": "桑基图常用于可持续能源、物流、人口流动、资源分配等领域的数据可视化。它可以帮助用户直观地理解和分析复杂的流动和关系，从而支持决策和策划过程。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python",
+      "用Python做桑基图"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-14-Sankey-diagram.html#桑基图的特点",
+    "href": "Guide/Python/25-03-14-Sankey-diagram.html#桑基图的特点",
+    "title": "用Python做桑基图",
+    "section": "",
+    "text": "节点：桑基图由一系列节点组成，每个节点代表一个特定的实体或类别。例如，节点可以代表不同的时间、地点和部门等。\n箭头：箭头表示流动的路径，从一个节点流向另一个节点。箭头的宽度通常表示流量或数量的大小。\n流量量级：桑基图可以显示不同节点之间的流量量级，通过箭头的宽度来表示。宽度越大，表示流量或数量越大。\n路径：桑基图可以显示多个节点之间的复杂路径，通过连接不同的节点和箭头来表示。\n颜色编码：桑基图可以使用颜色来编码不同的节点或流动路径，以帮助用户更好地理解和区分不同的实体或类别。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python",
+      "用Python做桑基图"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-14-Sankey-diagram.html#设计的注意事项",
+    "href": "Guide/Python/25-03-14-Sankey-diagram.html#设计的注意事项",
+    "title": "用Python做桑基图",
+    "section": "",
+    "text": "在设计桑基图图表时，以下是一些需要注意的事项：\n\n数据准备：确保数据准备充分，包括节点和流量的数据。节点应该清晰明确，流量数据应该准确可靠。\n简洁明了：桑基图应该保持简洁明了，避免过多的节点和复杂的路径。过多的节点和路径可能会导致图表混乱不清晰，难以理解。\n良好的布局：选择合适的布局方式，使得节点和箭头的排列有一定的逻辑性。可以按照流动的方向或重要性进行布局。\n色彩选择：选择合适的色彩来区分不同的节点和流动路径。颜色应该鲜明对比，以便用户能够清晰地区分不同的实体或类别。\n箭头宽度控制：根据流量的大小，合理调整箭头的宽度。宽度应该能够直观地反映流量的差异，但也不能过于夸张。",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python",
+      "用Python做桑基图"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-14-Sankey-diagram.html#本地python",
+    "href": "Guide/Python/25-03-14-Sankey-diagram.html#本地python",
+    "title": "用Python做桑基图",
+    "section": "2.1 本地Python",
+    "text": "2.1 本地Python\n安装相关的包和库：\n\npip install dash\npip install numpy\n\n\n2.1.1 本地运行示例\n在 Python 终端或编辑器运行后，可以在浏览器中输入 http://127.0.0.1:8051/ 进行查看。\n\n# -*- coding: utf-8 -*-\n\"\"\"\nCreated on Fri Mar 14 17:07:53 2025\n\n@author: asus\n\"\"\"\n\nimport dash\nfrom dash import html, dcc, Input, Output\nimport plotly.graph_objects as go\nimport dash_bootstrap_components as dbc\nimport numpy as np\nimport plotly.express as px\n \n \ndef create_complex_sankey():\n    # 示例数据\n    labels = [\"能源\", \"电力\", \"运输\", \"工业\", \"住宅\", \"商业\", \"损失\", \"可再生\", \"化石燃料\", \"核能\"]\n    sources = [0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]\n    targets = [1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 7, 8, 8, 9, 9, 7]\n    values = [8, 4, 2, 8, 4, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1]\n \n    # 创建桑基图\n    sankey_fig = go.Figure(data=[go.Sankey(\n        node=dict(\n            pad=15,\n            thickness=20,\n            line=dict(color=\"black\", width=0.5),\n            label=labels,\n            color=[\"#FF9999\", \"#66B3FF\", \"#99FF99\", \"#FFCC99\", \"#FF6666\", \"#66FF66\", \"#6666FF\", \"#FF66FF\", \"#66FFFF\", \"#FFFF66\"]\n        ),\n        link=dict(\n            source=sources,\n            target=targets,\n            value=values,\n            color=[\"rgba(255, 153, 153, 0.6)\", \"rgba(102, 179, 255, 0.6)\", \"rgba(153, 255, 153, 0.6)\", \"rgba(255, 204, 153, 0.6)\",\n                   \"rgba(255, 102, 102, 0.6)\", \"rgba(102, 255, 102, 0.6)\", \"rgba(102, 102, 255, 0.6)\", \"rgba(255, 102, 255, 0.6)\",\n                   \"rgba(102, 255, 255, 0.6)\", \"rgba(255, 255, 102, 0.6)\", \"rgba(255, 153, 153, 0.6)\", \"rgba(102, 179, 255, 0.6)\",\n                   \"rgba(153, 255, 153, 0.6)\", \"rgba(255, 204, 153, 0.6)\", \"rgba(255, 102, 102, 0.6)\", \"rgba(102, 255, 102, 0.6)\"]\n        )\n    )])\n \n    # 更新布局\n    sankey_fig.update_layout(\n        title='复杂桑基图示例',\n        font_size=10,\n        template='plotly_white'\n    )\n \n    return sankey_fig\n \napp = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])\n \napp.layout = html.Div([\n    html.H3(\"桑基图展示\", className=\"text-center mt-4 mb-3\"),\n    dcc.Graph(figure=create_complex_sankey())\n])\n \nif __name__ == \"__main__\":\n    app.run_server(debug=True, port=8051)",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python",
+      "用Python做桑基图"
+    ]
+  },
+  {
+    "objectID": "Guide/Python/25-03-14-Sankey-diagram.html#jupyter-实现",
+    "href": "Guide/Python/25-03-14-Sankey-diagram.html#jupyter-实现",
+    "title": "用Python做桑基图",
+    "section": "2.2 Jupyter 实现",
+    "text": "2.2 Jupyter 实现\n为了能在本网页中显示桑基图，需要在 jupyter 中运行该程序，那么除了相关的 jupyter 包需要被安装外，需要更换 dash 包为 jupyter-dash 。\n\n2.2.1 安装 jupyter-dash\n\npip install jupyter-dash\n\n\n\n2.2.2 运行程序\n\n# -*- coding: utf-8 -*-\n\"\"\"\nCreated on Fri Mar 14 17:07:53 2025\n\n@author: asus\n\"\"\"\n\nfrom jupyter_dash import JupyterDash  # 替换 dash\nfrom dash import html, dcc, Input, Output\nimport plotly.graph_objects as go\nimport dash_bootstrap_components as dbc\nimport numpy as np\nimport plotly.express as px\n\ndef create_complex_sankey():\n    labels = [\"能源\", \"电力\", \"运输\", \"工业\", \"住宅\", \"商业\", \"损失\", \"可再生\", \"化石燃料\", \"核能\"]\n    sources = [0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]\n    targets = [1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 7, 8, 8, 9, 9, 7]\n    values = [8, 4, 2, 8, 4, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1]\n\n    sankey_fig = go.Figure(data=[go.Sankey(\n        node=dict(\n            pad=15,\n            thickness=20,\n            line=dict(color=\"black\", width=0.5),\n            label=labels,\n            color=[\"#FF9999\", \"#66B3FF\", \"#99FF99\", \"#FFCC99\", \"#FF6666\", \"#66FF66\", \"#6666FF\", \"#FF66FF\", \"#66FFFF\", \"#FFFF66\"]\n        ),\n        link=dict(\n            source=sources,\n            target=targets,\n            value=values,\n            color=[\"rgba(255, 153, 153, 0.6)\", \"rgba(102, 179, 255, 0.6)\", \"rgba(153, 255, 153, 0.6)\", \"rgba(255, 204, 153, 0.6)\",\n                   \"rgba(255, 102, 102, 0.6)\", \"rgba(102, 255, 102, 0.6)\", \"rgba(102, 102, 255, 0.6)\", \"rgba(255, 102, 255, 0.6)\",\n                   \"rgba(102, 255, 255, 0.6)\", \"rgba(255, 255, 102, 0.6)\", \"rgba(255, 153, 153, 0.6)\", \"rgba(102, 179, 255, 0.6)\",\n                   \"rgba(153, 255, 153, 0.6)\", \"rgba(255, 204, 153, 0.6)\", \"rgba(255, 102, 102, 0.6)\", \"rgba(102, 255, 102, 0.6)\"]\n        )\n    )])\n\n    sankey_fig.update_layout(\n        title='复杂桑基图示例',\n        font_size=10,\n        template='plotly_white'\n    )\n\n    return sankey_fig\n\n# 使用 JupyterDash 替代 Dash\napp = JupyterDash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])\n\napp.layout = html.Div([\n    html.H3(\"桑基图展示\", className=\"text-center mt-4 mb-3\"),\n    dcc.Graph(figure=create_complex_sankey())\n])\n\n# 在 Jupyter 中运行，mode='inline' 将图形嵌入笔记本\napp.run_server(mode='inline')",
+    "crumbs": [
+      "Home",
+      "统计软件使用指南",
+      "Python",
+      "用Python做桑基图"
     ]
   }
 ]

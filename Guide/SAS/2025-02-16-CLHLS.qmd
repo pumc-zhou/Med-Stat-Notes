@@ -1,8 +1,8 @@
 ---
 title: "使用SAS处理CLHLS数据"
 author: "simonzhou"
-number-sections: false
-toc: false
+number-sections: true
+toc: true
 date: "2025-02-16"
 bibliography: references.bib
 # format: html

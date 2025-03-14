@@ -3,6 +3,7 @@ title: "Stata 做 ITSA 分析"
 output: 
   html:
     code-fold: true
+    code-tools: true
 number-sections: true
 toc: true
 date: "2025-03-11"

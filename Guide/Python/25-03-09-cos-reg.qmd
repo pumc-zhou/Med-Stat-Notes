@@ -3,6 +3,7 @@ title: "用Python做生存分析和COX回归"
 output: 
   html:
     code-fold: true
+    code-tools: true
 number-sections: true
 toc: true
 date: "2025-03-09"
@@ -14,6 +15,9 @@ execute:
   eval: true      # 执行代码
   warning: false  # 隐藏警告信息
   message: false  # 隐藏消息
+tags:
+  - "Python"
+  - "数据可视化"
 ---
 
 # 生存分析
