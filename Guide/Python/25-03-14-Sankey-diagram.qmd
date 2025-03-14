@@ -158,6 +158,7 @@ pip install jupyter-dash
 ```{python}
 #| echo = true
 #| cache = true
+#| eval = false
 
 # -*- coding: utf-8 -*-
 """
@@ -216,6 +217,39 @@ app.layout = html.Div([
 
 # 在 Jupyter 中运行，mode='inline' 将图形嵌入笔记本
 app.run_server(mode='inline')
+```
+
+### 网页无法正确显示
+
+因为 GitHub 只支持静态网页，但是 桑基图 是一个通过 Flask 生成的动态 Web 应用，因为当本地生成后托管到 GitHub 后，是无法正确显示该图形。
+
+解决办法：
+
+1.  将网页托管到支持动态图像的服务器上，如 Render 等
+
+2.  改用静态图形
+
+```{python}
+#| echo = true
+#| cache = true
+
+import plotly.graph_objects as go
+
+def create_complex_sankey():
+    labels = ["能源", "电力", "运输", "工业", "住宅", "商业", "损失", "可再生", "化石燃料", "核能"]
+    sources = [0, 0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6]
+    targets = [1, 2, 3, 4, 5, 6, 4, 5, 6, 7, 7, 8, 8, 9, 9, 7]
+    values = [8, 4, 2, 8, 4, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1]
+    sankey_fig = go.Figure(data=[go.Sankey(
+        node=dict(pad=15, thickness=20, line=dict(color="black", width=0.5), label=labels),
+        link=dict(source=sources, target=targets, value=values)
+    )])
+    sankey_fig.update_layout(title='复杂桑基图示例', font_size=10, template='plotly_white')
+    return sankey_fig
+
+# 保存为静态 HTML 文件
+fig = create_complex_sankey()
+fig.write_html("sankey.html", include_plotlyjs='cdn')
 ```
 
 # 桑基图的不足
