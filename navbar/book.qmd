@@ -2,6 +2,7 @@
 title: "公共卫生相关的书籍"
 author: "Simonzhou"
 date: "2025-02-24"
+date-modified: "today"
 format: 
   html:           # 输出格式为 HTML
     self-contained: true  # 生成独立的 HTML 文件
@@ -14,6 +15,8 @@ format:
 # Maybe you will be interested
 
 对于刚接触统计的朋友，可以先看看《[女士品茶：统计学如何变革了科学和生活](https://weread.qq.com/web/reader/997328307239e753997d337#outline?noScroll=1)》这本书，也会他能激发你的一些对于统计学（家们）的兴趣，通过一些有趣的小故事，带你走进统计学的世界。
+
+2025-03-30，出于对 *THE LADY TASTING TEA* 的兴趣，后续将会整理一下出现的主要统计学家和他的主要成果（公式）。
 
 # Basic
 

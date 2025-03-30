@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Simonzhou">
 
-<title>统计软件使用历程 – 医学统计学笔记</title>
+<title>卡方检验 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,27 +58,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../Guide/R/R-intro.html" rel="next">
-<link href="../Learn/Bayes/01-Bayes-PGM.html" rel="prev">
-<link href="../images/logo.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../Learn/Basic/10-non-parameter-test.html" rel="next">
+<link href="../../Learn/Basic/08-anova-test.html" rel="prev">
+<link href="../../images/logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,27 +116,54 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="统计软件使用历程 – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
-<meta property="og:image" content="www.lazyzhou.cn/Guide/images/logo.png">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="卡方检验 – 医学统计学笔记">
+<meta property="og:image" content="www.lazyzhou.cn/Learn/Basic/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="统计软件使用历程 – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
+<meta name="twitter:title" content="卡方检验 – 医学统计学笔记">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../images/logo.png" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/logo.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">医学统计学习笔记</span>
     </a>
   </div>
@@ -146,7 +174,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -155,11 +183,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">    
         <li>
-    <a class="dropdown-item" href="../Learn/Basic/00-basic.html">
+    <a class="dropdown-item" href="../../Learn/Basic/00-basic.html">
  <span class="dropdown-text">Basic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Learn/Bayes/00-About-Bayes.html">
+    <a class="dropdown-item" href="../../Learn/Bayes/00-About-Bayes.html">
  <span class="dropdown-text">Bayes</span></a>
   </li>  
     </ul>
@@ -170,23 +198,23 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">    
         <li>
-    <a class="dropdown-item" href="../Guide/Guide-intro.html">
+    <a class="dropdown-item" href="../../Guide/Guide-intro.html">
  <span class="dropdown-text">Guide</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/Python/Python-intro.html">
+    <a class="dropdown-item" href="../../Guide/Python/Python-intro.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/R/R-intro.html">
+    <a class="dropdown-item" href="../../Guide/R/R-intro.html">
  <span class="dropdown-text">R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/SAS/SAS-intro.html">
+    <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/Stata/Stata-intro.html">
+    <a class="dropdown-item" href="../../Guide/Stata/Stata-intro.html">
  <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
@@ -197,7 +225,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">    
         <li>
-    <a class="dropdown-item" href="../Quarto/quarto-intro.html">
+    <a class="dropdown-item" href="../../Quarto/quarto-intro.html">
  <span class="dropdown-text">Intro</span></a>
   </li>  
     </ul>
@@ -205,7 +233,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../navbar/book.html"> 
+    <a class="nav-link" href="../../navbar/book.html"> 
 <span class="menu-text">Books</span></a>
   </li>  
 </ul>
@@ -226,7 +254,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Guide/Guide-intro.html">统计软件使用历程</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Learn/Basic/00-basic.html">医学统计学基础</a></li><li class="breadcrumb-item"><a href="../../Learn/Basic/00-basic.html">医学统计学基础</a></li><li class="breadcrumb-item"><a href="../../Learn/Basic/09-chi2-test.html">卡方检验</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -240,13 +268,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">主页</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -255,82 +283,82 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">关于卫生统计学</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/02-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/02-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">不同资料的统计描述</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/03-Random-events-probabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/03-Random-events-probabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">随机事件的概率</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/04-discrete-type-random-variable.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/04-discrete-type-random-variable.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">离散型随机变量的概率分布</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/05-random-variable-of-continuous-type.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/05-random-variable-of-continuous-type.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">连续型随机变量的概率分布</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/06-parameter-estimation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/06-parameter-estimation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">参数估计</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/07-parameter-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/07-parameter-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">参数检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/08-anova-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/08-anova-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">方差分析</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">卡方检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">非参数检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">简单线性相关和回归</span></a>
   </div>
 </li>
@@ -338,7 +366,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">贝叶斯与概率推理</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -347,13 +375,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">贝叶斯与概率推理</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Bayes/01-Bayes-PGM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Bayes/01-Bayes-PGM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">贝叶斯与概率图模型（PGM）</span></a>
   </div>
 </li>
@@ -363,7 +391,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link active">
+            <a href="../../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">统计软件使用历程</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -372,7 +400,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -381,19 +409,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">CLHLS Data Analysis by R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MacOS安装 R 和 Rstudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R</span></a>
   </div>
 </li>
@@ -401,7 +429,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -410,25 +438,25 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python和Stata处理一份卫生费用数据</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python做生存分析和COX回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python做桑基图</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python</span></a>
   </div>
 </li>
@@ -436,7 +464,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -445,19 +473,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">使用SAS处理CLHLS数据</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS Install</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">SAS</span></a>
   </div>
 </li>
@@ -465,7 +493,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stata</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -474,13 +502,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stata 做 ITSA 分析</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stata</span></a>
   </div>
 </li>
@@ -490,7 +518,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -499,19 +527,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Qmd config giscus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Quarto/quarto-LaTeX.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Quarto/quarto-LaTeX.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto与LaTeX的记录</span></a>
   </div>
 </li>
@@ -522,21 +550,65 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#非参数检验" id="toc-非参数检验" class="nav-link active" data-scroll-target="#非参数检验"><span class="header-section-number">1</span> 非参数检验</a>
+  <ul class="collapse">
+  <li><a href="#卡方检验" id="toc-卡方检验" class="nav-link" data-scroll-target="#卡方检验"><span class="header-section-number">1.1</span> 卡方检验</a>
+  <ul class="collapse">
+  <li><a href="#分类资料差异比较的方法" id="toc-分类资料差异比较的方法" class="nav-link" data-scroll-target="#分类资料差异比较的方法"><span class="header-section-number">1.1.1</span> 分类资料差异比较的方法</a></li>
+  <li><a href="#单个率的比较" id="toc-单个率的比较" class="nav-link" data-scroll-target="#单个率的比较"><span class="header-section-number">1.1.2</span> 单个率的比较</a></li>
+  </ul></li>
+  <li><a href="#率的比较" id="toc-率的比较" class="nav-link" data-scroll-target="#率的比较"><span class="header-section-number">1.2</span> 率的比较</a>
+  <ul class="collapse">
+  <li><a href="#交叉表数据的chi2检验" id="toc-交叉表数据的chi2检验" class="nav-link" data-scroll-target="#交叉表数据的chi2检验"><span class="header-section-number">1.2.1</span> 2×2交叉表数据的<span class="math inline">\(\chi^2\)</span>检验</a></li>
+  <li><a href="#配对设计数据的chi2检验" id="toc-配对设计数据的chi2检验" class="nav-link" data-scroll-target="#配对设计数据的chi2检验"><span class="header-section-number">1.2.2</span> 配对设计数据的<span class="math inline">\(\chi^2\)</span>检验</a></li>
+  </ul></li>
+  <li><a href="#独立性检验" id="toc-独立性检验" class="nav-link" data-scroll-target="#独立性检验"><span class="header-section-number">1.3</span> 独立性检验</a>
+  <ul class="collapse">
+  <li><a href="#交叉表的独立性检验" id="toc-交叉表的独立性检验" class="nav-link" data-scroll-target="#交叉表的独立性检验"><span class="header-section-number">1.3.1</span> 2×2交叉表的独立性检验</a></li>
+  <li><a href="#配对数据的独立性检验" id="toc-配对数据的独立性检验" class="nav-link" data-scroll-target="#配对数据的独立性检验"><span class="header-section-number">1.3.2</span> 2×2配对数据的独立性检验</a></li>
+  <li><a href="#rc样本率或构成比的比较" id="toc-rc样本率或构成比的比较" class="nav-link" data-scroll-target="#rc样本率或构成比的比较"><span class="header-section-number">1.3.3</span> R×C样本率或构成比的比较</a></li>
+  </ul></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Learn/Basic/09-chi2-test.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Learn/Basic/00-basic.html">医学统计学基础</a></li><li class="breadcrumb-item"><a href="../../Learn/Basic/00-basic.html">医学统计学基础</a></li><li class="breadcrumb-item"><a href="../../Learn/Basic/09-chi2-test.html">卡方检验</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">统计软件使用历程</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">卡方检验</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>Simonzhou </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025年2月27日</p>
+    </div>
+  </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">修改于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年3月30日</p>
+    </div>
+  </div>
     
   </div>
   
@@ -545,21 +617,229 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>一些统计软件的使用记录。</p>
-<p>最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。</p>
-<p>后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。</p>
-<p>21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。</p>
-<p>21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。</p>
-<p>23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛<a href="https://www.dxy.cn/">丁香园</a>的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。</p>
-<p>其实23年的时候posit已经开始看开发quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用quarto，和社区交流后无果，只能使用vscode来作为编辑器。</p>
-<p>直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。</p>
-<p>24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。</p>
-<p>25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。</p>
-<p>我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。</p>
+<section id="非参数检验" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 非参数检验</h1>
+<section id="卡方检验" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="卡方检验"><span class="header-section-number">1.1</span> 卡方检验</h2>
+<section id="分类资料差异比较的方法" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="分类资料差异比较的方法"><span class="header-section-number">1.1.1</span> 分类资料差异比较的方法</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+<col style="width: 14%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">资料特征</th>
+<th style="text-align: center;">数据特征</th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;">完全随机设计</th>
+<th style="text-align: left;"></th>
+<th style="text-align: left;">配对设计</th>
+<th style="text-align: left;">随机区组</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">单组</td>
+<td style="text-align: left;">两组</td>
+<td style="text-align: left;">多组</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">分类资料</td>
+<td style="text-align: center;">无序分类资料</td>
+<td style="text-align: left;">二项分布直接计算概率法、正态近似法（Z检验）、率的正态近似</td>
+<td style="text-align: left;">独立四格表<span class="math inline">\(\chi^2\)</span>检验、Fisher确切概率法</td>
+<td style="text-align: left;">R×C交叉表<span class="math inline">\(\chi^2\)</span>检验、Fisher确切概率法</td>
+<td style="text-align: left;">配对四格表<span class="math inline">\(\chi^2\)</span>检验，配对R×R列联表<span class="math inline">\(\chi^2\)</span>检验</td>
+<td style="text-align: left;">/</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"></td>
+<td style="text-align: center;">等级资料</td>
+<td style="text-align: left;">Wilcoxon符合秩和检验</td>
+<td style="text-align: left;">wilcoxon秩和检验</td>
+<td style="text-align: left;">Kruskal-Wallis H检验</td>
+<td style="text-align: left;">Wilcoxon符合秩和检验</td>
+<td style="text-align: left;">Friedman M秩和检验</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="单个率的比较" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="单个率的比较"><span class="header-section-number">1.1.2</span> 单个率的比较</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 40%">
+<col style="width: 59%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">方法</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">确切概率法</td>
+<td>1. 适用情形：样本量较小或<span class="math inline">\(\pi_0\)</span>不靠近0.5时作单侧检验的情形。<br>2. 计算公式：<br>(1)最多有k例阳性的概率：<span class="math inline">\(Pr(X\le k)\)</span><br>(2)最少有k例阳性的概率：<span class="math inline">\(Pr(X\ge k)\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">正态近似法</td>
+<td>1. 适用情形：样本量较大时，<span class="math inline">\(n\pi,n(1-\pi)\)</span>均大于5；<br>2. 计算公式：分子为<span class="math inline">\(p-\pi_0\)</span>，分母为率的标准误</td>
+</tr>
+</tbody>
+</table>
+<p><em>notice：</em>上式中p为样本率，<span class="math inline">\(\pi_0\)</span>为给的总体率（常为理论值或标准值），n为样本含量。</p>
+</section>
+</section>
+<section id="率的比较" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="率的比较"><span class="header-section-number">1.2</span> 率的比较</h2>
+<section id="交叉表数据的chi2检验" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="交叉表数据的chi2检验"><span class="header-section-number">1.2.1</span> 2×2交叉表数据的<span class="math inline">\(\chi^2\)</span>检验</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 35%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">方法</th>
+<th style="text-align: left;">情形</th>
+<th style="text-align: left;">计算公式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">独立四格表卡方检验</td>
+<td style="text-align: left;"><span class="math inline">\(n\ge 40\)</span>且所有的<span class="math inline">\(T\ge 5\)</span><br><span class="math inline">\(n\ge 40\)</span>且任一理论频数有<span class="math inline">\(1\le T&lt; 5\)</span><br>当<span class="math inline">\(n&lt;40\)</span>，或任一一个格子理论频数<span class="math inline">\(T&lt;1\)</span>时</td>
+<td style="text-align: left;">卡方基本公式、独立四格表专用公式<br>同上、但是需要校正<br>用四格表资料的Fisher确切概率法</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">正态近似法</td>
+<td style="text-align: left;"><span class="math inline">\(n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)\)</span>均大于5</td>
+<td style="text-align: left;">分子为样本率之差，分母为样本率差的标准误<br><span class="math inline">\(S_{p1-p2}\)</span>为两个样本率之差的标准误，<span class="math inline">\(p_c=\frac{x_1+x_2}{n_1+n_2}\)</span>为两样本的合并率</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">校正样本率的正态近似法</td>
+<td style="text-align: left;">当<span class="math inline">\(n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)\)</span>不太大时</td>
+<td style="text-align: left;">同上，但是需要对样本率实施“分子+2、分母+4”的校正</td>
+</tr>
+</tbody>
+</table>
+<p><em>notice：</em></p>
+<ol type="1">
+<li>正态近似法与卡方检验结果是很接近的。在日常计算时，因为计算简便，故常用卡方检验公式。</li>
+<li>四格表的自由度为1。</li>
+<li>四格表实际频数变动时，若周边合计数保持不变，则理论频数将不会产生变化。</li>
+<li>用<span class="math inline">\(n_R\)</span>和<span class="math inline">\(n_C\)</span>和n分别表示行合计、列合计和总合计，则计算每格理论数的公式为：<span class="math inline">\(T_{RC}=\frac{n_R×n_C}{n}\)</span>。</li>
+<li><span class="math inline">\(\chi^2\)</span>检验的基本公式：<span class="math inline">\(\chi^2=\sum \frac{(A-T)^2}{T}\)</span>。</li>
+<li>校正的<span class="math inline">\(\chi^2\)</span>检验的基本公式：<span class="math inline">\(\chi^2=\sum \frac{(|A-T|-0.5)^2}{T}\)</span>。</li>
+</ol>
+</section>
+<section id="配对设计数据的chi2检验" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="配对设计数据的chi2检验"><span class="header-section-number">1.2.2</span> 配对设计数据的<span class="math inline">\(\chi^2\)</span>检验</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">方法</th>
+<th style="text-align: left;">情形</th>
+<th style="text-align: left;">计算公式</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">配对四格表卡方检验</td>
+<td style="text-align: left;">当<span class="math inline">\((b+c)\ge 40\)</span>时<br>当<span class="math inline">\((b+c)&lt;40\)</span>时</td>
+<td style="text-align: left;">配对卡方检验专用公式<br>校正配对卡方检验专用公式</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">配对R×R交叉表数据的<span class="math inline">\(\chi^2\)</span>检验</td>
+<td style="text-align: left;">R（<span class="math inline">\(R\ge2\)</span>）</td>
+<td style="text-align: left;"><span class="math inline">\(T=\frac{k-1}{k}\sum_{i=1}^{k}\frac{(n_i-m_i)^2}{n_i+m_i-2A_{ii}}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><em>notice：</em></p>
+<ol type="1">
+<li>配对<span class="math inline">\(\chi^2\)</span>检验的基本公式：<span class="math inline">\(\chi^2=\sum \frac{(A-T)^2}{T}=\frac{(b-c)^2}{b+c}\)</span>。</li>
+<li>若b+c&lt;40,使用校正的配对<span class="math inline">\(\chi^2\)</span>检验的基本公式：<span class="math inline">\(\chi^2=\sum \frac{(|b-c|-1)^2}{b+c}\)</span>。</li>
+</ol>
+</section>
+</section>
+<section id="独立性检验" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="独立性检验"><span class="header-section-number">1.3</span> 独立性检验</h2>
+<section id="交叉表的独立性检验" class="level3" data-number="1.3.1">
+<h3 data-number="1.3.1" class="anchored" data-anchor-id="交叉表的独立性检验"><span class="header-section-number">1.3.1</span> 2×2交叉表的独立性检验</h3>
+<ol type="1">
+<li>建立假设检验，确定检验水准 <span class="math inline">\(H_0\)</span>:两变量之间相互独立 <span class="math inline">\(H_1\)</span>:两变量之间相互独立 <span class="math inline">\(\alpha=0.05\)</span></li>
+<li>计算检验统计量 [^2=_{i,j} ]</li>
+<li>确定P值，做出推断</li>
+<li>关联系数的计算 [r=]</li>
+</ol>
+</section>
+<section id="配对数据的独立性检验" class="level3" data-number="1.3.2">
+<h3 data-number="1.3.2" class="anchored" data-anchor-id="配对数据的独立性检验"><span class="header-section-number">1.3.2</span> 2×2配对数据的独立性检验</h3>
+</section>
+<section id="rc样本率或构成比的比较" class="level3" data-number="1.3.3">
+<h3 data-number="1.3.3" class="anchored" data-anchor-id="rc样本率或构成比的比较"><span class="header-section-number">1.3.3</span> R×C样本率或构成比的比较</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 62%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">类目</th>
+<th style="text-align: left;">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">假设检验</td>
+<td style="text-align: left;"><span class="math inline">\(H_0\)</span>：各组总体率（或构成比）相同。<span class="math inline">\(H_1\)</span>：各组总体率（或构成比）不同（不全相同）。</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">计算公式</td>
+<td style="text-align: left;">卡方检验基本公式，自由度为：<span class="math inline">\(v=(R-1)(C-1)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">数据要求</td>
+<td style="text-align: left;">1. 应用条件：不能有理论频数小于1的格子，或者不能有1/5以上的理论频数大于等于1且小于5 <br>2. 不能进行卡方检验时的解决办法：①增加样本量；②合并或删除理论频数比较小的行或列；③采用Fisher确切概率法</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">卡方分割</td>
+<td style="text-align: left;">多个率或多个频率分布比较的卡方检验，当结论为拒绝<span class="math inline">\(H_0\)</span>时，仅表示多组之间是有差别的。若需要明确研究是那两组之间存在差别，可做率的多重比较，将R×C表分割为若干个小的四格表进行检验，并且需要根据比较的次数合理地修正检验水准<span class="math inline">\(\alpha\)</span>，否则将人为地增大犯第一类错误的概率</td>
+</tr>
+</tbody>
+</table>
+<p><em>notice:</em></p>
+<ol type="1">
+<li>多个独立样本率的比较，根据R个独立样本的频率分布，是检验R个二项分布总体的概率是否相同，。假设对四个样本率进行比较，进行<span class="math inline">\(\chi^2\)</span>检验，则它的行数为4，列数为2，其自由度为<span class="math inline">\(v=(R-1)×(C-1)=(4-1)(2-1)=3\)</span>。</li>
+<li>针对行列表资料的<span class="math inline">\(\chi^2\)</span>检验，若有<span class="math inline">\(1/5\)</span>格子以上的理论频数小于5，即<span class="math inline">\(1\le T\le5\)</span>时，应考虑增加样本量，或结合专业知识对行或列进行合并。</li>
+</ol>
 
 
 <!-- -->
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1185,43 +1465,106 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../Learn/Bayes/01-Bayes-PGM.html" class="pagination-link" aria-label="贝叶斯与概率图模型（PGM）">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">贝叶斯与概率图模型（PGM）</span>
+      <a href="../../Learn/Basic/08-anova-test.html" class="pagination-link" aria-label="方差分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">方差分析</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Guide/R/R-intro.html" class="pagination-link" aria-label="R">
-        <span class="nav-page-text">R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Learn/Basic/10-non-parameter-test.html" class="pagination-link" aria-label="非参数检验">
+        <span class="nav-page-text">非参数检验</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "统计软件使用历程"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>一些统计软件的使用记录。</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "卡方检验"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-27"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> "today"</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true         # 在输出中显示代码</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  eval: true         # 执行代码</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false     # 隐藏警告信息</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false     # 隐藏消息</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true        # 启用代码缓存</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: true       # 冻结代码输出</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu"># 非参数检验</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛<span class="co">[</span><span class="ot">丁香园</span><span class="co">](https://www.dxy.cn/)</span>的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 卡方检验</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>其实23年的时候posit已经开始看开发quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用quarto，和社区交流后无果，只能使用vscode来作为编辑器。</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 分类资料差异比较的方法</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>| 资料特征 | 数据特征 |   | 完全随机设计 |   | 配对设计 | 随机区组 |</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>|:---------:|:---------:|:----------|:----------|:----------|:----------|:----------|</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>|  |  | 单组 | 两组 | 多组 |  |  |</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>| 分类资料 | 无序分类资料 | 二项分布直接计算概率法、正态近似法（Z检验）、率的正态近似 | 独立四格表$\chi^2$检验、Fisher确切概率法 | R×C交叉表$\chi^2$检验、Fisher确切概率法 | 配对四格表$\chi^2$检验，配对R×R列联表$\chi^2$检验 | / |</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>|  | 等级资料 | Wilcoxon符合秩和检验 | wilcoxon秩和检验 | Kruskal-Wallis H检验 | Wilcoxon符合秩和检验 | Friedman M秩和检验 |</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 单个率的比较</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>| 方法 | 内容 |</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>|:---------------------------:|-------------------------------------------|</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>| 确切概率法 | 1<span class="sc">\.</span> 适用情形：样本量较小或$\pi_0$不靠近0.5时作单侧检验的情形。&lt;br&gt;2. 计算公式：&lt;br&gt;(1)最多有k例阳性的概率：$Pr(X\le k)$&lt;br&gt;(2)最少有k例阳性的概率：$Pr(X\ge k)$ |</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>| 正态近似法 | 1<span class="sc">\.</span> 适用情形：样本量较大时，$n\pi,n(1-\pi)$均大于5；&lt;br&gt;2. 计算公式：分子为$p-\pi_0$，分母为率的标准误 |</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>*notice：*上式中p为样本率，$\pi_0$为给的总体率（常为理论值或标准值），n为样本含量。</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## 率的比较</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2×2交叉表数据的$\chi^2$检验</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>| 方法 | 情形 | 计算公式 |</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>|:-------------------:|:-------------------------|:-------------------------|</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>| 独立四格表卡方检验 | $n\ge 40$且所有的$T\ge 5$&lt;br&gt;$n\ge 40$且任一理论频数有$1\le T&lt; 5$&lt;br&gt;当$n&lt;40$，或任一一个格子理论频数$T&lt;1$时 | 卡方基本公式、独立四格表专用公式&lt;br&gt;同上、但是需要校正&lt;br&gt;用四格表资料的Fisher确切概率法 |</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>| 正态近似法 | $n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)$均大于5 | 分子为样本率之差，分母为样本率差的标准误&lt;br&gt;$S_{p1-p2}$为两个样本率之差的标准误，$p_c=\frac{x_1+x_2}{n_1+n_2}$为两样本的合并率 |</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>| 校正样本率的正态近似法 | 当$n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)$不太大时 | 同上，但是需要对样本率实施“分子+2、分母+4”的校正 |</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>*notice：*</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>正态近似法与卡方检验结果是很接近的。在日常计算时，因为计算简便，故常用卡方检验公式。</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>四格表的自由度为1。</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>四格表实际频数变动时，若周边合计数保持不变，则理论频数将不会产生变化。</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>用$n_R$和$n_C$和n分别表示行合计、列合计和总合计，则计算每格理论数的公式为：$T_{RC}=\frac{n_R×n_C}{n}$。</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>$\chi^2$检验的基本公式：$\chi^2=\sum \frac{(A-T)^2}{T}$。</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>校正的$\chi^2$检验的基本公式：$\chi^2=\sum \frac{(|A-T|-0.5)^2}{T}$。</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="fu">### 配对设计数据的$\chi^2$检验</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>| 方法 | 情形 | 计算公式 |</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>|:----------------------:|:-----------------------|:-----------------------|</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>| 配对四格表卡方检验 | 当$(b+c)\ge 40$时&lt;br&gt;当$(b+c)&lt;40$时 | 配对卡方检验专用公式&lt;br&gt;校正配对卡方检验专用公式 |</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>| 配对R×R交叉表数据的$\chi^2$检验 | R（$R\ge2$） | $T=\frac{k-1}{k}\sum_{i=1}^{k}\frac{(n_i-m_i)^2}{n_i+m_i-2A_{ii}}$ |</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>*notice：*</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>配对$\chi^2$检验的基本公式：$\chi^2=\sum \frac{(A-T)^2}{T}=\frac{(b-c)^2}{b+c}$。</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>若b+c<span class="sc">\&lt;</span>40,使用校正的配对$\chi^2$检验的基本公式：$\chi^2=\sum \frac{(|b-c|-1)^2}{b+c}$。</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## 独立性检验</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2×2交叉表的独立性检验</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>建立假设检验，确定检验水准 $H_0$:两变量之间相互独立 $H_1$:两变量之间相互独立 $\alpha=0.05$</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>计算检验统计量 <span class="sc">\[</span>\chi\^2=\sum<span class="sc">\_</span>{i,j}\frac{(A_{ij}-T_{ij})^2}{T_{ij}} <span class="sc">\]</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>确定P值，做出推断</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>关联系数的计算 <span class="sc">\[</span>r=\sqrt{\frac{\chi^2}{\chi^2+n}}<span class="sc">\]</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2×2配对数据的独立性检验</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### R×C样本率或构成比的比较</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>| 类目 | 内容 |</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>|:-------------------------:|:--------------------------------------------|</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>| 假设检验 | $H_0$：各组总体率（或构成比）相同。$H_1$：各组总体率（或构成比）不同（不全相同）。 |</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>| 计算公式 | 卡方检验基本公式，自由度为：$v=(R-1)(C-1)$ |</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>| 数据要求 | 1<span class="sc">\.</span> 应用条件：不能有理论频数小于1的格子，或者不能有1/5以上的理论频数大于等于1且小于5 &lt;br&gt;2. 不能进行卡方检验时的解决办法：①增加样本量；②合并或删除理论频数比较小的行或列；③采用Fisher确切概率法 |</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>| 卡方分割 | 多个率或多个频率分布比较的卡方检验，当结论为拒绝$H_0$时，仅表示多组之间是有差别的。若需要明确研究是那两组之间存在差别，可做率的多重比较，将R×C表分割为若干个小的四格表进行检验，并且需要根据比较的次数合理地修正检验水准$\alpha$，否则将人为地增大犯第一类错误的概率 |</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>*notice:*</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>多个独立样本率的比较，根据R个独立样本的频率分布，是检验R个二项分布总体的概率是否相同，。假设对四个样本率进行比较，进行$\chi^2$检验，则它的行数为4，列数为2，其自由度为$v=(R-1)×(C-1)=(4-1)(2-1)=3$。</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>针对行列表资料的$\chi^2$检验，若有$1/5$格子以上的理论频数小于5，即$1\le T\le5$时，应考虑增加样本量，或结合专业知识对行或列进行合并。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1235,7 +1578,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Guide-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Learn/Basic/09-chi2-test.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -1252,5 +1595,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

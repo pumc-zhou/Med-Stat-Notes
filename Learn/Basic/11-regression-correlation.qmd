@@ -2,6 +2,7 @@
 title: "简单线性相关和回归"
 author: "Simonzhou"
 date: "2025-02-27"
+date-modified: "today"
 #format: 
 #  html:           # 输出格式为 HTML
 #    self-contained: true  # 生成独立的 HTML 文件

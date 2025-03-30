@@ -715,12 +715,12 @@
   {
     "objectID": "Guide/Guide-intro.html",
     "href": "Guide/Guide-intro.html",
-    "title": "统计软件使用指南",
+    "title": "统计软件使用历程",
     "section": "",
-    "text": "一些统计软件的使用记录",
+    "text": "一些统计软件的使用记录。\n最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。\n后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。\n21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。\n21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。\n23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛丁香园的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。\n其实23年的时候posit已经开始看开发quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用quarto，和社区交流后无果，只能使用vscode来作为编辑器。\n直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。\n24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。\n25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。\n我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。",
     "crumbs": [
       "Home",
-      "统计软件使用指南"
+      "统计软件使用历程"
     ]
   },
   {
@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-03-14},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” March 14, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-03-30},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” March 30, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -1345,7 +1345,7 @@
     "href": "navbar/book.html",
     "title": "公共卫生相关的书籍",
     "section": "",
-    "text": "读的书有点乱，主要都在微信读书看，部分是纸质书，介绍主要以我看过或在看的书为主。\n\n1 Maybe you will be interested\n对于刚接触统计的朋友，可以先看看《女士品茶：统计学如何变革了科学和生活》这本书，也会他能激发你的一些对于统计学（家们）的兴趣，通过一些有趣的小故事，带你走进统计学的世界。\n\n\n2 Basic\n考研的话，除了人卫第八版是一个通用教材，其他的院校各有不同，比如说赵耐青、方积乾和贺佳，根据院校给的参考书目来选择，这几个人的书都买了看过一下，个人主要用过人卫版和姜晶梅的《医学统计学》，各有见长。\n\n\n3 Advance\n提升部分可以看看 Springer 出版的 Mathematical Models in Epidemiology ，2023年科学出版社出版了中文版 《流行病学中的数学模型》\n\nThe book is a comprehensive, self-contained introduction to the mathematical modeling and analysis of disease transmission models. It includes (i) an introduction to the main concepts of compartmental models including models with heterogeneous mixing of individuals and models for vector-transmitted diseases, (ii) a detailed analysis of models for important specific diseases, including tuberculosis, HIV/AIDS, influenza, Ebola virus disease, malaria, dengue fever and the Zika virus, (iii) an introduction to more advanced mathematical topics, including age structure, spatial structure, and mobility, and (iv) some challenges and opportunities for the future.\nThere are exercises of varying degrees of difficulty, and projects leading to new research directions. For the benefit of public health professionals whose contact with mathematics may not be recent, there is an appendix covering the necessary mathematical background. There are indications which sections require a strong mathematical background so that the book can be useful for both mathematical modelers and public health professionals.\n\nend."
+    "text": "读的书有点乱，主要都在微信读书看，部分是纸质书，介绍主要以我看过或在看的书为主。\n\n1 Maybe you will be interested\n对于刚接触统计的朋友，可以先看看《女士品茶：统计学如何变革了科学和生活》这本书，也会他能激发你的一些对于统计学（家们）的兴趣，通过一些有趣的小故事，带你走进统计学的世界。\n2025-03-30，出于对 THE LADY TASTING TEA 的兴趣，后续将会整理一下出现的主要统计学家和他的主要成果（公式）。\n\n\n2 Basic\n考研的话，除了人卫第八版是一个通用教材，其他的院校各有不同，比如说赵耐青、方积乾和贺佳，根据院校给的参考书目来选择，这几个人的书都买了看过一下，个人主要用过人卫版和姜晶梅的《医学统计学》，各有见长。\n\n\n3 Advance\n提升部分可以看看 Springer 出版的 Mathematical Models in Epidemiology ，2023年科学出版社出版了中文版 《流行病学中的数学模型》\n\nThe book is a comprehensive, self-contained introduction to the mathematical modeling and analysis of disease transmission models. It includes (i) an introduction to the main concepts of compartmental models including models with heterogeneous mixing of individuals and models for vector-transmitted diseases, (ii) a detailed analysis of models for important specific diseases, including tuberculosis, HIV/AIDS, influenza, Ebola virus disease, malaria, dengue fever and the Zika virus, (iii) an introduction to more advanced mathematical topics, including age structure, spatial structure, and mobility, and (iv) some challenges and opportunities for the future.\nThere are exercises of varying degrees of difficulty, and projects leading to new research directions. For the benefit of public health professionals whose contact with mathematics may not be recent, there is an appendix covering the necessary mathematical background. There are indications which sections require a strong mathematical background so that the book can be useful for both mathematical modelers and public health professionals.\n\nend."
   },
   {
     "objectID": "Quarto/quarto-intro.html",
@@ -1698,6 +1698,214 @@
   {
     "objectID": "Learn/Basic/10-regression-correlation.html#示例",
     "href": "Learn/Basic/10-regression-correlation.html#示例",
+    "title": "简单线性相关和回归",
+    "section": "\n3.3 示例",
+    "text": "3.3 示例\n假设有一组数据描述学生的身高 \\(X\\) 和体重 \\(Y\\)，并且假设 \\((X, Y)\\) 服从双元正态分布：\n\n3.3.1 均值向量：\n\\[\\mu = \\begin{pmatrix}\n170 \\\\\n65\n\\end{pmatrix}\\]\n表示身高的均值为 170 厘米，体重的均值为 65 千克。 •\n\n3.3.2 协方差矩阵：\n\\[\\Sigma = \\begin{pmatrix}\n100 & 20 \\\\\n20 & 25\n\\end{pmatrix}\\]\n这里，身高的方差为 100，体重的方差为 25，协方差为 20，表示身高和体重之间存在正相关关系。\n在这个示例中，如果我们知道某个学生的身高为 180 厘米，我们可以利用条件分布来预测他的体重，这个体重的预测值也是正态分布。\n我们用一个图形来展示：\n\n## 安装和加载所需的包\n#install.packages(\"plotly\")\n#install.packages(\"mvtnorm\")\nlibrary(plotly)\nlibrary(mvtnorm)\nlibrary(webshot2)\n\n# 创建网格数据\nx &lt;- seq(150, 190, length.out = 100)\n#身高150-190，等距的100个值\ny &lt;- seq(50, 80, length.out = 100)\n#体重50-80，等距的100个值\ngrid &lt;- expand.grid(X = x, Y = y)\n#生成 x 和 y 的所有组合，用于构建一个网格数据框，以便计算多元正态分布的概率密度。\n\n# 设置均值和协方差矩阵\nmu &lt;- c(170, 65)\n#设置双元正态分布的均值向量，表示均值分别为身高 170 cm 和体重 65 kg\n\nsigma &lt;- matrix(c(100, 20, 20, 25), nrow = 2)\n#设置协方差矩阵，表示身高的方差为 100，体重的方差为 25，身高和体重之间的协方差为 20\n\n# 计算概率密度\nz &lt;- dmvnorm(as.matrix(grid), mean = mu, sigma = sigma)\n#计算每个网格点上双元正态分布的概率密度。\n\n# 将概率密度矩阵转换为适合绘图的形状\nz_matrix &lt;- matrix(z, nrow = 100, ncol = 100)\n\n# 绘制三维表面图\nplot_ly(x = x, y = y, z = z_matrix, type = \"surface\") %&gt;%\n  layout(title = list(text = \"双元正态分布的三维概率密度图\", y=0.95),\n         scene = list(xaxis = list(title = \"身高 (cm)\"),\n                      yaxis = list(title = \"体重 (kg)\"),\n                      zaxis = list(title = \"概率密度\")))\n\n\nBinary normal distribution\n\n\n注：上述图像在被转换为PDF文件时，会发生报错：Quarto 文档中包含了一些生成 HTML 输出的函数（比如交互式图表或其他 HTML 小部件），但你当前的目标输出格式是 PDF。由于 PDF 是静态格式，无法直接渲染 HTML 内容，Quarto 会报错并停止执行。\n解决方案，此章节不转换为PDF格式，或者：\n如果你仍想输出 PDF，但希望将 HTML 小部件作为静态截图嵌入，可以安装 R 的 webshot 或 webshot2 包。Quarto 会利用它们将 HTML 内容转换为图片。\n需要安装：\n\ninstall.packages(\"webshot2\")\n\n然后在这段程序的前部导入该包：library(webshot2)。\nend.",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/10-non-parameter-test.html",
+    "href": "Learn/Basic/10-non-parameter-test.html",
+    "title": "非参数检验",
+    "section": "",
+    "text": "秩和检验（Rank-Sum Test）是一种非参数检验方法，用于比较两个独立样本的分布是否存在显著差异。它无需对数据分布作正态性假设，适用于数据偏离正态分布、样本量较小或数据为序数型变量的场景。\n常见的秩和检验包括：\n\nMann-Whitney U 检验（也称Wilcoxon秩和检验）：用于比较两个独立样本的中位数是否相等。\nWilcoxon 符号秩检验：用于两个配对样本的比较（类似配对t检验，但无需正态性假设）。\n\n\n\n\nMann-Whitney U 检验公式\n\n假设两组独立样本分别为 \\(X\\) 和 \\(Y\\)，样本量分别为 \\(n_1\\) 和 \\(n_2\\)。\n对两组样本合并并按大小排序，赋予秩次。计算两组的秩次和 \\(R_1\\) 和 \\(R_2\\)（分别为 $ X$ 和 \\(Y\\) 的秩次总和）。\n\n确定统计量T值：\n\n假设两组样本量 \\(n_1&lt;n_2\\)，一般情况下以样本量较小者\\(n_1\\)对应的秩和\\(T_1\\)为检验统计量\\(T\\)，当样本相等时可以选择任一组的秩和为\\(T\\)。1\n当两组中样本量较小者不低于10时，在\\(H_0\\)成立假设下，统计量\\(T\\)的抽样分布近似于正态分布，有\n\\[T\\approx N\\left(\\frac{n_1(n+1)}{2},\\frac{n_1 n_2(n+1)}{12} \\right)\\] 此时，Wilcoxon 秩和统计量在\\(H_0\\)下关于\\(\\mu=\\frac{n_1(n+1)}{2}\\)对称。\n如果没有或存在较少的“结”，将\\(T\\)标准化后为：\n\\[U=\\frac{T-\\frac{n_1(n+1)}{2}+C}{\\sqrt{\\frac{n_1 n_2(n+1)}{12}}}\\approx N(0,1)\\]\n其中，C为连续性校正系数，当\\(T&gt;\\frac{n(n+1)}{4}\\)时，\\(C=-0.5\\)，当\\(T&lt;\\frac{n(n+1)}{4}\\)时，\\(C=0.5\\)，当\\(T=\\frac{n(n+1)}{4}\\)时，\\(C=0\\)。\n若“结”的比例较多（&gt;25%），则用以下公式校正：\n\\[U_c=\\frac{T-\\frac{n_1(n+1)}{2}+C}{\\sqrt{\\frac{n_1 n_2}{12}[(n+1)-\\sum_\\limits{i=1}^{g}\\frac{t_i^3-t_i}{n(n-1)}]}}\\approx N(0,1)\\]\n\nWilcoxon 符号秩检验公式\n\n对配对样本 \\((X_i, Y_i)\\)，计算差值 \\(D_i = X_i - Y_i\\)，取非零差值的绝对值并排序（若差值为0则舍去不计，且减去相应的个数），赋予秩次 \\(R_i\\)。再根据差值的符号计算符号秩次和 \\(W\\)：\n\\[W = \\sum R_i \\cdot \\text{sign}(D_i)\\]\n检验统计量 \\(T\\) 是 \\(W\\) 的绝对值，依据表或正态分布计算显著性。\n正态近似法：\n当\\(n\\ge 30\\)时，有中心极限定理可知，当\\(H_0\\)成立时统计量\\(T\\)的抽样分布近似正态分布，有\n\\[T\\approx N \\left(\\frac{n(n+1)}{4},\\frac{n(n+1)(2n+1)}{24}\\right)\\] 其中，均数\\(\\mu=\\frac{n(n+1)}{4}\\)，方差\\(\\sigma^2=\\frac{n(n+1)(2n+1)}{24}\\)。 将T标准化后，近似服从标准正态分布，有\n\\[U=\\frac{T-\\frac{n(n+1)}{4}+C}{\\sqrt{\\frac{n(n+1)(2n+1)}{24}}}\\approx N(0,1)\\] 其中，n是差值不为0的对子数，C为连续性校正系数，当\\(T&gt;\\frac{n(n+1)}{4}\\)时，\\(C=-0.5\\)，当\\(T&lt;\\frac{n(n+1)}{4}\\)时，\\(C=0.5\\)，当\\(T=\\frac{n(n+1)}{4}\\)时，\\(C=0\\)。\n当N较大时，样本中可能存在较多的“结”，（如“结”所占比例大于25%），此时需要使用校正公式：\n\\[U=\\frac{T-\\frac{n(n+1)}{4}+C}{\\sqrt{\\frac{n(n+1)(2n+1)}{24}-\\frac{\\sum_\\limits{i=1}^g(t_i^3-t_i)}{48}}}\\approx N(0,1)\\] 其中，\\(t_i\\)为\\(i\\)个“结”中有相同秩次的个数，\\(g\\)是“结”的个数。\nWilcoxon符号秩检验的前提条件为数据是连续的且差值分布是对称的。\nnotice：秩和秩和的区别：秩是指全部观察值按某种顺序排列的位序，在一定程度上反映了等级的高低；而秩和则表示同组秩次之和，在一定程度上反映了等级的分布。2\n\n\n\n\nMann-Whitney U 检验：\n\n比较两个独立样本的中位数是否存在显著差异。\n\n适用于非正态分布数据或含有极端值的样本。\n\n示例：比较两种治疗方法的疗效（不同受试者组）。\n\nWilcoxon 符号秩检验：\n\n比较两个配对样本的中位数差异。\n\n适用于重复测量数据或实验设计中存在配对关系的场景。\n\n示例：同一批受试者在治疗前后血压的变化。\n\n\n\n\n\n\n秩和检验是非参数方法，对数据分布假设少，但效率可能低于参数方法（如t检验）在满足条件时的效果，如果满足参数检验的条件，应优先考虑使用参数检验的方法，否则会增加犯二类错误的概率。\n数据需要满足独立性假设，否则检验结果可能不准确。\n\nend.",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "非参数检验"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/10-non-parameter-test.html#秩和检验",
+    "href": "Learn/Basic/10-non-parameter-test.html#秩和检验",
+    "title": "非参数检验",
+    "section": "",
+    "text": "秩和检验（Rank-Sum Test）是一种非参数检验方法，用于比较两个独立样本的分布是否存在显著差异。它无需对数据分布作正态性假设，适用于数据偏离正态分布、样本量较小或数据为序数型变量的场景。\n常见的秩和检验包括：\n\nMann-Whitney U 检验（也称Wilcoxon秩和检验）：用于比较两个独立样本的中位数是否相等。\nWilcoxon 符号秩检验：用于两个配对样本的比较（类似配对t检验，但无需正态性假设）。\n\n\n\n\nMann-Whitney U 检验公式\n\n假设两组独立样本分别为 \\(X\\) 和 \\(Y\\)，样本量分别为 \\(n_1\\) 和 \\(n_2\\)。\n对两组样本合并并按大小排序，赋予秩次。计算两组的秩次和 \\(R_1\\) 和 \\(R_2\\)（分别为 $ X$ 和 \\(Y\\) 的秩次总和）。\n\n确定统计量T值：\n\n假设两组样本量 \\(n_1&lt;n_2\\)，一般情况下以样本量较小者\\(n_1\\)对应的秩和\\(T_1\\)为检验统计量\\(T\\)，当样本相等时可以选择任一组的秩和为\\(T\\)。1\n当两组中样本量较小者不低于10时，在\\(H_0\\)成立假设下，统计量\\(T\\)的抽样分布近似于正态分布，有\n\\[T\\approx N\\left(\\frac{n_1(n+1)}{2},\\frac{n_1 n_2(n+1)}{12} \\right)\\] 此时，Wilcoxon 秩和统计量在\\(H_0\\)下关于\\(\\mu=\\frac{n_1(n+1)}{2}\\)对称。\n如果没有或存在较少的“结”，将\\(T\\)标准化后为：\n\\[U=\\frac{T-\\frac{n_1(n+1)}{2}+C}{\\sqrt{\\frac{n_1 n_2(n+1)}{12}}}\\approx N(0,1)\\]\n其中，C为连续性校正系数，当\\(T&gt;\\frac{n(n+1)}{4}\\)时，\\(C=-0.5\\)，当\\(T&lt;\\frac{n(n+1)}{4}\\)时，\\(C=0.5\\)，当\\(T=\\frac{n(n+1)}{4}\\)时，\\(C=0\\)。\n若“结”的比例较多（&gt;25%），则用以下公式校正：\n\\[U_c=\\frac{T-\\frac{n_1(n+1)}{2}+C}{\\sqrt{\\frac{n_1 n_2}{12}[(n+1)-\\sum_\\limits{i=1}^{g}\\frac{t_i^3-t_i}{n(n-1)}]}}\\approx N(0,1)\\]\n\nWilcoxon 符号秩检验公式\n\n对配对样本 \\((X_i, Y_i)\\)，计算差值 \\(D_i = X_i - Y_i\\)，取非零差值的绝对值并排序（若差值为0则舍去不计，且减去相应的个数），赋予秩次 \\(R_i\\)。再根据差值的符号计算符号秩次和 \\(W\\)：\n\\[W = \\sum R_i \\cdot \\text{sign}(D_i)\\]\n检验统计量 \\(T\\) 是 \\(W\\) 的绝对值，依据表或正态分布计算显著性。\n正态近似法：\n当\\(n\\ge 30\\)时，有中心极限定理可知，当\\(H_0\\)成立时统计量\\(T\\)的抽样分布近似正态分布，有\n\\[T\\approx N \\left(\\frac{n(n+1)}{4},\\frac{n(n+1)(2n+1)}{24}\\right)\\] 其中，均数\\(\\mu=\\frac{n(n+1)}{4}\\)，方差\\(\\sigma^2=\\frac{n(n+1)(2n+1)}{24}\\)。 将T标准化后，近似服从标准正态分布，有\n\\[U=\\frac{T-\\frac{n(n+1)}{4}+C}{\\sqrt{\\frac{n(n+1)(2n+1)}{24}}}\\approx N(0,1)\\] 其中，n是差值不为0的对子数，C为连续性校正系数，当\\(T&gt;\\frac{n(n+1)}{4}\\)时，\\(C=-0.5\\)，当\\(T&lt;\\frac{n(n+1)}{4}\\)时，\\(C=0.5\\)，当\\(T=\\frac{n(n+1)}{4}\\)时，\\(C=0\\)。\n当N较大时，样本中可能存在较多的“结”，（如“结”所占比例大于25%），此时需要使用校正公式：\n\\[U=\\frac{T-\\frac{n(n+1)}{4}+C}{\\sqrt{\\frac{n(n+1)(2n+1)}{24}-\\frac{\\sum_\\limits{i=1}^g(t_i^3-t_i)}{48}}}\\approx N(0,1)\\] 其中，\\(t_i\\)为\\(i\\)个“结”中有相同秩次的个数，\\(g\\)是“结”的个数。\nWilcoxon符号秩检验的前提条件为数据是连续的且差值分布是对称的。\nnotice：秩和秩和的区别：秩是指全部观察值按某种顺序排列的位序，在一定程度上反映了等级的高低；而秩和则表示同组秩次之和，在一定程度上反映了等级的分布。2\n\n\n\n\nMann-Whitney U 检验：\n\n比较两个独立样本的中位数是否存在显著差异。\n\n适用于非正态分布数据或含有极端值的样本。\n\n示例：比较两种治疗方法的疗效（不同受试者组）。\n\nWilcoxon 符号秩检验：\n\n比较两个配对样本的中位数差异。\n\n适用于重复测量数据或实验设计中存在配对关系的场景。\n\n示例：同一批受试者在治疗前后血压的变化。\n\n\n\n\n\n\n秩和检验是非参数方法，对数据分布假设少，但效率可能低于参数方法（如t检验）在满足条件时的效果，如果满足参数检验的条件，应优先考虑使用参数检验的方法，否则会增加犯二类错误的概率。\n数据需要满足独立性假设，否则检验结果可能不准确。\n\nend.",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "非参数检验"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/10-non-parameter-test.html#footnotes",
+    "href": "Learn/Basic/10-non-parameter-test.html#footnotes",
+    "title": "非参数检验",
+    "section": "脚注",
+    "text": "脚注\n\n\n不是说一定要选择样本量较小者对应的秩和作为检验统计量，只是长期的使用习惯，造成了这一惯例。如果取较小的秩和计算后得到的\\(U&lt;u_{\\alpha/2}\\)，则表示拒绝\\(H_0\\)；相反，如果取较大的秩和计算后得到的\\(U&gt;u_{1-\\alpha/2}\\)，也会表示拒绝\\(H_0\\)，他们都表示检验统计量落在了拒绝域中。↩︎\n尽管非参数方法对总体分布形式未做要求，但如果我们知道总体的一些性质而不去利用，就会浪费许多有用的信息，最常见的就是分布的对称性，配对设计的 Wilcoxon 符号秩检验充分利用了差值分布对称性这一信息，这与尽可能地采用有效方法，利用尽可能多的信息进行统计分析的大原则相一致。↩︎",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "非参数检验"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/09-chi2-test.html",
+    "href": "Learn/Basic/09-chi2-test.html",
+    "title": "卡方检验",
+    "section": "",
+    "text": "资料特征\n数据特征\n\n完全随机设计\n\n配对设计\n随机区组\n\n\n\n\n\n\n单组\n两组\n多组\n\n\n\n\n分类资料\n无序分类资料\n二项分布直接计算概率法、正态近似法（Z检验）、率的正态近似\n独立四格表\\(\\chi^2\\)检验、Fisher确切概率法\nR×C交叉表\\(\\chi^2\\)检验、Fisher确切概率法\n配对四格表\\(\\chi^2\\)检验，配对R×R列联表\\(\\chi^2\\)检验\n/\n\n\n\n等级资料\nWilcoxon符合秩和检验\nwilcoxon秩和检验\nKruskal-Wallis H检验\nWilcoxon符合秩和检验\nFriedman M秩和检验\n\n\n\n\n\n\n\n\n\n\n\n\n\n方法\n内容\n\n\n\n\n确切概率法\n1. 适用情形：样本量较小或\\(\\pi_0\\)不靠近0.5时作单侧检验的情形。2. 计算公式：(1)最多有k例阳性的概率：\\(Pr(X\\le k)\\)(2)最少有k例阳性的概率：\\(Pr(X\\ge k)\\)\n\n\n正态近似法\n1. 适用情形：样本量较大时，\\(n\\pi,n(1-\\pi)\\)均大于5；2. 计算公式：分子为\\(p-\\pi_0\\)，分母为率的标准误\n\n\n\nnotice：上式中p为样本率，\\(\\pi_0\\)为给的总体率（常为理论值或标准值），n为样本含量。\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n方法\n情形\n计算公式\n\n\n\n\n独立四格表卡方检验\n\\(n\\ge 40\\)且所有的\\(T\\ge 5\\)\\(n\\ge 40\\)且任一理论频数有\\(1\\le T&lt; 5\\)当\\(n&lt;40\\)，或任一一个格子理论频数\\(T&lt;1\\)时\n卡方基本公式、独立四格表专用公式同上、但是需要校正用四格表资料的Fisher确切概率法\n\n\n正态近似法\n\\(n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)\\)均大于5\n分子为样本率之差，分母为样本率差的标准误\\(S_{p1-p2}\\)为两个样本率之差的标准误，\\(p_c=\\frac{x_1+x_2}{n_1+n_2}\\)为两样本的合并率\n\n\n校正样本率的正态近似法\n当\\(n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)\\)不太大时\n同上，但是需要对样本率实施“分子+2、分母+4”的校正\n\n\n\nnotice：\n\n正态近似法与卡方检验结果是很接近的。在日常计算时，因为计算简便，故常用卡方检验公式。\n四格表的自由度为1。\n四格表实际频数变动时，若周边合计数保持不变，则理论频数将不会产生变化。\n用\\(n_R\\)和\\(n_C\\)和n分别表示行合计、列合计和总合计，则计算每格理论数的公式为：\\(T_{RC}=\\frac{n_R×n_C}{n}\\)。\n\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(A-T)^2}{T}\\)。\n校正的\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(|A-T|-0.5)^2}{T}\\)。\n\n\n\n\n\n\n\n\n\n\n\n\n方法\n情形\n计算公式\n\n\n\n\n配对四格表卡方检验\n当\\((b+c)\\ge 40\\)时当\\((b+c)&lt;40\\)时\n配对卡方检验专用公式校正配对卡方检验专用公式\n\n\n配对R×R交叉表数据的\\(\\chi^2\\)检验\nR（\\(R\\ge2\\)）\n\\(T=\\frac{k-1}{k}\\sum_{i=1}^{k}\\frac{(n_i-m_i)^2}{n_i+m_i-2A_{ii}}\\)\n\n\n\nnotice：\n\n配对\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(A-T)^2}{T}=\\frac{(b-c)^2}{b+c}\\)。\n若b+c&lt;40,使用校正的配对\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(|b-c|-1)^2}{b+c}\\)。\n\n\n\n\n\n\n\n\n建立假设检验，确定检验水准 \\(H_0\\):两变量之间相互独立 \\(H_1\\):两变量之间相互独立 \\(\\alpha=0.05\\)\n计算检验统计量 [^2=_{i,j} ]\n确定P值，做出推断\n关联系数的计算 [r=]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n类目\n内容\n\n\n\n\n假设检验\n\\(H_0\\)：各组总体率（或构成比）相同。\\(H_1\\)：各组总体率（或构成比）不同（不全相同）。\n\n\n计算公式\n卡方检验基本公式，自由度为：\\(v=(R-1)(C-1)\\)\n\n\n数据要求\n1. 应用条件：不能有理论频数小于1的格子，或者不能有1/5以上的理论频数大于等于1且小于5 2. 不能进行卡方检验时的解决办法：①增加样本量；②合并或删除理论频数比较小的行或列；③采用Fisher确切概率法\n\n\n卡方分割\n多个率或多个频率分布比较的卡方检验，当结论为拒绝\\(H_0\\)时，仅表示多组之间是有差别的。若需要明确研究是那两组之间存在差别，可做率的多重比较，将R×C表分割为若干个小的四格表进行检验，并且需要根据比较的次数合理地修正检验水准\\(\\alpha\\)，否则将人为地增大犯第一类错误的概率\n\n\n\nnotice:\n\n多个独立样本率的比较，根据R个独立样本的频率分布，是检验R个二项分布总体的概率是否相同，。假设对四个样本率进行比较，进行\\(\\chi^2\\)检验，则它的行数为4，列数为2，其自由度为\\(v=(R-1)×(C-1)=(4-1)(2-1)=3\\)。\n针对行列表资料的\\(\\chi^2\\)检验，若有\\(1/5\\)格子以上的理论频数小于5，即\\(1\\le T\\le5\\)时，应考虑增加样本量，或结合专业知识对行或列进行合并。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "卡方检验"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/09-chi2-test.html#卡方检验",
+    "href": "Learn/Basic/09-chi2-test.html#卡方检验",
+    "title": "卡方检验",
+    "section": "",
+    "text": "资料特征\n数据特征\n\n完全随机设计\n\n配对设计\n随机区组\n\n\n\n\n\n\n单组\n两组\n多组\n\n\n\n\n分类资料\n无序分类资料\n二项分布直接计算概率法、正态近似法（Z检验）、率的正态近似\n独立四格表\\(\\chi^2\\)检验、Fisher确切概率法\nR×C交叉表\\(\\chi^2\\)检验、Fisher确切概率法\n配对四格表\\(\\chi^2\\)检验，配对R×R列联表\\(\\chi^2\\)检验\n/\n\n\n\n等级资料\nWilcoxon符合秩和检验\nwilcoxon秩和检验\nKruskal-Wallis H检验\nWilcoxon符合秩和检验\nFriedman M秩和检验\n\n\n\n\n\n\n\n\n\n\n\n\n\n方法\n内容\n\n\n\n\n确切概率法\n1. 适用情形：样本量较小或\\(\\pi_0\\)不靠近0.5时作单侧检验的情形。2. 计算公式：(1)最多有k例阳性的概率：\\(Pr(X\\le k)\\)(2)最少有k例阳性的概率：\\(Pr(X\\ge k)\\)\n\n\n正态近似法\n1. 适用情形：样本量较大时，\\(n\\pi,n(1-\\pi)\\)均大于5；2. 计算公式：分子为\\(p-\\pi_0\\)，分母为率的标准误\n\n\n\nnotice：上式中p为样本率，\\(\\pi_0\\)为给的总体率（常为理论值或标准值），n为样本含量。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "卡方检验"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/09-chi2-test.html#率的比较",
+    "href": "Learn/Basic/09-chi2-test.html#率的比较",
+    "title": "卡方检验",
+    "section": "",
+    "text": "方法\n情形\n计算公式\n\n\n\n\n独立四格表卡方检验\n\\(n\\ge 40\\)且所有的\\(T\\ge 5\\)\\(n\\ge 40\\)且任一理论频数有\\(1\\le T&lt; 5\\)当\\(n&lt;40\\)，或任一一个格子理论频数\\(T&lt;1\\)时\n卡方基本公式、独立四格表专用公式同上、但是需要校正用四格表资料的Fisher确切概率法\n\n\n正态近似法\n\\(n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)\\)均大于5\n分子为样本率之差，分母为样本率差的标准误\\(S_{p1-p2}\\)为两个样本率之差的标准误，\\(p_c=\\frac{x_1+x_2}{n_1+n_2}\\)为两样本的合并率\n\n\n校正样本率的正态近似法\n当\\(n_1p_1,n_1(1-p_1),n_2p_2,n_2(1-p_2)\\)不太大时\n同上，但是需要对样本率实施“分子+2、分母+4”的校正\n\n\n\nnotice：\n\n正态近似法与卡方检验结果是很接近的。在日常计算时，因为计算简便，故常用卡方检验公式。\n四格表的自由度为1。\n四格表实际频数变动时，若周边合计数保持不变，则理论频数将不会产生变化。\n用\\(n_R\\)和\\(n_C\\)和n分别表示行合计、列合计和总合计，则计算每格理论数的公式为：\\(T_{RC}=\\frac{n_R×n_C}{n}\\)。\n\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(A-T)^2}{T}\\)。\n校正的\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(|A-T|-0.5)^2}{T}\\)。\n\n\n\n\n\n\n\n\n\n\n\n\n方法\n情形\n计算公式\n\n\n\n\n配对四格表卡方检验\n当\\((b+c)\\ge 40\\)时当\\((b+c)&lt;40\\)时\n配对卡方检验专用公式校正配对卡方检验专用公式\n\n\n配对R×R交叉表数据的\\(\\chi^2\\)检验\nR（\\(R\\ge2\\)）\n\\(T=\\frac{k-1}{k}\\sum_{i=1}^{k}\\frac{(n_i-m_i)^2}{n_i+m_i-2A_{ii}}\\)\n\n\n\nnotice：\n\n配对\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(A-T)^2}{T}=\\frac{(b-c)^2}{b+c}\\)。\n若b+c&lt;40,使用校正的配对\\(\\chi^2\\)检验的基本公式：\\(\\chi^2=\\sum \\frac{(|b-c|-1)^2}{b+c}\\)。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "卡方检验"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/09-chi2-test.html#独立性检验",
+    "href": "Learn/Basic/09-chi2-test.html#独立性检验",
+    "title": "卡方检验",
+    "section": "",
+    "text": "建立假设检验，确定检验水准 \\(H_0\\):两变量之间相互独立 \\(H_1\\):两变量之间相互独立 \\(\\alpha=0.05\\)\n计算检验统计量 [^2=_{i,j} ]\n确定P值，做出推断\n关联系数的计算 [r=]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n类目\n内容\n\n\n\n\n假设检验\n\\(H_0\\)：各组总体率（或构成比）相同。\\(H_1\\)：各组总体率（或构成比）不同（不全相同）。\n\n\n计算公式\n卡方检验基本公式，自由度为：\\(v=(R-1)(C-1)\\)\n\n\n数据要求\n1. 应用条件：不能有理论频数小于1的格子，或者不能有1/5以上的理论频数大于等于1且小于5 2. 不能进行卡方检验时的解决办法：①增加样本量；②合并或删除理论频数比较小的行或列；③采用Fisher确切概率法\n\n\n卡方分割\n多个率或多个频率分布比较的卡方检验，当结论为拒绝\\(H_0\\)时，仅表示多组之间是有差别的。若需要明确研究是那两组之间存在差别，可做率的多重比较，将R×C表分割为若干个小的四格表进行检验，并且需要根据比较的次数合理地修正检验水准\\(\\alpha\\)，否则将人为地增大犯第一类错误的概率\n\n\n\nnotice:\n\n多个独立样本率的比较，根据R个独立样本的频率分布，是检验R个二项分布总体的概率是否相同，。假设对四个样本率进行比较，进行\\(\\chi^2\\)检验，则它的行数为4，列数为2，其自由度为\\(v=(R-1)×(C-1)=(4-1)(2-1)=3\\)。\n针对行列表资料的\\(\\chi^2\\)检验，若有\\(1/5\\)格子以上的理论频数小于5，即\\(1\\le T\\le5\\)时，应考虑增加样本量，或结合专业知识对行或列进行合并。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "卡方检验"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html",
+    "href": "Learn/Basic/11-regression-correlation.html",
+    "title": "简单线性相关和回归",
+    "section": "",
+    "text": "two variables relationship\n\n\n\n\n\nThe basic process of straight-line regression analysis\n\n\n\n\n\n\n\n\n名称\n适用条件\n\n\n\nPearson直线相关系数\n双变量正态分布的资料\\(\\rightarrow\\)定量\\(\\rightarrow\\)类比t检验、方差分析\n\n\n列联系数\n非等级资料\\(\\rightarrow\\)分类\\(\\rightarrow\\)类比卡方检验\n\n\nSpearman秩相关系数\n不满足双变量正态分布、分布未知、等级资料\\(\\rightarrow\\)定量+分类\\(\\rightarrow\\)类比秩和检验",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#两变量关系分析",
+    "href": "Learn/Basic/11-regression-correlation.html#两变量关系分析",
+    "title": "简单线性相关和回归",
+    "section": "",
+    "text": "two variables relationship",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#常见相关系数",
+    "href": "Learn/Basic/11-regression-correlation.html#常见相关系数",
+    "title": "简单线性相关和回归",
+    "section": "",
+    "text": "The basic process of straight-line regression analysis\n\n\n\n\n\n\n\n\n名称\n适用条件\n\n\n\nPearson直线相关系数\n双变量正态分布的资料\\(\\rightarrow\\)定量\\(\\rightarrow\\)类比t检验、方差分析\n\n\n列联系数\n非等级资料\\(\\rightarrow\\)分类\\(\\rightarrow\\)类比卡方检验\n\n\nSpearman秩相关系数\n不满足双变量正态分布、分布未知、等级资料\\(\\rightarrow\\)定量+分类\\(\\rightarrow\\)类比秩和检验",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#假设检验",
+    "href": "Learn/Basic/11-regression-correlation.html#假设检验",
+    "title": "简单线性相关和回归",
+    "section": "\n2.1 假设检验",
+    "text": "2.1 假设检验\n\n2.1.1 F检验\n\\(y_i\\)的总离均差平方和为：\n\\[SS_{yy}=\\sum_{i}(y_i-\\bar y)^2\\] 对其做分解，得到等式：\n\\[SS_{yy}=\\sum_{i}^{n}(\\hat y_i-\\bar y)^2+\\sum_{i}^{n}(y_i-\\hat y_i)^2\\] \\(\\sum_{i}^{n}(\\hat y_i-\\bar y)^2\\)为回归平方和（regression sum of squares），记为\\(SS_R\\)，表示回归估计值\\(\\hat y_i\\)与均数\\(\\bar y\\)的离差平方和，其公式为：\n\\[\n\\begin{align}\nSS_{yy} &= \\sum_{i=1}^{n}(\\hat y_i - \\bar y)^2 \\\\\n        &= \\sum_{i=1}^{n}[a + bx_i - (a + b\\bar x)]^2 \\\\\n        &= SS_{xx}b^2 \\\\\n        &= SS_{xy}b\n\\end{align}\n\\] 显然，回归平方和\\(SS_{R}\\)反映的是在y的总变异中由x与y的直线回归关系解释的那部分变异。\\(SS_R\\)值越大，说明回归直线的拟合效果就越好。\n\\(\\sum_{i}^{n}(y_i-\\hat y_i)^2\\)为残差平方和（residual sum of squares），记为\\(SS_E\\)，表示观测值\\(y_i\\)与回归估计值\\(\\hat y_i\\)的离差平方和，其公式为： \\[SS_E=\\sum_{i=1}^{n}(y_i-\\hat y_i)^2\\] \\(SS_E\\)反映了在总变异中扣除自变量x对因变量y的线性影响以后的其他因素（包括x对y的非线性影响和随机误差等）对y变异的影响，也就是在总平方和中无法用y和x线性回归关系解释的部分。\\(SS_E\\)值越小，说明回归直线的拟合效果就越好。\n对公式进行简化： \\[\\begin{align}\nSS_{yy}=&\\sum_{i}^{n}(\\hat y_i-\\bar y)^2+\\sum_{i}^{n}(y_i-\\hat y_i)^2\\\\\n=&SS_R+SS_E\n\\end{align}\\] 上述三个平方和，各有其相应的自由度\\(v\\)，并有如下关系： \\[v_{yy}=v_R+v_E\\\\\nv_{yy}=n-1,v_R=1,v_E=n-2\\]\n在\\(H_0\\)成立的条件下，有： \\[\\frac{SS_R}{\\sigma^2}\\sim \\chi^2(v_R),\\frac{SS_E}{\\sigma^2}\\sim \\chi^2(v_E)\\] 且\\(SS_R\\)和\\(SS_E\\)相互独立。\n检验统计量：\n\\[F=\\frac{SS_R/v_R}{SS_E/v_E}\\] 服从自由度\\(v_R=1,v_E=n-2\\)的F分布。如果y和x确实存在直线回归关系，那么回归所解释的变异\\(SS_R\\)应大于其他因素所解释的变异\\(SS_E\\)。由此可见，F检验正是建立在这个基础上的。\n对于给定的检验水准\\(\\alpha\\)， 如果\\(F&gt;F_{(v_R,v_E),1-\\alpha}\\)，则拒绝\\(H_0\\)，认为直线回归方程有统计学显著性；\n如果\\(F\\leq F_{(v_R,v_E),1-\\alpha}\\)，则不拒绝\\(H_0\\)，尚不能认为直线回归方程有统计学显著性。\n\n2.1.2 t检验法\n回归直线方程的稳定性程度取决于 \\(b\\) 的波动大小，即 \\(S_b\\) 的大小，这里的 \\(S_b\\) 为样本回归系数 \\(b\\) 的标准误的估计值。由于统计量 \\(b\\) 来自正态总体，故可从 \\(b\\) 的抽样分布出发构造 \\(t\\) 统计量对其进行假设检验。\n当 \\(H_0\\) ：\\(\\beta = 0\\) 成立时，检验统计量服从自由度 \\(v_E=n-2\\) 的 \\(t\\) 分布。\n\\[\nt=\\frac{b-0}{S_b}\\sim t(v_E)\n\\]\n其中：\n\\[\nS_b=\\frac{S_{yx}}{\\sqrt{SS_{xx}}}=\\sqrt{\\frac{S_{yx}/(n-2)}{SS_{xx}}}\n\\]\n\\(S_{yx}=\\sqrt{SS_E/(n-2)}\\) 为剩余标准差（residual standard deviation），是指扣除 \\(x\\) 对 \\(y\\) 的线性影响后，衡量观测值 \\(y\\) 对回归直线的平均离散程度，即回归直线 \\(\\hat y\\) 估计的精度。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#直线回归方程的区间估计",
+    "href": "Learn/Basic/11-regression-correlation.html#直线回归方程的区间估计",
+    "title": "简单线性相关和回归",
+    "section": "\n2.2 直线回归方程的区间估计",
+    "text": "2.2 直线回归方程的区间估计\n\n2.2.1 总体回归系数的置信区间\n\\[\nt = \\frac{b-\\beta}{S_b}\\sim t(v_E)\n\\]",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#直线相关与直线回归的比较",
+    "href": "Learn/Basic/11-regression-correlation.html#直线相关与直线回归的比较",
+    "title": "简单线性相关和回归",
+    "section": "\n2.3 直线相关与直线回归的比较",
+    "text": "2.3 直线相关与直线回归的比较\n\n\n\n\n\n\n\n区别与联系\n类目\n内容\n\n\n\n区别\n资料要求\n1. 线性相关要求X,Y服从双变量正态分布，对这种资料进行回归分析称为\\(\\textrm{II}\\)型回归，即可以把X当自变量，也可以当因变量，反之亦然。2. 线性回归要求Y在给定X值时服从正态分布，X可以是精确测量和严格控制的变量，这时的回归称为型回归，即不可以把X当因变量，Y当自变量进行回归分析。\n\n\n\n\n应用\n1. 线性相关用来表达两个变量间的互依关系，两个变量的研究地位是相等的，谁做X，谁做Y都可以；2. 线性回归用来表达两个变量间的依存变化的数量关系，即一个变量（为因变量Y）如何依存于另一个变量（为自变量X）而变化，两个变量的研究地位是不相等的。\n\n\n\n意义\n1. 相关系数r说明具有线性关系的两个变量之间的密切程度和相关方向；2. 回归系数b表示X每变化一个单位所导致的Y的平均变化量。\n\n\n\nr和b的取值范围\nr没有单位，而b有单位（其单位是：Y的单位/X的单位），所以导致两者的取值范围不同；\\(-1 \\le r \\le 1\\),\\(-\\infty&lt;b&lt;+\\infty\\)\n\n\n\n\nr和b的计算公式不同\n\n\\(r=\\frac{l_{xy}}{\\sqrt{l_{xx}l_{yy}}}\\),\\(b=\\frac{SS_{xy}}{SS_{xx}}\\)\n\n\n\n联系\n符号\n对于既可以做相关又可作回归的同一组资料，计算出r与b的正负号相同\n\n\n\n假设检验\n对于同一组资料，相关系数和回归系数的假设检验等价。即有：\\(t_b=t_r\\)\n\n\n\n\n相互换算\n对于同一组资料，相关系数和回归系数可通过下式换算：\\(b=r\\frac{S_Y}{S_X}\\)，式中的\\(S_X,S_Y\\)分别是\\(X,Y\\)的标准差\n\n\n\n用回归解释相关\n又决定系数\\(R^2=\\frac{SS_{回}}{SS_{总}}\\in [0,1]\\)当总平方和的大小决定了相关的密切程度，回归平方和越接近总平方和，则\\(R^2\\)越接近1，相关的效果越好，说明回归效果越好，相关的密切程度也越高。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#数学定义",
+    "href": "Learn/Basic/11-regression-correlation.html#数学定义",
+    "title": "简单线性相关和回归",
+    "section": "\n3.1 数学定义",
+    "text": "3.1 数学定义\n均值向量：对于双元正态变量 \\((X, Y)\\)，均值向量为：\n\\[\\mu = \\begin{pmatrix}\n\\mu_X \\\\\n\\mu_Y\n\\end{pmatrix}\\]\n其中 \\(\\mu_X\\) 和 \\(\\mu_Y\\) 分别是随机变量 \\(X\\) 和 \\(Y\\) 的均值。 2. 协方差矩阵：协方差矩阵为：\n\\[\\Sigma = \\begin{pmatrix}\n\\sigma_X^2 & \\sigma_{XY} \\\\\n\\sigma_{XY} & \\sigma_Y^2\n\\end{pmatrix}\\]\n其中 \\(\\sigma_X^2\\) 和 \\(\\sigma_Y^2\\) 是 \\(X\\) 和 \\(Y\\) 的方差，\\(\\sigma_{XY}\\) 是它们之间的协方差。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#性质",
+    "href": "Learn/Basic/11-regression-correlation.html#性质",
+    "title": "简单线性相关和回归",
+    "section": "\n3.2 性质",
+    "text": "3.2 性质\n\n边缘分布：\\(X\\) 和 \\(Y\\) 的边缘分布也是正态分布。\n条件分布：给定 \\(X\\) 的值，\\(Y\\) 的条件分布也是正态分布。\n相关性：协方差矩阵的值可以用来判断 X 和 Y 之间的相关性。如果 \\(\\sigma_{XY} &gt; 0\\)，则两者正相关；如果 \\(\\sigma_{XY} &lt; 0\\)，则负相关。",
+    "crumbs": [
+      "Home",
+      "医学统计学基础",
+      "医学统计学基础",
+      "简单线性相关和回归"
+    ]
+  },
+  {
+    "objectID": "Learn/Basic/11-regression-correlation.html#示例",
+    "href": "Learn/Basic/11-regression-correlation.html#示例",
     "title": "简单线性相关和回归",
     "section": "\n3.3 示例",
     "text": "3.3 示例\n假设有一组数据描述学生的身高 \\(X\\) 和体重 \\(Y\\)，并且假设 \\((X, Y)\\) 服从双元正态分布：\n\n3.3.1 均值向量：\n\\[\\mu = \\begin{pmatrix}\n170 \\\\\n65\n\\end{pmatrix}\\]\n表示身高的均值为 170 厘米，体重的均值为 65 千克。 •\n\n3.3.2 协方差矩阵：\n\\[\\Sigma = \\begin{pmatrix}\n100 & 20 \\\\\n20 & 25\n\\end{pmatrix}\\]\n这里，身高的方差为 100，体重的方差为 25，协方差为 20，表示身高和体重之间存在正相关关系。\n在这个示例中，如果我们知道某个学生的身高为 180 厘米，我们可以利用条件分布来预测他的体重，这个体重的预测值也是正态分布。\n我们用一个图形来展示：\n\n## 安装和加载所需的包\n#install.packages(\"plotly\")\n#install.packages(\"mvtnorm\")\nlibrary(plotly)\nlibrary(mvtnorm)\nlibrary(webshot2)\n\n# 创建网格数据\nx &lt;- seq(150, 190, length.out = 100)\n#身高150-190，等距的100个值\ny &lt;- seq(50, 80, length.out = 100)\n#体重50-80，等距的100个值\ngrid &lt;- expand.grid(X = x, Y = y)\n#生成 x 和 y 的所有组合，用于构建一个网格数据框，以便计算多元正态分布的概率密度。\n\n# 设置均值和协方差矩阵\nmu &lt;- c(170, 65)\n#设置双元正态分布的均值向量，表示均值分别为身高 170 cm 和体重 65 kg\n\nsigma &lt;- matrix(c(100, 20, 20, 25), nrow = 2)\n#设置协方差矩阵，表示身高的方差为 100，体重的方差为 25，身高和体重之间的协方差为 20\n\n# 计算概率密度\nz &lt;- dmvnorm(as.matrix(grid), mean = mu, sigma = sigma)\n#计算每个网格点上双元正态分布的概率密度。\n\n# 将概率密度矩阵转换为适合绘图的形状\nz_matrix &lt;- matrix(z, nrow = 100, ncol = 100)\n\n# 绘制三维表面图\nplot_ly(x = x, y = y, z = z_matrix, type = \"surface\") %&gt;%\n  layout(title = list(text = \"双元正态分布的三维概率密度图\", y=0.95),\n         scene = list(xaxis = list(title = \"身高 (cm)\"),\n                      yaxis = list(title = \"体重 (kg)\"),\n                      zaxis = list(title = \"概率密度\")))\n\n\nBinary normal distribution\n\n\n注：上述图像在被转换为PDF文件时，会发生报错：Quarto 文档中包含了一些生成 HTML 输出的函数（比如交互式图表或其他 HTML 小部件），但你当前的目标输出格式是 PDF。由于 PDF 是静态格式，无法直接渲染 HTML 内容，Quarto 会报错并停止执行。\n解决方案，此章节不转换为PDF格式，或者：\n如果你仍想输出 PDF，但希望将 HTML 小部件作为静态截图嵌入，可以安装 R 的 webshot 或 webshot2 包。Quarto 会利用它们将 HTML 内容转换为图片。\n需要安装：\n\ninstall.packages(\"webshot2\")\n\n然后在这段程序的前部导入该包：library(webshot2)。\nend.",

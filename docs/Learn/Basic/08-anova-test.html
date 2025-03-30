@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Learn/Basic/09-non-parameter-test.html" rel="next">
+<link href="../../Learn/Basic/09-chi2-test.html" rel="next">
 <link href="../../Learn/Basic/07-parameter-test.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -146,7 +146,7 @@ window.Quarto = {
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../images/logo.png" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">一份医学统计学习笔记</span>
+    <span class="navbar-title">医学统计学习笔记</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="搜索"></div>
@@ -194,6 +194,10 @@ window.Quarto = {
         <li>
     <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Guide/Stata/Stata-intro.html">
+ <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
 </li>
@@ -318,13 +322,19 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Learn/Basic/09-non-parameter-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">非参数检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Learn/Basic/10-regression-correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">简单线性相关和回归</span></a>
   </div>
 </li>
@@ -358,7 +368,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">统计软件使用指南</span></a>
+ <span class="menu-text">统计软件使用历程</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -367,7 +377,7 @@ window.Quarto = {
 <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R introduction</span></a>
+ <span class="menu-text">R</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -388,7 +398,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R introduction</span></a>
+ <span class="menu-text">R</span></a>
   </div>
 </li>
       </ul>
@@ -396,7 +406,7 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Python introduction</span></a>
+ <span class="menu-text">Python</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -410,8 +420,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做生存分析和COX回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做桑基图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Python introduction</span></a>
+ <span class="menu-text">Python</span></a>
   </div>
 </li>
       </ul>
@@ -419,7 +441,7 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SAS introduction</span></a>
+ <span class="menu-text">SAS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -440,7 +462,30 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SAS introduction</span></a>
+ <span class="menu-text">SAS</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata 做 ITSA 分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata</span></a>
   </div>
 </li>
       </ul>
@@ -451,11 +496,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
@@ -1267,8 +1312,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Learn/Basic/09-non-parameter-test.html" class="pagination-link" aria-label="非参数检验">
-        <span class="nav-page-text">非参数检验</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Learn/Basic/09-chi2-test.html" class="pagination-link" aria-label="卡方检验">
+        <span class="nav-page-text">卡方检验</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1320,7 +1365,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="fu">## 析因设计的总结</span></span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>| 类目 | 析因设计的方差分析 |</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>|:---------------------:|:------------------------------------------------|</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>|:----------------------:|:----------------------------------------------|</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>| **数据要求** | 因素之间的数据独立，样本数据满足正态性和方差齐性假设 |</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>| **检验目的** | 推断多个因素及其交互作用是否对观测指标存在显著影响 |</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>| **主效应假设** | $H_0$: 各因素的水平对观测指标的均数无显著影响；&lt;br&gt;$H_1$: 各因素的水平对观测指标的均数存在显著影响 |</span>
