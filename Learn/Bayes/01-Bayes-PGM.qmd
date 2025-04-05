@@ -2,6 +2,7 @@
 title: "贝叶斯与概率图模型（PGM）"
 author: "Simonzhou"
 date: "2025-02-28"
+date-modified: "today"
 #format: 
 #  html:           # 输出格式为 HTML
 #    self-contained: true  # 生成独立的 HTML 文件
@@ -85,7 +86,7 @@ plot(dag)
 
 原因：`Rgraphviz` 没有被正确的安装。
 
-需要从bioconductor中安装：
+需要从 `bioconductor` 中安装：
 
 ```{bash,eval = FALSE}
 > install.packages("Rgraphviz")
@@ -246,5 +247,49 @@ BiocManager::install("Rgraphviz", force = TRUE)
     The downloaded binary packages are in
             C:\Users\asus\AppData\Local\Temp\Rtmp2j7SlA\downloaded_packages
     ```
+
+## 灯泡机的简单概率图模型
+
+首先，为每一个节点定义取值：
+
+```{r,eval = FALSE}
+machine_val <- c("working", "broken")
+light_bulb_val <- c("good", "bad")
+```
+
+为两个随机变量定义百分比数值：
+
+```{r,eval = FALSE}
+machine_val <- c(99,1)
+light_bulb_val <- c(99,1,60,40)
+```
+
+使用 gRain 定义随机变量：
+
+```{r,eval=FALSE}
+library(gRain)
+M <- cptable(~machine, values = machine_prob,
+            levels = machine_val)
+L <- cptable(~light_bulb | machine,
+            values = light_bulb_prob,
+            levels = light_bulb_val)
+```
+
+这里的 `cptable` 表示条件概率表[^1]：它是离散型随机变量概率分布的内存表示[^2]。
+
+[^1]: 条件概率表（Conditional Probability Table, CPT），是一种表格形式的数据结构，用来描述离散型随机变量之间的概率关系。通常用于表示一个变量（或一组变量）的概率分布，可能依赖于其他变量（条件变量）。
+
+[^2]: “内存表示”指的是在计算机程序中，这种概率分布被组织和存储为一种数据结构（例如表格、数组或矩阵），以便程序可以高效地访问和操作这些概率值。具体来说，`cptable` 函数会根据你提供的参数（如 `values` 和 `levels`）生成一个对象，这个对象在内存中以某种形式存储了变量的概率分布。
+
+### 构建新的概率图模型
+
+```{r,eval=FALSE}
+plist <- compileCPT(list(M,L))
+plist
+```
+
+输出结果如上，这里可以清楚地看到之前定义的概率分布
+
+2025.04.05 再次尝试复现程序，失败，暂时停止概率图R程序的复现工作。
 
 end.
