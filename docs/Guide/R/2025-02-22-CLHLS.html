@@ -148,7 +148,7 @@ window.Quarto = {
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../images/logo.png" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="../../index.html">
-    <span class="navbar-title">一份医学统计学习笔记</span>
+    <span class="navbar-title">医学统计学习笔记</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="搜索"></div>
@@ -197,6 +197,10 @@ window.Quarto = {
     <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../Guide/Stata/Stata-intro.html">
+ <span class="dropdown-text">Stata</span></a>
+  </li>  
     </ul>
 </li>
   <li class="nav-item dropdown ">
@@ -232,7 +236,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/R/R-intro.html">R introduction</a></li><li class="breadcrumb-item"><a href="../../Guide/R/2025-02-22-CLHLS.html">CLHLS Data Analysis by R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用历程</a></li><li class="breadcrumb-item"><a href="../../Guide/R/R-intro.html">R</a></li><li class="breadcrumb-item"><a href="../../Guide/R/2025-02-22-CLHLS.html">CLHLS Data Analysis by R</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -320,13 +324,19 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Learn/Basic/09-non-parameter-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">非参数检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Learn/Basic/10-regression-correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">简单线性相关和回归</span></a>
   </div>
 </li>
@@ -360,7 +370,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">统计软件使用指南</span></a>
+ <span class="menu-text">统计软件使用历程</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -369,7 +379,7 @@ window.Quarto = {
 <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R introduction</span></a>
+ <span class="menu-text">R</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -390,7 +400,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R introduction</span></a>
+ <span class="menu-text">R</span></a>
   </div>
 </li>
       </ul>
@@ -398,7 +408,7 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Python introduction</span></a>
+ <span class="menu-text">Python</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -412,8 +422,20 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做生存分析和COX回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做桑基图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Python introduction</span></a>
+ <span class="menu-text">Python</span></a>
   </div>
 </li>
       </ul>
@@ -421,7 +443,7 @@ window.Quarto = {
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SAS introduction</span></a>
+ <span class="menu-text">SAS</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -442,7 +464,30 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SAS introduction</span></a>
+ <span class="menu-text">SAS</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata 做 ITSA 分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Stata</span></a>
   </div>
 </li>
       </ul>
@@ -453,11 +498,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
@@ -517,7 +562,7 @@ window.Quarto = {
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/R/2025-02-22-CLHLS.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用指南</a></li><li class="breadcrumb-item"><a href="../../Guide/R/R-intro.html">R introduction</a></li><li class="breadcrumb-item"><a href="../../Guide/R/2025-02-22-CLHLS.html">CLHLS Data Analysis by R</a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件使用历程</a></li><li class="breadcrumb-item"><a href="../../Guide/R/R-intro.html">R</a></li><li class="breadcrumb-item"><a href="../../Guide/R/2025-02-22-CLHLS.html">CLHLS Data Analysis by R</a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">CLHLS Data Analysis by R</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
 </div>
 
@@ -1724,8 +1769,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><script src="https://giscus.app/client.js" data-repo="zhoulvbang/comments" data-repo-id="R_kgDON9RmWA" data-category="General" data-category-id="DIC_kwDON9RmWM4CnLUH" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="../../Guide/R/R-intro.html" class="pagination-link" aria-label="R introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">R introduction</span>
+      <a href="../../Guide/R/R-intro.html" class="pagination-link" aria-label="R">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">R</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
