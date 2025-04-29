@@ -118,7 +118,7 @@ website:
           - section: Guide/SAS/SAS-intro.qmd
             contents: Guide/SAS/*.qmd
           - section: Guide/Stata/Stata-intro.qmd
-            contents: Guide/Stata/*.qmd
+            contents: Guide/Stata/*.{qmd,ipynb}
       - section: Quarto/quarto-intro.qmd
         contents: Quarto/*.qmd
 
