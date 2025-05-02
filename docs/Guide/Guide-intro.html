@@ -502,7 +502,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Guide/Stata/25-04-29-Stata-PY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Use Stata with Python</span></a>
+ <span class="menu-text">00-Use Stata in Quarto(ipynb)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Stata/25-05-02-stata-obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-数据的初步观测</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -579,7 +585,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年4月29日</p>
+      <p class="date-modified">2025年5月2日</p>
     </div>
   </div>
     
@@ -602,7 +608,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。</p>
 <p>我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。</p>
 <p>2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。</p>
-<p>2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 <code>.ipynb</code> 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 <code>.ipynb</code> 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功。</p>
+<p>2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 <code>.ipynb</code> 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 <code>.ipynb</code> 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 <code>.ipynb</code> 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。</p>
 
 
 <!-- -->
@@ -1275,7 +1281,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 <span class="in">`.ipynb`</span> 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 <span class="in">`.ipynb`</span> 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 <span class="in">`.ipynb`</span> 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 <span class="in">`.ipynb`</span> 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 <span class="in">`.ipynb`</span> 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simonzhou">
+<meta name="author" content="Simon Zhou">
 
-<title>Stata – 医学统计学笔记</title>
+<title>01-数据的初步观测 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="next">
-<link href="../../Guide/SAS/SAS-install.html" rel="prev">
+<link href="../../Quarto/quarto-intro.html" rel="next">
+<link href="../../Guide/Stata/25-04-29-Stata-PY.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -117,16 +117,15 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="Stata – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
+<meta property="og:title" content="01-数据的初步观测 – 医学统计学笔记">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="Stata – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="01-数据的初步观测 – 医学统计学笔记">
+<meta name="twitter:image" content="www.lazyzhou.cn/Guide/Stata/25-05-02-stata-obs_files/figure-html/cell-16-output-2.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +226,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-02-stata-obs.html">01-数据的初步观测</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -486,7 +485,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link active">
+            <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stata</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -507,13 +506,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-02-stata-obs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-02-stata-obs.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">01-数据的初步观测</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stata</span></a>
   </div>
 </li>
@@ -555,13 +554,33 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#主要观测命令" id="toc-主要观测命令" class="nav-link active" data-scroll-target="#主要观测命令"><span class="header-section-number">1</span> 主要观测命令</a>
+  <ul class="collapse">
+  <li><a href="#数据集的基本信息" id="toc-数据集的基本信息" class="nav-link" data-scroll-target="#数据集的基本信息"><span class="header-section-number">1.1</span> 数据集的基本信息</a></li>
+  <li><a href="#describe" id="toc-describe" class="nav-link" data-scroll-target="#describe"><span class="header-section-number">1.2</span> describe</a></li>
+  <li><a href="#count" id="toc-count" class="nav-link" data-scroll-target="#count"><span class="header-section-number">1.3</span> count</a></li>
+  <li><a href="#isid" id="toc-isid" class="nav-link" data-scroll-target="#isid"><span class="header-section-number">1.4</span> isid</a></li>
+  <li><a href="#unique" id="toc-unique" class="nav-link" data-scroll-target="#unique"><span class="header-section-number">1.5</span> unique</a></li>
+  <li><a href="#summarize" id="toc-summarize" class="nav-link" data-scroll-target="#summarize"><span class="header-section-number">1.6</span> summarize</a></li>
+  <li><a href="#list" id="toc-list" class="nav-link" data-scroll-target="#list"><span class="header-section-number">1.7</span> list</a></li>
+  <li><a href="#tabulate" id="toc-tabulate" class="nav-link" data-scroll-target="#tabulate"><span class="header-section-number">1.8</span> tabulate</a></li>
+  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram"><span class="header-section-number">1.9</span> histogram</a></li>
+  <li><a href="#scatter" id="toc-scatter" class="nav-link" data-scroll-target="#scatter"><span class="header-section-number">1.10</span> scatter</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-02-stata-obs.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-02-stata-obs.html">01-数据的初步观测</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Stata</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">01-数据的初步观测</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
 </div>
 
 
@@ -571,14 +590,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simonzhou </p>
+             <p>Simon Zhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年3月9日</p>
+      <p class="date">2025年5月2日</p>
     </div>
   </div>
   
@@ -590,17 +609,590 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
-<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
-<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
-<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
-<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
-<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
-<p>然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。</p>
+<section id="主要观测命令" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 主要观测命令</h1>
+<pre class="{stata}"><code>describe  // 描述数据集的基本信息
+summarize  // 描述变量的基本信息
+list  // 列出数据集的所有观测值
+browse  // 浏览数据集的所有观测值
+inspect  // 检查变量的分布情况
+tabulate  // 生成频数表
+histogram  // 生成直方图
+scatter  // 生成散点图</code></pre>
+<section id="数据集的基本信息" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="数据集的基本信息"><span class="header-section-number">1.1</span> 数据集的基本信息</h2>
+<p>Stata内置的 1978 automobile data（数据集名为 auto）是一个经典的示例数据集，常用于演示统计分析、回归建模等操作。</p>
+<div id="ea3ac544" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="3e751394" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sysuse auto, clear  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 加载内置数据集</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. sysuse auto, clear  
+(1978 automobile data)
+
+. // 加载内置数据集
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="describe" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="describe"><span class="header-section-number">1.2</span> describe</h2>
+<p>展示变量类型、格式、和任何的赋值/变量标签</p>
+<p>语法: <code>describe [varlist]</code></p>
+<p>注意: <code>[]</code> 意味着<code>[varlist]</code>是可选的，<code>varlist</code> 是变量列表，可以指定一个或多个变量。如果不指定，Stata将显示数据集中所有变量的信息。</p>
+<div id="b9446bf3" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>describe</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 描述数据集的变量信息</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. describe
+
+Contains data from C:\Program Files\Stata18/ado\base/a/auto.dta
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2022 17:45
+                                              (_dta has notes)
+-------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------
+make            str18   %-18s                 Make and model
+price           int     %8.0gc                Price
+mpg             int     %8.0g                 Mileage (mpg)
+rep78           int     %8.0g                 Repair record 1978
+headroom        float   %6.1f                 Headroom (in.)
+trunk           int     %8.0g                 Trunk space (cu. ft.)
+weight          int     %8.0gc                Weight (lbs.)
+length          int     %8.0g                 Length (in.)
+turn            int     %8.0g                 Turn circle (ft.)
+displacement    int     %8.0g                 Displacement (cu. in.)
+gear_ratio      float   %6.2f                 Gear ratio
+foreign         byte    %8.0g      origin     Car origin
+-------------------------------------------------------------------------------
+Sorted by: foreign
+
+. // 描述数据集的变量信息
+. </code></pre>
+</div>
+</div>
+<div id="f6525ec3" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 简要描述数据集的变量信息</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>describe ,short</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 简要描述数据集的变量信息
+. describe ,short
+
+Contains data from C:\Program Files\Stata18/ado\base/a/auto.dta
+ Observations:            74                  1978 automobile data
+    Variables:            12                  13 Apr 2022 17:45
+Sorted by: foreign
+
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="count" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="count"><span class="header-section-number">1.3</span> count</h2>
+<p>计算数据集中观测值的数量</p>
+<p>语法: <code>count [if] [in]</code></p>
+<div id="52641c32" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 计算数据集中的观测值数量</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>count</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 计算数据集中观测值价格大于<span class="dv">4000</span><span class="er">的数量</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>count <span class="cf">if</span> price <span class="op">&gt;</span> <span class="dv">4000</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 计算数据集中的观测值数量
+. count
+  74
+
+. // 计算数据集中观测值价格大于4000的数量
+. count if price &gt; 4000
+  63
+
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="isid" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="isid"><span class="header-section-number">1.4</span> isid</h2>
+<p>检查数据集中是否有重复的观测值（是否唯一标识符）</p>
+<p>语法: <code>isid varlist</code></p>
+<p>如果报错就说明不是，如果没有报错就说明是唯一标识符。</p>
+<div id="3fc98798" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 检查变量mpg是否是唯一标识符</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>isid mpg</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">SystemError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[7], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">stata</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">// 检查变量mpg是否是唯一标识符</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">isid mpg</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\IPython\core\interactiveshell.py:2543</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg ansi-bold">(self, magic_name, line, cell)</span>
+<span class="ansi-green-fg">   2541</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>builtin_trap:
+<span class="ansi-green-fg">   2542</span>     args <span style="color:rgb(98,98,98)">=</span> (magic_arg_s, cell)
+<span class="ansi-green-fg ansi-bold">-&gt; 2543</span>     result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   2545</span> <span style="font-style:italic;color:rgb(95,135,135)"># The code below prevents the output from being displayed</span>
+<span class="ansi-green-fg">   2546</span> <span style="font-style:italic;color:rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
+<span class="ansi-green-fg">   2547</span> <span style="font-style:italic;color:rgb(95,135,135)"># when the last Python token in the expression is a ';'.</span>
+<span class="ansi-green-fg">   2548</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(fn, magic<span style="color:rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\ipython\stpymagic.py:276</span>, in <span class="ansi-cyan-fg">PyStataMagic.stata</span><span class="ansi-blue-fg ansi-bold">(self, line, cell, local_ns)</span>
+<span class="ansi-green-fg">    274</span>     _stata<span style="color:rgb(98,98,98)">.</span>run(cell, quietly<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, inline<span style="color:rgb(98,98,98)">=</span>_config<span style="color:rgb(98,98,98)">.</span>stconfig[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">grshow</span><span style="color:rgb(175,0,0)">'</span>])
+<span class="ansi-green-fg">    275</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg ansi-bold">--&gt; 276</span>     <span class="ansi-yellow-bg">_stata</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cell</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">quietly</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">inline</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">_config</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">stconfig</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">grshow</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    278</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gw</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gh</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args:
+<span class="ansi-green-fg">    279</span>     _config<span style="color:rgb(98,98,98)">.</span>set_graph_size(gwidth, gheight)
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:325</span>, in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg ansi-bold">(cmd, quietly, echo, inline)</span>
+<span class="ansi-green-fg">    323</span> <span style="color:rgb(175,0,0)">        _stata_wrk2(</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">qui include </span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)"> + tmpf, None, False, 1)</span>
+<span class="ansi-green-fg">    324</span> <span style="color:rgb(175,0,0)">    else:</span>
+<span class="ansi-green-fg ansi-bold">--&gt; 325</span> <span style="color:rgb(175,0,0)">        _stata_wrk2(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">include </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">"</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg"> + tmpf, None, False, 1)</span>
+<span class="ansi-green-fg">    327</span> <span style="color:rgb(175,0,0)">if inline:</span>
+<span class="ansi-green-fg">    328</span> <span style="color:rgb(175,0,0)">    if config.get_stipython()&gt;=3:</span>
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:116</span>, in <span class="ansi-cyan-fg">_stata_wrk2</span><span class="ansi-blue-fg ansi-bold">(cmd, real_cmd, colon, mode)</span>
+<span class="ansi-green-fg">    114</span>         err <span style="color:rgb(98,98,98)">=</span> callback[<span style="color:rgb(98,98,98)">0</span>]
+<span class="ansi-green-fg">    115</span>         callback<span style="color:rgb(98,98,98)">.</span>clear()
+<span class="ansi-green-fg ansi-bold">--&gt; 116</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">SystemError</span>(err)
+<span class="ansi-green-fg">    117</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyboardInterrupt</span>:
+<span class="ansi-green-fg">    118</span>     outputter<span style="color:rgb(98,98,98)">.</span>done()
+
+<span class="ansi-red-fg ansi-bold">SystemError</span>: 
+. // 检查变量mpg是否是唯一标识符
+. isid mpg
+variable mpg does not uniquely identify the observations
+r(459);
+r(459);
+</pre>
+</div>
+</div>
+</div>
+<div id="951bbc89" class="cell">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 检查变量price是否是唯一标识符</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>isid price</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 检查变量mpg和price的组合是否是唯一标识符</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>isid mpg price</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. isid price
+
+. // 检查变量price是否是唯一标识符
+. isid mpg price
+
+. // 检查变量mpg和price的组合是否是唯一标识符
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="unique" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="unique"><span class="header-section-number">1.5</span> unique</h2>
+<p><code>unique</code> 是一个用户自定义命令，用于检查数据集中变量的唯一值，它不是自带的，需要用户进行安装。</p>
+<p>语法: <code>unique varlist</code></p>
+<p>它和 <code>isid</code> 的区别在于，<code>isid</code> 只检查唯一标识符，而 <code>unique</code> 可以检查任意变量的唯一值。</p>
+<p><code>isid</code> 在遇到重复值时会报错，而 <code>unique</code> 会返回一个包含唯一值的列表。</p>
+<div id="b7ffad73" class="cell">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>ssc install unique</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>checking unique consistency and verifying not already installed...
+installing into C:\Users\asus\ado\plus\...
+installation complete.</code></pre>
+</div>
+</div>
+<div id="518ec4a4" class="cell">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>unique mpg</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>unique weight</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>unique price</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>unique mpg weight</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. unique mpg
+Number of unique values of mpg is  21
+Number of records is  74
+
+. unique weight
+Number of unique values of weight is  64
+Number of records is  74
+
+. unique price
+Number of unique values of price is  74
+Number of records is  74
+
+. unique mpg weight
+Number of unique values of mpg weight is  74
+Number of records is  74
+
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="summarize" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="summarize"><span class="header-section-number">1.6</span> summarize</h2>
+<p>展示变量的基本统计信息，包括均值、标准差、最小值、最大值等。</p>
+<p>语法: <code>summarize [varlist]</code></p>
+<div id="489e22ba" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 只查看 `auto` 数据集中的 `price` 变量</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>summarize price</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 查看 `auto` 数据集中所有的变量信息</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>summarize</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 只查看 `auto` 数据集中的 `price` 变量
+. summarize price
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+       price |         74    6165.257    2949.496       3291      15906
+
+. // 查看 `auto` 数据集中所有的变量信息
+. summarize
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        make |          0
+       price |         74    6165.257    2949.496       3291      15906
+         mpg |         74     21.2973    5.785503         12         41
+       rep78 |         69    3.405797    .9899323          1          5
+    headroom |         74    2.993243    .8459948        1.5          5
+-------------+---------------------------------------------------------
+       trunk |         74    13.75676    4.277404          5         23
+      weight |         74    3019.459    777.1936       1760       4840
+      length |         74    187.9324    22.26634        142        233
+        turn |         74    39.64865    4.399354         31         51
+displacement |         74    197.2973    91.83722         79        425
+-------------+---------------------------------------------------------
+  gear_ratio |         74    3.014865    .4562871       2.19       3.89
+     foreign |         74    .2972973    .4601885          0          1
+
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="list" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="list"><span class="header-section-number">1.7</span> list</h2>
+<p>列出数据集的所有观测值</p>
+<p>语法: <code>list [varlist] [if] [in]</code></p>
+<p>如果不指定 <code>varlist</code>，Stata 将列出数据集中的所有变量。 如果不指定 <code>if</code> 和 <code>in</code>，Stata 将列出数据集中的所有观测值。</p>
+<p>如果指定了 <code>if</code> 和 <code>in</code>，Stata 将只列出满足条件的观测值。</p>
+<div id="88897095" class="cell">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 只查看 `auto` 数据集中的 `price` 变量，显示详细信息</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>summarize price, detail</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 查看 `auto` 数据集中所有的变量信息，限制显示前<span class="dv">10</span><span class="er">行</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span> <span class="kw">in</span> <span class="dv">1</span><span class="op">/</span><span class="dv">10</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 只查看 `auto` 数据集中的 `price` 变量，显示详细信息
+. summarize price, detail
+
+                            Price
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         3291           3291
+ 5%         3748           3299
+10%         3895           3667       Obs                  74
+25%         4195           3748       Sum of wgt.          74
+
+50%       5006.5                      Mean           6165.257
+                        Largest       Std. dev.      2949.496
+75%         6342          13466
+90%        11385          13594       Variance        8699526
+95%        13466          14500       Skewness       1.653434
+99%        15906          15906       Kurtosis       4.819188
+
+. 
+. // 查看 `auto` 数据集中所有的变量信息，限制显示前10行
+. list in 10
+
+     +-----------------------------------------------------------------+
+ 10. | make          | price | mpg | rep78 | headroom | trunk | weight |
+     | Buick Skylark | 4,082 |  19 |     3 |      3.5 |    13 |  3,400 |
+     |-----------------------------------------------------------------|
+     |  length   |  turn   |  displa~t   |   gear_r~o   |    foreign   |
+     |     200   |    42   |       231   |       3.08   |   Domestic   |
+     +-----------------------------------------------------------------+
+
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="tabulate" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="tabulate"><span class="header-section-number">1.8</span> tabulate</h2>
+<p>用于生成频数表</p>
+<p>语法: <code>tabulate varlist [if] [in]</code></p>
+<p>命令可以简写为 <code>tab</code>。</p>
+<p>如果不指定 <code>if</code> 和 <code>in</code>，Stata 将列出数据集中的所有观测值。 如果指定了 <code>if</code> 和 <code>in</code>，Stata 将只列出满足条件的观测值。</p>
+<div id="3a338942" class="cell" data-execution_count="26">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 对 `auto` 数据集生成频数表</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>tabulate foreign</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 对 `auto` 数据集生成二维交叉表</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>tab foreign rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 对 `auto` 数据集生成频数表
+. tabulate foreign
+
+ Car origin |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   Domestic |         52       70.27       70.27
+    Foreign |         22       29.73      100.00
+------------+-----------------------------------
+      Total |         74      100.00
+
+. 
+. // 对 `auto` 数据集生成二维交叉表
+. tab foreign rep78
+
+           |                   Repair record 1978
+Car origin |         1          2          3          4          5 |     Total
+-----------+-------------------------------------------------------+----------
+  Domestic |         2          8         27          9          2 |        48 
+   Foreign |         0          0          3          9          9 |        21 
+-----------+-------------------------------------------------------+----------
+     Total |         2          8         30         18         11 |        69 
+
+. </code></pre>
+</div>
+</div>
+<div id="61d3e227" class="cell" data-execution_count="27">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 将缺失值定位某一类别, missing 可以简写为 m</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>tab foreign, m</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 不显示频率结果, nofreq 可以简写为 nof</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>tab foreign, nofreq</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 不显示标签值, nolabel 可以简写为 nol</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>tab foreign, nolabel</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 将缺失值定位某一类别, missing 可以简写为 m
+. tab foreign, m
+
+ Car origin |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   Domestic |         52       70.27       70.27
+    Foreign |         22       29.73      100.00
+------------+-----------------------------------
+      Total |         74      100.00
+
+. 
+. // 不显示频率结果, nofreq 可以简写为 nof
+. tab foreign, nofreq
+
+. 
+. // 不显示标签值, nolabel 可以简写为 nol
+. tab foreign, nolabel
+
+ Car origin |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         52       70.27       70.27
+          1 |         22       29.73      100.00
+------------+-----------------------------------
+      Total |         74      100.00
+
+. </code></pre>
+</div>
+</div>
+<div id="d9a85a80" class="cell" data-execution_count="28">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 生成相对频率的条形图</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>tab foreign, p</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 按照频率数对 `auto` 数据集进行排序</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>tabulate foreign, sort</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 生成相对频率的条形图
+. tab foreign, p
+
+ Car origin |      Freq.
+------------+------------+-----------------------------------------------------
+   Domestic |         52 |****************************************************
+    Foreign |         22 |**********************
+------------+------------+-----------------------------------------------------
+      Total |         74 
+
+. 
+. // 按照频率数对 `auto` 数据集进行排序
+. tabulate foreign, sort
+
+ Car origin |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   Domestic |         52       70.27       70.27
+    Foreign |         22       29.73      100.00
+------------+-----------------------------------
+      Total |         74      100.00
+
+. </code></pre>
+</div>
+</div>
+</section>
+<section id="histogram" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="histogram"><span class="header-section-number">1.9</span> histogram</h2>
+<p>生成直方图，用于展示变量的分布情况</p>
+<p>语法: <code>histogram varname [if] [in]</code></p>
+<p>如果不指定 <code>if</code> 和 <code>in</code>，Stata 将列出数据集中的所有观测值。</p>
+<div id="9d184c7c" class="cell" data-execution_count="31">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 生成 `price` 变量的直方图，并叠加正态分布曲线</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>histogram price, normal</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 生成 `price` 变量的直方图，并叠加正态分布曲线
+. histogram price, normal
+(bin=8, start=3291, width=1576.875)
+
+. </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-02-stata-obs_files/figure-html/cell-16-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="ce51e63b" class="cell" data-execution_count="32">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 生成 `price` 变量的直方图，并叠加频率分布曲线</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>histogram price, normal frequency</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 生成 `price` 变量的直方图，并叠加频率分布曲线
+. histogram price, normal frequency
+(bin=8, start=3291, width=1576.875)
+
+. </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-02-stata-obs_files/figure-html/cell-17-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="609f7b28" class="cell" data-execution_count="33">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 生成 `price` 变量的直方图，并叠加频率分布曲线，设置标题和坐标轴标签</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>histogram price, normal frequency ytitle(<span class="st">"Frequency"</span>) xtitle(<span class="st">"Price"</span>) title(<span class="st">"Histogram of Price"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 生成 `price` 变量的直方图，并叠加频率分布曲线，设置标题和坐标轴标签
+. histogram price, normal frequency ytitle("Frequency") xtitle("Price") title("
+&gt; Histogram of Price")
+(bin=8, start=3291, width=1576.875)
+
+. </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-02-stata-obs_files/figure-html/cell-18-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="scatter" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="scatter"><span class="header-section-number">1.10</span> scatter</h2>
+<p>生成散点图，用于展示两个变量之间的关系</p>
+<p>语法: <code>scatter yvar xvar [if] [in]</code></p>
+<div id="3d8aaffd" class="cell" data-execution_count="34">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 生成 `mpg` 和 `weight` 变量的散点图</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>scatter mpg weight</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 生成 `mpg` 和 `weight` 变量的散点图
+. scatter mpg weight
+
+. </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-02-stata-obs_files/figure-html/cell-19-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
-<!-- -->
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1226,38 +1818,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/SAS-install.html" class="pagination-link" aria-label="SAS Install">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">SAS Install</span>
+      <a href="../../Guide/Stata/25-04-29-Stata-PY.html" class="pagination-link" aria-label="00-Use Stata in Quarto(ipynb)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">00-Use Stata in Quarto(ipynb)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="Stata 做 ITSA 分析">
-        <span class="nav-page-text">Stata 做 ITSA 分析</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Quarto/quarto-intro.html" class="pagination-link" aria-label="Quarto introduction">
+        <span class="nav-page-text">Quarto introduction</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Stata"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1270,7 +1840,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-02-stata-obs.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

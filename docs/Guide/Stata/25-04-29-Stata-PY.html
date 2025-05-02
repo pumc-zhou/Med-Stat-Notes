@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simon Zhou">
 
-<title>Use Stata with Python – 医学统计学笔记</title>
+<title>00-Use Stata in Quarto(ipynb) – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Quarto/quarto-intro.html" rel="next">
+<link href="../../Guide/Stata/25-05-02-stata-obs.html" rel="next">
 <link href="../../Guide/Stata/25-03-11-ITSA.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -117,11 +117,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="Use Stata with Python – 医学统计学笔记">
+<meta property="og:title" content="00-Use Stata in Quarto(ipynb) – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="Use Stata with Python – 医学统计学笔记">
+<meta name="twitter:title" content="00-Use Stata in Quarto(ipynb) – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -227,7 +227,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-04-29-Stata-PY.html">Use Stata with Python</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-04-29-Stata-PY.html">00-Use Stata in Quarto(ipynb)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -502,7 +502,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Stata/25-04-29-Stata-PY.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Use Stata with Python</span></a>
+ <span class="menu-text">00-Use Stata in Quarto(ipynb)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-02-stata-obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-数据的初步观测</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -574,9 +580,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-04-29-Stata-PY.html">Use Stata with Python</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-04-29-Stata-PY.html">00-Use Stata in Quarto(ipynb)</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Use Stata with Python</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">00-Use Stata in Quarto(ipynb)</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
 </div>
 
 
@@ -624,7 +630,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>即通过在 Python 环境中直接安装 pystata 模块，便能在 Python 环境中直接调用 Stata17 的命令。而 stata_kernel 是通过在 Jupyter Notebook 中安装 stata_kernel 模块，来实现 Python 与 Stata 的交互。</p>
 <p>在使用Quarto制作本网站时，可以编译 <code>.qmd</code> 和 <code>.ipynb</code> 文件，生成 <code>.html</code> 和 <code>.pdf</code> 文件，就想是否可以 Quarto 中利用 <code>.ipynb</code> 文件来调用 Stata 然后编译成 <code>.html</code> 文件再在网站中展示出来。</p>
 <p>于是有了这篇笔记。</p>
-<p>步骤主要分为四部分： 1. 将 Stata 添加到系统环境变量中 2. 在 Python 中安装 PyStata 3. 在 Jupyter Notebook 中使用PyStata 4. 在 Quarto 中使用 PyStata</p>
+<p>步骤主要分为四部分：</p>
+<ol type="1">
+<li>将 Stata 添加到系统环境变量中</li>
+<li>在 Python 中安装 PyStata</li>
+<li>在 Jupyter Notebook 中使用PyStata</li>
+<li>在 Quarto 中使用 PyStata</li>
+</ol>
 </section>
 </section>
 <section id="前置要求" class="level2" data-number="1.3">
@@ -720,11 +732,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <h3 data-number="2.1.1" class="anchored" data-anchor-id="配置-stata"><span class="header-section-number">2.1.1</span> 配置 Stata</h3>
 <p>假设你的 Stata 安装在 STATA_SYSDIR 目录下，并且使用的是 Stata/MP 版本。你可以在 Python 环境中按如下方式配置 Stata：</p>
 <p>如果 Stata 配置正确，<code>stata_setup.config()</code> 将返回如下的启动画面，其中包含 Stata 的徽标和初始化消息。</p>
-<div id="2de78942" class="cell" data-execution_count="2">
+<div id="2de78942" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:\Program Files\Stata18'</span>, <span class="st">'mp'</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -1455,8 +1467,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Quarto/quarto-intro.html" class="pagination-link" aria-label="Quarto introduction">
-        <span class="nav-page-text">Quarto introduction</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-02-stata-obs.html" class="pagination-link" aria-label="01-数据的初步观测">
+        <span class="nav-page-text">01-数据的初步观测</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

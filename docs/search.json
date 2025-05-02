@@ -717,7 +717,7 @@
     "href": "Guide/Guide-intro.html",
     "title": "统计软件",
     "section": "",
-    "text": "一些统计软件的使用记录。\n最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。\n后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。\n21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。\n21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。\n23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛丁香园的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、Markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。\n其实23年的时候Posit已经在开发Quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用Quarto，和社区交流后无果，只能使用VS Code来作为编辑器。\n直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。\n24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。\n25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。\n我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。\n2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。\n2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 .ipynb 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 .ipynb 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功。",
+    "text": "一些统计软件的使用记录。\n最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。\n后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。\n21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。\n21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。\n23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛丁香园的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、Markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。\n其实23年的时候Posit已经在开发Quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用Quarto，和社区交流后无果，只能使用VS Code来作为编辑器。\n直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。\n24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。\n25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。\n我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。\n2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。\n2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 .ipynb 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 .ipynb 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 .ipynb 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。",
     "crumbs": [
       "Home",
       "统计软件"
@@ -822,7 +822,7 @@
     "text": "这是一个使用 R 语言对 CLHLS 数据进行清洗和分析的工作文档。\n\n本文数据源来自北大开放研究数据平台。DVN/WBO7LK_2020\n使用 SAS 逐渐让我失去的耐心，极其臃肿和笨重，Vintage Car，交互页面也很糟糕，用起来很令人烦躁，遂改用 R 对数据进行分析。\n2025-03-06 R 也没那么好用，反而觉得 Stata 的简便也是一种优势所在。",
     "crumbs": [
       "Home",
-      "统计软件使用历程",
+      "统计软件",
       "R",
       "CLHLS Data Analysis by R"
     ]
@@ -835,7 +835,7 @@
     "text": "本文数据源来自北大开放研究数据平台。DVN/WBO7LK_2020\n使用 SAS 逐渐让我失去的耐心，极其臃肿和笨重，Vintage Car，交互页面也很糟糕，用起来很令人烦躁，遂改用 R 对数据进行分析。\n2025-03-06 R 也没那么好用，反而觉得 Stata 的简便也是一种优势所在。",
     "crumbs": [
       "Home",
-      "统计软件使用历程",
+      "统计软件",
       "R",
       "CLHLS Data Analysis by R"
     ]
@@ -848,7 +848,7 @@
     "text": "2.1 数据导出\n\nlibrary(writexl)  \n# 12. 保存描述性统计表格  \nwrite_xlsx(final_summary, \"C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/Rsummary0223.xlsx\")  \n# 13. 保存结果  \nwrite_xlsx(final_data, \"C:/Users/asus/Desktop/test/CLHLS/Analysis-0214/final_data0223.xlsx\")",
     "crumbs": [
       "Home",
-      "统计软件使用历程",
+      "统计软件",
       "R",
       "CLHLS Data Analysis by R"
     ]
@@ -861,7 +861,7 @@
     "text": "2.2 描述性统计",
     "crumbs": [
       "Home",
-      "统计软件使用历程",
+      "统计软件",
       "R",
       "CLHLS Data Analysis by R"
     ]
@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-04-29},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” April 29, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-02},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 2, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -1366,7 +1366,7 @@
     "text": "3.1 构建Logistic回归模型\nLogistic 回归分析最大的一个优势可能就是广泛涉及优势比（？），在这里介绍一下优势比的概念。\n\n3.1.1 优势比\n优势（Odds）是指某事件的发生概率 \\(\\pi\\) 与该事件不发生的概率 \\(1-\\pi\\) 之比，亦称为比，记为 Odds ，某事件在两种不同条件下的优势之比称为优势比（Odds Ratio，OR）。优势比在流行病学中的病例对照研究中被普遍应用（当然不仅限于病例对照研究）。\n设某事件的两种不同暴露的发生概率分别为 \\(\\pi_1\\) 和 \\(\\pi_0\\) ，对应的 \\(Odds_1= \\pi_1 /（1-\\pi_1）\\)，\\(Odds_0 =\\pi_0 /（1-\\pi_0）\\) ，两个 \\(Odds\\) 之比定义为 \\(OR=Odds_1/Odds_0\\)。\n由于 \\(Odds=\\pi /(1-\\pi)=(\\pi-1+1)/(1-\\pi)=－1+1 /(1-\\pi)\\) 以及 \\(0＜ \\pi ＜1\\)，所以 \\(\\pi\\) 越大，\\(Odds\\) 就越大，反之 \\(\\pi\\) 越小，\\(Odds\\) 就越小，特別当 \\(\\pi\\) 越接近 0时，\\(Odds\\) 也越接近 0，因此优势和优势比具有下列性质。\n\n如果 \\(\\pi_1 = \\pi_0\\)。，对应有 \\(Odds_1=Odds_0\\) , \\(OR=1\\) 。\n如果 \\(\\pi_1&gt;\\pi_0\\) ，则 \\(Odds_1&gt;Odds_o\\) ，相应有 $ OR&gt;1$ 。同理如果 \\(\\pi_1&lt;\\pi_0\\)，则 \\(Odds_1&lt;Odds_0\\) ，相应有 \\(OR &lt; 1\\)。\n\n由于概率 \\(\\pi_1\\) 也可以用 \\(Odds\\) 表示，\\(\\pi=\\frac{Odds}{1+Odds}\\) ，所以也可以通过比较 \\(Odds_1\\) 与 \\(Odds_0\\) 的大小来推断 \\(\\pi_1\\) 和 \\(\\pi_0\\) 的大小关系，即可以用 \\(OR&gt;1\\), \\(OR=1\\) 或 \\(OR&lt;1\\) 推断 \\(\\pi_1\\) 和 \\(\\pi_0\\) 的大小关系。\n\n3.1.2 Logistic 回归模型\nLogistic 回归模型的因变量必须为分类变量，主要有三种：二分类 Logistic 回归模型、有序分类 Logistic 回归模型、无序分类 Logistic 回归模型。其中二分类 Logistic 回归模型最为常用。自变量则无要求，可以是定量变量、有序分类变量和无序分类变量。\n假如研究所关注的事件（如死亡或痊愈等）是否发生用因变量 \\(Y\\) 表示，\\(Y=1\\) 表示该结局事件发生，反之，\\(Y=0\\) 表示该结局事件未发生。\n那么可构建如下方程式：\n\\[logit(\\pi(Y=1))=ln\\frac{\\pi(Y=1)}{\\pi(Y=0)}=ln\\frac{\\pi(Y=1)}{1-\\pi(Y=1)}=\\beta_0 + \\beta_1 X_1 + \\cdot \\beta_p X_p\\]\n\n3.1.3 共线性检验\n共线性(Colinearity)指的是自变量之间存在高度相关性。这种情况会导致回归系数的不稳定，并使得对模型参数 的估计变得不可靠。在 Logistic 回归中，严重的共线性可能导致模型性能下降，甚至可能导致预测结果难以解释\n方差膨胀因子是统计学中用于衡量多元线性回归模型中自变量之间共线性程度的指标，提供了一种定量的方式来评估自变量之间的共线性。\n方差膨胀因子的解释标准通常如下：如果VIF值小于5，表示自变量之间的共线性程度较低，可以接受。如果VIF值在5到10之间， 表示自变量之间存在一定程度的共线性，但尚可接受。如果VIF值大于10，表示自变量之间存在严重的共线性问题， 需要考虑进行变量选择或者采取其他方法来处理共线性。\n自评健康作为 因变量 ，自变量是 经济支持、生活支持和情绪支持，在前序的处理过程，只有原始的的经济支持变量（加总金额）是定量变量，其他两个都是做的二分类变量处理，如何做共线性检验，看起来并不明朗，因为三个变量看起来没有太多的关系，但是控制变量有些可能存在相关性，但是，是否有对控制变量做共线性检验的必要？\n\n3.1.4 2025-03-07 共线性检验\n使用car包对共线性进行检验。\n理论上，共线性检验较为简单，但是在处理此数据时，碰壁较多。\n首先核查数据的完整性，删除全NA和单一值变量，再将分类变量转换为因子类型，经济变量这里也是用“经济分组”这一变量处理，即所有的变量都是分类变量。（全部为分类变量在这里处理其实可能有些问题，我暂未找到合适的处理办法，寻找相关的信息也没有较为清晰地答案）\n\n# library(car)\n# 数据完整性检查，删除全NA和单一值变量\nvalid_vars &lt;- all_predictors[sapply(final_data[, all_predictors, drop = FALSE], function(x) !(all(is.na(x)) || length(unique(na.omit(x))) == 1))]\nfinal_data &lt;- final_data[, c(outcome, valid_vars)]\n\n# 仅将二分类变量转换为因子类型\nbinary_vars &lt;- valid_vars[sapply(final_data[, valid_vars], function(x) length(unique(na.omit(x))) == 2)]\nfinal_data &lt;- final_data %&gt;% mutate(across(all_of(binary_vars), as.factor))\n\n# VIF计算\nif (length(valid_vars) &gt; 1) {\n  formula_vif &lt;- as.formula(paste(outcome, \"~\", paste(valid_vars, collapse = \" + \")))\n  lm_model &lt;- lm(formula_vif, data = final_data)\n  vif_values &lt;- vif(lm_model)\n  \n  vif_df &lt;- data.frame(\n    Variable = names(vif_values),\n    VIF = round(vif_values, 3)\n  )\n  mean_vif &lt;- mean(vif_values, na.rm = TRUE)\n  # 结果保留两位小数\n  mean_vif &lt;- round(mean_vif, 3)\n  \n  # 保存结果\n  writeLines(c(\"=== 多重共线性检验 (VIF Results) ===\", \n               paste(\"平均 VIF 值:\", round(mean_vif, 3)), \"\",\n               capture.output(print(vif_df))), con = output_vif_file)\n  \n  write_xlsx(list(VIF_Results = vif_df, Mean_VIF = data.frame(Statistic = \"平均 VIF 值\", Value = round(mean_vif, 3))), \n             output_vif_excel)\n  \n  cat(\"VIF 检验完成，结果已保存至:\", output_vif_file, \"和\", output_vif_excel, \"\\n\")\n} else {\n  cat(\"错误：自变量数量不足，无法计算 VIF\\n\")\n}\n\n\n3.1.5 logistic 回归\n\n# 5. Logistic 回归分析\nlogistic_results &lt;- list()\n\nfor (outcome in outcomes) {\n  formula &lt;- as.formula(\n    paste(outcome, \"~\", paste(independents, collapse = \" + \"), \"+\", paste(controls, collapse = \" + \"))\n  )\n  \n  model &lt;- glm(formula, data = final_data, family = binomial(link = \"logit\"))\n  \n  # 提取回归结果，保留三位小数\n  model_summary &lt;- summary(model)\n  coef_table &lt;- as.data.frame(coef(model_summary)) %&gt;%\n    mutate(\n      Variable = rownames(.),\n      OR = round(exp(Estimate), 3),\n      OR_Lower = round(exp(Estimate - 1.96 * `Std. Error`), 3),\n      OR_Upper = round(exp(Estimate + 1.96 * `Std. Error`), 3),\n      `Wald χ²` = round((Estimate / `Std. Error`)^2, 3),\n      df = 1\n    ) %&gt;%\n    select(Variable, df, Estimate, `Std. Error`, `Wald χ²`, `Pr(&gt;|z|)`, OR, OR_Lower, OR_Upper) %&gt;%\n    rename(\n      `回归系数` = Estimate,\n      `标准误` = `Std. Error`,\n      `P 值` = `Pr(&gt;|z|)`\n    ) %&gt;%\n    mutate(across(c(`回归系数`, `标准误`, `P 值`), ~ round(.x, 3)))\n  \n  logistic_results[[outcome]] &lt;- coef_table\n}\n\n# 6. 生成 Word 文档\ndoc &lt;- read_docx()\n\nfor (outcome in outcomes) {\n  doc &lt;- doc %&gt;%\n    body_add_par(value = paste(\"Logistic 回归分析结果：因变量 =\", outcome), style = \"heading 1\") %&gt;%\n    body_add_flextable(flextable(logistic_results[[outcome]]) %&gt;%\n                         set_table_properties(width = 1, layout = \"autofit\"))\n}\n\nprint(doc, target = output_logistic_file)\ncat(\"Logistic 回归分析结果已保存至:\", output_logistic_file, \"\\n\")",
     "crumbs": [
       "Home",
-      "统计软件使用历程",
+      "统计软件",
       "R",
       "CLHLS Data Analysis by R"
     ]
@@ -2036,105 +2036,248 @@
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html",
     "href": "Guide/Stata/25-04-29-Stata-PY.html",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "",
-    "text": "在Stata官网冲浪的时候，看到他们推出了Python与Stata联合使用的功能，于是就想试试。\nStata是一个强大的统计分析软件，广泛应用于社会科学、经济学、医学等领域。它提供了丰富的统计分析功能和数据处理工具，适合进行复杂的数据分析和建模工作。\n在使用Stata的时候，我们可能会需要在Python中调用Stata的功能。PyStata就是一个可以让我们在Python中使用Stata的工具。它允许我们在Python中运行Stata命令，并且可以将结果返回到Python中进行进一步的分析和处理。\n\n\n\nStata 官网关于 pystata 的介绍\nPyStata 是 Stata17 中引入的一个新概念，它涵盖了所有 Stata 和 Python 的交互方式。\n事实上从 Stata16 开始，我们就可以在 Stata 中调用 Python 代码，并通过 Stata 函数接口（ sfi 模块）实现 Python 与 Stata 核心功能的交互；但 Stata17 通过允许我们通过导入一个新的 Python 包（pystata）从一个独立的 Python 环境中调用 Stata ，这大大扩展二者的交互功能，使我们可以在基于或支持 IPython 内核的环境中（例如：Jupyter Notebook 、Jupyter Lab 、Spyder 、PyCharm 、VScode 等）更加方便地调用 Stata 和 Mata。\n\n\n自 Stata17 之后，官方推出了一种 StataS与 Python 的全新交互方式，而 stata_kernel 是一个第三方项目。\n即通过在 Python 环境中直接安装 pystata 模块，便能在 Python 环境中直接调用 Stata17 的命令。而 stata_kernel 是通过在 Jupyter Notebook 中安装 stata_kernel 模块，来实现 Python 与 Stata 的交互。\n在使用Quarto制作本网站时，可以编译 .qmd 和 .ipynb 文件，生成 .html 和 .pdf 文件，就想是否可以 Quarto 中利用 .ipynb 文件来调用 Stata 然后编译成 .html 文件再在网站中展示出来。\n于是有了这篇笔记。\n步骤主要分为四部分： 1. 将 Stata 添加到系统环境变量中 2. 在 Python 中安装 PyStata 3. 在 Jupyter Notebook 中使用PyStata 4. 在 Quarto 中使用 PyStata\n\n\n\n\n\n请先安装好 Stata 17 或更高版本，且最好是无限制的版本，因为有很多网上的资源是破解的，可能会有一些限制。\nStata17/18/19 软件必须具备有效的许可证，否则无法调用\n拥有基于或支持 IPython 内核的 Python 环境（建议使用 Jupyter Lab 或 VScode）\nPython 3.7 或更高版本（建议使用 Anaconda 进行安装和管理）\n\n\n\n\n要使用 pystata 包的完整功能，需要安装以下 Python 包：\n\nNumPy 1.9 或更高版本\npandas 0.15 或更高版本\n\n如果您仅计划通过调用 stata 模块中的 run() 方法执行 Stata 命令，则无需安装 NumPy 和 pandas 包。\n然而，如果需要调用 stata 模块中用于在 Stata 和 Python 之间传递数据和结果的方法，则必须安装这些包。\n\nIPython 5.0 或更高版本\n\n如果您想使用魔法命令，则需要安装 IPython 包。\n\n\n\n\n\n\n\n\n找到 Stata 的安装目录，通常在 C:\\Program Files\\Stata18 或 C:\\Program Files (x86)\\Stata18。\n复制该目录的路径。\n右键点击“此电脑”或“计算机”，选择“属性”。\n点击“高级系统设置”。\n在“系统属性”窗口中，点击“环境变量”。\n在“系统变量”部分，找到名为“Path”的变量，选中它并点击“编辑”。\n在“编辑环境变量”窗口中，点击“新建”，然后粘贴 Stata 的安装目录路径。\n点击“确定”保存更改，关闭所有窗口。\n重新启动命令提示符或 PowerShell，以使更改生效。\n在命令提示符中输入 stata，如果 Stata 启动，则说明添加成功。\n\n\n\n\n\n打开命令提示符或 PowerShell。\n输入以下命令，将 C:\\Program Files\\Stata18 替换为 Stata 的安装目录：\n\nsetx PATH \"%PATH%;C:\\Program Files\\Stata17\"\n\n按下回车键执行命令。\n关闭命令提示符或 PowerShell。\n重新打开命令提示符或 PowerShell，以使更改生效。\n在命令提示符中输入 stata，如果 Stata 启动，则说明添加成功。\n\n\n\n\n这个办法也有一定的普及程度，但是可能不太好用，对于新手来说会有些难以理解。可以参考连玉君的珠联璧合：Jupyter Notebook 和 Stata 之融合。\n主要步骤如下：\n\n找到 Stata 的安装目录，通常在 C:\\Program Files\\Stata18 或 C:\\Program Files (x86)\\Stata18。\n在该目录下找到 StataMP.exe 或 StataSE.exe 文件。\n将该文件的路径复制下来。\n以管理员身份打开电脑的 Windows Powershell 。\n在 PS C:\\WINDOWS\\system32&gt; 后输入以下命令（将路径转到 Stata 安装目录下）：\n\n在 Windows PowerShell 执行 cd 命令，以进入 stata 程序安装的路径。cd 命令后接上步所获取的 stata 安装路径。根据个人电脑安装路径不同有所差异。路径请以英文引号包围，这样可以避免路径文件夹名称中包含空格导致无法顺利进入目标路径。\ncd \"C:\\Program Files\\Stata18\"\n实际效果应该如下：\nPS C:\\WINDOWS\\system32&gt; cd 'C:\\Program Files\\Stata18'\nPS C:\\Program Files\\Stata18&gt;\n\n输入以下命令来将 stata 添加到命令行注册表中：\n\n.\\StataMP-64.exe /Register\n需要注意的是： .\\StataMP-64.exe /Register 中的 .\\StataMP-64.exe 部分，根据个人电脑安装 Stata17+ 版本有所差异。我电脑安装的是 MP 版，所以为 .\\StataMP-64.exe。如果安装的是 SE 版，应该为 .\\StataSE-64.exe。\n这里实测效果不太好，不知道为什么，注册成功但是命令行输入 stata 还是无法打开 Stata。",
+    "text": "在Stata官网冲浪的时候，看到他们推出了Python与Stata联合使用的功能，于是就想试试。\nStata是一个强大的统计分析软件，广泛应用于社会科学、经济学、医学等领域。它提供了丰富的统计分析功能和数据处理工具，适合进行复杂的数据分析和建模工作。\n在使用Stata的时候，我们可能会需要在Python中调用Stata的功能。PyStata就是一个可以让我们在Python中使用Stata的工具。它允许我们在Python中运行Stata命令，并且可以将结果返回到Python中进行进一步的分析和处理。\n\n\n\nStata 官网关于 pystata 的介绍\nPyStata 是 Stata17 中引入的一个新概念，它涵盖了所有 Stata 和 Python 的交互方式。\n事实上从 Stata16 开始，我们就可以在 Stata 中调用 Python 代码，并通过 Stata 函数接口（ sfi 模块）实现 Python 与 Stata 核心功能的交互；但 Stata17 通过允许我们通过导入一个新的 Python 包（pystata）从一个独立的 Python 环境中调用 Stata ，这大大扩展二者的交互功能，使我们可以在基于或支持 IPython 内核的环境中（例如：Jupyter Notebook 、Jupyter Lab 、Spyder 、PyCharm 、VScode 等）更加方便地调用 Stata 和 Mata。\n\n\n自 Stata17 之后，官方推出了一种 StataS与 Python 的全新交互方式，而 stata_kernel 是一个第三方项目。\n即通过在 Python 环境中直接安装 pystata 模块，便能在 Python 环境中直接调用 Stata17 的命令。而 stata_kernel 是通过在 Jupyter Notebook 中安装 stata_kernel 模块，来实现 Python 与 Stata 的交互。\n在使用Quarto制作本网站时，可以编译 .qmd 和 .ipynb 文件，生成 .html 和 .pdf 文件，就想是否可以 Quarto 中利用 .ipynb 文件来调用 Stata 然后编译成 .html 文件再在网站中展示出来。\n于是有了这篇笔记。\n步骤主要分为四部分：\n\n将 Stata 添加到系统环境变量中\n在 Python 中安装 PyStata\n在 Jupyter Notebook 中使用PyStata\n在 Quarto 中使用 PyStata\n\n\n\n\n\n\n请先安装好 Stata 17 或更高版本，且最好是无限制的版本，因为有很多网上的资源是破解的，可能会有一些限制。\nStata17/18/19 软件必须具备有效的许可证，否则无法调用\n拥有基于或支持 IPython 内核的 Python 环境（建议使用 Jupyter Lab 或 VScode）\nPython 3.7 或更高版本（建议使用 Anaconda 进行安装和管理）\n\n\n\n\n要使用 pystata 包的完整功能，需要安装以下 Python 包：\n\nNumPy 1.9 或更高版本\npandas 0.15 或更高版本\n\n如果您仅计划通过调用 stata 模块中的 run() 方法执行 Stata 命令，则无需安装 NumPy 和 pandas 包。\n然而，如果需要调用 stata 模块中用于在 Stata 和 Python 之间传递数据和结果的方法，则必须安装这些包。\n\nIPython 5.0 或更高版本\n\n如果您想使用魔法命令，则需要安装 IPython 包。\n\n\n\n\n\n\n\n\n找到 Stata 的安装目录，通常在 C:\\Program Files\\Stata18 或 C:\\Program Files (x86)\\Stata18。\n复制该目录的路径。\n右键点击“此电脑”或“计算机”，选择“属性”。\n点击“高级系统设置”。\n在“系统属性”窗口中，点击“环境变量”。\n在“系统变量”部分，找到名为“Path”的变量，选中它并点击“编辑”。\n在“编辑环境变量”窗口中，点击“新建”，然后粘贴 Stata 的安装目录路径。\n点击“确定”保存更改，关闭所有窗口。\n重新启动命令提示符或 PowerShell，以使更改生效。\n在命令提示符中输入 stata，如果 Stata 启动，则说明添加成功。\n\n\n\n\n\n打开命令提示符或 PowerShell。\n输入以下命令，将 C:\\Program Files\\Stata18 替换为 Stata 的安装目录：\n\nsetx PATH \"%PATH%;C:\\Program Files\\Stata17\"\n\n按下回车键执行命令。\n关闭命令提示符或 PowerShell。\n重新打开命令提示符或 PowerShell，以使更改生效。\n在命令提示符中输入 stata，如果 Stata 启动，则说明添加成功。\n\n\n\n\n这个办法也有一定的普及程度，但是可能不太好用，对于新手来说会有些难以理解。可以参考连玉君的珠联璧合：Jupyter Notebook 和 Stata 之融合。\n主要步骤如下：\n\n找到 Stata 的安装目录，通常在 C:\\Program Files\\Stata18 或 C:\\Program Files (x86)\\Stata18。\n在该目录下找到 StataMP.exe 或 StataSE.exe 文件。\n将该文件的路径复制下来。\n以管理员身份打开电脑的 Windows Powershell 。\n在 PS C:\\WINDOWS\\system32&gt; 后输入以下命令（将路径转到 Stata 安装目录下）：\n\n在 Windows PowerShell 执行 cd 命令，以进入 stata 程序安装的路径。cd 命令后接上步所获取的 stata 安装路径。根据个人电脑安装路径不同有所差异。路径请以英文引号包围，这样可以避免路径文件夹名称中包含空格导致无法顺利进入目标路径。\ncd \"C:\\Program Files\\Stata18\"\n实际效果应该如下：\nPS C:\\WINDOWS\\system32&gt; cd 'C:\\Program Files\\Stata18'\nPS C:\\Program Files\\Stata18&gt;\n\n输入以下命令来将 stata 添加到命令行注册表中：\n\n.\\StataMP-64.exe /Register\n需要注意的是： .\\StataMP-64.exe /Register 中的 .\\StataMP-64.exe 部分，根据个人电脑安装 Stata17+ 版本有所差异。我电脑安装的是 MP 版，所以为 .\\StataMP-64.exe。如果安装的是 SE 版，应该为 .\\StataSE-64.exe。\n这里实测效果不太好，不知道为什么，注册成功但是命令行输入 stata 还是无法打开 Stata。",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
     ]
   },
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html#前言",
     "href": "Guide/Stata/25-04-29-Stata-PY.html#前言",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "",
     "text": "在Stata官网冲浪的时候，看到他们推出了Python与Stata联合使用的功能，于是就想试试。\nStata是一个强大的统计分析软件，广泛应用于社会科学、经济学、医学等领域。它提供了丰富的统计分析功能和数据处理工具，适合进行复杂的数据分析和建模工作。\n在使用Stata的时候，我们可能会需要在Python中调用Stata的功能。PyStata就是一个可以让我们在Python中使用Stata的工具。它允许我们在Python中运行Stata命令，并且可以将结果返回到Python中进行进一步的分析和处理。",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
     ]
   },
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html#关于pystata",
     "href": "Guide/Stata/25-04-29-Stata-PY.html#关于pystata",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "",
-    "text": "Stata 官网关于 pystata 的介绍\nPyStata 是 Stata17 中引入的一个新概念，它涵盖了所有 Stata 和 Python 的交互方式。\n事实上从 Stata16 开始，我们就可以在 Stata 中调用 Python 代码，并通过 Stata 函数接口（ sfi 模块）实现 Python 与 Stata 核心功能的交互；但 Stata17 通过允许我们通过导入一个新的 Python 包（pystata）从一个独立的 Python 环境中调用 Stata ，这大大扩展二者的交互功能，使我们可以在基于或支持 IPython 内核的环境中（例如：Jupyter Notebook 、Jupyter Lab 、Spyder 、PyCharm 、VScode 等）更加方便地调用 Stata 和 Mata。\n\n\n自 Stata17 之后，官方推出了一种 StataS与 Python 的全新交互方式，而 stata_kernel 是一个第三方项目。\n即通过在 Python 环境中直接安装 pystata 模块，便能在 Python 环境中直接调用 Stata17 的命令。而 stata_kernel 是通过在 Jupyter Notebook 中安装 stata_kernel 模块，来实现 Python 与 Stata 的交互。\n在使用Quarto制作本网站时，可以编译 .qmd 和 .ipynb 文件，生成 .html 和 .pdf 文件，就想是否可以 Quarto 中利用 .ipynb 文件来调用 Stata 然后编译成 .html 文件再在网站中展示出来。\n于是有了这篇笔记。\n步骤主要分为四部分： 1. 将 Stata 添加到系统环境变量中 2. 在 Python 中安装 PyStata 3. 在 Jupyter Notebook 中使用PyStata 4. 在 Quarto 中使用 PyStata",
+    "text": "Stata 官网关于 pystata 的介绍\nPyStata 是 Stata17 中引入的一个新概念，它涵盖了所有 Stata 和 Python 的交互方式。\n事实上从 Stata16 开始，我们就可以在 Stata 中调用 Python 代码，并通过 Stata 函数接口（ sfi 模块）实现 Python 与 Stata 核心功能的交互；但 Stata17 通过允许我们通过导入一个新的 Python 包（pystata）从一个独立的 Python 环境中调用 Stata ，这大大扩展二者的交互功能，使我们可以在基于或支持 IPython 内核的环境中（例如：Jupyter Notebook 、Jupyter Lab 、Spyder 、PyCharm 、VScode 等）更加方便地调用 Stata 和 Mata。\n\n\n自 Stata17 之后，官方推出了一种 StataS与 Python 的全新交互方式，而 stata_kernel 是一个第三方项目。\n即通过在 Python 环境中直接安装 pystata 模块，便能在 Python 环境中直接调用 Stata17 的命令。而 stata_kernel 是通过在 Jupyter Notebook 中安装 stata_kernel 模块，来实现 Python 与 Stata 的交互。\n在使用Quarto制作本网站时，可以编译 .qmd 和 .ipynb 文件，生成 .html 和 .pdf 文件，就想是否可以 Quarto 中利用 .ipynb 文件来调用 Stata 然后编译成 .html 文件再在网站中展示出来。\n于是有了这篇笔记。\n步骤主要分为四部分：\n\n将 Stata 添加到系统环境变量中\n在 Python 中安装 PyStata\n在 Jupyter Notebook 中使用PyStata\n在 Quarto 中使用 PyStata",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
     ]
   },
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html#前置要求",
     "href": "Guide/Stata/25-04-29-Stata-PY.html#前置要求",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "",
     "text": "请先安装好 Stata 17 或更高版本，且最好是无限制的版本，因为有很多网上的资源是破解的，可能会有一些限制。\nStata17/18/19 软件必须具备有效的许可证，否则无法调用\n拥有基于或支持 IPython 内核的 Python 环境（建议使用 Jupyter Lab 或 VScode）\nPython 3.7 或更高版本（建议使用 Anaconda 进行安装和管理）",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
     ]
   },
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html#依赖项",
     "href": "Guide/Stata/25-04-29-Stata-PY.html#依赖项",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "",
     "text": "要使用 pystata 包的完整功能，需要安装以下 Python 包：\n\nNumPy 1.9 或更高版本\npandas 0.15 或更高版本\n\n如果您仅计划通过调用 stata 模块中的 run() 方法执行 Stata 命令，则无需安装 NumPy 和 pandas 包。\n然而，如果需要调用 stata 模块中用于在 Stata 和 Python 之间传递数据和结果的方法，则必须安装这些包。\n\nIPython 5.0 或更高版本\n\n如果您想使用魔法命令，则需要安装 IPython 包。",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
     ]
   },
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html#stata-添加到系统环境变量中",
     "href": "Guide/Stata/25-04-29-Stata-PY.html#stata-添加到系统环境变量中",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "",
     "text": "找到 Stata 的安装目录，通常在 C:\\Program Files\\Stata18 或 C:\\Program Files (x86)\\Stata18。\n复制该目录的路径。\n右键点击“此电脑”或“计算机”，选择“属性”。\n点击“高级系统设置”。\n在“系统属性”窗口中，点击“环境变量”。\n在“系统变量”部分，找到名为“Path”的变量，选中它并点击“编辑”。\n在“编辑环境变量”窗口中，点击“新建”，然后粘贴 Stata 的安装目录路径。\n点击“确定”保存更改，关闭所有窗口。\n重新启动命令提示符或 PowerShell，以使更改生效。\n在命令提示符中输入 stata，如果 Stata 启动，则说明添加成功。\n\n\n\n\n\n打开命令提示符或 PowerShell。\n输入以下命令，将 C:\\Program Files\\Stata18 替换为 Stata 的安装目录：\n\nsetx PATH \"%PATH%;C:\\Program Files\\Stata17\"\n\n按下回车键执行命令。\n关闭命令提示符或 PowerShell。\n重新打开命令提示符或 PowerShell，以使更改生效。\n在命令提示符中输入 stata，如果 Stata 启动，则说明添加成功。\n\n\n\n\n这个办法也有一定的普及程度，但是可能不太好用，对于新手来说会有些难以理解。可以参考连玉君的珠联璧合：Jupyter Notebook 和 Stata 之融合。\n主要步骤如下：\n\n找到 Stata 的安装目录，通常在 C:\\Program Files\\Stata18 或 C:\\Program Files (x86)\\Stata18。\n在该目录下找到 StataMP.exe 或 StataSE.exe 文件。\n将该文件的路径复制下来。\n以管理员身份打开电脑的 Windows Powershell 。\n在 PS C:\\WINDOWS\\system32&gt; 后输入以下命令（将路径转到 Stata 安装目录下）：\n\n在 Windows PowerShell 执行 cd 命令，以进入 stata 程序安装的路径。cd 命令后接上步所获取的 stata 安装路径。根据个人电脑安装路径不同有所差异。路径请以英文引号包围，这样可以避免路径文件夹名称中包含空格导致无法顺利进入目标路径。\ncd \"C:\\Program Files\\Stata18\"\n实际效果应该如下：\nPS C:\\WINDOWS\\system32&gt; cd 'C:\\Program Files\\Stata18'\nPS C:\\Program Files\\Stata18&gt;\n\n输入以下命令来将 stata 添加到命令行注册表中：\n\n.\\StataMP-64.exe /Register\n需要注意的是： .\\StataMP-64.exe /Register 中的 .\\StataMP-64.exe 部分，根据个人电脑安装 Stata17+ 版本有所差异。我电脑安装的是 MP 版，所以为 .\\StataMP-64.exe。如果安装的是 SE 版，应该为 .\\StataSE-64.exe。\n这里实测效果不太好，不知道为什么，注册成功但是命令行输入 stata 还是无法打开 Stata。",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
     ]
   },
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html#方法一使用-pip-配置-pystata",
     "href": "Guide/Stata/25-04-29-Stata-PY.html#方法一使用-pip-配置-pystata",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "2.1 方法一：使用 pip 配置 pystata",
-    "text": "2.1 方法一：使用 pip 配置 pystata\nPyStata 可以通过 pip 安装。Windows 可以使用以下命令进行安装：\npip install --upgrade --user stata_setup\nmacOS 或 Unix 系统可以使用以下命令进行安装：\n$ pip install --upgrade --user stata_setup\n\n2.1.1 配置 Stata\n假设你的 Stata 安装在 STATA_SYSDIR 目录下，并且使用的是 Stata/MP 版本。你可以在 Python 环境中按如下方式配置 Stata：\n如果 Stata 配置正确，stata_setup.config() 将返回如下的启动画面，其中包含 Stata 的徽标和初始化消息。\n\n\n代码\nimport stata_setup\nstata_setup.config('C:\\Program Files\\Stata18', 'mp')\n\n\n\n  ___  ____  ____  ____  ____ ®\n /__    /   ____/   /   ____/      18.0\n___/   /   /___/   /   /___/       MP—Parallel Edition\n\n Statistics and Data Science       Copyright 1985-2023 StataCorp LLC\n                                   StataCorp\n                                   4905 Lakeway Drive\n                                   College Station, Texas 77845 USA\n                                   800-STATA-PC        https://www.stata.com\n                                   979-696-4600        stata@stata.com\n\nStata license: Unlimited-user 2-core network, expiring  8 Apr 2026\nSerial number: 501809376090\n  Licensed to: ausa\n               NJU\n\nNotes:\n      1. Unicode is supported; see help unicode_advice.\n      2. More than 2 billion observations are allowed; see help obs_advice.\n      3. Maximum number of variables is set to 5,000 but can be increased;\n          see help set_maxvar.\n\n\n如果你不想看到初始化的信息，可以使用如下命令将其隐藏：\nstata_setup.config('YOUR_STATA_SYSDIR', 'mp', splash=False)",
+    "text": "2.1 方法一：使用 pip 配置 pystata\nPyStata 可以通过 pip 安装。Windows 可以使用以下命令进行安装：\npip install --upgrade --user stata_setup\nmacOS 或 Unix 系统可以使用以下命令进行安装：\n$ pip install --upgrade --user stata_setup\n\n2.1.1 配置 Stata\n假设你的 Stata 安装在 STATA_SYSDIR 目录下，并且使用的是 Stata/MP 版本。你可以在 Python 环境中按如下方式配置 Stata：\n如果 Stata 配置正确，stata_setup.config() 将返回如下的启动画面，其中包含 Stata 的徽标和初始化消息。\n\n\n代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp')\n\n\n\n  ___  ____  ____  ____  ____ ®\n /__    /   ____/   /   ____/      18.0\n___/   /   /___/   /   /___/       MP—Parallel Edition\n\n Statistics and Data Science       Copyright 1985-2023 StataCorp LLC\n                                   StataCorp\n                                   4905 Lakeway Drive\n                                   College Station, Texas 77845 USA\n                                   800-STATA-PC        https://www.stata.com\n                                   979-696-4600        stata@stata.com\n\nStata license: Unlimited-user 2-core network, expiring  8 Apr 2026\nSerial number: 501809376090\n  Licensed to: ausa\n               NJU\n\nNotes:\n      1. Unicode is supported; see help unicode_advice.\n      2. More than 2 billion observations are allowed; see help obs_advice.\n      3. Maximum number of variables is set to 5,000 but can be increased;\n          see help set_maxvar.\n\n\n如果你不想看到初始化的信息，可以使用如下命令将其隐藏：\nstata_setup.config('YOUR_STATA_SYSDIR', 'mp', splash=False)",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
     ]
   },
   {
     "objectID": "Guide/Stata/25-04-29-Stata-PY.html#方法二将-pystata-添加到-sys.path",
     "href": "Guide/Stata/25-04-29-Stata-PY.html#方法二将-pystata-添加到-sys.path",
-    "title": "Use Stata with Python",
+    "title": "00-Use Stata in Quarto(ipynb)",
     "section": "2.2 方法二：将 pystata 添加到 sys.path",
     "text": "2.2 方法二：将 pystata 添加到 sys.path\n找到 pystata 包的最直接方法是将 pystata 子目录的位置添加到 Python 的模块搜索路径中。在你的 Python 环境中，你可以输入\nimport sys\nsys.path.append('STATA_SYSDIR/utilities')\nfrom pystata import config\nconfig.init('mp')\n如果配置正确，config.init() 应该返回无错误，并显示同上面一样的的启动画面，其中包含 Stata 的徽标和初始化消息。如果您想隐藏这些消息，可以将 splash 参数设置为 False。\n更多的安装和配置信息可以访问：pystata",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "Use Stata with Python"
+      "00-Use Stata in Quarto(ipynb)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html",
+    "href": "Guide/Stata/25-05-02-stata-obs.html",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "describe  // 描述数据集的基本信息\nsummarize  // 描述变量的基本信息\nlist  // 列出数据集的所有观测值\nbrowse  // 浏览数据集的所有观测值\ninspect  // 检查变量的分布情况\ntabulate  // 生成频数表\nhistogram  // 生成直方图\nscatter  // 生成散点图\n\n\nStata内置的 1978 automobile data（数据集名为 auto）是一个经典的示例数据集，常用于演示统计分析、回归建模等操作。\n\n\n代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)\n\n\n\n\n代码\n%%stata\nsysuse auto, clear  \n// 加载内置数据集\n\n\n\n. sysuse auto, clear  \n(1978 automobile data)\n\n. // 加载内置数据集\n. \n\n\n\n\n\n展示变量类型、格式、和任何的赋值/变量标签\n语法: describe [varlist]\n注意: [] 意味着[varlist]是可选的，varlist 是变量列表，可以指定一个或多个变量。如果不指定，Stata将显示数据集中所有变量的信息。\n\n\n代码\n%%stata\ndescribe\n// 描述数据集的变量信息\n\n\n\n. describe\n\nContains data from C:\\Program Files\\Stata18/ado\\base/a/auto.dta\n Observations:            74                  1978 automobile data\n    Variables:            12                  13 Apr 2022 17:45\n                                              (_dta has notes)\n-------------------------------------------------------------------------------\nVariable      Storage   Display    Value\n    name         type    format    label      Variable label\n-------------------------------------------------------------------------------\nmake            str18   %-18s                 Make and model\nprice           int     %8.0gc                Price\nmpg             int     %8.0g                 Mileage (mpg)\nrep78           int     %8.0g                 Repair record 1978\nheadroom        float   %6.1f                 Headroom (in.)\ntrunk           int     %8.0g                 Trunk space (cu. ft.)\nweight          int     %8.0gc                Weight (lbs.)\nlength          int     %8.0g                 Length (in.)\nturn            int     %8.0g                 Turn circle (ft.)\ndisplacement    int     %8.0g                 Displacement (cu. in.)\ngear_ratio      float   %6.2f                 Gear ratio\nforeign         byte    %8.0g      origin     Car origin\n-------------------------------------------------------------------------------\nSorted by: foreign\n\n. // 描述数据集的变量信息\n. \n\n\n\n\n代码\n%%stata\n// 简要描述数据集的变量信息\ndescribe ,short\n\n\n\n. // 简要描述数据集的变量信息\n. describe ,short\n\nContains data from C:\\Program Files\\Stata18/ado\\base/a/auto.dta\n Observations:            74                  1978 automobile data\n    Variables:            12                  13 Apr 2022 17:45\nSorted by: foreign\n\n. \n\n\n\n\n\n计算数据集中观测值的数量\n语法: count [if] [in]\n\n\n代码\n%%stata\n// 计算数据集中的观测值数量\ncount\n// 计算数据集中观测值价格大于4000的数量\ncount if price &gt; 4000\n\n\n\n. // 计算数据集中的观测值数量\n. count\n  74\n\n. // 计算数据集中观测值价格大于4000的数量\n. count if price &gt; 4000\n  63\n\n. \n\n\n\n\n\n检查数据集中是否有重复的观测值（是否唯一标识符）\n语法: isid varlist\n如果报错就说明不是，如果没有报错就说明是唯一标识符。\n\n\n代码\n%%stata\n// 检查变量mpg是否是唯一标识符\nisid mpg\n\n\n\n---------------------------------------------------------------------------\nSystemError                               Traceback (most recent call last)\nCell In[7], line 1\n----&gt; 1 get_ipython().run_cell_magic('stata', '', '// 检查变量mpg是否是唯一标识符\\nisid mpg\\n')\n\nFile c:\\Users\\asus\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\IPython\\core\\interactiveshell.py:2543, in InteractiveShell.run_cell_magic(self, magic_name, line, cell)\n   2541 with self.builtin_trap:\n   2542     args = (magic_arg_s, cell)\n-&gt; 2543     result = fn(*args, **kwargs)\n   2545 # The code below prevents the output from being displayed\n   2546 # when using magics with decorator @output_can_be_silenced\n   2547 # when the last Python token in the expression is a ';'.\n   2548 if getattr(fn, magic.MAGIC_OUTPUT_CAN_BE_SILENCED, False):\n\nFile C:\\Program Files/Stata18\\utilities\\pystata\\ipython\\stpymagic.py:276, in PyStataMagic.stata(self, line, cell, local_ns)\n    274     _stata.run(cell, quietly=True, inline=_config.stconfig['grshow'])\n    275 else:\n--&gt; 276     _stata.run(cell, quietly=False, inline=_config.stconfig['grshow'])\n    278 if '-gw' in args or '-gh' in args:\n    279     _config.set_graph_size(gwidth, gheight)\n\nFile C:\\Program Files/Stata18\\utilities\\pystata\\stata.py:325, in run(cmd, quietly, echo, inline)\n    323         _stata_wrk2(\"qui include \" + tmpf, None, False, 1)\n    324     else:\n--&gt; 325         _stata_wrk2(\"include \" + tmpf, None, False, 1)\n    327 if inline:\n    328     if config.get_stipython()&gt;=3:\n\nFile C:\\Program Files/Stata18\\utilities\\pystata\\stata.py:116, in _stata_wrk2(cmd, real_cmd, colon, mode)\n    114         err = callback[0]\n    115         callback.clear()\n--&gt; 116         raise SystemError(err)\n    117 except KeyboardInterrupt:\n    118     outputter.done()\n\nSystemError: \n. // 检查变量mpg是否是唯一标识符\n. isid mpg\nvariable mpg does not uniquely identify the observations\nr(459);\nr(459);\n\n\n\n\n\n\n代码\n%%stata\n// 检查变量price是否是唯一标识符\nisid price\n// 检查变量mpg和price的组合是否是唯一标识符\nisid mpg price\n\n\n\n. isid price\n\n. // 检查变量price是否是唯一标识符\n. isid mpg price\n\n. // 检查变量mpg和price的组合是否是唯一标识符\n. \n\n\n\n\n\nunique 是一个用户自定义命令，用于检查数据集中变量的唯一值，它不是自带的，需要用户进行安装。\n语法: unique varlist\n它和 isid 的区别在于，isid 只检查唯一标识符，而 unique 可以检查任意变量的唯一值。\nisid 在遇到重复值时会报错，而 unique 会返回一个包含唯一值的列表。\n\n\n代码\n%%stata\nssc install unique\n\n\nchecking unique consistency and verifying not already installed...\ninstalling into C:\\Users\\asus\\ado\\plus\\...\ninstallation complete.\n\n\n\n\n代码\n%%stata\nunique mpg\nunique weight\nunique price\nunique mpg weight\n\n\n\n. unique mpg\nNumber of unique values of mpg is  21\nNumber of records is  74\n\n. unique weight\nNumber of unique values of weight is  64\nNumber of records is  74\n\n. unique price\nNumber of unique values of price is  74\nNumber of records is  74\n\n. unique mpg weight\nNumber of unique values of mpg weight is  74\nNumber of records is  74\n\n. \n\n\n\n\n\n展示变量的基本统计信息，包括均值、标准差、最小值、最大值等。\n语法: summarize [varlist]\n\n\n代码\n%%stata\n// 只查看 `auto` 数据集中的 `price` 变量\nsummarize price\n// 查看 `auto` 数据集中所有的变量信息\nsummarize\n\n\n\n. // 只查看 `auto` 数据集中的 `price` 变量\n. summarize price\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n       price |         74    6165.257    2949.496       3291      15906\n\n. // 查看 `auto` 数据集中所有的变量信息\n. summarize\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n        make |          0\n       price |         74    6165.257    2949.496       3291      15906\n         mpg |         74     21.2973    5.785503         12         41\n       rep78 |         69    3.405797    .9899323          1          5\n    headroom |         74    2.993243    .8459948        1.5          5\n-------------+---------------------------------------------------------\n       trunk |         74    13.75676    4.277404          5         23\n      weight |         74    3019.459    777.1936       1760       4840\n      length |         74    187.9324    22.26634        142        233\n        turn |         74    39.64865    4.399354         31         51\ndisplacement |         74    197.2973    91.83722         79        425\n-------------+---------------------------------------------------------\n  gear_ratio |         74    3.014865    .4562871       2.19       3.89\n     foreign |         74    .2972973    .4601885          0          1\n\n. \n\n\n\n\n\n列出数据集的所有观测值\n语法: list [varlist] [if] [in]\n如果不指定 varlist，Stata 将列出数据集中的所有变量。 如果不指定 if 和 in，Stata 将列出数据集中的所有观测值。\n如果指定了 if 和 in，Stata 将只列出满足条件的观测值。\n\n\n代码\n%%stata\n// 只查看 `auto` 数据集中的 `price` 变量，显示详细信息\nsummarize price, detail\n\n// 查看 `auto` 数据集中所有的变量信息，限制显示前10行\nlist in 1/10\n\n\n\n. // 只查看 `auto` 数据集中的 `price` 变量，显示详细信息\n. summarize price, detail\n\n                            Price\n-------------------------------------------------------------\n      Percentiles      Smallest\n 1%         3291           3291\n 5%         3748           3299\n10%         3895           3667       Obs                  74\n25%         4195           3748       Sum of wgt.          74\n\n50%       5006.5                      Mean           6165.257\n                        Largest       Std. dev.      2949.496\n75%         6342          13466\n90%        11385          13594       Variance        8699526\n95%        13466          14500       Skewness       1.653434\n99%        15906          15906       Kurtosis       4.819188\n\n. \n. // 查看 `auto` 数据集中所有的变量信息，限制显示前10行\n. list in 10\n\n     +-----------------------------------------------------------------+\n 10. | make          | price | mpg | rep78 | headroom | trunk | weight |\n     | Buick Skylark | 4,082 |  19 |     3 |      3.5 |    13 |  3,400 |\n     |-----------------------------------------------------------------|\n     |  length   |  turn   |  displa~t   |   gear_r~o   |    foreign   |\n     |     200   |    42   |       231   |       3.08   |   Domestic   |\n     +-----------------------------------------------------------------+\n\n. \n\n\n\n\n\n用于生成频数表\n语法: tabulate varlist [if] [in]\n命令可以简写为 tab。\n如果不指定 if 和 in，Stata 将列出数据集中的所有观测值。 如果指定了 if 和 in，Stata 将只列出满足条件的观测值。\n\n\n代码\n%%stata\n// 对 `auto` 数据集生成频数表\ntabulate foreign\n\n// 对 `auto` 数据集生成二维交叉表\ntab foreign rep78\n\n\n\n. // 对 `auto` 数据集生成频数表\n. tabulate foreign\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n   Domestic |         52       70.27       70.27\n    Foreign |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n. \n. // 对 `auto` 数据集生成二维交叉表\n. tab foreign rep78\n\n           |                   Repair record 1978\nCar origin |         1          2          3          4          5 |     Total\n-----------+-------------------------------------------------------+----------\n  Domestic |         2          8         27          9          2 |        48 \n   Foreign |         0          0          3          9          9 |        21 \n-----------+-------------------------------------------------------+----------\n     Total |         2          8         30         18         11 |        69 \n\n. \n\n\n\n\n代码\n%%stata\n// 将缺失值定位某一类别, missing 可以简写为 m\ntab foreign, m\n\n// 不显示频率结果, nofreq 可以简写为 nof\ntab foreign, nofreq\n\n// 不显示标签值, nolabel 可以简写为 nol\ntab foreign, nolabel\n\n\n\n. // 将缺失值定位某一类别, missing 可以简写为 m\n. tab foreign, m\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n   Domestic |         52       70.27       70.27\n    Foreign |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n. \n. // 不显示频率结果, nofreq 可以简写为 nof\n. tab foreign, nofreq\n\n. \n. // 不显示标签值, nolabel 可以简写为 nol\n. tab foreign, nolabel\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n          0 |         52       70.27       70.27\n          1 |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n. \n\n\n\n\n代码\n%%stata\n// 生成相对频率的条形图\ntab foreign, p\n\n// 按照频率数对 `auto` 数据集进行排序\ntabulate foreign, sort\n\n\n\n. // 生成相对频率的条形图\n. tab foreign, p\n\n Car origin |      Freq.\n------------+------------+-----------------------------------------------------\n   Domestic |         52 |****************************************************\n    Foreign |         22 |**********************\n------------+------------+-----------------------------------------------------\n      Total |         74 \n\n. \n. // 按照频率数对 `auto` 数据集进行排序\n. tabulate foreign, sort\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n   Domestic |         52       70.27       70.27\n    Foreign |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n. \n\n\n\n\n\n生成直方图，用于展示变量的分布情况\n语法: histogram varname [if] [in]\n如果不指定 if 和 in，Stata 将列出数据集中的所有观测值。\n\n\n代码\n%%stata\n// 生成 `price` 变量的直方图，并叠加正态分布曲线\nhistogram price, normal\n\n\n\n. // 生成 `price` 变量的直方图，并叠加正态分布曲线\n. histogram price, normal\n(bin=8, start=3291, width=1576.875)\n\n. \n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\n// 生成 `price` 变量的直方图，并叠加频率分布曲线\nhistogram price, normal frequency\n\n\n\n. // 生成 `price` 变量的直方图，并叠加频率分布曲线\n. histogram price, normal frequency\n(bin=8, start=3291, width=1576.875)\n\n. \n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\n// 生成 `price` 变量的直方图，并叠加频率分布曲线，设置标题和坐标轴标签\nhistogram price, normal frequency ytitle(\"Frequency\") xtitle(\"Price\") title(\"Histogram of Price\")\n\n\n\n. // 生成 `price` 变量的直方图，并叠加频率分布曲线，设置标题和坐标轴标签\n. histogram price, normal frequency ytitle(\"Frequency\") xtitle(\"Price\") title(\"\n&gt; Histogram of Price\")\n(bin=8, start=3291, width=1576.875)\n\n. \n\n\n\n\n\n\n\n\n\n\n\n\n生成散点图，用于展示两个变量之间的关系\n语法: scatter yvar xvar [if] [in]\n\n\n代码\n%%stata\n// 生成 `mpg` 和 `weight` 变量的散点图\nscatter mpg weight\n\n\n\n. // 生成 `mpg` 和 `weight` 变量的散点图\n. scatter mpg weight\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#数据集的基本信息",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#数据集的基本信息",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "Stata内置的 1978 automobile data（数据集名为 auto）是一个经典的示例数据集，常用于演示统计分析、回归建模等操作。\n\n\n代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)\n\n\n\n\n代码\n%%stata\nsysuse auto, clear  \n// 加载内置数据集\n\n\n\n. sysuse auto, clear  \n(1978 automobile data)\n\n. // 加载内置数据集\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#describe",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#describe",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "展示变量类型、格式、和任何的赋值/变量标签\n语法: describe [varlist]\n注意: [] 意味着[varlist]是可选的，varlist 是变量列表，可以指定一个或多个变量。如果不指定，Stata将显示数据集中所有变量的信息。\n\n\n代码\n%%stata\ndescribe\n// 描述数据集的变量信息\n\n\n\n. describe\n\nContains data from C:\\Program Files\\Stata18/ado\\base/a/auto.dta\n Observations:            74                  1978 automobile data\n    Variables:            12                  13 Apr 2022 17:45\n                                              (_dta has notes)\n-------------------------------------------------------------------------------\nVariable      Storage   Display    Value\n    name         type    format    label      Variable label\n-------------------------------------------------------------------------------\nmake            str18   %-18s                 Make and model\nprice           int     %8.0gc                Price\nmpg             int     %8.0g                 Mileage (mpg)\nrep78           int     %8.0g                 Repair record 1978\nheadroom        float   %6.1f                 Headroom (in.)\ntrunk           int     %8.0g                 Trunk space (cu. ft.)\nweight          int     %8.0gc                Weight (lbs.)\nlength          int     %8.0g                 Length (in.)\nturn            int     %8.0g                 Turn circle (ft.)\ndisplacement    int     %8.0g                 Displacement (cu. in.)\ngear_ratio      float   %6.2f                 Gear ratio\nforeign         byte    %8.0g      origin     Car origin\n-------------------------------------------------------------------------------\nSorted by: foreign\n\n. // 描述数据集的变量信息\n. \n\n\n\n\n代码\n%%stata\n// 简要描述数据集的变量信息\ndescribe ,short\n\n\n\n. // 简要描述数据集的变量信息\n. describe ,short\n\nContains data from C:\\Program Files\\Stata18/ado\\base/a/auto.dta\n Observations:            74                  1978 automobile data\n    Variables:            12                  13 Apr 2022 17:45\nSorted by: foreign\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#count",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#count",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "计算数据集中观测值的数量\n语法: count [if] [in]\n\n\n代码\n%%stata\n// 计算数据集中的观测值数量\ncount\n// 计算数据集中观测值价格大于4000的数量\ncount if price &gt; 4000\n\n\n\n. // 计算数据集中的观测值数量\n. count\n  74\n\n. // 计算数据集中观测值价格大于4000的数量\n. count if price &gt; 4000\n  63\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#isid",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#isid",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "检查数据集中是否有重复的观测值（是否唯一标识符）\n语法: isid varlist\n如果报错就说明不是，如果没有报错就说明是唯一标识符。\n\n\n代码\n%%stata\n// 检查变量mpg是否是唯一标识符\nisid mpg\n\n\n\n---------------------------------------------------------------------------\nSystemError                               Traceback (most recent call last)\nCell In[7], line 1\n----&gt; 1 get_ipython().run_cell_magic('stata', '', '// 检查变量mpg是否是唯一标识符\\nisid mpg\\n')\n\nFile c:\\Users\\asus\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\IPython\\core\\interactiveshell.py:2543, in InteractiveShell.run_cell_magic(self, magic_name, line, cell)\n   2541 with self.builtin_trap:\n   2542     args = (magic_arg_s, cell)\n-&gt; 2543     result = fn(*args, **kwargs)\n   2545 # The code below prevents the output from being displayed\n   2546 # when using magics with decorator @output_can_be_silenced\n   2547 # when the last Python token in the expression is a ';'.\n   2548 if getattr(fn, magic.MAGIC_OUTPUT_CAN_BE_SILENCED, False):\n\nFile C:\\Program Files/Stata18\\utilities\\pystata\\ipython\\stpymagic.py:276, in PyStataMagic.stata(self, line, cell, local_ns)\n    274     _stata.run(cell, quietly=True, inline=_config.stconfig['grshow'])\n    275 else:\n--&gt; 276     _stata.run(cell, quietly=False, inline=_config.stconfig['grshow'])\n    278 if '-gw' in args or '-gh' in args:\n    279     _config.set_graph_size(gwidth, gheight)\n\nFile C:\\Program Files/Stata18\\utilities\\pystata\\stata.py:325, in run(cmd, quietly, echo, inline)\n    323         _stata_wrk2(\"qui include \" + tmpf, None, False, 1)\n    324     else:\n--&gt; 325         _stata_wrk2(\"include \" + tmpf, None, False, 1)\n    327 if inline:\n    328     if config.get_stipython()&gt;=3:\n\nFile C:\\Program Files/Stata18\\utilities\\pystata\\stata.py:116, in _stata_wrk2(cmd, real_cmd, colon, mode)\n    114         err = callback[0]\n    115         callback.clear()\n--&gt; 116         raise SystemError(err)\n    117 except KeyboardInterrupt:\n    118     outputter.done()\n\nSystemError: \n. // 检查变量mpg是否是唯一标识符\n. isid mpg\nvariable mpg does not uniquely identify the observations\nr(459);\nr(459);\n\n\n\n\n\n\n代码\n%%stata\n// 检查变量price是否是唯一标识符\nisid price\n// 检查变量mpg和price的组合是否是唯一标识符\nisid mpg price\n\n\n\n. isid price\n\n. // 检查变量price是否是唯一标识符\n. isid mpg price\n\n. // 检查变量mpg和price的组合是否是唯一标识符\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#unique",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#unique",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "unique 是一个用户自定义命令，用于检查数据集中变量的唯一值，它不是自带的，需要用户进行安装。\n语法: unique varlist\n它和 isid 的区别在于，isid 只检查唯一标识符，而 unique 可以检查任意变量的唯一值。\nisid 在遇到重复值时会报错，而 unique 会返回一个包含唯一值的列表。\n\n\n代码\n%%stata\nssc install unique\n\n\nchecking unique consistency and verifying not already installed...\ninstalling into C:\\Users\\asus\\ado\\plus\\...\ninstallation complete.\n\n\n\n\n代码\n%%stata\nunique mpg\nunique weight\nunique price\nunique mpg weight\n\n\n\n. unique mpg\nNumber of unique values of mpg is  21\nNumber of records is  74\n\n. unique weight\nNumber of unique values of weight is  64\nNumber of records is  74\n\n. unique price\nNumber of unique values of price is  74\nNumber of records is  74\n\n. unique mpg weight\nNumber of unique values of mpg weight is  74\nNumber of records is  74\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#summarize",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#summarize",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "展示变量的基本统计信息，包括均值、标准差、最小值、最大值等。\n语法: summarize [varlist]\n\n\n代码\n%%stata\n// 只查看 `auto` 数据集中的 `price` 变量\nsummarize price\n// 查看 `auto` 数据集中所有的变量信息\nsummarize\n\n\n\n. // 只查看 `auto` 数据集中的 `price` 变量\n. summarize price\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n       price |         74    6165.257    2949.496       3291      15906\n\n. // 查看 `auto` 数据集中所有的变量信息\n. summarize\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n        make |          0\n       price |         74    6165.257    2949.496       3291      15906\n         mpg |         74     21.2973    5.785503         12         41\n       rep78 |         69    3.405797    .9899323          1          5\n    headroom |         74    2.993243    .8459948        1.5          5\n-------------+---------------------------------------------------------\n       trunk |         74    13.75676    4.277404          5         23\n      weight |         74    3019.459    777.1936       1760       4840\n      length |         74    187.9324    22.26634        142        233\n        turn |         74    39.64865    4.399354         31         51\ndisplacement |         74    197.2973    91.83722         79        425\n-------------+---------------------------------------------------------\n  gear_ratio |         74    3.014865    .4562871       2.19       3.89\n     foreign |         74    .2972973    .4601885          0          1\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#list",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#list",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "列出数据集的所有观测值\n语法: list [varlist] [if] [in]\n如果不指定 varlist，Stata 将列出数据集中的所有变量。 如果不指定 if 和 in，Stata 将列出数据集中的所有观测值。\n如果指定了 if 和 in，Stata 将只列出满足条件的观测值。\n\n\n代码\n%%stata\n// 只查看 `auto` 数据集中的 `price` 变量，显示详细信息\nsummarize price, detail\n\n// 查看 `auto` 数据集中所有的变量信息，限制显示前10行\nlist in 1/10\n\n\n\n. // 只查看 `auto` 数据集中的 `price` 变量，显示详细信息\n. summarize price, detail\n\n                            Price\n-------------------------------------------------------------\n      Percentiles      Smallest\n 1%         3291           3291\n 5%         3748           3299\n10%         3895           3667       Obs                  74\n25%         4195           3748       Sum of wgt.          74\n\n50%       5006.5                      Mean           6165.257\n                        Largest       Std. dev.      2949.496\n75%         6342          13466\n90%        11385          13594       Variance        8699526\n95%        13466          14500       Skewness       1.653434\n99%        15906          15906       Kurtosis       4.819188\n\n. \n. // 查看 `auto` 数据集中所有的变量信息，限制显示前10行\n. list in 10\n\n     +-----------------------------------------------------------------+\n 10. | make          | price | mpg | rep78 | headroom | trunk | weight |\n     | Buick Skylark | 4,082 |  19 |     3 |      3.5 |    13 |  3,400 |\n     |-----------------------------------------------------------------|\n     |  length   |  turn   |  displa~t   |   gear_r~o   |    foreign   |\n     |     200   |    42   |       231   |       3.08   |   Domestic   |\n     +-----------------------------------------------------------------+\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#tabulate",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#tabulate",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "用于生成频数表\n语法: tabulate varlist [if] [in]\n命令可以简写为 tab。\n如果不指定 if 和 in，Stata 将列出数据集中的所有观测值。 如果指定了 if 和 in，Stata 将只列出满足条件的观测值。\n\n\n代码\n%%stata\n// 对 `auto` 数据集生成频数表\ntabulate foreign\n\n// 对 `auto` 数据集生成二维交叉表\ntab foreign rep78\n\n\n\n. // 对 `auto` 数据集生成频数表\n. tabulate foreign\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n   Domestic |         52       70.27       70.27\n    Foreign |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n. \n. // 对 `auto` 数据集生成二维交叉表\n. tab foreign rep78\n\n           |                   Repair record 1978\nCar origin |         1          2          3          4          5 |     Total\n-----------+-------------------------------------------------------+----------\n  Domestic |         2          8         27          9          2 |        48 \n   Foreign |         0          0          3          9          9 |        21 \n-----------+-------------------------------------------------------+----------\n     Total |         2          8         30         18         11 |        69 \n\n. \n\n\n\n\n代码\n%%stata\n// 将缺失值定位某一类别, missing 可以简写为 m\ntab foreign, m\n\n// 不显示频率结果, nofreq 可以简写为 nof\ntab foreign, nofreq\n\n// 不显示标签值, nolabel 可以简写为 nol\ntab foreign, nolabel\n\n\n\n. // 将缺失值定位某一类别, missing 可以简写为 m\n. tab foreign, m\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n   Domestic |         52       70.27       70.27\n    Foreign |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n. \n. // 不显示频率结果, nofreq 可以简写为 nof\n. tab foreign, nofreq\n\n. \n. // 不显示标签值, nolabel 可以简写为 nol\n. tab foreign, nolabel\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n          0 |         52       70.27       70.27\n          1 |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n. \n\n\n\n\n代码\n%%stata\n// 生成相对频率的条形图\ntab foreign, p\n\n// 按照频率数对 `auto` 数据集进行排序\ntabulate foreign, sort\n\n\n\n. // 生成相对频率的条形图\n. tab foreign, p\n\n Car origin |      Freq.\n------------+------------+-----------------------------------------------------\n   Domestic |         52 |****************************************************\n    Foreign |         22 |**********************\n------------+------------+-----------------------------------------------------\n      Total |         74 \n\n. \n. // 按照频率数对 `auto` 数据集进行排序\n. tabulate foreign, sort\n\n Car origin |      Freq.     Percent        Cum.\n------------+-----------------------------------\n   Domestic |         52       70.27       70.27\n    Foreign |         22       29.73      100.00\n------------+-----------------------------------\n      Total |         74      100.00\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#histogram",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#histogram",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "生成直方图，用于展示变量的分布情况\n语法: histogram varname [if] [in]\n如果不指定 if 和 in，Stata 将列出数据集中的所有观测值。\n\n\n代码\n%%stata\n// 生成 `price` 变量的直方图，并叠加正态分布曲线\nhistogram price, normal\n\n\n\n. // 生成 `price` 变量的直方图，并叠加正态分布曲线\n. histogram price, normal\n(bin=8, start=3291, width=1576.875)\n\n. \n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\n// 生成 `price` 变量的直方图，并叠加频率分布曲线\nhistogram price, normal frequency\n\n\n\n. // 生成 `price` 变量的直方图，并叠加频率分布曲线\n. histogram price, normal frequency\n(bin=8, start=3291, width=1576.875)\n\n. \n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\n// 生成 `price` 变量的直方图，并叠加频率分布曲线，设置标题和坐标轴标签\nhistogram price, normal frequency ytitle(\"Frequency\") xtitle(\"Price\") title(\"Histogram of Price\")\n\n\n\n. // 生成 `price` 变量的直方图，并叠加频率分布曲线，设置标题和坐标轴标签\n. histogram price, normal frequency ytitle(\"Frequency\") xtitle(\"Price\") title(\"\n&gt; Histogram of Price\")\n(bin=8, start=3291, width=1576.875)\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-02-stata-obs.html#scatter",
+    "href": "Guide/Stata/25-05-02-stata-obs.html#scatter",
+    "title": "01-数据的初步观测",
+    "section": "",
+    "text": "生成散点图，用于展示两个变量之间的关系\n语法: scatter yvar xvar [if] [in]\n\n\n代码\n%%stata\n// 生成 `mpg` 和 `weight` 变量的散点图\nscatter mpg weight\n\n\n\n. // 生成 `mpg` 和 `weight` 变量的散点图\n. scatter mpg weight\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "01-数据的初步观测"
     ]
   }
 ]
