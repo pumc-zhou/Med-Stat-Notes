@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-03},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 3, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-04},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 4, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -2369,6 +2369,84 @@
       "统计软件",
       "Stata",
       "01-数据的初步观测"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-04-CI.html",
+    "href": "Guide/Stata/25-05-04-CI.html",
+    "title": "03-置信区间（Confidence Interval）",
+    "section": "",
+    "text": "代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "03-置信区间（Confidence Interval）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-04-CI.html#置信区间的定义",
+    "href": "Guide/Stata/25-05-04-CI.html#置信区间的定义",
+    "title": "03-置信区间（Confidence Interval）",
+    "section": "1 置信区间的定义",
+    "text": "1 置信区间的定义\n置信区间是一个范围，用于估计总体参数的可能值。它是基于样本数据计算得出的，并且在一定的置信水平下，包含了总体参数的真实值。 置信区间通常用以下形式表示：\n\\[ CI = (\\hat{\\theta} - E, \\hat{\\theta} + E) \\]\n其中，\\(\\hat{\\theta}\\) 是样本统计量的估计值，\\(E\\) 是误差范围（也称为边际误差）。\n置信区间计算的一般形式为： \\[ CI = (\\hat{\\theta} - z_{\\alpha/2} \\cdot SE, \\hat{\\theta} + z_{\\alpha/2} \\cdot SE) \\]\n置信区间的宽度取决于样本大小、样本标准差和所选的置信水平。较大的样本通常会导致更窄的置信区间，而较高的置信水平则会导致更宽的置信区间。\n置信区间的计算通常涉及以下步骤：\n\n选择一个置信水平（例如，95%或99%）。\n计算样本统计量（例如，样本均值或样本比例）。\n计算样本标准差或标准误差。\n根据所选的置信水平，查找相应的临界值（例如，Z值或t值）。\n计算置信区间的边际误差。\n构建置信区间。\n解释置信区间的含义。\n报告置信区间的结果。\n进行假设检验时，置信区间可以用来判断是否拒绝原假设。\n在进行回归分析时，置信区间可以用来评估回归系数的显著性和可靠性。\n在进行方差分析时，置信区间可以用来评估组间差异的显著性和可靠性。\n\n\n\n代码\n%%stata\n// 载入数据集，使用 Stata 的内置数据集 auto.dta\nsysuse auto, clear\n\n\n\n. // 载入数据集，使用 Stata 的内置数据集 auto.dta\n. sysuse auto, clear\n(1978 automobile data)\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "03-置信区间（Confidence Interval）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-04-CI.html#ci-mean",
+    "href": "Guide/Stata/25-05-04-CI.html#ci-mean",
+    "title": "03-置信区间（Confidence Interval）",
+    "section": "2 ci mean",
+    "text": "2 ci mean\n连续变量 mean 的标准误（SE）和置信区间（CI）\n语法：\nci mean varname [if] [in] [weight] [,options]\n或者\ncii means #obs #mean #sd [,level(#)]\n默认置信水平为95%，可以通过 options 或 level(#) 选项更改。\n\n\n代码\n%%stata\nci mean mpg price,level(95)\n\n\n\n    Variable |        Obs        Mean    Std. err.       [95% conf. interval]\n-------------+---------------------------------------------------------------\n         mpg |         74     21.2973    .6725511         19.9569    22.63769\n       price |         74    6165.257    342.8719        5481.914      6848.6\n\n\n\n\n代码\n%%stata\ncii mean 144 19599 4389,level(95)\n\n\n\n    Variable |        Obs        Mean    Std. err.       [95% conf. interval]\n-------------+---------------------------------------------------------------\n             |        166       19599    340.6525         18926.4     20271.6",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "03-置信区间（Confidence Interval）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-04-CI.html#分类变量的置信区间",
+    "href": "Guide/Stata/25-05-04-CI.html#分类变量的置信区间",
+    "title": "03-置信区间（Confidence Interval）",
+    "section": "3 分类变量的置信区间",
+    "text": "3 分类变量的置信区间\n\n3.1 继续使用 ci 命令\nci 命令可以用于计算分类变量的置信区间。对于分类变量，通常使用比例（proportion）来表示其分布情况。ci 命令可以计算样本比例的置信区间。\nci priportion varname [if] [in] [weight] [,options]\n缺点：ci prop 只能用于计算 binary 变量的置信区间，不能用于多分类变量。\n\n\n代码\n%%stata\nci prop foreign\n\n\n\n                                                            Binomial exact   \n    Variable |        Obs  Proportion    Std. err.       [95% conf. interval]\n-------------+---------------------------------------------------------------\n     foreign |         74    .2972973    .0531331         .196584    .4148353\n\n\n\n\n代码\n%%stata\nci prop rep78\n\n\nno binary (0/1) variables found; nothing to compute\n\n\n\n\n3.2 proportion\nproportion 命令可以用于计算分类变量的置信区间。它可以处理多分类变量，并且可以计算每个类别的比例和置信区间。\n语法形式：\nproportion varname [if] [in] [weight] [,options]\n默认置信水平为95%，可以通过 options 选项更改。\n\n\n代码\n%%stata\nprop foreign\n\n\n\nProportion estimation                       Number of obs = 74\n\n--------------------------------------------------------------\n             |                                   Logit\n             | Proportion   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n     foreign |\n   Domestic  |   .7027027   .0531331      .5874215     .796909\n    Foreign  |   .2972973   .0531331       .203091    .4125785\n--------------------------------------------------------------\n\n\n\n\n代码\n%%stata\nprop rep78\n\n\n\nProportion estimation                       Number of obs = 69\n\n--------------------------------------------------------------\n             |                                   Logit\n             | Proportion   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n       rep78 |\n          1  |   .0289855   .0201966      .0070794    .1110924\n          2  |    .115942   .0385422       .058317    .2173648\n          3  |   .4347826   .0596787      .3214848    .5553295\n          4  |   .2608696   .0528625      .1695907    .3788629\n          5  |   .1594203   .0440694      .0895793     .267702\n--------------------------------------------------------------\n\n\n\n\n代码\n%%stata\nprop foreign rep78\n\n\n\nProportion estimation                       Number of obs = 69\n\n--------------------------------------------------------------\n             |                                   Logit\n             | Proportion   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n     foreign |\n   Domestic  |   .6956522   .0553932      .5755656     .793927\n    Foreign  |   .3043478   .0553932       .206073    .4244344\n             |\n       rep78 |\n          1  |   .0289855   .0201966      .0070794    .1110924\n          2  |    .115942   .0385422       .058317    .2173648\n          3  |   .4347826   .0596787      .3214848    .5553295\n          4  |   .2608696   .0528625      .1695907    .3788629\n          5  |   .1594203   .0440694      .0895793     .267702\n--------------------------------------------------------------\n\n\nprop 多个变量时，Stata 会默认去除缺失值。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "03-置信区间（Confidence Interval）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-04-CI.html#pwcorr",
+    "href": "Guide/Stata/25-05-04-CI.html#pwcorr",
+    "title": "03-置信区间（Confidence Interval）",
+    "section": "4 pwcorr",
+    "text": "4 pwcorr\npwcorr 命令用于计算变量之间的成对相关系数。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。\npwcorr [varlist] [if] [in] [weight] [,options]\n\n\n代码\n%%stata\npwcorr price headroom mpg displacement\n\n\n\n             |    price headroom      mpg displa~t\n-------------+------------------------------------\n       price |   1.0000 \n    headroom |   0.1145   1.0000 \n         mpg |  -0.4686  -0.4138   1.0000 \ndisplacement |   0.4949   0.4745  -0.7056   1.0000 \n\n\n\n\n代码\n%%stata\n// 展示P值版，并且用星号标记显著性水平为0.05的相关系数\npwcorr price headroom mpg displacement, sig star(0.05)\n\n\n\n. // 展示P值版\n. pwcorr price headroom mpg displacement, sig star(0.05)\n\n             |    price headroom      mpg displa~t\n-------------+------------------------------------\n       price |   1.0000 \n             |\n             |\n    headroom |   0.1145   1.0000 \n             |   0.3313\n             |\n         mpg |  -0.4686* -0.4138*  1.0000 \n             |   0.0000   0.0002\n             |\ndisplacement |   0.4949*  0.4745* -0.7056*  1.0000 \n             |   0.0000   0.0000   0.0000\n             |\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "03-置信区间（Confidence Interval）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-04-CI.html#graph-matrix",
+    "href": "Guide/Stata/25-05-04-CI.html#graph-matrix",
+    "title": "03-置信区间（Confidence Interval）",
+    "section": "5 graph matrix",
+    "text": "5 graph matrix\ngraph matrix 命令用于绘制变量之间的散点图矩阵。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。\ngraph matrix [varlist] [if] [in] [weight] [,options]\n\n\n代码\n%%stata\ngraph matrix price headroom mpg displacement\n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\ngraph matrix price headroom mpg displacement, half",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "03-置信区间（Confidence Interval）"
     ]
   }
 ]
