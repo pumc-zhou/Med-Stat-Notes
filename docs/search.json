@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-04},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 4, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-05},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 5, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -2374,79 +2374,287 @@
   {
     "objectID": "Guide/Stata/25-05-04-CI.html",
     "href": "Guide/Stata/25-05-04-CI.html",
-    "title": "03-置信区间（Confidence Interval）",
+    "title": "03-置信区间（CI）",
     "section": "",
     "text": "代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "03-置信区间（Confidence Interval）"
+      "03-置信区间（CI）"
     ]
   },
   {
     "objectID": "Guide/Stata/25-05-04-CI.html#置信区间的定义",
     "href": "Guide/Stata/25-05-04-CI.html#置信区间的定义",
-    "title": "03-置信区间（Confidence Interval）",
+    "title": "03-置信区间（CI）",
     "section": "1 置信区间的定义",
     "text": "1 置信区间的定义\n置信区间是一个范围，用于估计总体参数的可能值。它是基于样本数据计算得出的，并且在一定的置信水平下，包含了总体参数的真实值。 置信区间通常用以下形式表示：\n\\[ CI = (\\hat{\\theta} - E, \\hat{\\theta} + E) \\]\n其中，\\(\\hat{\\theta}\\) 是样本统计量的估计值，\\(E\\) 是误差范围（也称为边际误差）。\n置信区间计算的一般形式为： \\[ CI = (\\hat{\\theta} - z_{\\alpha/2} \\cdot SE, \\hat{\\theta} + z_{\\alpha/2} \\cdot SE) \\]\n置信区间的宽度取决于样本大小、样本标准差和所选的置信水平。较大的样本通常会导致更窄的置信区间，而较高的置信水平则会导致更宽的置信区间。\n置信区间的计算通常涉及以下步骤：\n\n选择一个置信水平（例如，95%或99%）。\n计算样本统计量（例如，样本均值或样本比例）。\n计算样本标准差或标准误差。\n根据所选的置信水平，查找相应的临界值（例如，Z值或t值）。\n计算置信区间的边际误差。\n构建置信区间。\n解释置信区间的含义。\n报告置信区间的结果。\n进行假设检验时，置信区间可以用来判断是否拒绝原假设。\n在进行回归分析时，置信区间可以用来评估回归系数的显著性和可靠性。\n在进行方差分析时，置信区间可以用来评估组间差异的显著性和可靠性。\n\n\n\n代码\n%%stata\n// 载入数据集，使用 Stata 的内置数据集 auto.dta\nsysuse auto, clear\n\n\n\n. // 载入数据集，使用 Stata 的内置数据集 auto.dta\n. sysuse auto, clear\n(1978 automobile data)\n\n.",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "03-置信区间（Confidence Interval）"
+      "03-置信区间（CI）"
     ]
   },
   {
     "objectID": "Guide/Stata/25-05-04-CI.html#ci-mean",
     "href": "Guide/Stata/25-05-04-CI.html#ci-mean",
-    "title": "03-置信区间（Confidence Interval）",
+    "title": "03-置信区间（CI）",
     "section": "2 ci mean",
     "text": "2 ci mean\n连续变量 mean 的标准误（SE）和置信区间（CI）\n语法：\nci mean varname [if] [in] [weight] [,options]\n或者\ncii means #obs #mean #sd [,level(#)]\n默认置信水平为95%，可以通过 options 或 level(#) 选项更改。\n\n\n代码\n%%stata\nci mean mpg price,level(95)\n\n\n\n    Variable |        Obs        Mean    Std. err.       [95% conf. interval]\n-------------+---------------------------------------------------------------\n         mpg |         74     21.2973    .6725511         19.9569    22.63769\n       price |         74    6165.257    342.8719        5481.914      6848.6\n\n\n\n\n代码\n%%stata\ncii mean 144 19599 4389,level(95)\n\n\n\n    Variable |        Obs        Mean    Std. err.       [95% conf. interval]\n-------------+---------------------------------------------------------------\n             |        166       19599    340.6525         18926.4     20271.6",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "03-置信区间（Confidence Interval）"
+      "03-置信区间（CI）"
     ]
   },
   {
     "objectID": "Guide/Stata/25-05-04-CI.html#分类变量的置信区间",
     "href": "Guide/Stata/25-05-04-CI.html#分类变量的置信区间",
-    "title": "03-置信区间（Confidence Interval）",
+    "title": "03-置信区间（CI）",
     "section": "3 分类变量的置信区间",
     "text": "3 分类变量的置信区间\n\n3.1 继续使用 ci 命令\nci 命令可以用于计算分类变量的置信区间。对于分类变量，通常使用比例（proportion）来表示其分布情况。ci 命令可以计算样本比例的置信区间。\nci priportion varname [if] [in] [weight] [,options]\n缺点：ci prop 只能用于计算 binary 变量的置信区间，不能用于多分类变量。\n\n\n代码\n%%stata\nci prop foreign\n\n\n\n                                                            Binomial exact   \n    Variable |        Obs  Proportion    Std. err.       [95% conf. interval]\n-------------+---------------------------------------------------------------\n     foreign |         74    .2972973    .0531331         .196584    .4148353\n\n\n\n\n代码\n%%stata\nci prop rep78\n\n\nno binary (0/1) variables found; nothing to compute\n\n\n\n\n3.2 proportion\nproportion 命令可以用于计算分类变量的置信区间。它可以处理多分类变量，并且可以计算每个类别的比例和置信区间。\n语法形式：\nproportion varname [if] [in] [weight] [,options]\n默认置信水平为95%，可以通过 options 选项更改。\n\n\n代码\n%%stata\nprop foreign\n\n\n\nProportion estimation                       Number of obs = 74\n\n--------------------------------------------------------------\n             |                                   Logit\n             | Proportion   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n     foreign |\n   Domestic  |   .7027027   .0531331      .5874215     .796909\n    Foreign  |   .2972973   .0531331       .203091    .4125785\n--------------------------------------------------------------\n\n\n\n\n代码\n%%stata\nprop rep78\n\n\n\nProportion estimation                       Number of obs = 69\n\n--------------------------------------------------------------\n             |                                   Logit\n             | Proportion   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n       rep78 |\n          1  |   .0289855   .0201966      .0070794    .1110924\n          2  |    .115942   .0385422       .058317    .2173648\n          3  |   .4347826   .0596787      .3214848    .5553295\n          4  |   .2608696   .0528625      .1695907    .3788629\n          5  |   .1594203   .0440694      .0895793     .267702\n--------------------------------------------------------------\n\n\n\n\n代码\n%%stata\nprop foreign rep78\n\n\n\nProportion estimation                       Number of obs = 69\n\n--------------------------------------------------------------\n             |                                   Logit\n             | Proportion   Std. err.     [95% conf. interval]\n-------------+------------------------------------------------\n     foreign |\n   Domestic  |   .6956522   .0553932      .5755656     .793927\n    Foreign  |   .3043478   .0553932       .206073    .4244344\n             |\n       rep78 |\n          1  |   .0289855   .0201966      .0070794    .1110924\n          2  |    .115942   .0385422       .058317    .2173648\n          3  |   .4347826   .0596787      .3214848    .5553295\n          4  |   .2608696   .0528625      .1695907    .3788629\n          5  |   .1594203   .0440694      .0895793     .267702\n--------------------------------------------------------------\n\n\nprop 多个变量时，Stata 会默认去除缺失值。",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "03-置信区间（Confidence Interval）"
+      "03-置信区间（CI）"
     ]
   },
   {
     "objectID": "Guide/Stata/25-05-04-CI.html#pwcorr",
     "href": "Guide/Stata/25-05-04-CI.html#pwcorr",
-    "title": "03-置信区间（Confidence Interval）",
+    "title": "03-置信区间（CI）",
     "section": "4 pwcorr",
     "text": "4 pwcorr\npwcorr 命令用于计算变量之间的成对相关系数。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。\npwcorr [varlist] [if] [in] [weight] [,options]\n\n\n代码\n%%stata\npwcorr price headroom mpg displacement\n\n\n\n             |    price headroom      mpg displa~t\n-------------+------------------------------------\n       price |   1.0000 \n    headroom |   0.1145   1.0000 \n         mpg |  -0.4686  -0.4138   1.0000 \ndisplacement |   0.4949   0.4745  -0.7056   1.0000 \n\n\n\n\n代码\n%%stata\n// 展示P值版，并且用星号标记显著性水平为0.05的相关系数\npwcorr price headroom mpg displacement, sig star(0.05)\n\n\n\n. // 展示P值版\n. pwcorr price headroom mpg displacement, sig star(0.05)\n\n             |    price headroom      mpg displa~t\n-------------+------------------------------------\n       price |   1.0000 \n             |\n             |\n    headroom |   0.1145   1.0000 \n             |   0.3313\n             |\n         mpg |  -0.4686* -0.4138*  1.0000 \n             |   0.0000   0.0002\n             |\ndisplacement |   0.4949*  0.4745* -0.7056*  1.0000 \n             |   0.0000   0.0000   0.0000\n             |\n\n.",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "03-置信区间（Confidence Interval）"
+      "03-置信区间（CI）"
     ]
   },
   {
     "objectID": "Guide/Stata/25-05-04-CI.html#graph-matrix",
     "href": "Guide/Stata/25-05-04-CI.html#graph-matrix",
-    "title": "03-置信区间（Confidence Interval）",
+    "title": "03-置信区间（CI）",
     "section": "5 graph matrix",
     "text": "5 graph matrix\ngraph matrix 命令用于绘制变量之间的散点图矩阵。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。\ngraph matrix [varlist] [if] [in] [weight] [,options]\n\n\n代码\n%%stata\ngraph matrix price headroom mpg displacement\n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\ngraph matrix price headroom mpg displacement, half",
     "crumbs": [
       "Home",
       "统计软件",
       "Stata",
-      "03-置信区间（Confidence Interval）"
+      "03-置信区间（CI）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-ttest.html",
+    "href": "Guide/Stata/25-05-05-ttest.html",
+    "title": "06-t检验（t-test）",
+    "section": "",
+    "text": "代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "06-t检验（t-test）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-ttest.html#数据导入",
+    "href": "Guide/Stata/25-05-05-ttest.html#数据导入",
+    "title": "06-t检验（t-test）",
+    "section": "0.1 数据导入",
+    "text": "0.1 数据导入\n\n\n代码\n%%stata\nwebuse auto.dta, clear\n\n\n(1978 automobile data)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "06-t检验（t-test）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-ttest.html#独立样本-t-检验-two-samples-t-test",
+    "href": "Guide/Stata/25-05-05-ttest.html#独立样本-t-检验-two-samples-t-test",
+    "title": "06-t检验（t-test）",
+    "section": "1.1 独立样本 t 检验 (two-samples t-test)",
+    "text": "1.1 独立样本 t 检验 (two-samples t-test)\n语法：\nttest varname, by(groupvar) [if] [in] [,level(#)]\n\n\n代码\n%%stata\nttest price, by(foreign)\n\n\n\nTwo-sample t test with equal variances\n------------------------------------------------------------------------------\n   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]\n---------+--------------------------------------------------------------------\nDomestic |      52    6072.423    429.4911    3097.104    5210.184    6934.662\n Foreign |      22    6384.682    558.9942    2621.915     5222.19    7547.174\n---------+--------------------------------------------------------------------\nCombined |      74    6165.257    342.8719    2949.496    5481.914      6848.6\n---------+--------------------------------------------------------------------\n    diff |           -312.2587    754.4488               -1816.225    1191.708\n------------------------------------------------------------------------------\n    diff = mean(Domestic) - mean(Foreign)                         t =  -0.4139\nH0: diff = 0                                     Degrees of freedom =       72\n\n    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0\n Pr(T &lt; t) = 0.3401         Pr(|T| &gt; |t|) = 0.6802          Pr(T &gt; t) = 0.6599",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "06-t检验（t-test）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-ttest.html#两个变量的比较",
+    "href": "Guide/Stata/25-05-05-ttest.html#两个变量的比较",
+    "title": "06-t检验（t-test）",
+    "section": "1.2 两个变量的比较",
+    "text": "1.2 两个变量的比较\n\n1.2.1 非配对样本\nttest var1 == var2 [if] [in] ,unpaired [level(#)]\n\n\n代码\n%%stata\nwebuse fuel.dta, clear\nttest mpg1 == mpg2, unpaired\n\n\n\n. webuse fuel.dta, clear\n\n. ttest mpg1 == mpg2, unpaired\n\nTwo-sample t test with equal variances\n------------------------------------------------------------------------------\nVariable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]\n---------+--------------------------------------------------------------------\n    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475\n    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551\n---------+--------------------------------------------------------------------\nCombined |      24      21.875    .6264476    3.068954    20.57909    23.17091\n---------+--------------------------------------------------------------------\n    diff |               -1.75    1.225518               -4.291568    .7915684\n------------------------------------------------------------------------------\n    diff = mean(mpg1) - mean(mpg2)                                t =  -1.4280\nH0: diff = 0                                     Degrees of freedom =       22\n\n    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0\n Pr(T &lt; t) = 0.0837         Pr(|T| &gt; |t|) = 0.1673          Pr(T &gt; t) = 0.9163\n\n. \n\n\n\n\n1.2.2 配对样本 t 检验 (paired t-test)\n语法：\nttest var1 == var2 [if] [in] ,[level(#)]\n\n\n代码\n%%stata\nwebuse fuel.dta, clear\nttest mpg1 == mpg2\n\n\n\n. webuse fuel.dta, clear\n\n. ttest mpg1 == mpg2\n\nPaired t test\n------------------------------------------------------------------------------\nVariable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]\n---------+--------------------------------------------------------------------\n    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475\n    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551\n---------+--------------------------------------------------------------------\n    diff |      12       -1.75    .7797144     2.70101    -3.46614   -.0338602\n------------------------------------------------------------------------------\n     mean(diff) = mean(mpg1 - mpg2)                               t =  -2.2444\n H0: mean(diff) = 0                              Degrees of freedom =       11\n\n Ha: mean(diff) &lt; 0           Ha: mean(diff) != 0           Ha: mean(diff) &gt; 0\n Pr(T &lt; t) = 0.0232         Pr(|T| &gt; |t|) = 0.0463          Pr(T &gt; t) = 0.9768\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "06-t检验（t-test）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-log-do.html",
+    "href": "Guide/Stata/25-05-05-log-do.html",
+    "title": "05-代码的可复现性与文件管理",
+    "section": "",
+    "text": "代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)\n代码\n%%stata\n// 载入数据集，使用 Stata 的内置数据集 auto.dta\nsysuse auto, clear\n\n\n\n. // 载入数据集，使用 Stata 的内置数据集 auto.dta\n. sysuse auto, clear\n(1978 automobile data)\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "05-代码的可复现性与文件管理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-log-do.html#代码规范",
+    "href": "Guide/Stata/25-05-05-log-do.html#代码规范",
+    "title": "05-代码的可复现性与文件管理",
+    "section": "2.1 代码规范",
+    "text": "2.1 代码规范\n/* README: \n   1. 创建时间：2025-05-05\n   2. 上次修改时间：2025-05-08\n   3. 本文档的目的：用于探索数据&绘图&制表&建模\n   4. 本文档的依赖项：\n      - Stata &gt; 17.0\n      - Data: data.dta or other.files\n      - packages: estout, outreg2, etc.\n   5. 输入数据：output.dta or other.files\n   6. 输出结果：results.txt\n   7. 如有问题，请联系作者或查看文档。\nNotes: \n   1. 本文档的内容仅供参考，作者不对其准确性和完整性负责。\n   2. 本文档的内容可能会随时更新，作者不保证其及时性和有效性。\n   3. 本文档的内容可能会受到版权保护，未经授权不得转载或引用。\n   4. 本文档的内容仅代表作者个人观点，不代表任何机构或组织的观点。\n   5. 其他信息：\n      - 作者：Simon Zhou\n      - 邮箱：\n*/\n\n* 代码如下：\n\n// 载入数据集，使用 Stata 的内置数据集 auto.dta\nsysuse auto, clear\n\n* 1. 数据探索\ndescribe\nsummarize\n\n* 2. 绘制散点图\ntwoway scatter mpg weight",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "05-代码的可复现性与文件管理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-log-do.html#append-和-replace-的区别",
+    "href": "Guide/Stata/25-05-05-log-do.html#append-和-replace-的区别",
+    "title": "05-代码的可复现性与文件管理",
+    "section": "3.1 append 和 replace 的区别",
+    "text": "3.1 append 和 replace 的区别\n\nappend：将新的输出追加到已有的 log file 中。\nreplace：替换已有的 log file，创建一个新的 log file。\n如果文件不存在，append 和 replace 的效果是一样的，都会创建一个新的 log file。\n如果文件已经存在，而用户没有指定 append 或 replace，Stata 会报错来询问用户如何选择。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "05-代码的可复现性与文件管理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-log-do.html#text-和-smcl-的区别",
+    "href": "Guide/Stata/25-05-05-log-do.html#text-和-smcl-的区别",
+    "title": "05-代码的可复现性与文件管理",
+    "section": "3.2 text 和 smcl 的区别",
+    "text": "3.2 text 和 smcl 的区别\n\ntext：创建一个纯文本格式的 log file，适合于在文本编辑器中查看和编辑，体积较小，只有单色。\nsmcl：创建一个 Stata 默认格式的 log file，适合于在 Stata 中查看和编辑，可以保存各种颜色。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "05-代码的可复现性与文件管理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-log-do.html#namelogname-的作用",
+    "href": "Guide/Stata/25-05-05-log-do.html#namelogname-的作用",
+    "title": "05-代码的可复现性与文件管理",
+    "section": "3.3 name(logname) 的作用",
+    "text": "3.3 name(logname) 的作用\n\nname(logname)：给 log file 起一个名字，方便后续的引用和管理。\n如果不指定，Stata 会自动生成一个默认的名字，通常是以日期和时间为基础的字符串。\n如果用户给 log file 起了名字（不是 filename），那么用户就可以同时打开好几个 log file。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "05-代码的可复现性与文件管理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-log-do.html#结束-log-file",
+    "href": "Guide/Stata/25-05-05-log-do.html#结束-log-file",
+    "title": "05-代码的可复现性与文件管理",
+    "section": "3.4 结束 log file",
+    "text": "3.4 结束 log file\n\n如果没有起名字，可以世界使用 log close 命令来结束 log file。\n如果用户没有结束 log file，Stata 会在退出时自动结束 log file。\n如果用户在 Stata 中打开了多个 log file，用户可以使用 log close logfile-name 命令来结束指定的 log file，或者使用 log close _all 命令来结束所有的 log file。\n\n\n\n代码\n%%stata\nlog close // 关闭现有的日志文件 \nlog using test,append\nlog close _all // 关闭所有日志文件\n\n\n\n. log close // 关闭现有的日志文件 \n      name:  &lt;unnamed&gt;\n       log:  C:\\Users\\asus\\Desktop\\test\\Stata-test\\Statatest.smcl\n  log type:  smcl\n closed on:   5 May 2025, 12:18:32\n-------------------------------------------------------------------------------\n\n. log using test,append\n(file C:\\Users\\asus\\Desktop\\test\\Stata-test\\test.smcl not found)\n-------------------------------------------------------------------------------\n      name:  &lt;unnamed&gt;\n       log:  C:\\Users\\asus\\Desktop\\test\\Stata-test\\test.smcl\n  log type:  smcl\n opened on:   5 May 2025, 12:18:32\n\n. log close _all // 关闭所有日志文件\n      name:  &lt;unnamed&gt;\n       log:  C:\\Users\\asus\\Desktop\\test\\Stata-test\\test.smcl\n  log type:  smcl\n closed on:   5 May 2025, 12:18:32\n-------------------------------------------------------------------------------\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "05-代码的可复现性与文件管理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-log-do.html#do-file-的基本语法",
+    "href": "Guide/Stata/25-05-05-log-do.html#do-file-的基本语法",
+    "title": "05-代码的可复现性与文件管理",
+    "section": "4.1 Do file 的基本语法",
+    "text": "4.1 Do file 的基本语法\n\n4.1.1 注释\n\n使用 * 或 // 来添加单行注释，* 作为一行开头时，这一行都是注释。\n\n在 Command 后添加注释使用 // 较好，并在 // 添加一些文字注释，以提醒或解释本行代码用途。\n\n使用 /* ... */ 来添加多行注释。\n注释可以放在代码的前面或后面，也可以单独成行。\n\n\n\n代码\n%%stata\nclear all // 清除所有变量和数据集\n\npwd // 显示当前工作目录\ncd \"C:\\Users\\asus\\Desktop\\test\\Stata-test\" // 更改工作目录到指定路径\n// 注意：请将 \"YourUsername\" 替换为你的实际用户名\n\n\n\n. clear all // 清除所有变量和数据集\n\n. \n. pwd // 显示当前工作目录\nC:\\Users\\asus\\Desktop\\test\\Stata-test\n\n. cd \"C:\\Users\\asus\\Desktop\\test\\Stata-test\" // 更改工作目录到指定路径\nC:\\Users\\asus\\Desktop\\test\\Stata-test\n\n. // 注意：请将 \"YourUsername\" 替换为你的实际用户名\n. \n\n\n\n\n代码\n%%stata\n*log close // 关闭现有的日志文件\nlog using Statatest, replace \n// 创建一个新的日志文件，替换现有的文件\n\n\n\n. *log close // 关闭现有的日志文件\n. log using Statatest, replace \n-------------------------------------------------------------------------------\n      name:  &lt;unnamed&gt;\n       log:  C:\\Users\\asus\\Desktop\\test\\Stata-test\\Statatest.smcl\n  log type:  smcl\n opened on:   5 May 2025, 12:18:53\n\n. // 创建一个新的日志文件，替换现有的文件\n. \n\n\n\n\n代码\n%%stata\n// 载入数据集，使用 Stata 的内置数据集 auto.dta\nsysuse auto.dta, clear \n\n** 数据分析的探索性描述\nsum price\ncodebook mpg\n\n\n\n. // 载入数据集，使用 Stata 的内置数据集 auto.dta\n. sysuse auto.dta, clear \n(1978 automobile data)\n\n. \n. ** 数据分析的探索性描述\n. sum price\n\n    Variable |        Obs        Mean    Std. dev.       Min        Max\n-------------+---------------------------------------------------------\n       price |         74    6165.257    2949.496       3291      15906\n\n. codebook mpg\n\n-------------------------------------------------------------------------------\nmpg                                                               Mileage (mpg)\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (int)\n\n                 Range: [12,41]                       Units: 1\n         Unique values: 21                        Missing .: 0/74\n\n                  Mean: 21.2973\n             Std. dev.:  5.7855\n\n           Percentiles:     10%       25%       50%       75%       90%\n                             14        18        20        25        29\n\n. \n\n\n\n\n代码\n%%stata\nci mean rep78\ncorr weight length\n\n\n\n. ci mean rep78\n\n    Variable |        Obs        Mean    Std. err.       [95% conf. interval]\n-------------+---------------------------------------------------------------\n       rep78 |         69    3.405797    .1191738        3.167989    3.643605\n\n. corr weight length\n(obs=74)\n\n             |   weight   length\n-------------+------------------\n      weight |   1.0000\n      length |   0.9460   1.0000\n\n\n. \n\n\n\n\n4.1.2 copy the “Command”\n如果用户使用交互页面来选择相关的操作，Stata 会在命令窗口中显示用户操作所对应的命令。\n用户可以直接复制这些命令到 Do file 中，方便后续的修改和复现。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "05-代码的可复现性与文件管理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-scatter-plot.html",
+    "href": "Guide/Stata/25-05-05-scatter-plot.html",
+    "title": "04-双变量作图",
+    "section": "",
+    "text": "代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "04-双变量作图"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-scatter-plot.html#stata的scheme主题",
+    "href": "Guide/Stata/25-05-05-scatter-plot.html#stata的scheme主题",
+    "title": "04-双变量作图",
+    "section": "1.1 Stata的scheme（主题）",
+    "text": "1.1 Stata的scheme（主题）\nStata提供了多种 scheme （style）来美化图形。可以使用set scheme命令来设置主题。以下是一些常用的主题：\n\ns1color：适用于需要强调数据点的情况，具有鲜艳的颜色。\ns2color：默认主题，适用于需要强调数据点的情况。\ns1mono：单色主题，适用于打印或黑白显示。\ns2mono：单色主题，适用于强调数据点的情况。\neconomist：适用于经济学和社会科学领域的主题。\njournal：适用于学术期刊的主题，具有简洁和专业的外观。\ns1manual：手动主题，适用于需要自定义颜色和样式的情况。\ns2manual：手动主题，适用于强调数据点的情况。\ns2color8：适用于需要强调数据点的情况，具有8种颜色的主题。\nplotplain：适用于需要强调数据点的情况，具有简单和清晰的外观。\n\n更好的主题？\nsimono：适用于需要强调数据点的情况，具有简洁和专业的外观。\n\n1.1.1 scheme 的设置\nset scheme s1mono : 当前会话中设置主题为s1mono。\nset scheme s1mono, perm : 永久设置主题为s1mono, perm 为 permanent 的缩写。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "04-双变量作图"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-scatter-plot.html#scatter命令",
+    "href": "Guide/Stata/25-05-05-scatter-plot.html#scatter命令",
+    "title": "04-双变量作图",
+    "section": "1.2 scatter命令",
+    "text": "1.2 scatter命令\nscatter命令用于绘制散点图。基本语法如下：\n[twoway] scatter yvar xvar [if] [in] [weight] [, options]\n最基础的形式：\ntwoway scatter yvar xvar\n进阶形式：\ntwoway scatter y1 y2 y3 x1 x2 x3 [if] [in] [weight], options\n\n\n代码\n%%stata\ntwoway scatter mpg weight\n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\ntwoway scatter weight length price",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "04-双变量作图"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-scatter-plot.html#change-the-scheme-of-the-scatter-plot",
+    "href": "Guide/Stata/25-05-05-scatter-plot.html#change-the-scheme-of-the-scatter-plot",
+    "title": "04-双变量作图",
+    "section": "1.3 change the scheme of the scatter plot",
+    "text": "1.3 change the scheme of the scatter plot\ntwoway scatter y x,msymbol(oh) mcolor(red) msize(medium) scheme(s1mono)\n\nmsymbol:改变形状(help symbolstyle)\nmcolor:改变颜色(help colorstyle)\nmsize:改变大小(help markerstyle)\n\n\n\n代码\n%%stata\nhelp symbolstyle\n\n\n\n[G-4] symbolstyle -- Choices for the shape of markers\n                     (View complete PDF manual entry)\n\n\nSyntax\n------\n\n                        Synonym\n        symbolstyle     (if any)     Description\n        -------------------------------------------------------\n        circle             O         solid\n        diamond            D         solid\n        triangle           T         solid\n        square             S         solid\n        plus               +\n        X                  X\n        arrowf             A         filled arrow head\n        arrow              a\n        pipe               |\n        V                  V\n\n        smcircle           o         solid\n        smdiamond          d         solid\n        smsquare           s         solid\n        smtriangle         t         solid\n        smplus\n        smx                x\n        smv                v\n\n        circle_hollow      Oh        hollow\n        diamond_hollow     Dh        hollow\n        triangle_hollow    Th        hollow\n        square_hollow      Sh        hollow\n\n        smcircle_hollow    oh        hollow\n        smdiamond_hollow   dh        hollow\n        smtriangle_hollow  th        hollow\n        smsquare_hollow    sh        hollow\n\n        point              p         a small dot\n        none               i         a symbol that is invisible\n        -------------------------------------------------------\n\n        For a symbol palette displaying each of the above symbols, type\n\n            . palette symbolpalette [, scheme(schemename)]\n\n        Other symbolstyles may be available; type\n\n            . graph query symbolstyle\n\n        to obtain the complete list of symbolstyles installed on your\n        computer.\n\n\nDescription\n-----------\n\n    Markers are the ink used to mark where points are on a plot; see [G-3]\n    marker_options.  symbolstyle specifies the shape of the marker.\n\n    You specify the symbolstyle inside the msymbol() option allowed with many\n    of the graph commands:\n\n        . graph twoway ..., msymbol(symbolstyle) ...\n\n    Sometimes you will see that a symbolstylelist is allowed:\n\n        . scatter ..., msymbol(symbolstylelist) ...\n\n    A symbolstylelist is a sequence of symbolstyles separated by spaces.\n    Shorthands are allowed to make specifying the list easier; see [G-4]\n    stylelists.\n\n\nLinks to PDF documentation\n--------------------------\n\n        Remarks and examples\n\n    The above sections are not included in this help file.\n\n\nRemarks\n-------\n\n    Remarks are presented under the following headings:\n\n        Typical use\n        Filled and hollow symbols\n        Size of symbols\n\n\nTypical use\n-----------\n\n    msymbol(symbolstyle) is one of the more commonly specified options.  For\n    instance, you may not be satisfied with the default rendition of\n\n        . scatter mpg weight if foreign ||\n          scatter mpg weight if !foreign\n\n    and prefer\n\n        . scatter mpg weight if foreign, msymbol(oh) ||\n          scatter mpg weight if !foreign, msymbol(x)\n\n    When you are graphing multiple y variables in the same plot, you can\n    specify a list of symbolstyles inside the msymbol() option:\n\n        . scatter mpg1 mpg2 weight, msymbol(oh x)\n\n    The result is the same as typing\n\n        . scatter mpg1 weight, msymbol(oh) ||\n          scatter mpg2 weight, msymbol(x)\n\n    Also, in the above, we specified the symbol-style synonyms.  Whether you\n    type\n\n        . scatter mpg1 weight, msymbol(oh) ||\n          scatter mpg2 weight, msymbol(x)\n\n    or\n\n        . scatter mpg1 weight, msymbol(smcircle_hollow) ||\n          scatter mpg2 weight, msymbol(smx)\n\n    makes no difference.\n\n\nFilled and hollow symbols\n-------------------------\n\n    The symbolstyle specifies the shape of the symbol, and in that sense, one\n    of the styles circle and hcircle -- and diamond and hdiamond, etc. -- is\n    unnecessary in that each is a different rendition of the same shape.  The\n    option mfcolor(colorstyle) (see [G-3] marker_options) specifies how the\n    inside of the symbol is to be filled.  hcircle(), hdiamond, etc., are\n    included for convenience and are equivalent to specifying\n\n        msymbol(Oh): msymbol(O) mfcolor(none)\n\n        msymbol(dh): msymbol(d) mfcolor(none)\n\n        etc.\n\n    Using mfcolor() to fill the inside of a symbol with different colors\n    sometimes creates what are effectively new symbols.  For instance, if you\n    take msymbol(O) and fill its interior with a lighter shade of the same\n    color used to outline the shape, you obtain a pleasing result.  For\n    instance, you might try\n\n        msymbol(O) mlcolor(yellow) mfcolor(.5*yellow)\n\n    or\n\n        msymbol(O) mlcolor(gs5) mfcolor(gs12)\n\n    as in\n\n        . scatter mpg weight, msymbol(O) mlcolor(gs5) mfcolor(gs14)\n          (click to run)\n\n\nSize of symbols\n---------------\n\n    Just as msymbol(O) and msymbol(Oh) differ only in mfcolor(), msymbol(O)\n    and msymbol(o) -- symbols circle and smcircle -- differ only in msize().\n    In particular,\n\n        msymbol(O): msymbol(O) msize(medium)\n\n        msymbol(o): msymbol(O) msize(small)\n\n    and the same is true for all the other large and small symbol pairs.\n\n    msize() is interpreted as being relative to the size of the graph region\n    (see [G-3] region_options), so the same symbol size will in fact be a\n    little different in\n\n        . scatter mpg weight\n\n    and\n\n        . scatter mpg weight, by(foreign total)\n\n\n\n\n代码\n%%stata\nhelp colorstyle\n\n\n\n[G-4] colorstyle -- Choices for color\n                    (View complete PDF manual entry)\n\n\nSyntax\n------\n\n    Set color of &lt;object&gt; to colorstyle\n\n        &lt;object&gt;color(colorstyle)\n\n\n    Set color of all affected objects to colorstyle\n\n        color(colorstyle)\n\n\n    Set opacity of &lt;object&gt; to #, where # is a percentage of 100% opacity\n\n        &lt;object&gt;color(%#)\n\n\n    Set opacity for all affected objects colors to #\n\n        color(%#)\n\n\n    Set both color and opacity of &lt;object&gt;\n\n        &lt;object&gt;color(colorstyle%#)\n\n\n    Set both color and opacity of all affected objects\n\n        &lt;object&gt;color(colorstyle%#)\n\n\n    colorstyle            Description\n    -------------------------------------------------------------------------\n    black                 \n\n    stc1                  color used by scheme stcolor\n    stc2                  color used by scheme stcolor\n    .                     \n    .                     \n    stc15                 color used by scheme stcolor\n    stblue                blue used by scheme stcolor\n    stgreen               green used by scheme stcolor\n    stred                 red used by scheme stcolor\n    styellow              yellow used by scheme stcolor\n\n    gs0                   gray scale: 0 = black\n    gs1                   gray scale: very dark gray\n    gs2                   \n    .                     \n    .                     \n    gs15                  gray scale: very light gray\n    gs16                  gray scale: 16 = white\n\n    white                 \n\n    blue                  \n    bluishgray            \n    brown                 \n    cranberry             \n    cyan                  \n    dimgray               between gs14 and gs15\n    dkgreen               dark green\n    dknavy                dark navy blue\n    dkorange              dark orange\n    eggshell              \n    emerald               \n    forest_green          \n    gold                  \n    gray                  equivalent to gs8\n    green                 \n    khaki                 \n    lavender              \n    lime                  \n    ltblue                light blue\n    ltbluishgray          light blue-gray, used by scheme s2color\n    ltkhaki               light khaki\n    magenta               \n    maroon                \n    midblue               \n    midgreen              \n    mint                  \n    navy                  \n    olive                 \n    olive_teal            \n    orange                \n    orange_red            \n    pink                  \n    purple                \n    red                   \n    sand                  \n    sandb                 bright sand\n    sienna                \n    stone                 \n    teal                  \n    yellow                \n\n                          colors used by The Economist magazine:\n    ebg                           background color\n    ebblue                        bright blue\n    edkblue                       dark blue\n    eltblue                       light blue\n    eltgreen                      light green\n    emidblue                      midblue\n    erose                         rose\n\n    none                  no color; invisible; draws nothing\n    background or bg      same color as background\n    foreground or fg      same color as foreground\n\n    \"# # #\"               RGB value; white = \"255 255 255\"\n\n    \"# # # #\"             CMYK value; yellow = \"0 0 255 0\"\n\n    \"hsv # # #\"           HSV value; white = \"hsv 0 0 1\"\n\n    colorstyle*#          color with adjusted intensity; #'s range from 0 to\n                            255\n\n    colorstyle%#          color with adjusted opacity; #s range from 0 to 100\n\n    *#                    default color with adjusted intensity\n    %#                    default color with adjusted opacity\n    -------------------------------------------------------------------------\n    When specifying RGB, CMYK, or HSV values, it is best to enclose the\n      values in quotes; type \"128 128 128\" not 128 128 128.\n\n\nDescription\n-----------\n\n    colorstyle sets the color and opacity of graph components such as lines,\n    backgrounds, and bars.  Some options allow a sequence of colorstyles with\n    colorstylelist; see [G-4] stylelists.\n\n\nLinks to PDF documentation\n--------------------------\n\n        Remarks and examples\n\n    The above sections are not included in this help file.\n\n\nRemarks\n-------\n\n    colorstyle sets the color and opacity of graph components such as lines,\n    backgrounds, and bars.  Colors can be specified with a named color, such\n    as black, olive, and yellow, or with a color value in the RGB, CMYK, or\n    HSV format.  colorstyle can also set a component to match the background\n    color or foreground color.  Additionally, colorstyle can modify color\n    intensity, making the color lighter or darker.  Some options allow a\n    sequence of colorstyles with colorstylelist; see [G-4] stylelists.\n\n    To see a list of named colors, use graph query colorstyle.  See [G-2]\n    graph query.  For a color palette showing an individual color or\n    comparing two colors, use palette color.  See [G-2] palette.\n\n    Remarks are presented under the following headings:\n\n        Adjust opacity\n        Adjust intensity\n        Specify RGB values\n        Specify CMYK values\n        Specify HSV values\n        Export custom colors\n\n\nAdjust opacity\n--------------\n\n    Opacity is the percentage of a color that covers the background color.\n    That is, 100% means that the color fully hides the background, and 0%\n    means that the color has no coverage and is fully transparent.  If you\n    prefer to think about transparency, opacity is the inverse of\n    transparency.  Adjust opacity with the % modifier.  For example, type\n\n        green%50\n        \"0 255 0%50\"\n        %30\n\n    Omitting the color specification in the command adjusts the opacity of\n    the object while retaining the default color.  For instance, specify\n    mcolor(%30) with graph twoway scatter to use the default fill color at\n    30% opacity.\n\n    Specifying color%0 makes the object completely transparent and is\n    equivalent to color none.\n\n\nAdjust intensity\n----------------\n\n    Color intensity (brightness) can be modified by specifying a color, *,\n    and a multiplier value.  For example, type\n\n        green*.8\n        purple*1.5\n        \"0 255 255*1.2\"\n        \"hsv 240 1 1*.5\"\n\n    A value of 1 leaves the color unchanged, a value greater than 1 makes the\n    color darker, and a value less than 1 makes the color lighter.  Note that\n    there is no space between color and *, even when color is a numerical\n    value for RGB or CMYK.\n\n    Omitting the color specification in the command adjusts the intensity of\n    the object's default color.  For instance, specify bcolor(*.7) with graph\n    twoway bar to use the default fill color at reduced brightness, or\n    specify bcolor(*2) to increase the brightness of the default color.\n\n    Specifying color*0 makes the color as light as possible, but it is not\n    equivalent to color none.  color*255 makes the color as dark as possible,\n    although values much smaller than 255 usually achieve the same result.\n\n    For an example using the intensity adjustment, see Typical use in [G-2]\n    graph twoway kdensity.\n\n\nRGB values\n----------\n\n    In addition to specifying named colors such as yellow, you can specify\n    colors with RGB values.  An RGB value is a triplet of numbers ranging\n    from 0 to 255 that describes the level of red, green, and blue light that\n    must be emitted to produce a given color.  RGB is used to define colors\n    for on-screen display and in nonprofessional printing.  Examples of RGB\n    values are\n\n        red     =   255    0    0\n        green   =     0  255    0\n        blue    =     0    0  255\n        white   =   255  255  255\n        black   =     0    0    0\n        gray    =   128  128  128\n        navy    =    26   71  111\n\n\nCMYK values\n-----------\n\n    You can specify colors using CMYK values.  You will probably only use\n    CMYK values when they are provided by a journal or publisher.  You can\n    specify CMYK values either as integers from 0 to 255 or as proportions of\n    ink using real numbers from 0.0 to 1.0.  If all four values are 1 or\n    less, the numbers are taken to be proportions of ink.  For example,\n\n        red     =     0  255  255    0   or, equivalently,     0     1  1     0\n        green   =   255    0  255    0   or, equivalently,     1     0  1     0\n        blue    =   255  255    0    0   or, equivalently,     1     1  0     0\n        white   =     0    0    0    0   or, equivalently,     0     0  0     0\n        black   =     0    0    0  255   or, equivalently,     0     0  0     1\n        gray    =     0    0    0  128   or, equivalently,     0     0  0    .5\n        navy    =    85   40    0  144   or, equivalently,  .334  .157  0  .565\n\n\nHSV values\n----------\n\n    You can specify colors with HSV (hue, saturation, and value), also called\n    HSL (hue, saturation, and luminance) and HSB (hue, saturation, and\n    brightness).  HSV is often used in image editing software.  An HSV value\n    is a triplet of numbers.  So that Stata can differentiate them from RGB\n    values, HSV colors must be prefaced with hsv.  The first number specifies\n    the hue from 0 to 360, the second number specifies the saturation from 0\n    to 1, and the third number specifies the value (luminance or brightness)\n    from 0 to 1.  For example,\n\n        red     =   hsv   0     1     1\n        green   =   hsv 120     1  .502\n        blue    =   hsv 240     1     1\n        white   =   hsv   0     0     1\n        black   =   hsv   0     0     0\n        navy    =   hsv 209  .766  .435\n\n\nExport custom colors\n--------------------\n\n    graph export stores all colors as RGB+opacity values, that is, RGB values\n    0-255 and opacity values 0-1.  If you need color values from Stata in\n    CMYK format, use the graph export command with the cmyk(on) option, and\n    save the graph in one of the following formats: PostScript, Encapsulated\n    PostScript, or PDF.\n\n    You can set Stata to permanently use CMYK colors for PostScript export\n    files by typing translator set Graph2ps cmyk on and for EPS export files\n    by typing translator set Graph2eps cmyk on.\n\n    The CMYK values returned in graph export may differ from the CMYK values\n    that you entered.  This is because Stata normalizes CMYK values by\n    reducing all CMY values until one value is 0.  The difference is added to\n    the K (black) value.  For example, Stata normalizes the CMYK value 10 10\n    5 0 to 5 5 0 5.  Stata subtracts 5 from the CMY values so that Y is 0 and\n    then adds 5 to K.\n\n\nVideo example\n-------------\n\n        Transparency in Stata graphs\n\n\n\n\n代码\n%%stata\ntwoway scatter mpg weight,msymbol(D) mcolor(red) msize(medium)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "04-双变量作图"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-05-scatter-plot.html#option-by",
+    "href": "Guide/Stata/25-05-05-scatter-plot.html#option-by",
+    "title": "04-双变量作图",
+    "section": "1.4 Option: by",
+    "text": "1.4 Option: by\n按照某个变量分组绘制散点图，可以使用by选项。by选项可以将数据按照指定变量进行分组，并为每个组绘制单独的散点图。\ntwoway scatter y x, by(groupvar)\n\n\n代码\n%%stata\ntwoway scatter mpg weight,by(foreign)\n\n\n\n\n\n\n\n\n\n\n\n代码\n%%stata\ntwoway(scatter mpg weight if foreign ==0)(scatter mpg weight if foreign ==1),legend(label(1 \"Domestic\") label(2 \"Foreign\"))",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "04-双变量作图"
     ]
   }
 ]

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simon Zhou">
 
-<title>03-置信区间（CI） – 医学统计学笔记</title>
+<title>06-t检验（t-test） – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-05-05-log-do.html" rel="next">
-<link href="../../Guide/Stata/25-05-03-describe-index.html" rel="prev">
+<link href="../../Quarto/quarto-intro.html" rel="next">
+<link href="../../Guide/Stata/25-05-05-scatter-plot.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,44 +116,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="03-置信区间（CI） – 医学统计学笔记">
+<meta property="og:title" content="06-t检验（t-test） – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="03-置信区间（CI） – 医学统计学笔记">
+<meta name="twitter:title" content="06-t检验（t-test） – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:image" content="www.lazyzhou.cn/Guide/Stata/25-05-04-CI_files/figure-html/cell-13-output-1.svg">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -257,7 +227,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-04-CI.html">03-置信区间（CI）</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">06-t检验（t-test）</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -549,7 +519,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-04-CI.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-05-04-CI.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">03-置信区间（CI）</span></a>
   </div>
 </li>
@@ -567,7 +537,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">06-t检验（t-test）</span></a>
   </div>
 </li>
@@ -620,20 +590,21 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul class="collapse">
-  <li><a href="#置信区间的定义" id="toc-置信区间的定义" class="nav-link active" data-scroll-target="#置信区间的定义"><span class="header-section-number">1</span> 置信区间的定义</a></li>
-  <li><a href="#ci-mean" id="toc-ci-mean" class="nav-link" data-scroll-target="#ci-mean"><span class="header-section-number">2</span> ci mean</a></li>
-  <li><a href="#分类变量的置信区间" id="toc-分类变量的置信区间" class="nav-link" data-scroll-target="#分类变量的置信区间"><span class="header-section-number">3</span> 分类变量的置信区间</a></li>
-  <li><a href="#pwcorr" id="toc-pwcorr" class="nav-link" data-scroll-target="#pwcorr"><span class="header-section-number">4</span> pwcorr</a></li>
-  <li><a href="#graph-matrix" id="toc-graph-matrix" class="nav-link" data-scroll-target="#graph-matrix"><span class="header-section-number">5</span> graph matrix</a></li>
+  <li><a href="#数据导入" id="toc-数据导入" class="nav-link active" data-scroll-target="#数据导入"><span class="header-section-number">0.1</span> 数据导入</a></li>
+  <li><a href="#单样本-t-检验one-sample-t-test" id="toc-单样本-t-检验one-sample-t-test" class="nav-link" data-scroll-target="#单样本-t-检验one-sample-t-test"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</a>
+  <ul class="collapse">
+  <li><a href="#独立样本-t-检验-two-samples-t-test" id="toc-独立样本-t-检验-two-samples-t-test" class="nav-link" data-scroll-target="#独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</a></li>
+  <li><a href="#两个变量的比较" id="toc-两个变量的比较" class="nav-link" data-scroll-target="#两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-04-CI.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-04-CI.html">03-置信区间（CI）</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">06-t检验（t-test）</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">03-置信区间（CI）</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">06-t检验（t-test）</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
 </div>
 
 
@@ -650,7 +621,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年5月4日</p>
+      <p class="date">2025年5月5日</p>
     </div>
   </div>
   
@@ -662,283 +633,170 @@ window.Quarto = {
 </header>
 
 
-<div id="a5c2e17d" class="cell" data-execution_count="2">
+<div id="a8bc257b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="置信区间的定义" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="置信区间的定义"><span class="header-section-number">1</span> 置信区间的定义</h2>
-<p>置信区间是一个范围，用于估计总体参数的可能值。它是基于样本数据计算得出的，并且在一定的置信水平下，包含了总体参数的真实值。 置信区间通常用以下形式表示：</p>
-<p><span class="math display">\[ CI = (\hat{\theta} - E, \hat{\theta} + E) \]</span></p>
-<p>其中，<span class="math inline">\(\hat{\theta}\)</span> 是样本统计量的估计值，<span class="math inline">\(E\)</span> 是误差范围（也称为边际误差）。</p>
-<p>置信区间计算的一般形式为： <span class="math display">\[ CI = (\hat{\theta} - z_{\alpha/2} \cdot SE, \hat{\theta} + z_{\alpha/2} \cdot SE) \]</span></p>
-<p>置信区间的宽度取决于样本大小、样本标准差和所选的置信水平。较大的样本通常会导致更窄的置信区间，而较高的置信水平则会导致更宽的置信区间。</p>
-<p>置信区间的计算通常涉及以下步骤：</p>
-<ol type="1">
-<li>选择一个置信水平（例如，95%或99%）。</li>
-<li>计算样本统计量（例如，样本均值或样本比例）。</li>
-<li>计算样本标准差或标准误差。</li>
-<li>根据所选的置信水平，查找相应的临界值（例如，Z值或t值）。</li>
-<li>计算置信区间的边际误差。</li>
-<li>构建置信区间。</li>
-<li>解释置信区间的含义。</li>
-<li>报告置信区间的结果。</li>
-<li>进行假设检验时，置信区间可以用来判断是否拒绝原假设。</li>
-<li>在进行回归分析时，置信区间可以用来评估回归系数的显著性和可靠性。</li>
-<li>在进行方差分析时，置信区间可以用来评估组间差异的显著性和可靠性。</li>
-</ol>
-<div id="9597f20a" class="cell" data-execution_count="3">
+<section id="数据导入" class="level2" data-number="0.1">
+<h2 data-number="0.1" class="anchored" data-anchor-id="数据导入"><span class="header-section-number">0.1</span> 数据导入</h2>
+<div id="6766ebf5" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 载入数据集，使用 Stata 的内置数据集 auto.dta</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sysuse auto, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>webuse auto.dta, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-. // 载入数据集，使用 Stata 的内置数据集 auto.dta
-. sysuse auto, clear
-(1978 automobile data)
-
-. </code></pre>
+<pre><code>(1978 automobile data)</code></pre>
 </div>
 </div>
 </section>
-<section id="ci-mean" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="ci-mean"><span class="header-section-number">2</span> ci mean</h2>
-<p>连续变量 mean 的标准误（SE）和置信区间（CI）</p>
-<p>语法：</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ci</span> <span class="kw">mean</span> varname [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>或者</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">cii</span> <span class="kw">means</span> #obs #mean #sd [,<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>默认置信水平为95%，可以通过 <code>options</code> 或 <code>level(#)</code> 选项更改。</p>
-<div id="7161ae12" class="cell" data-execution_count="4">
+<section id="单样本-t-检验one-sample-t-test" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</h1>
+<p>交互页面的操作更为简单和直观，直接选择数据集和变量即可。</p>
+<p>当然通过代码也可以实现相同的功能，但是相对而言更考验用户的代码功底、统计知识储备和对数据的理解。</p>
+<div id="33b1f95a" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ci mean mpg price,level(<span class="dv">95</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ttest price <span class="op">==</span> <span class="dv">6000</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Variable |        Obs        Mean    Std. err.       [95% conf. interval]
--------------+---------------------------------------------------------------
-         mpg |         74     21.2973    .6725511         19.9569    22.63769
-       price |         74    6165.257    342.8719        5481.914      6848.6</code></pre>
+One-sample t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+   price |      74    6165.257    342.8719    2949.496    5481.914      6848.6
+------------------------------------------------------------------------------
+    mean = mean(price)                                            t =   0.4820
+H0: mean = 6000                                  Degrees of freedom =       73
+
+   Ha: mean &lt; 6000             Ha: mean != 6000               Ha: mean &gt; 6000
+ Pr(T &lt; t) = 0.6844         Pr(|T| &gt; |t|) = 0.6313          Pr(T &gt; t) = 0.3156</code></pre>
 </div>
 </div>
-<div id="331c478f" class="cell">
+<p>语法：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname == # [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)] [<span class="kw">by</span>(varname)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>varname</code>：要进行 t 检验的变量名</li>
+<li><code>#</code>：要进行 t 检验的值</li>
+<li><code>if</code>：条件语句，表示只对满足条件的观测进行 t 检验</li>
+<li><code>in</code>：表示只对数据集中的某些观测进行 t 检验</li>
+<li><code>level(#)</code>：置信水平，默认值为 95%，可以设置 <code>#</code> 为 90%、95% 或 99%</li>
+<li><code>by</code>：分组变量，表示对不同组进行 t 检验</li>
+</ul>
+<section id="独立样本-t-检验-two-samples-t-test" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</h2>
+<p>语法：</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname, <span class="kw">by</span>(groupvar) [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b2c5a10f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cii mean <span class="dv">144</span> <span class="dv">19599</span> <span class="dv">4389</span>,level(<span class="dv">95</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ttest price, by(foreign)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-    Variable |        Obs        Mean    Std. err.       [95% conf. interval]
--------------+---------------------------------------------------------------
-             |        166       19599    340.6525         18926.4     20271.6</code></pre>
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+Domestic |      52    6072.423    429.4911    3097.104    5210.184    6934.662
+ Foreign |      22    6384.682    558.9942    2621.915     5222.19    7547.174
+---------+--------------------------------------------------------------------
+Combined |      74    6165.257    342.8719    2949.496    5481.914      6848.6
+---------+--------------------------------------------------------------------
+    diff |           -312.2587    754.4488               -1816.225    1191.708
+------------------------------------------------------------------------------
+    diff = mean(Domestic) - mean(Foreign)                         t =  -0.4139
+H0: diff = 0                                     Degrees of freedom =       72
+
+    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
+ Pr(T &lt; t) = 0.3401         Pr(|T| &gt; |t|) = 0.6802          Pr(T &gt; t) = 0.6599</code></pre>
 </div>
 </div>
 </section>
-<section id="分类变量的置信区间" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="分类变量的置信区间"><span class="header-section-number">3</span> 分类变量的置信区间</h2>
-<section id="继续使用-ci-命令" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="继续使用-ci-命令"><span class="header-section-number">3.1</span> 继续使用 <code>ci</code> 命令</h3>
-<p><code>ci</code> 命令可以用于计算分类变量的置信区间。对于分类变量，通常使用比例（proportion）来表示其分布情况。<code>ci</code> 命令可以计算样本比例的置信区间。</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ci</span> priportion varname [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>缺点：<code>ci prop</code> 只能用于计算 binary 变量的置信区间，不能用于多分类变量。</p>
-<div id="ac32ed31" class="cell" data-execution_count="6">
+<section id="两个变量的比较" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</h2>
+<section id="非配对样本" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="非配对样本"><span class="header-section-number">1.2.1</span> 非配对样本</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,unpaired [<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a68a3aca" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ci prop foreign</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2, unpaired</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-                                                            Binomial exact   
-    Variable |        Obs  Proportion    Std. err.       [95% conf. interval]
--------------+---------------------------------------------------------------
-     foreign |         74    .2972973    .0531331         .196584    .4148353</code></pre>
-</div>
-</div>
-<div id="71eb3cf7" class="cell" data-execution_count="7">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ci prop rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>no binary (0/1) variables found; nothing to compute</code></pre>
-</div>
-</div>
-</section>
-<section id="proportion" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="proportion"><span class="header-section-number">3.2</span> proportion</h3>
-<p><code>proportion</code> 命令可以用于计算分类变量的置信区间。它可以处理多分类变量，并且可以计算每个类别的比例和置信区间。</p>
-<p>语法形式：</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">proportion</span> varname [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>默认置信水平为95%，可以通过 <code>options</code> 选项更改。</p>
-<div id="1f4c1b13" class="cell" data-execution_count="8">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>prop foreign</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Proportion estimation                       Number of obs = 74
+. webuse fuel.dta, clear
 
---------------------------------------------------------------
-             |                                   Logit
-             | Proportion   Std. err.     [95% conf. interval]
--------------+------------------------------------------------
-     foreign |
-   Domestic  |   .7027027   .0531331      .5874215     .796909
-    Foreign  |   .2972973   .0531331       .203091    .4125785
---------------------------------------------------------------</code></pre>
-</div>
-</div>
-<div id="6436a7c2" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>prop rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Proportion estimation                       Number of obs = 69
+. ttest mpg1 == mpg2, unpaired
 
---------------------------------------------------------------
-             |                                   Logit
-             | Proportion   Std. err.     [95% conf. interval]
--------------+------------------------------------------------
-       rep78 |
-          1  |   .0289855   .0201966      .0070794    .1110924
-          2  |    .115942   .0385422       .058317    .2173648
-          3  |   .4347826   .0596787      .3214848    .5553295
-          4  |   .2608696   .0528625      .1695907    .3788629
-          5  |   .1594203   .0440694      .0895793     .267702
---------------------------------------------------------------</code></pre>
-</div>
-</div>
-<div id="15dbecb1" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>prop foreign rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Proportion estimation                       Number of obs = 69
+Two-sample t test with equal variances
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
+    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
+---------+--------------------------------------------------------------------
+Combined |      24      21.875    .6264476    3.068954    20.57909    23.17091
+---------+--------------------------------------------------------------------
+    diff |               -1.75    1.225518               -4.291568    .7915684
+------------------------------------------------------------------------------
+    diff = mean(mpg1) - mean(mpg2)                                t =  -1.4280
+H0: diff = 0                                     Degrees of freedom =       22
 
---------------------------------------------------------------
-             |                                   Logit
-             | Proportion   Std. err.     [95% conf. interval]
--------------+------------------------------------------------
-     foreign |
-   Domestic  |   .6956522   .0553932      .5755656     .793927
-    Foreign  |   .3043478   .0553932       .206073    .4244344
-             |
-       rep78 |
-          1  |   .0289855   .0201966      .0070794    .1110924
-          2  |    .115942   .0385422       .058317    .2173648
-          3  |   .4347826   .0596787      .3214848    .5553295
-          4  |   .2608696   .0528625      .1695907    .3788629
-          5  |   .1594203   .0440694      .0895793     .267702
---------------------------------------------------------------</code></pre>
-</div>
-</div>
-<p><code>prop</code> 多个变量时，Stata 会默认去除缺失值。</p>
-</section>
-</section>
-<section id="pwcorr" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="pwcorr"><span class="header-section-number">4</span> pwcorr</h2>
-<p><code>pwcorr</code> 命令用于计算变量之间的成对相关系数。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">pwcorr</span> [<span class="kw">varlist</span>] [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="af2cbe78" class="cell" data-execution_count="19">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pwcorr price headroom mpg displacement</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-             |    price headroom      mpg displa~t
--------------+------------------------------------
-       price |   1.0000 
-    headroom |   0.1145   1.0000 
-         mpg |  -0.4686  -0.4138   1.0000 
-displacement |   0.4949   0.4745  -0.7056   1.0000 </code></pre>
-</div>
-</div>
-<div id="4b4d5260" class="cell">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 展示P值版，并且用星号标记显著性水平为<span class="fl">0.05</span><span class="er">的相关系数</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pwcorr price headroom mpg displacement, sig star(<span class="fl">0.05</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-. // 展示P值版
-. pwcorr price headroom mpg displacement, sig star(0.05)
-
-             |    price headroom      mpg displa~t
--------------+------------------------------------
-       price |   1.0000 
-             |
-             |
-    headroom |   0.1145   1.0000 
-             |   0.3313
-             |
-         mpg |  -0.4686* -0.4138*  1.0000 
-             |   0.0000   0.0002
-             |
-displacement |   0.4949*  0.4745* -0.7056*  1.0000 
-             |   0.0000   0.0000   0.0000
-             |
+    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
+ Pr(T &lt; t) = 0.0837         Pr(|T| &gt; |t|) = 0.1673          Pr(T &gt; t) = 0.9163
 
 . </code></pre>
 </div>
 </div>
 </section>
-<section id="graph-matrix" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="graph-matrix"><span class="header-section-number">5</span> graph matrix</h2>
-<p><code>graph matrix</code> 命令用于绘制变量之间的散点图矩阵。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。</p>
-<p><code>graph matrix [varlist] [if] [in] [weight] [,options]</code></p>
-<div id="d6c7602a" class="cell" data-execution_count="22">
+<section id="配对样本-t-检验-paired-t-test" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="配对样本-t-检验-paired-t-test"><span class="header-section-number">1.2.2</span> 配对样本 t 检验 (paired t-test)</h3>
+<p>语法：</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,[<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="a4f829e7" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>graph matrix price headroom mpg displacement</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="25-05-04-CI_files/figure-html/cell-13-output-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-<div id="6e47e567" class="cell" data-execution_count="23">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>graph matrix price headroom mpg displacement, half</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="25-05-04-CI_files/figure-html/cell-14-output-1.svg" class="img-fluid figure-img"></p>
-</figure>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. webuse fuel.dta, clear
+
+. ttest mpg1 == mpg2
+
+Paired t test
+------------------------------------------------------------------------------
+Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
+---------+--------------------------------------------------------------------
+    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
+    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
+---------+--------------------------------------------------------------------
+    diff |      12       -1.75    .7797144     2.70101    -3.46614   -.0338602
+------------------------------------------------------------------------------
+     mean(diff) = mean(mpg1 - mpg2)                               t =  -2.2444
+ H0: mean(diff) = 0                              Degrees of freedom =       11
+
+ Ha: mean(diff) &lt; 0           Ha: mean(diff) != 0           Ha: mean(diff) &gt; 0
+ Pr(T &lt; t) = 0.0232         Pr(|T| &gt; |t|) = 0.0463          Pr(T &gt; t) = 0.9768
+
+. </code></pre>
 </div>
 </div>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1565,13 +1423,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/Stata/25-05-03-describe-index.html" class="pagination-link" aria-label="02-统计描述指标">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-统计描述指标</span>
+      <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="pagination-link" aria-label="04-双变量作图">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">04-双变量作图</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-05-05-log-do.html" class="pagination-link" aria-label="05-代码的可复现性与文件管理">
-        <span class="nav-page-text">05-代码的可复现性与文件管理</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Quarto/quarto-intro.html" class="pagination-link" aria-label="Quarto introduction">
+        <span class="nav-page-text">Quarto introduction</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1587,7 +1445,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-04-CI.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

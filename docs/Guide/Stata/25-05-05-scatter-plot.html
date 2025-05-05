@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simon Zhou">
 
-<title>03-置信区间（CI） – 医学统计学笔记</title>
+<title>04-双变量作图 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-05-05-log-do.html" rel="next">
-<link href="../../Guide/Stata/25-05-03-describe-index.html" rel="prev">
+<link href="../../Guide/Stata/25-05-05-ttest.html" rel="next">
+<link href="../../Guide/Stata/25-05-05-log-do.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,43 +116,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="03-置信区间（CI） – 医学统计学笔记">
+<meta property="og:title" content="04-双变量作图 – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="03-置信区间（CI） – 医学统计学笔记">
+<meta name="twitter:title" content="04-双变量作图 – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:image" content="www.lazyzhou.cn/Guide/Stata/25-05-04-CI_files/figure-html/cell-13-output-1.svg">
+<meta name="twitter:image" content="www.lazyzhou.cn/Guide/Stata/25-05-05-scatter-plot_files/figure-html/cell-4-output-1.svg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -257,7 +228,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-04-CI.html">03-置信区间（CI）</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-scatter-plot.html">04-双变量作图</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -549,7 +520,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-04-CI.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-05-04-CI.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">03-置信区间（CI）</span></a>
   </div>
 </li>
@@ -561,7 +532,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">04-双变量作图</span></a>
   </div>
 </li>
@@ -620,20 +591,22 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul class="collapse">
-  <li><a href="#置信区间的定义" id="toc-置信区间的定义" class="nav-link active" data-scroll-target="#置信区间的定义"><span class="header-section-number">1</span> 置信区间的定义</a></li>
-  <li><a href="#ci-mean" id="toc-ci-mean" class="nav-link" data-scroll-target="#ci-mean"><span class="header-section-number">2</span> ci mean</a></li>
-  <li><a href="#分类变量的置信区间" id="toc-分类变量的置信区间" class="nav-link" data-scroll-target="#分类变量的置信区间"><span class="header-section-number">3</span> 分类变量的置信区间</a></li>
-  <li><a href="#pwcorr" id="toc-pwcorr" class="nav-link" data-scroll-target="#pwcorr"><span class="header-section-number">4</span> pwcorr</a></li>
-  <li><a href="#graph-matrix" id="toc-graph-matrix" class="nav-link" data-scroll-target="#graph-matrix"><span class="header-section-number">5</span> graph matrix</a></li>
+  <li><a href="#scatt-plots" id="toc-scatt-plots" class="nav-link active" data-scroll-target="#scatt-plots"><span class="header-section-number">1</span> scatt plots</a>
+  <ul class="collapse">
+  <li><a href="#stata的scheme主题" id="toc-stata的scheme主题" class="nav-link" data-scroll-target="#stata的scheme主题"><span class="header-section-number">1.1</span> Stata的scheme（主题）</a></li>
+  <li><a href="#scatter命令" id="toc-scatter命令" class="nav-link" data-scroll-target="#scatter命令"><span class="header-section-number">1.2</span> scatter命令</a></li>
+  <li><a href="#change-the-scheme-of-the-scatter-plot" id="toc-change-the-scheme-of-the-scatter-plot" class="nav-link" data-scroll-target="#change-the-scheme-of-the-scatter-plot"><span class="header-section-number">1.3</span> change the scheme of the scatter plot</a></li>
+  <li><a href="#option-by" id="toc-option-by" class="nav-link" data-scroll-target="#option-by"><span class="header-section-number">1.4</span> Option: by</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-04-CI.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-scatter-plot.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-04-CI.html">03-置信区间（CI）</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-scatter-plot.html">04-双变量作图</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">03-置信区间（CI）</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">04-双变量作图</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
 </div>
 
 
@@ -650,7 +623,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年5月4日</p>
+      <p class="date">2025年5月5日</p>
     </div>
   </div>
   
@@ -662,35 +635,18 @@ window.Quarto = {
 </header>
 
 
-<div id="a5c2e17d" class="cell" data-execution_count="2">
+<div id="8cbe299b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="置信区间的定义" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="置信区间的定义"><span class="header-section-number">1</span> 置信区间的定义</h2>
-<p>置信区间是一个范围，用于估计总体参数的可能值。它是基于样本数据计算得出的，并且在一定的置信水平下，包含了总体参数的真实值。 置信区间通常用以下形式表示：</p>
-<p><span class="math display">\[ CI = (\hat{\theta} - E, \hat{\theta} + E) \]</span></p>
-<p>其中，<span class="math inline">\(\hat{\theta}\)</span> 是样本统计量的估计值，<span class="math inline">\(E\)</span> 是误差范围（也称为边际误差）。</p>
-<p>置信区间计算的一般形式为： <span class="math display">\[ CI = (\hat{\theta} - z_{\alpha/2} \cdot SE, \hat{\theta} + z_{\alpha/2} \cdot SE) \]</span></p>
-<p>置信区间的宽度取决于样本大小、样本标准差和所选的置信水平。较大的样本通常会导致更窄的置信区间，而较高的置信水平则会导致更宽的置信区间。</p>
-<p>置信区间的计算通常涉及以下步骤：</p>
-<ol type="1">
-<li>选择一个置信水平（例如，95%或99%）。</li>
-<li>计算样本统计量（例如，样本均值或样本比例）。</li>
-<li>计算样本标准差或标准误差。</li>
-<li>根据所选的置信水平，查找相应的临界值（例如，Z值或t值）。</li>
-<li>计算置信区间的边际误差。</li>
-<li>构建置信区间。</li>
-<li>解释置信区间的含义。</li>
-<li>报告置信区间的结果。</li>
-<li>进行假设检验时，置信区间可以用来判断是否拒绝原假设。</li>
-<li>在进行回归分析时，置信区间可以用来评估回归系数的显著性和可靠性。</li>
-<li>在进行方差分析时，置信区间可以用来评估组间差异的显著性和可靠性。</li>
-</ol>
-<div id="9597f20a" class="cell" data-execution_count="3">
+<section id="scatt-plots" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> scatt plots</h1>
+<p>散点图是一种用于可视化两个变量之间关系的图形。它通过在二维坐标系中绘制点来表示数据点的位置，横轴和纵轴分别表示两个变量的值。散点图可以帮助我们识别变量之间的相关性、趋势和异常值。</p>
+<p>散点图通常用于探索性数据分析（EDA）阶段。</p>
+<div id="b3d7bf8d" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
@@ -706,239 +662,638 @@ window.Quarto = {
 . </code></pre>
 </div>
 </div>
+<section id="stata的scheme主题" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="stata的scheme主题"><span class="header-section-number">1.1</span> Stata的scheme（主题）</h2>
+<p>Stata提供了多种 scheme （style）来美化图形。可以使用<code>set scheme</code>命令来设置主题。以下是一些常用的主题：</p>
+<ul>
+<li><code>s1color</code>：适用于需要强调数据点的情况，具有鲜艳的颜色。</li>
+<li><code>s2color</code>：默认主题，适用于需要强调数据点的情况。</li>
+<li><code>s1mono</code>：单色主题，适用于打印或黑白显示。</li>
+<li><code>s2mono</code>：单色主题，适用于强调数据点的情况。</li>
+<li><code>economist</code>：适用于经济学和社会科学领域的主题。</li>
+<li><code>journal</code>：适用于学术期刊的主题，具有简洁和专业的外观。</li>
+<li><code>s1manual</code>：手动主题，适用于需要自定义颜色和样式的情况。</li>
+<li><code>s2manual</code>：手动主题，适用于强调数据点的情况。</li>
+<li><code>s2color8</code>：适用于需要强调数据点的情况，具有8种颜色的主题。</li>
+<li><code>plotplain</code>：适用于需要强调数据点的情况，具有简单和清晰的外观。</li>
+</ul>
+<p>更好的主题？</p>
+<p><code>simono</code>：适用于需要强调数据点的情况，具有简洁和专业的外观。</p>
+<section id="scheme-的设置" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="scheme-的设置"><span class="header-section-number">1.1.1</span> scheme 的设置</h3>
+<p><code>set scheme s1mono</code> : 当前会话中设置主题为<code>s1mono</code>。</p>
+<p><code>set scheme s1mono, perm</code> : 永久设置主题为<code>s1mono</code>, <code>perm</code> 为 <code>permanent</code> 的缩写。</p>
 </section>
-<section id="ci-mean" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="ci-mean"><span class="header-section-number">2</span> ci mean</h2>
-<p>连续变量 mean 的标准误（SE）和置信区间（CI）</p>
-<p>语法：</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ci</span> <span class="kw">mean</span> varname [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>或者</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">cii</span> <span class="kw">means</span> #obs #mean #sd [,<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>默认置信水平为95%，可以通过 <code>options</code> 或 <code>level(#)</code> 选项更改。</p>
-<div id="7161ae12" class="cell" data-execution_count="4">
+</section>
+<section id="scatter命令" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="scatter命令"><span class="header-section-number">1.2</span> scatter命令</h2>
+<p><code>scatter</code>命令用于绘制散点图。基本语法如下：</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>[<span class="kw">twoway</span>] <span class="kw">scatter</span> yvar xvar [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [, options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>最基础的形式：</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> yvar xvar</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>进阶形式：</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> y1 y2 y3 x1 <span class="kw">x2</span> x3 [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>], options</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4dcf2c4d" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ci mean mpg price,level(<span class="dv">95</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>twoway scatter mpg weight</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Variable |        Obs        Mean    Std. err.       [95% conf. interval]
--------------+---------------------------------------------------------------
-         mpg |         74     21.2973    .6725511         19.9569    22.63769
-       price |         74    6165.257    342.8719        5481.914      6848.6</code></pre>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-4-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
 </div>
 </div>
-<div id="331c478f" class="cell">
+</div>
+<div id="ee87d859" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cii mean <span class="dv">144</span> <span class="dv">19599</span> <span class="dv">4389</span>,level(<span class="dv">95</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>twoway scatter weight length price</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Variable |        Obs        Mean    Std. err.       [95% conf. interval]
--------------+---------------------------------------------------------------
-             |        166       19599    340.6525         18926.4     20271.6</code></pre>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-5-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="分类变量的置信区间" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="分类变量的置信区间"><span class="header-section-number">3</span> 分类变量的置信区间</h2>
-<section id="继续使用-ci-命令" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="继续使用-ci-命令"><span class="header-section-number">3.1</span> 继续使用 <code>ci</code> 命令</h3>
-<p><code>ci</code> 命令可以用于计算分类变量的置信区间。对于分类变量，通常使用比例（proportion）来表示其分布情况。<code>ci</code> 命令可以计算样本比例的置信区间。</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ci</span> priportion varname [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>缺点：<code>ci prop</code> 只能用于计算 binary 变量的置信区间，不能用于多分类变量。</p>
-<div id="ac32ed31" class="cell" data-execution_count="6">
+<section id="change-the-scheme-of-the-scatter-plot" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="change-the-scheme-of-the-scatter-plot"><span class="header-section-number">1.3</span> change the scheme of the scatter plot</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> <span class="fu">y</span> x,<span class="bn">msymbol</span>(oh) mcolor(<span class="kw">red</span>) msize(medium) <span class="dv">scheme</span>(s1mono)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li><code>msymbol</code>:改变形状(<code>help symbolstyle</code>)</li>
+<li><code>mcolor</code>:改变颜色(<code>help colorstyle</code>)</li>
+<li><code>msize</code>:改变大小(<code>help markerstyle</code>)</li>
+</ul>
+<div id="11d9f8e6" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ci prop foreign</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span> symbolstyle</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-                                                            Binomial exact   
-    Variable |        Obs  Proportion    Std. err.       [95% conf. interval]
--------------+---------------------------------------------------------------
-     foreign |         74    .2972973    .0531331         .196584    .4148353</code></pre>
+[G-4] symbolstyle -- Choices for the shape of markers
+                     (View complete PDF manual entry)
+
+
+Syntax
+------
+
+                        Synonym
+        symbolstyle     (if any)     Description
+        -------------------------------------------------------
+        circle             O         solid
+        diamond            D         solid
+        triangle           T         solid
+        square             S         solid
+        plus               +
+        X                  X
+        arrowf             A         filled arrow head
+        arrow              a
+        pipe               |
+        V                  V
+
+        smcircle           o         solid
+        smdiamond          d         solid
+        smsquare           s         solid
+        smtriangle         t         solid
+        smplus
+        smx                x
+        smv                v
+
+        circle_hollow      Oh        hollow
+        diamond_hollow     Dh        hollow
+        triangle_hollow    Th        hollow
+        square_hollow      Sh        hollow
+
+        smcircle_hollow    oh        hollow
+        smdiamond_hollow   dh        hollow
+        smtriangle_hollow  th        hollow
+        smsquare_hollow    sh        hollow
+
+        point              p         a small dot
+        none               i         a symbol that is invisible
+        -------------------------------------------------------
+
+        For a symbol palette displaying each of the above symbols, type
+
+            . palette symbolpalette [, scheme(schemename)]
+
+        Other symbolstyles may be available; type
+
+            . graph query symbolstyle
+
+        to obtain the complete list of symbolstyles installed on your
+        computer.
+
+
+Description
+-----------
+
+    Markers are the ink used to mark where points are on a plot; see [G-3]
+    marker_options.  symbolstyle specifies the shape of the marker.
+
+    You specify the symbolstyle inside the msymbol() option allowed with many
+    of the graph commands:
+
+        . graph twoway ..., msymbol(symbolstyle) ...
+
+    Sometimes you will see that a symbolstylelist is allowed:
+
+        . scatter ..., msymbol(symbolstylelist) ...
+
+    A symbolstylelist is a sequence of symbolstyles separated by spaces.
+    Shorthands are allowed to make specifying the list easier; see [G-4]
+    stylelists.
+
+
+Links to PDF documentation
+--------------------------
+
+        Remarks and examples
+
+    The above sections are not included in this help file.
+
+
+Remarks
+-------
+
+    Remarks are presented under the following headings:
+
+        Typical use
+        Filled and hollow symbols
+        Size of symbols
+
+
+Typical use
+-----------
+
+    msymbol(symbolstyle) is one of the more commonly specified options.  For
+    instance, you may not be satisfied with the default rendition of
+
+        . scatter mpg weight if foreign ||
+          scatter mpg weight if !foreign
+
+    and prefer
+
+        . scatter mpg weight if foreign, msymbol(oh) ||
+          scatter mpg weight if !foreign, msymbol(x)
+
+    When you are graphing multiple y variables in the same plot, you can
+    specify a list of symbolstyles inside the msymbol() option:
+
+        . scatter mpg1 mpg2 weight, msymbol(oh x)
+
+    The result is the same as typing
+
+        . scatter mpg1 weight, msymbol(oh) ||
+          scatter mpg2 weight, msymbol(x)
+
+    Also, in the above, we specified the symbol-style synonyms.  Whether you
+    type
+
+        . scatter mpg1 weight, msymbol(oh) ||
+          scatter mpg2 weight, msymbol(x)
+
+    or
+
+        . scatter mpg1 weight, msymbol(smcircle_hollow) ||
+          scatter mpg2 weight, msymbol(smx)
+
+    makes no difference.
+
+
+Filled and hollow symbols
+-------------------------
+
+    The symbolstyle specifies the shape of the symbol, and in that sense, one
+    of the styles circle and hcircle -- and diamond and hdiamond, etc. -- is
+    unnecessary in that each is a different rendition of the same shape.  The
+    option mfcolor(colorstyle) (see [G-3] marker_options) specifies how the
+    inside of the symbol is to be filled.  hcircle(), hdiamond, etc., are
+    included for convenience and are equivalent to specifying
+
+        msymbol(Oh): msymbol(O) mfcolor(none)
+
+        msymbol(dh): msymbol(d) mfcolor(none)
+
+        etc.
+
+    Using mfcolor() to fill the inside of a symbol with different colors
+    sometimes creates what are effectively new symbols.  For instance, if you
+    take msymbol(O) and fill its interior with a lighter shade of the same
+    color used to outline the shape, you obtain a pleasing result.  For
+    instance, you might try
+
+        msymbol(O) mlcolor(yellow) mfcolor(.5*yellow)
+
+    or
+
+        msymbol(O) mlcolor(gs5) mfcolor(gs12)
+
+    as in
+
+        . scatter mpg weight, msymbol(O) mlcolor(gs5) mfcolor(gs14)
+          (click to run)
+
+
+Size of symbols
+---------------
+
+    Just as msymbol(O) and msymbol(Oh) differ only in mfcolor(), msymbol(O)
+    and msymbol(o) -- symbols circle and smcircle -- differ only in msize().
+    In particular,
+
+        msymbol(O): msymbol(O) msize(medium)
+
+        msymbol(o): msymbol(O) msize(small)
+
+    and the same is true for all the other large and small symbol pairs.
+
+    msize() is interpreted as being relative to the size of the graph region
+    (see [G-3] region_options), so the same symbol size will in fact be a
+    little different in
+
+        . scatter mpg weight
+
+    and
+
+        . scatter mpg weight, by(foreign total)</code></pre>
 </div>
 </div>
-<div id="71eb3cf7" class="cell" data-execution_count="7">
+<div id="8d38ddd8" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ci prop rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span> colorstyle</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>no binary (0/1) variables found; nothing to compute</code></pre>
+<pre><code>
+[G-4] colorstyle -- Choices for color
+                    (View complete PDF manual entry)
+
+
+Syntax
+------
+
+    Set color of &lt;object&gt; to colorstyle
+
+        &lt;object&gt;color(colorstyle)
+
+
+    Set color of all affected objects to colorstyle
+
+        color(colorstyle)
+
+
+    Set opacity of &lt;object&gt; to #, where # is a percentage of 100% opacity
+
+        &lt;object&gt;color(%#)
+
+
+    Set opacity for all affected objects colors to #
+
+        color(%#)
+
+
+    Set both color and opacity of &lt;object&gt;
+
+        &lt;object&gt;color(colorstyle%#)
+
+
+    Set both color and opacity of all affected objects
+
+        &lt;object&gt;color(colorstyle%#)
+
+
+    colorstyle            Description
+    -------------------------------------------------------------------------
+    black                 
+
+    stc1                  color used by scheme stcolor
+    stc2                  color used by scheme stcolor
+    .                     
+    .                     
+    stc15                 color used by scheme stcolor
+    stblue                blue used by scheme stcolor
+    stgreen               green used by scheme stcolor
+    stred                 red used by scheme stcolor
+    styellow              yellow used by scheme stcolor
+
+    gs0                   gray scale: 0 = black
+    gs1                   gray scale: very dark gray
+    gs2                   
+    .                     
+    .                     
+    gs15                  gray scale: very light gray
+    gs16                  gray scale: 16 = white
+
+    white                 
+
+    blue                  
+    bluishgray            
+    brown                 
+    cranberry             
+    cyan                  
+    dimgray               between gs14 and gs15
+    dkgreen               dark green
+    dknavy                dark navy blue
+    dkorange              dark orange
+    eggshell              
+    emerald               
+    forest_green          
+    gold                  
+    gray                  equivalent to gs8
+    green                 
+    khaki                 
+    lavender              
+    lime                  
+    ltblue                light blue
+    ltbluishgray          light blue-gray, used by scheme s2color
+    ltkhaki               light khaki
+    magenta               
+    maroon                
+    midblue               
+    midgreen              
+    mint                  
+    navy                  
+    olive                 
+    olive_teal            
+    orange                
+    orange_red            
+    pink                  
+    purple                
+    red                   
+    sand                  
+    sandb                 bright sand
+    sienna                
+    stone                 
+    teal                  
+    yellow                
+
+                          colors used by The Economist magazine:
+    ebg                           background color
+    ebblue                        bright blue
+    edkblue                       dark blue
+    eltblue                       light blue
+    eltgreen                      light green
+    emidblue                      midblue
+    erose                         rose
+
+    none                  no color; invisible; draws nothing
+    background or bg      same color as background
+    foreground or fg      same color as foreground
+
+    "# # #"               RGB value; white = "255 255 255"
+
+    "# # # #"             CMYK value; yellow = "0 0 255 0"
+
+    "hsv # # #"           HSV value; white = "hsv 0 0 1"
+
+    colorstyle*#          color with adjusted intensity; #'s range from 0 to
+                            255
+
+    colorstyle%#          color with adjusted opacity; #s range from 0 to 100
+
+    *#                    default color with adjusted intensity
+    %#                    default color with adjusted opacity
+    -------------------------------------------------------------------------
+    When specifying RGB, CMYK, or HSV values, it is best to enclose the
+      values in quotes; type "128 128 128" not 128 128 128.
+
+
+Description
+-----------
+
+    colorstyle sets the color and opacity of graph components such as lines,
+    backgrounds, and bars.  Some options allow a sequence of colorstyles with
+    colorstylelist; see [G-4] stylelists.
+
+
+Links to PDF documentation
+--------------------------
+
+        Remarks and examples
+
+    The above sections are not included in this help file.
+
+
+Remarks
+-------
+
+    colorstyle sets the color and opacity of graph components such as lines,
+    backgrounds, and bars.  Colors can be specified with a named color, such
+    as black, olive, and yellow, or with a color value in the RGB, CMYK, or
+    HSV format.  colorstyle can also set a component to match the background
+    color or foreground color.  Additionally, colorstyle can modify color
+    intensity, making the color lighter or darker.  Some options allow a
+    sequence of colorstyles with colorstylelist; see [G-4] stylelists.
+
+    To see a list of named colors, use graph query colorstyle.  See [G-2]
+    graph query.  For a color palette showing an individual color or
+    comparing two colors, use palette color.  See [G-2] palette.
+
+    Remarks are presented under the following headings:
+
+        Adjust opacity
+        Adjust intensity
+        Specify RGB values
+        Specify CMYK values
+        Specify HSV values
+        Export custom colors
+
+
+Adjust opacity
+--------------
+
+    Opacity is the percentage of a color that covers the background color.
+    That is, 100% means that the color fully hides the background, and 0%
+    means that the color has no coverage and is fully transparent.  If you
+    prefer to think about transparency, opacity is the inverse of
+    transparency.  Adjust opacity with the % modifier.  For example, type
+
+        green%50
+        "0 255 0%50"
+        %30
+
+    Omitting the color specification in the command adjusts the opacity of
+    the object while retaining the default color.  For instance, specify
+    mcolor(%30) with graph twoway scatter to use the default fill color at
+    30% opacity.
+
+    Specifying color%0 makes the object completely transparent and is
+    equivalent to color none.
+
+
+Adjust intensity
+----------------
+
+    Color intensity (brightness) can be modified by specifying a color, *,
+    and a multiplier value.  For example, type
+
+        green*.8
+        purple*1.5
+        "0 255 255*1.2"
+        "hsv 240 1 1*.5"
+
+    A value of 1 leaves the color unchanged, a value greater than 1 makes the
+    color darker, and a value less than 1 makes the color lighter.  Note that
+    there is no space between color and *, even when color is a numerical
+    value for RGB or CMYK.
+
+    Omitting the color specification in the command adjusts the intensity of
+    the object's default color.  For instance, specify bcolor(*.7) with graph
+    twoway bar to use the default fill color at reduced brightness, or
+    specify bcolor(*2) to increase the brightness of the default color.
+
+    Specifying color*0 makes the color as light as possible, but it is not
+    equivalent to color none.  color*255 makes the color as dark as possible,
+    although values much smaller than 255 usually achieve the same result.
+
+    For an example using the intensity adjustment, see Typical use in [G-2]
+    graph twoway kdensity.
+
+
+RGB values
+----------
+
+    In addition to specifying named colors such as yellow, you can specify
+    colors with RGB values.  An RGB value is a triplet of numbers ranging
+    from 0 to 255 that describes the level of red, green, and blue light that
+    must be emitted to produce a given color.  RGB is used to define colors
+    for on-screen display and in nonprofessional printing.  Examples of RGB
+    values are
+
+        red     =   255    0    0
+        green   =     0  255    0
+        blue    =     0    0  255
+        white   =   255  255  255
+        black   =     0    0    0
+        gray    =   128  128  128
+        navy    =    26   71  111
+
+
+CMYK values
+-----------
+
+    You can specify colors using CMYK values.  You will probably only use
+    CMYK values when they are provided by a journal or publisher.  You can
+    specify CMYK values either as integers from 0 to 255 or as proportions of
+    ink using real numbers from 0.0 to 1.0.  If all four values are 1 or
+    less, the numbers are taken to be proportions of ink.  For example,
+
+        red     =     0  255  255    0   or, equivalently,     0     1  1     0
+        green   =   255    0  255    0   or, equivalently,     1     0  1     0
+        blue    =   255  255    0    0   or, equivalently,     1     1  0     0
+        white   =     0    0    0    0   or, equivalently,     0     0  0     0
+        black   =     0    0    0  255   or, equivalently,     0     0  0     1
+        gray    =     0    0    0  128   or, equivalently,     0     0  0    .5
+        navy    =    85   40    0  144   or, equivalently,  .334  .157  0  .565
+
+
+HSV values
+----------
+
+    You can specify colors with HSV (hue, saturation, and value), also called
+    HSL (hue, saturation, and luminance) and HSB (hue, saturation, and
+    brightness).  HSV is often used in image editing software.  An HSV value
+    is a triplet of numbers.  So that Stata can differentiate them from RGB
+    values, HSV colors must be prefaced with hsv.  The first number specifies
+    the hue from 0 to 360, the second number specifies the saturation from 0
+    to 1, and the third number specifies the value (luminance or brightness)
+    from 0 to 1.  For example,
+
+        red     =   hsv   0     1     1
+        green   =   hsv 120     1  .502
+        blue    =   hsv 240     1     1
+        white   =   hsv   0     0     1
+        black   =   hsv   0     0     0
+        navy    =   hsv 209  .766  .435
+
+
+Export custom colors
+--------------------
+
+    graph export stores all colors as RGB+opacity values, that is, RGB values
+    0-255 and opacity values 0-1.  If you need color values from Stata in
+    CMYK format, use the graph export command with the cmyk(on) option, and
+    save the graph in one of the following formats: PostScript, Encapsulated
+    PostScript, or PDF.
+
+    You can set Stata to permanently use CMYK colors for PostScript export
+    files by typing translator set Graph2ps cmyk on and for EPS export files
+    by typing translator set Graph2eps cmyk on.
+
+    The CMYK values returned in graph export may differ from the CMYK values
+    that you entered.  This is because Stata normalizes CMYK values by
+    reducing all CMY values until one value is 0.  The difference is added to
+    the K (black) value.  For example, Stata normalizes the CMYK value 10 10
+    5 0 to 5 5 0 5.  Stata subtracts 5 from the CMY values so that Y is 0 and
+    then adds 5 to K.
+
+
+Video example
+-------------
+
+        Transparency in Stata graphs</code></pre>
+</div>
+</div>
+<div id="70b566fe" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>twoway scatter mpg weight,msymbol(D) mcolor(red) msize(medium)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-8-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
-<section id="proportion" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="proportion"><span class="header-section-number">3.2</span> proportion</h3>
-<p><code>proportion</code> 命令可以用于计算分类变量的置信区间。它可以处理多分类变量，并且可以计算每个类别的比例和置信区间。</p>
-<p>语法形式：</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">proportion</span> varname [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>默认置信水平为95%，可以通过 <code>options</code> 选项更改。</p>
-<div id="1f4c1b13" class="cell" data-execution_count="8">
+<section id="option-by" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="option-by"><span class="header-section-number">1.4</span> Option: by</h2>
+<p>按照某个变量分组绘制散点图，可以使用<code>by</code>选项。<code>by</code>选项可以将数据按照指定变量进行分组，并为每个组绘制单独的散点图。</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> <span class="fu">y</span> x, <span class="kw">by</span>(groupvar)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="58b7acac" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>prop foreign</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Proportion estimation                       Number of obs = 74
-
---------------------------------------------------------------
-             |                                   Logit
-             | Proportion   Std. err.     [95% conf. interval]
--------------+------------------------------------------------
-     foreign |
-   Domestic  |   .7027027   .0531331      .5874215     .796909
-    Foreign  |   .2972973   .0531331       .203091    .4125785
---------------------------------------------------------------</code></pre>
-</div>
-</div>
-<div id="6436a7c2" class="cell" data-execution_count="9">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>prop rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Proportion estimation                       Number of obs = 69
-
---------------------------------------------------------------
-             |                                   Logit
-             | Proportion   Std. err.     [95% conf. interval]
--------------+------------------------------------------------
-       rep78 |
-          1  |   .0289855   .0201966      .0070794    .1110924
-          2  |    .115942   .0385422       .058317    .2173648
-          3  |   .4347826   .0596787      .3214848    .5553295
-          4  |   .2608696   .0528625      .1695907    .3788629
-          5  |   .1594203   .0440694      .0895793     .267702
---------------------------------------------------------------</code></pre>
-</div>
-</div>
-<div id="15dbecb1" class="cell" data-execution_count="14">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>prop foreign rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Proportion estimation                       Number of obs = 69
-
---------------------------------------------------------------
-             |                                   Logit
-             | Proportion   Std. err.     [95% conf. interval]
--------------+------------------------------------------------
-     foreign |
-   Domestic  |   .6956522   .0553932      .5755656     .793927
-    Foreign  |   .3043478   .0553932       .206073    .4244344
-             |
-       rep78 |
-          1  |   .0289855   .0201966      .0070794    .1110924
-          2  |    .115942   .0385422       .058317    .2173648
-          3  |   .4347826   .0596787      .3214848    .5553295
-          4  |   .2608696   .0528625      .1695907    .3788629
-          5  |   .1594203   .0440694      .0895793     .267702
---------------------------------------------------------------</code></pre>
-</div>
-</div>
-<p><code>prop</code> 多个变量时，Stata 会默认去除缺失值。</p>
-</section>
-</section>
-<section id="pwcorr" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="pwcorr"><span class="header-section-number">4</span> pwcorr</h2>
-<p><code>pwcorr</code> 命令用于计算变量之间的成对相关系数。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">pwcorr</span> [<span class="kw">varlist</span>] [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="af2cbe78" class="cell" data-execution_count="19">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>pwcorr price headroom mpg displacement</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-             |    price headroom      mpg displa~t
--------------+------------------------------------
-       price |   1.0000 
-    headroom |   0.1145   1.0000 
-         mpg |  -0.4686  -0.4138   1.0000 
-displacement |   0.4949   0.4745  -0.7056   1.0000 </code></pre>
-</div>
-</div>
-<div id="4b4d5260" class="cell">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 展示P值版，并且用星号标记显著性水平为<span class="fl">0.05</span><span class="er">的相关系数</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pwcorr price headroom mpg displacement, sig star(<span class="fl">0.05</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-. // 展示P值版
-. pwcorr price headroom mpg displacement, sig star(0.05)
-
-             |    price headroom      mpg displa~t
--------------+------------------------------------
-       price |   1.0000 
-             |
-             |
-    headroom |   0.1145   1.0000 
-             |   0.3313
-             |
-         mpg |  -0.4686* -0.4138*  1.0000 
-             |   0.0000   0.0002
-             |
-displacement |   0.4949*  0.4745* -0.7056*  1.0000 
-             |   0.0000   0.0000   0.0000
-             |
-
-. </code></pre>
-</div>
-</div>
-</section>
-<section id="graph-matrix" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="graph-matrix"><span class="header-section-number">5</span> graph matrix</h2>
-<p><code>graph matrix</code> 命令用于绘制变量之间的散点图矩阵。它可以处理连续变量和分类变量，并且可以计算每对变量之间的相关系数和置信区间。</p>
-<p><code>graph matrix [varlist] [if] [in] [weight] [,options]</code></p>
-<div id="d6c7602a" class="cell" data-execution_count="22">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>graph matrix price headroom mpg displacement</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>twoway scatter mpg weight,by(foreign)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="25-05-04-CI_files/figure-html/cell-13-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-9-output-1.svg" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="6e47e567" class="cell" data-execution_count="23">
+<div id="13d287f6" class="cell" data-execution_count="18">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>graph matrix price headroom mpg displacement, half</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>twoway(scatter mpg weight <span class="cf">if</span> foreign <span class="op">==</span><span class="dv">0</span>)(scatter mpg weight <span class="cf">if</span> foreign <span class="op">==</span><span class="dv">1</span>),legend(label(<span class="dv">1</span> <span class="st">"Domestic"</span>) label(<span class="dv">2</span> <span class="st">"Foreign"</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="25-05-04-CI_files/figure-html/cell-14-output-1.svg" class="img-fluid figure-img"></p>
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-10-output-1.svg" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1565,13 +1920,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/Stata/25-05-03-describe-index.html" class="pagination-link" aria-label="02-统计描述指标">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-统计描述指标</span>
+      <a href="../../Guide/Stata/25-05-05-log-do.html" class="pagination-link" aria-label="05-代码的可复现性与文件管理">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">05-代码的可复现性与文件管理</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-05-05-log-do.html" class="pagination-link" aria-label="05-代码的可复现性与文件管理">
-        <span class="nav-page-text">05-代码的可复现性与文件管理</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-05-ttest.html" class="pagination-link" aria-label="06-t检验（t-test）">
+        <span class="nav-page-text">06-t检验（t-test）</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1587,7 +1942,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-04-CI.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-scatter-plot.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
