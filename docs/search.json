@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-05},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 5, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-06},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 6, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -1482,7 +1482,7 @@
     "text": "Interrupted Time Series Analysis (ITSA) 是一种常用的时间序列分析方法，用于评估某个干预措施对某个事件或趋势的影响。\n\n\nITSA 模型的基本形式如下：\n\\[\nY_t = \\beta_0 + \\beta_1 \\cdot T_t + \\beta_2 \\cdot X_t + \\beta_3 \\cdot T_t \\cdot X_t + \\epsilon_t\n\\]\n公式中各代码的含义分别为：\n\n\\(Y_t\\)：因变量，时间序列的观测值\n\\(T_t\\)：时间变量（序列），表示时间点 \\(t\\) 距离干预前的时间长度\n\\(X_t\\)：干预变量（哑变量），表示干预措施的状态，通常为 0 或 1\n\\(\\beta_0\\)：截距，即常数项\n\\(\\beta_1\\)：时间变量的系数，表示时间的趋势（改革前的变化趋势）\n\\(\\beta_2\\)：干预变量的系数，表示干预的效应\n\\(\\beta_3\\)：交互项系数，表示改革后与改革前斜率的差值，故改革后的斜率值为 \\(\\beta_1 + \\beta_3\\)\n\\(\\epsilon_t\\)：误差项\n\n\n\n\n这里使用 Stata 中的 nlswork 数据集，该数据集包含了 1987 年和 1988 年的 个体数据。 首先找到 nlswork 数据集，你可以从互联网上寻找相关资源；或者从 Stata 的 nlswork 包中导出这一数据集，操作如下：\nsysuse nlswork, clear\nsave \"your-file-path\\nlswork.dta\", replace\n\n\n\n\n\nssc install itsa\nssc install actest\n\n\n\n\n需要分析的变量很多，但是我们可以首先从次均住院费用开始，这是最直接的一组数据，根据 DIP政策 实施的时间点来划分时间段。\n这里是2018-2023年六年的费用数据，我们首先对其按年进行处理，得到一个费用均数，实际上大多数论文都是按照月份进行处理，这样更合理也更详细一些，这里也可以按月份来，但是需要重新清洗数据，还是按照年份先试一下。\n但是也有个问题就是，2022年开始DIP改革，数据只截止到2023，因此2022-2023无法进行回归，只能用截距代替一下（数据不稳定，谨慎对待）。\n操作代码如下：\nclear all\nuse \"C:\\Users\\asus\\ITSA\\ITSA-PRE.dta\", replace\n\n// 按年份聚合数据，取平均值\ncollapse (mean) Cost, by(year)\n\n// 设置时间变量\ntsset year\n\n// 定义时间变量和干预变量\ngen time = year - 2017\ngen DIP = (year &gt;= 2022) // 2022年及以后为1，之前为0\ngen time_post = (time - 5) * DIP // 干预后时间变量\n\n// 计算政策前的趋势（2018-2021）\nregress Cost time if year &lt;= 2021\nlocal beta0 = _b[_cons]\nlocal beta1 = _b[time]\n\n// 计算 2022 年的预测值\nlocal cost_2022_pred = `beta0' + `beta1' * 5\ngen Cost_pred_2022 = `cost_2022_pred' if year == 2022\n\n// 计算政策前趋势线（2018-2022）\ngenerate Cost_pred_2018_2022 = `beta0' + `beta1' * time if year &lt;= 2022\n\n// 计算 2022 和 2023 年的真实值\ngen cost_2022_actual = Cost if year == 2022\ngen cost_2023_actual = Cost if year == 2023\negen cost_2022_real = max(cost_2022_actual)\negen cost_2023_real = max(cost_2023_actual)\nlocal cost_2022_actual = cost_2022_real\nlocal cost_2023_actual = cost_2023_real\n\n// 计算政策后趋势斜率\nlocal beta_post_1 = (`cost_2023_actual' - `cost_2022_actual') / (6 - 5)\n\n// 计算政策后趋势线（从 2022 真实值开始）\ngenerate Cost_pred_post = `cost_2022_actual' + `beta_post_1' * (time - 5) if year &gt;= 2022\n\n// 显示关键信息\ndisplay \"政策前趋势 β1: `beta1'\"\ndisplay \"2022 预测值: `cost_2022_pred'\"\ndisplay \"2022 真实值: `cost_2022_actual'\"\ndisplay \"2023 真实值: `cost_2023_actual'\"\ndisplay \"政策后斜率 β_post_1: `beta_post_1'\"\n\n// 画图\ntwoway (scatter Cost year, msize(small)) /// 观察值\n       (line Cost_pred_2018_2022 year if year &lt;= 2022, lcolor(blue)) /// 政策前趋势\n       (line Cost_pred_post year if year &gt;= 2022, lcolor(red)) /// 政策后趋势\n       (scatter Cost_pred_2022 year if year == 2022, mcolor(green) msize(medium)) /// 2022预测值\n       (pcarrow Cost_pred_2022 year Cost year if year == 2022, lcolor(green) mcolor(green)), /// \n       xline(2022, lpattern(dash)) ///\n       title(\"Cost Time Series Analysis\") ///\n       subtitle(\"Intervention at 2022\") ///\n       xlabel(2018(1)2023) ///\n       legend(label(1 \"Observed\") label(2 \"Pre-intervention trend\") ///\n              label(3 \"Post-intervention trend\") label(4 \"2022 Prediction\") label(5 \"Level change at 2022\"))\n\n// 保存图形\ngraph save \"C:\\Users\\asus\\test\\cost_time_series_graph.gph\", replace\n\n// 计算回归系数表\nregress Cost time DIP time_post\noutreg2 using \"C:\\Users\\asus\\test\\itsa_results.doc\", replace word\n这里用\n\n2018年的数据作为起始数据（ITSA方程的截距，即 \\(\\beta_0\\) ）；\n2018-2021年的数据拟合政策前 次均费用 随时间变化的趋势，即 \\(\\beta_1\\) ；\n然后用 \\(\\beta_1\\) 计算2022年的预测值(\\(cost_{2022pred} = \\beta_0 +\\beta_1 * 5\\) )；\n2022年到2023年的数据直接使用真实值，得到政策后的趋势直线，如果数据足够多（≥3），则可以对政策后的数据进行回归得到 \\(\\beta_3\\)；\n使用2022年的真实值减去2022年的预测值，得到政策变化对 cost 造成的水平影响，即 \\(\\beta_2\\) 。\n\n\n\n\n上述代码运行后输出 中断时间序列分析 趋势图：\n\n\n\nITSA-TREND\n\n\n\n\n\n代码的最后，做回归系数表，得到如下结果：\n\n\n\n回归系数表\n\n\n\n政策前的时间趋势为：\\(\\beta_1=331.6185\\)；\n政策实施时的瞬时变化为：\\(\\beta_2=-219.9033\\);\n政策实施后的变化趋势为：\\(\\beta_3=-1628.044\\) 。\n\n其他变量也就可以按照此种模式进行一一计算，当然也可以用循环的模式计算，以后再论。",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "统计软件",
       "Stata",
       "Stata 做 ITSA 分析"
     ]
@@ -1495,7 +1495,7 @@
     "text": "ITSA 模型的基本形式如下：\n\\[\nY_t = \\beta_0 + \\beta_1 \\cdot T_t + \\beta_2 \\cdot X_t + \\beta_3 \\cdot T_t \\cdot X_t + \\epsilon_t\n\\]\n公式中各代码的含义分别为：\n\n\\(Y_t\\)：因变量，时间序列的观测值\n\\(T_t\\)：时间变量（序列），表示时间点 \\(t\\) 距离干预前的时间长度\n\\(X_t\\)：干预变量（哑变量），表示干预措施的状态，通常为 0 或 1\n\\(\\beta_0\\)：截距，即常数项\n\\(\\beta_1\\)：时间变量的系数，表示时间的趋势（改革前的变化趋势）\n\\(\\beta_2\\)：干预变量的系数，表示干预的效应\n\\(\\beta_3\\)：交互项系数，表示改革后与改革前斜率的差值，故改革后的斜率值为 \\(\\beta_1 + \\beta_3\\)\n\\(\\epsilon_t\\)：误差项",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "统计软件",
       "Stata",
       "Stata 做 ITSA 分析"
     ]
@@ -1508,7 +1508,7 @@
     "text": "这里使用 Stata 中的 nlswork 数据集，该数据集包含了 1987 年和 1988 年的 个体数据。 首先找到 nlswork 数据集，你可以从互联网上寻找相关资源；或者从 Stata 的 nlswork 包中导出这一数据集，操作如下：\nsysuse nlswork, clear\nsave \"your-file-path\\nlswork.dta\", replace",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "统计软件",
       "Stata",
       "Stata 做 ITSA 分析"
     ]
@@ -1521,7 +1521,7 @@
     "text": "ssc install itsa\nssc install actest",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "统计软件",
       "Stata",
       "Stata 做 ITSA 分析"
     ]
@@ -1534,7 +1534,7 @@
     "text": "需要分析的变量很多，但是我们可以首先从次均住院费用开始，这是最直接的一组数据，根据 DIP政策 实施的时间点来划分时间段。\n这里是2018-2023年六年的费用数据，我们首先对其按年进行处理，得到一个费用均数，实际上大多数论文都是按照月份进行处理，这样更合理也更详细一些，这里也可以按月份来，但是需要重新清洗数据，还是按照年份先试一下。\n但是也有个问题就是，2022年开始DIP改革，数据只截止到2023，因此2022-2023无法进行回归，只能用截距代替一下（数据不稳定，谨慎对待）。\n操作代码如下：\nclear all\nuse \"C:\\Users\\asus\\ITSA\\ITSA-PRE.dta\", replace\n\n// 按年份聚合数据，取平均值\ncollapse (mean) Cost, by(year)\n\n// 设置时间变量\ntsset year\n\n// 定义时间变量和干预变量\ngen time = year - 2017\ngen DIP = (year &gt;= 2022) // 2022年及以后为1，之前为0\ngen time_post = (time - 5) * DIP // 干预后时间变量\n\n// 计算政策前的趋势（2018-2021）\nregress Cost time if year &lt;= 2021\nlocal beta0 = _b[_cons]\nlocal beta1 = _b[time]\n\n// 计算 2022 年的预测值\nlocal cost_2022_pred = `beta0' + `beta1' * 5\ngen Cost_pred_2022 = `cost_2022_pred' if year == 2022\n\n// 计算政策前趋势线（2018-2022）\ngenerate Cost_pred_2018_2022 = `beta0' + `beta1' * time if year &lt;= 2022\n\n// 计算 2022 和 2023 年的真实值\ngen cost_2022_actual = Cost if year == 2022\ngen cost_2023_actual = Cost if year == 2023\negen cost_2022_real = max(cost_2022_actual)\negen cost_2023_real = max(cost_2023_actual)\nlocal cost_2022_actual = cost_2022_real\nlocal cost_2023_actual = cost_2023_real\n\n// 计算政策后趋势斜率\nlocal beta_post_1 = (`cost_2023_actual' - `cost_2022_actual') / (6 - 5)\n\n// 计算政策后趋势线（从 2022 真实值开始）\ngenerate Cost_pred_post = `cost_2022_actual' + `beta_post_1' * (time - 5) if year &gt;= 2022\n\n// 显示关键信息\ndisplay \"政策前趋势 β1: `beta1'\"\ndisplay \"2022 预测值: `cost_2022_pred'\"\ndisplay \"2022 真实值: `cost_2022_actual'\"\ndisplay \"2023 真实值: `cost_2023_actual'\"\ndisplay \"政策后斜率 β_post_1: `beta_post_1'\"\n\n// 画图\ntwoway (scatter Cost year, msize(small)) /// 观察值\n       (line Cost_pred_2018_2022 year if year &lt;= 2022, lcolor(blue)) /// 政策前趋势\n       (line Cost_pred_post year if year &gt;= 2022, lcolor(red)) /// 政策后趋势\n       (scatter Cost_pred_2022 year if year == 2022, mcolor(green) msize(medium)) /// 2022预测值\n       (pcarrow Cost_pred_2022 year Cost year if year == 2022, lcolor(green) mcolor(green)), /// \n       xline(2022, lpattern(dash)) ///\n       title(\"Cost Time Series Analysis\") ///\n       subtitle(\"Intervention at 2022\") ///\n       xlabel(2018(1)2023) ///\n       legend(label(1 \"Observed\") label(2 \"Pre-intervention trend\") ///\n              label(3 \"Post-intervention trend\") label(4 \"2022 Prediction\") label(5 \"Level change at 2022\"))\n\n// 保存图形\ngraph save \"C:\\Users\\asus\\test\\cost_time_series_graph.gph\", replace\n\n// 计算回归系数表\nregress Cost time DIP time_post\noutreg2 using \"C:\\Users\\asus\\test\\itsa_results.doc\", replace word\n这里用\n\n2018年的数据作为起始数据（ITSA方程的截距，即 \\(\\beta_0\\) ）；\n2018-2021年的数据拟合政策前 次均费用 随时间变化的趋势，即 \\(\\beta_1\\) ；\n然后用 \\(\\beta_1\\) 计算2022年的预测值(\\(cost_{2022pred} = \\beta_0 +\\beta_1 * 5\\) )；\n2022年到2023年的数据直接使用真实值，得到政策后的趋势直线，如果数据足够多（≥3），则可以对政策后的数据进行回归得到 \\(\\beta_3\\)；\n使用2022年的真实值减去2022年的预测值，得到政策变化对 cost 造成的水平影响，即 \\(\\beta_2\\) 。",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "统计软件",
       "Stata",
       "Stata 做 ITSA 分析"
     ]
@@ -1547,7 +1547,7 @@
     "text": "上述代码运行后输出 中断时间序列分析 趋势图：\n\n\n\nITSA-TREND",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "统计软件",
       "Stata",
       "Stata 做 ITSA 分析"
     ]
@@ -1560,7 +1560,7 @@
     "text": "代码的最后，做回归系数表，得到如下结果：\n\n\n\n回归系数表\n\n\n\n政策前的时间趋势为：\\(\\beta_1=331.6185\\)；\n政策实施时的瞬时变化为：\\(\\beta_2=-219.9033\\);\n政策实施后的变化趋势为：\\(\\beta_3=-1628.044\\) 。\n\n其他变量也就可以按照此种模式进行一一计算，当然也可以用循环的模式计算，以后再论。",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "统计软件",
       "Stata",
       "Stata 做 ITSA 分析"
     ]
@@ -2655,6 +2655,110 @@
       "统计软件",
       "Stata",
       "04-双变量作图"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#sas-在-linux-的安装",
+    "href": "Guide/SAS/SAS-install.html#sas-在-linux-的安装",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "2 SAS 在 Linux 的安装",
+    "text": "2 SAS 在 Linux 的安装",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#sas-与-vscode-扩展",
+    "href": "Guide/SAS/SAS-install.html#sas-与-vscode-扩展",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "3 SAS 与 vscode 扩展",
+    "text": "3 SAS 与 vscode 扩展\nSAS VS Code 扩展轻量级，可在任何地方运行，并允许您集成 SAS 和其他语言。该工具还提供直接连接到 SAS Viya 和 SAS 9 并运行代码的功能。\n\nSAS 语法突出显示和帮助、代码完成和代码片段\n用于连接 SAS 和运行代码的配置文件配置\n支持 SAS Viya 和 SAS 9 连接\n访问 SAS 内容和库\n为 SAS、SQL、Python 和其他语言创建笔记本\n\n扩展程序可在 GitHub 上找到仓库与原代码：[vscode-sas-extension](https://github.com/sassoftware/vscode-sas-extension)\n更多关于 SAS 与 vscode 的信息可以访问：[SAS Extension for Visual Studio Code](https://developer.sas.com/programming/vs_code_extension)\n\n3.1 安装插件\n在 vscode 的扩展页面搜索 “sas” ，第一个 “official SAS ···“ 即为正确扩展：",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#配置路径",
+    "href": "Guide/SAS/SAS-install.html#配置路径",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "4 配置路径",
+    "text": "4 配置路径\nBefore you can run SAS code, you must configure the SAS extension to access your SAS 9.4 (remote or local) server or a SAS Viya server and add a connection profile.\n在运行 SAS 代码之前，您必须配置 SAS 扩展以访问 SAS 9.4（远程或本地）服务器或 SAS Viya 服务器。您必须获得 SAS 9.4 或 SAS Viya 的许可才能运行 SAS 代码。\n\n打开 SAS 程序文件。\n单击 VS Code 窗口左下方状态栏中的“无配置文件”。\n您还可以打开命令面板（F1，或Ctrl+Shift+P在 Windows 或 Linux 上，或Shift+CMD+P在 OSX 上）并找到SAS: Add New Connection Profile命令。\n按照“添加新连接配置文件”部分中的说明添加配置文件。\n创建配置文件后，状态栏项将从“无配置文件”更改为新配置文件的名称。\n\n\n更多设置可以查看[SAS Extension for Visual Studio Code Documentation](https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/sas9local)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#编译-sas-文件",
+    "href": "Guide/SAS/SAS-install.html#编译-sas-文件",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "5 编译 SAS 文件",
+    "text": "5 编译 SAS 文件\nSAS 文件右上角有一个 奔跑的小人 ，点击即可开始运行所选中的程序段落，并在右侧窗口输出结果。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#在-jupyter-notebook-中使用-sas",
+    "href": "Guide/SAS/SAS-install.html#在-jupyter-notebook-中使用-sas",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "6 在 Jupyter Notebook 中使用 SAS",
+    "text": "6 在 Jupyter Notebook 中使用 SAS\n\n6.1 环境准备\n安装 Anaconda 集成环境或 Python 和 SAS 软件，其中Anaconda要求Python3+；Python在Jupyter Notebook和SAS之间起一个桥梁的作用，Jupyter Notebook中的SAS代码会交给Python，Python负责将代码传递给SAS执行；然后将执行的结果返回给Jupyter Notebook显示。\nSAS版本要求9.4，也可以是 SAS Viya。\n\n\n6.2 安装SAS_KERNEL\n启动 cmd，输入命令：\n\n\n代码\npip install sas_kernel\n\n\n然后就会自动安装 sas_kernel 及其相应的依赖项。\n安装完成后可以输入命令：\n\n\n代码\njupyter kernelspec list\n\n\n来检测 sas_kernel 是否安装成功，如果成功，理论上会看到如下形式的输出：\nAvailable kernels:\n    python3    /home/sas/anaconda3/lib/python3.5/site-packages/ipykernel/resources\n    sas        /home/sas/.local/share/jupyter/kernels/sas\n\n\n6.3 修改 Python 配置文件\n安装好 sas_kernel 后找到 Anaconda 或 Python 的安装目录，会有一个相应的文件夹出现，例如我的文件路径如下：\nC:\\Users\\asus\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\saspy\n在这个文件路径下找到 sascfg.py 文件，该文件中需要配置连接SAS的信息。可以配置连接本地机器的SAS；也可以配置连接远程机器的SAS Server，无论是Linux Server还是Windows Server都可以。此处就以连接本地SAS为例进行说明。\n\n打开该文件，首先是一大段注释；\n在这段注释后定义的第一个变量 SAS_config_names 用于指定连接SAS的配置方式，提供了 10 种方式：default, ssh, iomlinux, iomwin, winlocal, winiomlinux, winiomwin, httpsviya, httpviya, iomcom。默认为 default 方式。\n因为我们需要连接Windows机器本地的SAS，所以需要将 SAS_config_names 的值修改为 winlocal 。\n\n\n后续有一些安装步骤，但是大多是在2016-2020年更新的教程，无法找到复现的路径，可能相关的配置已被优化。\n包括这个 [SAS岩论 | 在Jupyter Notebook中使用SAS ](https://www.sohu.com/a/218339423_278472) 中写到的需要使用 cpW 定义 SAS 路径。\n\n\n6.4 修改系统变量\n将sas相关文件 sspiauth.dll 添加到系统环境变量，该文件很可能在如下目录：\nC:\\Program Files\\SASHome\\SASFoundation\\9.4\\core\\sasext\n（注意添加变量时不要包含 sspiauth.dll 文件本身）\nWarning: 环境变量添加完成后，要重启电脑才会生效。\n\n\n6.5 在 jupyter notebook 中使用 SAS\n新建文件，选择使用 SAS 内核，或者在 cell 中通过 magic command 指定内核。\n%%sas\n使用语法如下所示：\n\n\n代码\n%%sas\ndata iris;\n    set sashelp.iris;\nrun;\n\nproc print data=iris(obs=10);\nrun;\n\n\n在Notebook中写SAS代码了，跟Python一样，同样有代码提示、语法高亮的功能。但是你会注意到过程步的结果显示了，运行的日志去哪里了？\n如果代码运行错误或者没有输出（例如纯DATA步）的话，那么输出就是日志信息。\n能够正确运行且有输出结果的代码就不会显示日志了。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#安装sas日志组件",
+    "href": "Guide/SAS/SAS-install.html#安装sas日志组件",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "7 安装SAS日志组件",
+    "text": "7 安装SAS日志组件\n如果想要像SAS Base一样，随时查看所有程序运行的日志结果也没问题。安装一个Notebook的SAS日志扩展组件就可以了。打开Anaconda Prompt，输入以下命令安装：\njupyter nbextension install --py sas_kernel.showSASLog\n运行完毕后，输入以下命令启用SAS日志组件：\njupyter nbextension enable sas_kernel.showSASLog –py",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#连接sas-server",
+    "href": "Guide/SAS/SAS-install.html#连接sas-server",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "8 连接SAS Server",
+    "text": "8 连接SAS Server\n如果需要配置连接远程的SAS Server，如连接远程Windows机器的SAS Server，需在sascfg.py中做以下修改：\n\n将SAS_config_names的值改为“wintowin”；\n在wintowin连接方式中将参数iomhost的值修改为远程Windows机器的IP地址；将参数encoding的值修改为euc-cn；\n将cpW中5个Jar包的路径修改为远程Windows机器中SAS对应的目录。\n\n修改完毕后，启动Notebook，首次运行SAS代码时，会提示输入访问SAS Server的有效SAS用户和密码。1\n\n8.1 典型生态项目\n\nSASPy\nSASPy 是一个 Python 库，允许你通过 Python 代码与 SAS 进行交互。SAS Kernel 依赖于 SASPy，因此在使用 SAS Kernel 之前，你需要配置 SASPy。\n\n\nJupyterLab 扩展\nSAS Kernel 支持 JupyterLab 扩展，这些扩展可以提高你在 JupyterLab 中的编程效率。你可以通过以下命令安装这些扩展：\npip install sas_kernel[jlab_ext] \n\n\nNBGrader\nNBGrader 是一个用于分配和评分 Jupyter Notebook 的系统，它与 SAS Kernel 兼容。你可以使用 NBGrader 来创建和评分包含 SAS 代码的作业。\n通过这些生态项目，SAS Kernel 不仅扩展了 Jupyter Notebook 的功能，还增强了其在数据科学和分析领域的应用能力。2",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/SAS-install.html#footnotes",
+    "href": "Guide/SAS/SAS-install.html#footnotes",
+    "title": "00-SAS安装与vscode 扩展",
+    "section": "脚注",
+    "text": "脚注\n\n\nSAS岩论 | 在Jupyter Notebook中使用SAS↩︎\nSAS Kernel for Jupyter 安装与使用教程↩︎",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS安装与vscode 扩展"
     ]
   }
 ]

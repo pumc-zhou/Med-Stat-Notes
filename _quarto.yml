@@ -112,11 +112,11 @@ website:
       - section: Guide/Guide-intro.qmd
         contents:
           - section: Guide/R/R-intro.qmd
-            contents: Guide/R/*.qmd
+            contents: Guide/R/*.{qmd,ipynb}
           - section: Guide/Python/Python-intro.qmd
             contents: Guide/Python/*.{qmd,ipynb}
           - section: Guide/SAS/SAS-intro.qmd
-            contents: Guide/SAS/*.qmd
+            contents: Guide/SAS/*.{qmd,ipynb}
           - section: Guide/Stata/Stata-intro.qmd
             contents: Guide/Stata/*.{qmd,ipynb}
       - section: Quarto/quarto-intro.qmd
