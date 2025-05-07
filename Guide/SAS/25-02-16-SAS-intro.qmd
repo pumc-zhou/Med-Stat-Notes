@@ -1,12 +1,12 @@
 ---
-title: "SAS"
+title: "00-SAS-Record"
 author: "Simonzhou"
 date: "2025-02-16"
 number-sections: false
 toc: false
 ---
 
-SAS introduction
+# SAS introduction
 
 SAS的历史很长，很强大，但是现代化做的一般（交互界面）。
 
@@ -24,3 +24,9 @@ SAS的历史很长，很强大，但是现代化做的一般（交互界面）�
 用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。
 
 每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。
+
+# SAS Using Record
+
+2025-05-06，这几天调试 SAS 与 VSCODE 的联合使用，发现很久没有打开的 SAS 中文页面出现了乱码，调试了一天才解决，做了很多尝试，此处做一些记录，首先是修改 `encoding` ，但是没有效果，然后指定相关的语言和地区，可能是和系统设置有冲突，但是不是主要问题，最后在网上找到 SAS-TW 的一些问题指南，是因为 Windows 的 **Beta: 使用 Unicode UTF-8 提供全球語言支援** 引发的问题，最后尝试将其关闭后重启解决中文乱码问题。[^1]
+
+[^1]: [SAS 程式(SAS 9.4) 繁體中文出現亂碼怎麼辦?](https://blogs.sas.com/content/sastaiwan/2022/04/08/sas-%E7%A8%8B%E5%BC%8Fsas-9-4-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E5%87%BA%E7%8F%BE%E4%BA%82%E7%A2%BC%E6%80%8E%E9%BA%BC%E8%BE%A6/)

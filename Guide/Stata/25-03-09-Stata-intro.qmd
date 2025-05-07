@@ -1,7 +1,8 @@
 ---
-title: "Stata"
+title: "00-Stata Intro and Record"
 author: "Simonzhou"
 date: "2025-03-09"
+date-modified: today
 number-sections: false
 toc: false
 ---
@@ -18,4 +19,4 @@ toc: false
 
 Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。
 
-然后根据研究目的，选择合适的模型，找到前人写的代码，拿来增删改查，AI 大法，跑通，分析。
+然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。

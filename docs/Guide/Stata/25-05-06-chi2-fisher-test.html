@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simon Zhou">
 
-<title>07-t检验（t-test） – 医学统计学笔记</title>
+<title>08-卡方检验与Fisher精确检验 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" rel="next">
-<link href="../../Guide/Stata/25-05-05-scatter-plot.html" rel="prev">
+<link href="../../Guide/Stata/25-05-06-RR-CAL.html" rel="next">
+<link href="../../Guide/Stata/25-05-05-ttest.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,12 +116,41 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="07-t检验（t-test） – 医学统计学笔记">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="08-卡方检验与Fisher精确检验 – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="07-t检验（t-test） – 医学统计学笔记">
+<meta name="twitter:title" content="08-卡方检验与Fisher精确检验 – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -227,7 +256,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">07-t检验（t-test）</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html">08-卡方检验与Fisher精确检验</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -549,13 +578,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">07-t检验（t-test）</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">08-卡方检验与Fisher精确检验</span></a>
   </div>
 </li>
@@ -638,21 +667,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <h2 id="toc-title">该页面内容</h2>
    
   <ul class="collapse">
-  <li><a href="#数据导入" id="toc-数据导入" class="nav-link active" data-scroll-target="#数据导入"><span class="header-section-number">0.1</span> 数据导入</a></li>
-  <li><a href="#单样本-t-检验one-sample-t-test" id="toc-单样本-t-检验one-sample-t-test" class="nav-link" data-scroll-target="#单样本-t-检验one-sample-t-test"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</a>
-  <ul class="collapse">
-  <li><a href="#独立样本-t-检验-two-samples-t-test" id="toc-独立样本-t-检验-two-samples-t-test" class="nav-link" data-scroll-target="#独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</a></li>
-  <li><a href="#两个变量的比较" id="toc-两个变量的比较" class="nav-link" data-scroll-target="#两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</a></li>
-  </ul></li>
+  <li><a href="#数据导入" id="toc-数据导入" class="nav-link active" data-scroll-target="#数据导入"><span class="header-section-number">1</span> 数据导入</a></li>
+  <li><a href="#chi2-test" id="toc-chi2-test" class="nav-link" data-scroll-target="#chi2-test"><span class="header-section-number">2</span> <span class="math inline">\(\chi^2\)</span> test</a></li>
+  <li><a href="#fishers-exact-test" id="toc-fishers-exact-test" class="nav-link" data-scroll-target="#fishers-exact-test"><span class="header-section-number">3</span> Fisher’s exact test</a></li>
+  <li><a href="#notices" id="toc-notices" class="nav-link" data-scroll-target="#notices"><span class="header-section-number">4</span> Notices</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-06-chi2-fisher-test.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">07-t检验（t-test）</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html">08-卡方检验与Fisher精确检验</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">07-t检验（t-test）</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+<h1 class="title">08-卡方检验与Fisher精确检验</h1>
 </div>
 
 
@@ -669,7 +696,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年5月5日</p>
+      <p class="date">2025年5月6日</p>
     </div>
   </div>
   
@@ -681,170 +708,162 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<div id="a8bc257b" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>代码</summary>
+<div id="441e39dd" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 </div>
-<section id="数据导入" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="数据导入"><span class="header-section-number">0.1</span> 数据导入</h2>
-<div id="6766ebf5" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>代码</summary>
+<section id="数据导入" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="数据导入"><span class="header-section-number">1</span> 数据导入</h2>
+<p>此章节使用 Stata 自带的 1988 年 美国的 National Longitudinal Study of Young Women Data 进行分析和示例。</p>
+<div id="8a6c27b1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>webuse auto.dta, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sysuse nlsw88.dta, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>(1978 automobile data)</code></pre>
+<pre><code>(NLSW, 1988 extract)</code></pre>
 </div>
 </div>
 </section>
-<section id="单样本-t-检验one-sample-t-test" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</h1>
-<p>交互页面的操作更为简单和直观，直接选择数据集和变量即可。</p>
-<p>当然通过代码也可以实现相同的功能，但是相对而言更考验用户的代码功底、统计知识储备和对数据的理解。</p>
-<div id="33b1f95a" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ttest price <span class="op">==</span> <span class="dv">6000</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<section id="chi2-test" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="chi2-test"><span class="header-section-number">2</span> <span class="math inline">\(\chi^2\)</span> test</h2>
+<p>卡方检验(<span class="math inline">\(\chi^2\)</span>)，主要用于检验两个或多个分类变量之间的关联性。它通过比较实际观察频数与期望频数之间的差异来判断变量是否独立，从而揭示不同类别之间是否存在统计学上的显著关系。</p>
+<p>基本语法：</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tabulate</span> var1 var2,<span class="fu">chi2</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>tabulate</code> 可以简写为 <code>tab</code>，后续都用 <code>tab</code> 替代 <code>tabulate</code></p>
+<div id="7ba4bbdd" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>tab race married, chi2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-One-sample t test
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-   price |      74    6165.257    342.8719    2949.496    5481.914      6848.6
-------------------------------------------------------------------------------
-    mean = mean(price)                                            t =   0.4820
-H0: mean = 6000                                  Degrees of freedom =       73
+           |        Married
+      Race |    Single    Married |     Total
+-----------+----------------------+----------
+     White |       487      1,150 |     1,637 
+     Black |       309        274 |       583 
+     Other |         8         18 |        26 
+-----------+----------------------+----------
+     Total |       804      1,442 |     2,246 
 
-   Ha: mean &lt; 6000             Ha: mean != 6000               Ha: mean &gt; 6000
- Pr(T &lt; t) = 0.6844         Pr(|T| &gt; |t|) = 0.6313          Pr(T &gt; t) = 0.3156</code></pre>
+          Pearson chi2(2) = 101.4215   Pr = 0.000</code></pre>
 </div>
 </div>
+<section id="查看每一个单元格对于-chi2-检验的贡献" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="查看每一个单元格对于-chi2-检验的贡献"><span class="header-section-number">2.1</span> 查看每一个单元格对于 <span class="math inline">\(\chi^2\)</span> 检验的贡献:</h3>
 <p>语法：</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname == # [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)] [<span class="kw">by</span>(varname)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>varname</code>：要进行 t 检验的变量名</li>
-<li><code>#</code>：要进行 t 检验的值</li>
-<li><code>if</code>：条件语句，表示只对满足条件的观测进行 t 检验</li>
-<li><code>in</code>：表示只对数据集中的某些观测进行 t 检验</li>
-<li><code>level(#)</code>：置信水平，默认值为 95%，可以设置 <code>#</code> 为 90%、95% 或 99%</li>
-<li><code>by</code>：分组变量，表示对不同组进行 t 检验</li>
-</ul>
-<section id="独立样本-t-检验-two-samples-t-test" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</h2>
-<p>语法：</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname, <span class="kw">by</span>(groupvar) [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="b2c5a10f" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>代码</summary>
+<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> var1 var2, cchi2 <span class="fu">chi2</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="3a334d30" class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ttest price, by(foreign)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tab race married, cchi2 chi2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Two-sample t test with equal variances
-------------------------------------------------------------------------------
-   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-Domestic |      52    6072.423    429.4911    3097.104    5210.184    6934.662
- Foreign |      22    6384.682    558.9942    2621.915     5222.19    7547.174
----------+--------------------------------------------------------------------
-Combined |      74    6165.257    342.8719    2949.496    5481.914      6848.6
----------+--------------------------------------------------------------------
-    diff |           -312.2587    754.4488               -1816.225    1191.708
-------------------------------------------------------------------------------
-    diff = mean(Domestic) - mean(Foreign)                         t =  -0.4139
-H0: diff = 0                                     Degrees of freedom =       72
++-------------------+
+| Key               |
+|-------------------|
+|     frequency     |
+| chi2 contribution |
++-------------------+
 
-    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
- Pr(T &lt; t) = 0.3401         Pr(|T| &gt; |t|) = 0.6802          Pr(T &gt; t) = 0.6599</code></pre>
+           |        Married
+      Race |    Single    Married |     Total
+-----------+----------------------+----------
+     White |       487      1,150 |     1,637 
+           |      16.7        9.3 |      26.0 
+-----------+----------------------+----------
+     Black |       309        274 |       583 
+           |      48.2       26.9 |      75.1 
+-----------+----------------------+----------
+     Other |         8         18 |        26 
+           |       0.2        0.1 |       0.3 
+-----------+----------------------+----------
+     Total |       804      1,442 |     2,246 
+           |      65.1       36.3 |     101.4 
+
+          Pearson chi2(2) = 101.4215   Pr = 0.000</code></pre>
 </div>
 </div>
 </section>
-<section id="两个变量的比较" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</h2>
-<section id="非配对样本" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="非配对样本"><span class="header-section-number">1.2.1</span> 非配对样本</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,unpaired [<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="a68a3aca" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2, unpaired</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-. webuse fuel.dta, clear
-
-. ttest mpg1 == mpg2, unpaired
-
-Two-sample t test with equal variances
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
-    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
----------+--------------------------------------------------------------------
-Combined |      24      21.875    .6264476    3.068954    20.57909    23.17091
----------+--------------------------------------------------------------------
-    diff |               -1.75    1.225518               -4.291568    .7915684
-------------------------------------------------------------------------------
-    diff = mean(mpg1) - mean(mpg2)                                t =  -1.4280
-H0: diff = 0                                     Degrees of freedom =       22
-
-    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
- Pr(T &lt; t) = 0.0837         Pr(|T| &gt; |t|) = 0.1673          Pr(T &gt; t) = 0.9163
-
-. </code></pre>
-</div>
-</div>
-</section>
-<section id="配对样本-t-检验-paired-t-test" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="配对样本-t-检验-paired-t-test"><span class="header-section-number">1.2.2</span> 配对样本 t 检验 (paired t-test)</h3>
+<section id="查看期望频数理论频数" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="查看期望频数理论频数"><span class="header-section-number">2.2</span> 查看期望频数（理论频数）</h3>
 <p>语法：</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,[<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="a4f829e7" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> var1 var2, <span class="fu">chi2</span> expected</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c7c57378" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>tab race married, chi2 expected</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-. webuse fuel.dta, clear
++--------------------+
+| Key                |
+|--------------------|
+|     frequency      |
+| expected frequency |
++--------------------+
 
-. ttest mpg1 == mpg2
+           |        Married
+      Race |    Single    Married |     Total
+-----------+----------------------+----------
+     White |       487      1,150 |     1,637 
+           |     586.0    1,051.0 |   1,637.0 
+-----------+----------------------+----------
+     Black |       309        274 |       583 
+           |     208.7      374.3 |     583.0 
+-----------+----------------------+----------
+     Other |         8         18 |        26 
+           |       9.3       16.7 |      26.0 
+-----------+----------------------+----------
+     Total |       804      1,442 |     2,246 
+           |     804.0    1,442.0 |   2,246.0 
 
-Paired t test
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
-    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
----------+--------------------------------------------------------------------
-    diff |      12       -1.75    .7797144     2.70101    -3.46614   -.0338602
-------------------------------------------------------------------------------
-     mean(diff) = mean(mpg1 - mpg2)                               t =  -2.2444
- H0: mean(diff) = 0                              Degrees of freedom =       11
-
- Ha: mean(diff) &lt; 0           Ha: mean(diff) != 0           Ha: mean(diff) &gt; 0
- Pr(T &lt; t) = 0.0232         Pr(|T| &gt; |t|) = 0.0463          Pr(T &gt; t) = 0.9768
-
-. </code></pre>
+          Pearson chi2(2) = 101.4215   Pr = 0.000</code></pre>
 </div>
 </div>
-
-
 </section>
 </section>
+<section id="fishers-exact-test" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="fishers-exact-test"><span class="header-section-number">3</span> Fisher’s exact test</h2>
+<p>当列联表中理论频数(期望频数)&lt;5时，我们可以增加样本量、删去理论频数太少的行或列、或者合并某些行或列。</p>
+<p>当然也可以使用Fisher精确检验来检验，并且任何样本量都可以使用Fisher精确检验。</p>
+<p>语法：</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">tab</span> var1 var2, exact</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="669a0dfd" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>tab race married, exact</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Enumerating sample-space combinations:
+stage 3:  enumerations = 1
+stage 2:  enumerations = 27
+stage 1:  enumerations = 0
+
+           |        Married
+      Race |    Single    Married |     Total
+-----------+----------------------+----------
+     White |       487      1,150 |     1,637 
+     Black |       309        274 |       583 
+     Other |         8         18 |        26 
+-----------+----------------------+----------
+     Total |       804      1,442 |     2,246 
+
+           Fisher's exact =                 0.000</code></pre>
+</div>
+</div>
+</section>
+<section id="notices" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="notices"><span class="header-section-number">4</span> Notices</h2>
+<p>在一般的统计学教程或书籍中，有如下的说明：</p>
+<ol type="1">
+<li>总例数≥40，所有理论频数≥5，看Pearson Chi-Square结果;</li>
+<li>总例数≥40，出现1个理论频数≥1且&lt;5，<span class="math inline">\(\chi^2\)</span>检验需进行连续性校正，这时以<strong>Continuity Correction</strong>结果为准</li>
+<li>总例数≥40，至少2个理论频数≥1且&lt;5，看<strong>Fisher’s Exact Test</strong>结果;</li>
+<li>总例数&lt;40或者出现理论频数&lt;1，看<strong>Fisher’s Exact Test</strong>结果</li>
+</ol>
+<p>针对上述 第2点 中对<span class="math inline">\(\chi^2\)</span>检验需进行连续性校正，在 Stata 中一般不是必须的：</p>
+<ol type="1">
+<li>Stata不自带卡方检验的连续性矫正</li>
+<li>Stata有用户自写的package可以实现连续性矫正，但是并不推荐:卡方检验的连续性矫正并不是必须的、也不是最推荐的方法</li>
+<li>在样本量足够大的时候，使用卡方检验时，是否使用卡方检验的连续性校正区别很小;使用Fisher精确检验也是没有问题的</li>
+<li>在样本量小的时候(通常是某个格子期望频&lt;5)，可直接使用Fisher精确检验，亦不需要使用“卡方检验+连续性矫正”</li>
+</ol>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -1471,13 +1490,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="pagination-link" aria-label="05-双变量作图">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">05-双变量作图</span>
+      <a href="../../Guide/Stata/25-05-05-ttest.html" class="pagination-link" aria-label="07-t检验（t-test）">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">07-t检验（t-test）</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" class="pagination-link" aria-label="08-卡方检验与Fisher精确检验">
-        <span class="nav-page-text">08-卡方检验与Fisher精确检验</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-06-RR-CAL.html" class="pagination-link" aria-label="09-RR值与OR值的计算">
+        <span class="nav-page-text">09-RR值与OR值的计算</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1493,7 +1512,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-06-chi2-fisher-test.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

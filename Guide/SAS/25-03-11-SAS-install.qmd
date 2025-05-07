@@ -1,5 +1,5 @@
 ---
-title: "00-SAS安装与vscode 扩展"
+title: "01-SAS 安装与vscode 扩展"
 author: "Simon Zhou"
 date: "2025-03-11"
 date-modified: "2025-05-06"
@@ -76,8 +76,7 @@ SAS版本要求9.4，也可以是 SAS Viya。
 
 启动 `cmd`，输入命令：
 
-```{python}
-#| eval: false
+``` python
 pip install sas_kernel
 ```
 
@@ -85,8 +84,7 @@ pip install sas_kernel
 
 安装完成后可以输入命令：
 
-```{python}
-#| eval: false
+``` python
 jupyter kernelspec list
 ```
 
@@ -134,14 +132,13 @@ C:\Program Files\SASHome\SASFoundation\9.4\core\sasext
 
 新建文件，选择使用 SAS 内核，或者在 cell 中通过 magic command 指定内核。
 
-``` python
+``` sas
 %%sas
 ```
 
 使用语法如下所示：
 
-```{python}
-#| eval: false
+``` sas
 %%sas
 data iris;
     set sashelp.iris;
@@ -195,8 +192,8 @@ SASPy 是一个 Python 库，允许你通过 Python 代码与 SAS 进行交互�
 
 SAS Kernel 支持 JupyterLab 扩展，这些扩展可以提高你在 JupyterLab 中的编程效率。你可以通过以下命令安装这些扩展：
 
-```         
-pip install sas_kernel[jlab_ext] 
+``` python
+pip install sas_kernel[jlab_ext]
 ```
 
 #### **NBGrader**

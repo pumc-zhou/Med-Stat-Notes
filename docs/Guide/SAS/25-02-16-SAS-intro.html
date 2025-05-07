@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simon Zhou">
+<meta name="author" content="Simonzhou">
 
-<title>07-t检验（t-test） – 医学统计学笔记</title>
+<title>00-SAS-Record – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" rel="next">
-<link href="../../Guide/Stata/25-05-05-scatter-plot.html" rel="prev">
+<link href="../../Guide/SAS/25-03-11-SAS-install.html" rel="next">
+<link href="../../Guide/SAS/2025-02-16-CLHLS.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -117,16 +117,16 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="07-t检验（t-test） – 医学统计学笔记">
+<meta property="og:title" content="00-SAS-Record – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
-<meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
+<meta property="og:image" content="www.lazyzhou.cn/Guide/SAS/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="07-t检验（t-test） – 医学统计学笔记">
+<meta name="twitter:title" content="00-SAS-Record – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +227,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">07-t检验（t-test）</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">Guide/SAS/SAS-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">00-SAS-Record</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -457,13 +457,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Guide/SAS/SAS-intro.qmd</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
@@ -472,7 +472,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">00-SAS-Record</span></a>
   </div>
 </li>
@@ -492,13 +492,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">Guide/Stata/Stata-intro.qmd</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
@@ -549,7 +549,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">07-t检验（t-test）</span></a>
   </div>
 </li>
@@ -633,26 +633,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
-    <h2 id="toc-title">该页面内容</h2>
-   
-  <ul class="collapse">
-  <li><a href="#数据导入" id="toc-数据导入" class="nav-link active" data-scroll-target="#数据导入"><span class="header-section-number">0.1</span> 数据导入</a></li>
-  <li><a href="#单样本-t-检验one-sample-t-test" id="toc-单样本-t-检验one-sample-t-test" class="nav-link" data-scroll-target="#单样本-t-检验one-sample-t-test"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</a>
-  <ul class="collapse">
-  <li><a href="#独立样本-t-检验-two-samples-t-test" id="toc-独立样本-t-检验-two-samples-t-test" class="nav-link" data-scroll-target="#独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</a></li>
-  <li><a href="#两个变量的比较" id="toc-两个变量的比较" class="nav-link" data-scroll-target="#两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</a></li>
-  </ul></li>
-  </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">07-t检验（t-test）</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">Guide/SAS/SAS-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">00-SAS-Record</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">07-t检验（t-test）</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">00-SAS-Record</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
 </div>
 
 
@@ -662,14 +649,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simon Zhou </p>
+             <p>Simonzhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年5月5日</p>
+      <p class="date">2025年2月16日</p>
     </div>
   </div>
   
@@ -681,173 +668,38 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<div id="a8bc257b" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="数据导入" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="数据导入"><span class="header-section-number">0.1</span> 数据导入</h2>
-<div id="6766ebf5" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>webuse auto.dta, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>(1978 automobile data)</code></pre>
-</div>
-</div>
+<section id="sas-introduction" class="level1">
+<h1>SAS introduction</h1>
+<p>SAS的历史很长，很强大，但是现代化做的一般（交互界面）。</p>
+<p>使用场景也是有限的，至少一般情况下用不上这么高级的工具。</p>
+<p>但是在某些领域又是极其重要的，像银行和药企，他们要追求足够的稳定和严谨，那么多年不曾有重大改变且一向以稳定著称的 SAS 自然可以很好的满足这一需求。</p>
+<ol type="1">
+<li>SAS 对学术研究的支持是比较不友好的。正版太贵，除非学校有提供，个人基本不可能使用正版，这里下载破解版，搞SID(SAS的授权证书)需要时间成本，还容易有安装问题，没错你可以选择使用SAS的教育版，不过谁用谁知道。</li>
+<li>安装比较麻烦，尤其是在Linux上，我曾用两周的时间折腾在 Linux 上安装一个 SAS ，最后以失败告终，且在互联网上找不到解决的方案，AI也束手无策。</li>
+<li>SAS不开源，意味着你看到某些论文，里面使用一些比较新的统计分析方法，SAS不大可能有现成代码可以使用，而 Python 和 R 则大几率有现成的包可以调用，这里也会节省不少时间。</li>
+<li>SAS的强大一方面是性能稳定，可以处理几十上百GB的数据而不容易崩溃，但是医学数据一般容量比较小，并不是非得SAS才能跑的动。</li>
+<li>SAS相比其他编程语言来说是独树一帜(奇葩)的存在（<code>proc</code>和<code>data</code>步独步天下），从语法上面来说并没有什么和它相接近的语言，相反 R 和 Python 则会和一般的编程语言例如 Java, C 等有一些类似的地方，对以后万一还需要学习其他语言或者学习以后新诞生的编程软件诞有一定帮助。</li>
+<li>SAS 的支持有限，互联网上关于 SAS 的使用信息较少，一般都在出版的书中有可复现的内容，也没有像 Python 和 R 等活跃的社区可以提供较多的互动和支持，编程遇上问题不容易找到答案。</li>
+</ol>
+<p>用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。</p>
+<p>每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。</p>
 </section>
-<section id="单样本-t-检验one-sample-t-test" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</h1>
-<p>交互页面的操作更为简单和直观，直接选择数据集和变量即可。</p>
-<p>当然通过代码也可以实现相同的功能，但是相对而言更考验用户的代码功底、统计知识储备和对数据的理解。</p>
-<div id="33b1f95a" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ttest price <span class="op">==</span> <span class="dv">6000</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-One-sample t test
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-   price |      74    6165.257    342.8719    2949.496    5481.914      6848.6
-------------------------------------------------------------------------------
-    mean = mean(price)                                            t =   0.4820
-H0: mean = 6000                                  Degrees of freedom =       73
+<section id="sas-using-record" class="level1">
+<h1>SAS Using Record</h1>
+<p>2025-05-06，这几天调试 SAS 与 VSCODE 的联合使用，发现很久没有打开的 SAS 中文页面出现了乱码，调试了一天才解决，做了很多尝试，此处做一些记录，首先是修改 <code>encoding</code> ，但是没有效果，然后指定相关的语言和地区，可能是和系统设置有冲突，但是不是主要问题，最后在网上找到 SAS-TW 的一些问题指南，是因为 Windows 的 <strong>Beta: 使用 Unicode UTF-8 提供全球語言支援</strong> 引发的问题，最后尝试将其关闭后重启解决中文乱码问题。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 
-   Ha: mean &lt; 6000             Ha: mean != 6000               Ha: mean &gt; 6000
- Pr(T &lt; t) = 0.6844         Pr(|T| &gt; |t|) = 0.6313          Pr(T &gt; t) = 0.3156</code></pre>
-</div>
-</div>
-<p>语法：</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname == # [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)] [<span class="kw">by</span>(varname)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><code>varname</code>：要进行 t 检验的变量名</li>
-<li><code>#</code>：要进行 t 检验的值</li>
-<li><code>if</code>：条件语句，表示只对满足条件的观测进行 t 检验</li>
-<li><code>in</code>：表示只对数据集中的某些观测进行 t 检验</li>
-<li><code>level(#)</code>：置信水平，默认值为 95%，可以设置 <code>#</code> 为 90%、95% 或 99%</li>
-<li><code>by</code>：分组变量，表示对不同组进行 t 检验</li>
-</ul>
-<section id="独立样本-t-检验-two-samples-t-test" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</h2>
-<p>语法：</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname, <span class="kw">by</span>(groupvar) [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="b2c5a10f" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ttest price, by(foreign)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Two-sample t test with equal variances
-------------------------------------------------------------------------------
-   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-Domestic |      52    6072.423    429.4911    3097.104    5210.184    6934.662
- Foreign |      22    6384.682    558.9942    2621.915     5222.19    7547.174
----------+--------------------------------------------------------------------
-Combined |      74    6165.257    342.8719    2949.496    5481.914      6848.6
----------+--------------------------------------------------------------------
-    diff |           -312.2587    754.4488               -1816.225    1191.708
-------------------------------------------------------------------------------
-    diff = mean(Domestic) - mean(Foreign)                         t =  -0.4139
-H0: diff = 0                                     Degrees of freedom =       72
 
-    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
- Pr(T &lt; t) = 0.3401         Pr(|T| &gt; |t|) = 0.6802          Pr(T &gt; t) = 0.6599</code></pre>
-</div>
-</div>
-</section>
-<section id="两个变量的比较" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</h2>
-<section id="非配对样本" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="非配对样本"><span class="header-section-number">1.2.1</span> 非配对样本</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,unpaired [<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="a68a3aca" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2, unpaired</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-. webuse fuel.dta, clear
-
-. ttest mpg1 == mpg2, unpaired
-
-Two-sample t test with equal variances
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
-    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
----------+--------------------------------------------------------------------
-Combined |      24      21.875    .6264476    3.068954    20.57909    23.17091
----------+--------------------------------------------------------------------
-    diff |               -1.75    1.225518               -4.291568    .7915684
-------------------------------------------------------------------------------
-    diff = mean(mpg1) - mean(mpg2)                                t =  -1.4280
-H0: diff = 0                                     Degrees of freedom =       22
-
-    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
- Pr(T &lt; t) = 0.0837         Pr(|T| &gt; |t|) = 0.1673          Pr(T &gt; t) = 0.9163
-
-. </code></pre>
-</div>
-</div>
-</section>
-<section id="配对样本-t-检验-paired-t-test" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="配对样本-t-检验-paired-t-test"><span class="header-section-number">1.2.2</span> 配对样本 t 检验 (paired t-test)</h3>
-<p>语法：</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,[<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="a4f829e7" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-. webuse fuel.dta, clear
-
-. ttest mpg1 == mpg2
-
-Paired t test
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
-    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
----------+--------------------------------------------------------------------
-    diff |      12       -1.75    .7797144     2.70101    -3.46614   -.0338602
-------------------------------------------------------------------------------
-     mean(diff) = mean(mpg1 - mpg2)                               t =  -2.2444
- H0: mean(diff) = 0                              Degrees of freedom =       11
-
- Ha: mean(diff) &lt; 0           Ha: mean(diff) != 0           Ha: mean(diff) &gt; 0
- Pr(T &lt; t) = 0.0232         Pr(|T| &gt; |t|) = 0.0463          Pr(T &gt; t) = 0.9768
-
-. </code></pre>
-</div>
-</div>
-
+<!-- -->
 
 </section>
-</section>
-</section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://blogs.sas.com/content/sastaiwan/2022/04/08/sas-%E7%A8%8B%E5%BC%8Fsas-9-4-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E5%87%BA%E7%8F%BE%E4%BA%82%E7%A2%BC%E6%80%8E%E9%BA%BC%E8%BE%A6/">SAS 程式(SAS 9.4) 繁體中文出現亂碼怎麼辦?</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1471,16 +1323,49 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="pagination-link" aria-label="05-双变量作图">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">05-双变量作图</span>
+      <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="pagination-link" aria-label="使用SAS处理CLHLS数据">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">使用SAS处理CLHLS数据</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" class="pagination-link" aria-label="08-卡方检验与Fisher精确检验">
-        <span class="nav-page-text">08-卡方检验与Fisher精确检验</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-03-11-SAS-install.html" class="pagination-link" aria-label="01-SAS 安装与vscode 扩展">
+        <span class="nav-page-text">01-SAS 安装与vscode 扩展</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "00-SAS-Record"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-16"</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># SAS introduction</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>SAS的历史很长，很强大，但是现代化做的一般（交互界面）。</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>使用场景也是有限的，至少一般情况下用不上这么高级的工具。</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>但是在某些领域又是极其重要的，像银行和药企，他们要追求足够的稳定和严谨，那么多年不曾有重大改变且一向以稳定著称的 SAS 自然可以很好的满足这一需求。</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>SAS 对学术研究的支持是比较不友好的。正版太贵，除非学校有提供，个人基本不可能使用正版，这里下载破解版，搞SID(SAS的授权证书)需要时间成本，还容易有安装问题，没错你可以选择使用SAS的教育版，不过谁用谁知道。</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>安装比较麻烦，尤其是在Linux上，我曾用两周的时间折腾在 Linux 上安装一个 SAS ，最后以失败告终，且在互联网上找不到解决的方案，AI也束手无策。</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>SAS不开源，意味着你看到某些论文，里面使用一些比较新的统计分析方法，SAS不大可能有现成代码可以使用，而 Python 和 R 则大几率有现成的包可以调用，这里也会节省不少时间。</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>SAS的强大一方面是性能稳定，可以处理几十上百GB的数据而不容易崩溃，但是医学数据一般容量比较小，并不是非得SAS才能跑的动。</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>SAS相比其他编程语言来说是独树一帜(奇葩)的存在（<span class="in">`proc`</span>和<span class="in">`data`</span>步独步天下），从语法上面来说并没有什么和它相接近的语言，相反 R 和 Python 则会和一般的编程语言例如 Java, C 等有一些类似的地方，对以后万一还需要学习其他语言或者学习以后新诞生的编程软件诞有一定帮助。</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>SAS 的支持有限，互联网上关于 SAS 的使用信息较少，一般都在出版的书中有可复现的内容，也没有像 Python 和 R 等活跃的社区可以提供较多的互动和支持，编程遇上问题不容易找到答案。</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu"># SAS Using Record</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>2025-05-06，这几天调试 SAS 与 VSCODE 的联合使用，发现很久没有打开的 SAS 中文页面出现了乱码，调试了一天才解决，做了很多尝试，此处做一些记录，首先是修改 <span class="in">`encoding`</span> ，但是没有效果，然后指定相关的语言和地区，可能是和系统设置有冲突，但是不是主要问题，最后在网上找到 SAS-TW 的一些问题指南，是因为 Windows 的 **Beta: 使用 Unicode UTF-8 提供全球語言支援** 引发的问题，最后尝试将其关闭后重启解决中文乱码问题。<span class="ot">[^1]</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span><span class="co">[</span><span class="ot">SAS 程式(SAS 9.4) 繁體中文出現亂碼怎麼辦?</span><span class="co">](https://blogs.sas.com/content/sastaiwan/2022/04/08/sas-%E7%A8%8B%E5%BC%8Fsas-9-4-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E5%87%BA%E7%8F%BE%E4%BA%82%E7%A2%BC%E6%80%8E%E9%BA%BC%E8%BE%A6/)</span></span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1493,7 +1378,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-02-16-SAS-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

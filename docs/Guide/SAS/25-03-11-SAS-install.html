@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simon Zhou">
 
-<title>07-t检验（t-test） – 医学统计学笔记</title>
+<title>01-SAS 安装与vscode 扩展 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" rel="next">
-<link href="../../Guide/Stata/25-05-05-scatter-plot.html" rel="prev">
+<link href="../../Guide/SAS/25-05-05-SAS-install-connect.html" rel="next">
+<link href="../../Guide/SAS/25-02-16-SAS-intro.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -117,13 +117,16 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="07-t检验（t-test） – 医学统计学笔记">
+<meta property="og:title" content="01-SAS 安装与vscode 扩展 – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
-<meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
+<meta property="og:image" content="www.lazyzhou.cn/Guide/SAS/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="07-t检验（t-test） – 医学统计学笔记">
+<meta name="twitter:title" content="01-SAS 安装与vscode 扩展 – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="www.lazyzhou.cn/Guide/SAS/images/SAS-extension.png">
+<meta name="twitter:image-height" content="709">
+<meta name="twitter:image-width" content="1323">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-sidebar docked nav-fixed">
@@ -227,7 +230,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">07-t检验（t-test）</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">Guide/SAS/SAS-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-03-11-SAS-install.html">01-SAS 安装与vscode 扩展</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -457,13 +460,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
  <span class="menu-text">Guide/SAS/SAS-intro.qmd</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
@@ -478,7 +481,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">01-SAS 安装与vscode 扩展</span></a>
   </div>
 </li>
@@ -492,13 +495,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">Guide/Stata/Stata-intro.qmd</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
@@ -549,7 +552,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">07-t检验（t-test）</span></a>
   </div>
 </li>
@@ -638,21 +641,23 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <h2 id="toc-title">该页面内容</h2>
    
   <ul class="collapse">
-  <li><a href="#数据导入" id="toc-数据导入" class="nav-link active" data-scroll-target="#数据导入"><span class="header-section-number">0.1</span> 数据导入</a></li>
-  <li><a href="#单样本-t-检验one-sample-t-test" id="toc-单样本-t-检验one-sample-t-test" class="nav-link" data-scroll-target="#单样本-t-检验one-sample-t-test"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</a>
-  <ul class="collapse">
-  <li><a href="#独立样本-t-检验-two-samples-t-test" id="toc-独立样本-t-检验-two-samples-t-test" class="nav-link" data-scroll-target="#独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</a></li>
-  <li><a href="#两个变量的比较" id="toc-两个变量的比较" class="nav-link" data-scroll-target="#两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</a></li>
-  </ul></li>
+  <li><a href="#sas-在-windows-的安装" id="toc-sas-在-windows-的安装" class="nav-link active" data-scroll-target="#sas-在-windows-的安装"><span class="header-section-number">1</span> SAS 在 Windows 的安装</a></li>
+  <li><a href="#sas-在-linux-的安装" id="toc-sas-在-linux-的安装" class="nav-link" data-scroll-target="#sas-在-linux-的安装"><span class="header-section-number">2</span> SAS 在 Linux 的安装</a></li>
+  <li><a href="#sas-与-vscode-扩展" id="toc-sas-与-vscode-扩展" class="nav-link" data-scroll-target="#sas-与-vscode-扩展"><span class="header-section-number">3</span> SAS 与 vscode 扩展</a></li>
+  <li><a href="#配置路径" id="toc-配置路径" class="nav-link" data-scroll-target="#配置路径"><span class="header-section-number">4</span> 配置路径</a></li>
+  <li><a href="#编译-sas-文件" id="toc-编译-sas-文件" class="nav-link" data-scroll-target="#编译-sas-文件"><span class="header-section-number">5</span> 编译 SAS 文件</a></li>
+  <li><a href="#在-jupyter-notebook-中使用-sas" id="toc-在-jupyter-notebook-中使用-sas" class="nav-link" data-scroll-target="#在-jupyter-notebook-中使用-sas"><span class="header-section-number">6</span> 在 Jupyter Notebook 中使用 SAS</a></li>
+  <li><a href="#安装sas日志组件" id="toc-安装sas日志组件" class="nav-link" data-scroll-target="#安装sas日志组件"><span class="header-section-number">7</span> 安装SAS日志组件</a></li>
+  <li><a href="#连接sas-server" id="toc-连接sas-server" class="nav-link" data-scroll-target="#连接sas-server"><span class="header-section-number">8</span> 连接SAS Server</a></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-03-11-SAS-install.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Guide/Stata/Stata-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-05-ttest.html">07-t检验（t-test）</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">Guide/SAS/SAS-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-03-11-SAS-install.html">01-SAS 安装与vscode 扩展</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">07-t检验（t-test）</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">01-SAS 安装与vscode 扩展</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
 </div>
 
 
@@ -669,10 +674,16 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年5月5日</p>
+      <p class="date">2025年3月11日</p>
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">修改于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年5月6日</p>
+    </div>
+  </div>
     
   </div>
   
@@ -681,173 +692,152 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<div id="a8bc257b" class="cell" data-execution_count="1">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<section id="数据导入" class="level2" data-number="0.1">
-<h2 data-number="0.1" class="anchored" data-anchor-id="数据导入"><span class="header-section-number">0.1</span> 数据导入</h2>
-<div id="6766ebf5" class="cell" data-execution_count="2">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>webuse auto.dta, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>(1978 automobile data)</code></pre>
-</div>
-</div>
+<section id="sas-在-windows-的安装" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sas-在-windows-的安装"><span class="header-section-number">1</span> SAS 在 Windows 的安装</h2>
 </section>
-<section id="单样本-t-检验one-sample-t-test" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 单样本 t 检验(one-sample t-test)</h1>
-<p>交互页面的操作更为简单和直观，直接选择数据集和变量即可。</p>
-<p>当然通过代码也可以实现相同的功能，但是相对而言更考验用户的代码功底、统计知识储备和对数据的理解。</p>
-<div id="33b1f95a" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>ttest price <span class="op">==</span> <span class="dv">6000</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-One-sample t test
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-   price |      74    6165.257    342.8719    2949.496    5481.914      6848.6
-------------------------------------------------------------------------------
-    mean = mean(price)                                            t =   0.4820
-H0: mean = 6000                                  Degrees of freedom =       73
-
-   Ha: mean &lt; 6000             Ha: mean != 6000               Ha: mean &gt; 6000
- Pr(T &lt; t) = 0.6844         Pr(|T| &gt; |t|) = 0.6313          Pr(T &gt; t) = 0.3156</code></pre>
-</div>
-</div>
-<p>语法：</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname == # [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)] [<span class="kw">by</span>(varname)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="sas-在-linux-的安装" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sas-在-linux-的安装"><span class="header-section-number">2</span> SAS 在 Linux 的安装</h2>
+</section>
+<section id="sas-与-vscode-扩展" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sas-与-vscode-扩展"><span class="header-section-number">3</span> SAS 与 vscode 扩展</h2>
+<p>SAS VS Code 扩展轻量级，可在任何地方运行，并允许您集成 SAS 和其他语言。该工具还提供直接连接到 SAS Viya 和 SAS 9 并运行代码的功能。</p>
 <ul>
-<li><code>varname</code>：要进行 t 检验的变量名</li>
-<li><code>#</code>：要进行 t 检验的值</li>
-<li><code>if</code>：条件语句，表示只对满足条件的观测进行 t 检验</li>
-<li><code>in</code>：表示只对数据集中的某些观测进行 t 检验</li>
-<li><code>level(#)</code>：置信水平，默认值为 95%，可以设置 <code>#</code> 为 90%、95% 或 99%</li>
-<li><code>by</code>：分组变量，表示对不同组进行 t 检验</li>
+<li><p>SAS 语法突出显示和帮助、代码完成和代码片段</p></li>
+<li><p>用于连接 SAS 和运行代码的配置文件配置</p></li>
+<li><p>支持 SAS Viya 和 SAS 9 连接</p></li>
+<li><p>访问 SAS 内容和库</p></li>
+<li><p>为 SAS、SQL、Python 和其他语言创建笔记本</p></li>
 </ul>
-<section id="独立样本-t-检验-two-samples-t-test" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="独立样本-t-检验-two-samples-t-test"><span class="header-section-number">1.1</span> 独立样本 t 检验 (two-samples t-test)</h2>
-<p>语法：</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> varname, <span class="kw">by</span>(groupvar) [<span class="kw">if</span>] [<span class="kw">in</span>] [,<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="b2c5a10f" class="cell" data-execution_count="4">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>ttest price, by(foreign)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Two-sample t test with equal variances
-------------------------------------------------------------------------------
-   Group |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-Domestic |      52    6072.423    429.4911    3097.104    5210.184    6934.662
- Foreign |      22    6384.682    558.9942    2621.915     5222.19    7547.174
----------+--------------------------------------------------------------------
-Combined |      74    6165.257    342.8719    2949.496    5481.914      6848.6
----------+--------------------------------------------------------------------
-    diff |           -312.2587    754.4488               -1816.225    1191.708
-------------------------------------------------------------------------------
-    diff = mean(Domestic) - mean(Foreign)                         t =  -0.4139
-H0: diff = 0                                     Degrees of freedom =       72
-
-    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
- Pr(T &lt; t) = 0.3401         Pr(|T| &gt; |t|) = 0.6802          Pr(T &gt; t) = 0.6599</code></pre>
-</div>
-</div>
-</section>
-<section id="两个变量的比较" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="两个变量的比较"><span class="header-section-number">1.2</span> 两个变量的比较</h2>
-<section id="非配对样本" class="level3" data-number="1.2.1">
-<h3 data-number="1.2.1" class="anchored" data-anchor-id="非配对样本"><span class="header-section-number">1.2.1</span> 非配对样本</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,unpaired [<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="a68a3aca" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2, unpaired</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-. webuse fuel.dta, clear
-
-. ttest mpg1 == mpg2, unpaired
-
-Two-sample t test with equal variances
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
-    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
----------+--------------------------------------------------------------------
-Combined |      24      21.875    .6264476    3.068954    20.57909    23.17091
----------+--------------------------------------------------------------------
-    diff |               -1.75    1.225518               -4.291568    .7915684
-------------------------------------------------------------------------------
-    diff = mean(mpg1) - mean(mpg2)                                t =  -1.4280
-H0: diff = 0                                     Degrees of freedom =       22
-
-    Ha: diff &lt; 0                 Ha: diff != 0                 Ha: diff &gt; 0
- Pr(T &lt; t) = 0.0837         Pr(|T| &gt; |t|) = 0.1673          Pr(T &gt; t) = 0.9163
-
-. </code></pre>
-</div>
-</div>
-</section>
-<section id="配对样本-t-检验-paired-t-test" class="level3" data-number="1.2.2">
-<h3 data-number="1.2.2" class="anchored" data-anchor-id="配对样本-t-检验-paired-t-test"><span class="header-section-number">1.2.2</span> 配对样本 t 检验 (paired t-test)</h3>
-<p>语法：</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ttest</span> var1 == var2 [<span class="kw">if</span>] [<span class="kw">in</span>] ,[<span class="dv">level</span>(#)]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="a4f829e7" class="cell" data-execution_count="6">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>webuse fuel.dta, clear</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>ttest mpg1 <span class="op">==</span> mpg2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-. webuse fuel.dta, clear
-
-. ttest mpg1 == mpg2
-
-Paired t test
-------------------------------------------------------------------------------
-Variable |     Obs        Mean    Std. err.   Std. dev.   [95% conf. interval]
----------+--------------------------------------------------------------------
-    mpg1 |      12          21    .7881701    2.730301    19.26525    22.73475
-    mpg2 |      12       22.75    .9384465    3.250874    20.68449    24.81551
----------+--------------------------------------------------------------------
-    diff |      12       -1.75    .7797144     2.70101    -3.46614   -.0338602
-------------------------------------------------------------------------------
-     mean(diff) = mean(mpg1 - mpg2)                               t =  -2.2444
- H0: mean(diff) = 0                              Degrees of freedom =       11
-
- Ha: mean(diff) &lt; 0           Ha: mean(diff) != 0           Ha: mean(diff) &gt; 0
- Pr(T &lt; t) = 0.0232         Pr(|T| &gt; |t|) = 0.0463          Pr(T &gt; t) = 0.9768
-
-. </code></pre>
-</div>
-</div>
-
-
+<p>扩展程序可在 GitHub 上找到仓库与原代码：[<a href="https://github.com/sassoftware/vscode-sas-extension">vscode-sas-extension</a>](<a href="https://github.com/sassoftware/vscode-sas-extension" class="uri">https://github.com/sassoftware/vscode-sas-extension</a>)</p>
+<p>更多关于 SAS 与 vscode 的信息可以访问：[<strong>SAS Extension for Visual Studio Code</strong>](<a href="https://developer.sas.com/programming/vs_code_extension" class="uri">https://developer.sas.com/programming/vs_code_extension</a>)</p>
+<section id="安装插件" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="安装插件"><span class="header-section-number">3.1</span> 安装插件</h3>
+<p>在 vscode 的扩展页面搜索 “sas” ，第一个 “official SAS ···“ 即为正确扩展：</p>
+<p><img src="images/SAS-extension.png" class="img-fluid"></p>
 </section>
 </section>
+<section id="配置路径" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="配置路径"><span class="header-section-number">4</span> 配置路径</h2>
+<p>Before you can run SAS code, you must&nbsp;<a href="https://sassoftware.github.io/vscode-sas-extension/Configurations/" title="https://sassoftware.github.io/vscode-sas-extension/Configurations/">configure the SAS extension</a>&nbsp;to access your SAS 9.4 (remote or local) server or a SAS Viya server and&nbsp;<a href="https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/" title="https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/">add a connection profile</a>.</p>
+<p>在运行 SAS 代码之前，您必须配置 SAS 扩展以访问 SAS 9.4（远程或本地）服务器或 SAS Viya 服务器。您必须获得 SAS 9.4 或 SAS Viya 的许可才能运行 SAS 代码。</p>
+<ol type="1">
+<li><p>打开 SAS 程序文件。</p></li>
+<li><p>单击 VS Code 窗口左下方状态栏中的“无配置文件”。</p>
+<p>您还可以打开命令面板（<code>F1</code>，或<code>Ctrl+Shift+P</code>在 Windows 或 Linux 上，或<code>Shift+CMD+P</code>在 OSX 上）并找到<code>SAS: Add New Connection Profile</code>命令。</p></li>
+<li><p><a href="https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/#add-new-connection-profile">按照“添加新连接配置文件”</a>部分中的说明添加配置文件。</p></li>
+<li><p>创建配置文件后，状态栏项将从“无配置文件”更改为新配置文件的名称。</p></li>
+</ol>
+<p><img src="images/paste-2.png" class="img-fluid"></p>
+<p>更多设置可以查看[<a href="https://sassoftware.github.io/vscode-sas-extension/"><strong>SAS Extension for Visual Studio Code Documentation</strong></a>](<a href="#0" style="font-size: 13pt; font-weight: var(--fontWeightRegular);">https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/sas9local</a>)</p>
+</section>
+<section id="编译-sas-文件" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="编译-sas-文件"><span class="header-section-number">5</span> 编译 SAS 文件</h2>
+<p>SAS 文件右上角有一个 奔跑的小人 ，点击即可开始运行所选中的程序段落，并在右侧窗口输出结果。</p>
+</section>
+<section id="在-jupyter-notebook-中使用-sas" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="在-jupyter-notebook-中使用-sas"><span class="header-section-number">6</span> 在 Jupyter Notebook 中使用 SAS</h2>
+<section id="环境准备" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="环境准备"><span class="header-section-number">6.1</span> 环境准备</h3>
+<p>安装 Anaconda 集成环境或 Python 和 SAS 软件，其中Anaconda要求Python3+；Python在Jupyter Notebook和SAS之间起一个桥梁的作用，Jupyter Notebook中的SAS代码会交给Python，Python负责将代码传递给SAS执行；然后将执行的结果返回给Jupyter Notebook显示。</p>
+<p>SAS版本要求9.4，也可以是 SAS Viya。</p>
+</section>
+<section id="安装sas_kernel" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="安装sas_kernel"><span class="header-section-number">6.2</span> 安装SAS_KERNEL</h3>
+<p>启动 <code>cmd</code>，输入命令：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pip install sas_kernel</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>然后就会自动安装 <code>sas_kernel</code> 及其相应的依赖项。</p>
+<p>安装完成后可以输入命令：</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>jupyter kernelspec <span class="bu">list</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>来检测 <code>sas_kernel</code> 是否安装成功，如果成功，理论上会看到如下形式的输出：</p>
+<pre><code>Available kernels:
+    python3    /home/sas/anaconda3/lib/python3.5/site-packages/ipykernel/resources
+    sas        /home/sas/.local/share/jupyter/kernels/sas</code></pre>
+</section>
+<section id="修改-python-配置文件" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="修改-python-配置文件"><span class="header-section-number">6.3</span> 修改 Python 配置文件</h3>
+<p>安装好 <code>sas_kernel</code> 后找到 Anaconda 或 Python 的安装目录，会有一个相应的文件夹出现，例如我的文件路径如下：</p>
+<pre><code>C:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\saspy</code></pre>
+<p>在这个文件路径下找到 <code>sascfg.py</code> 文件，该文件中需要配置连接SAS的信息。可以配置连接本地机器的SAS；也可以配置连接远程机器的SAS Server，无论是Linux Server还是Windows Server都可以。此处就以连接本地SAS为例进行说明。</p>
+<ol type="1">
+<li>打开该文件，首先是一大段注释；</li>
+<li>在这段注释后定义的第一个变量 <code>SAS_config_names</code> 用于指定连接SAS的配置方式，提供了 10 种方式：<code>default</code>, <code>ssh</code>, <code>iomlinux</code>, <code>iomwin</code>, <code>winlocal</code>, <code>winiomlinux</code>, <code>winiomwin</code>, <code>httpsviya</code>, <code>httpviya</code>, <code>iomcom</code>。默认为 <code>default</code> 方式。</li>
+<li>因为我们需要连接Windows机器本地的SAS，所以需要将 <code>SAS_config_names</code> 的值修改为 <code>winlocal</code> 。</li>
+</ol>
+<p><img src="images/paste-1.png" class="img-fluid"></p>
+<p>后续有一些安装步骤，但是大多是在2016-2020年更新的教程，无法找到复现的路径，可能相关的配置已被优化。</p>
+<p>包括这个 [<strong>SAS岩论 | 在Jupyter Notebook中使用SAS</strong> ](<a href="https://www.sohu.com/a/218339423_278472" class="uri">https://www.sohu.com/a/218339423_278472</a>) 中写到的需要使用 cpW 定义 SAS 路径。</p>
+</section>
+<section id="修改系统变量" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="修改系统变量"><span class="header-section-number">6.4</span> 修改系统变量</h3>
+<p>将sas相关文件 <code>sspiauth.dll</code> 添加到系统环境变量，该文件很可能在如下目录：</p>
+<pre><code>C:\Program Files\SASHome\SASFoundation\9.4\core\sasext</code></pre>
+<p>（注意添加变量时不要包含 sspiauth.dll 文件本身）</p>
+<p><strong>Warning:</strong> 环境变量添加完成后，要重启电脑才会生效。</p>
+</section>
+<section id="在-jupyter-notebook-中使用-sas-1" class="level3" data-number="6.5">
+<h3 data-number="6.5" class="anchored" data-anchor-id="在-jupyter-notebook-中使用-sas-1"><span class="header-section-number">6.5</span> 在 jupyter notebook 中使用 SAS</h3>
+<p>新建文件，选择使用 SAS 内核，或者在 cell 中通过 magic command 指定内核。</p>
+<pre class="sas"><code>%%sas</code></pre>
+<p>使用语法如下所示：</p>
+<pre class="sas"><code>%%sas
+data iris;
+    set sashelp.iris;
+run;
+
+proc print data=iris(obs=10);
+run;</code></pre>
+<p>在Notebook中写SAS代码了，跟Python一样，同样有代码提示、语法高亮的功能。但是你会注意到过程步的结果显示了，运行的日志去哪里了？</p>
+<p>如果代码运行错误或者没有输出（例如纯DATA步）的话，那么输出就是日志信息。</p>
+<p>能够正确运行且有输出结果的代码就不会显示日志了。</p>
+</section>
+</section>
+<section id="安装sas日志组件" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="安装sas日志组件"><span class="header-section-number">7</span> 安装SAS日志组件</h2>
+<p>如果想要像SAS Base一样，随时查看所有程序运行的日志结果也没问题。安装一个Notebook的SAS日志扩展组件就可以了。打开Anaconda Prompt，输入以下命令安装：</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>jupyter nbextension install <span class="op">--</span>py sas_kernel.showSASLog</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>运行完毕后，输入以下命令启用SAS日志组件：</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>jupyter nbextension enable sas_kernel.showSASLog –py</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="连接sas-server" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="连接sas-server"><span class="header-section-number">8</span> 连接SAS Server</h2>
+<p>如果需要配置连接远程的SAS Server，如连接远程Windows机器的SAS Server，需在sascfg.py中做以下修改：</p>
+<ol type="1">
+<li><p>将SAS_config_names的值改为“wintowin”；</p></li>
+<li><p>在wintowin连接方式中将参数iomhost的值修改为远程Windows机器的IP地址；将参数encoding的值修改为euc-cn；</p></li>
+<li><p>将cpW中5个Jar包的路径修改为远程Windows机器中SAS对应的目录。</p></li>
+</ol>
+<p>修改完毕后，启动Notebook，首次运行SAS代码时，会提示输入访问SAS Server的有效SAS用户和密码。<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<section id="典型生态项目" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="典型生态项目"><span class="header-section-number">8.1</span> <strong>典型生态项目</strong></h3>
+<section id="saspy" class="level4">
+<h4 class="anchored" data-anchor-id="saspy"><strong>SASPy</strong></h4>
+<p>SASPy 是一个 Python 库，允许你通过 Python 代码与 SAS 进行交互。SAS Kernel 依赖于 SASPy，因此在使用 SAS Kernel 之前，你需要配置 SASPy。</p>
+</section>
+<section id="jupyterlab-扩展" class="level4">
+<h4 class="anchored" data-anchor-id="jupyterlab-扩展"><strong>JupyterLab 扩展</strong></h4>
+<p>SAS Kernel 支持 JupyterLab 扩展，这些扩展可以提高你在 JupyterLab 中的编程效率。你可以通过以下命令安装这些扩展：</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>pip install sas_kernel[jlab_ext]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="nbgrader" class="level4">
+<h4 class="anchored" data-anchor-id="nbgrader"><strong>NBGrader</strong></h4>
+<p>NBGrader 是一个用于分配和评分 Jupyter Notebook 的系统，它与 SAS Kernel 兼容。你可以使用 NBGrader 来创建和评分包含 SAS 代码的作业。</p>
+<p>通过这些生态项目，SAS Kernel 不仅扩展了 Jupyter Notebook 的功能，还增强了其在数据科学和分析领域的应用能力。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+
+
+<!-- -->
+
+</section>
+</section>
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">脚注</h2>
+
+<ol>
+<li id="fn1"><p><a href="https://www.sohu.com/a/218339423_278472" class="uri">SAS岩论 | 在Jupyter Notebook中使用SAS</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><a href="https://blog.csdn.net/gitblog_01103/article/details/142273387?fromshare=blogdetail&amp;sharetype=blogdetail&amp;sharerId=142273387&amp;sharerefer=PC&amp;sharesource=&amp;sharefrom=from_link" class="uri">SAS Kernel for Jupyter 安装与使用教程</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1471,16 +1461,222 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="pagination-link" aria-label="05-双变量作图">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">05-双变量作图</span>
+      <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="pagination-link" aria-label="00-SAS-Record">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">00-SAS-Record</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" class="pagination-link" aria-label="08-卡方检验与Fisher精确检验">
-        <span class="nav-page-text">08-卡方检验与Fisher精确检验</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="pagination-link" aria-label="02-SAS 在 Jupyter Notebook 中使用">
+        <span class="nav-page-text">02-SAS 在 Jupyter Notebook 中使用</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb11" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "01-SAS 安装与vscode 扩展"</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simon Zhou"</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-11"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> "2025-05-06"</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">    html:</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">        code-fold: true</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">        fig_caption: true</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">        number-sections: true</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">        toc: true</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">        toc-depth: 2</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 在 Windows 的安装</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 在 Linux 的安装</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 与 vscode 扩展</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>SAS VS Code 扩展轻量级，可在任何地方运行，并允许您集成 SAS 和其他语言。该工具还提供直接连接到 SAS Viya 和 SAS 9 并运行代码的功能。</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 语法突出显示和帮助、代码完成和代码片段</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>用于连接 SAS 和运行代码的配置文件配置</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>支持 SAS Viya 和 SAS 9 连接</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>访问 SAS 内容和库</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>为 SAS、SQL、Python 和其他语言创建笔记本</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>扩展程序可在 GitHub 上找到仓库与原代码：<span class="sc">\[</span><span class="co">[</span><span class="ot">vscode-sas-extension</span><span class="co">](https://github.com/sassoftware/vscode-sas-extension)</span><span class="sc">\]</span>(<span class="ot">&lt;https://github.com/sassoftware/vscode-sas-extension&gt;</span>)</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>更多关于 SAS 与 vscode 的信息可以访问：<span class="sc">\[</span>**SAS Extension for Visual Studio Code**<span class="sc">\]</span>(<span class="ot">&lt;https://developer.sas.com/programming/vs_code_extension&gt;</span>)</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### 安装插件</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>在 vscode 的扩展页面搜索 “sas” ，第一个 “official SAS ···“ 即为正确扩展：</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/SAS-extension.png)</span></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 配置路径</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>Before you can run SAS code, you must&nbsp;<span class="co">[</span><span class="ot">configure the SAS extension</span><span class="co">](https://sassoftware.github.io/vscode-sas-extension/Configurations/ "https://sassoftware.github.io/vscode-sas-extension/Configurations/")</span>&nbsp;to access your SAS 9.4 (remote or local) server or a SAS Viya server and&nbsp;<span class="co">[</span><span class="ot">add a connection profile</span><span class="co">](https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/ "https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/")</span>.</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>在运行 SAS 代码之前，您必须配置 SAS 扩展以访问 SAS 9.4（远程或本地）服务器或 SAS Viya 服务器。您必须获得 SAS 9.4 或 SAS Viya 的许可才能运行 SAS 代码。</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>打开 SAS 程序文件。</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>单击 VS Code 窗口左下方状态栏中的“无配置文件”。</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a>    您还可以打开命令面板（<span class="in">`F1`</span>，或<span class="in">`Ctrl+Shift+P`</span>在 Windows 或 Linux 上，或<span class="in">`Shift+CMD+P`</span>在 OSX 上）并找到<span class="in">`SAS: Add New Connection Profile`</span>命令。</span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span><span class="co">[</span><span class="ot">按照“添加新连接配置文件”</span><span class="co">](https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/#add-new-connection-profile)</span>部分中的说明添加配置文件。</span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>创建配置文件后，状态栏项将从“无配置文件”更改为新配置文件的名称。</span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-2.png)</span></span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>更多设置可以查看<span class="sc">\[</span><span class="co">[</span><span class="ot">**SAS Extension for Visual Studio Code Documentation**</span><span class="co">](https://sassoftware.github.io/vscode-sas-extension/)</span><span class="sc">\]</span>(<span class="co">[</span><span class="ot">https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/sas9local</span><span class="co">](#0)</span>{style="font-size: 13pt; font-weight: var(--fontWeightRegular);"})</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## 编译 SAS 文件</span></span>
+<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a>SAS 文件右上角有一个 奔跑的小人 ，点击即可开始运行所选中的程序段落，并在右侧窗口输出结果。</span>
+<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## 在 Jupyter Notebook 中使用 SAS</span></span>
+<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="fu">### 环境准备</span></span>
+<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a>安装 Anaconda 集成环境或 Python 和 SAS 软件，其中Anaconda要求Python3+；Python在Jupyter Notebook和SAS之间起一个桥梁的作用，Jupyter Notebook中的SAS代码会交给Python，Python负责将代码传递给SAS执行；然后将执行的结果返回给Jupyter Notebook显示。</span>
+<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a>SAS版本要求9.4，也可以是 SAS Viya。</span>
+<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="fu">### 安装SAS_KERNEL</span></span>
+<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a>启动 <span class="in">`cmd`</span>，输入命令：</span>
+<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="in">``` python</span></span>
+<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a>pip install sas_kernel</span>
+<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a>然后就会自动安装 <span class="in">`sas_kernel`</span> 及其相应的依赖项。</span>
+<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a>安装完成后可以输入命令：</span>
+<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="in">``` python</span></span>
+<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a>jupyter kernelspec <span class="bu">list</span></span>
+<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a>来检测 <span class="in">`sas_kernel`</span> 是否安装成功，如果成功，理论上会看到如下形式的输出：</span>
+<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="in">Available kernels:</span></span>
+<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a><span class="in">    python3    /home/sas/anaconda3/lib/python3.5/site-packages/ipykernel/resources</span></span>
+<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a><span class="in">    sas        /home/sas/.local/share/jupyter/kernels/sas</span></span>
+<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a><span class="fu">### 修改 Python 配置文件</span></span>
+<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a>安装好 <span class="in">`sas_kernel`</span> 后找到 Anaconda 或 Python 的安装目录，会有一个相应的文件夹出现，例如我的文件路径如下：</span>
+<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a><span class="in">C:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\saspy</span></span>
+<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a>在这个文件路径下找到 <span class="in">`sascfg.py`</span> 文件，该文件中需要配置连接SAS的信息。可以配置连接本地机器的SAS；也可以配置连接远程机器的SAS Server，无论是Linux Server还是Windows Server都可以。此处就以连接本地SAS为例进行说明。</span>
+<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>打开该文件，首先是一大段注释；</span>
+<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>在这段注释后定义的第一个变量 <span class="in">`SAS_config_names`</span> 用于指定连接SAS的配置方式，提供了 10 种方式：<span class="in">`default`</span>, <span class="in">`ssh`</span>, <span class="in">`iomlinux`</span>, <span class="in">`iomwin`</span>, <span class="in">`winlocal`</span>, <span class="in">`winiomlinux`</span>, <span class="in">`winiomwin`</span>, <span class="in">`httpsviya`</span>, <span class="in">`httpviya`</span>, <span class="in">`iomcom`</span>。默认为 <span class="in">`default`</span> 方式。</span>
+<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>因为我们需要连接Windows机器本地的SAS，所以需要将 <span class="in">`SAS_config_names`</span> 的值修改为 <span class="in">`winlocal`</span> 。</span>
+<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-1.png)</span></span>
+<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a>后续有一些安装步骤，但是大多是在2016-2020年更新的教程，无法找到复现的路径，可能相关的配置已被优化。</span>
+<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a>包括这个 <span class="sc">\[</span>**SAS岩论 \| 在Jupyter Notebook中使用SAS** <span class="sc">\]</span>(<span class="ot">&lt;https://www.sohu.com/a/218339423_278472&gt;</span>) 中写到的需要使用 cpW 定义 SAS 路径。</span>
+<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="fu">### 修改系统变量</span></span>
+<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a>将sas相关文件 <span class="in">`sspiauth.dll`</span> 添加到系统环境变量，该文件很可能在如下目录：</span>
+<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="in">```         </span></span>
+<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="in">C:\Program Files\SASHome\SASFoundation\9.4\core\sasext</span></span>
+<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a>（注意添加变量时不要包含 sspiauth.dll 文件本身）</span>
+<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a>**Warning:** 环境变量添加完成后，要重启电脑才会生效。</span>
+<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### 在 jupyter notebook 中使用 SAS</span></span>
+<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a>新建文件，选择使用 SAS 内核，或者在 cell 中通过 magic command 指定内核。</span>
+<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="in">``` sas</span></span>
+<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="in">%%sas</span></span>
+<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a>使用语法如下所示：</span>
+<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="in">``` sas</span></span>
+<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="in">%%sas</span></span>
+<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="in">data iris;</span></span>
+<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a><span class="in">    set sashelp.iris;</span></span>
+<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="in">proc print data=iris(obs=10);</span></span>
+<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-150"><a href="#cb11-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-151"><a href="#cb11-151" aria-hidden="true" tabindex="-1"></a>在Notebook中写SAS代码了，跟Python一样，同样有代码提示、语法高亮的功能。但是你会注意到过程步的结果显示了，运行的日志去哪里了？</span>
+<span id="cb11-152"><a href="#cb11-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-153"><a href="#cb11-153" aria-hidden="true" tabindex="-1"></a>如果代码运行错误或者没有输出（例如纯DATA步）的话，那么输出就是日志信息。</span>
+<span id="cb11-154"><a href="#cb11-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-155"><a href="#cb11-155" aria-hidden="true" tabindex="-1"></a>能够正确运行且有输出结果的代码就不会显示日志了。</span>
+<span id="cb11-156"><a href="#cb11-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-157"><a href="#cb11-157" aria-hidden="true" tabindex="-1"></a><span class="fu">## 安装SAS日志组件</span></span>
+<span id="cb11-158"><a href="#cb11-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-159"><a href="#cb11-159" aria-hidden="true" tabindex="-1"></a>如果想要像SAS Base一样，随时查看所有程序运行的日志结果也没问题。安装一个Notebook的SAS日志扩展组件就可以了。打开Anaconda Prompt，输入以下命令安装：</span>
+<span id="cb11-160"><a href="#cb11-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-161"><a href="#cb11-161" aria-hidden="true" tabindex="-1"></a><span class="in">``` python</span></span>
+<span id="cb11-162"><a href="#cb11-162" aria-hidden="true" tabindex="-1"></a>jupyter nbextension install <span class="op">--</span>py sas_kernel.showSASLog</span>
+<span id="cb11-163"><a href="#cb11-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-164"><a href="#cb11-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-165"><a href="#cb11-165" aria-hidden="true" tabindex="-1"></a>运行完毕后，输入以下命令启用SAS日志组件：</span>
+<span id="cb11-166"><a href="#cb11-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-167"><a href="#cb11-167" aria-hidden="true" tabindex="-1"></a><span class="in">``` python</span></span>
+<span id="cb11-168"><a href="#cb11-168" aria-hidden="true" tabindex="-1"></a>jupyter nbextension enable sas_kernel.showSASLog –py</span>
+<span id="cb11-169"><a href="#cb11-169" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-170"><a href="#cb11-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-171"><a href="#cb11-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## 连接SAS Server</span></span>
+<span id="cb11-172"><a href="#cb11-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-173"><a href="#cb11-173" aria-hidden="true" tabindex="-1"></a>如果需要配置连接远程的SAS Server，如连接远程Windows机器的SAS Server，需在sascfg.py中做以下修改：</span>
+<span id="cb11-174"><a href="#cb11-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-175"><a href="#cb11-175" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>将SAS_config_names的值改为“wintowin”；</span>
+<span id="cb11-176"><a href="#cb11-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-177"><a href="#cb11-177" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>在wintowin连接方式中将参数iomhost的值修改为远程Windows机器的IP地址；将参数encoding的值修改为euc-cn；</span>
+<span id="cb11-178"><a href="#cb11-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-179"><a href="#cb11-179" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>将cpW中5个Jar包的路径修改为远程Windows机器中SAS对应的目录。</span>
+<span id="cb11-180"><a href="#cb11-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-181"><a href="#cb11-181" aria-hidden="true" tabindex="-1"></a>修改完毕后，启动Notebook，首次运行SAS代码时，会提示输入访问SAS Server的有效SAS用户和密码。<span class="ot">[^1]</span></span>
+<span id="cb11-182"><a href="#cb11-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-183"><a href="#cb11-183" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span><span class="co">[</span><span class="ot">SAS岩论 \| 在Jupyter Notebook中使用SAS</span><span class="co">](https://www.sohu.com/a/218339423_278472)</span>{.uri}</span>
+<span id="cb11-184"><a href="#cb11-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-185"><a href="#cb11-185" aria-hidden="true" tabindex="-1"></a><span class="fu">### **典型生态项目**</span></span>
+<span id="cb11-186"><a href="#cb11-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-187"><a href="#cb11-187" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **SASPy**</span></span>
+<span id="cb11-188"><a href="#cb11-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-189"><a href="#cb11-189" aria-hidden="true" tabindex="-1"></a>SASPy 是一个 Python 库，允许你通过 Python 代码与 SAS 进行交互。SAS Kernel 依赖于 SASPy，因此在使用 SAS Kernel 之前，你需要配置 SASPy。</span>
+<span id="cb11-190"><a href="#cb11-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-191"><a href="#cb11-191" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **JupyterLab 扩展**</span></span>
+<span id="cb11-192"><a href="#cb11-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-193"><a href="#cb11-193" aria-hidden="true" tabindex="-1"></a>SAS Kernel 支持 JupyterLab 扩展，这些扩展可以提高你在 JupyterLab 中的编程效率。你可以通过以下命令安装这些扩展：</span>
+<span id="cb11-194"><a href="#cb11-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-195"><a href="#cb11-195" aria-hidden="true" tabindex="-1"></a><span class="in">``` python</span></span>
+<span id="cb11-196"><a href="#cb11-196" aria-hidden="true" tabindex="-1"></a>pip install sas_kernel[jlab_ext]</span>
+<span id="cb11-197"><a href="#cb11-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-198"><a href="#cb11-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-199"><a href="#cb11-199" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **NBGrader**</span></span>
+<span id="cb11-200"><a href="#cb11-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-201"><a href="#cb11-201" aria-hidden="true" tabindex="-1"></a>NBGrader 是一个用于分配和评分 Jupyter Notebook 的系统，它与 SAS Kernel 兼容。你可以使用 NBGrader 来创建和评分包含 SAS 代码的作业。</span>
+<span id="cb11-202"><a href="#cb11-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-203"><a href="#cb11-203" aria-hidden="true" tabindex="-1"></a>通过这些生态项目，SAS Kernel 不仅扩展了 Jupyter Notebook 的功能，还增强了其在数据科学和分析领域的应用能力。<span class="ot">[^2]</span></span>
+<span id="cb11-204"><a href="#cb11-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-205"><a href="#cb11-205" aria-hidden="true" tabindex="-1"></a><span class="ot">[^2]: </span><span class="co">[</span><span class="ot">SAS Kernel for Jupyter 安装与使用教程</span><span class="co">](https://blog.csdn.net/gitblog_01103/article/details/142273387?fromshare=blogdetail&amp;sharetype=blogdetail&amp;sharerId=142273387&amp;sharerefer=PC&amp;sharesource=&amp;sharefrom=from_link)</span>{.uri}</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1493,7 +1689,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-05-ttest.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-03-11-SAS-install.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
