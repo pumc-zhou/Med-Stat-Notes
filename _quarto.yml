@@ -76,9 +76,9 @@ website:
           - text: "R"
             file: Guide/R/R-intro.qmd
           - text: "SAS"
-            file: Guide/SAS/SAS-intro.qmd
+            file: Guide/SAS/25-02-16-SAS-intro.qmd
           - text: "Stata"
-            file: Guide/Stata/Stata-intro.qmd
+            file: Guide/Stata/25-03-09-Stata-intro.qmd
       - text: "Quarto"
         menu:
           - text: "Intro"
@@ -111,15 +111,15 @@ website:
             contents: Learn/Bayes/*.qmd
       - section: Guide/Guide-intro.qmd
         contents:
-          - section: Guide/R/R-intro.qmd
+          - section: R
             contents: Guide/R/*.{qmd,ipynb}
-          - section: Guide/Python/Python-intro.qmd
+          - section: Python
             contents: Guide/Python/*.{qmd,ipynb}
-          - section: Guide/SAS/SAS-intro.qmd
+          - section: SAS
             contents: Guide/SAS/*.{qmd,ipynb}
-          - section: Guide/Stata/Stata-intro.qmd
+          - section: Stata
             contents: Guide/Stata/*.{qmd,ipynb}
-      - section: Quarto/quarto-intro.qmd
+      - section: Quarto
         contents: Quarto/*.qmd
 
   page-footer:
