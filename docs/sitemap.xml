@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-05-08T05:13:36.269Z</lastmod>
+    <lastmod>2025-05-08T14:15:47.145Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -214,10 +214,22 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-survival-ana.html</loc>
-    <lastmod>2025-05-08T05:13:03.954Z</lastmod>
+    <lastmod>2025-05-08T08:23:20.985Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-02-16-SAS-intro.html</loc>
     <lastmod>2025-05-07T14:12:58.935Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-GEE.html</loc>
+    <lastmod>2025-05-08T10:00:28.236Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-Cox-reg.html</loc>
+    <lastmod>2025-05-08T09:16:19.931Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-Ord-Logistic-Reg.html</loc>
+    <lastmod>2025-05-08T14:14:22.225Z</lastmod>
   </url>
 </urlset>

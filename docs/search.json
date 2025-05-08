@@ -3683,5 +3683,161 @@
       "SAS",
       "00-SAS-Record"
     ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-GEE.html",
+    "href": "Guide/Stata/25-05-08-GEE.html",
+    "title": "17-广义估计方程(GEE)",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-GEE.html#广义估计方程",
+    "href": "Guide/Stata/25-05-08-GEE.html#广义估计方程",
+    "title": "17-广义估计方程(GEE)",
+    "section": "1 广义估计方程",
+    "text": "1 广义估计方程\n广义估计方程（Generalized Estimating Equations, GEE）是一种用于分析具有相关性数据的统计方法，特别适用于纵向数据和重复测量数据的分析。\n\n1.1 基本概念\n广义估计方程是一种扩展的回归模型，旨在处理因变量之间可能存在的相关性。它于1986年由Liang和Zeger首次提出，主要用于估计广义线性模型的参数，尤其是在数据存在重复测量或相关性时。GEE通过准似然估计方法来处理这些数据，适用于多种类型的因变量，包括连续型、二分类和计数数据等。\n\n\n1.2 应用场景\n\n纵向数据分析：如临床试验中对同一组受试者在不同时间点的测量数据进行分析。\n重复测量数据：例如在心理学和社会科学研究中，研究同一对象在不同条件下的表现。\n组间比较：用于比较不同组别在某一时间点或多个时间点的差异。\n\n\n\n1.3 优势与特点\n\n处理相关性：GEE能够有效处理因变量之间的相关性，避免了传统方法（如方差分析）在数据不独立时可能导致的偏差。\n灵活性：适用于多种类型的因变量，且对自变量的数据类型没有严格要求，可以处理定类和定量数据。\n模型选择：根据因变量的分布特征选择合适的模型，如泊松回归、负二项回归等。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-GEE.html#什么是纵向数据分析",
+    "href": "Guide/Stata/25-05-08-GEE.html#什么是纵向数据分析",
+    "title": "17-广义估计方程(GEE)",
+    "section": "2 什么是纵向数据分析",
+    "text": "2 什么是纵向数据分析\nExamples oflongitudinal dataanalysis(LDA,纵向数据分析)\n\nChild BP measured at each annual visit from 3 to 9 years old\nInfant weight measured at 3, 6, 9, 12 months\nIn a 3-arm cross-over trial, short chain fatty acid measured at the end ofeach\n\n\n2.1 纵向数据 vs. 横向数据\n纵向数据是指对同一组受试个体或者受试单元在不同时间点上的重复观测若干次，得到由截面和时间序列融合在一起的数据。\n因而纵向数据具有自相关性、生态单位聚集性、测量次数与测量时间间隔的非均衡性等特点。\n\nEstablish temporaltrends(时序:A在B之前发生)\nSeparate cohort effects from aging effects\nChildren have different baseline values in reading abilities\nThe trajectories of reading abilities differs by people\n\n\n\n2.2 方差公式\n\\[Var(X-Y)\nVar((1)X+(-1)Y)=(1^2)Var(X)+(-1^2)Var(Y)+2(1)(-1)Cov(X,Y)\\]\n在非配对 t 检验中，\\(Cov(X,Y)\\)为0，此时 \\(Var(X-Y)\\)\n打破线性相关的假设",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-GEE.html#gee-模型",
+    "href": "Guide/Stata/25-05-08-GEE.html#gee-模型",
+    "title": "17-广义估计方程(GEE)",
+    "section": "3 GEE 模型",
+    "text": "3 GEE 模型\n\n\n\ncorrelation\ndescription\n\n\n\n\nexchangeable\nexchangeable\n\n\nindependent\nindependent\n\n\nunstructured\nunstructured\n\n\nfixed matname\nuser-specified\n\n\nar #\nautoregressive of order #\n\n\nstationary #\nstationary of order #\n\n\nnonstationary #\nnonstationary of order #\n\n\n\n\n3.1 GEE 常用步骤\n\n使用 independent 回归结构\n稳健标准误估计（robust variance estimate）；如果用错模型，稳健后的结果也会相差不远\n使用 QIC（AIC for GEE）评估GEE模型",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-GEE.html#数据导入",
+    "href": "Guide/Stata/25-05-08-GEE.html#数据导入",
+    "title": "17-广义估计方程(GEE)",
+    "section": "4 数据导入",
+    "text": "4 数据导入\nData:NLS Women 14-24 in 1968\n\n%%stata\nwebuse union,clear\n\n(NLS Women 14-24 in 1968)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-GEE.html#数据观测",
+    "href": "Guide/Stata/25-05-08-GEE.html#数据观测",
+    "title": "17-广义估计方程(GEE)",
+    "section": "5 数据观测",
+    "text": "5 数据观测\n\n%%stata\nlist in 1/10\n\n\n     +----------------------------------------------------------------+\n     | idcode   year   age   grade   not_smsa   south   union   black |\n     |----------------------------------------------------------------|\n  1. |      1     72    20      12          0       0       1       1 |\n  2. |      1     77    25      12          0       0       0       1 |\n  3. |      1     80    28      12          0       0       1       1 |\n  4. |      1     83    31      12          0       0       1       1 |\n  5. |      1     85    33      12          0       0       1       1 |\n     |----------------------------------------------------------------|\n  6. |      1     87    35      12          0       0       1       1 |\n  7. |      1     88    37      12          0       0       1       1 |\n  8. |      2     71    19      12          0       0       0       1 |\n  9. |      2     77    25      12          0       0       1       1 |\n 10. |      2     78    26      12          0       0       1       1 |\n     +----------------------------------------------------------------+",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-GEE.html#用法",
+    "href": "Guide/Stata/25-05-08-GEE.html#用法",
+    "title": "17-广义估计方程(GEE)",
+    "section": "6 用法",
+    "text": "6 用法\n\n6.1 GEE 准备\nxtset studyid timevar\n\nstudyid: unique ID for each participant\ntimevar: timevar will usually be a variable that counts 1,2,…, and is to be interpreted as firstyear ofsurvey, second year,…, or first month oftreatment, second month.\n\n\n%%stata\nxtset id year\n\n\nPanel variable: idcode (unbalanced)\n Time variable: year, 70 to 88, but with gaps\n         Delta: 1 unit\n\n\n\n\n6.2 GEE 命令\nxtgee y x_1,x_2,x_3,…[if] [in] [weight] ,family(family) link(link) corr(correlation structure) robust\n可以使用 help gee 查看更多信息\n\n%%stata\nxtgee union age grade not_smsa south, family(binomial) link(logit) corr(ind) robust\n\n\nIteration 1:  Tolerance = 1.940e-12\n\nGEE population-averaged model                      Number of obs    =   26,200\nGroup variable: idcode                             Number of groups =    4,434\nFamily: Binomial                                   Obs per group:  \nLink:   Logit                                                   min =        1\nCorrelation: independent                                        avg =      5.9\n                                                                max =       12\n                                                   Wald chi2(4)     =   160.30\nScale parameter = 1                                Prob &gt; chi2      =   0.0000\n\nPearson chi2(26200)  = 26242.04                    Deviance         = 27093.19\nDispersion (Pearson) = 1.001604                    Dispersion       = 1.034091\n\n                                 (Std. err. adjusted for clustering on idcode)\n------------------------------------------------------------------------------\n             |               Robust\n       union | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |    .011683   .0033035     3.54   0.000     .0052082    .0181577\n       grade |    .048511   .0139346     3.48   0.000     .0211997    .0758223\n    not_smsa |  -.2214007   .0713343    -3.10   0.002    -.3612134    -.081588\n       south |  -.6470985   .0629803   -10.27   0.000    -.7705376   -.5236594\n       _cons |  -1.941974   .1973105    -9.84   0.000    -2.328695   -1.555253\n------------------------------------------------------------------------------",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-Cox-reg.html",
+    "href": "Guide/Stata/25-05-08-Cox-reg.html",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-Cox-reg.html#数据导入",
+    "href": "Guide/Stata/25-05-08-Cox-reg.html#数据导入",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "1 数据导入",
+    "text": "1 数据导入\n在一个抗癌药物的Clinical Trial中，48名患者被随机分配到新药组(28人)和安慰剂组(20人)，研究人员想知道新药是否影响患者的生存情况。\nData：Patient Survival in Drug Trial\n\n%%stata\nwebuse drugtr,clear\n\n(Patient survival in drug trial)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-Cox-reg.html#cox回归",
+    "href": "Guide/Stata/25-05-08-Cox-reg.html#cox回归",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "2 Cox回归",
+    "text": "2 Cox回归\nCox回归分析，也称为比例风险回归模型（Proportional Hazards Model，简称Cox模型），是由英国统计学家D.R.Cox于1972年提出的一种半参数回归模型。\n该模型主要用于生存分析，能够同时分析多个因素对生存期的影响，并且可以处理带有截尾生存时间的数据。\n\n2.1 基本概念\n在介绍Cox回归模型之前，需要了解几个相关的概念：\n\n生存函数：表示观察对象的生存时间大于某时刻的概率。\n死亡函数：表示观察对象的生存时间不大于某时刻的概率。\n死亡密度函数：表示观察对象在某时刻的瞬时死亡率。\n危险率函数：表示生存时间已达到某时刻的观察对象在该时刻的瞬时死亡率1。\n\n\n\n2.2 基本原理\nCox回归模型的基本形式为： \\[h(t|X) = h_0(t) \\exp(\\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p)\\]\n其中， \\(h(t|X)\\) 是在给定协变量 \\(X\\) 时的危险率，\\(h_0(t)\\) 是基准危险率，\\(\\beta_i\\) 是需要估计的回归系数。\n\n\n2.3 Cox回归模型的假设包括：\n\n比例风险假设：各危险因素的作用不随时间变化。\n对数线性假设：协变量与对数风险比呈线性关系。\n\n\n\n2.4 偏回归系数的意义\n偏回归系数 \\(\\beta_i\\) 的流行病学含义是在其他协变量不变的情况下，协变量每增加一个测定单位时所引起的相对危险度的自然对数的改变量。\n\n\n2.5 假设检验\nCox回归模型中的偏回归系数可以通过建立偏似然函数，利用Newton-Raphson迭代法求得。常用的假设检验方法包括似然比检验、Wald检验和记分检验。\nCox回归模型由于其灵活性和广泛应用，成为生存分析中最常用的多因素分析方法之一。\n\n%%stata\nstcox drug\n\n\n        Failure _d: died\n  Analysis time _t: studytime\n\nIteration 0:  Log likelihood = -99.911448\nIteration 1:  Log likelihood = -88.254734\nIteration 2:  Log likelihood = -88.001551\nIteration 3:  Log likelihood =  -88.00019\nRefining estimates:\nIteration 0:  Log likelihood =  -88.00019\n\nCox regression with Breslow method for ties\n\nNo. of subjects =  48                                   Number of obs =     48\nNo. of failures =  31\nTime at risk    = 744\n                                                        LR chi2(1)    =  23.82\nLog likelihood = -88.00019                              Prob &gt; chi2   = 0.0000\n\n------------------------------------------------------------------------------\n          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        drug |   .1327581   .0584002    -4.59   0.000     .0560555    .3144157\n------------------------------------------------------------------------------\n\n\n这里 Drug 的 coefficient(\\(\\beta\\)) : 新药组终点事件发生风险是安慰剂组的 13.3%(95% CI: 5.6%,31.4%)\n控制年龄：\n\n%%stata\nstcox drug age\n\n\n        Failure _d: died\n  Analysis time _t: studytime\n\nIteration 0:  Log likelihood = -99.911448\nIteration 1:  Log likelihood = -83.551879\nIteration 2:  Log likelihood = -83.324009\nIteration 3:  Log likelihood = -83.323546\nRefining estimates:\nIteration 0:  Log likelihood = -83.323546\n\nCox regression with Breslow method for ties\n\nNo. of subjects =  48                                   Number of obs =     48\nNo. of failures =  31\nTime at risk    = 744\n                                                        LR chi2(2)    =  33.18\nLog likelihood = -83.323546                             Prob &gt; chi2   = 0.0000\n\n------------------------------------------------------------------------------\n          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        drug |   .1048772   .0477017    -4.96   0.000     .0430057    .2557622\n         age |   1.120325   .0417711     3.05   0.002     1.041375     1.20526\n------------------------------------------------------------------------------\n\n\n这里 Drug 的 coefficient(\\(\\beta_1\\)) : 在控制了患者的年龄后，新药组终点事件发生风险是安慰剂组的 10.5%(95% CI: 4.3%,25.6%)\n反过来，这里 Age 的 coefficient(\\(\\beta_2\\)) : 在控制了治疗方法后，患者年龄每增加 1 岁，发生终点事件风险增加 12%(95% CI: 4.1%,20.5%)\n\n\n2.6 Cox回归的命令语法\nstcox var1 var2 var3 ... [if] [in] [, options]\nNotice\n\n必须要在指定Data为Suvivaldata之后(stset之后)才能使用任何st开头的命令\n由于我们已经在一开始将数据转化为Survivaldata的时候指定过终点事件(Failure variable)、时间变量(Time variable)，我们在这里只需要设置需要在回归方程中independent variable即可\nExample\n\nstcox drug age\nstcox drug age if age &lt; 50",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-Cox-reg.html#ph-假定检验",
+    "href": "Guide/Stata/25-05-08-Cox-reg.html#ph-假定检验",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "3 PH 假定检验",
+    "text": "3 PH 假定检验\n\n3.1 使用统计检验法\nCox回归模型在应用时，有一个非常重要的前提条件，即比例风险（Proportional hazards）假定，简称PH假定。\nNotice:PH假定的检验基于上一步进行的Cox回归。\n\\(H_0\\)：纳入Cox回归模型的变量满足PH假定\n\\(P&gt;0.05\\)，不能拒绝\\(H_0\\)\n\n%%stata\nestat phtest\n\n\nTest of proportional-hazards assumption\n\nTime function: Analysis time\n------------------------------------------------\n             |     chi2       df       Prob&gt;chi2\n-------------+----------------------------------\n Global test |     0.43        2          0.8064\n------------------------------------------------\n\n\n\n\n3.2 PH假定 使用图像法\n使用- ln(-ln(生存))图法，判断标准是如果待评价的变量分成的亚组曲线平行或近似平行，则满足PH假定。\nstphplot,by(bar1) adjust(var2 var3)\nvar1 是自变量名，var2 等是希望控制的变量。\nNotice:这个命令不一定要跟在cox回归之后\n\n%%stata\nstphplot,by(drug) adjust(age)\n\n\n        Failure _d: died\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n\n3.3 如果不满足PH假定\n\n一般只要两组生存曲线趋势一致、不明显交叉即可判定PH假定成立\n如果PH假定不成立，可以加上时间(time)和暴露 (exposure,比如本例之中的drug)的交互项(interaction term), time*exposure\n也可以对于不同的时间段分别分析(e.g.0-10，10-20,&gt;20)\n参数生存分析模型:streg进行参数生存分析",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-Ord-Logistic-Reg.html",
+    "href": "Guide/Stata/25-05-08-Ord-Logistic-Reg.html",
+    "title": "18-有序多分类Logistic回归",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "18-有序多分类Logistic回归"
+    ]
   }
 ]
