@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-07},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 7, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-08},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 8, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -3539,6 +3539,149 @@
       "统计软件",
       "Guide/Stata/Stata-intro.qmd",
       "11-简单线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html",
+    "href": "Guide/Stata/25-05-08-survival-ana.html",
+    "title": "15-生存分析",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#生存分析",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#生存分析",
+    "title": "15-生存分析",
+    "section": "1 生存分析",
+    "text": "1 生存分析\n\n描述一个组内个体的生存时间\n\n寿命表法(Life tables methods)\n非参数Kaplan-Meier曲线\n\n比较两个或多个组的生存时间\n\nLog-rank test\n\n研究生存时间和变量之间的关系\n\n半参数Cox比例风险模型\n参数生存分析模型",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#k-m曲线的历史",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#k-m曲线的历史",
+    "title": "15-生存分析",
+    "section": "2 K-M曲线的历史",
+    "text": "2 K-M曲线的历史\n\n1958年，Dr. Kaplan和DrMeier 介绍了一种全新的、解决随访期间RightCensoring问题的生存分析方法\n特点:精确地记录并利用每个个体发生终点事件的具体时间，在任何一个终点事件发生的时间点计算出一个新的、基于之前所有信息的Cumulative survival\n优点:\n\n相比于Life-table method，更加充分地利用了信息，给出更准确的统计量\n非参数估计方法:不要求总体的分布形式，因此非常适合生存分析时使用\nK-M曲线可以很直观地表现出两组或多组的生存率或死亡率，适合在文章中展示",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#导入数据",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#导入数据",
+    "title": "15-生存分析",
+    "section": "3 导入数据",
+    "text": "3 导入数据\n使用 Patient Survival in Drug Trial 数据集\n\n%%stata\nwebuse drugtr,clear\n\n(Patient survival in drug trial)\n\n\n将数据恢复成普通的数据格式：stset,clear\n\nStata已经将这个数据集设置成了生存数据的格式，导入数据集后，将数 据集恢复成普通的数据格式，这样才是我们在临床研究中见到的数据结构。\n\n\n%%stata\nstset,clear",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#数据集的初步观察",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#数据集的初步观察",
+    "title": "15-生存分析",
+    "section": "4 数据集的初步观察",
+    "text": "4 数据集的初步观察\n\n%%stata\nlist in 5/10\n\n\n     +------------------------------+\n     | studyt~e   died   drug   age |\n     |------------------------------|\n  5. |        4      1      0    56 |\n  6. |        4      1      0    67 |\n  7. |        5      1      0    63 |\n  8. |        5      1      0    58 |\n  9. |        8      1      0    56 |\n     |------------------------------|\n 10. |        8      0      0    58 |\n     +------------------------------+\n\n\n\n%%stata\ncodebook drug\n\n\n-------------------------------------------------------------------------------\ndrug                                                      Drug type (0=placebo)\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [0,1]                         Units: 1\n         Unique values: 2                         Missing .: 0/48\n\n            Tabulation: Freq.  Value\n                           20  0\n                           28  1\n\n\n\n%%stata\ncodebook studytime\n\n\n-------------------------------------------------------------------------------\nstudytime                                        Months to death or end of exp.\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [1,39]                        Units: 1\n         Unique values: 28                        Missing .: 0/48\n\n                  Mean:    15.5\n             Std. dev.: 10.2563\n\n           Percentiles:     10%       25%       50%       75%       90%\n                              4       7.5      12.5        23        32\n\n\n\n%%stata\ncodebook died\n\n\n-------------------------------------------------------------------------------\ndied                                                          1 if patient died\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [0,1]                         Units: 1\n         Unique values: 2                         Missing .: 0/48\n\n            Tabulation: Freq.  Value\n                           17  0\n                           31  1\n\n\n\n%%stata\ncodebook age\n\n\n-------------------------------------------------------------------------------\nage                                              Patient's age at start of exp.\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [47,67]                       Units: 1\n         Unique values: 18                        Missing .: 0/48\n\n                  Mean: 55.875\n             Std. dev.: 5.6592\n\n           Percentiles:    10%       25%       50%       75%       90%\n                            49      50.5        56        60        65",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#数据申明代码操作",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#数据申明代码操作",
+    "title": "15-生存分析",
+    "section": "5 数据申明——代码操作",
+    "text": "5 数据申明——代码操作\n\n告诉Stata: 终点事件(Failure variable),随访时间(Time variable)\nstset timevar, failure(failvar[==numlist])\n\ntimevar: 随访时间变量\nfailvar: 终点事件变量\nnumlist: 终点时间变量中，哪个(哪些)值代表发生了终点事件?\n\n\n\n%%stata\nstset studytime,failure(died==1)\n\n\nSurvival-time data settings\n\n         Failure event: died==1\nObserved time interval: (0, studytime]\n     Exit on or before: failure\n\n--------------------------------------------------------------------------\n         48  total observations\n          0  exclusions\n--------------------------------------------------------------------------\n         48  observations remaining, representing\n         31  failures in single-record/single-failure data\n        744  total analysis time at risk and under observation\n                                                At risk from t =         0\n                                     Earliest observed entry t =         0\n                                          Last observed exit t =        39",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#生存数据再观测",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#生存数据再观测",
+    "title": "15-生存分析",
+    "section": "6 生存数据再观测",
+    "text": "6 生存数据再观测\nNotice：必须要在指定数据集为生存分析数据集之后(stset 之后)才能使用任何其他的 st 开始的命令。\n\n%%stata\nstsum\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n         |               Incidence     Number of   |------ Survival time -----|\n         | Time at risk       rate      subjects        25%       50%       75%\n---------+---------------------------------------------------------------------\n   Total |          744   .0416667            48          8        17        33\n\n\n\n%%stata\nstdescribe\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n                                   |-------------- Per subject --------------|\nCategory                   Total        Mean         Min     Median        Max\n------------------------------------------------------------------------------\nNumber of subjects            48   \nNumber of records             48           1           1          1          1\n\nEntry time (first)                         0           0          0          0\nExit time (final)                       15.5           1       12.5         39\n\nSubjects with gap              0   \nTime on gap                    0   \nTime at risk                 744        15.5           1       12.5         39\n\nFailures                      31    .6458333           0          1          1\n------------------------------------------------------------------------------\n\n\n\n%%stata\nsts list\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\nKaplan–Meier survivor function\n\n             At                  Survivor      Std.\n  Time     risk   Fail   Lost    function     error     [95% conf. int.]\n------------------------------------------------------------------------\n     1       48      2      0      0.9583    0.0288     0.8435    0.9894\n     2       46      1      0      0.9375    0.0349     0.8186    0.9794\n     3       45      1      0      0.9167    0.0399     0.7930    0.9679\n     4       44      2      0      0.8750    0.0477     0.7427    0.9418\n     5       42      2      0      0.8333    0.0538     0.6943    0.9129\n     6       40      2      1      0.7917    0.0586     0.6474    0.8820\n     7       37      1      0      0.7703    0.0608     0.6236    0.8656\n     8       36      3      1      0.7061    0.0661     0.5546    0.8143\n     9       32      0      1      0.7061    0.0661     0.5546    0.8143\n    10       31      1      1      0.6833    0.0678     0.5302    0.7957\n    11       29      2      1      0.6362    0.0708     0.4807    0.7564\n    12       26      2      0      0.5872    0.0733     0.4304    0.7145\n    13       24      1      0      0.5628    0.0742     0.4060    0.6931\n    15       23      1      1      0.5383    0.0749     0.3821    0.6712\n    16       21      1      0      0.5127    0.0756     0.3570    0.6483\n    17       20      1      1      0.4870    0.0761     0.3326    0.6249\n    19       18      0      2      0.4870    0.0761     0.3326    0.6249\n    20       16      0      1      0.4870    0.0761     0.3326    0.6249\n    22       15      2      0      0.4221    0.0786     0.2680    0.5684\n    23       13      2      0      0.3572    0.0788     0.2087    0.5083\n    24       11      1      0      0.3247    0.0780     0.1809    0.4771\n    25       10      1      1      0.2922    0.0767     0.1543    0.4449\n    28        8      1      1      0.2557    0.0753     0.1247    0.4093\n    32        6      0      2      0.2557    0.0753     0.1247    0.4093\n    33        4      1      0      0.1918    0.0791     0.0676    0.3634\n    34        3      0      1      0.1918    0.0791     0.0676    0.3634\n    35        2      0      1      0.1918    0.0791     0.0676    0.3634\n    39        1      0      1      0.1918    0.0791     0.0676    0.3634\n------------------------------------------------------------------------",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#k-m曲线的绘制",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#k-m曲线的绘制",
+    "title": "15-生存分析",
+    "section": "7 K-M曲线的绘制",
+    "text": "7 K-M曲线的绘制\n语法：\nsts graph [if] [in] [,options]\n[,options] 不是必须，可以形如：,by(var)，这样就会按照 var 的分类绘制不同的线\n\n%%stata\nsts graph,by(drug)\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n7.1 图像展现更多的信息\n\n%%stata\nsts graph if age&lt;50,by(drug)\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n%%stata\nsts graph,by(drug) risktable\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n\n7.2 复杂绘图示例\n\n%%stata\nlabel drop drug_label\nlabel define drug_label 0 \"安慰剂\" 1 \"试验药\"\nlabel values drug drug_label\n\n\n. label drop drug_label\n\n. label define drug_label 0 \"安慰剂\" 1 \"试验药\"\n\n. label values drug drug_label\n\n. \n\n\n\n%%stata\nsts graph, ///\n    by(drug) ci atrisk ///\n    xlabel(0(5)40) ylabel(0(0.2)1) ///\n    legend(position(6) ring(1) cols(2) rowgap(1) colgap(1)) ///\n    xtitle(\"x轴的标签\") ytitle(\"y轴的标签\") ///\n    title(\"这里是标题\", size(medsmall)) ///\n    subtitle(\"这里是副标题\", size(small)) ///\n    caption(\"注释\", size(vsmall)) ///\n    note(\"数据来源：xxx\", size(vsmall)) ///\n    graphregion(margin(10 10 10 10)) ///\n    plotregion(margin(5 5 5 5))\n\n\n. sts graph, ///\n&gt;     by(drug) ci atrisk ///\n&gt;     xlabel(0(5)40) ylabel(0(0.2)1) ///\n&gt;     legend(position(6) ring(1) cols(2) rowgap(1) colgap(1)) ///\n&gt;     xtitle(\"x轴的标签\") ytitle(\"y轴的标签\") ///\n&gt;     title(\"这里是标题\", size(medsmall)) ///\n&gt;     subtitle(\"这里是副标题\", size(small)) ///\n&gt;     caption(\"注释\", size(vsmall)) ///\n&gt;     note(\"数据来源：xxx\", size(vsmall)) ///\n&gt;     graphregion(margin(10 10 10 10)) ///\n&gt;     plotregion(margin(5 5 5 5))\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-survival-ana.html#检验组间差别log-rank-test",
+    "href": "Guide/Stata/25-05-08-survival-ana.html#检验组间差别log-rank-test",
+    "title": "15-生存分析",
+    "section": "8 检验组间差别（Log-Rank Test）",
+    "text": "8 检验组间差别（Log-Rank Test）\n\n%%stata\nsts test drug\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\nEquality of survivor functions\nLog-rank test\n\n      |  Observed       Expected\ndrug  |    events         events\n------+-------------------------\n    0 |        19           7.25\n    1 |        12          23.75\n------+-------------------------\nTotal |        31          31.00\n\n                chi2(1) =  28.27\n                Pr&gt;chi2 = 0.0000",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-02-16-SAS-intro.html",
+    "href": "Guide/SAS/25-02-16-SAS-intro.html",
+    "title": "00-SAS-Record",
+    "section": "",
+    "text": "SAS的历史很长，很强大，但是现代化做的一般（交互界面）。\n使用场景也是有限的，至少一般情况下用不上这么高级的工具。\n但是在某些领域又是极其重要的，像银行和药企，他们要追求足够的稳定和严谨，那么多年不曾有重大改变且一向以稳定著称的 SAS 自然可以很好的满足这一需求。\n\nSAS 对学术研究的支持是比较不友好的。正版太贵，除非学校有提供，个人基本不可能使用正版，这里下载破解版，搞SID(SAS的授权证书)需要时间成本，还容易有安装问题，没错你可以选择使用SAS的教育版，不过谁用谁知道。\n安装比较麻烦，尤其是在Linux上，我曾用两周的时间折腾在 Linux 上安装一个 SAS ，最后以失败告终，且在互联网上找不到解决的方案，AI也束手无策。\nSAS不开源，意味着你看到某些论文，里面使用一些比较新的统计分析方法，SAS不大可能有现成代码可以使用，而 Python 和 R 则大几率有现成的包可以调用，这里也会节省不少时间。\nSAS的强大一方面是性能稳定，可以处理几十上百GB的数据而不容易崩溃，但是医学数据一般容量比较小，并不是非得SAS才能跑的动。\nSAS相比其他编程语言来说是独树一帜(奇葩)的存在（proc和data步独步天下），从语法上面来说并没有什么和它相接近的语言，相反 R 和 Python 则会和一般的编程语言例如 Java, C 等有一些类似的地方，对以后万一还需要学习其他语言或者学习以后新诞生的编程软件诞有一定帮助。\nSAS 的支持有限，互联网上关于 SAS 的使用信息较少，一般都在出版的书中有可复现的内容，也没有像 Python 和 R 等活跃的社区可以提供较多的互动和支持，编程遇上问题不容易找到答案。\n\n用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。\n每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS-Record"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-02-16-SAS-intro.html#footnotes",
+    "href": "Guide/SAS/25-02-16-SAS-intro.html#footnotes",
+    "title": "00-SAS-Record",
+    "section": "脚注",
+    "text": "脚注\n\n\nSAS 程式(SAS 9.4) 繁體中文出現亂碼怎麼辦?↩︎",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "00-SAS-Record"
     ]
   }
 ]

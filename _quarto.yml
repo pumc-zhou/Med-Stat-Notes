@@ -105,9 +105,9 @@ website:
         file: index.qmd
       - section: Learn/Basic/00-basic.qmd
         contents: 
-          - section: Learn/Basic/00-basic.qmd
+          - section: Basic
             contents: Learn/Basic/*.qmd
-          - section: Learn/Bayes/00-About-Bayes.qmd
+          - section: Bayes
             contents: Learn/Bayes/*.qmd
       - section: Guide/Guide-intro.qmd
         contents:
