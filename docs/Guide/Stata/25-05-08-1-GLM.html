@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simonzhou">
+<meta name="author" content="Simon Zhou">
 
-<title>00-Stata Intro and Record – 医学统计学笔记</title>
+<title>14-广义线性模型（GLM） – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="next">
-<link href="../../Guide/SAS/25-05-05-SAS-install-connect.html" rel="prev">
+<link href="../../Guide/Stata/25-05-08-2-survival-ana.html" rel="next">
+<link href="../../Guide/Stata/25-05-07-4-log-binary.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,17 +116,46 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="14-广义线性模型（GLM） – 医学统计学笔记">
+<meta property="og:description" content="Generalized Linear Model">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
+<meta name="twitter:title" content="14-广义线性模型（GLM） – 医学统计学笔记">
+<meta name="twitter:description" content="Generalized Linear Model">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +256,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-08-1-GLM.html">14-广义线性模型（GLM）</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -501,7 +530,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
   </div>
 </li>
@@ -591,7 +620,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-08-1-GLM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-1-GLM.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">14-广义线性模型（GLM）</span></a>
   </div>
 </li>
@@ -669,13 +698,32 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#什么是广义线性模型" id="toc-什么是广义线性模型" class="nav-link active" data-scroll-target="#什么是广义线性模型"><span class="header-section-number">1</span> 什么是广义线性模型</a></li>
+  <li><a href="#simple-glm-vs.-multiple-glm" id="toc-simple-glm-vs.-multiple-glm" class="nav-link" data-scroll-target="#simple-glm-vs.-multiple-glm"><span class="header-section-number">2</span> Simple GLM vs.&nbsp;Multiple GLM</a></li>
+  <li><a href="#specify-options" id="toc-specify-options" class="nav-link" data-scroll-target="#specify-options"><span class="header-section-number">3</span> Specify Options</a></li>
+  <li><a href="#linear-regression" id="toc-linear-regression" class="nav-link" data-scroll-target="#linear-regression"><span class="header-section-number">4</span> linear regression</a></li>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression"><span class="header-section-number">5</span> Logistic regression</a></li>
+  <li><a href="#poisson-regression" id="toc-poisson-regression" class="nav-link" data-scroll-target="#poisson-regression"><span class="header-section-number">6</span> Poisson regression</a></li>
+  <li><a href="#log-binomial-regression" id="toc-log-binomial-regression" class="nav-link" data-scroll-target="#log-binomial-regression"><span class="header-section-number">7</span> Log-binomial Regression</a></li>
+  <li><a href="#代码的转换" id="toc-代码的转换" class="nav-link" data-scroll-target="#代码的转换"><span class="header-section-number">8</span> 代码的转换</a></li>
+  <li><a href="#线性回归模型的比较" id="toc-线性回归模型的比较" class="nav-link" data-scroll-target="#线性回归模型的比较"><span class="header-section-number">9</span> 线性回归模型的比较</a></li>
+  <li><a href="#logistic-回归的比较" id="toc-logistic-回归的比较" class="nav-link" data-scroll-target="#logistic-回归的比较"><span class="header-section-number">10</span> logistic 回归的比较</a></li>
+  <li><a href="#log-binomial-model" id="toc-log-binomial-model" class="nav-link" data-scroll-target="#log-binomial-model"><span class="header-section-number">11</span> Log-Binomial Model</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-08-1-GLM.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-08-1-GLM.html">14-广义线性模型（GLM）</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">00-Stata Intro and Record</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<h1 class="title">14-广义线性模型（GLM）</h1>
+<p class="subtitle lead">Generalized Linear Model</p>
 </div>
 
 
@@ -685,23 +733,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simonzhou </p>
+             <p>Simon Zhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年3月9日</p>
+      <p class="date">2025年5月8日</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">修改于</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月9日</p>
-    </div>
-  </div>
     
   </div>
   
@@ -710,17 +752,939 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
-<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
-<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
-<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
-<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
-<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
-<p>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</p>
+<div id="5ff8b048" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="05aea553" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sysuse auto.dta,clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1978 automobile data)</code></pre>
+</div>
+</div>
+<p>大于15%会产生Bias的这个问题，只有在我们想用odds去estimaterisk的时候才会发生。</p>
+<ol type="1">
+<li>在cohort study和clinicaltrial中，outcome是结局事件的发生率;</li>
+<li>在cross-sectional中，outcome是结局事件的prevalence;</li>
+<li>在case-control中，我们不报告risk，只报告odds，因此就没有这个问题了。</li>
+</ol>
+<section id="什么是广义线性模型" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="什么是广义线性模型"><span class="header-section-number">1</span> 什么是广义线性模型</h2>
+<ul>
+<li>线性回归 Linear regression：
+<ul>
+<li><span class="math inline">\(exp Y = \beta_0 + \beta_1*X_1+\cdots + \beta_n *X_n\)</span></li>
+</ul></li>
+<li>广义线性回归 Generalized linear model：
+<ul>
+<li><span class="math inline">\(f(exp Y)= β_0 + β_1*X_1 + \cdots + \beta_n* X_n\)</span></li>
+<li>Linear regression is a special case of GLM</li>
+<li>Same for logistic regression, Poisson regression, Log-Binomial regression</li>
+<li>Even for Cox regression (Aug.31st &amp; Sep.7th), GEE model (Sep.14th)</li>
+</ul></li>
+<li>总结：在GLM中，转化Y使得转化之后的Y和X们呈线性关系</li>
+</ul>
+</section>
+<section id="simple-glm-vs.-multiple-glm" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="simple-glm-vs.-multiple-glm"><span class="header-section-number">2</span> Simple GLM vs.&nbsp;Multiple GLM</h2>
+<section id="简单广义线性模型" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="简单广义线性模型"><span class="header-section-number">2.1</span> 简单广义线性模型</h3>
+<p><span class="math display">\[f(exp Y)= β_0 + β_1*X_1\]</span></p>
+</section>
+<section id="多元广义线性模型" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="多元广义线性模型"><span class="header-section-number">2.2</span> 多元广义线性模型</h3>
+<p><span class="math display">\[f(exp Y)= β_0 + β_1*X_1 + \cdots + \beta_n* X_n\]</span></p>
+<p>X变量可以是各种类型的变量（连续、分类）</p>
+</section>
+</section>
+<section id="specify-options" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="specify-options"><span class="header-section-number">3</span> Specify Options</h2>
+<section id="family" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="family"><span class="header-section-number">3.1</span> Family</h3>
+<p>Y 变量的分布类型</p>
+</section>
+<section id="link" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="link"><span class="header-section-number">3.2</span> Link</h3>
+<p>把 Y 怎么转化，才和 X 成linear关系</p>
+</section>
+</section>
+<section id="linear-regression" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="linear-regression"><span class="header-section-number">4</span> linear regression</h2>
+<section id="y-var" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="y-var"><span class="header-section-number">4.1</span> Y var</h3>
+<ol type="1">
+<li>连续分布（continuous variable）</li>
+<li>如何分布? 高斯分布（Gaussian Distribution）</li>
+<li>Model：
+<ul>
+<li><span class="math display">\[f(exp Y)= β_0 + β_1*X_1 + \cdots + \beta_n* X_n\]</span></li>
+<li>Y 怎么转化才和 X 成 linear 关系？
+<ul>
+<li>不用转化</li>
+<li>Link：Identity（恒等）</li>
+</ul></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="logistic-regression" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="logistic-regression"><span class="header-section-number">5</span> Logistic regression</h2>
+<section id="y-var-1" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="y-var-1"><span class="header-section-number">5.1</span> Y var</h3>
+<ol type="1">
+<li>Binary variable</li>
+<li>如何分布? 二项分布(Binomial)</li>
+<li>Model:
+<ul>
+<li><span class="math display">\[ln[P(Y=1)/P(Y=0)]= β_0 + β_1*X_1+\cdots + β_n*X_n\]</span></li>
+<li>Exp Y = P(Y=1)</li>
+<li>Y 怎么转化才和X成linear关系？Link：logit</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="poisson-regression" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="poisson-regression"><span class="header-section-number">6</span> Poisson regression</h2>
+<section id="y-var-2" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="y-var-2"><span class="header-section-number">6.1</span> Y var</h3>
+<ol type="1">
+<li>Count variable:整数(1,2,3,.n)</li>
+<li>如何分布? 泊松分布(Poisson)</li>
+<li>Model:
+<ul>
+<li><span class="math display">\[ln[risk of event)]= β_0 + β_1*X_1+\cdots + β_n*X_n\]</span></li>
+<li>Y 怎么转化才和X成linear关系？Link：Log</li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="log-binomial-regression" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="log-binomial-regression"><span class="header-section-number">7</span> Log-binomial Regression</h2>
+<section id="y-var-3" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="y-var-3"><span class="header-section-number">7.1</span> Y var</h3>
+<ol type="1">
+<li>Binary variable</li>
+<li>如何分布? 二项分布(Binomial)</li>
+<li>Model:
+<ul>
+<li><span class="math display">\[ln[P(Y=1)]= β_0 + β_1*X_1+\cdots + β_n*X_n\]</span></li>
+<li>Exp Y = P(Y=1)</li>
+<li>Y 怎么转化才和X成linear关系？Link：Log</li>
+</ul></li>
+</ol>
+<div id="537520eb" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span> glm</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[R] glm -- Generalized linear models
+           (View complete PDF manual entry)
 
 
-<!-- -->
+Syntax
+------
 
+        glm depvar [indepvars] [if] [in] [weight] [, options]
+
+    options                     Description
+    -------------------------------------------------------------------------
+    Model
+      family(familyname)        distribution of depvar; default is
+                                  family(gaussian)
+      link(linkname)            link function; default is canonical link for
+                                  family() specified
+
+    Model 2
+      noconstant                suppress constant term
+      exposure(varname)         include ln(varname) in model with coefficient
+                                  constrained to 1
+      offset(varname)           include varname in model with coefficient
+                                  constrained to 1
+      constraints(constraints)  apply specified linear constraints
+      asis                      retain perfect predictor variables
+      mu(varname)               use varname as the initial estimate for the
+                                  mean of depvar
+      init(varname)             synonym for mu(varname)
+
+    SE/Robust
+      vce(vcetype)              vcetype may be oim, robust, cluster clustvar,
+                                  eim, opg, bootstrap, jackknife, hac kernel,
+                                  jackknife1, or unbiased
+      vfactor(#)                multiply variance matrix by scalar #
+      disp(#)                   quasilikelihood multiplier
+      scale(x2|dev|#)           set the scale parameter
+
+    Reporting
+      level(#)                  set confidence level; default is level(95)
+      eform                     report exponentiated coefficients
+      nocnsreport               do not display constraints
+      display_options           control columns and column formats, row
+                                  spacing, line width, display of omitted
+                                  variables and base and empty cells, and
+                                  factor-variable labeling
+
+    Maximization
+      ml                        use maximum likelihood optimization; the
+                                  default
+      irls                      use iterated, reweighted least-squares
+                                  optimization of the deviance
+      maximize_options          control the maximization process; seldom used
+      fisher(#)                 use the Fisher scoring Hessian or expected
+                                  information matrix (EIM)
+      search                    search for good starting values
+
+      noheader                  suppress header table from above coefficient
+                                  table
+      notable                   suppress coefficient table
+      nodisplay                 suppress the output; iteration log is still
+                                  displayed
+      collinear                 keep collinear variables
+      coeflegend                display legend instead of statistics
+    -------------------------------------------------------------------------
+
+    familyname               Description
+    -------------------------------------------------------------------------
+    gaussian                 Gaussian (normal)
+    igaussian                inverse Gaussian
+    binomial[varnameN|#N]    Bernoulli/binomial
+    poisson                  Poisson
+    nbinomial[#k|ml]         negative binomial
+    gamma                    gamma
+    -------------------------------------------------------------------------
+
+    linkname                 Description
+    -------------------------------------------------------------------------
+    identity                 identity
+    log                      log
+    logit                    logit
+    probit                   probit
+    cloglog                  cloglog
+    power #                  power
+    opower #                 odds power
+    nbinomial                negative binomial
+    loglog                   log-log
+    logc                     log-complement
+    -------------------------------------------------------------------------
+
+    indepvars may contain factor variables; see fvvarlist.
+    depvar and indepvars may contain time-series operators; see tsvarlist.
+    bayes, bootstrap, by, collect, fmm, fp, jackknife, mfp, mi estimate,
+      nestreg, rolling, statsby, stepwise, and svy are allowed; see prefix.
+      For more details, see [BAYES] bayes: glm and [FMM] fmm: glm.
+    vce(bootstrap), vce(jackknife), and vce(jackknife1) are not allowed with
+      the mi estimate prefix.
+    Weights are not allowed with the bootstrap prefix.
+    aweights are not allowed with the jackknife prefix.
+    vce(), vfactor(), disp(), scale(), irls, fisher(), noheader, notable,
+      nodisplay, and weights are not allowed with the svy prefix.
+    fweights, aweights, iweights, and pweights are allowed; see weight.
+    noheader, notable, nodisplay, collinear, and coeflegend do not appear in
+      the dialog box.
+    See [R] glm postestimation for features available after estimation.
+
+
+Menu
+----
+
+    Statistics &gt; Generalized linear models &gt; Generalized linear models (GLM)
+
+
+Description
+-----------
+
+    glm fits generalized linear models.  It can fit models by using either
+    IRLS (maximum quasilikelihood) or Newton-Raphson (maximum likelihood)
+    optimization, which is the default.
+
+    See [U] 27 Overview of Stata estimation commands for a description of all
+    of Stata's estimation commands, several of which fit models that can also
+    be fit using glm.
+
+
+Links to PDF documentation
+--------------------------
+
+        Quick start
+
+        Remarks and examples
+
+        Methods and formulas
+
+    The above sections are not included in this help file.
+
+
+Options
+-------
+
+        +-------+
+    ----+ Model +------------------------------------------------------------
+
+    family(familyname) specifies the distribution of depvar; family(gaussian)
+        is the default.
+
+    link(linkname) specifies the link function; the default is the canonical
+        link for the family() specified (except for family(nbinomial)).
+
+        +---------+
+    ----+ Model 2 +----------------------------------------------------------
+
+    noconstant, exposure(varname), offset(varname), constraints(constraints);
+        see [R] Estimation options.  constraints(constraints) is not allowed
+        with irls.
+
+    asis forces retention of perfect predictor variables and their
+        associated, perfectly predicted observations and may produce
+        instabilities in maximization; see [R] probit.  This option is
+        allowed only with option family(binomial) with a denominator of 1.
+
+    mu(varname) specifies varname as the initial estimate for the mean of 
+        depvar.  This option can be useful with models that experience
+        convergence difficulties, such as family(binomial) models with power
+        or odds-power links.  init(varname) is a synonym.
+
+        +-----------+
+    ----+ SE/Robust +--------------------------------------------------------
+
+    vce(vcetype) specifies the type of standard error reported, which
+        includes types that are derived from asymptotic theory (oim, opg),
+        that are robust to some kinds of misspecification (robust), that
+        allow for intragroup correlation (cluster clustvar), and that use
+        bootstrap or jackknife methods (bootstrap, jackknife); see [R]
+        vce_option.
+
+        In addition to the standard vcetypes, glm allows the following
+        alternatives:
+
+        vce(eim) specifies that the EIM estimate of variance be used.
+
+        vce(jackknife1) specifies that the one-step jackknife estimate of
+            variance be used.
+
+        vce(hac kernel [#]) specifies that a heteroskedasticity- and
+            autocorrelation-consistent (HAC) variance estimate be used.  HAC
+            refers to the general form for combining weighted matrices to
+            form the variance estimate.  There are three kernels built into
+            glm.  kernel is a user-written program or one of
+
+                          nwest | gallant | anderson
+
+            # specifies the number of lags.  If # is not specified, N - 2 is
+            assumed.  If you wish to specify vce(hac ... ), you must tsset
+            your data before calling glm.
+
+        vce(unbiased) specifies that the unbiased sandwich estimate of
+            variance be used.
+
+    vfactor(#) specifies a scalar by which to multiply the resulting variance
+        matrix.  This option allows you to match output with other packages,
+        which may apply degrees of freedom or other small-sample corrections
+        to estimates of variance.
+
+    disp(#) multiplies the variance of depvar by # and divides the deviance
+        by #.  The resulting distributions are members of the quasilikelihood
+        family.  This option is allowed only with option irls.
+
+    scale(x2|dev|#) overrides the default scale parameter.  This option is
+        allowed only with Hessian (information matrix) variance estimates.
+
+        By default, scale(1) is assumed for the discrete distributions
+        (binomial, Poisson, and negative binomial), and scale(x2) is assumed
+        for the continuous distributions (Gaussian, gamma, and inverse
+        Gaussian).
+
+        scale(x2) specifies that the scale parameter be set to the Pearson
+        chi-squared (or generalized chi-squared) statistic divided by the
+        residual degrees of freedom, which is recommended by McCullagh and
+        Nelder (1989) as a good general choice for continuous distributions.
+
+        scale(dev) sets the scale parameter to the deviance divided by the
+        residual degrees of freedom.  This option provides an alternative to
+        scale(x2) for continuous distributions and overdispersed or
+        underdispersed discrete distributions.  This option is allowed only
+        with option irls.
+
+        scale(#) sets the scale parameter to #.  For example, using scale(1)
+        in family(gamma) models results in exponential-errors regression.
+        Additional use of link(log) rather than the default link(power -1)
+        for family(gamma) essentially reproduces Stata's streg, dist(exp)
+        nohr command (see [ST] streg) if all the observations are uncensored.
+
+        +-----------+
+    ----+ Reporting +--------------------------------------------------------
+
+    level(#); see [R] Estimation options.
+
+    eform displays the exponentiated coefficients and corresponding standard
+        errors and confidence intervals.  For family(binomial) link(logit)
+        (that is, logistic regression), exponentiation results are odds
+        ratios; for family(nbinomial) link(log) (that is, negative binomial
+        regression) and for family(poisson) link(log) (that is, Poisson
+        regression), exponentiated coefficients are incidence-rate ratios.
+
+    nocnsreport; see [R] Estimation options.
+
+    display_options:  noci, nopvalues, noomitted, vsquish, noemptycells,
+        baselevels, allbaselevels, nofvlabel, fvwrap(#), fvwrapon(style),
+        cformat(%fmt), pformat(%fmt), sformat(%fmt), and nolstretch; see [R]
+        Estimation options.
+
+        +--------------+
+    ----+ Maximization +-----------------------------------------------------
+
+    ml requests that optimization be carried out using Stata's ml commands
+        and is the default.
+
+    irls requests iterated, reweighted least-squares (IRLS) optimization of
+        the deviance instead of Newton-Raphson optimization of the log
+        likelihood.  If the irls option is not specified, the optimization is
+        carried out using Stata's ml commands, in which case all options of
+        ml maximize are also available.
+
+    maximize_options:  difficult, technique(algorithm_spec), iterate(#),
+        [no]log, trace, gradient, showstep, hessian, showtolerance,
+        tolerance(#), ltolerance(#), nrtolerance(#), nonrtolerance, and
+        from(init_specs); see [R] Maximize.  These options are seldom used.
+
+        Setting the optimization method to technique(bhhh) resets the default
+        vcetype to vce(opg).
+
+        If option irls is specified, only maximize_options iterate(), nolog,
+        trace, and ltolerance() are allowed.  With irls specified, the
+        convergence criterion is satisfied when the absolute change in
+        deviance from one iteration to the next is less than or equal to
+        ltolerance(), where ltolerance(1e-6) is the default.
+
+    fisher(#) specifies the number of Newton-Raphson steps that should use
+        the Fisher scoring Hessian or EIM before switching to the observed
+        information matrix (OIM).  This option is useful only for
+        Newton-Raphson optimization (and not when using irls).
+
+    search specifies that the command search for good starting values.  This
+        option is useful only for Newton-Raphson optimization (and not when
+        using irls).
+
+    The following options are available with glm but are not shown in the
+    dialog box:
+
+    noheader suppresses the header information from the output.  The
+        coefficient table is still displayed.
+
+    notable suppresses the table of coefficients from the output.  The header
+        information is still displayed.
+
+    nodisplay suppresses the output.  The iteration log is still displayed.
+
+    collinear, coeflegend; see [R] Estimation options.  collinear is not
+        allowed with irls.
+
+
+Remarks
+-------
+
+    Although glm can be used to fit linear regression (and, in fact, does so
+    by default), this should be viewed as an instructional feature; regress
+    produces such estimates more quickly, and many postestimation commands
+    are available to explore the adequacy of the fit; see [R] regress and [R]
+    regress postestimation.
+
+    In any case, you should specify the link function by using the link()
+    option and specify the distributional family by using family().  The
+    available link functions are
+
+                   Link function            glm option     
+                   ----------------------------------------
+                   identity                 link(identity) 
+                   log                      link(log)      
+                   logit                    link(logit)    
+                   probit                   link(probit)   
+                   complementary log-log    link(cloglog)  
+                   odds power               link(opower #) 
+                   power                    link(power #)  
+                   negative binomial        link(nbinomial)
+                   log-log                  link(loglog)   
+                   log-complement           link(logc)     
+
+    The available distributional families are
+
+                   Family                 glm option       
+                   ----------------------------------------
+                   Gaussian(normal)       family(gaussian) 
+                   inverse Gaussian       family(igaussian)
+                   Bernoulli/binomial     family(binomial) 
+                   Poisson                family(poisson)  
+                   negative binomial      family(nbinomial)
+                   gamma                  family(gamma)    
+
+    You do not have to specify both family() and link(); the default link()
+    is the canonical link for the specified family() (except for nbinomial):
+
+                    Family                  Default link  
+                    --------------------------------------
+                    family(gaussian)        link(identity)
+                    family(igaussian)       link(power -2)
+                    family(binomial)        link(logit)   
+                    family(poisson)         link(log)     
+                    family(nbinomial)       link(log)     
+                    family(gamma)           link(power -1)
+
+    If you specify both family() and link(), not all combinations make sense.
+    You may choose from the following combinations:
+
+          | id  log  logit  probit  clog  pow  opower  nbinomial  loglog  logc
+----------+-------------------------------------------------------------------
+Gaussian  |  x   x                         x
+inv. Gau. |  x   x                         x
+binomial  |  x   x     x      x       x    x     x                  x      x
+Poisson   |  x   x                         x
+neg. bin. |  x   x                         x              x
+gamma     |  x   x                         x
+
+
+Examples
+--------
+
+    ---------------------------------------------------------------------------
+    Setup
+        . webuse lbw
+
+    Generalized linear model with Bernoulli family and default logit link
+        . glm low age lwt i.race smoke ptl ht ui, family(binomial)
+
+    Replay results and report exponentiated coefficients
+        . glm, eform
+
+    ---------------------------------------------------------------------------
+    Setup
+        . webuse ldose
+
+    Generalized linear model with binomial family and default logit link
+        . glm r ldose, family(binomial n)
+
+    Generalized linear model with binomial family and cloglog link
+        . glm r ldose, family(binomial n) link(cloglog)
+
+    ---------------------------------------------------------------------------
+    Setup
+        . webuse beetle
+
+    Generalized linear model with binomial family and cloglog link
+        . glm r i.beetle ldose, family(binomial n) link(cloglog)
+
+    Replay results with 99% confidence intervals
+        . glm, level(99)
+    ---------------------------------------------------------------------------
+
+
+Stored results
+--------------
+
+    glm, ml stores the following in e():
+
+    Scalars           
+      e(N)                   number of observations
+      e(k)                   number of parameters
+      e(k_eq)                number of equations in e(b)
+      e(k_eq_model)          number of equations in overall model test
+      e(k_dv)                number of dependent variables
+      e(df_m)                model degrees of freedom
+      e(df)                  residual degrees of freedom
+      e(phi)                 scale parameter
+      e(aic)                 model AIC
+      e(bic)                 model BIC
+      e(ll)                  log likelihood, if NR
+      e(N_clust)             number of clusters
+      e(chi2)                chi-squared
+      e(p)                   p-value for model test
+      e(deviance)            deviance
+      e(deviance_s)          scaled deviance
+      e(deviance_p)          Pearson deviance
+      e(deviance_ps)         scaled Pearson deviance
+      e(dispers)             dispersion
+      e(dispers_s)           scaled dispersion
+      e(dispers_p)           Pearson dispersion
+      e(dispers_ps)          scaled Pearson dispersion
+      e(nbml)                1 if negative binomial parameter estimated via
+                               ML, 0 otherwise
+      e(vf)                  factor set by vfactor(), 1 if not set
+      e(power)               power set by link(power #) or link(opower #)
+      e(rank)                rank of e(V)
+      e(ic)                  number of iterations
+      e(rc)                  return code
+      e(converged)           1 if converged, 0 otherwise
+
+    Macros            
+      e(cmd)                 glm
+      e(cmdline)             command as typed
+      e(depvar)              name of dependent variable
+      e(varfunc)             program to calculate variance function
+      e(varfunct)            variance title
+      e(varfuncf)            variance function
+      e(link)                program to calculate link function
+      e(linkt)               link title
+      e(linkf)               link function
+      e(m)                   number of binomial trials
+      e(wtype)               weight type
+      e(wexp)                weight expression
+      e(title)               title in estimation output
+      e(clustvar)            name of cluster variable
+      e(offset)              linear offset variable
+      e(chi2type)            Wald; type of model chi-squared test
+      e(cons)                noconstant, if specified
+      e(hac_kernel)          HAC kernel
+      e(hac_lag)             HAC lag
+      e(vce)                 vcetype specified in vce()
+      e(vcetype)             title used to label Std. err.
+      e(opt)                 ml or irls
+      e(opt1)                optimization title, line 1
+      e(opt2)                optimization title, line 2
+      e(which)               max or min; whether optimizer is to perform
+                               maximization or minimization
+      e(ml_method)           type of ml method
+      e(user)                name of likelihood-evaluator program
+      e(technique)           maximization technique
+      e(properties)          b V
+      e(predict)             program used to implement predict
+      e(marginsok)           predictions allowed by margins
+      e(marginsnotok)        predictions disallowed by margins
+      e(asbalanced)          factor variables fvset as asbalanced
+      e(asobserved)          factor variables fvset as asobserved
+
+    Matrices          
+      e(b)                   coefficient vector
+      e(Cns)                 constraints matrix
+      e(ilog)                iteration log (up to 20 iterations)
+      e(gradient)            gradient vector
+      e(V)                   variance-covariance matrix of the estimators
+      e(V_modelbased)        model-based variance
+
+    Functions         
+      e(sample)              marks estimation sample
+
+    In addition to the above, the following is stored in r():
+
+    Matrices          
+      r(table)               matrix containing the coefficients with their
+                               standard errors, test statistics, p-values,
+                               and confidence intervals
+
+    Note that results stored in r() are updated when the command is replayed
+    and will be replaced when any r-class command is run after the estimation
+    command.
+
+    glm, irls stores the following in e():
+
+    Scalars           
+      e(N)                   number of observations
+      e(k)                   number of parameters
+      e(k_eq_model)          number of equations in overall model test
+      e(df_m)                model degrees of freedom
+      e(df)                  residual degrees of freedom
+      e(phi)                 scale parameter
+      e(disp)                dispersion parameter
+      e(bic)                 model BIC
+      e(N_clust)             number of clusters
+      e(deviance)            deviance
+      e(deviance_s)          scaled deviance
+      e(deviance_p)          Pearson deviance
+      e(deviance_ps)         scaled Pearson deviance
+      e(dispers)             dispersion
+      e(dispers_s)           scaled dispersion
+      e(dispers_p)           Pearson dispersion
+      e(dispers_ps)          scaled Pearson dispersion
+      e(nbml)                1 if negative binomial parameter estimated via
+                               ML, 0 otherwise
+      e(vf)                  factor set by vfactor(), 1 if not set
+      e(power)               power set by link(power #) or link(opower #)
+      e(rank)                rank of e(V)
+      e(rc)                  return code
+
+    Macros            
+      e(cmd)                 glm
+      e(cmdline)             command as typed
+      e(depvar)              name of dependent variable
+      e(varfunc)             program to calculate variance function
+      e(varfunct)            variance title
+      e(varfuncf)            variance function
+      e(link)                program to calculate link function
+      e(linkt)               link title
+      e(linkf)               link function
+      e(m)                   number of binomial trials
+      e(wtype)               weight type
+      e(wexp)                weight expression
+      e(clustvar)            name of cluster variable
+      e(offset)              linear offset variable
+      e(cons)                noconstant, if specified
+      e(hac_kernel)          HAC kernel
+      e(hac_lag)             HAC lag
+      e(vce)                 vcetype specified in vce()
+      e(vcetype)             title used to label Std. err.
+      e(opt)                 ml or irls
+      e(opt1)                optimization title, line 1
+      e(opt2)                optimization title, line 2
+      e(properties)          b V
+      e(predict)             program used to implement predict
+      e(marginsok)           predictions allowed by margins
+      e(marginsnotok)        predictions disallowed by margins
+      e(asbalanced)          factor variables fvset as asbalanced
+      e(asobserved)          factor variables fvset as asobserved
+
+    Matrices          
+      e(b)                   coefficient vector
+      e(V)                   variance-covariance matrix of the estimators
+      e(V_modelbased)        model-based variance
+
+    Functions         
+      e(sample)              marks estimation sample
+
+    In addition to the above, the following is stored in r():
+
+    Matrices          
+      r(table)               matrix containing the coefficients with their
+                               standard errors, test statistics, p-values,
+                               and confidence intervals
+
+    Note that results stored in r() are updated when the command is replayed
+    and will be replaced when any r-class command is run after the estimation
+    command.
+
+
+Reference
+---------
+
+    McCullagh, P., and J. A. Nelder. 1989.  Generalized Linear Models. 2nd
+        ed.  London: Chapman &amp; Hall/CRC.</code></pre>
+</div>
+</div>
+<p>glm command in Stata - Umbrella Command - linear regression: family(<strong>gau</strong>ssian) link(<strong>i</strong>dentity) - logistic regression: family(<strong>b</strong>inomial) link(<strong>l</strong>ogit) - poisson regression: family(<strong>p</strong>oisson) link(<strong>log</strong>) - log-binomial regression: family(<strong>b</strong>inomial) link(<strong>log</strong>)</p>
+<blockquote class="blockquote">
+<p>加粗部分表示，在实际代码中可以简写为加粗的字母或单词即可</p>
+</blockquote>
+</section>
+</section>
+<section id="代码的转换" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="代码的转换"><span class="header-section-number">8</span> 代码的转换</h2>
+<section id="linear-regression-1" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="linear-regression-1"><span class="header-section-number">8.1</span> Linear regression:</h3>
+<ul>
+<li><code>regress price weight length mpg i.rep78</code></li>
+<li><code>glm price weight length mpg i.rep78, family(gaussian)link(identity)</code></li>
+</ul>
+</section>
+<section id="logistic-regression-1" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="logistic-regression-1"><span class="header-section-number">8.2</span> Logistic regression:</h3>
+<ul>
+<li><code>logistic low age i.smoke i.race</code></li>
+<li><code>glm low age i.smoke i.race,family(binomial) link(logit)</code></li>
+<li><code>glm low age i.smoke i.race,family(binomial) link(logit) eform</code></li>
+</ul>
+<blockquote class="blockquote">
+<p><code>eform</code> 直接输出 OR 值，即 <span class="math inline">\(e^{\beta}\)</span></p>
+</blockquote>
+</section>
+</section>
+<section id="线性回归模型的比较" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="线性回归模型的比较"><span class="header-section-number">9</span> 线性回归模型的比较</h2>
+<div id="1ddab3af" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>regress price weight length mpg i.rep78</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =        69
+-------------+----------------------------------   F(7, 61)        =      7.25
+       Model |   262008114         7  37429730.6   Prob &gt; F        =    0.0000
+    Residual |   314788844        61  5160472.86   R-squared       =    0.4542
+-------------+----------------------------------   Adj R-squared   =    0.3916
+       Total |   576796959        68  8482308.22   Root MSE        =    2271.7
+
+------------------------------------------------------------------------------
+       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      weight |   5.186695   1.163383     4.46   0.000     2.860367    7.513022
+      length |  -124.1544   40.07637    -3.10   0.003     -204.292   -44.01671
+         mpg |  -126.8367   84.49819    -1.50   0.138    -295.8012    42.12791
+             |
+       rep78 |
+          2  |   1137.284   1803.332     0.63   0.531    -2468.701    4743.269
+          3  |   1254.642   1661.545     0.76   0.453    -2067.823    4577.108
+          4  |   2267.188   1698.018     1.34   0.187    -1128.208    5662.584
+          5  |   3850.759   1787.272     2.15   0.035     276.8886     7424.63
+             |
+       _cons |   14614.49   6155.842     2.37   0.021     2305.125    26923.86
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="8e36beaf" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>glm price weight length mpg i.rep78, family(gaussian)link(identity)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  Log likelihood = -626.90582  
+
+Generalized linear models                         Number of obs   =         69
+Optimization     : ML                             Residual df     =         61
+                                                  Scale parameter =    5160473
+Deviance         =  314788844.4                   (1/df) Deviance =    5160473
+Pearson          =  314788844.4                   (1/df) Pearson  =    5160473
+
+Variance function: V(u) = 1                       [Gaussian]
+Link function    : g(u) = u                       [Identity]
+
+                                                  AIC             =   18.40307
+Log likelihood   = -626.9058204                   BIC             =   3.15e+08
+
+------------------------------------------------------------------------------
+             |                 OIM
+       price | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      weight |   5.186695   1.163383     4.46   0.000     2.906506    7.466883
+      length |  -124.1544   40.07637    -3.10   0.002    -202.7026   -45.60612
+         mpg |  -126.8367   84.49819    -1.50   0.133    -292.4501    38.77675
+             |
+       rep78 |
+          2  |   1137.284   1803.332     0.63   0.528    -2397.182     4671.75
+          3  |   1254.642   1661.545     0.76   0.450    -2001.927    4511.211
+          4  |   2267.188   1698.018     1.34   0.182    -1060.866    5595.241
+          5  |   3850.759   1787.272     2.15   0.031     347.7711    7353.747
+             |
+       _cons |   14614.49   6155.842     2.37   0.018     2549.263    26679.72
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="logistic-回归的比较" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="logistic-回归的比较"><span class="header-section-number">10</span> logistic 回归的比较</h2>
+<p>重新导入数据：</p>
+<div id="acb5f039" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>webuse lbw,clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Hosmer &amp; Lemeshow data)</code></pre>
+</div>
+</div>
+<div id="680a3e12" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>logistic low age i.smoke i.race</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Logistic regression                                     Number of obs =    189
+                                                        LR chi2(4)    =  15.81
+                                                        Prob &gt; chi2   = 0.0033
+Log likelihood = -109.4311                              Pseudo R2     = 0.0674
+
+------------------------------------------------------------------------------
+         low | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         age |   .9657186   .0322573    -1.04   0.296     .9045206    1.031057
+             |
+       smoke |
+     Smoker  |    3.00582   1.118001     2.96   0.003     1.449982    6.231081
+             |
+        race |
+      Black  |   2.749483   1.356659     2.05   0.040     1.045318    7.231924
+      Other  |   2.876948   1.167921     2.60   0.009     1.298314    6.375062
+             |
+       _cons |    .365111   .3146026    -1.17   0.242     .0674491    1.976395
+------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.</code></pre>
+</div>
+</div>
+<div id="1071af95" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>glm low age i.smoke i.race,family(binomial) link(logit) eform</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  Log likelihood = -109.53148  
+Iteration 1:  Log likelihood = -109.43111  
+Iteration 2:  Log likelihood =  -109.4311  
+Iteration 3:  Log likelihood =  -109.4311  
+
+Generalized linear models                         Number of obs   =        189
+Optimization     : ML                             Residual df     =        184
+                                                  Scale parameter =          1
+Deviance         =  218.8621974                   (1/df) Deviance =   1.189468
+Pearson          =  182.9642078                   (1/df) Pearson  =   .9943707
+
+Variance function: V(u) = u*(1-u)                 [Bernoulli]
+Link function    : g(u) = ln(u/(1-u))             [Logit]
+
+                                                  AIC             =   1.210911
+Log likelihood   = -109.4310987                   BIC             =  -745.6193
+
+------------------------------------------------------------------------------
+             |                 OIM
+         low | Odds ratio   std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         age |   .9657186   .0322573    -1.04   0.296     .9045206    1.031057
+             |
+       smoke |
+     Smoker  |    3.00582   1.118001     2.96   0.003     1.449982    6.231081
+             |
+        race |
+      Black  |   2.749483   1.356659     2.05   0.040     1.045318    7.231924
+      Other  |   2.876948   1.167921     2.60   0.009     1.298314    6.375062
+             |
+       _cons |    .365111   .3146026    -1.17   0.242     .0674491    1.976395
+------------------------------------------------------------------------------
+Note: _cons estimates baseline odds.</code></pre>
+</div>
+</div>
+</section>
+<section id="log-binomial-model" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="log-binomial-model"><span class="header-section-number">11</span> Log-Binomial Model</h2>
+<p><code>glm low age i.smoke i.race,family(binomial) link(log)</code></p>
+<ul>
+<li>Logistic regression 的一种替代</li>
+<li>Fail to converge</li>
+<li>Poisson regression with robust variance estimate</li>
+</ul>
+<p>为了避免出现 Fail to converge 的问题，采用稳健方差估计：</p>
+<p><code>glm low age i.smoke i.race,family(poisson) link(log) robust</code></p>
+<ul>
+<li><code>robust</code> 可以缩写为 <code>r</code></li>
+</ul>
+<div id="b462ef6e" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>glm low age i.smoke i.race,family(poisson) link(log) robust</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  Log pseudolikelihood = -124.55888  
+Iteration 1:  Log pseudolikelihood = -122.39663  
+Iteration 2:  Log pseudolikelihood = -122.39591  
+Iteration 3:  Log pseudolikelihood = -122.39591  
+
+Generalized linear models                         Number of obs   =        189
+Optimization     : ML                             Residual df     =        184
+                                                  Scale parameter =          1
+Deviance         =   126.791811                   (1/df) Deviance =   .6890859
+Pearson          =  124.4629927                   (1/df) Pearson  =   .6764293
+
+Variance function: V(u) = u                       [Poisson]
+Link function    : g(u) = ln(u)                   [Log]
+
+                                                  AIC             =   1.348105
+Log pseudolikelihood = -122.3959055               BIC             =  -837.6896
+
+------------------------------------------------------------------------------
+             |               Robust
+         low | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         age |  -.0246781   .0203034    -1.22   0.224    -.0644722    .0151159
+             |
+       smoke |
+     Smoker  |   .6972155    .211848     3.29   0.001     .2820011     1.11243
+             |
+        race |
+      Black  |    .639629   .2818353     2.27   0.023     .0872419    1.192016
+      Other  |   .6813692   .2428128     2.81   0.005     .2054649    1.157273
+             |
+       _cons |  -1.286544   .5405667    -2.38   0.017    -2.346035   -.2270526
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1346,39 +2310,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="pagination-link" aria-label="02-SAS 在 Jupyter Notebook 中使用">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-SAS 在 Jupyter Notebook 中使用</span>
+      <a href="../../Guide/Stata/25-05-07-4-log-binary.html" class="pagination-link" aria-label="13-二分类Logistic回归">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">13-二分类Logistic回归</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="11-Stata 做 ITSA 分析">
-        <span class="nav-page-text">11-Stata 做 ITSA 分析</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-08-2-survival-ana.html" class="pagination-link" aria-label="15-生存分析">
+        <span class="nav-page-text">15-生存分析</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "00-Stata Intro and Record"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1391,7 +2332,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-03-09-Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-08-1-GLM.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

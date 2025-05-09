@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simonzhou">
+<meta name="author" content="Simon Zhou">
 
-<title>00-Stata Intro and Record – 医学统计学笔记</title>
+<title>10-单因素方差分析（ANOVA） – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="next">
-<link href="../../Guide/SAS/25-05-05-SAS-install-connect.html" rel="prev">
+<link href="../../Guide/Stata/25-05-07-2-simple-line-reg.html" rel="next">
+<link href="../../Guide/Stata/25-05-06-RR-CAL.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -117,16 +117,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="00-Stata Intro and Record – 医学统计学笔记">
+<meta property="og:title" content="10-单因素方差分析（ANOVA） – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="00-Stata Intro and Record – 医学统计学笔记">
+<meta name="twitter:title" content="10-单因素方差分析（ANOVA） – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="www.lazyzhou.cn/Guide/Stata/25-05-07-1-ANOVA_files/figure-html/cell-7-output-1.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +228,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-07-1-ANOVA.html">10-单因素方差分析（ANOVA）</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -501,7 +502,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
   </div>
 </li>
@@ -567,7 +568,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-07-1-ANOVA.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-1-ANOVA.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">10-单因素方差分析（ANOVA）</span></a>
   </div>
 </li>
@@ -669,13 +670,29 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#为什么只讲单因素方差分析" id="toc-为什么只讲单因素方差分析" class="nav-link active" data-scroll-target="#为什么只讲单因素方差分析"><span class="header-section-number">1</span> 为什么只讲单因素方差分析</a>
+  <ul class="collapse">
+  <li><a href="#方差分析的假设" id="toc-方差分析的假设" class="nav-link" data-scroll-target="#方差分析的假设"><span class="header-section-number">1.1</span> 方差分析的假设</a></li>
+  <li><a href="#数据导入" id="toc-数据导入" class="nav-link" data-scroll-target="#数据导入"><span class="header-section-number">1.2</span> 数据导入</a></li>
+  <li><a href="#假设4每组内没有明显的异常值" id="toc-假设4每组内没有明显的异常值" class="nav-link" data-scroll-target="#假设4每组内没有明显的异常值"><span class="header-section-number">1.3</span> 假设4：每组内没有明显的异常值</a></li>
+  <li><a href="#假设5每组内y变量符合正态分布" id="toc-假设5每组内y变量符合正态分布" class="nav-link" data-scroll-target="#假设5每组内y变量符合正态分布"><span class="header-section-number">1.4</span> 假设5：每组内y变量符合正态分布</a></li>
+  <li><a href="#单因素方差分析" id="toc-单因素方差分析" class="nav-link" data-scroll-target="#单因素方差分析"><span class="header-section-number">1.5</span> 单因素方差分析</a></li>
+  </ul></li>
+  <li><a href="#多因素方差分析" id="toc-多因素方差分析" class="nav-link" data-scroll-target="#多因素方差分析"><span class="header-section-number">2</span> 多因素方差分析</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-07-1-ANOVA.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-07-1-ANOVA.html">10-单因素方差分析（ANOVA）</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">00-Stata Intro and Record</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<h1 class="title">10-单因素方差分析（ANOVA）</h1>
 </div>
 
 
@@ -685,23 +702,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simonzhou </p>
+             <p>Simon Zhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年3月9日</p>
+      <p class="date">2025年5月7日</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">修改于</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月9日</p>
-    </div>
-  </div>
     
   </div>
   
@@ -710,17 +721,380 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
-<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
-<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
-<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
-<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
-<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
-<p>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</p>
+<div id="953fa5e4" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="为什么只讲单因素方差分析" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 为什么只讲单因素方差分析</h1>
+<ul>
+<li>作为回归分析的“引子</li>
+<li>“单因素方差分析”与“单因素回归分析”是相同的</li>
+<li>“多因素方差分析”不如直接使用“多因素回归分析</li>
+<li>回归分析中能更加方便的看两个变量是否存在交互作用(ANCOVA)</li>
+</ul>
+<p>单因素方差分析（one-way ANOVA）也叫完全随机设计资料（completely randomized designe）的方差分析</p>
+<section id="方差分析的假设" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="方差分析的假设"><span class="header-section-number">1.1</span> 方差分析的假设</h2>
+<ul>
+<li>假设1:y变量为连续变量</li>
+<li>假设2:有一个包含2个及以上分类、且组别间相互独立的x变量</li>
+<li>假设3:每组间和组内的观测值相互独立</li>
+<li>假设4:每组内没有明显异常值</li>
+<li>假设5:每组内y变量符合正态分布</li>
+<li>假设6:进行方差齐性检验，观察每组的方差是否相等</li>
+</ul>
+<p>总结为：<strong>独立、正态、方差齐</strong></p>
+</section>
+<section id="数据导入" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="数据导入"><span class="header-section-number">1.2</span> 数据导入</h2>
+<div id="f00f4c76" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>webuse systolic,clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Systolic blood pressure data)</code></pre>
+</div>
+</div>
+<section id="查看一下数据形式与结构" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="查看一下数据形式与结构"><span class="header-section-number">1.2.1</span> 查看一下数据形式与结构</h3>
+<div id="760cd8c4" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">list</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+     +---------------------------+
+     | drug   disease   systolic |
+     |---------------------------|
+  1. |    1         1         42 |
+  2. |    1         1         44 |
+  3. |    1         1         36 |
+  4. |    1         1         13 |
+  5. |    1         1         19 |
+     |---------------------------|
+  6. |    1         1         22 |
+  7. |    1         2         33 |
+  8. |    1         2         26 |
+  9. |    1         2         33 |
+ 10. |    1         2         21 |
+     |---------------------------|
+ 11. |    1         3         31 |
+ 12. |    1         3         -3 |
+ 13. |    1         3         25 |
+ 14. |    1         3         25 |
+ 15. |    1         3         24 |
+     |---------------------------|
+ 16. |    2         1         28 |
+ 17. |    2         1         23 |
+ 18. |    2         1         34 |
+ 19. |    2         1         42 |
+ 20. |    2         1         13 |
+     |---------------------------|
+ 21. |    2         2         34 |
+ 22. |    2         2         33 |
+ 23. |    2         2         31 |
+ 24. |    2         2         36 |
+ 25. |    2         3          3 |
+     |---------------------------|
+ 26. |    2         3         26 |
+ 27. |    2         3         28 |
+ 28. |    2         3         32 |
+ 29. |    2         3          4 |
+ 30. |    2         3         16 |
+     |---------------------------|
+ 31. |    3         1          1 |
+ 32. |    3         1         29 |
+ 33. |    3         1         19 |
+ 34. |    3         2         11 |
+ 35. |    3         2          9 |
+     |---------------------------|
+ 36. |    3         2          7 |
+ 37. |    3         2          1 |
+ 38. |    3         2         -6 |
+ 39. |    3         3         21 |
+ 40. |    3         3          1 |
+     |---------------------------|
+ 41. |    3         3          9 |
+ 42. |    3         3          3 |
+ 43. |    4         1         24 |
+ 44. |    4         1          9 |
+ 45. |    4         1         22 |
+     |---------------------------|
+ 46. |    4         1         -2 |
+ 47. |    4         1         15 |
+ 48. |    4         2         27 |
+ 49. |    4         2         12 |
+ 50. |    4         2         12 |
+     |---------------------------|
+ 51. |    4         2         -5 |
+ 52. |    4         2         16 |
+ 53. |    4         2         15 |
+ 54. |    4         3         22 |
+ 55. |    4         3          7 |
+     |---------------------------|
+ 56. |    4         3         25 |
+ 57. |    4         3          5 |
+ 58. |    4         3         12 |
+     +---------------------------+</code></pre>
+</div>
+</div>
+<div id="a2825e52" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>codebook drug</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-------------------------------------------------------------------------------
+drug                                                                  Drug used
+-------------------------------------------------------------------------------
+
+                  Type: Numeric (int)
+
+                 Range: [1,4]                         Units: 1
+         Unique values: 4                         Missing .: 0/58
+
+            Tabulation: Freq.  Value
+                           15  1
+                           15  2
+                           12  3
+                           16  4</code></pre>
+</div>
+</div>
+<div id="7c3bc352" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">sum</span> systolic,detail</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                 Increment in systolic b.p.
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%           -6             -6
+ 5%           -3             -5
+10%            1             -3       Obs                  58
+25%            9             -2       Sum of wgt.          58
+
+50%           21                      Mean           18.87931
+                        Largest       Std. dev.      12.80087
+75%           28             36
+90%           34             42       Variance       163.8624
+95%           42             42       Skewness       -.094992
+99%           44             44       Kurtosis        2.13251</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="假设4每组内没有明显的异常值" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="假设4每组内没有明显的异常值"><span class="header-section-number">1.3</span> 假设4：每组内没有明显的异常值</h2>
+<p>最直观的方式就是用箱型图进行展示数据分布</p>
+<div id="371917b1" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>graph box systolic,over(drug)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-07-1-ANOVA_files/figure-html/cell-7-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="ce1ba87a" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>graph box systolic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-07-1-ANOVA_files/figure-html/cell-8-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="假设5每组内y变量符合正态分布" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="假设5每组内y变量符合正态分布"><span class="header-section-number">1.4</span> 假设5：每组内y变量符合正态分布</h2>
+<p>一般使用下面三种方法中的一种检验正态性就可以，一般使用 <code>Shapiro-Wilk检验</code> 较为普遍。</p>
+<section id="偏度与峰度" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="偏度与峰度"><span class="header-section-number">1.4.1</span> 偏度与峰度</h3>
+<p>使用 <code>sktest</code> 检验偏度与峰度，P值大于0.05，就不能说不符合正态分布</p>
+<div id="6a38c3d1" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sktest systolic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Skewness and kurtosis tests for normality
+                                                         ----- Joint test -----
+    Variable |       Obs   Pr(skewness)   Pr(kurtosis)   Adj chi2(2)  Prob&gt;chi2
+-------------+-----------------------------------------------------------------
+    systolic |        58         0.7452         0.0529          4.03     0.1331</code></pre>
+</div>
+</div>
+</section>
+<section id="shapiro-wilk-w-test" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="shapiro-wilk-w-test"><span class="header-section-number">1.4.2</span> Shapiro-Wilk W test</h3>
+<p>Shapiro-Wilk检验，是一种基于相关性的算法。计算可得到一个相关系数，它越接近1就越表明数据和正态分布拟合得越好。</p>
+<p>它基于Shapiro和Wilk于1965年提出的检验统计量。以下是其基本原理和用途：</p>
+<p><strong>基本原理：</strong></p>
+<ol type="1">
+<li><p>零假设（Null Hypothesis）：Shapiro-Wilk检验的零假设是数据集来自于正态分布。这意味着，如果数据确实服从正态分布，则零假设成立。</p></li>
+<li><p>计算Shapiro-Wilk统计量：检验首先计算Shapiro-Wilk统计量，这是一个衡量数据与正态分布拟合的度量。该统计量基于数据的观察值和正态分布的期望值之间的差异。//Shapiro-Wilk检验的统计量（W统计量）是通过与理论正态分布的期望值进行比较来判断样本数据是否符合正态分布。Shapiro-Wilk检验的原假设是样本数据符合正态分布。统计量的计算基于样本数据的排序顺序和回归分析的概念。W统计量越接近1，表示样本数据越接近正态分布。</p></li>
+<li><p>与临界值比较：接下来，Shapiro-Wilk统计量与临界值进行比较。临界值是根据所选的显著性水平（通常为5%）和数据集的大小计算得出的。如果Shapiro-Wilk统计量小于临界值，就意味着数据不太可能来自于正态分布。</p></li>
+<li><p>做出决策：根据统计量与临界值的比较，可以决定是否拒绝零假设。如果统计量足够小，小于临界值，通常会拒绝零假设，这意味着数据不服从正态分布。否则，不能拒绝零假设，这表示数据可能服从正态分布。</p></li>
+</ol>
+<p><strong>Notices：</strong> Shapiro-Wilk正态性检验对检验样本大小有一定的要求。具体来说，Shapiro-Wilk检验在样本大小较小（通常小于大约50-200，具体取决于不同文献和实践）时可能不太适用，并且在这种情况下其效力可能会降低。</p>
+<div id="6e4d88ed" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>swilk systolic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                   Shapiro–Wilk W test for normal data
+
+    Variable |        Obs       W           V         z       Prob&gt;z
+-------------+------------------------------------------------------
+    systolic |         58    0.97803      1.162     0.323    0.37331</code></pre>
+</div>
+</div>
+<p><strong>Shapiro-Francia test</strong></p>
+<p>Shapiro-Francia检验是一种用于检验数据是否来自正态分布的统计方法。它是Shapiro-Wilk检验的一个变种，通常适用于小到中等样本大小的数据集。Shapiro-Francia检验的核心思想是通过计算统计量来评估数据的正态性。</p>
+<p>Shapiro-Francia检验的零假设是数据来自正态分布，而备择假设是数据不来自正态分布。检验的结果会生成一个p-value，如果p-value较小（通常小于0.05），则通常会拒绝零假设，表明数据不符合正态分布。如果p-value较大，则无法拒绝零假设，表明数据可能来自正态分布。</p>
+<p>这种检验方法对于小到中等样本大小的数据集通常效果良好，并且可以用于确定数据是否符合正态分布的假设。</p>
+<p>虽然Shapiro-Francia检验在小样本中通常效果较好，但它也依赖于权重参数的准确性，因此在某些情况下可能不如其他正态性检验方法稳健。因此，在使用Shapiro-Francia检验时，应谨慎选择合适的样本大小和检验方法，以确保可靠的结果。</p>
+<div id="5fa552db" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sfrancia systolic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                  Shapiro–Francia W' test for normal data
+
+    Variable |       Obs       W'          V'        z       Prob&gt;z
+-------------+-----------------------------------------------------
+    systolic |        58    0.98522      0.866    -0.275    0.60824</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="单因素方差分析" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="单因素方差分析"><span class="header-section-number">1.5</span> 单因素方差分析</h2>
+<p>语法：</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">oneway</span> yvar xvar,[,option]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>如果得到的 <code>Prob&gt;F</code> 结果是 <code>&gt;0.05</code> 则说明至少有两个组的平均值是有显著差别的。</p>
+<p><code>Prob&gt;chi2 =</code> 得到的结果如果 <code>&gt;0.05</code> 则说明各组满足方差齐性。</p>
+<div id="2643957e" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>oneway systolic drug</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                        Analysis of variance
+    Source              SS         df      MS            F     Prob &gt; F
+------------------------------------------------------------------------
+Between groups      3133.23851      3   1044.41284      9.09     0.0001
+ Within groups      6206.91667     54   114.942901
+------------------------------------------------------------------------
+    Total           9340.15517     57   163.862371
+
+Bartlett's equal-variances test: chi2(3) =   1.0063    Prob&gt;chi2 = 0.800</code></pre>
+</div>
+</div>
+<section id="使用两两比较" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="使用两两比较"><span class="header-section-number">1.5.1</span> 使用两两比较</h3>
+<p>一般使用 <code>bonferroni</code> 比较</p>
+<div id="fac16efd" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>oneway systolic drug, bonferroni </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                        Analysis of variance
+    Source              SS         df      MS            F     Prob &gt; F
+------------------------------------------------------------------------
+Between groups      3133.23851      3   1044.41284      9.09     0.0001
+ Within groups      6206.91667     54   114.942901
+------------------------------------------------------------------------
+    Total           9340.15517     57   163.862371
+
+Bartlett's equal-variances test: chi2(3) =   1.0063    Prob&gt;chi2 = 0.800
+
+            Comparison of Increment in systolic b.p. by Drug used
+                                (Bonferroni)
+Row Mean-|
+Col Mean |          1          2          3
+---------+---------------------------------
+       2 |   -.533333
+         |      1.000
+         |
+       3 |   -17.3167   -16.7833
+         |      0.001      0.001
+         |
+       4 |   -12.5667   -12.0333       4.75
+         |      0.012      0.017      1.000</code></pre>
+</div>
+</div>
+<div id="6b064208" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>oneway systolic drug, bonferroni tab</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+            |  Summary of Increment in systolic
+            |                b.p.
+  Drug used |        Mean   Std. dev.       Freq.
+------------+------------------------------------
+          1 |   26.066667   11.677002          15
+          2 |   25.533333    11.61813          15
+          3 |        8.75     10.0193          12
+          4 |        13.5   9.3238047          16
+------------+------------------------------------
+      Total |    18.87931   12.800874          58
+
+                        Analysis of variance
+    Source              SS         df      MS            F     Prob &gt; F
+------------------------------------------------------------------------
+Between groups      3133.23851      3   1044.41284      9.09     0.0001
+ Within groups      6206.91667     54   114.942901
+------------------------------------------------------------------------
+    Total           9340.15517     57   163.862371
+
+Bartlett's equal-variances test: chi2(3) =   1.0063    Prob&gt;chi2 = 0.800
+
+            Comparison of Increment in systolic b.p. by Drug used
+                                (Bonferroni)
+Row Mean-|
+Col Mean |          1          2          3
+---------+---------------------------------
+       2 |   -.533333
+         |      1.000
+         |
+       3 |   -17.3167   -16.7833
+         |      0.001      0.001
+         |
+       4 |   -12.5667   -12.0333       4.75
+         |      0.012      0.017      1.000</code></pre>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="多因素方差分析" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 多因素方差分析</h1>
+<p>语法：</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>anova yvar xvar1 xvar2,[,option]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="f2b687ea" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>anova systolic drug disease</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                         Number of obs =         58    R-squared     =  0.3803
+                         Root MSE      =    10.5503    Adj R-squared =  0.3207
+
+                  Source | Partial SS         df         MS        F    Prob&gt;F
+              -----------+----------------------------------------------------
+                   Model |  3552.0722          5   710.41445      6.38  0.0001
+                         |
+                    drug |  3063.4329          3   1021.1443      9.17  0.0001
+                 disease |  418.83374          2   209.41687      1.88  0.1626
+                         |
+                Residual |  5788.0829         52   111.30929  
+              -----------+----------------------------------------------------
+                   Total |  9340.1552         57   163.86237  </code></pre>
+</div>
+</div>
 
 
-<!-- -->
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1346,39 +1720,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="pagination-link" aria-label="02-SAS 在 Jupyter Notebook 中使用">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-SAS 在 Jupyter Notebook 中使用</span>
+      <a href="../../Guide/Stata/25-05-06-RR-CAL.html" class="pagination-link" aria-label="09-RR值与OR值的计算">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">09-RR值与OR值的计算</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="11-Stata 做 ITSA 分析">
-        <span class="nav-page-text">11-Stata 做 ITSA 分析</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-07-2-simple-line-reg.html" class="pagination-link" aria-label="11-简单线性回归">
+        <span class="nav-page-text">11-简单线性回归</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "00-Stata Intro and Record"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1391,7 +1742,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-03-09-Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-07-1-ANOVA.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

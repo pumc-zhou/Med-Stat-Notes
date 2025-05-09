@@ -1,0 +1,192 @@
+---
+title: "20-数据整理"
+subtitle: "Data Clean and Management"
+author: "Simon Zhou"
+date: "2025-05-09"
+format: 
+    html:
+        code-fold: false
+        fig_caption: true
+        number-sections: true
+        toc: true
+        toc-depth: 2
+---
+
+使用 Do-file 完成后续的数据整理操作
+
+## Stata 须知
+
+1.  Stata区分大小写! Stata is case-sensitive!
+2.  常见符号:
+    -   `=`是 赋值(e.g· `gen x = 1`)
+    -   `==`是 恒等(e.g· `gen x = 1 if y == 2`)
+    -   `|`是 或者(e.g· `gen x = 1 if y == 2 | y == 3`)
+    -   `&`是 且(e.g· `gen x = 1 if y == 2 & z == 3`) \## 数据整理的常见步骤
+3.  查看工作路径(`pwd`);改变工作路径(`cd`)
+4.  导入Excel文件(`import excel`),CSV文件(`import delimited`),dta文件(`use`)
+5.  添加变量或变量数值标签(`label`)
+6.  生成新变量(`gen`)或统计量变量(`egen`)
+7.  将观测值按照变量数值大小排序(`sort`;`gsort`)
+8.  改变变量前后顺序(`order`)
+9.  将数据集进行长宽转换(`reshape`)
+10. 合并数据集(`merge`)
+11. 删除(`drop`)或保留(`keep`)观测值或变量
+12. 导出Excel,CSV文件(`export`)或dta文件(`save`) %%skip
+
+-   Stata添加注释的方法
+
+-   Stata中绿色的文字是不运行的
+
+``` stata
+// 跟在command之后的注释 
+/// 代表行内换行 
+* 星号作为一行的开头时，这一行都是注释 
+/* 两个星号之间加多行注释 */ 
+/*  Purpose: 
+    Author: 
+    Date created: 
+*/
+
+* 清除Stata内存里的所有数据和宏等 
+clear all
+
+//set maxvar 8000 
+* 如果你的变量数>5000，需要设置。例如:set maxvar 8000 
+* 请注意:Stata IC最多只有2,048个变量;SE:32,767;MP:120，000
+
+* 得到现在的工作路径，每个人肯定都不一样 
+pwd
+
+* 改变到自己的工作路径
+* 改变工作路径到"/Users/username/Desktop/Stata'
+cd "/Users/username/Desktop/Stata"
+
+* 把child.csv,child.xlsx,child.dta,anthro.dta这4个文件放到工作路径底下
+
+* 查看工作路径底下都有什么文件 
+dir
+
+* 如果现在有打开的Log文件，那么关闭它 
+capture log close  
+* 打开新的Log文件 
+log using Lecture.log,replace
+
+***********导入dta数据*************** 
+* 在这里，没有指定"child.dta"这个文件的位置，那么Stata就会到工作路径下面去找这个文件 
+* 逗号后面的clear指的是清除现有的数据，这样才能腾出地方导入新的数据
+
+use "child.dta",clear 
+* 或者(文件路径中如果有空格，一定需要用""包裹路径)
+use "/Users/username/Desktop/Stata/child.dta", clear
+
+**************导入csv文件*******************
+import delimited"child.csv", clear
+
+* 当然，你也可以指定这个文件的位置，是一样的
+import delimited "/Users/username/Desktop/Stata/child.csv", clear
+
+* 在导入CSV文件时，Stata自己判断是否把CSV文件的第一行作为变量名导入
+* 我们可以让Stata不把CSV文件的第一行作为变量名导入
+import delimited"child.csv",varnames(nonames) clear
+
+* 我们也可以让Stata必须把CSV文件的第一行作为变量名导入
+import delimited"child.csv",varnames(1) clear
+
+*我们可以让Stata导入的时候把变量名全变成大写
+import delimited"child.csv",varnames(1) case(upper) clear
+
+* 或者全变成小写
+import delimited "child.csv",varnames(1) case(lower) clear
+* 或者保留CSV里的形式
+import delimited "child.csv",varnames(1) case(preserve) clear
+
+*******************导入Excel文件**************
+import excel "child.xlsx",clear
+* 或者
+import excel"/Users/username/Desktop/Stata/child.xlsx",clear
+
+* 在导入Excel文件时，Stata默认第一行不是变量名
+* 我们可以让Stata把第一行当做变量名导入
+import excel "child.xlsx",firstrow clear
+
+* 我们也可以指定导入Excel文件里的哪个Sheet
+import excel "child.xlsx",firstrow sheet("Sheet1")clear
+
+* 我们可以让stata导入的时候把变量名全变成大写
+import excel "child.xlsx",firstrow case(upper) clear
+
+* 或者全变成小写
+import excel "child.xlsx",firstrow case(lower)clear
+
+* 或者保留Excel里的形式
+import excel "child.xlsx",firstrow case(preserve) clear
+import excel "/Users/username/Desktop/Stata/child.xlsx"， ///
+sheet("Sheet1")firstrow clear
+
+*************数据清理*****************
+/*
+我们以CHILD_SEX变量为例，进行数据的清洗和整理CHILD SEX现在是字符型变量:"1"是Boy","2"是Girl,"M"是missing
+*/
+codebook CHILD SEX
+```
+
+## 数据清理和排序
+
+继续上述的分析步骤，进入数据清理
+
+``` stata
+* 改变工作路径到"/Users/username/Desktop/Stata'
+cd "/Users/username/Desktop/Stata"
+
+* 或者保留Excel里的形式
+import excel "child.xlsx",firstrow case(preserve) clear
+import excel "/Users/username/Desktop/Stata/child.xlsx"， ///
+sheet("Sheet1")firstrow clear
+
+*************数据清理*****************
+/*
+我们以CHILD_SEX变量为例，进行数据的清洗和整理CHILD SEX现在是字符型变量:"1"是Boy","2"是Girl,"M"是missing
+*/
+codebook CHILD_SEX
+
+/*
+我们将CHILD_SEX替换成数值型变量。我们使用destring命令在destring的时候，我们可以通过option "force"把不是数字的字符(如"M")替换为缺失值
+(destring CHILD SEX,force replace)
+但是，需要更加小心:万一有人输入的是"B"，我们其实应该替换为1。
+为了保险起见，我们手动把"M“改成".""
+*/
+replace CHILD_SEX = "." if CHILD_SEX == "M"
+
+/*
+注意:
+字符型变量的观测值只能替换成字符型，因此我们只能把"M"替换成".""，不能替换成 . 
+比如，这个就是错的:
+replace CHILD_SEX = . if CHILD_SEX = "M"
+Stata会告诉你: type mismatch r(109);
+*/
+
+destring CHILD_SEX, replace
+
+/*
+destring的时候:
+replace option替代现在的CHILD_SEX变量
+destring CHILD_SEX，replace
+generate option生成一个新的变量
+destring CHILD_SEX, generate(CHILD_SEX_2)
+*/
+
+* Destring以后，我们再来看一下CHILD_SEX的信息
+codebook CHILD_SEX
+/*
+我们当然可以对于每一个变量进行这样的destring操作，不过比较麻烦
+我写了一个小的loop，可以对每一个变量进行destring操作
+*/
+foreach v of varlist _all { //对于所有变量进行循环
+    capture confirm string var 'v' //先确定这个变量是不是string
+    if _rc==0{ //如果是的话
+    replace 'v' = "." if 'v' == "M"//将"'M"替换成"."
+    destring 'v',replace
+    }
+    }
+
+```

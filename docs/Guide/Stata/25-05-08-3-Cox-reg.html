@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simonzhou">
+<meta name="author" content="Simon Zhou">
 
-<title>00-Stata Intro and Record – 医学统计学笔记</title>
+<title>16-Cox回归与比例风险假定检验 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="next">
-<link href="../../Guide/SAS/25-05-05-SAS-install-connect.html" rel="prev">
+<link href="../../Guide/Stata/25-05-08-4-GEE.html" rel="next">
+<link href="../../Guide/Stata/25-05-08-2-survival-ana.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,17 +116,47 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="16-Cox回归与比例风险假定检验 – 医学统计学笔记">
+<meta property="og:description" content="Cox regression and Proportional Hazard assumptions">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="16-Cox回归与比例风险假定检验 – 医学统计学笔记">
+<meta name="twitter:description" content="Cox regression and Proportional Hazard assumptions">
+<meta name="twitter:image" content="www.lazyzhou.cn/Guide/Stata/25-05-08-3-Cox-reg_files/figure-html/cell-7-output-2.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +257,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-08-3-Cox-reg.html">16-Cox回归与比例风险假定检验</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -501,7 +531,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
   </div>
 </li>
@@ -603,7 +633,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-08-3-Cox-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-3-Cox-reg.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">16-Cox回归与比例风险假定检验</span></a>
   </div>
 </li>
@@ -669,13 +699,24 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#数据导入" id="toc-数据导入" class="nav-link active" data-scroll-target="#数据导入"><span class="header-section-number">1</span> 数据导入</a></li>
+  <li><a href="#cox回归" id="toc-cox回归" class="nav-link" data-scroll-target="#cox回归"><span class="header-section-number">2</span> Cox回归</a></li>
+  <li><a href="#ph-假定检验" id="toc-ph-假定检验" class="nav-link" data-scroll-target="#ph-假定检验"><span class="header-section-number">3</span> PH 假定检验</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-08-3-Cox-reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-08-3-Cox-reg.html">16-Cox回归与比例风险假定检验</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">00-Stata Intro and Record</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<h1 class="title">16-Cox回归与比例风险假定检验</h1>
+<p class="subtitle lead">Cox regression and Proportional Hazard assumptions</p>
 </div>
 
 
@@ -685,23 +726,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simonzhou </p>
+             <p>Simon Zhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年3月9日</p>
+      <p class="date">2025年5月8日</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">修改于</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月9日</p>
-    </div>
-  </div>
     
   </div>
   
@@ -710,17 +745,196 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
-<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
-<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
-<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
-<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
-<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
-<p>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</p>
+<div id="3b22d0f7" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="数据导入" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="数据导入"><span class="header-section-number">1</span> 数据导入</h2>
+<p>在一个抗癌药物的Clinical Trial中，48名患者被随机分配到新药组(28人)和安慰剂组(20人)，研究人员想知道新药是否影响患者的生存情况。</p>
+<p>Data：<strong>Patient Survival in Drug Trial</strong></p>
+<div id="3d1e2552" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>webuse drugtr,clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Patient survival in drug trial)</code></pre>
+</div>
+</div>
+</section>
+<section id="cox回归" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="cox回归"><span class="header-section-number">2</span> Cox回归</h2>
+<p>Cox回归分析，也称为比例风险回归模型（Proportional Hazards Model，简称Cox模型），是由英国统计学家D.R.Cox于1972年提出的一种半参数回归模型。</p>
+<p>该模型主要用于生存分析，能够同时分析多个因素对生存期的影响，并且可以处理带有截尾生存时间的数据。</p>
+<section id="基本概念" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="基本概念"><span class="header-section-number">2.1</span> 基本概念</h3>
+<p>在介绍Cox回归模型之前，需要了解几个相关的概念：</p>
+<ul>
+<li>生存函数：表示观察对象的生存时间大于某时刻的概率。</li>
+<li>死亡函数：表示观察对象的生存时间不大于某时刻的概率。</li>
+<li>死亡密度函数：表示观察对象在某时刻的瞬时死亡率。</li>
+<li>危险率函数：表示生存时间已达到某时刻的观察对象在该时刻的瞬时死亡率1。</li>
+</ul>
+</section>
+<section id="基本原理" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="基本原理"><span class="header-section-number">2.2</span> 基本原理</h3>
+<p>Cox回归模型的基本形式为： <span class="math display">\[h(t|X) = h_0(t) \exp(\beta_1 X_1 + \beta_2 X_2 + \cdots + \beta_p X_p)\]</span></p>
+<p>其中， <span class="math inline">\(h(t|X)\)</span> 是在给定协变量 <span class="math inline">\(X\)</span> 时的危险率，<span class="math inline">\(h_0(t)\)</span> 是基准危险率，<span class="math inline">\(\beta_i\)</span> 是需要估计的回归系数。</p>
+</section>
+<section id="cox回归模型的假设包括" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="cox回归模型的假设包括"><span class="header-section-number">2.3</span> Cox回归模型的假设包括：</h3>
+<ul>
+<li>比例风险假设：各危险因素的作用不随时间变化。</li>
+<li>对数线性假设：协变量与对数风险比呈线性关系。</li>
+</ul>
+</section>
+<section id="偏回归系数的意义" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="偏回归系数的意义"><span class="header-section-number">2.4</span> 偏回归系数的意义</h3>
+<p>偏回归系数 <span class="math inline">\(\beta_i\)</span> 的流行病学含义是在其他协变量不变的情况下，协变量每增加一个测定单位时所引起的相对危险度的自然对数的改变量。</p>
+</section>
+<section id="假设检验" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="假设检验"><span class="header-section-number">2.5</span> 假设检验</h3>
+<p>Cox回归模型中的偏回归系数可以通过建立偏似然函数，利用Newton-Raphson迭代法求得。常用的假设检验方法包括似然比检验、Wald检验和记分检验。</p>
+<p>Cox回归模型由于其灵活性和广泛应用，成为生存分析中最常用的多因素分析方法之一。</p>
+<div id="e3230792" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>stcox drug</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+        Failure _d: died
+  Analysis time _t: studytime
+
+Iteration 0:  Log likelihood = -99.911448
+Iteration 1:  Log likelihood = -88.254734
+Iteration 2:  Log likelihood = -88.001551
+Iteration 3:  Log likelihood =  -88.00019
+Refining estimates:
+Iteration 0:  Log likelihood =  -88.00019
+
+Cox regression with Breslow method for ties
+
+No. of subjects =  48                                   Number of obs =     48
+No. of failures =  31
+Time at risk    = 744
+                                                        LR chi2(1)    =  23.82
+Log likelihood = -88.00019                              Prob &gt; chi2   = 0.0000
+
+------------------------------------------------------------------------------
+          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        drug |   .1327581   .0584002    -4.59   0.000     .0560555    .3144157
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>这里 Drug 的 coefficient(<span class="math inline">\(\beta\)</span>) : 新药组终点事件发生风险是安慰剂组的 13.3%(95% CI: 5.6%,31.4%)</p>
+<p>控制年龄：</p>
+<div id="e34c6efc" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>stcox drug age</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+        Failure _d: died
+  Analysis time _t: studytime
+
+Iteration 0:  Log likelihood = -99.911448
+Iteration 1:  Log likelihood = -83.551879
+Iteration 2:  Log likelihood = -83.324009
+Iteration 3:  Log likelihood = -83.323546
+Refining estimates:
+Iteration 0:  Log likelihood = -83.323546
+
+Cox regression with Breslow method for ties
+
+No. of subjects =  48                                   Number of obs =     48
+No. of failures =  31
+Time at risk    = 744
+                                                        LR chi2(2)    =  33.18
+Log likelihood = -83.323546                             Prob &gt; chi2   = 0.0000
+
+------------------------------------------------------------------------------
+          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        drug |   .1048772   .0477017    -4.96   0.000     .0430057    .2557622
+         age |   1.120325   .0417711     3.05   0.002     1.041375     1.20526
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>这里 Drug 的 coefficient(<span class="math inline">\(\beta_1\)</span>) : <strong>在控制了患者的年龄后</strong>，新药组终点事件发生风险是安慰剂组的 10.5%(95% CI: 4.3%,25.6%)</p>
+<p>反过来，这里 Age 的 coefficient(<span class="math inline">\(\beta_2\)</span>) : <strong>在控制了治疗方法后</strong>，患者年龄每增加 1 岁，发生终点事件风险增加 12%(95% CI: 4.1%,20.5%)</p>
+</section>
+<section id="cox回归的命令语法" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="cox回归的命令语法"><span class="header-section-number">2.6</span> Cox回归的命令语法</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">stcox</span> var1 var2 var3 ... [<span class="kw">if</span>] [<span class="kw">in</span>] [, options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><strong>Notice</strong></p>
+<ol type="1">
+<li>必须要在指定Data为Suvivaldata之后(<code>stset</code>之后)才能使用任何<code>st</code>开头的命令</li>
+<li>由于我们已经在一开始将数据转化为Survivaldata的时候指定过终点事件(Failure variable)、时间变量(Time variable)，我们在这里只需要设置需要在回归方程中independent variable即可</li>
+<li>Example
+<ul>
+<li><code>stcox drug age</code></li>
+<li><code>stcox drug age if age &lt; 50</code></li>
+</ul></li>
+</ol>
+</section>
+</section>
+<section id="ph-假定检验" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="ph-假定检验"><span class="header-section-number">3</span> PH 假定检验</h2>
+<section id="使用统计检验法" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="使用统计检验法"><span class="header-section-number">3.1</span> 使用统计检验法</h3>
+<p>Cox回归模型在应用时，有一个非常重要的前提条件，即比例风险（Proportional hazards）假定，简称PH假定。</p>
+<p><strong>Notice</strong>:PH假定的检验基于上一步进行的Cox回归。</p>
+<p><span class="math inline">\(H_0\)</span>：纳入Cox回归模型的变量满足PH假定</p>
+<p><span class="math inline">\(P&gt;0.05\)</span>，不能拒绝<span class="math inline">\(H_0\)</span></p>
+<div id="31805520" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>estat phtest</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Test of proportional-hazards assumption
+
+Time function: Analysis time
+------------------------------------------------
+             |     chi2       df       Prob&gt;chi2
+-------------+----------------------------------
+ Global test |     0.43        2          0.8064
+------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="ph假定-使用图像法" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="ph假定-使用图像法"><span class="header-section-number">3.2</span> PH假定 使用图像法</h3>
+<p>使用- ln(-ln(生存))图法，判断标准是如果待评价的变量分成的亚组曲线平行或近似平行，则满足PH假定。</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">stphplot</span>,<span class="kw">by</span>(bar1) <span class="kw">adjust</span>(var2 var3)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>var1</code> 是自变量名，<code>var2</code> 等是希望控制的变量。</p>
+<p><strong>Notice</strong>:这个命令不一定要跟在cox回归之后</p>
+<div id="ca850d3e" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>stphplot,by(drug) adjust(age)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+        Failure _d: died
+  Analysis time _t: studytime</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-08-3-Cox-reg_files/figure-html/cell-7-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="如果不满足ph假定" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="如果不满足ph假定"><span class="header-section-number">3.3</span> 如果不满足PH假定</h3>
+<ol type="1">
+<li>一般只要两组生存曲线趋势一致、不明显交叉即可判定PH假定成立</li>
+<li>如果PH假定不成立，可以加上时间(time)和暴露 (exposure,比如本例之中的drug)的交互项(interaction term), time*exposure</li>
+<li>也可以对于不同的时间段分别分析(e.g.0-10，10-20,&gt;20)</li>
+<li>参数生存分析模型:<code>streg</code>进行参数生存分析</li>
+</ol>
 
 
-<!-- -->
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1346,39 +1560,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="pagination-link" aria-label="02-SAS 在 Jupyter Notebook 中使用">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-SAS 在 Jupyter Notebook 中使用</span>
+      <a href="../../Guide/Stata/25-05-08-2-survival-ana.html" class="pagination-link" aria-label="15-生存分析">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">15-生存分析</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="11-Stata 做 ITSA 分析">
-        <span class="nav-page-text">11-Stata 做 ITSA 分析</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-08-4-GEE.html" class="pagination-link" aria-label="17-广义估计方程(GEE)">
+        <span class="nav-page-text">17-广义估计方程(GEE)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "00-Stata Intro and Record"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1391,7 +1582,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-03-09-Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-08-3-Cox-reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

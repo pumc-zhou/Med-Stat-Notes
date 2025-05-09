@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simonzhou">
+<meta name="author" content="Simon Zhou">
 
-<title>00-Stata Intro and Record – 医学统计学笔记</title>
+<title>18-有序多分类Logistic回归 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="next">
-<link href="../../Guide/SAS/25-05-05-SAS-install-connect.html" rel="prev">
+<link href="../../Guide/Stata/25-05-09-1-multinomail-logistic-reg.html" rel="next">
+<link href="../../Guide/Stata/25-05-08-4-GEE.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,17 +116,46 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="18-有序多分类Logistic回归 – 医学统计学笔记">
+<meta property="og:description" content="Ordinal Logistic Regression">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
+<meta name="twitter:title" content="18-有序多分类Logistic回归 – 医学统计学笔记">
+<meta name="twitter:description" content="Ordinal Logistic Regression">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +256,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html">18-有序多分类Logistic回归</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -501,7 +530,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
   </div>
 </li>
@@ -615,7 +644,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">18-有序多分类Logistic回归</span></a>
   </div>
 </li>
@@ -669,13 +698,26 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#多分类变量" id="toc-多分类变量" class="nav-link active" data-scroll-target="#多分类变量"><span class="header-section-number">1</span> 多分类变量</a></li>
+  <li><a href="#有序多分类" id="toc-有序多分类" class="nav-link" data-scroll-target="#有序多分类"><span class="header-section-number">2</span> 有序多分类</a></li>
+  <li><a href="#导入数据" id="toc-导入数据" class="nav-link" data-scroll-target="#导入数据"><span class="header-section-number">3</span> 导入数据</a></li>
+  <li><a href="#卡方检验" id="toc-卡方检验" class="nav-link" data-scroll-target="#卡方检验"><span class="header-section-number">4</span> 卡方检验</a></li>
+  <li><a href="#有序logistic回归" id="toc-有序logistic回归" class="nav-link" data-scroll-target="#有序logistic回归"><span class="header-section-number">5</span> 有序Logistic回归</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-08-5-Ord-Logistic-Reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html">18-有序多分类Logistic回归</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">00-Stata Intro and Record</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<h1 class="title">18-有序多分类Logistic回归</h1>
+<p class="subtitle lead">Ordinal Logistic Regression</p>
 </div>
 
 
@@ -685,23 +727,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simonzhou </p>
+             <p>Simon Zhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年3月9日</p>
+      <p class="date">2025年5月8日</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">修改于</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月9日</p>
-    </div>
-  </div>
     
   </div>
   
@@ -710,17 +746,256 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
-<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
-<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
-<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
-<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
-<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
-<p>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</p>
+<div id="f3847b39" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="多分类变量" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="多分类变量"><span class="header-section-number">1</span> 多分类变量</h2>
+<p>多分类变量主要分为有序多分类和无序多分类变量</p>
+<section id="有许多分类变量" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="有许多分类变量"><span class="header-section-number">1.1</span> 有许多分类变量</h3>
+<p>疾病分期；严重程度；发展阶段等</p>
+</section>
+<section id="无序多分类变量" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="无序多分类变量"><span class="header-section-number">1.2</span> 无序多分类变量</h3>
+<p>方位（东、南、西、北）；品牌等</p>
+</section>
+</section>
+<section id="有序多分类" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="有序多分类"><span class="header-section-number">2</span> 有序多分类</h2>
+<section id="有序多分类的原理" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="有序多分类的原理"><span class="header-section-number">2.1</span> 有序多分类的原理</h3>
+<ol type="1">
+<li>将y变量的n个分类拆分成n-1个二分类Logistic回归</li>
+<li>例子中的Excellent; Good; Average; Fair; Poor拆分成:
+<ul>
+<li><a href="1">Poor</a> vs.&nbsp;<a href="0">Excellent + Good + Average+Fair</a></li>
+<li><a href="1">Fair+Poor</a> vs.&nbsp;<a href="0">Excellent + Good+ Average</a></li>
+<li><a href="1">Average + Fair + Poor</a> vs.&nbsp;<a href="0">Excellent + Good</a></li>
+<li><a href="1">Good + Average + Fair + Poor</a> vs.&nbsp;<a href="0">Excellent</a></li>
+</ul></li>
+</ol>
+</section>
+<section id="proportional-odds-假定" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="proportional-odds-假定"><span class="header-section-number">2.2</span> Proportional odds 假定</h3>
+<ol type="1">
+<li>多个二元Logistic回归中，除了<span class="math inline">\(\beta_0\)</span>以外的系数相等 <span class="math display">\[Odds(Poor)/Odds(Excellent+Good+Average+Fair)\\
+= Odds(Fair+Poor)/Odds(Excellent+Good+Average)\\
+=Odds(Average+Fair+Poor)/Odds(Excellent+Good)\\
+= Odds(Good+Average+Fair+Poor)/Odds(Excellent)\]</span></li>
+<li>Proportionalodds假定是否成立更多是由研究问题的自身性质决定，可以用数据进行检测，但数据本身可能有Bias</li>
+<li>如果该假定不成立:当做无序多分类Logistic回归</li>
+</ol>
+</section>
+</section>
+<section id="导入数据" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="导入数据"><span class="header-section-number">3</span> 导入数据</h2>
+<p>1977年汽车修理记录数据</p>
+<div id="02e056db" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>webuse fullauto.dta,clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Automobile models)</code></pre>
+</div>
+</div>
+<section id="结局变量" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="结局变量"><span class="header-section-number">3.1</span> 结局变量</h3>
+<p>outcome：车辆维修状况</p>
+<div id="27cbec93" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>codebook rep77</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-------------------------------------------------------------------------------
+rep77                                                        Repair record 1977
+-------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+                 Label: repair
+
+                 Range: [1,5]                         Units: 1
+         Unique values: 5                         Missing .: 8/74
+
+            Tabulation: Freq.   Numeric  Label
+                            3         1  Poor
+                           11         2  Fair
+                           27         3  Average
+                           20         4  Good
+                            5         5  Excellent
+                            8         .  </code></pre>
+</div>
+</div>
+</section>
+<section id="暴露变量" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="暴露变量"><span class="header-section-number">3.2</span> 暴露变量</h3>
+<p>exposure：是否为进口车</p>
+<div id="74cdacdd" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>codebook foreign</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+-------------------------------------------------------------------------------
+foreign                                                                 Foreign
+-------------------------------------------------------------------------------
+
+                  Type: Numeric (byte)
+                 Label: foreign
+
+                 Range: [0,1]                         Units: 1
+         Unique values: 2                         Missing .: 0/74
+
+            Tabulation: Freq.   Numeric  Label
+                           52         0  Domestic
+                           22         1  Foreign</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="卡方检验" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="卡方检验"><span class="header-section-number">4</span> 卡方检验</h2>
+<p><span class="math inline">\(H_0\)</span>：车辆是否为进口车和车辆维修状况没有关系</p>
+<div id="34f3c47b" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>tab foreign rep77,chi2</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+           |                   Repair record 1977
+   Foreign |      Poor       Fair    Average       Good  Excellent |     Total
+-----------+-------------------------------------------------------+----------
+  Domestic |         2         10         20         13          0 |        45 
+   Foreign |         1          1          7          7          5 |        21 
+-----------+-------------------------------------------------------+----------
+     Total |         3         11         27         20          5 |        66 
+
+          Pearson chi2(4) =  13.8619   Pr = 0.008</code></pre>
+</div>
+</div>
+<p><span class="math inline">\(P=0.008&lt;0.05\)</span>，在<span class="math inline">\(\alpha=0.05\)</span> 的检验水准下，拒绝零假设，得出结论:车辆是否为进口车和车辆维修状况有关系</p>
+</section>
+<section id="有序logistic回归" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="有序logistic回归"><span class="header-section-number">5</span> 有序Logistic回归</h2>
+<section id="语法" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="语法"><span class="header-section-number">5.1</span> 语法</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ologit</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x3 ...xn [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [,options]</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>最常用的 <code>[,options]</code> 是 <code>or</code>,他可以直接给出<code>OR</code>值</li>
+<li>Examples：
+<ul>
+<li>ologit rep77 foreign</li>
+<li>ologit rep77 foreign, or</li>
+<li>ologit rep77 foreign length mpg, or</li>
+</ul></li>
+</ul>
+<div id="5e956f80" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>ologit rep77 foreign</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  Log likelihood = -89.895098  
+Iteration 1:  Log likelihood = -85.951765  
+Iteration 2:  Log likelihood = -85.908227  
+Iteration 3:  Log likelihood = -85.908161  
+Iteration 4:  Log likelihood = -85.908161  
+
+Ordered logistic regression                             Number of obs =     66
+                                                        LR chi2(1)    =   7.97
+                                                        Prob &gt; chi2   = 0.0047
+Log likelihood = -85.908161                             Pseudo R2     = 0.0444
+
+------------------------------------------------------------------------------
+       rep77 | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     foreign |   1.455878   .5308951     2.74   0.006     .4153425    2.496413
+-------------+----------------------------------------------------------------
+       /cut1 |  -2.765562   .5988208                     -3.939229   -1.591895
+       /cut2 |  -.9963603   .3217706                     -1.627019   -.3657016
+       /cut3 |   .9426153   .3136398                      .3278925    1.557338
+       /cut4 |   3.123351   .5423257                      2.060412     4.18629
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>进口车（foreign=1）和国产车（foreign=0）比：</p>
+<p><span class="math display">\[Odds=e^{-1.46}=0.23\]</span></p>
+<ul>
+<li>更高维修状况等级为reference，在更低维修状况的odds</li>
+</ul>
+<p>也可以是：</p>
+<p><span class="math display">\[Odds=e^{\beta}=e^{1.46}=4.29\]</span></p>
+<ul>
+<li>更低维修状况等级为reference，在更高维修状况的odds</li>
+</ul>
+<p>进口(Foreign=1)车和国产车相比(Foreign=0)，在“更低的车辆维修状况等级”的odds是在“更高维修状况等级”的0.23倍</p>
+<p><strong>一般使用如下假释</strong>：进口(Foreign=1)车和国产车相比(Foreign=0)，在“更高的车辆维修状况等级”的odds是在“更低维修状况等级”的4.29倍</p>
+<div id="d127dbfb" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ologit rep77 foreign,<span class="kw">or</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  Log likelihood = -89.895098  
+Iteration 1:  Log likelihood = -85.951765  
+Iteration 2:  Log likelihood = -85.908227  
+Iteration 3:  Log likelihood = -85.908161  
+Iteration 4:  Log likelihood = -85.908161  
+
+Ordered logistic regression                             Number of obs =     66
+                                                        LR chi2(1)    =   7.97
+                                                        Prob &gt; chi2   = 0.0047
+Log likelihood = -85.908161                             Pseudo R2     = 0.0444
+
+------------------------------------------------------------------------------
+       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     foreign |   4.288246   2.276609     2.74   0.006      1.51489    12.13888
+-------------+----------------------------------------------------------------
+       /cut1 |  -2.765562   .5988208                     -3.939229   -1.591895
+       /cut2 |  -.9963603   .3217706                     -1.627019   -.3657016
+       /cut3 |   .9426153   .3136398                      .3278925    1.557338
+       /cut4 |   3.123351   .5423257                      2.060412     4.18629
+------------------------------------------------------------------------------
+Note: Estimates are transformed only in the first equation to odds ratios.</code></pre>
+</div>
+</div>
+<div id="e65a541b" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>ologit rep77 foreign length mpg,<span class="kw">or</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  Log likelihood = -89.895098  
+Iteration 1:  Log likelihood = -78.775147  
+Iteration 2:  Log likelihood = -78.254294  
+Iteration 3:  Log likelihood = -78.250719  
+Iteration 4:  Log likelihood = -78.250719  
+
+Ordered logistic regression                             Number of obs =     66
+                                                        LR chi2(3)    =  23.29
+                                                        Prob &gt; chi2   = 0.0000
+Log likelihood = -78.250719                             Pseudo R2     = 0.1295
+
+------------------------------------------------------------------------------
+       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     foreign |    18.1162   14.32342     3.66   0.000     3.846558    85.32223
+      length |   1.086354    .024682     3.65   0.000      1.03904    1.135823
+         mpg |   1.259567   .0887425     3.28   0.001     1.097109     1.44608
+-------------+----------------------------------------------------------------
+       /cut1 |   17.92748   5.551191                      7.047344    28.80761
+       /cut2 |   19.86506    5.59648                      8.896161    30.83396
+       /cut3 |   22.10331   5.708936                        10.914    33.29262
+       /cut4 |   24.69213   5.890754                      13.14647     36.2378
+------------------------------------------------------------------------------
+Note: Estimates are transformed only in the first equation to odds ratios.</code></pre>
+</div>
+</div>
+<ul>
+<li>在控制了汽车的长度、里程之后，进口车有着更高车辆维修状况等级的odds是国产车的18.12倍(95%CI:3.85,85.32)</li>
+<li>在控制了汽车的产地、里程之后，车辆每增加1 inch，有更高车辆维修状况的odds增加8.64%(95% CI: 3.90,13.58)</li>
+<li>mpg</li>
+</ul>
 
 
-<!-- -->
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1346,39 +1621,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="pagination-link" aria-label="02-SAS 在 Jupyter Notebook 中使用">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-SAS 在 Jupyter Notebook 中使用</span>
+      <a href="../../Guide/Stata/25-05-08-4-GEE.html" class="pagination-link" aria-label="17-广义估计方程(GEE)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">17-广义估计方程(GEE)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="11-Stata 做 ITSA 分析">
-        <span class="nav-page-text">11-Stata 做 ITSA 分析</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-09-1-multinomail-logistic-reg.html" class="pagination-link" aria-label="19-无序多分类Logistic回归">
+        <span class="nav-page-text">19-无序多分类Logistic回归</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "00-Stata Intro and Record"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1391,7 +1643,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-03-09-Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-08-5-Ord-Logistic-Reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

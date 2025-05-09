@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-08},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 8, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-09},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 9, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -3838,6 +3838,864 @@
       "统计软件",
       "Stata",
       "18-有序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-2-data-manag.html",
+    "href": "Guide/Stata/25-05-09-2-data-manag.html",
+    "title": "20-数据整理",
+    "section": "",
+    "text": "使用 Do-file 完成后续的数据整理操作",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "20-数据整理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-2-data-manag.html#stata-须知",
+    "href": "Guide/Stata/25-05-09-2-data-manag.html#stata-须知",
+    "title": "20-数据整理",
+    "section": "1 Stata 须知",
+    "text": "1 Stata 须知\n\nStata区分大小写! Stata is case-sensitive!\n常见符号:\n\n=是 赋值(e.g· gen x = 1)\n==是 恒等(e.g· gen x = 1 if y == 2)\n|是 或者(e.g· gen x = 1 if y == 2 | y == 3)\n&是 且(e.g· gen x = 1 if y == 2 & z == 3) ## 数据整理的常见步骤\n\n查看工作路径(pwd);改变工作路径(cd)\n导入Excel文件(import excel),CSV文件(import delimited),dta文件(use)\n添加变量或变量数值标签(label)\n生成新变量(gen)或统计量变量(egen)\n将观测值按照变量数值大小排序(sort;gsort)\n改变变量前后顺序(order)\n将数据集进行长宽转换(reshape)\n合并数据集(merge)\n删除(drop)或保留(keep)观测值或变量\n导出Excel,CSV文件(export)或dta文件(save) %%skip\n\n\nStata添加注释的方法\nStata中绿色的文字是不运行的\n\n// 跟在command之后的注释 \n/// 代表行内换行 \n* 星号作为一行的开头时，这一行都是注释 \n/* 两个星号之间加多行注释 */ \n/*  Purpose: \n    Author: \n    Date created: \n*/\n\n* 清除Stata内存里的所有数据和宏等 \nclear all\n\n//set maxvar 8000 \n* 如果你的变量数&gt;5000，需要设置。例如:set maxvar 8000 \n* 请注意:Stata IC最多只有2,048个变量;SE:32,767;MP:120，000\n\n* 得到现在的工作路径，每个人肯定都不一样 \npwd\n\n* 改变到自己的工作路径\n* 改变工作路径到\"/Users/username/Desktop/Stata'\ncd \"/Users/username/Desktop/Stata\"\n\n* 把child.csv,child.xlsx,child.dta,anthro.dta这4个文件放到工作路径底下\n\n* 查看工作路径底下都有什么文件 \ndir\n\n* 如果现在有打开的Log文件，那么关闭它 \ncapture log close  \n* 打开新的Log文件 \nlog using Lecture.log,replace\n\n***********导入dta数据*************** \n* 在这里，没有指定\"child.dta\"这个文件的位置，那么Stata就会到工作路径下面去找这个文件 \n* 逗号后面的clear指的是清除现有的数据，这样才能腾出地方导入新的数据\n\nuse \"child.dta\",clear \n* 或者(文件路径中如果有空格，一定需要用\"\"包裹路径)\nuse \"/Users/username/Desktop/Stata/child.dta\", clear\n\n**************导入csv文件*******************\nimport delimited\"child.csv\", clear\n\n* 当然，你也可以指定这个文件的位置，是一样的\nimport delimited \"/Users/username/Desktop/Stata/child.csv\", clear\n\n* 在导入CSV文件时，Stata自己判断是否把CSV文件的第一行作为变量名导入\n* 我们可以让Stata不把CSV文件的第一行作为变量名导入\nimport delimited\"child.csv\",varnames(nonames) clear\n\n* 我们也可以让Stata必须把CSV文件的第一行作为变量名导入\nimport delimited\"child.csv\",varnames(1) clear\n\n*我们可以让Stata导入的时候把变量名全变成大写\nimport delimited\"child.csv\",varnames(1) case(upper) clear\n\n* 或者全变成小写\nimport delimited \"child.csv\",varnames(1) case(lower) clear\n* 或者保留CSV里的形式\nimport delimited \"child.csv\",varnames(1) case(preserve) clear\n\n*******************导入Excel文件**************\nimport excel \"child.xlsx\",clear\n* 或者\nimport excel\"/Users/username/Desktop/Stata/child.xlsx\",clear\n\n* 在导入Excel文件时，Stata默认第一行不是变量名\n* 我们可以让Stata把第一行当做变量名导入\nimport excel \"child.xlsx\",firstrow clear\n\n* 我们也可以指定导入Excel文件里的哪个Sheet\nimport excel \"child.xlsx\",firstrow sheet(\"Sheet1\")clear\n\n* 我们可以让stata导入的时候把变量名全变成大写\nimport excel \"child.xlsx\",firstrow case(upper) clear\n\n* 或者全变成小写\nimport excel \"child.xlsx\",firstrow case(lower)clear\n\n* 或者保留Excel里的形式\nimport excel \"child.xlsx\",firstrow case(preserve) clear\nimport excel \"/Users/username/Desktop/Stata/child.xlsx\"， ///\nsheet(\"Sheet1\")firstrow clear\n\n*************数据清理*****************\n/*\n我们以CHILD_SEX变量为例，进行数据的清洗和整理CHILD SEX现在是字符型变量:\"1\"是Boy\",\"2\"是Girl,\"M\"是missing\n*/\ncodebook CHILD SEX",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "20-数据整理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-2-data-manag.html#数据清理和排序",
+    "href": "Guide/Stata/25-05-09-2-data-manag.html#数据清理和排序",
+    "title": "20-数据整理",
+    "section": "2 数据清理和排序",
+    "text": "2 数据清理和排序\n继续上述的分析步骤，进入数据清理\n* 改变工作路径到\"/Users/username/Desktop/Stata'\ncd \"/Users/username/Desktop/Stata\"\n\n* 或者保留Excel里的形式\nimport excel \"child.xlsx\",firstrow case(preserve) clear\nimport excel \"/Users/username/Desktop/Stata/child.xlsx\"， ///\nsheet(\"Sheet1\")firstrow clear\n\n*************数据清理*****************\n/*\n我们以CHILD_SEX变量为例，进行数据的清洗和整理CHILD SEX现在是字符型变量:\"1\"是Boy\",\"2\"是Girl,\"M\"是missing\n*/\ncodebook CHILD_SEX\n\n/*\n我们将CHILD_SEX替换成数值型变量。我们使用destring命令在destring的时候，我们可以通过option \"force\"把不是数字的字符(如\"M\")替换为缺失值\n(destring CHILD SEX,force replace)\n但是，需要更加小心:万一有人输入的是\"B\"，我们其实应该替换为1。\n为了保险起见，我们手动把\"M“改成\".\"\"\n*/\nreplace CHILD_SEX = \".\" if CHILD_SEX == \"M\"\n\n/*\n注意:\n字符型变量的观测值只能替换成字符型，因此我们只能把\"M\"替换成\".\"\"，不能替换成 . \n比如，这个就是错的:\nreplace CHILD_SEX = . if CHILD_SEX = \"M\"\nStata会告诉你: type mismatch r(109);\n*/\n\ndestring CHILD_SEX, replace\n\n/*\ndestring的时候:\nreplace option替代现在的CHILD_SEX变量\ndestring CHILD_SEX，replace\ngenerate option生成一个新的变量\ndestring CHILD_SEX, generate(CHILD_SEX_2)\n*/\n\n* Destring以后，我们再来看一下CHILD_SEX的信息\ncodebook CHILD_SEX\n/*\n我们当然可以对于每一个变量进行这样的destring操作，不过比较麻烦\n我写了一个小的loop，可以对每一个变量进行destring操作\n*/\nforeach v of varlist _all { //对于所有变量进行循环\n    capture confirm string var 'v' //先确定这个变量是不是string\n    if _rc==0{ //如果是的话\n    replace 'v' = \".\" if 'v' == \"M\"//将\"'M\"替换成\".\"\n    destring 'v',replace\n    }\n    }",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "20-数据整理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html",
+    "href": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html",
+    "title": "18-有序多分类Logistic回归",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "18-有序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#多分类变量",
+    "href": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#多分类变量",
+    "title": "18-有序多分类Logistic回归",
+    "section": "1 多分类变量",
+    "text": "1 多分类变量\n多分类变量主要分为有序多分类和无序多分类变量\n\n1.1 有许多分类变量\n疾病分期；严重程度；发展阶段等\n\n\n1.2 无序多分类变量\n方位（东、南、西、北）；品牌等",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "18-有序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#有序多分类",
+    "href": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#有序多分类",
+    "title": "18-有序多分类Logistic回归",
+    "section": "2 有序多分类",
+    "text": "2 有序多分类\n\n2.1 有序多分类的原理\n\n将y变量的n个分类拆分成n-1个二分类Logistic回归\n例子中的Excellent; Good; Average; Fair; Poor拆分成:\n\nPoor vs. Excellent + Good + Average+Fair\nFair+Poor vs. Excellent + Good+ Average\nAverage + Fair + Poor vs. Excellent + Good\nGood + Average + Fair + Poor vs. Excellent\n\n\n\n\n2.2 Proportional odds 假定\n\n多个二元Logistic回归中，除了\\(\\beta_0\\)以外的系数相等 \\[Odds(Poor)/Odds(Excellent+Good+Average+Fair)\\\\\n= Odds(Fair+Poor)/Odds(Excellent+Good+Average)\\\\\n=Odds(Average+Fair+Poor)/Odds(Excellent+Good)\\\\\n= Odds(Good+Average+Fair+Poor)/Odds(Excellent)\\]\nProportionalodds假定是否成立更多是由研究问题的自身性质决定，可以用数据进行检测，但数据本身可能有Bias\n如果该假定不成立:当做无序多分类Logistic回归",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "18-有序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#导入数据",
+    "href": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#导入数据",
+    "title": "18-有序多分类Logistic回归",
+    "section": "3 导入数据",
+    "text": "3 导入数据\n1977年汽车修理记录数据\n\n%%stata\nwebuse fullauto.dta,clear\n\n(Automobile models)\n\n\n\n3.1 结局变量\noutcome：车辆维修状况\n\n%%stata\ncodebook rep77\n\n\n-------------------------------------------------------------------------------\nrep77                                                        Repair record 1977\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n                 Label: repair\n\n                 Range: [1,5]                         Units: 1\n         Unique values: 5                         Missing .: 8/74\n\n            Tabulation: Freq.   Numeric  Label\n                            3         1  Poor\n                           11         2  Fair\n                           27         3  Average\n                           20         4  Good\n                            5         5  Excellent\n                            8         .  \n\n\n\n\n3.2 暴露变量\nexposure：是否为进口车\n\n%%stata\ncodebook foreign\n\n\n-------------------------------------------------------------------------------\nforeign                                                                 Foreign\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n                 Label: foreign\n\n                 Range: [0,1]                         Units: 1\n         Unique values: 2                         Missing .: 0/74\n\n            Tabulation: Freq.   Numeric  Label\n                           52         0  Domestic\n                           22         1  Foreign",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "18-有序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#卡方检验",
+    "href": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#卡方检验",
+    "title": "18-有序多分类Logistic回归",
+    "section": "4 卡方检验",
+    "text": "4 卡方检验\n\\(H_0\\)：车辆是否为进口车和车辆维修状况没有关系\n\n%%stata\ntab foreign rep77,chi2\n\n\n           |                   Repair record 1977\n   Foreign |      Poor       Fair    Average       Good  Excellent |     Total\n-----------+-------------------------------------------------------+----------\n  Domestic |         2         10         20         13          0 |        45 \n   Foreign |         1          1          7          7          5 |        21 \n-----------+-------------------------------------------------------+----------\n     Total |         3         11         27         20          5 |        66 \n\n          Pearson chi2(4) =  13.8619   Pr = 0.008\n\n\n\\(P=0.008&lt;0.05\\)，在\\(\\alpha=0.05\\) 的检验水准下，拒绝零假设，得出结论:车辆是否为进口车和车辆维修状况有关系",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "18-有序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#有序logistic回归",
+    "href": "Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html#有序logistic回归",
+    "title": "18-有序多分类Logistic回归",
+    "section": "5 有序Logistic回归",
+    "text": "5 有序Logistic回归\n\n5.1 语法\nologit y x1 x2 x3 ...xn [if] [in] [weight] [,options]\n\n最常用的 [,options] 是 or,他可以直接给出OR值\nExamples：\n\nologit rep77 foreign\nologit rep77 foreign, or\nologit rep77 foreign length mpg, or\n\n\n\n%%stata\nologit rep77 foreign\n\n\nIteration 0:  Log likelihood = -89.895098  \nIteration 1:  Log likelihood = -85.951765  \nIteration 2:  Log likelihood = -85.908227  \nIteration 3:  Log likelihood = -85.908161  \nIteration 4:  Log likelihood = -85.908161  \n\nOrdered logistic regression                             Number of obs =     66\n                                                        LR chi2(1)    =   7.97\n                                                        Prob &gt; chi2   = 0.0047\nLog likelihood = -85.908161                             Pseudo R2     = 0.0444\n\n------------------------------------------------------------------------------\n       rep77 | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     foreign |   1.455878   .5308951     2.74   0.006     .4153425    2.496413\n-------------+----------------------------------------------------------------\n       /cut1 |  -2.765562   .5988208                     -3.939229   -1.591895\n       /cut2 |  -.9963603   .3217706                     -1.627019   -.3657016\n       /cut3 |   .9426153   .3136398                      .3278925    1.557338\n       /cut4 |   3.123351   .5423257                      2.060412     4.18629\n------------------------------------------------------------------------------\n\n\n进口车（foreign=1）和国产车（foreign=0）比：\n\\[Odds=e^{-1.46}=0.23\\]\n\n更高维修状况等级为reference，在更低维修状况的odds\n\n也可以是：\n\\[Odds=e^{\\beta}=e^{1.46}=4.29\\]\n\n更低维修状况等级为reference，在更高维修状况的odds\n\n进口(Foreign=1)车和国产车相比(Foreign=0)，在“更低的车辆维修状况等级”的odds是在“更高维修状况等级”的0.23倍\n一般使用如下假释：进口(Foreign=1)车和国产车相比(Foreign=0)，在“更高的车辆维修状况等级”的odds是在“更低维修状况等级”的4.29倍\n\n%%stata\nologit rep77 foreign,or\n\n\nIteration 0:  Log likelihood = -89.895098  \nIteration 1:  Log likelihood = -85.951765  \nIteration 2:  Log likelihood = -85.908227  \nIteration 3:  Log likelihood = -85.908161  \nIteration 4:  Log likelihood = -85.908161  \n\nOrdered logistic regression                             Number of obs =     66\n                                                        LR chi2(1)    =   7.97\n                                                        Prob &gt; chi2   = 0.0047\nLog likelihood = -85.908161                             Pseudo R2     = 0.0444\n\n------------------------------------------------------------------------------\n       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     foreign |   4.288246   2.276609     2.74   0.006      1.51489    12.13888\n-------------+----------------------------------------------------------------\n       /cut1 |  -2.765562   .5988208                     -3.939229   -1.591895\n       /cut2 |  -.9963603   .3217706                     -1.627019   -.3657016\n       /cut3 |   .9426153   .3136398                      .3278925    1.557338\n       /cut4 |   3.123351   .5423257                      2.060412     4.18629\n------------------------------------------------------------------------------\nNote: Estimates are transformed only in the first equation to odds ratios.\n\n\n\n%%stata\nologit rep77 foreign length mpg,or\n\n\nIteration 0:  Log likelihood = -89.895098  \nIteration 1:  Log likelihood = -78.775147  \nIteration 2:  Log likelihood = -78.254294  \nIteration 3:  Log likelihood = -78.250719  \nIteration 4:  Log likelihood = -78.250719  \n\nOrdered logistic regression                             Number of obs =     66\n                                                        LR chi2(3)    =  23.29\n                                                        Prob &gt; chi2   = 0.0000\nLog likelihood = -78.250719                             Pseudo R2     = 0.1295\n\n------------------------------------------------------------------------------\n       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     foreign |    18.1162   14.32342     3.66   0.000     3.846558    85.32223\n      length |   1.086354    .024682     3.65   0.000      1.03904    1.135823\n         mpg |   1.259567   .0887425     3.28   0.001     1.097109     1.44608\n-------------+----------------------------------------------------------------\n       /cut1 |   17.92748   5.551191                      7.047344    28.80761\n       /cut2 |   19.86506    5.59648                      8.896161    30.83396\n       /cut3 |   22.10331   5.708936                        10.914    33.29262\n       /cut4 |   24.69213   5.890754                      13.14647     36.2378\n------------------------------------------------------------------------------\nNote: Estimates are transformed only in the first equation to odds ratios.\n\n\n\n在控制了汽车的长度、里程之后，进口车有着更高车辆维修状况等级的odds是国产车的18.12倍(95%CI:3.85,85.32)\n在控制了汽车的产地、里程之后，车辆每增加1 inch，有更高车辆维修状况的odds增加8.64%(95% CI: 3.90,13.58)\nmpg",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "18-有序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-3-Cox-reg.html",
+    "href": "Guide/Stata/25-05-08-3-Cox-reg.html",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-3-Cox-reg.html#数据导入",
+    "href": "Guide/Stata/25-05-08-3-Cox-reg.html#数据导入",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "1 数据导入",
+    "text": "1 数据导入\n在一个抗癌药物的Clinical Trial中，48名患者被随机分配到新药组(28人)和安慰剂组(20人)，研究人员想知道新药是否影响患者的生存情况。\nData：Patient Survival in Drug Trial\n\n%%stata\nwebuse drugtr,clear\n\n(Patient survival in drug trial)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-3-Cox-reg.html#cox回归",
+    "href": "Guide/Stata/25-05-08-3-Cox-reg.html#cox回归",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "2 Cox回归",
+    "text": "2 Cox回归\nCox回归分析，也称为比例风险回归模型（Proportional Hazards Model，简称Cox模型），是由英国统计学家D.R.Cox于1972年提出的一种半参数回归模型。\n该模型主要用于生存分析，能够同时分析多个因素对生存期的影响，并且可以处理带有截尾生存时间的数据。\n\n2.1 基本概念\n在介绍Cox回归模型之前，需要了解几个相关的概念：\n\n生存函数：表示观察对象的生存时间大于某时刻的概率。\n死亡函数：表示观察对象的生存时间不大于某时刻的概率。\n死亡密度函数：表示观察对象在某时刻的瞬时死亡率。\n危险率函数：表示生存时间已达到某时刻的观察对象在该时刻的瞬时死亡率1。\n\n\n\n2.2 基本原理\nCox回归模型的基本形式为： \\[h(t|X) = h_0(t) \\exp(\\beta_1 X_1 + \\beta_2 X_2 + \\cdots + \\beta_p X_p)\\]\n其中， \\(h(t|X)\\) 是在给定协变量 \\(X\\) 时的危险率，\\(h_0(t)\\) 是基准危险率，\\(\\beta_i\\) 是需要估计的回归系数。\n\n\n2.3 Cox回归模型的假设包括：\n\n比例风险假设：各危险因素的作用不随时间变化。\n对数线性假设：协变量与对数风险比呈线性关系。\n\n\n\n2.4 偏回归系数的意义\n偏回归系数 \\(\\beta_i\\) 的流行病学含义是在其他协变量不变的情况下，协变量每增加一个测定单位时所引起的相对危险度的自然对数的改变量。\n\n\n2.5 假设检验\nCox回归模型中的偏回归系数可以通过建立偏似然函数，利用Newton-Raphson迭代法求得。常用的假设检验方法包括似然比检验、Wald检验和记分检验。\nCox回归模型由于其灵活性和广泛应用，成为生存分析中最常用的多因素分析方法之一。\n\n%%stata\nstcox drug\n\n\n        Failure _d: died\n  Analysis time _t: studytime\n\nIteration 0:  Log likelihood = -99.911448\nIteration 1:  Log likelihood = -88.254734\nIteration 2:  Log likelihood = -88.001551\nIteration 3:  Log likelihood =  -88.00019\nRefining estimates:\nIteration 0:  Log likelihood =  -88.00019\n\nCox regression with Breslow method for ties\n\nNo. of subjects =  48                                   Number of obs =     48\nNo. of failures =  31\nTime at risk    = 744\n                                                        LR chi2(1)    =  23.82\nLog likelihood = -88.00019                              Prob &gt; chi2   = 0.0000\n\n------------------------------------------------------------------------------\n          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        drug |   .1327581   .0584002    -4.59   0.000     .0560555    .3144157\n------------------------------------------------------------------------------\n\n\n这里 Drug 的 coefficient(\\(\\beta\\)) : 新药组终点事件发生风险是安慰剂组的 13.3%(95% CI: 5.6%,31.4%)\n控制年龄：\n\n%%stata\nstcox drug age\n\n\n        Failure _d: died\n  Analysis time _t: studytime\n\nIteration 0:  Log likelihood = -99.911448\nIteration 1:  Log likelihood = -83.551879\nIteration 2:  Log likelihood = -83.324009\nIteration 3:  Log likelihood = -83.323546\nRefining estimates:\nIteration 0:  Log likelihood = -83.323546\n\nCox regression with Breslow method for ties\n\nNo. of subjects =  48                                   Number of obs =     48\nNo. of failures =  31\nTime at risk    = 744\n                                                        LR chi2(2)    =  33.18\nLog likelihood = -83.323546                             Prob &gt; chi2   = 0.0000\n\n------------------------------------------------------------------------------\n          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        drug |   .1048772   .0477017    -4.96   0.000     .0430057    .2557622\n         age |   1.120325   .0417711     3.05   0.002     1.041375     1.20526\n------------------------------------------------------------------------------\n\n\n这里 Drug 的 coefficient(\\(\\beta_1\\)) : 在控制了患者的年龄后，新药组终点事件发生风险是安慰剂组的 10.5%(95% CI: 4.3%,25.6%)\n反过来，这里 Age 的 coefficient(\\(\\beta_2\\)) : 在控制了治疗方法后，患者年龄每增加 1 岁，发生终点事件风险增加 12%(95% CI: 4.1%,20.5%)\n\n\n2.6 Cox回归的命令语法\nstcox var1 var2 var3 ... [if] [in] [, options]\nNotice\n\n必须要在指定Data为Suvivaldata之后(stset之后)才能使用任何st开头的命令\n由于我们已经在一开始将数据转化为Survivaldata的时候指定过终点事件(Failure variable)、时间变量(Time variable)，我们在这里只需要设置需要在回归方程中independent variable即可\nExample\n\nstcox drug age\nstcox drug age if age &lt; 50",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-3-Cox-reg.html#ph-假定检验",
+    "href": "Guide/Stata/25-05-08-3-Cox-reg.html#ph-假定检验",
+    "title": "16-Cox回归与比例风险假定检验",
+    "section": "3 PH 假定检验",
+    "text": "3 PH 假定检验\n\n3.1 使用统计检验法\nCox回归模型在应用时，有一个非常重要的前提条件，即比例风险（Proportional hazards）假定，简称PH假定。\nNotice:PH假定的检验基于上一步进行的Cox回归。\n\\(H_0\\)：纳入Cox回归模型的变量满足PH假定\n\\(P&gt;0.05\\)，不能拒绝\\(H_0\\)\n\n%%stata\nestat phtest\n\n\nTest of proportional-hazards assumption\n\nTime function: Analysis time\n------------------------------------------------\n             |     chi2       df       Prob&gt;chi2\n-------------+----------------------------------\n Global test |     0.43        2          0.8064\n------------------------------------------------\n\n\n\n\n3.2 PH假定 使用图像法\n使用- ln(-ln(生存))图法，判断标准是如果待评价的变量分成的亚组曲线平行或近似平行，则满足PH假定。\nstphplot,by(bar1) adjust(var2 var3)\nvar1 是自变量名，var2 等是希望控制的变量。\nNotice:这个命令不一定要跟在cox回归之后\n\n%%stata\nstphplot,by(drug) adjust(age)\n\n\n        Failure _d: died\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n\n3.3 如果不满足PH假定\n\n一般只要两组生存曲线趋势一致、不明显交叉即可判定PH假定成立\n如果PH假定不成立，可以加上时间(time)和暴露 (exposure,比如本例之中的drug)的交互项(interaction term), time*exposure\n也可以对于不同的时间段分别分析(e.g.0-10，10-20,&gt;20)\n参数生存分析模型:streg进行参数生存分析",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "16-Cox回归与比例风险假定检验"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html",
+    "href": "Guide/Stata/25-05-08-1-GLM.html",
+    "title": "14-广义线性模型（GLM）",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)\n%%stata\nsysuse auto.dta,clear\n\n(1978 automobile data)\n大于15%会产生Bias的这个问题，只有在我们想用odds去estimaterisk的时候才会发生。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#什么是广义线性模型",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#什么是广义线性模型",
+    "title": "14-广义线性模型（GLM）",
+    "section": "1 什么是广义线性模型",
+    "text": "1 什么是广义线性模型\n\n线性回归 Linear regression：\n\n\\(exp Y = \\beta_0 + \\beta_1*X_1+\\cdots + \\beta_n *X_n\\)\n\n广义线性回归 Generalized linear model：\n\n\\(f(exp Y)= β_0 + β_1*X_1 + \\cdots + \\beta_n* X_n\\)\nLinear regression is a special case of GLM\nSame for logistic regression, Poisson regression, Log-Binomial regression\nEven for Cox regression (Aug.31st & Sep.7th), GEE model (Sep.14th)\n\n总结：在GLM中，转化Y使得转化之后的Y和X们呈线性关系",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#simple-glm-vs.-multiple-glm",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#simple-glm-vs.-multiple-glm",
+    "title": "14-广义线性模型（GLM）",
+    "section": "2 Simple GLM vs. Multiple GLM",
+    "text": "2 Simple GLM vs. Multiple GLM\n\n2.1 简单广义线性模型\n\\[f(exp Y)= β_0 + β_1*X_1\\]\n\n\n2.2 多元广义线性模型\n\\[f(exp Y)= β_0 + β_1*X_1 + \\cdots + \\beta_n* X_n\\]\nX变量可以是各种类型的变量（连续、分类）",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#specify-options",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#specify-options",
+    "title": "14-广义线性模型（GLM）",
+    "section": "3 Specify Options",
+    "text": "3 Specify Options\n\n3.1 Family\nY 变量的分布类型\n\n\n3.2 Link\n把 Y 怎么转化，才和 X 成linear关系",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#linear-regression",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#linear-regression",
+    "title": "14-广义线性模型（GLM）",
+    "section": "4 linear regression",
+    "text": "4 linear regression\n\n4.1 Y var\n\n连续分布（continuous variable）\n如何分布? 高斯分布（Gaussian Distribution）\nModel：\n\n\\[f(exp Y)= β_0 + β_1*X_1 + \\cdots + \\beta_n* X_n\\]\nY 怎么转化才和 X 成 linear 关系？\n\n不用转化\nLink：Identity（恒等）",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#logistic-regression",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#logistic-regression",
+    "title": "14-广义线性模型（GLM）",
+    "section": "5 Logistic regression",
+    "text": "5 Logistic regression\n\n5.1 Y var\n\nBinary variable\n如何分布? 二项分布(Binomial)\nModel:\n\n\\[ln[P(Y=1)/P(Y=0)]= β_0 + β_1*X_1+\\cdots + β_n*X_n\\]\nExp Y = P(Y=1)\nY 怎么转化才和X成linear关系？Link：logit",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#poisson-regression",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#poisson-regression",
+    "title": "14-广义线性模型（GLM）",
+    "section": "6 Poisson regression",
+    "text": "6 Poisson regression\n\n6.1 Y var\n\nCount variable:整数(1,2,3,.n)\n如何分布? 泊松分布(Poisson)\nModel:\n\n\\[ln[risk of event)]= β_0 + β_1*X_1+\\cdots + β_n*X_n\\]\nY 怎么转化才和X成linear关系？Link：Log",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#log-binomial-regression",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#log-binomial-regression",
+    "title": "14-广义线性模型（GLM）",
+    "section": "7 Log-binomial Regression",
+    "text": "7 Log-binomial Regression\n\n7.1 Y var\n\nBinary variable\n如何分布? 二项分布(Binomial)\nModel:\n\n\\[ln[P(Y=1)]= β_0 + β_1*X_1+\\cdots + β_n*X_n\\]\nExp Y = P(Y=1)\nY 怎么转化才和X成linear关系？Link：Log\n\n\n\n%%stata\nhelp glm\n\n\n[R] glm -- Generalized linear models\n           (View complete PDF manual entry)\n\n\nSyntax\n------\n\n        glm depvar [indepvars] [if] [in] [weight] [, options]\n\n    options                     Description\n    -------------------------------------------------------------------------\n    Model\n      family(familyname)        distribution of depvar; default is\n                                  family(gaussian)\n      link(linkname)            link function; default is canonical link for\n                                  family() specified\n\n    Model 2\n      noconstant                suppress constant term\n      exposure(varname)         include ln(varname) in model with coefficient\n                                  constrained to 1\n      offset(varname)           include varname in model with coefficient\n                                  constrained to 1\n      constraints(constraints)  apply specified linear constraints\n      asis                      retain perfect predictor variables\n      mu(varname)               use varname as the initial estimate for the\n                                  mean of depvar\n      init(varname)             synonym for mu(varname)\n\n    SE/Robust\n      vce(vcetype)              vcetype may be oim, robust, cluster clustvar,\n                                  eim, opg, bootstrap, jackknife, hac kernel,\n                                  jackknife1, or unbiased\n      vfactor(#)                multiply variance matrix by scalar #\n      disp(#)                   quasilikelihood multiplier\n      scale(x2|dev|#)           set the scale parameter\n\n    Reporting\n      level(#)                  set confidence level; default is level(95)\n      eform                     report exponentiated coefficients\n      nocnsreport               do not display constraints\n      display_options           control columns and column formats, row\n                                  spacing, line width, display of omitted\n                                  variables and base and empty cells, and\n                                  factor-variable labeling\n\n    Maximization\n      ml                        use maximum likelihood optimization; the\n                                  default\n      irls                      use iterated, reweighted least-squares\n                                  optimization of the deviance\n      maximize_options          control the maximization process; seldom used\n      fisher(#)                 use the Fisher scoring Hessian or expected\n                                  information matrix (EIM)\n      search                    search for good starting values\n\n      noheader                  suppress header table from above coefficient\n                                  table\n      notable                   suppress coefficient table\n      nodisplay                 suppress the output; iteration log is still\n                                  displayed\n      collinear                 keep collinear variables\n      coeflegend                display legend instead of statistics\n    -------------------------------------------------------------------------\n\n    familyname               Description\n    -------------------------------------------------------------------------\n    gaussian                 Gaussian (normal)\n    igaussian                inverse Gaussian\n    binomial[varnameN|#N]    Bernoulli/binomial\n    poisson                  Poisson\n    nbinomial[#k|ml]         negative binomial\n    gamma                    gamma\n    -------------------------------------------------------------------------\n\n    linkname                 Description\n    -------------------------------------------------------------------------\n    identity                 identity\n    log                      log\n    logit                    logit\n    probit                   probit\n    cloglog                  cloglog\n    power #                  power\n    opower #                 odds power\n    nbinomial                negative binomial\n    loglog                   log-log\n    logc                     log-complement\n    -------------------------------------------------------------------------\n\n    indepvars may contain factor variables; see fvvarlist.\n    depvar and indepvars may contain time-series operators; see tsvarlist.\n    bayes, bootstrap, by, collect, fmm, fp, jackknife, mfp, mi estimate,\n      nestreg, rolling, statsby, stepwise, and svy are allowed; see prefix.\n      For more details, see [BAYES] bayes: glm and [FMM] fmm: glm.\n    vce(bootstrap), vce(jackknife), and vce(jackknife1) are not allowed with\n      the mi estimate prefix.\n    Weights are not allowed with the bootstrap prefix.\n    aweights are not allowed with the jackknife prefix.\n    vce(), vfactor(), disp(), scale(), irls, fisher(), noheader, notable,\n      nodisplay, and weights are not allowed with the svy prefix.\n    fweights, aweights, iweights, and pweights are allowed; see weight.\n    noheader, notable, nodisplay, collinear, and coeflegend do not appear in\n      the dialog box.\n    See [R] glm postestimation for features available after estimation.\n\n\nMenu\n----\n\n    Statistics &gt; Generalized linear models &gt; Generalized linear models (GLM)\n\n\nDescription\n-----------\n\n    glm fits generalized linear models.  It can fit models by using either\n    IRLS (maximum quasilikelihood) or Newton-Raphson (maximum likelihood)\n    optimization, which is the default.\n\n    See [U] 27 Overview of Stata estimation commands for a description of all\n    of Stata's estimation commands, several of which fit models that can also\n    be fit using glm.\n\n\nLinks to PDF documentation\n--------------------------\n\n        Quick start\n\n        Remarks and examples\n\n        Methods and formulas\n\n    The above sections are not included in this help file.\n\n\nOptions\n-------\n\n        +-------+\n    ----+ Model +------------------------------------------------------------\n\n    family(familyname) specifies the distribution of depvar; family(gaussian)\n        is the default.\n\n    link(linkname) specifies the link function; the default is the canonical\n        link for the family() specified (except for family(nbinomial)).\n\n        +---------+\n    ----+ Model 2 +----------------------------------------------------------\n\n    noconstant, exposure(varname), offset(varname), constraints(constraints);\n        see [R] Estimation options.  constraints(constraints) is not allowed\n        with irls.\n\n    asis forces retention of perfect predictor variables and their\n        associated, perfectly predicted observations and may produce\n        instabilities in maximization; see [R] probit.  This option is\n        allowed only with option family(binomial) with a denominator of 1.\n\n    mu(varname) specifies varname as the initial estimate for the mean of \n        depvar.  This option can be useful with models that experience\n        convergence difficulties, such as family(binomial) models with power\n        or odds-power links.  init(varname) is a synonym.\n\n        +-----------+\n    ----+ SE/Robust +--------------------------------------------------------\n\n    vce(vcetype) specifies the type of standard error reported, which\n        includes types that are derived from asymptotic theory (oim, opg),\n        that are robust to some kinds of misspecification (robust), that\n        allow for intragroup correlation (cluster clustvar), and that use\n        bootstrap or jackknife methods (bootstrap, jackknife); see [R]\n        vce_option.\n\n        In addition to the standard vcetypes, glm allows the following\n        alternatives:\n\n        vce(eim) specifies that the EIM estimate of variance be used.\n\n        vce(jackknife1) specifies that the one-step jackknife estimate of\n            variance be used.\n\n        vce(hac kernel [#]) specifies that a heteroskedasticity- and\n            autocorrelation-consistent (HAC) variance estimate be used.  HAC\n            refers to the general form for combining weighted matrices to\n            form the variance estimate.  There are three kernels built into\n            glm.  kernel is a user-written program or one of\n\n                          nwest | gallant | anderson\n\n            # specifies the number of lags.  If # is not specified, N - 2 is\n            assumed.  If you wish to specify vce(hac ... ), you must tsset\n            your data before calling glm.\n\n        vce(unbiased) specifies that the unbiased sandwich estimate of\n            variance be used.\n\n    vfactor(#) specifies a scalar by which to multiply the resulting variance\n        matrix.  This option allows you to match output with other packages,\n        which may apply degrees of freedom or other small-sample corrections\n        to estimates of variance.\n\n    disp(#) multiplies the variance of depvar by # and divides the deviance\n        by #.  The resulting distributions are members of the quasilikelihood\n        family.  This option is allowed only with option irls.\n\n    scale(x2|dev|#) overrides the default scale parameter.  This option is\n        allowed only with Hessian (information matrix) variance estimates.\n\n        By default, scale(1) is assumed for the discrete distributions\n        (binomial, Poisson, and negative binomial), and scale(x2) is assumed\n        for the continuous distributions (Gaussian, gamma, and inverse\n        Gaussian).\n\n        scale(x2) specifies that the scale parameter be set to the Pearson\n        chi-squared (or generalized chi-squared) statistic divided by the\n        residual degrees of freedom, which is recommended by McCullagh and\n        Nelder (1989) as a good general choice for continuous distributions.\n\n        scale(dev) sets the scale parameter to the deviance divided by the\n        residual degrees of freedom.  This option provides an alternative to\n        scale(x2) for continuous distributions and overdispersed or\n        underdispersed discrete distributions.  This option is allowed only\n        with option irls.\n\n        scale(#) sets the scale parameter to #.  For example, using scale(1)\n        in family(gamma) models results in exponential-errors regression.\n        Additional use of link(log) rather than the default link(power -1)\n        for family(gamma) essentially reproduces Stata's streg, dist(exp)\n        nohr command (see [ST] streg) if all the observations are uncensored.\n\n        +-----------+\n    ----+ Reporting +--------------------------------------------------------\n\n    level(#); see [R] Estimation options.\n\n    eform displays the exponentiated coefficients and corresponding standard\n        errors and confidence intervals.  For family(binomial) link(logit)\n        (that is, logistic regression), exponentiation results are odds\n        ratios; for family(nbinomial) link(log) (that is, negative binomial\n        regression) and for family(poisson) link(log) (that is, Poisson\n        regression), exponentiated coefficients are incidence-rate ratios.\n\n    nocnsreport; see [R] Estimation options.\n\n    display_options:  noci, nopvalues, noomitted, vsquish, noemptycells,\n        baselevels, allbaselevels, nofvlabel, fvwrap(#), fvwrapon(style),\n        cformat(%fmt), pformat(%fmt), sformat(%fmt), and nolstretch; see [R]\n        Estimation options.\n\n        +--------------+\n    ----+ Maximization +-----------------------------------------------------\n\n    ml requests that optimization be carried out using Stata's ml commands\n        and is the default.\n\n    irls requests iterated, reweighted least-squares (IRLS) optimization of\n        the deviance instead of Newton-Raphson optimization of the log\n        likelihood.  If the irls option is not specified, the optimization is\n        carried out using Stata's ml commands, in which case all options of\n        ml maximize are also available.\n\n    maximize_options:  difficult, technique(algorithm_spec), iterate(#),\n        [no]log, trace, gradient, showstep, hessian, showtolerance,\n        tolerance(#), ltolerance(#), nrtolerance(#), nonrtolerance, and\n        from(init_specs); see [R] Maximize.  These options are seldom used.\n\n        Setting the optimization method to technique(bhhh) resets the default\n        vcetype to vce(opg).\n\n        If option irls is specified, only maximize_options iterate(), nolog,\n        trace, and ltolerance() are allowed.  With irls specified, the\n        convergence criterion is satisfied when the absolute change in\n        deviance from one iteration to the next is less than or equal to\n        ltolerance(), where ltolerance(1e-6) is the default.\n\n    fisher(#) specifies the number of Newton-Raphson steps that should use\n        the Fisher scoring Hessian or EIM before switching to the observed\n        information matrix (OIM).  This option is useful only for\n        Newton-Raphson optimization (and not when using irls).\n\n    search specifies that the command search for good starting values.  This\n        option is useful only for Newton-Raphson optimization (and not when\n        using irls).\n\n    The following options are available with glm but are not shown in the\n    dialog box:\n\n    noheader suppresses the header information from the output.  The\n        coefficient table is still displayed.\n\n    notable suppresses the table of coefficients from the output.  The header\n        information is still displayed.\n\n    nodisplay suppresses the output.  The iteration log is still displayed.\n\n    collinear, coeflegend; see [R] Estimation options.  collinear is not\n        allowed with irls.\n\n\nRemarks\n-------\n\n    Although glm can be used to fit linear regression (and, in fact, does so\n    by default), this should be viewed as an instructional feature; regress\n    produces such estimates more quickly, and many postestimation commands\n    are available to explore the adequacy of the fit; see [R] regress and [R]\n    regress postestimation.\n\n    In any case, you should specify the link function by using the link()\n    option and specify the distributional family by using family().  The\n    available link functions are\n\n                   Link function            glm option     \n                   ----------------------------------------\n                   identity                 link(identity) \n                   log                      link(log)      \n                   logit                    link(logit)    \n                   probit                   link(probit)   \n                   complementary log-log    link(cloglog)  \n                   odds power               link(opower #) \n                   power                    link(power #)  \n                   negative binomial        link(nbinomial)\n                   log-log                  link(loglog)   \n                   log-complement           link(logc)     \n\n    The available distributional families are\n\n                   Family                 glm option       \n                   ----------------------------------------\n                   Gaussian(normal)       family(gaussian) \n                   inverse Gaussian       family(igaussian)\n                   Bernoulli/binomial     family(binomial) \n                   Poisson                family(poisson)  \n                   negative binomial      family(nbinomial)\n                   gamma                  family(gamma)    \n\n    You do not have to specify both family() and link(); the default link()\n    is the canonical link for the specified family() (except for nbinomial):\n\n                    Family                  Default link  \n                    --------------------------------------\n                    family(gaussian)        link(identity)\n                    family(igaussian)       link(power -2)\n                    family(binomial)        link(logit)   \n                    family(poisson)         link(log)     \n                    family(nbinomial)       link(log)     \n                    family(gamma)           link(power -1)\n\n    If you specify both family() and link(), not all combinations make sense.\n    You may choose from the following combinations:\n\n          | id  log  logit  probit  clog  pow  opower  nbinomial  loglog  logc\n----------+-------------------------------------------------------------------\nGaussian  |  x   x                         x\ninv. Gau. |  x   x                         x\nbinomial  |  x   x     x      x       x    x     x                  x      x\nPoisson   |  x   x                         x\nneg. bin. |  x   x                         x              x\ngamma     |  x   x                         x\n\n\nExamples\n--------\n\n    ---------------------------------------------------------------------------\n    Setup\n        . webuse lbw\n\n    Generalized linear model with Bernoulli family and default logit link\n        . glm low age lwt i.race smoke ptl ht ui, family(binomial)\n\n    Replay results and report exponentiated coefficients\n        . glm, eform\n\n    ---------------------------------------------------------------------------\n    Setup\n        . webuse ldose\n\n    Generalized linear model with binomial family and default logit link\n        . glm r ldose, family(binomial n)\n\n    Generalized linear model with binomial family and cloglog link\n        . glm r ldose, family(binomial n) link(cloglog)\n\n    ---------------------------------------------------------------------------\n    Setup\n        . webuse beetle\n\n    Generalized linear model with binomial family and cloglog link\n        . glm r i.beetle ldose, family(binomial n) link(cloglog)\n\n    Replay results with 99% confidence intervals\n        . glm, level(99)\n    ---------------------------------------------------------------------------\n\n\nStored results\n--------------\n\n    glm, ml stores the following in e():\n\n    Scalars           \n      e(N)                   number of observations\n      e(k)                   number of parameters\n      e(k_eq)                number of equations in e(b)\n      e(k_eq_model)          number of equations in overall model test\n      e(k_dv)                number of dependent variables\n      e(df_m)                model degrees of freedom\n      e(df)                  residual degrees of freedom\n      e(phi)                 scale parameter\n      e(aic)                 model AIC\n      e(bic)                 model BIC\n      e(ll)                  log likelihood, if NR\n      e(N_clust)             number of clusters\n      e(chi2)                chi-squared\n      e(p)                   p-value for model test\n      e(deviance)            deviance\n      e(deviance_s)          scaled deviance\n      e(deviance_p)          Pearson deviance\n      e(deviance_ps)         scaled Pearson deviance\n      e(dispers)             dispersion\n      e(dispers_s)           scaled dispersion\n      e(dispers_p)           Pearson dispersion\n      e(dispers_ps)          scaled Pearson dispersion\n      e(nbml)                1 if negative binomial parameter estimated via\n                               ML, 0 otherwise\n      e(vf)                  factor set by vfactor(), 1 if not set\n      e(power)               power set by link(power #) or link(opower #)\n      e(rank)                rank of e(V)\n      e(ic)                  number of iterations\n      e(rc)                  return code\n      e(converged)           1 if converged, 0 otherwise\n\n    Macros            \n      e(cmd)                 glm\n      e(cmdline)             command as typed\n      e(depvar)              name of dependent variable\n      e(varfunc)             program to calculate variance function\n      e(varfunct)            variance title\n      e(varfuncf)            variance function\n      e(link)                program to calculate link function\n      e(linkt)               link title\n      e(linkf)               link function\n      e(m)                   number of binomial trials\n      e(wtype)               weight type\n      e(wexp)                weight expression\n      e(title)               title in estimation output\n      e(clustvar)            name of cluster variable\n      e(offset)              linear offset variable\n      e(chi2type)            Wald; type of model chi-squared test\n      e(cons)                noconstant, if specified\n      e(hac_kernel)          HAC kernel\n      e(hac_lag)             HAC lag\n      e(vce)                 vcetype specified in vce()\n      e(vcetype)             title used to label Std. err.\n      e(opt)                 ml or irls\n      e(opt1)                optimization title, line 1\n      e(opt2)                optimization title, line 2\n      e(which)               max or min; whether optimizer is to perform\n                               maximization or minimization\n      e(ml_method)           type of ml method\n      e(user)                name of likelihood-evaluator program\n      e(technique)           maximization technique\n      e(properties)          b V\n      e(predict)             program used to implement predict\n      e(marginsok)           predictions allowed by margins\n      e(marginsnotok)        predictions disallowed by margins\n      e(asbalanced)          factor variables fvset as asbalanced\n      e(asobserved)          factor variables fvset as asobserved\n\n    Matrices          \n      e(b)                   coefficient vector\n      e(Cns)                 constraints matrix\n      e(ilog)                iteration log (up to 20 iterations)\n      e(gradient)            gradient vector\n      e(V)                   variance-covariance matrix of the estimators\n      e(V_modelbased)        model-based variance\n\n    Functions         \n      e(sample)              marks estimation sample\n\n    In addition to the above, the following is stored in r():\n\n    Matrices          \n      r(table)               matrix containing the coefficients with their\n                               standard errors, test statistics, p-values,\n                               and confidence intervals\n\n    Note that results stored in r() are updated when the command is replayed\n    and will be replaced when any r-class command is run after the estimation\n    command.\n\n    glm, irls stores the following in e():\n\n    Scalars           \n      e(N)                   number of observations\n      e(k)                   number of parameters\n      e(k_eq_model)          number of equations in overall model test\n      e(df_m)                model degrees of freedom\n      e(df)                  residual degrees of freedom\n      e(phi)                 scale parameter\n      e(disp)                dispersion parameter\n      e(bic)                 model BIC\n      e(N_clust)             number of clusters\n      e(deviance)            deviance\n      e(deviance_s)          scaled deviance\n      e(deviance_p)          Pearson deviance\n      e(deviance_ps)         scaled Pearson deviance\n      e(dispers)             dispersion\n      e(dispers_s)           scaled dispersion\n      e(dispers_p)           Pearson dispersion\n      e(dispers_ps)          scaled Pearson dispersion\n      e(nbml)                1 if negative binomial parameter estimated via\n                               ML, 0 otherwise\n      e(vf)                  factor set by vfactor(), 1 if not set\n      e(power)               power set by link(power #) or link(opower #)\n      e(rank)                rank of e(V)\n      e(rc)                  return code\n\n    Macros            \n      e(cmd)                 glm\n      e(cmdline)             command as typed\n      e(depvar)              name of dependent variable\n      e(varfunc)             program to calculate variance function\n      e(varfunct)            variance title\n      e(varfuncf)            variance function\n      e(link)                program to calculate link function\n      e(linkt)               link title\n      e(linkf)               link function\n      e(m)                   number of binomial trials\n      e(wtype)               weight type\n      e(wexp)                weight expression\n      e(clustvar)            name of cluster variable\n      e(offset)              linear offset variable\n      e(cons)                noconstant, if specified\n      e(hac_kernel)          HAC kernel\n      e(hac_lag)             HAC lag\n      e(vce)                 vcetype specified in vce()\n      e(vcetype)             title used to label Std. err.\n      e(opt)                 ml or irls\n      e(opt1)                optimization title, line 1\n      e(opt2)                optimization title, line 2\n      e(properties)          b V\n      e(predict)             program used to implement predict\n      e(marginsok)           predictions allowed by margins\n      e(marginsnotok)        predictions disallowed by margins\n      e(asbalanced)          factor variables fvset as asbalanced\n      e(asobserved)          factor variables fvset as asobserved\n\n    Matrices          \n      e(b)                   coefficient vector\n      e(V)                   variance-covariance matrix of the estimators\n      e(V_modelbased)        model-based variance\n\n    Functions         \n      e(sample)              marks estimation sample\n\n    In addition to the above, the following is stored in r():\n\n    Matrices          \n      r(table)               matrix containing the coefficients with their\n                               standard errors, test statistics, p-values,\n                               and confidence intervals\n\n    Note that results stored in r() are updated when the command is replayed\n    and will be replaced when any r-class command is run after the estimation\n    command.\n\n\nReference\n---------\n\n    McCullagh, P., and J. A. Nelder. 1989.  Generalized Linear Models. 2nd\n        ed.  London: Chapman & Hall/CRC.\n\n\nglm command in Stata - Umbrella Command - linear regression: family(gaussian) link(identity) - logistic regression: family(binomial) link(logit) - poisson regression: family(poisson) link(log) - log-binomial regression: family(binomial) link(log)\n\n加粗部分表示，在实际代码中可以简写为加粗的字母或单词即可",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#代码的转换",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#代码的转换",
+    "title": "14-广义线性模型（GLM）",
+    "section": "8 代码的转换",
+    "text": "8 代码的转换\n\n8.1 Linear regression:\n\nregress price weight length mpg i.rep78\nglm price weight length mpg i.rep78, family(gaussian)link(identity)\n\n\n\n8.2 Logistic regression:\n\nlogistic low age i.smoke i.race\nglm low age i.smoke i.race,family(binomial) link(logit)\nglm low age i.smoke i.race,family(binomial) link(logit) eform\n\n\neform 直接输出 OR 值，即 \\(e^{\\beta}\\)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#线性回归模型的比较",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#线性回归模型的比较",
+    "title": "14-广义线性模型（GLM）",
+    "section": "9 线性回归模型的比较",
+    "text": "9 线性回归模型的比较\n\n%%stata\nregress price weight length mpg i.rep78\n\n\n      Source |       SS           df       MS      Number of obs   =        69\n-------------+----------------------------------   F(7, 61)        =      7.25\n       Model |   262008114         7  37429730.6   Prob &gt; F        =    0.0000\n    Residual |   314788844        61  5160472.86   R-squared       =    0.4542\n-------------+----------------------------------   Adj R-squared   =    0.3916\n       Total |   576796959        68  8482308.22   Root MSE        =    2271.7\n\n------------------------------------------------------------------------------\n       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |   5.186695   1.163383     4.46   0.000     2.860367    7.513022\n      length |  -124.1544   40.07637    -3.10   0.003     -204.292   -44.01671\n         mpg |  -126.8367   84.49819    -1.50   0.138    -295.8012    42.12791\n             |\n       rep78 |\n          2  |   1137.284   1803.332     0.63   0.531    -2468.701    4743.269\n          3  |   1254.642   1661.545     0.76   0.453    -2067.823    4577.108\n          4  |   2267.188   1698.018     1.34   0.187    -1128.208    5662.584\n          5  |   3850.759   1787.272     2.15   0.035     276.8886     7424.63\n             |\n       _cons |   14614.49   6155.842     2.37   0.021     2305.125    26923.86\n------------------------------------------------------------------------------\n\n\n\n%%stata\nglm price weight length mpg i.rep78, family(gaussian)link(identity)\n\n\nIteration 0:  Log likelihood = -626.90582  \n\nGeneralized linear models                         Number of obs   =         69\nOptimization     : ML                             Residual df     =         61\n                                                  Scale parameter =    5160473\nDeviance         =  314788844.4                   (1/df) Deviance =    5160473\nPearson          =  314788844.4                   (1/df) Pearson  =    5160473\n\nVariance function: V(u) = 1                       [Gaussian]\nLink function    : g(u) = u                       [Identity]\n\n                                                  AIC             =   18.40307\nLog likelihood   = -626.9058204                   BIC             =   3.15e+08\n\n------------------------------------------------------------------------------\n             |                 OIM\n       price | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |   5.186695   1.163383     4.46   0.000     2.906506    7.466883\n      length |  -124.1544   40.07637    -3.10   0.002    -202.7026   -45.60612\n         mpg |  -126.8367   84.49819    -1.50   0.133    -292.4501    38.77675\n             |\n       rep78 |\n          2  |   1137.284   1803.332     0.63   0.528    -2397.182     4671.75\n          3  |   1254.642   1661.545     0.76   0.450    -2001.927    4511.211\n          4  |   2267.188   1698.018     1.34   0.182    -1060.866    5595.241\n          5  |   3850.759   1787.272     2.15   0.031     347.7711    7353.747\n             |\n       _cons |   14614.49   6155.842     2.37   0.018     2549.263    26679.72\n------------------------------------------------------------------------------",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#logistic-回归的比较",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#logistic-回归的比较",
+    "title": "14-广义线性模型（GLM）",
+    "section": "10 logistic 回归的比较",
+    "text": "10 logistic 回归的比较\n重新导入数据：\n\n%%stata\nwebuse lbw,clear\n\n(Hosmer & Lemeshow data)\n\n\n\n%%stata\nlogistic low age i.smoke i.race\n\n\nLogistic regression                                     Number of obs =    189\n                                                        LR chi2(4)    =  15.81\n                                                        Prob &gt; chi2   = 0.0033\nLog likelihood = -109.4311                              Pseudo R2     = 0.0674\n\n------------------------------------------------------------------------------\n         low | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |   .9657186   .0322573    -1.04   0.296     .9045206    1.031057\n             |\n       smoke |\n     Smoker  |    3.00582   1.118001     2.96   0.003     1.449982    6.231081\n             |\n        race |\n      Black  |   2.749483   1.356659     2.05   0.040     1.045318    7.231924\n      Other  |   2.876948   1.167921     2.60   0.009     1.298314    6.375062\n             |\n       _cons |    .365111   .3146026    -1.17   0.242     .0674491    1.976395\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n\n\n%%stata\nglm low age i.smoke i.race,family(binomial) link(logit) eform\n\n\nIteration 0:  Log likelihood = -109.53148  \nIteration 1:  Log likelihood = -109.43111  \nIteration 2:  Log likelihood =  -109.4311  \nIteration 3:  Log likelihood =  -109.4311  \n\nGeneralized linear models                         Number of obs   =        189\nOptimization     : ML                             Residual df     =        184\n                                                  Scale parameter =          1\nDeviance         =  218.8621974                   (1/df) Deviance =   1.189468\nPearson          =  182.9642078                   (1/df) Pearson  =   .9943707\n\nVariance function: V(u) = u*(1-u)                 [Bernoulli]\nLink function    : g(u) = ln(u/(1-u))             [Logit]\n\n                                                  AIC             =   1.210911\nLog likelihood   = -109.4310987                   BIC             =  -745.6193\n\n------------------------------------------------------------------------------\n             |                 OIM\n         low | Odds ratio   std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |   .9657186   .0322573    -1.04   0.296     .9045206    1.031057\n             |\n       smoke |\n     Smoker  |    3.00582   1.118001     2.96   0.003     1.449982    6.231081\n             |\n        race |\n      Black  |   2.749483   1.356659     2.05   0.040     1.045318    7.231924\n      Other  |   2.876948   1.167921     2.60   0.009     1.298314    6.375062\n             |\n       _cons |    .365111   .3146026    -1.17   0.242     .0674491    1.976395\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-1-GLM.html#log-binomial-model",
+    "href": "Guide/Stata/25-05-08-1-GLM.html#log-binomial-model",
+    "title": "14-广义线性模型（GLM）",
+    "section": "11 Log-Binomial Model",
+    "text": "11 Log-Binomial Model\nglm low age i.smoke i.race,family(binomial) link(log)\n\nLogistic regression 的一种替代\nFail to converge\nPoisson regression with robust variance estimate\n\n为了避免出现 Fail to converge 的问题，采用稳健方差估计：\nglm low age i.smoke i.race,family(poisson) link(log) robust\n\nrobust 可以缩写为 r\n\n\n%%stata\nglm low age i.smoke i.race,family(poisson) link(log) robust\n\n\nIteration 0:  Log pseudolikelihood = -124.55888  \nIteration 1:  Log pseudolikelihood = -122.39663  \nIteration 2:  Log pseudolikelihood = -122.39591  \nIteration 3:  Log pseudolikelihood = -122.39591  \n\nGeneralized linear models                         Number of obs   =        189\nOptimization     : ML                             Residual df     =        184\n                                                  Scale parameter =          1\nDeviance         =   126.791811                   (1/df) Deviance =   .6890859\nPearson          =  124.4629927                   (1/df) Pearson  =   .6764293\n\nVariance function: V(u) = u                       [Poisson]\nLink function    : g(u) = ln(u)                   [Log]\n\n                                                  AIC             =   1.348105\nLog pseudolikelihood = -122.3959055               BIC             =  -837.6896\n\n------------------------------------------------------------------------------\n             |               Robust\n         low | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |  -.0246781   .0203034    -1.22   0.224    -.0644722    .0151159\n             |\n       smoke |\n     Smoker  |   .6972155    .211848     3.29   0.001     .2820011     1.11243\n             |\n        race |\n      Black  |    .639629   .2818353     2.27   0.023     .0872419    1.192016\n      Other  |   .6813692   .2428128     2.81   0.005     .2054649    1.157273\n             |\n       _cons |  -1.286544   .5405667    -2.38   0.017    -2.346035   -.2270526\n------------------------------------------------------------------------------",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "14-广义线性模型（GLM）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-3-multi-reg.html",
+    "href": "Guide/Stata/25-05-07-3-multi-reg.html",
+    "title": "12-多元线性回归",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "12-多元线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-3-multi-reg.html#导入数据",
+    "href": "Guide/Stata/25-05-07-3-multi-reg.html#导入数据",
+    "title": "12-多元线性回归",
+    "section": "1 导入数据",
+    "text": "1 导入数据\n\n%%stata\nsysuse auto.dta,clear\n\n(1978 automobile data)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "12-多元线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-3-multi-reg.html#区分简单线性回归和多元线性回归",
+    "href": "Guide/Stata/25-05-07-3-multi-reg.html#区分简单线性回归和多元线性回归",
+    "title": "12-多元线性回归",
+    "section": "2 区分简单线性回归和多元线性回归",
+    "text": "2 区分简单线性回归和多元线性回归\n简单线性回归形如：\\(y=\\beta_0+\\beta_1 x\\)，例如：\n\n%%stata\nreg price weight\n\n\n      Source |       SS           df       MS      Number of obs   =        74\n-------------+----------------------------------   F(1, 72)        =     29.42\n       Model |   184233937         1   184233937   Prob &gt; F        =    0.0000\n    Residual |   450831459        72  6261548.04   R-squared       =    0.2901\n-------------+----------------------------------   Adj R-squared   =    0.2802\n       Total |   635065396        73  8699525.97   Root MSE        =    2502.3\n\n------------------------------------------------------------------------------\n       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |   2.044063   .3768341     5.42   0.000     1.292857    2.795268\n       _cons |  -6.707353    1174.43    -0.01   0.995     -2347.89    2334.475\n------------------------------------------------------------------------------\n\n\n\\(\\beta_1\\)：汽车的重量每增加一个单位，售价增加 2.04 个单位(95%CI:1.29,2.80)\n_cons 是 \\(\\beta_0\\)，即是截距，但是要注意符号与实际的区别\n多元线性模型即不止一个自变量，形如：\\(y=\\beta_0+\\beta_1 x_1 +\\beta_2 x_2 + \\dots\\)\n\n%%stata\nreg price weight length\n\n\n      Source |       SS           df       MS      Number of obs   =        74\n-------------+----------------------------------   F(2, 71)        =     18.91\n       Model |   220725280         2   110362640   Prob &gt; F        =    0.0000\n    Residual |   414340116        71  5835776.28   R-squared       =    0.3476\n-------------+----------------------------------   Adj R-squared   =    0.3292\n       Total |   635065396        73  8699525.97   Root MSE        =    2415.7\n\n------------------------------------------------------------------------------\n       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |   4.699065   1.122339     4.19   0.000     2.461184    6.936946\n      length |  -97.96031    39.1746    -2.50   0.015    -176.0722   -19.84838\n       _cons |   10386.54   4308.159     2.41   0.019     1796.316    18976.76\n------------------------------------------------------------------------------\n\n\n\\(\\beta_2\\)(length)：在控制 weight 变量后，汽车的 length 每增加一个单位，售价减少 97.96 个单位(95%CI:-176.07,2.-19.85)\n\n%%stata\nreg price weight length mpg\n\n\n      Source |       SS           df       MS      Number of obs   =        74\n-------------+----------------------------------   F(3, 70)        =     12.98\n       Model |   226957412         3  75652470.6   Prob &gt; F        =    0.0000\n    Residual |   408107984        70  5830114.06   R-squared       =    0.3574\n-------------+----------------------------------   Adj R-squared   =    0.3298\n       Total |   635065396        73  8699525.97   Root MSE        =    2414.6\n\n------------------------------------------------------------------------------\n       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |   4.364798   1.167455     3.74   0.000     2.036383    6.693213\n      length |  -104.8682   39.72154    -2.64   0.010    -184.0903   -25.64607\n         mpg |  -86.78928   83.94335    -1.03   0.305     -254.209    80.63046\n       _cons |   14542.43   5890.632     2.47   0.016      2793.94    26290.93\n------------------------------------------------------------------------------\n\n\n\n%%stata\nreg price weight length mpg rep78\n\n\n      Source |       SS           df       MS      Number of obs   =        69\n-------------+----------------------------------   F(4, 64)        =     12.68\n       Model |   255066807         4  63766701.9   Prob &gt; F        =    0.0000\n    Residual |   321730151        64  5027033.62   R-squared       =    0.4422\n-------------+----------------------------------   Adj R-squared   =    0.4074\n       Total |   576796959        68  8482308.22   Root MSE        =    2242.1\n\n------------------------------------------------------------------------------\n       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |   4.959534   1.119624     4.43   0.000     2.722827    7.196241\n      length |  -115.0177   38.56456    -2.98   0.004    -192.0592   -37.97612\n         mpg |  -106.7122   81.15836    -1.31   0.193    -268.8446    55.42027\n       rep78 |   910.9859   304.5274     2.99   0.004     302.6226    1519.349\n       _cons |   11934.51   5774.178     2.07   0.043     399.2604    23469.75\n------------------------------------------------------------------------------\n\n\n\\(\\beta_4\\) (rep78): 在控制了汽车的重量、长度、里程后，汽车的修理次数每增加一个单位，售价增加910.99个单位(95%CI:302.62,1519.35)\n这里 rep78 是一个连续变量，如果处理为多分类变量（哑变量）\n\n2.1 什么是哑变量？为什么要设置哑变量？\n当自变量X为多分类变量时，例如职业、学历、血型、疾病严重程度等等此时仅用一个回归系数来解释多分类变量之间的变化关系，及其对因变量Y的影响，就显得太不理想。\n\n\n2.2 如何设置哑变量\n\n在多分类变量前加上 “i.” 告诉Stata这不是连续变量\n形如：\n\n\n%%stata\nreg price weight length mpg i.rep78\n\n\n      Source |       SS           df       MS      Number of obs   =        69\n-------------+----------------------------------   F(7, 61)        =      7.25\n       Model |   262008114         7  37429730.6   Prob &gt; F        =    0.0000\n    Residual |   314788844        61  5160472.86   R-squared       =    0.4542\n-------------+----------------------------------   Adj R-squared   =    0.3916\n       Total |   576796959        68  8482308.22   Root MSE        =    2271.7\n\n------------------------------------------------------------------------------\n       price | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |   5.186695   1.163383     4.46   0.000     2.860367    7.513022\n      length |  -124.1544   40.07637    -3.10   0.003     -204.292   -44.01671\n         mpg |  -126.8367   84.49819    -1.50   0.138    -295.8012    42.12791\n             |\n       rep78 |\n          2  |   1137.284   1803.332     0.63   0.531    -2468.701    4743.269\n          3  |   1254.642   1661.545     0.76   0.453    -2067.823    4577.108\n          4  |   2267.188   1698.018     1.34   0.187    -1128.208    5662.584\n          5  |   3850.759   1787.272     2.15   0.035     276.8886     7424.63\n             |\n       _cons |   14614.49   6155.842     2.37   0.021     2305.125    26923.86\n------------------------------------------------------------------------------\n\n\nrep78 2:在控制了汽车的重量、长度、里程后，汽 车的修理次数两次和一次相比，售价增加1137.28个单 位(95%CI:-2468.70,4743.27)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "12-多元线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-3-multi-reg.html#回归分析需要注意的事情",
+    "href": "Guide/Stata/25-05-07-3-multi-reg.html#回归分析需要注意的事情",
+    "title": "12-多元线性回归",
+    "section": "3 回归分析需要注意的事情",
+    "text": "3 回归分析需要注意的事情\n\n时刻注意纳入模型的观测值数量\n\nCase-wise Deletion：只有纳入模型的变量都没有缺失值，这个观测值才会被纳入回归模型分析（有缺失会被系统默认剔除）\n\n如何让\\(\\beta_0\\)有意义？\n\n使用\\(y=\\beta_0+\\beta_1(x-\\bar x)\\)\n让\\(\\beta_0\\geq 0\\)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "12-多元线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-1-ANOVA.html",
+    "href": "Guide/Stata/25-05-07-1-ANOVA.html",
+    "title": "10-单因素方差分析（ANOVA）",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "10-单因素方差分析（ANOVA）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-1-ANOVA.html#方差分析的假设",
+    "href": "Guide/Stata/25-05-07-1-ANOVA.html#方差分析的假设",
+    "title": "10-单因素方差分析（ANOVA）",
+    "section": "1.1 方差分析的假设",
+    "text": "1.1 方差分析的假设\n\n假设1:y变量为连续变量\n假设2:有一个包含2个及以上分类、且组别间相互独立的x变量\n假设3:每组间和组内的观测值相互独立\n假设4:每组内没有明显异常值\n假设5:每组内y变量符合正态分布\n假设6:进行方差齐性检验，观察每组的方差是否相等\n\n总结为：独立、正态、方差齐",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "10-单因素方差分析（ANOVA）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-1-ANOVA.html#数据导入",
+    "href": "Guide/Stata/25-05-07-1-ANOVA.html#数据导入",
+    "title": "10-单因素方差分析（ANOVA）",
+    "section": "1.2 数据导入",
+    "text": "1.2 数据导入\n\n%%stata\nwebuse systolic,clear\n\n(Systolic blood pressure data)\n\n\n\n1.2.1 查看一下数据形式与结构\n\n%%stata\nlist\n\n\n     +---------------------------+\n     | drug   disease   systolic |\n     |---------------------------|\n  1. |    1         1         42 |\n  2. |    1         1         44 |\n  3. |    1         1         36 |\n  4. |    1         1         13 |\n  5. |    1         1         19 |\n     |---------------------------|\n  6. |    1         1         22 |\n  7. |    1         2         33 |\n  8. |    1         2         26 |\n  9. |    1         2         33 |\n 10. |    1         2         21 |\n     |---------------------------|\n 11. |    1         3         31 |\n 12. |    1         3         -3 |\n 13. |    1         3         25 |\n 14. |    1         3         25 |\n 15. |    1         3         24 |\n     |---------------------------|\n 16. |    2         1         28 |\n 17. |    2         1         23 |\n 18. |    2         1         34 |\n 19. |    2         1         42 |\n 20. |    2         1         13 |\n     |---------------------------|\n 21. |    2         2         34 |\n 22. |    2         2         33 |\n 23. |    2         2         31 |\n 24. |    2         2         36 |\n 25. |    2         3          3 |\n     |---------------------------|\n 26. |    2         3         26 |\n 27. |    2         3         28 |\n 28. |    2         3         32 |\n 29. |    2         3          4 |\n 30. |    2         3         16 |\n     |---------------------------|\n 31. |    3         1          1 |\n 32. |    3         1         29 |\n 33. |    3         1         19 |\n 34. |    3         2         11 |\n 35. |    3         2          9 |\n     |---------------------------|\n 36. |    3         2          7 |\n 37. |    3         2          1 |\n 38. |    3         2         -6 |\n 39. |    3         3         21 |\n 40. |    3         3          1 |\n     |---------------------------|\n 41. |    3         3          9 |\n 42. |    3         3          3 |\n 43. |    4         1         24 |\n 44. |    4         1          9 |\n 45. |    4         1         22 |\n     |---------------------------|\n 46. |    4         1         -2 |\n 47. |    4         1         15 |\n 48. |    4         2         27 |\n 49. |    4         2         12 |\n 50. |    4         2         12 |\n     |---------------------------|\n 51. |    4         2         -5 |\n 52. |    4         2         16 |\n 53. |    4         2         15 |\n 54. |    4         3         22 |\n 55. |    4         3          7 |\n     |---------------------------|\n 56. |    4         3         25 |\n 57. |    4         3          5 |\n 58. |    4         3         12 |\n     +---------------------------+\n\n\n\n%%stata\ncodebook drug\n\n\n-------------------------------------------------------------------------------\ndrug                                                                  Drug used\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (int)\n\n                 Range: [1,4]                         Units: 1\n         Unique values: 4                         Missing .: 0/58\n\n            Tabulation: Freq.  Value\n                           15  1\n                           15  2\n                           12  3\n                           16  4\n\n\n\n%%stata\nsum systolic,detail\n\n\n                 Increment in systolic b.p.\n-------------------------------------------------------------\n      Percentiles      Smallest\n 1%           -6             -6\n 5%           -3             -5\n10%            1             -3       Obs                  58\n25%            9             -2       Sum of wgt.          58\n\n50%           21                      Mean           18.87931\n                        Largest       Std. dev.      12.80087\n75%           28             36\n90%           34             42       Variance       163.8624\n95%           42             42       Skewness       -.094992\n99%           44             44       Kurtosis        2.13251",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "10-单因素方差分析（ANOVA）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-1-ANOVA.html#假设4每组内没有明显的异常值",
+    "href": "Guide/Stata/25-05-07-1-ANOVA.html#假设4每组内没有明显的异常值",
+    "title": "10-单因素方差分析（ANOVA）",
+    "section": "1.3 假设4：每组内没有明显的异常值",
+    "text": "1.3 假设4：每组内没有明显的异常值\n最直观的方式就是用箱型图进行展示数据分布\n\n%%stata\ngraph box systolic,over(drug)\n\n\n\n\n\n\n\n\n\n%%stata\ngraph box systolic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "10-单因素方差分析（ANOVA）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-1-ANOVA.html#假设5每组内y变量符合正态分布",
+    "href": "Guide/Stata/25-05-07-1-ANOVA.html#假设5每组内y变量符合正态分布",
+    "title": "10-单因素方差分析（ANOVA）",
+    "section": "1.4 假设5：每组内y变量符合正态分布",
+    "text": "1.4 假设5：每组内y变量符合正态分布\n一般使用下面三种方法中的一种检验正态性就可以，一般使用 Shapiro-Wilk检验 较为普遍。\n\n1.4.1 偏度与峰度\n使用 sktest 检验偏度与峰度，P值大于0.05，就不能说不符合正态分布\n\n%%stata\nsktest systolic\n\n\nSkewness and kurtosis tests for normality\n                                                         ----- Joint test -----\n    Variable |       Obs   Pr(skewness)   Pr(kurtosis)   Adj chi2(2)  Prob&gt;chi2\n-------------+-----------------------------------------------------------------\n    systolic |        58         0.7452         0.0529          4.03     0.1331\n\n\n\n\n1.4.2 Shapiro-Wilk W test\nShapiro-Wilk检验，是一种基于相关性的算法。计算可得到一个相关系数，它越接近1就越表明数据和正态分布拟合得越好。\n它基于Shapiro和Wilk于1965年提出的检验统计量。以下是其基本原理和用途：\n基本原理：\n\n零假设（Null Hypothesis）：Shapiro-Wilk检验的零假设是数据集来自于正态分布。这意味着，如果数据确实服从正态分布，则零假设成立。\n计算Shapiro-Wilk统计量：检验首先计算Shapiro-Wilk统计量，这是一个衡量数据与正态分布拟合的度量。该统计量基于数据的观察值和正态分布的期望值之间的差异。//Shapiro-Wilk检验的统计量（W统计量）是通过与理论正态分布的期望值进行比较来判断样本数据是否符合正态分布。Shapiro-Wilk检验的原假设是样本数据符合正态分布。统计量的计算基于样本数据的排序顺序和回归分析的概念。W统计量越接近1，表示样本数据越接近正态分布。\n与临界值比较：接下来，Shapiro-Wilk统计量与临界值进行比较。临界值是根据所选的显著性水平（通常为5%）和数据集的大小计算得出的。如果Shapiro-Wilk统计量小于临界值，就意味着数据不太可能来自于正态分布。\n做出决策：根据统计量与临界值的比较，可以决定是否拒绝零假设。如果统计量足够小，小于临界值，通常会拒绝零假设，这意味着数据不服从正态分布。否则，不能拒绝零假设，这表示数据可能服从正态分布。\n\nNotices： Shapiro-Wilk正态性检验对检验样本大小有一定的要求。具体来说，Shapiro-Wilk检验在样本大小较小（通常小于大约50-200，具体取决于不同文献和实践）时可能不太适用，并且在这种情况下其效力可能会降低。\n\n%%stata\nswilk systolic\n\n\n                   Shapiro–Wilk W test for normal data\n\n    Variable |        Obs       W           V         z       Prob&gt;z\n-------------+------------------------------------------------------\n    systolic |         58    0.97803      1.162     0.323    0.37331\n\n\nShapiro-Francia test\nShapiro-Francia检验是一种用于检验数据是否来自正态分布的统计方法。它是Shapiro-Wilk检验的一个变种，通常适用于小到中等样本大小的数据集。Shapiro-Francia检验的核心思想是通过计算统计量来评估数据的正态性。\nShapiro-Francia检验的零假设是数据来自正态分布，而备择假设是数据不来自正态分布。检验的结果会生成一个p-value，如果p-value较小（通常小于0.05），则通常会拒绝零假设，表明数据不符合正态分布。如果p-value较大，则无法拒绝零假设，表明数据可能来自正态分布。\n这种检验方法对于小到中等样本大小的数据集通常效果良好，并且可以用于确定数据是否符合正态分布的假设。\n虽然Shapiro-Francia检验在小样本中通常效果较好，但它也依赖于权重参数的准确性，因此在某些情况下可能不如其他正态性检验方法稳健。因此，在使用Shapiro-Francia检验时，应谨慎选择合适的样本大小和检验方法，以确保可靠的结果。\n\n%%stata\nsfrancia systolic\n\n\n                  Shapiro–Francia W' test for normal data\n\n    Variable |       Obs       W'          V'        z       Prob&gt;z\n-------------+-----------------------------------------------------\n    systolic |        58    0.98522      0.866    -0.275    0.60824",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "10-单因素方差分析（ANOVA）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-1-ANOVA.html#单因素方差分析",
+    "href": "Guide/Stata/25-05-07-1-ANOVA.html#单因素方差分析",
+    "title": "10-单因素方差分析（ANOVA）",
+    "section": "1.5 单因素方差分析",
+    "text": "1.5 单因素方差分析\n语法：\noneway yvar xvar,[,option]\n如果得到的 Prob&gt;F 结果是 &gt;0.05 则说明至少有两个组的平均值是有显著差别的。\nProb&gt;chi2 = 得到的结果如果 &gt;0.05 则说明各组满足方差齐性。\n\n%%stata\noneway systolic drug\n\n\n                        Analysis of variance\n    Source              SS         df      MS            F     Prob &gt; F\n------------------------------------------------------------------------\nBetween groups      3133.23851      3   1044.41284      9.09     0.0001\n Within groups      6206.91667     54   114.942901\n------------------------------------------------------------------------\n    Total           9340.15517     57   163.862371\n\nBartlett's equal-variances test: chi2(3) =   1.0063    Prob&gt;chi2 = 0.800\n\n\n\n1.5.1 使用两两比较\n一般使用 bonferroni 比较\n\n%%stata\noneway systolic drug, bonferroni \n\n\n                        Analysis of variance\n    Source              SS         df      MS            F     Prob &gt; F\n------------------------------------------------------------------------\nBetween groups      3133.23851      3   1044.41284      9.09     0.0001\n Within groups      6206.91667     54   114.942901\n------------------------------------------------------------------------\n    Total           9340.15517     57   163.862371\n\nBartlett's equal-variances test: chi2(3) =   1.0063    Prob&gt;chi2 = 0.800\n\n            Comparison of Increment in systolic b.p. by Drug used\n                                (Bonferroni)\nRow Mean-|\nCol Mean |          1          2          3\n---------+---------------------------------\n       2 |   -.533333\n         |      1.000\n         |\n       3 |   -17.3167   -16.7833\n         |      0.001      0.001\n         |\n       4 |   -12.5667   -12.0333       4.75\n         |      0.012      0.017      1.000\n\n\n\n%%stata\noneway systolic drug, bonferroni tab\n\n\n            |  Summary of Increment in systolic\n            |                b.p.\n  Drug used |        Mean   Std. dev.       Freq.\n------------+------------------------------------\n          1 |   26.066667   11.677002          15\n          2 |   25.533333    11.61813          15\n          3 |        8.75     10.0193          12\n          4 |        13.5   9.3238047          16\n------------+------------------------------------\n      Total |    18.87931   12.800874          58\n\n                        Analysis of variance\n    Source              SS         df      MS            F     Prob &gt; F\n------------------------------------------------------------------------\nBetween groups      3133.23851      3   1044.41284      9.09     0.0001\n Within groups      6206.91667     54   114.942901\n------------------------------------------------------------------------\n    Total           9340.15517     57   163.862371\n\nBartlett's equal-variances test: chi2(3) =   1.0063    Prob&gt;chi2 = 0.800\n\n            Comparison of Increment in systolic b.p. by Drug used\n                                (Bonferroni)\nRow Mean-|\nCol Mean |          1          2          3\n---------+---------------------------------\n       2 |   -.533333\n         |      1.000\n         |\n       3 |   -17.3167   -16.7833\n         |      0.001      0.001\n         |\n       4 |   -12.5667   -12.0333       4.75\n         |      0.012      0.017      1.000",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "10-单因素方差分析（ANOVA）"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-2-simple-line-reg.html",
+    "href": "Guide/Stata/25-05-07-2-simple-line-reg.html",
+    "title": "11-简单线性回归",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "11-简单线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-2-simple-line-reg.html#导入数据",
+    "href": "Guide/Stata/25-05-07-2-simple-line-reg.html#导入数据",
+    "title": "11-简单线性回归",
+    "section": "1 导入数据",
+    "text": "1 导入数据\n\n%%stata\nsysuse auto.dta,clear\n\n(1978 automobile data)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "11-简单线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-2-simple-line-reg.html#线性回归的假设",
+    "href": "Guide/Stata/25-05-07-2-simple-line-reg.html#线性回归的假设",
+    "title": "11-简单线性回归",
+    "section": "2 线性回归的假设",
+    "text": "2 线性回归的假设\n\n假设1:y是连续变量\n假设2:x可以被定义为连续变量（也可以是哑变量）\n假设3:y和x之间存在线性关系\n假设4:具有相互独立的观测值\n假设5:不存在显著的outlier\n假设6:等方差性\n假设7:residual近似正态分布\n\n总结而言：线性、独立、正态、方差齐\n\n2.1 假设3:y和x之间存在线性关系\n通过 scatter plot 或 Lowess plot 进行查看\n如果不符合线性关系怎么办？\n\nspline：一次方项，分段fit直线\nQuadratic：二次方项\nCubic：三次方项\nRestricted cubic：三次方项（头尾近乎直线）\n\n\n%%stata\ntwoway scatter mpg weight\n\n\n\n\n\n\n\n\n\n%%stata\ntwoway lowess mpg weight\n\n\n\n\n\n\n\n\nscatter plot和lowess plot输出在一起\n\n%%stata\nlowess mpg weight\n\n\n\n\n\n\n\n\n\n%%stata\ntwoway (scatter mpg weight)(lowess mpg weight)\n\n\n\n\n\n\n\n\n\n\n2.2 假设4:具有相互独立的观测值\n\n可以使用杜宾-瓦特森(Durbin-Watson)统计量\nStata对于非time series数据不设有这个统计量的检测\n更多情况下，不需要测量这个假设是否成立\n如果是相互关联的观测值：GEE模型、Multi-level模型\n\n\n\n2.3 假设5:不存在显著的outlier\n\nBoxplot 或 Violin Plot\n\n\n%%stata\ngraph box mpg\n\n\n\n\n\n\n\n\n\n%%stata\nvioplot mpg\n\n\n\n\n\n\n\n\n\n\n2.4 假设6:等方差性\n\n使用 Residual-versus-fitted plot\n代码:rvfplot\n\n做等方差之前需要做回归的分析，分析及结果如下：\n\n%%stata\nreg mpg weight\n\n\n      Source |       SS           df       MS      Number of obs   =        74\n-------------+----------------------------------   F(1, 72)        =    134.62\n       Model |   1591.9902         1   1591.9902   Prob &gt; F        =    0.0000\n    Residual |  851.469256        72  11.8259619   R-squared       =    0.6515\n-------------+----------------------------------   Adj R-squared   =    0.6467\n       Total |  2443.45946        73  33.4720474   Root MSE        =    3.4389\n\n------------------------------------------------------------------------------\n         mpg | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      weight |  -.0060087   .0005179   -11.60   0.000    -.0070411   -.0049763\n       _cons |   39.44028   1.614003    24.44   0.000     36.22283    42.65774\n------------------------------------------------------------------------------\n\n\n\n%%stata\nrvfplot\n\n\n\n\n\n\n\n\n从上图可以看出，并不是完全等方差，特别是在 Fitted value 在 25-30 区间内时\n\n\n2.5 假设7:residual近似正态分布\n\nStep 1:得到残差\nStep 2:使用正态分布的检验方法\n\n直方图\n使用 qq plot 观测\n偏度峰度、Shapiro-Wilk检验、Shapiro-Francia检验\n\n\n先建立一个 resid 变量：\n\n%%stata\npredict resid,residual\n\n再对 resid 变量进行查看和检验\n下面分别是 直方图 和 Q-Q图\n\n%%stata\nhist resid\n\n(bin=8, start=-6.9593482, width=2.5970982)\n\n\n\n\n\n\n\n\n\n\n%%stata\n//qq plot\nqnorm resid\n\n\n. //qq plot\n. qnorm resid\n\n. \n\n\n\n\n\n\n\n\n\n\n\n2.6 对残差使用偏度、峰度进行检验\n\n%%stata\nsktest resid\n\n\nSkewness and kurtosis tests for normality\n                                                         ----- Joint test -----\n    Variable |       Obs   Pr(skewness)   Pr(kurtosis)   Adj chi2(2)  Prob&gt;chi2\n-------------+-----------------------------------------------------------------\n       resid |        74         0.0000         0.0010         20.82     0.0000\n\n\n\n\n2.7 使用 Shapiro-Wilk 检验\n\n%%stata\nswilk resid\n\n\n                   Shapiro–Wilk W test for normal data\n\n    Variable |        Obs       W           V         z       Prob&gt;z\n-------------+------------------------------------------------------\n       resid |         74    0.89593      6.702     4.150    0.00002",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "11-简单线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-2-simple-line-reg.html#简单线性回归",
+    "href": "Guide/Stata/25-05-07-2-simple-line-reg.html#简单线性回归",
+    "title": "11-简单线性回归",
+    "section": "3 简单线性回归",
+    "text": "3 简单线性回归\n\n3.1 语法\nregress depvar [indepvars] [if] [in] [weight] [,option]\n具体参见：regress — Linear regression",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "11-简单线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-4-log-binary.html",
+    "href": "Guide/Stata/25-05-07-4-log-binary.html",
+    "title": "13-二分类Logistic回归",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "13-二分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-4-log-binary.html#什么时候该用-logistic-回归",
+    "href": "Guide/Stata/25-05-07-4-log-binary.html#什么时候该用-logistic-回归",
+    "title": "13-二分类Logistic回归",
+    "section": "1 什么时候该用 Logistic 回归",
+    "text": "1 什么时候该用 Logistic 回归\n当outcome发生率 &gt;15% 时logistic regression得出的OR值会overestimate实际的RR值\n\n传统的 Logistic Regression（得出OR值）\nMantel-Haenszel（得出RR值）\nPoisson Regression with robust variance estimate\n\n\n1.1 新方法\n\n1998 Zhang and Yu What’s the Relative Risk?\n\n\\[RR=\\frac{OR}{(1-P_0)+(P_0\\times OR)}\\]\n\n2003 McNutt Outcomes Estimating the Relative Risk in Cohort Studies and Clinical Trials of Common\n金标准：Log Binomial",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "13-二分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-4-log-binary.html#二分类-logistic-模型的假设",
+    "href": "Guide/Stata/25-05-07-4-log-binary.html#二分类-logistic-模型的假设",
+    "title": "13-二分类Logistic回归",
+    "section": "2 二分类 Logistic 模型的假设",
+    "text": "2 二分类 Logistic 模型的假设\n\n假设1:因变量(结局)是二分类变量。\n假设2:有至少1个自变量，自变量可以是连续变量，也可以是分类变量，\n假设3:每条观测间相互独立。分类变量(包括因变量和自变量)的分类必须全面且每一个分类间互斥\n假设4:最小样本量要求为自变量数目的15倍，但一些研究者认为样本量应达到自变量数目的50倍\n假设5:连续的自变量与因变量的logit转换值之间存在线性关系。\n假设6:自变量之间无多重共线性，\n假设7:没有明显的离群点、杠杆点和强影响点。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "13-二分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-4-log-binary.html#做-logistic-回归的要求",
+    "href": "Guide/Stata/25-05-07-4-log-binary.html#做-logistic-回归的要求",
+    "title": "13-二分类Logistic回归",
+    "section": "3 做 Logistic 回归的要求",
+    "text": "3 做 Logistic 回归的要求\n\nY是二分类变量\nY的发生率 &lt;15%",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "13-二分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-4-log-binary.html#导入数据",
+    "href": "Guide/Stata/25-05-07-4-log-binary.html#导入数据",
+    "title": "13-二分类Logistic回归",
+    "section": "4 导入数据",
+    "text": "4 导入数据\n变量 low 是我们的结局事件，我们想看什么因素和孩子的 low birthweight 相关\n\n%%stata\nwebuse lbw,clear\n\n(Hosmer & Lemeshow data)\n\n\n\n%%stata\ntab low\n\n\nBirthweight |\n     &lt;2500g |      Freq.     Percent        Cum.\n------------+-----------------------------------\n          0 |        130       68.78       68.78\n          1 |         59       31.22      100.00\n------------+-----------------------------------\n      Total |        189      100.00\n\n\nDisclaimer: 本节的数据集中，结局事件发生率远远大于15%，应使用Log binomial模型进行分析。这里使用Logistic regression进行分析仅仅为了讲 解如何使用Stata进行操作、以及为下节的Log-binomial进行铺垫。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "13-二分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-07-4-log-binary.html#logistic-regression",
+    "href": "Guide/Stata/25-05-07-4-log-binary.html#logistic-regression",
+    "title": "13-二分类Logistic回归",
+    "section": "5 Logistic regression",
+    "text": "5 Logistic regression\n语法：\nlogistic y x1 x2 x3 ...\n\n5.1 Model 1: \\(low=\\beta_0+\\beta_1 age\\)\n\n%%stata\nlogistic low age\n\n\nLogistic regression                                     Number of obs =    189\n                                                        LR chi2(1)    =   2.76\n                                                        Prob &gt; chi2   = 0.0966\nLog likelihood = -115.95598                             Pseudo R2     = 0.0118\n\n------------------------------------------------------------------------------\n         low | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |   .9501333   .0299423    -1.62   0.105     .8932232    1.010669\n       _cons |      1.469   1.075492     0.53   0.599     .3498129    6.168901\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n\n\\(\\beta_1\\)：母亲的年龄每增加1岁，孩子低体重的风险是之前的0.95倍(95%CI:0.89,1.01)\n\n\n5.2 Model 2: \\(low=\\beta_0+\\beta_1 age+\\beta_2 smoke\\)\n\n%%stata\nlogistic low age i.smoke\n\n\nLogistic regression                                     Number of obs =    189\n                                                        LR chi2(2)    =   7.40\n                                                        Prob &gt; chi2   = 0.0248\nLog likelihood = -113.63815                             Pseudo R2     = 0.0315\n\n------------------------------------------------------------------------------\n         low | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |   .9514394   .0304194    -1.56   0.119     .8936482    1.012968\n             |\n       smoke |\n     Smoker  |   1.997405    .642777     2.15   0.032     1.063027    3.753081\n       _cons |   1.062798   .8048781     0.08   0.936     .2408901    4.689025\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n\n\\(\\beta_1\\)：控制了母亲的吸烟状况以后，母亲的年龄每增加1岁孩子低体重的风险是之前的0.95倍(95% CI:0.89,1.01)\n\n\n5.3 Model 2: \\(low=\\beta_0+\\beta_1 age+\\beta_2 smoke+\\beta_3 race\\)\n\n%%stata\nlogistic low age i.smoke i.race\n\n\nLogistic regression                                     Number of obs =    189\n                                                        LR chi2(4)    =  15.81\n                                                        Prob &gt; chi2   = 0.0033\nLog likelihood = -109.4311                              Pseudo R2     = 0.0674\n\n------------------------------------------------------------------------------\n         low | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |   .9657186   .0322573    -1.04   0.296     .9045206    1.031057\n             |\n       smoke |\n     Smoker  |    3.00582   1.118001     2.96   0.003     1.449982    6.231081\n             |\n        race |\n      Black  |   2.749483   1.356659     2.05   0.040     1.045318    7.231924\n      Other  |   2.876948   1.167921     2.60   0.009     1.298314    6.375062\n             |\n       _cons |    .365111   .3146026    -1.17   0.242     .0674491    1.976395\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n\n\\(\\beta_1\\)：控制了母亲的吸烟状况和种族以后，母亲的年龄每增加1岁孩子低体重的风险是之前的0.97倍(95%CI:0.90,1.03)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "13-二分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html",
+    "title": "15-生存分析",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#生存分析",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#生存分析",
+    "title": "15-生存分析",
+    "section": "1 生存分析",
+    "text": "1 生存分析\n\n描述一个组内个体的生存时间\n\n寿命表法(Life tables methods)\n非参数Kaplan-Meier曲线\n\n比较两个或多个组的生存时间\n\nLog-rank test\n\n研究生存时间和变量之间的关系\n\n半参数Cox比例风险模型\n参数生存分析模型",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#k-m曲线的历史",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#k-m曲线的历史",
+    "title": "15-生存分析",
+    "section": "2 K-M曲线的历史",
+    "text": "2 K-M曲线的历史\n\n1958年，Dr. Kaplan和DrMeier 介绍了一种全新的、解决随访期间RightCensoring问题的生存分析方法\n特点:精确地记录并利用每个个体发生终点事件的具体时间，在任何一个终点事件发生的时间点计算出一个新的、基于之前所有信息的Cumulative survival\n优点:\n\n相比于Life-table method，更加充分地利用了信息，给出更准确的统计量\n非参数估计方法:不要求总体的分布形式，因此非常适合生存分析时使用\nK-M曲线可以很直观地表现出两组或多组的生存率或死亡率，适合在文章中展示",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#导入数据",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#导入数据",
+    "title": "15-生存分析",
+    "section": "3 导入数据",
+    "text": "3 导入数据\n使用 Patient Survival in Drug Trial 数据集\n\n%%stata\nwebuse drugtr,clear\n\n(Patient survival in drug trial)\n\n\n将数据恢复成普通的数据格式：stset,clear\n\nStata已经将这个数据集设置成了生存数据的格式，导入数据集后，将数 据集恢复成普通的数据格式，这样才是我们在临床研究中见到的数据结构。\n\n\n%%stata\nstset,clear",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#数据集的初步观察",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#数据集的初步观察",
+    "title": "15-生存分析",
+    "section": "4 数据集的初步观察",
+    "text": "4 数据集的初步观察\n\n%%stata\nlist in 5/10\n\n\n     +------------------------------+\n     | studyt~e   died   drug   age |\n     |------------------------------|\n  5. |        4      1      0    56 |\n  6. |        4      1      0    67 |\n  7. |        5      1      0    63 |\n  8. |        5      1      0    58 |\n  9. |        8      1      0    56 |\n     |------------------------------|\n 10. |        8      0      0    58 |\n     +------------------------------+\n\n\n\n%%stata\ncodebook drug\n\n\n-------------------------------------------------------------------------------\ndrug                                                      Drug type (0=placebo)\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [0,1]                         Units: 1\n         Unique values: 2                         Missing .: 0/48\n\n            Tabulation: Freq.  Value\n                           20  0\n                           28  1\n\n\n\n%%stata\ncodebook studytime\n\n\n-------------------------------------------------------------------------------\nstudytime                                        Months to death or end of exp.\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [1,39]                        Units: 1\n         Unique values: 28                        Missing .: 0/48\n\n                  Mean:    15.5\n             Std. dev.: 10.2563\n\n           Percentiles:     10%       25%       50%       75%       90%\n                              4       7.5      12.5        23        32\n\n\n\n%%stata\ncodebook died\n\n\n-------------------------------------------------------------------------------\ndied                                                          1 if patient died\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [0,1]                         Units: 1\n         Unique values: 2                         Missing .: 0/48\n\n            Tabulation: Freq.  Value\n                           17  0\n                           31  1\n\n\n\n%%stata\ncodebook age\n\n\n-------------------------------------------------------------------------------\nage                                              Patient's age at start of exp.\n-------------------------------------------------------------------------------\n\n                  Type: Numeric (byte)\n\n                 Range: [47,67]                       Units: 1\n         Unique values: 18                        Missing .: 0/48\n\n                  Mean: 55.875\n             Std. dev.: 5.6592\n\n           Percentiles:    10%       25%       50%       75%       90%\n                            49      50.5        56        60        65",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#数据申明代码操作",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#数据申明代码操作",
+    "title": "15-生存分析",
+    "section": "5 数据申明——代码操作",
+    "text": "5 数据申明——代码操作\n\n告诉Stata: 终点事件(Failure variable),随访时间(Time variable)\nstset timevar, failure(failvar[==numlist])\n\ntimevar: 随访时间变量\nfailvar: 终点事件变量\nnumlist: 终点时间变量中，哪个(哪些)值代表发生了终点事件?\n\n\n\n%%stata\nstset studytime,failure(died==1)\n\n\nSurvival-time data settings\n\n         Failure event: died==1\nObserved time interval: (0, studytime]\n     Exit on or before: failure\n\n--------------------------------------------------------------------------\n         48  total observations\n          0  exclusions\n--------------------------------------------------------------------------\n         48  observations remaining, representing\n         31  failures in single-record/single-failure data\n        744  total analysis time at risk and under observation\n                                                At risk from t =         0\n                                     Earliest observed entry t =         0\n                                          Last observed exit t =        39",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#生存数据再观测",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#生存数据再观测",
+    "title": "15-生存分析",
+    "section": "6 生存数据再观测",
+    "text": "6 生存数据再观测\nNotice：必须要在指定数据集为生存分析数据集之后(stset 之后)才能使用任何其他的 st 开始的命令。\n\n%%stata\nstsum\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n         |               Incidence     Number of   |------ Survival time -----|\n         | Time at risk       rate      subjects        25%       50%       75%\n---------+---------------------------------------------------------------------\n   Total |          744   .0416667            48          8        17        33\n\n\n\n%%stata\nstdescribe\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n                                   |-------------- Per subject --------------|\nCategory                   Total        Mean         Min     Median        Max\n------------------------------------------------------------------------------\nNumber of subjects            48   \nNumber of records             48           1           1          1          1\n\nEntry time (first)                         0           0          0          0\nExit time (final)                       15.5           1       12.5         39\n\nSubjects with gap              0   \nTime on gap                    0   \nTime at risk                 744        15.5           1       12.5         39\n\nFailures                      31    .6458333           0          1          1\n------------------------------------------------------------------------------\n\n\n\n%%stata\nsts list\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\nKaplan–Meier survivor function\n\n             At                  Survivor      Std.\n  Time     risk   Fail   Lost    function     error     [95% conf. int.]\n------------------------------------------------------------------------\n     1       48      2      0      0.9583    0.0288     0.8435    0.9894\n     2       46      1      0      0.9375    0.0349     0.8186    0.9794\n     3       45      1      0      0.9167    0.0399     0.7930    0.9679\n     4       44      2      0      0.8750    0.0477     0.7427    0.9418\n     5       42      2      0      0.8333    0.0538     0.6943    0.9129\n     6       40      2      1      0.7917    0.0586     0.6474    0.8820\n     7       37      1      0      0.7703    0.0608     0.6236    0.8656\n     8       36      3      1      0.7061    0.0661     0.5546    0.8143\n     9       32      0      1      0.7061    0.0661     0.5546    0.8143\n    10       31      1      1      0.6833    0.0678     0.5302    0.7957\n    11       29      2      1      0.6362    0.0708     0.4807    0.7564\n    12       26      2      0      0.5872    0.0733     0.4304    0.7145\n    13       24      1      0      0.5628    0.0742     0.4060    0.6931\n    15       23      1      1      0.5383    0.0749     0.3821    0.6712\n    16       21      1      0      0.5127    0.0756     0.3570    0.6483\n    17       20      1      1      0.4870    0.0761     0.3326    0.6249\n    19       18      0      2      0.4870    0.0761     0.3326    0.6249\n    20       16      0      1      0.4870    0.0761     0.3326    0.6249\n    22       15      2      0      0.4221    0.0786     0.2680    0.5684\n    23       13      2      0      0.3572    0.0788     0.2087    0.5083\n    24       11      1      0      0.3247    0.0780     0.1809    0.4771\n    25       10      1      1      0.2922    0.0767     0.1543    0.4449\n    28        8      1      1      0.2557    0.0753     0.1247    0.4093\n    32        6      0      2      0.2557    0.0753     0.1247    0.4093\n    33        4      1      0      0.1918    0.0791     0.0676    0.3634\n    34        3      0      1      0.1918    0.0791     0.0676    0.3634\n    35        2      0      1      0.1918    0.0791     0.0676    0.3634\n    39        1      0      1      0.1918    0.0791     0.0676    0.3634\n------------------------------------------------------------------------",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#k-m曲线的绘制",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#k-m曲线的绘制",
+    "title": "15-生存分析",
+    "section": "7 K-M曲线的绘制",
+    "text": "7 K-M曲线的绘制\n语法：\nsts graph [if] [in] [,options]\n[,options] 不是必须，可以形如：,by(var)，这样就会按照 var 的分类绘制不同的线\n\n%%stata\nsts graph,by(drug)\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n7.1 图像展现更多的信息\n\n%%stata\nsts graph if age&lt;50,by(drug)\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n%%stata\nsts graph,by(drug) risktable\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n\n\n\n\n\n\n\n\n\n\n7.2 复杂绘图示例\n\n%%stata\nlabel drop drug_label\nlabel define drug_label 0 \"安慰剂\" 1 \"试验药\"\nlabel values drug drug_label\n\n\n. label drop drug_label\n\n. label define drug_label 0 \"安慰剂\" 1 \"试验药\"\n\n. label values drug drug_label\n\n. \n\n\n\n%%stata\nsts graph, ///\n    by(drug) ci atrisk ///\n    xlabel(0(5)40) ylabel(0(0.2)1) ///\n    legend(position(6) ring(1) cols(2) rowgap(1) colgap(1)) ///\n    xtitle(\"x轴的标签\") ytitle(\"y轴的标签\") ///\n    title(\"这里是标题\", size(medsmall)) ///\n    subtitle(\"这里是副标题\", size(small)) ///\n    caption(\"注释\", size(vsmall)) ///\n    note(\"数据来源：xxx\", size(vsmall)) ///\n    graphregion(margin(10 10 10 10)) ///\n    plotregion(margin(5 5 5 5))\n\n\n. sts graph, ///\n&gt;     by(drug) ci atrisk ///\n&gt;     xlabel(0(5)40) ylabel(0(0.2)1) ///\n&gt;     legend(position(6) ring(1) cols(2) rowgap(1) colgap(1)) ///\n&gt;     xtitle(\"x轴的标签\") ytitle(\"y轴的标签\") ///\n&gt;     title(\"这里是标题\", size(medsmall)) ///\n&gt;     subtitle(\"这里是副标题\", size(small)) ///\n&gt;     caption(\"注释\", size(vsmall)) ///\n&gt;     note(\"数据来源：xxx\", size(vsmall)) ///\n&gt;     graphregion(margin(10 10 10 10)) ///\n&gt;     plotregion(margin(5 5 5 5))\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-2-survival-ana.html#检验组间差别log-rank-test",
+    "href": "Guide/Stata/25-05-08-2-survival-ana.html#检验组间差别log-rank-test",
+    "title": "15-生存分析",
+    "section": "8 检验组间差别（Log-Rank Test）",
+    "text": "8 检验组间差别（Log-Rank Test）\n\n%%stata\nsts test drug\n\n\n        Failure _d: died==1\n  Analysis time _t: studytime\n\nEquality of survivor functions\nLog-rank test\n\n      |  Observed       Expected\ndrug  |    events         events\n------+-------------------------\n    0 |        19           7.25\n    1 |        12          23.75\n------+-------------------------\nTotal |        31          31.00\n\n                chi2(1) =  28.27\n                Pr&gt;chi2 = 0.0000",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "15-生存分析"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-4-GEE.html",
+    "href": "Guide/Stata/25-05-08-4-GEE.html",
+    "title": "17-广义估计方程(GEE)",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-4-GEE.html#广义估计方程",
+    "href": "Guide/Stata/25-05-08-4-GEE.html#广义估计方程",
+    "title": "17-广义估计方程(GEE)",
+    "section": "1 广义估计方程",
+    "text": "1 广义估计方程\n广义估计方程（Generalized Estimating Equations, GEE）是一种用于分析具有相关性数据的统计方法，特别适用于纵向数据和重复测量数据的分析。\n\n1.1 基本概念\n广义估计方程是一种扩展的回归模型，旨在处理因变量之间可能存在的相关性。它于1986年由Liang和Zeger首次提出，主要用于估计广义线性模型的参数，尤其是在数据存在重复测量或相关性时。GEE通过准似然估计方法来处理这些数据，适用于多种类型的因变量，包括连续型、二分类和计数数据等。\n\n\n1.2 应用场景\n\n纵向数据分析：如临床试验中对同一组受试者在不同时间点的测量数据进行分析。\n重复测量数据：例如在心理学和社会科学研究中，研究同一对象在不同条件下的表现。\n组间比较：用于比较不同组别在某一时间点或多个时间点的差异。\n\n\n\n1.3 优势与特点\n\n处理相关性：GEE能够有效处理因变量之间的相关性，避免了传统方法（如方差分析）在数据不独立时可能导致的偏差。\n灵活性：适用于多种类型的因变量，且对自变量的数据类型没有严格要求，可以处理定类和定量数据。\n模型选择：根据因变量的分布特征选择合适的模型，如泊松回归、负二项回归等。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-4-GEE.html#什么是纵向数据分析",
+    "href": "Guide/Stata/25-05-08-4-GEE.html#什么是纵向数据分析",
+    "title": "17-广义估计方程(GEE)",
+    "section": "2 什么是纵向数据分析",
+    "text": "2 什么是纵向数据分析\nExamples oflongitudinal dataanalysis(LDA,纵向数据分析)\n\nChild BP measured at each annual visit from 3 to 9 years old\nInfant weight measured at 3, 6, 9, 12 months\nIn a 3-arm cross-over trial, short chain fatty acid measured at the end ofeach\n\n\n2.1 纵向数据 vs. 横向数据\n纵向数据是指对同一组受试个体或者受试单元在不同时间点上的重复观测若干次，得到由截面和时间序列融合在一起的数据。\n因而纵向数据具有自相关性、生态单位聚集性、测量次数与测量时间间隔的非均衡性等特点。\n\nEstablish temporaltrends(时序:A在B之前发生)\nSeparate cohort effects from aging effects\nChildren have different baseline values in reading abilities\nThe trajectories of reading abilities differs by people\n\n\n\n2.2 方差公式\n\\[Var(X-Y)\nVar((1)X+(-1)Y)=(1^2)Var(X)+(-1^2)Var(Y)+2(1)(-1)Cov(X,Y)\\]\n在非配对 t 检验中，\\(Cov(X,Y)\\)为0，此时 \\(Var(X-Y)\\)\n打破线性相关的假设",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-4-GEE.html#gee-模型",
+    "href": "Guide/Stata/25-05-08-4-GEE.html#gee-模型",
+    "title": "17-广义估计方程(GEE)",
+    "section": "3 GEE 模型",
+    "text": "3 GEE 模型\n\n\n\ncorrelation\ndescription\n\n\n\n\nexchangeable\nexchangeable\n\n\nindependent\nindependent\n\n\nunstructured\nunstructured\n\n\nfixed matname\nuser-specified\n\n\nar #\nautoregressive of order #\n\n\nstationary #\nstationary of order #\n\n\nnonstationary #\nnonstationary of order #\n\n\n\n\n3.1 GEE 常用步骤\n\n使用 independent 回归结构\n稳健标准误估计（robust variance estimate）；如果用错模型，稳健后的结果也会相差不远\n使用 QIC（AIC for GEE）评估GEE模型",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-4-GEE.html#数据导入",
+    "href": "Guide/Stata/25-05-08-4-GEE.html#数据导入",
+    "title": "17-广义估计方程(GEE)",
+    "section": "4 数据导入",
+    "text": "4 数据导入\nData:NLS Women 14-24 in 1968\n\n%%stata\nwebuse union,clear\n\n(NLS Women 14-24 in 1968)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-4-GEE.html#数据观测",
+    "href": "Guide/Stata/25-05-08-4-GEE.html#数据观测",
+    "title": "17-广义估计方程(GEE)",
+    "section": "5 数据观测",
+    "text": "5 数据观测\n\n%%stata\nlist in 1/10\n\n\n     +----------------------------------------------------------------+\n     | idcode   year   age   grade   not_smsa   south   union   black |\n     |----------------------------------------------------------------|\n  1. |      1     72    20      12          0       0       1       1 |\n  2. |      1     77    25      12          0       0       0       1 |\n  3. |      1     80    28      12          0       0       1       1 |\n  4. |      1     83    31      12          0       0       1       1 |\n  5. |      1     85    33      12          0       0       1       1 |\n     |----------------------------------------------------------------|\n  6. |      1     87    35      12          0       0       1       1 |\n  7. |      1     88    37      12          0       0       1       1 |\n  8. |      2     71    19      12          0       0       0       1 |\n  9. |      2     77    25      12          0       0       1       1 |\n 10. |      2     78    26      12          0       0       1       1 |\n     +----------------------------------------------------------------+",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-08-4-GEE.html#用法",
+    "href": "Guide/Stata/25-05-08-4-GEE.html#用法",
+    "title": "17-广义估计方程(GEE)",
+    "section": "6 用法",
+    "text": "6 用法\n\n6.1 GEE 准备\nxtset studyid timevar\n\nstudyid: unique ID for each participant\ntimevar: timevar will usually be a variable that counts 1,2,…, and is to be interpreted as firstyear ofsurvey, second year,…, or first month oftreatment, second month.\n\n\n%%stata\nxtset id year\n\n\nPanel variable: idcode (unbalanced)\n Time variable: year, 70 to 88, but with gaps\n         Delta: 1 unit\n\n\n\n\n6.2 GEE 命令\nxtgee y x_1,x_2,x_3,…[if] [in] [weight] ,family(family) link(link) corr(correlation structure) robust\n可以使用 help gee 查看更多信息\n\n%%stata\nxtgee union age grade not_smsa south, family(binomial) link(logit) corr(ind) robust\n\n\nIteration 1:  Tolerance = 1.940e-12\n\nGEE population-averaged model                      Number of obs    =   26,200\nGroup variable: idcode                             Number of groups =    4,434\nFamily: Binomial                                   Obs per group:  \nLink:   Logit                                                   min =        1\nCorrelation: independent                                        avg =      5.9\n                                                                max =       12\n                                                   Wald chi2(4)     =   160.30\nScale parameter = 1                                Prob &gt; chi2      =   0.0000\n\nPearson chi2(26200)  = 26242.04                    Deviance         = 27093.19\nDispersion (Pearson) = 1.001604                    Dispersion       = 1.034091\n\n                                 (Std. err. adjusted for clustering on idcode)\n------------------------------------------------------------------------------\n             |               Robust\n       union | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         age |    .011683   .0033035     3.54   0.000     .0052082    .0181577\n       grade |    .048511   .0139346     3.48   0.000     .0211997    .0758223\n    not_smsa |  -.2214007   .0713343    -3.10   0.002    -.3612134    -.081588\n       south |  -.6470985   .0629803   -10.27   0.000    -.7705376   -.5236594\n       _cons |  -1.941974   .1973105    -9.84   0.000    -2.328695   -1.555253\n------------------------------------------------------------------------------",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "17-广义估计方程(GEE)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html",
+    "href": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html",
+    "title": "19-无序多分类Logistic回归",
+    "section": "",
+    "text": "import stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "19-无序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#无序多分类logistic回归",
+    "href": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#无序多分类logistic回归",
+    "title": "19-无序多分类Logistic回归",
+    "section": "1 无序多分类Logistic回归",
+    "text": "1 无序多分类Logistic回归\nProportional odds 假定满足\n\n%%stata\nwebuse fullauto.dta,clear\n\n(Automobile models)\n\n\n\n%%stata\nologit rep77 foreign,or\n\n\nIteration 0:  Log likelihood = -89.895098  \nIteration 1:  Log likelihood = -85.951765  \nIteration 2:  Log likelihood = -85.908227  \nIteration 3:  Log likelihood = -85.908161  \nIteration 4:  Log likelihood = -85.908161  \n\nOrdered logistic regression                             Number of obs =     66\n                                                        LR chi2(1)    =   7.97\n                                                        Prob &gt; chi2   = 0.0047\nLog likelihood = -85.908161                             Pseudo R2     = 0.0444\n\n------------------------------------------------------------------------------\n       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     foreign |   4.288246   2.276609     2.74   0.006      1.51489    12.13888\n-------------+----------------------------------------------------------------\n       /cut1 |  -2.765562   .5988208                     -3.939229   -1.591895\n       /cut2 |  -.9963603   .3217706                     -1.627019   -.3657016\n       /cut3 |   .9426153   .3136398                      .3278925    1.557338\n       /cut4 |   3.123351   .5423257                      2.060412     4.18629\n------------------------------------------------------------------------------\nNote: Estimates are transformed only in the first equation to odds ratios.\n\n\n进口车(Foreign=1)有着更高车辆维修状况等级的odds是国产车(Foreign=0)的4.29倍(95% CI: 1.51,12.13)\nProportional odds 假定不满足\n使用 Generalized Ordinal Logistic Regression\n需要安装 gologit2 命令\n\n%%stata\nssc install gologit2\n\nchecking gologit2 consistency and verifying not already installed...\ninstalling into C:\\Users\\asus\\ado\\plus\\...\ninstallation complete.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "19-无序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#gologit2-命令",
+    "href": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#gologit2-命令",
+    "title": "19-无序多分类Logistic回归",
+    "section": "2 gologit2 命令",
+    "text": "2 gologit2 命令\n\n2.1 满足Proportional Odds假定\ngologit2 y x x₂ x.., pl or\n这个command和 ologit command 给出的结果相同\n\n\n2.2 不满足Proportional0dds假定\ngologit2 y x x₂ x. ., npl or\n\npl & npl 分别表示满足 parallel\n\n\n\n2.3 检验是否满足Proportional Odds假定\nLikelihood-ratio test:lrtest\n\n%%stata\ngologit2 rep77 foreign,pl or\n\n\nGeneralized Ordered Logit Estimates                     Number of obs =     66\n                                                        LR chi2(1)    =   7.97\n                                                        Prob &gt; chi2   = 0.0047\nLog likelihood = -85.908161                             Pseudo R2     = 0.0444\n\n ( 1)  [Poor]foreign - [Fair]foreign = 0\n ( 2)  [Fair]foreign - [Average]foreign = 0\n ( 3)  [Average]foreign - [Good]foreign = 0\n------------------------------------------------------------------------------\n       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nPoor         |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   15.88797   9.514049     4.62   0.000     4.913051    51.37901\n-------------+----------------------------------------------------------------\nFair         |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   2.708406   .8714855     3.10   0.002     1.441525    5.088683\n-------------+----------------------------------------------------------------\nAverage      |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   .3896075   .1221964    -3.01   0.003     .2106962    .7204404\n-------------+----------------------------------------------------------------\nGood         |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   .0440095   .0238675    -5.76   0.000     .0152026    .1274015\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n\n\n%%stata\ngologit2 rep77 foreign,npl or\n\n\nGeneralized Ordered Logit Estimates                     Number of obs =     66\n                                                        LR chi2(4)    =  15.24\n                                                        Prob &gt; chi2   = 0.0042\nLog likelihood = -82.27372                              Pseudo R2     = 0.0848\n\n------------------------------------------------------------------------------\n       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nPoor         |\n     foreign |   .9300305   1.166495    -0.06   0.954     .0795928    10.86727\n       _cons |   21.50014   15.55202     4.24   0.000     5.208693    88.74704\n-------------+----------------------------------------------------------------\nFair         |\n     foreign |   3.453614   2.818944     1.52   0.129     .6974251    17.10213\n       _cons |   2.750213   .9271033     3.00   0.003     1.420445    5.324862\n-------------+----------------------------------------------------------------\nAverage      |\n     foreign |   3.281111   1.804947     2.16   0.031     1.116279    9.644262\n       _cons |   .4062893   .1336252    -2.74   0.006     .2132467    .7740847\n-------------+----------------------------------------------------------------\nGood         |\n     foreign |   3.94e+07   6.55e+10     0.01   0.992            0           .\n       _cons |   7.93e-09   .0000132    -0.01   0.991            0           .\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n\n当Proportional Odds假定不成立时\n进口车(Foreign=1)和国产车(Foreign=0)比:\n\nOdds(Excellent+Good+Average+Fair)/Odds(Poor)= 0.93\nOdds(Excellent+Good+Average)/Odds(Fair+Poor)= 3.45\nOdds(Excellent+Good)/Odds(Average+Fair+Poor)= 3.28\nOdds(Excellent)/Odds(Good+Average+Fair+Poor)= 3.94*10^7\n\n\n\n2.4 检查Proportional Odds假定是否成立\n\\(H_0\\):Non-Proportional Odds 模型可以更好解释结局变量各个等级之间关系\n\n%%stata\ngologit2 rep77 foreign,pl or \nest store A\ngologit2 rep77 foreign,npl or \nest store B\nlrtest A B //Likelihood-ratio test\n\n\n. gologit2 rep77 foreign,pl or \n\nGeneralized Ordered Logit Estimates                     Number of obs =     66\n                                                        LR chi2(1)    =   7.97\n                                                        Prob &gt; chi2   = 0.0047\nLog likelihood = -85.908161                             Pseudo R2     = 0.0444\n\n ( 1)  [Poor]foreign - [Fair]foreign = 0\n ( 2)  [Fair]foreign - [Average]foreign = 0\n ( 3)  [Average]foreign - [Good]foreign = 0\n------------------------------------------------------------------------------\n       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nPoor         |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   15.88797   9.514049     4.62   0.000     4.913051    51.37901\n-------------+----------------------------------------------------------------\nFair         |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   2.708406   .8714855     3.10   0.002     1.441525    5.088683\n-------------+----------------------------------------------------------------\nAverage      |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   .3896075   .1221964    -3.01   0.003     .2106962    .7204404\n-------------+----------------------------------------------------------------\nGood         |\n     foreign |   4.288247   2.276609     2.74   0.006      1.51489    12.13888\n       _cons |   .0440095   .0238675    -5.76   0.000     .0152026    .1274015\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n. est store A\n\n. gologit2 rep77 foreign,npl or \n\nGeneralized Ordered Logit Estimates                     Number of obs =     66\n                                                        LR chi2(4)    =  15.24\n                                                        Prob &gt; chi2   = 0.0042\nLog likelihood = -82.27372                              Pseudo R2     = 0.0848\n\n------------------------------------------------------------------------------\n       rep77 | Odds ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nPoor         |\n     foreign |   .9300305   1.166495    -0.06   0.954     .0795928    10.86727\n       _cons |   21.50014   15.55202     4.24   0.000     5.208693    88.74704\n-------------+----------------------------------------------------------------\nFair         |\n     foreign |   3.453614   2.818944     1.52   0.129     .6974251    17.10213\n       _cons |   2.750213   .9271033     3.00   0.003     1.420445    5.324862\n-------------+----------------------------------------------------------------\nAverage      |\n     foreign |   3.281111   1.804947     2.16   0.031     1.116279    9.644262\n       _cons |   .4062893   .1336252    -2.74   0.006     .2132467    .7740847\n-------------+----------------------------------------------------------------\nGood         |\n     foreign |   3.94e+07   6.55e+10     0.01   0.992            0           .\n       _cons |   7.93e-09   .0000132    -0.01   0.991            0           .\n------------------------------------------------------------------------------\nNote: _cons estimates baseline odds.\n\n. est store B\n\n. lrtest A B //Likelihood-ratio test\n\nLikelihood-ratio test\nAssumption: A nested within B\n\n LR chi2(3) =   7.27\nProb &gt; chi2 = 0.0638\n\n. \n\n\n根据 Likelihood-ratio test 得出的结果，\\(P=0.0638&gt;0.05\\)，拒绝\\(H_0\\): Non-Proportional 0dds并没有更好解释结局变量各个等级之间关系。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "19-无序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#无序多分类-logistic-回归",
+    "href": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#无序多分类-logistic-回归",
+    "title": "19-无序多分类Logistic回归",
+    "section": "3 无序多分类 Logistic 回归",
+    "text": "3 无序多分类 Logistic 回归\n\n把结局变量的某个分类作为reference，然后比较结局变量其他分类相对于reference的相对风险(Relative Risk)\n\n\\[RR_j=Pr(cat=j)/Pr(reference\\ cat)\\] \\[log(RR_j)=\\beta_{0j}+\\beta_{1j}X_1+\\cdots +\\beta_{pj}X_p\\]\nnotice：cat 是 category 的缩写",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "19-无序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#有序和无序多分类比较",
+    "href": "Guide/Stata/25-05-09-1-multinomail-logistic-reg.html#有序和无序多分类比较",
+    "title": "19-无序多分类Logistic回归",
+    "section": "4 有序和无序多分类比较",
+    "text": "4 有序和无序多分类比较\n\n有序多分类 Logistic 回归：\n\n\\(RR_j=Pr(cat&gt;j)/Pr(cat\\leq j)\\)\nologit y x_1 x_2 x_3 ...,or\n\n无序多分类Logistic回归:\n\n\\(RR_j=Pr(cat=j)/Pr(reference\\ cat)\\)\nmlogit y x_1 x_2x x_3...,rrr baseoutcome(j)\n\n\n\nmlogit 是 multi logit 的缩写\n\n\nbaseoutcome(j) 如果不指定， Stata 会自动选择\n\n\n%%stata\nmlogit rep77 foreign,rrr baseoutcome(1)\n\n\nIteration 0:  Log likelihood = -89.895098  \nIteration 1:  Log likelihood = -85.605381  \nIteration 2:  Log likelihood = -82.670821  \nIteration 3:  Log likelihood = -82.335383  \nIteration 4:  Log likelihood =  -82.28077  \nIteration 5:  Log likelihood = -82.274431  \nIteration 6:  Log likelihood = -82.273851  \nIteration 7:  Log likelihood = -82.273742  \nIteration 8:  Log likelihood = -82.273725  \nIteration 9:  Log likelihood =  -82.27372  \n\nMultinomial logistic regression                         Number of obs =     66\n                                                        LR chi2(4)    =  15.24\n                                                        Prob &gt; chi2   = 0.0042\nLog likelihood = -82.27372                              Pseudo R2     = 0.0848\n\n------------------------------------------------------------------------------\n       rep77 |        RRR   Std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nPoor         |  (base outcome)\n-------------+----------------------------------------------------------------\nFair         |\n     foreign |   .2000452   .3225721    -1.00   0.318     .0084834    4.717229\n       _cons |   5.000509   3.873398     2.08   0.038     1.095653    22.82209\n-------------+----------------------------------------------------------------\nAverage      |\n     foreign |   .7001516   .9110327    -0.27   0.784      .054653    8.969536\n       _cons |   10.00009   7.416364     3.10   0.002     2.337371    42.78389\n-------------+----------------------------------------------------------------\nGood         |\n     foreign |   1.076972   1.412458     0.06   0.955     .0823847    14.07869\n       _cons |   6.500016   4.937183     2.46   0.014     1.466803    28.80429\n-------------+----------------------------------------------------------------\nExcellent    |\n     foreign |   1.32e+07   1.52e+10     0.01   0.989            0           .\n       _cons |   3.79e-07   .0004353    -0.01   0.990            0           .\n------------------------------------------------------------------------------\nNote: _cons estimates baseline relative risk for each outcome.\n\n\n进口车(Foreign=1)和国产车(Foreign=0)比:\n\nRisk(Fair)/Risk(Poor)=0.20\nRisk(Average)/Risk(Poor)=0.70\nRisk(Good)/Risk(Poor)= 1.08\nRisk(Excellent)/Risk(Poor)= 1.32*10^7\n\n\nRisk(Excellent)/Risk(Poor)= 1.32*10^7，这个结果之所以如此大，是因为有一个 Excellent 样本是0，所以估计有偏",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "19-无序多分类Logistic回归"
     ]
   }
 ]

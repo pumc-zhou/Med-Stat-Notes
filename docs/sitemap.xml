@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-05-08T14:39:20.177Z</lastmod>
+    <lastmod>2025-05-09T14:42:27.916Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -231,5 +231,49 @@
   <url>
     <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-Ord-Logistic-Reg.html</loc>
     <lastmod>2025-05-08T14:14:22.225Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-09-2-data-manag.html</loc>
+    <lastmod>2025-05-09T14:42:21.733Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html</loc>
+    <lastmod>2025-05-09T04:27:50.800Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-3-Cox-reg.html</loc>
+    <lastmod>2025-05-08T09:16:19.931Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-1-GLM.html</loc>
+    <lastmod>2025-05-07T14:00:51.682Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-07-3-multi-reg.html</loc>
+    <lastmod>2025-05-07T08:08:31.448Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-07-1-ANOVA.html</loc>
+    <lastmod>2025-05-07T05:07:50.546Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-07-2-simple-line-reg.html</loc>
+    <lastmod>2025-05-07T07:35:31.613Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-07-4-log-binary.html</loc>
+    <lastmod>2025-05-07T13:47:57.251Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-2-survival-ana.html</loc>
+    <lastmod>2025-05-08T08:23:20.985Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-08-4-GEE.html</loc>
+    <lastmod>2025-05-08T10:00:28.236Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-09-1-multinomail-logistic-reg.html</loc>
+    <lastmod>2025-05-09T07:00:49.002Z</lastmod>
   </url>
 </urlset>
