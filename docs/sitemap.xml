@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-05-09T14:42:27.916Z</lastmod>
+    <lastmod>2025-05-10T08:27:43.958Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -275,5 +275,9 @@
   <url>
     <loc>www.lazyzhou.cn/Guide/Stata/25-05-09-1-multinomail-logistic-reg.html</loc>
     <lastmod>2025-05-09T07:00:49.002Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-09-2-data-manage.html</loc>
+    <lastmod>2025-05-10T08:27:40.057Z</lastmod>
   </url>
 </urlset>

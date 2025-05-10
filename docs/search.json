@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-09},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 9, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-10},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 10, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -4696,6 +4696,58 @@
       "统计软件",
       "Stata",
       "19-无序多分类Logistic回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-2-data-manage.html",
+    "href": "Guide/Stata/25-05-09-2-data-manage.html",
+    "title": "20-数据清洗与整理",
+    "section": "",
+    "text": "使用 Do-file 完成后续的数据整理操作",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "20-数据清洗与整理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-2-data-manage.html#sortorder变量名排序",
+    "href": "Guide/Stata/25-05-09-2-data-manage.html#sortorder变量名排序",
+    "title": "20-数据清洗与整理",
+    "section": "4.1 sort/order：变量名排序",
+    "text": "4.1 sort/order：变量名排序\n********************观测值排序********************\n* 排序之前，看前10个观测值\nList CHILD_PIDX CHILD_DOB_YEAR in 1/10\n\n* 排序(从小到大)\nsort CHILD_DOB_YEAR\nlist CHILD_PIDX CHILD_DOB_YEAR in 1/10\n\ngsort +CHILD_DOB_YEAR\nlist CHILD_PIDX CHILD_DOB_YEAR in 1/10\n\n* 排序(从大到小)\ngsort -CHILD_DOB_YEAR\nlist CHILD_PIDX CHILD_DOB_YEAR in 1/10\n\n* 也可以sort字符型变量\n* 从A-Z\ngsort +CENSUS_REGION\nlist CHILD_PIDX CENSUS_REGION in 1/10\n\n*从Z-A\ngsort -CENSUS_REGION\nlist CHILD_PIDX CENSUS_REGION in 1/10\n\n*****************变量名排序******************** \n* 看数据集中都有什么变量（并不是排列方式）\nds\n\n* 打开data browser\nbrowse\n\n* 看变量如何排列\nlist in 1/5\n\n* 改变变量排列顺序\norder CHILD_DOB_YEAR,after(CHILD_PIDX)\nlist in 1/5\n* 或者进入data browser进行查看\nbrowse\n\norder CHILDD0B_QTR,before(MOM_PIDX)\nlist in 1/5\n\n4.1.1 合并数据集\n/*\n语法形式是:\n打开一个数据集以后(master dataset):\nOne-to-one merge on specified key variables\n    merge 1:1 varlist using filename [, options]\nMany-to-one merge on specified key variables\n    merge m:1 varlist using filename [,options]\nOne-to-many merge on specified key variables\n    merge 1:m varlist using filename [, options]\nMany-to-many merge on specified key variables\n    merge m:m varlist using filename , options]\n因为现在我们的\"child\"数据集每个孩子只有1个观测值，\n而我们要合并的\"'anthro\"数据集(using dataset)每个孩子有多个观测值,\n所以在这里建议使用 1:m\n*/\n\nmerge 1:m CHILD_PIDX using \"anthro.dta\"\n* 大家也可以试试下面这个(删去前面的\"//\")\n* 但是请注意:这两个merge command只能留一个\n//merge m:m CHILD_PIDX using \"anthro.dta\"\n\n* 想保留既有maternal information又有infant anthropology measurement的孩子\n* 所以保留 _merge==3 的记录\nkeep ifmerge == 3\ndrop _merge\n\nsort CHILD_PIDX\n\n\n4.1.2 reshape\n在数据分析中，尤其是面板数据分析和多层次回归分析，经常需要将数据从宽形（wide form）转换为长形（long form），或反之。Stata提供了一个强大的命令reshape来实现这种转换，它可以根据数据的结构和需要转换的方向，灵活地处理各种情况。\nreshape命令的基本语法\nreshape命令的基本语法结构如下：\nreshape long stubnames, i(varlist) [options]\nreshape wide stubnames, i(varlist) [options]\n其中，i(varlist)是必须的，用于指定ID变量。j(varname [values])在从宽形转换为长形时，varname是现有变量；从长形转换为宽形时，varname是新变量。stubnames是变量名的公共部分。\nreshape wide CHILD_ADJ_AGE WEIGHT-HEAD_CIRC, i(CHILD_PIDX) j(VISIT)\n* 后悔了?\nreshape long",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "20-数据清洗与整理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-2-data-manage.html#egen生成变量统计量",
+    "href": "Guide/Stata/25-05-09-2-data-manage.html#egen生成变量统计量",
+    "title": "20-数据清洗与整理",
+    "section": "4.2 egen：生成变量统计量",
+    "text": "4.2 egen：生成变量统计量\nby CHILD_PIDX: egen max_visit = max(VISIT)\nby CHILD_PIDX: egen min_visit = min(VISIT)\nby CHILD_PIDX: egen mean_visit = mean(VISIT)\nby CHILD_PIDX: egen median_visit = median(VISIT)\n\nreshape Wide CHILD_ADJ_AGE WEIGHT-HEAD_CIRC,i(CHILD_PIDX) j(VISIT)\negen height_mean = rowean(HEIGHT6 HEIGHT12 HEIGHT24 HEIGHT36)\negen height_miss = rowmiss(HEIGHT6 HEIGHT12 HEIGHT24 HEIGHT36)\negen height_nonmiss = rownonmiss(HEIGHT6 HEIGHT12 HEIGHT24 HEIGHT36)\nreshape long\n\n* explore egen\nhelp egen\n\n4.2.1 keep/drop\n/*\nkeep/drop 后面接变量名:保留/除变量\nkeep varl var2 var3 :保留变量var1 var2 var3\ndrop varl var2 var3 :去掉变量var1 var2 var3\n\nkeep/drop 后面接 if +条件判断:保留/删除观测值\nkeep if ... :保留满足...条件的观测值\ndrop if ... :去掉满足...条件的观测值\n*/\n\n//比如:\ndrop MOM_EDUCATION_LOW_WRONG MOM_EDUCATION_LOW_RIGHT1 MOM_EDUCATION_LOW_RIGHT2\nkeep CHILD_PIDX MOM_EDUCATION CHILD_SEX\n//keep if CHILD DOB_YEAR &gt;= 2011\n//keep if CHILD DOB_YEAR ==2011 & CITIZENSHIP_PERC == 1",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "20-数据清洗与整理"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-09-2-data-manage.html#导出数据",
+    "href": "Guide/Stata/25-05-09-2-data-manage.html#导出数据",
+    "title": "20-数据清洗与整理",
+    "section": "4.3 导出数据",
+    "text": "4.3 导出数据\n* 存储为DTA格式的数据\nsave \"Sample\",replace\n//不指定文件类型的话，自动存为DTA数据\n//不指定位置的话，存到工作路径\n//当然，也可以指定位置\nsave \"/Users/username/Desktop/Stata/Sample\", replace\n\n* 导出为Excel格式的数据\nexport excel \"Sample\", replace //有问题!\nexport excel \"Sample.xlsx\", replace //有问题!\n\n* 是不会自动导出变量名的，必须指定\nexport excel \"Sample.xlsx\",firstrow(variables) replace //\"变量\"作为第一行\n\nexport excel \"Sample.xlsx\",firstrow(varlabels) replace //“变量标签\"作为第一行\n\nexport excel \"Sample.xlsx\",firstrow(variables) nolabel replace //不导出数值标签\n\n* 导出为CSV格式的数据\nexport delimited \"Sample.csv\"，replace //变量名自动作为第一行导出\nexport delimited \"Sample.csv\"，nolabel replace //不导出数值标签\n\nlog close\nend.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "20-数据清洗与整理"
     ]
   }
 ]

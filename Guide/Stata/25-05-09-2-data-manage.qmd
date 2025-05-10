@@ -1,0 +1,411 @@
+---
+title: "20-数据清洗与整理"
+subtitle: "Data Clean and Management"
+author: "Simon Zhou"
+date: "2025-05-09"
+format: 
+    html:
+        code-fold: false
+        fig_caption: true
+        number-sections: true
+        toc: true
+        toc-depth: 2
+---
+
+使用 Do-file 完成后续的数据整理操作
+
+# Stata 须知
+
+1.  Stata区分大小写! Stata is case-sensitive!
+2.  常见符号:
+    -   `=`是 赋值(e.g· `gen x = 1`)
+    -   `==`是 恒等(e.g· `gen x = 1 if y == 2`)
+    -   `|`是 或者(e.g· `gen x = 1 if y == 2 | y == 3`)
+    -   `&`是 且(e.g· `gen x = 1 if y == 2 & z == 3`) \## 数据整理的常见步骤
+3.  查看工作路径(`pwd`);改变工作路径(`cd`)
+4.  导入Excel文件(`import excel`),CSV文件(`import delimited`),dta文件(`use`)
+5.  添加变量或变量数值标签(`label`)
+6.  生成新变量(`gen`)或统计量变量(`egen`)
+7.  将观测值按照变量数值大小排序(`sort`;`gsort`)
+8.  改变变量前后顺序(`order`)
+9.  将数据集进行长宽转换(`reshape`)
+10. 合并数据集(`merge`)
+11. 删除(`drop`)或保留(`keep`)观测值或变量
+12. 导出Excel,CSV文件(`export`)或dta文件(`save`) %%skip
+
+-   Stata添加注释的方法
+
+-   Stata中绿色的文字是不运行的
+
+# Do-file示例
+
+``` stata
+// 跟在command之后的注释 
+/// 代表行内换行 
+* 星号作为一行的开头时，这一行都是注释 
+/* 两个星号之间加多行注释 */ 
+/*  Purpose: 
+    Author: 
+    Date created: 
+*/
+
+* 清除Stata内存里的所有数据和宏等 
+clear all
+
+//set maxvar 8000 
+* 如果你的变量数>5000，需要设置。例如:set maxvar 8000 
+* 请注意:Stata IC最多只有2,048个变量;SE:32,767;MP:120，000
+
+* 得到现在的工作路径，每个人肯定都不一样 
+pwd
+
+* 改变到自己的工作路径
+* 改变工作路径到"/Users/username/Desktop/Stata'
+cd "/Users/username/Desktop/Stata"
+
+* 把child.csv,child.xlsx,child.dta,anthro.dta这4个文件放到工作路径底下
+
+* 查看工作路径底下都有什么文件 
+dir
+
+* 如果现在有打开的Log文件，那么关闭它 
+capture log close  
+* 打开新的Log文件 
+log using Lecture.log,replace
+
+***********导入dta数据*************** 
+* 在这里，没有指定"child.dta"这个文件的位置，那么Stata就会到工作路径下面去找这个文件 
+* 逗号后面的clear指的是清除现有的数据，这样才能腾出地方导入新的数据
+
+use "child.dta",clear 
+* 或者(文件路径中如果有空格，一定需要用""包裹路径)
+use "/Users/username/Desktop/Stata/child.dta", clear
+
+**************导入csv文件*******************
+import delimited"child.csv", clear
+
+* 当然，你也可以指定这个文件的位置，是一样的
+import delimited "/Users/username/Desktop/Stata/child.csv", clear
+
+* 在导入CSV文件时，Stata自己判断是否把CSV文件的第一行作为变量名导入
+* 我们可以让Stata不把CSV文件的第一行作为变量名导入
+import delimited"child.csv",varnames(nonames) clear
+
+* 我们也可以让Stata必须把CSV文件的第一行作为变量名导入
+import delimited"child.csv",varnames(1) clear
+
+*我们可以让Stata导入的时候把变量名全变成大写
+import delimited"child.csv",varnames(1) case(upper) clear
+
+* 或者全变成小写
+import delimited "child.csv",varnames(1) case(lower) clear
+* 或者保留CSV里的形式
+import delimited "child.csv",varnames(1) case(preserve) clear
+
+*******************导入Excel文件**************
+import excel "child.xlsx",clear
+* 或者
+import excel"/Users/username/Desktop/Stata/child.xlsx",clear
+
+* 在导入Excel文件时，Stata默认第一行不是变量名
+* 我们可以让Stata把第一行当做变量名导入
+import excel "child.xlsx",firstrow clear
+
+* 我们也可以指定导入Excel文件里的哪个Sheet
+import excel "child.xlsx",firstrow sheet("Sheet1")clear
+
+* 我们可以让stata导入的时候把变量名全变成大写
+import excel "child.xlsx",firstrow case(upper) clear
+
+* 或者全变成小写
+import excel "child.xlsx",firstrow case(lower)clear
+
+* 或者保留Excel里的形式
+import excel "child.xlsx",firstrow case(preserve) clear
+import excel "/Users/username/Desktop/Stata/child.xlsx"， ///
+sheet("Sheet1")firstrow clear
+
+*************数据清理*****************
+/*
+我们以CHILD_SEX变量为例，进行数据的清洗和整理CHILD SEX现在是字符型变量:"1"是Boy","2"是Girl,"M"是missing
+*/
+codebook CHILD SEX
+```
+
+# 数据清理和排序
+
+继续上述的分析步骤，进入数据清理
+
+``` stata
+* 改变工作路径到"/Users/username/Desktop/Stata'
+cd "/Users/username/Desktop/Stata"
+
+* 或者保留Excel里的形式
+import excel "child.xlsx",firstrow case(preserve) clear
+import excel "/Users/username/Desktop/Stata/child.xlsx"， ///
+sheet("Sheet1")firstrow clear
+
+*************数据清理*****************
+/*
+我们以CHILD_SEX变量为例，进行数据的清洗和整理CHILD SEX现在是字符型变量:"1"是Boy","2"是Girl,"M"是missing
+*/
+codebook CHILD_SEX
+
+/*
+我们将CHILD_SEX替换成数值型变量。我们使用destring命令在destring的时候，我们可以通过option "force"把不是数字的字符(如"M")替换为缺失值
+(destring CHILD SEX,force replace)
+但是，需要更加小心:万一有人输入的是"B"，我们其实应该替换为1。
+为了保险起见，我们手动把"M“改成".""
+*/
+replace CHILD_SEX = "." if CHILD_SEX == "M"
+
+/*
+注意:
+字符型变量的观测值只能替换成字符型，因此我们只能把"M"替换成".""，不能替换成 . 
+比如，这个就是错的:
+replace CHILD_SEX = . if CHILD_SEX = "M"
+Stata会告诉你: type mismatch r(109);
+*/
+
+destring CHILD_SEX, replace
+
+/*
+destring的时候:
+replace option替代现在的CHILD_SEX变量
+destring CHILD_SEX，replace
+generate option生成一个新的变量
+destring CHILD_SEX, generate(CHILD_SEX_2)
+*/
+
+* Destring以后，我们再来看一下CHILD_SEX的信息
+codebook CHILD_SEX
+/*
+当然可以对于每一个变量进行这样的destring操作，不过比较麻烦
+一个小的loop，可以对每一个变量进行destring操作
+*/
+foreach v of varlist _all { //对于所有变量进行循环
+    capture confirm string var 'v' //先确定这个变量是不是string
+    if _rc==0{ //如果是的话
+    replace 'v' = "." if 'v' == "M"//将"'M"替换成"."
+    destring 'v',replace
+    }
+    }
+
+********************label************************
+/*在codebook中，看到CHILD_SEX这个变量还没有标签，也没有数值标签
+加变量标签是: label varvarname "xxxx"
+先定义一个 label label define labelname 1 "xx" 2 "yy" 3 "zz"...
+加变量的数值标签是label values varname labelname
+*/
+label var CHILD_SEX "孩子的性别(1是男孩，2是女孩)"
+label define sex_label 1 "男孩" 2 "女孩" //你可以管"sex_label"叫任何名字
+label values CHILD_SEX sex label
+
+* 加完标签以后，再来看一下CHILD SEX的信息
+codebook CHILD SEX
+
+* 再试一个变量
+codebook MOM_EDUCATION
+label var MOM_EDUCATION "母亲最高教育"
+label define edu label 1 "从未上过学" 2 "初中毕业及以下" 3 "高中毕业" 4 "大专毕业" ///
+5 "大学本科毕业" 6 "硕士研究生毕业及以上"
+
+* 去掉变量标签
+label var CHILD_SEX
+* 去掉数值标签
+label values CHILD_SEX
+
+************************生成新变量**********************
+codebook BABY_WEIGHT
+rename BABY_WEIGHT BABY_WEIGHT_KG
+gen BABY_WEIGHTG = BABY_WEIGHT_KG * 1000
+
+//将MOM_EDUCATION变成二分类变量
+* 方法1:错误方法
+gen MOM_EDUCATION_LOW_WRONG = 1 if MOM_EDUCATION <= 3
+replace MOM_EDUCATION_LOW_WRONG = 8 if MOM_EDUCATION > 3
+
+* 怎么错了?
+tab MOM_EDUCATION_LOW_WRONG MOM_EDUCATION,mis
+* 特别注意:在Stata中，缺失被定为为无限大
+* 方法2:对的方法
+gen MOM_EDUCATION_LOW_RIGHT1 = 1 if MOM_EDUCATION <= 3
+repLaCe MOM_EDUCATION_LOW_RIGHT1 = 0 1f MOM_EDUCATION> 3 & !missing(MOM_EDUCATION)
+* 再检查一下
+tab MOM_EDUCATION_LOW_RIGHT1 MOM_EDUCATION,miS
+
+* 方法3: 更保险的方法(请注意"|"是或者)
+gen MOM_EDUCATION_LOWRIGHT2 = 1  if,MOM_EDUCATION == 1 | MOM_EDUCATION == 2 | MOM_EDUCATION == 3
+replace MOM_EDUCATION_LOW_RIGHT2 = 0 if MOM_EDUCATION == 4 | MOM_EDUCATION == 5 | MOM_EDUCATION == 6
+*再检查一下
+tab MOM_EDUCATION_LOW_RIGHT2 MOM_EUCATION,mis
+```
+
+# 数据整理及导出
+
+## sort/order：变量名排序
+
+``` stata
+********************观测值排序********************
+* 排序之前，看前10个观测值
+List CHILD_PIDX CHILD_DOB_YEAR in 1/10
+
+* 排序(从小到大)
+sort CHILD_DOB_YEAR
+list CHILD_PIDX CHILD_DOB_YEAR in 1/10
+
+gsort +CHILD_DOB_YEAR
+list CHILD_PIDX CHILD_DOB_YEAR in 1/10
+
+* 排序(从大到小)
+gsort -CHILD_DOB_YEAR
+list CHILD_PIDX CHILD_DOB_YEAR in 1/10
+
+* 也可以sort字符型变量
+* 从A-Z
+gsort +CENSUS_REGION
+list CHILD_PIDX CENSUS_REGION in 1/10
+
+*从Z-A
+gsort -CENSUS_REGION
+list CHILD_PIDX CENSUS_REGION in 1/10
+
+*****************变量名排序******************** 
+* 看数据集中都有什么变量（并不是排列方式）
+ds
+
+* 打开data browser
+browse
+
+* 看变量如何排列
+list in 1/5
+
+* 改变变量排列顺序
+order CHILD_DOB_YEAR,after(CHILD_PIDX)
+list in 1/5
+* 或者进入data browser进行查看
+browse
+
+order CHILDD0B_QTR,before(MOM_PIDX)
+list in 1/5
+```
+
+### 合并数据集
+
+``` stata
+/*
+语法形式是:
+打开一个数据集以后(master dataset):
+One-to-one merge on specified key variables
+    merge 1:1 varlist using filename [, options]
+Many-to-one merge on specified key variables
+    merge m:1 varlist using filename [,options]
+One-to-many merge on specified key variables
+    merge 1:m varlist using filename [, options]
+Many-to-many merge on specified key variables
+    merge m:m varlist using filename , options]
+因为现在我们的"child"数据集每个孩子只有1个观测值，
+而我们要合并的"'anthro"数据集(using dataset)每个孩子有多个观测值,
+所以在这里建议使用 1:m
+*/
+
+merge 1:m CHILD_PIDX using "anthro.dta"
+* 大家也可以试试下面这个(删去前面的"//")
+* 但是请注意:这两个merge command只能留一个
+//merge m:m CHILD_PIDX using "anthro.dta"
+
+* 想保留既有maternal information又有infant anthropology measurement的孩子
+* 所以保留 _merge==3 的记录
+keep ifmerge == 3
+drop _merge
+
+sort CHILD_PIDX
+```
+
+### reshape
+
+在数据分析中，尤其是面板数据分析和多层次回归分析，经常需要将数据从宽形（wide form）转换为长形（long form），或反之。Stata提供了一个强大的命令***reshape***来实现这种转换，它可以根据数据的结构和需要转换的方向，灵活地处理各种情况。
+
+**reshape命令的基本语法**
+
+***reshape***命令的基本语法结构如下：
+
+`reshape long stubnames, i(varlist) [options]`
+
+`reshape wide stubnames, i(varlist) [options]`
+
+其中，***i(varlist)***是必须的，用于指定ID变量。***j(varname \[values\])***在从宽形转换为长形时，***varname***是现有变量；从长形转换为宽形时，***varname***是新变量。***stubnames***是变量名的公共部分。
+
+``` stata
+reshape wide CHILD_ADJ_AGE WEIGHT-HEAD_CIRC, i(CHILD_PIDX) j(VISIT)
+* 后悔了?
+reshape long
+```
+
+## egen：生成变量统计量
+
+``` stata
+by CHILD_PIDX: egen max_visit = max(VISIT)
+by CHILD_PIDX: egen min_visit = min(VISIT)
+by CHILD_PIDX: egen mean_visit = mean(VISIT)
+by CHILD_PIDX: egen median_visit = median(VISIT)
+
+reshape Wide CHILD_ADJ_AGE WEIGHT-HEAD_CIRC,i(CHILD_PIDX) j(VISIT)
+egen height_mean = rowean(HEIGHT6 HEIGHT12 HEIGHT24 HEIGHT36)
+egen height_miss = rowmiss(HEIGHT6 HEIGHT12 HEIGHT24 HEIGHT36)
+egen height_nonmiss = rownonmiss(HEIGHT6 HEIGHT12 HEIGHT24 HEIGHT36)
+reshape long
+
+* explore egen
+help egen
+```
+
+### keep/drop
+
+``` stata
+/*
+keep/drop 后面接变量名:保留/除变量
+keep varl var2 var3 :保留变量var1 var2 var3
+drop varl var2 var3 :去掉变量var1 var2 var3
+
+keep/drop 后面接 if +条件判断:保留/删除观测值
+keep if ... :保留满足...条件的观测值
+drop if ... :去掉满足...条件的观测值
+*/
+
+//比如:
+drop MOM_EDUCATION_LOW_WRONG MOM_EDUCATION_LOW_RIGHT1 MOM_EDUCATION_LOW_RIGHT2
+keep CHILD_PIDX MOM_EDUCATION CHILD_SEX
+//keep if CHILD DOB_YEAR >= 2011
+//keep if CHILD DOB_YEAR ==2011 & CITIZENSHIP_PERC == 1
+```
+
+## 导出数据
+
+``` stata
+* 存储为DTA格式的数据
+save "Sample",replace
+//不指定文件类型的话，自动存为DTA数据
+//不指定位置的话，存到工作路径
+//当然，也可以指定位置
+save "/Users/username/Desktop/Stata/Sample", replace
+
+* 导出为Excel格式的数据
+export excel "Sample", replace //有问题!
+export excel "Sample.xlsx", replace //有问题!
+
+* 是不会自动导出变量名的，必须指定
+export excel "Sample.xlsx",firstrow(variables) replace //"变量"作为第一行
+
+export excel "Sample.xlsx",firstrow(varlabels) replace //“变量标签"作为第一行
+
+export excel "Sample.xlsx",firstrow(variables) nolabel replace //不导出数值标签
+
+* 导出为CSV格式的数据
+export delimited "Sample.csv"，replace //变量名自动作为第一行导出
+export delimited "Sample.csv"，nolabel replace //不导出数值标签
+
+log close
+```
+
+end.
