@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-05-10T11:50:54.333Z</lastmod>
+    <lastmod>2025-05-10T12:29:42.525Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -283,5 +283,9 @@
   <url>
     <loc>www.lazyzhou.cn/Guide/Stata/25-05-10-advanced-plot.html</loc>
     <lastmod>2025-05-10T11:50:50.496Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-05-10-coefplot.html</loc>
+    <lastmod>2025-05-10T12:29:32.408Z</lastmod>
   </url>
 </urlset>
