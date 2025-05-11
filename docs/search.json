@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-10},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 10, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-11},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 11, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -4891,6 +4891,292 @@
       "统计软件",
       "Stata",
       "22-coefplot"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html",
+    "href": "Guide/Stata/25-05-11-2-DID.html",
+    "title": "24-双重差分(DID)",
+    "section": "",
+    "text": "双重差分回归 (DID) 用于评估一个事件的因果效应，其方法是比较事件发生的单元集合（处理组）与事件未发生的单元集合（控制组）。\nDID 背后的逻辑是，如果事件从未发生，处理组和控制组之间的差异应该随着时间的推移保持不变。\nDID 通过比较处理组和控制组在事件发生前后的差异来估计事件的因果效应。\nDID 法是一种无法随机分配样本情况下的替代方法，主要应用于区域行的策略评估问题。\n目标：获取相对同质的策略组和控制组，这个“相对”是指除策略影响外，策略组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n对于相对同质的策略组和控制组，DID法通过第一次的差分消除这个基本固定的差异，通过第二次的差分消除时间趋势的影响，评估策略带来的实际效应。\n从DID 法的目标中可知，该方法面对的实验数据是面板数据（多个时间点的截面数据组成面板数据），即在策略干预时间点前，至少有两个时间点的数据。\n\\[\ny = \\alpha_0 +\\alpha_1g +\\alpha_2T + \\alpha_3gT + \\epsilon\n\\] \\(\\alpha_0\\)为常数项，\\(\\alpha_1\\)为处理组和控制组的差异，\\(\\alpha_2\\)为时间效应，\\(\\epsilon\\)为误差项。 \\(\\alpha_3\\)为交互项的系数，表示处理组和控制组在事件发生前后的差异。\n其中，\\(y\\)为结果变量，\\(g\\)为处理组和控制组的虚拟变量，\\(T\\)为时间虚拟变量，\\(gT\\)为交互项。 \\(\\alpha_3\\)为DID估计量，表示处理组和控制组在事件发生前后的差异。\nDID 模型的有效性检验\n为了保证该模型的有效性，在试验设计时需要满足平行趋势假设：在事件发生前，处理组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n平行趋势，即策略组和控制组在干预前保持相同的变化趋势。\n3种常见的平行趋势的检验方法：\n\n画图法：画出处理组和控制组在事件发生前后的结果变量的变化趋势图，观察两组的变化趋势是否平行。\n统计检验法：使用t检验或F检验等统计方法，检验处理组和控制组在事件发生前的结果变量的差异是否显著。\n伪DID法：在事件发生前，随机选择一个时间点，将处理组和控制组的结果变量进行差分，检验差分后的结果变量是否显著。\n\n\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#什么是-did",
+    "href": "Guide/Stata/25-05-11-2-DID.html#什么是-did",
+    "title": "24-双重差分(DID)",
+    "section": "",
+    "text": "双重差分回归 (DID) 用于评估一个事件的因果效应，其方法是比较事件发生的单元集合（处理组）与事件未发生的单元集合（控制组）。\nDID 背后的逻辑是，如果事件从未发生，处理组和控制组之间的差异应该随着时间的推移保持不变。\nDID 通过比较处理组和控制组在事件发生前后的差异来估计事件的因果效应。\nDID 法是一种无法随机分配样本情况下的替代方法，主要应用于区域行的策略评估问题。\n目标：获取相对同质的策略组和控制组，这个“相对”是指除策略影响外，策略组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n对于相对同质的策略组和控制组，DID法通过第一次的差分消除这个基本固定的差异，通过第二次的差分消除时间趋势的影响，评估策略带来的实际效应。\n从DID 法的目标中可知，该方法面对的实验数据是面板数据（多个时间点的截面数据组成面板数据），即在策略干预时间点前，至少有两个时间点的数据。\n\\[\ny = \\alpha_0 +\\alpha_1g +\\alpha_2T + \\alpha_3gT + \\epsilon\n\\] \\(\\alpha_0\\)为常数项，\\(\\alpha_1\\)为处理组和控制组的差异，\\(\\alpha_2\\)为时间效应，\\(\\epsilon\\)为误差项。 \\(\\alpha_3\\)为交互项的系数，表示处理组和控制组在事件发生前后的差异。\n其中，\\(y\\)为结果变量，\\(g\\)为处理组和控制组的虚拟变量，\\(T\\)为时间虚拟变量，\\(gT\\)为交互项。 \\(\\alpha_3\\)为DID估计量，表示处理组和控制组在事件发生前后的差异。\nDID 模型的有效性检验\n为了保证该模型的有效性，在试验设计时需要满足平行趋势假设：在事件发生前，处理组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n平行趋势，即策略组和控制组在干预前保持相同的变化趋势。\n3种常见的平行趋势的检验方法：\n\n画图法：画出处理组和控制组在事件发生前后的结果变量的变化趋势图，观察两组的变化趋势是否平行。\n统计检验法：使用t检验或F检验等统计方法，检验处理组和控制组在事件发生前的结果变量的差异是否显著。\n伪DID法：在事件发生前，随机选择一个时间点，将处理组和控制组的结果变量进行差分，检验差分后的结果变量是否显著。\n\n\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#导入数据",
+    "href": "Guide/Stata/25-05-11-2-DID.html#导入数据",
+    "title": "24-双重差分(DID)",
+    "section": "2 导入数据",
+    "text": "2 导入数据\n使用 Princeton University 提供的示例程序与数据集，具体参见：Differences‐in‐Differences (using Stata)\n\n%%stata\nuse \"http://dss.princeton.edu/training/Panel101.dta\", clear",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#创建变量",
+    "href": "Guide/Stata/25-05-11-2-DID.html#创建变量",
+    "title": "24-双重差分(DID)",
+    "section": "3 创建变量",
+    "text": "3 创建变量\n\n3.1 创建时间虚拟变量\n创建一个虚拟变量来指示治疗开始的时间。假设治疗始于 1994 年。在这种情况下，1994 年之前的值为 0，1994 年之后的值为 1。如果您已经创建了虚拟变量，请跳过此步骤。\n\n%%stata\ngen time = (year&gt;=1994) & !missing(year)\n\n\n\n3.2 创建治疗虚拟变量\n创建一个虚拟变量来标识接受治疗的组。在本例中，假设代码为 5、6 和 7 的国家/地区接受了治疗 (=1)。代码为 1-4 的国家/地区未接受治疗 (=0)。如果您已经创建了虚拟变量，请跳过此步骤。\n\n%%stata\ngen treated = (country&gt;4) & !missing(country)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#创建交互项",
+    "href": "Guide/Stata/25-05-11-2-DID.html#创建交互项",
+    "title": "24-双重差分(DID)",
+    "section": "4 创建交互项",
+    "text": "4 创建交互项\n在时间和治疗之间创建交互。我们将此交互称为 “did”\n\n%%stata\ngen did = time*treated",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#估计-did-估计量",
+    "href": "Guide/Stata/25-05-11-2-DID.html#估计-did-估计量",
+    "title": "24-双重差分(DID)",
+    "section": "5 估计 DID 估计量",
+    "text": "5 估计 DID 估计量\n\n%%stata\nreg y time treated did, r\n\n\nLinear regression                               Number of obs     =         70\n                                                F(3, 66)          =       2.17\n                                                Prob &gt; F          =     0.0998\n                                                R-squared         =     0.0827\n                                                Root MSE          =     3.0e+09\n\n------------------------------------------------------------------------------\n             |               Robust\n           y | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n        time |   2.29e+09   9.00e+08     2.54   0.013     4.92e+08    4.09e+09\n     treated |   1.78e+09   1.05e+09     1.70   0.094    -3.11e+08    3.86e+09\n         did |  -2.52e+09   1.45e+09    -1.73   0.088    -5.42e+09    3.81e+08\n       _cons |   3.58e+08   7.61e+08     0.47   0.640    -1.16e+09    1.88e+09\n------------------------------------------------------------------------------\n\n\ndid 的系数是 双重差分 的估计量。效果在置信水准为 10% 时显著，且治疗措施产生了负面影响。\n估计 DID 中的差分估计量（使用 # 方法，无需生成交互项）\n\n%%stata\nreg y time##treated, r\n\n\nLinear regression                               Number of obs     =         70\n                                                F(3, 66)          =       2.17\n                                                Prob &gt; F          =     0.0998\n                                                R-squared         =     0.0827\n                                                Root MSE          =     3.0e+09\n\n------------------------------------------------------------------------------\n             |               Robust\n           y | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n      1.time |   2.29e+09   9.00e+08     2.54   0.013     4.92e+08    4.09e+09\n   1.treated |   1.78e+09   1.05e+09     1.70   0.094    -3.11e+08    3.86e+09\n             |\ntime#treated |\n        1 1  |  -2.52e+09   1.45e+09    -1.73   0.088    -5.42e+09    3.81e+08\n             |\n       _cons |   3.58e+08   7.61e+08     0.47   0.640    -1.16e+09    1.88e+09\n------------------------------------------------------------------------------\n\n\n变量 time#treated 的系数即为 DID 估计量（对应前述示例中的 did ）。该估计在10%的显著性水平下显著，显示处理措施产生了负向影响",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#使用-diff-命令",
+    "href": "Guide/Stata/25-05-11-2-DID.html#使用-diff-命令",
+    "title": "24-双重差分(DID)",
+    "section": "6 使用 diff 命令",
+    "text": "6 使用 diff 命令\ndiff 由外部宏包提供，需要用户进行安装才可以使用：\n\n%%stata\nssc install diff\n\nchecking diff consistency and verifying not already installed...\ninstalling into C:\\Users\\asus\\ado\\plus\\...\ninstallation complete.\n\n\n\n%%stata\ndiff y, t(treated) p(time)\n\n\nDIFFERENCE-IN-DIFFERENCES ESTIMATION RESULTS\n--------------------------------------------\nNumber of observations in the DIFF-IN-DIFF: 70\n            Before         After    \n   Control: 16             24          40\n   Treated: 12             18          30\n            28             42\n--------------------------------------------------------\n Outcome var.   | y       | S. Err. |   |t|   |  P&gt;|t|\n----------------+---------+---------+---------+---------\nBefore          |         |         |         | \n   Control      |  3.6e+08|         |         | \n   Treated      |  2.1e+09|         |         | \n   Diff (T-C)   |  1.8e+09|  1.1e+09| 1.58    | 0.120\nAfter           |         |         |         | \n   Control      |  2.6e+09|         |         | \n   Treated      |  1.9e+09|         |         | \n   Diff (T-C)   | -7.4e+08|  9.2e+08| 0.81    | 0.422\n                |         |         |         | \nDiff-in-Diff    | -2.5e+09|  1.5e+09| 1.73    | 0.088*\n--------------------------------------------------------\nR-square:    0.08\n* Means and Standard Errors are estimated by linear regression\n**Inference: *** p&lt;0.01; ** p&lt;0.05; * p&lt;0.1\n\n\n使用 help diff 查看更多的细节和选项。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#双重差分",
+    "href": "Guide/Stata/25-05-11-2-DID.html#双重差分",
+    "title": "24-双重差分(DID)",
+    "section": "7 双重差分",
+    "text": "7 双重差分",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#前后虚拟变量",
+    "href": "Guide/Stata/25-05-11-2-DID.html#前后虚拟变量",
+    "title": "24-双重差分(DID)",
+    "section": "8 前后虚拟变量",
+    "text": "8 前后虚拟变量\n\n8.1 创建一个指示变量\n\n0 ：表示事件发生之前的时间\n1 ：表示事件发生之时及其之后的时间\n\n\n\n8.2 导入数据\n\n%%stata\nuse \"C:\\Users\\asus\\Desktop\\R\\quarto\\Med-Stat-Notes\\Data\\WDI.dta\", clear\n\n\n虚拟事件 X 在 2009 年发生，影响所有国家\n构建一个事件前后虚拟变量：0 表示事件发生前，1 表示事件发生后\n\n\n%%stata\ngen after = (year &gt;= 2009) if !missing(year)\n\n\n\n8.3 检查数据类型\n\n%%stata\ntab year after\n\n\n           |         after\n      Time |         0          1 |     Total\n-----------+----------------------+----------\n      2000 |       126          0 |       126 \n      2001 |       126          0 |       126 \n      2002 |       126          0 |       126 \n      2003 |       126          0 |       126 \n      2004 |       126          0 |       126 \n      2005 |       126          0 |       126 \n      2006 |       126          0 |       126 \n      2007 |       126          0 |       126 \n      2008 |       126          0 |       126 \n      2009 |         0        126 |       126 \n      2010 |         0        126 |       126 \n      2011 |         0        126 |       126 \n      2012 |         0        126 |       126 \n      2013 |         0        126 |       126 \n      2014 |         0        126 |       126 \n      2015 |         0        126 |       126 \n      2016 |         0        126 |       126 \n      2017 |         0        126 |       126 \n      2018 |         0        126 |       126 \n      2019 |         0        126 |       126 \n      2020 |         0        126 |       126 \n      2021 |         0        126 |       126 \n-----------+----------------------+----------\n     Total |     1,134      1,638 |     2,772",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#干预变量",
+    "href": "Guide/Stata/25-05-11-2-DID.html#干预变量",
+    "title": "24-双重差分(DID)",
+    "section": "9 干预变量",
+    "text": "9 干预变量\n创建一个指示变量，用于识别接受处理的观测单位，其中：\n\n0 表示从未接受处理的单位，例如，从未实施相关政策的州；\n1 表示接受过处理的单位，例如，实施过相关政策的州。\n\n例如，若 abc、xyz 和 cgi 三个州属于处理组，且州名称为字符串格式，则可按如下方式创建处理变量：\ngen treated = (state == \"abc\" | /// state == \"xyz\" | ///\nstate == \"cgi\")  if !missing(state)\n在本示例中，接受处理的国家已另存为一个虚拟的 Stata 数据集，其中包含一个名为 treated、取值为 1 的变量。\n接下来我们将该文件合并，以便在主数据集中获得处理变量。\n\n%%stata\nmerge m:1 country using \"C:\\Users\\asus\\Desktop\\R\\quarto\\Med-Stat-Notes\\Data\\Treated.dta\", gen(merge1)\n\n\n    Result                      Number of obs\n    -----------------------------------------\n    Not matched                         1,276\n        from master                     1,276  (merge1==1)\n        from using                          0  (merge1==2)\n\n    Matched                             1,496  (merge1==3)\n    -----------------------------------------\n\n\n未处理的单位将显示为缺失值（.）\n\n%%stata\nreplace treated = 0 if treated == .\n\n(1,276 real changes made)\n\n\n查看数据\n\n%%stata\ntab country treated\n\n\n                      |        treated\n         Country Name |         0          1 |     Total\n----------------------+----------------------+----------\n              Albania |         0         22 |        22 \n              Algeria |        22          0 |        22 \n            Argentina |        22          0 |        22 \n              Armenia |         0         22 |        22 \n            Australia |        22          0 |        22 \n              Austria |        22          0 |        22 \n         Bahamas, The |        22          0 |        22 \n           Bangladesh |         0         22 |        22 \n              Belarus |         0         22 |        22 \n              Belgium |        22          0 |        22 \n               Belize |        22          0 |        22 \n                Benin |        22          0 |        22 \n               Bhutan |         0         22 |        22 \n              Bolivia |         0         22 |        22 \nBosnia and Herzegov.. |         0         22 |        22 \n             Botswana |        22          0 |        22 \n               Brazil |        22          0 |        22 \n    Brunei Darussalam |         0         22 |        22 \n             Bulgaria |         0         22 |        22 \n              Burundi |         0         22 |        22 \n             Cambodia |         0         22 |        22 \n             Cameroon |         0         22 |        22 \n               Canada |        22          0 |        22 \n                Chile |         0         22 |        22 \n             Colombia |         0         22 |        22 \n              Comoros |        22          0 |        22 \n     Congo, Dem. Rep. |        22          0 |        22 \n          Congo, Rep. |        22          0 |        22 \n           Costa Rica |         0         22 |        22 \n        Cote d'Ivoire |        22          0 |        22 \n              Croatia |         0         22 |        22 \n                 Cuba |        22          0 |        22 \n               Cyprus |         0         22 |        22 \n              Czechia |         0         22 |        22 \n              Denmark |        22          0 |        22 \n   Dominican Republic |         0         22 |        22 \n              Ecuador |        22          0 |        22 \n     Egypt, Arab Rep. |         0         22 |        22 \n          El Salvador |         0         22 |        22 \n              Estonia |         0         22 |        22 \n             Eswatini |         0         22 |        22 \n              Finland |        22          0 |        22 \n               France |        22          0 |        22 \n                Gabon |        22          0 |        22 \n              Germany |        22          0 |        22 \n               Greece |         0         22 |        22 \n            Guatemala |         0         22 |        22 \n                Haiti |        22          0 |        22 \n             Honduras |        22          0 |        22 \n Hong Kong SAR, China |         0         22 |        22 \n              Hungary |        22          0 |        22 \n              Iceland |         0         22 |        22 \n                India |        22          0 |        22 \n            Indonesia |         0         22 |        22 \n   Iran, Islamic Rep. |         0         22 |        22 \n              Ireland |         0         22 |        22 \n               Israel |        22          0 |        22 \n                Italy |        22          0 |        22 \n                Japan |         0         22 |        22 \n               Jordan |        22          0 |        22 \n           Kazakhstan |         0         22 |        22 \n                Kenya |        22          0 |        22 \n          Korea, Rep. |        22          0 |        22 \n      Kyrgyz Republic |        22          0 |        22 \n               Latvia |        22          0 |        22 \n              Lebanon |        22          0 |        22 \n            Lithuania |         0         22 |        22 \n           Luxembourg |         0         22 |        22 \n     Macao SAR, China |         0         22 |        22 \n           Madagascar |         0         22 |        22 \n             Malaysia |         0         22 |        22 \n                 Mali |         0         22 |        22 \n                Malta |        22          0 |        22 \n           Mauritania |         0         22 |        22 \n            Mauritius |        22          0 |        22 \n               Mexico |         0         22 |        22 \n              Moldova |         0         22 |        22 \n              Morocco |         0         22 |        22 \n           Mozambique |         0         22 |        22 \n              Namibia |        22          0 |        22 \n          Netherlands |         0         22 |        22 \n          New Zealand |         0         22 |        22 \n            Nicaragua |         0         22 |        22 \n                Niger |        22          0 |        22 \n              Nigeria |        22          0 |        22 \n      North Macedonia |         0         22 |        22 \n               Norway |        22          0 |        22 \n                 Oman |         0         22 |        22 \n             Pakistan |        22          0 |        22 \n               Panama |         0         22 |        22 \n             Paraguay |         0         22 |        22 \n                 Peru |        22          0 |        22 \n          Philippines |        22          0 |        22 \n               Poland |         0         22 |        22 \n             Portugal |        22          0 |        22 \n              Romania |         0         22 |        22 \n   Russian Federation |        22          0 |        22 \n               Rwanda |         0         22 |        22 \n         Saudi Arabia |         0         22 |        22 \n              Senegal |        22          0 |        22 \n               Serbia |        22          0 |        22 \n         Sierra Leone |        22          0 |        22 \n            Singapore |         0         22 |        22 \n      Slovak Republic |        22          0 |        22 \n             Slovenia |         0         22 |        22 \n      Solomon Islands |        22          0 |        22 \n         South Africa |        22          0 |        22 \n                Spain |         0         22 |        22 \n            Sri Lanka |         0         22 |        22 \n                Sudan |         0         22 |        22 \n               Sweden |         0         22 |        22 \n          Switzerland |         0         22 |        22 \n             Tanzania |        22          0 |        22 \n             Thailand |        22          0 |        22 \n          Timor-Leste |        22          0 |        22 \n              Tunisia |         0         22 |        22 \n              Turkiye |         0         22 |        22 \n               Uganda |         0         22 |        22 \n              Ukraine |         0         22 |        22 \n       United Kingdom |        22          0 |        22 \n        United States |         0         22 |        22 \n              Uruguay |         0         22 |        22 \n           Uzbekistan |        22          0 |        22 \n              Vietnam |         0         22 |        22 \n   West Bank and Gaza |        22          0 |        22 \n             Zimbabwe |        22          0 |        22 \n----------------------+----------------------+----------\n                Total |     1,276      1,496 |     2,772",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#did-指示变量",
+    "href": "Guide/Stata/25-05-11-2-DID.html#did-指示变量",
+    "title": "24-双重差分(DID)",
+    "section": "10 DID 指示变量",
+    "text": "10 DID 指示变量\nDID（双重差分）指示变量是”处理变量”和”事件前后变量”的交互项。\n在本示例中，我们将处理变量命名为 treated，事件前后变量命名为 after（可根据自己的数据替换变量名）。\n下面创建 DID 指示变量:\n\n%%stata\ngen did = after * treated\n\n创建一个带标签的数值型变量，用作分组或面板变量。这是为了让 Stata 的相关命令能够识别数据中的面板结构\n\n%%stata\nencode country, gen(country1)\n\n将数据设置为面板数据格式（仅适用于以 xt 开头的命令）\n\n%%stata\nxtset country1 year\n\n\nPanel variable: country1 (strongly balanced)\n Time variable: year, 2000 to 2021\n         Delta: 1 unit\n\n\n事件在所有处理组中同时发生\n使用 Stata 的 xtdidregress 或 didregress 命令进行差分中的差分分析\n\n如果是面板数据，使用 xtdidregress；\n如果是重复截面数据（即不同时点的抽样调查），使用 didregress\n面板数据（panel data）：同一组单位在多个时间点被观察（如同一批国家或个人被多次追踪）\n重复截面数据（repeated cross-sectional data）：每个时间点抽取不同的单位样本（如每年全国抽样调查）",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#使用-stata-的-xtdidregress-命令",
+    "href": "Guide/Stata/25-05-11-2-DID.html#使用-stata-的-xtdidregress-命令",
+    "title": "24-双重差分(DID)",
+    "section": "11 使用 Stata 的 xtdidregress 命令",
+    "text": "11 使用 Stata 的 xtdidregress 命令\n仅适用于 Stata 17 及以上版本（手动估计方法见后续）。\n如需查看该命令的详细说明与示例，请输入：help xtdidregress\n\n%%stata\nxtdidregress (gdppc) (did), group(country1) time(year)\n\n\nTreatment and time information\n\nTime variable: year\nControl:       did = 0\nTreatment:     did = 1\n-----------------------------------\n             |   Control  Treatment\n-------------+---------------------\nGroup        |\n    country1 |        58         68\n-------------+---------------------\nTime         |\n     Minimum |      2000       2009\n     Maximum |      2000       2009\n-----------------------------------\n\nDifference-in-differences regression                     Number of obs = 2,772\nData type: Longitudinal\n\n                             (Std. err. adjusted for 126 clusters in country1)\n------------------------------------------------------------------------------\n             |               Robust\n       gdppc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nATET         |\n         did |\n   (1 vs 0)  |   1164.492   610.0838     1.91   0.059    -42.93971    2371.923\n------------------------------------------------------------------------------\nNote: ATET estimate adjusted for panel effects and time effects.\n\n\n\n11.1 平行趋势\n如需了解 didregress 的后估计命令的详细信息和示例，请输入：help xtdidregress_postestimation\n运行 xtdidregress\n\n%%stata\nxtdidregress (gdppc) (did), group(country1) time(year)\n\n\nTreatment and time information\n\nTime variable: year\nControl:       did = 0\nTreatment:     did = 1\n-----------------------------------\n             |   Control  Treatment\n-------------+---------------------\nGroup        |\n    country1 |        58         68\n-------------+---------------------\nTime         |\n     Minimum |      2000       2009\n     Maximum |      2000       2009\n-----------------------------------\n\nDifference-in-differences regression                     Number of obs = 2,772\nData type: Longitudinal\n\n                             (Std. err. adjusted for 126 clusters in country1)\n------------------------------------------------------------------------------\n             |               Robust\n       gdppc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nATET         |\n         did |\n   (1 vs 0)  |   1164.492   610.0838     1.91   0.059    -42.93971    2371.923\n------------------------------------------------------------------------------\nNote: ATET estimate adjusted for panel effects and time effects.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#xtdidregress-的可视化",
+    "href": "Guide/Stata/25-05-11-2-DID.html#xtdidregress-的可视化",
+    "title": "24-双重差分(DID)",
+    "section": "12 xtdidregress 的可视化",
+    "text": "12 xtdidregress 的可视化\n可视化的示例和更多信息，请输入：help xtdidregress_postestimation\n\n%%stata\nxtdidregress (gdppc) (did), group(country1) time(year) \nestat trendplots, ytitle(GDP pc)\n\n\n. xtdidregress (gdppc) (did), group(country1) time(year) \n\nTreatment and time information\n\nTime variable: year\nControl:       did = 0\nTreatment:     did = 1\n-----------------------------------\n             |   Control  Treatment\n-------------+---------------------\nGroup        |\n    country1 |        58         68\n-------------+---------------------\nTime         |\n     Minimum |      2000       2009\n     Maximum |      2000       2009\n-----------------------------------\n\nDifference-in-differences regression                     Number of obs = 2,772\nData type: Longitudinal\n\n                             (Std. err. adjusted for 126 clusters in country1)\n------------------------------------------------------------------------------\n             |               Robust\n       gdppc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\nATET         |\n         did |\n   (1 vs 0)  |   1164.492   610.0838     1.91   0.059    -42.93971    2371.923\n------------------------------------------------------------------------------\nNote: ATET estimate adjusted for panel effects and time effects.\n\n. estat trendplots, ytitle(GDP pc)\n\n.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-2-DID.html#使用-ols-固定效应回归手动估计",
+    "href": "Guide/Stata/25-05-11-2-DID.html#使用-ols-固定效应回归手动估计",
+    "title": "24-双重差分(DID)",
+    "section": "13 使用 OLS 固定效应回归（手动估计）",
+    "text": "13 使用 OLS 固定效应回归（手动估计）\n\n13.1 双重差分的基础回归：所有单位在同一时间经历事件\n\n创建一个带标签的数值型变量，用作分组或面板变量\n\nencode country, gen(country1)\n\nDID 回归中不需要单独包括 after 和 treated 变量，因为已包含面板和时间固定效应\n\n在使用固定效应模型（如 xtreg, fe 或 areg 带 absorb()）进行差分中的差分回归时，只需要包含处理组与时间的交互项（即 treated#after），因为：\n\n个体固定效应 已控制了处理组与对照组之间的时间不变差异；\n时间固定效应 已控制了所有单位随时间的共同趋势。\n\nxtreg gdppc did i.year, fe vce(cluster country1)\n变量 did 的回归系数即为双重差分（DID）的估计量。该效应在 95% 显著性水平下不显著（P&gt;|t| &gt; 0.05），因此我们可以认为该事件对因变量没有显著影响。\n\n\n13.2 可视化平行趋势\nbysort year treated: egen mean_gdppc = mean(gdppc) \ntwoway line mean_gdppc year if treated == 0, sort || /// \nline mean_gdppc year if treated == 1, sort lpattern(dash) /// \nlegend(label(1 \"Control\") label(2 \"Treated\")) /// \nxline(2009)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "24-双重差分(DID)"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html",
+    "title": "23-Empericial Analysis Intro",
+    "section": "",
+    "text": "社会科学研究方法之一，着眼于当前社会或学科现实，通过事例和经验等从理论上推理说明，那就属于实证分析。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html#实证分析的定义",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html#实证分析的定义",
+    "title": "23-Empericial Analysis Intro",
+    "section": "",
+    "text": "社会科学研究方法之一，着眼于当前社会或学科现实，通过事例和经验等从理论上推理说明，那就属于实证分析。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html#基本含义",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html#基本含义",
+    "title": "23-Empericial Analysis Intro",
+    "section": "2 基本含义",
+    "text": "2 基本含义\n实证研究方法概述实证研究（Empirical Research）方法是一种与规范研究（Normative Research）方法相对应的方法，它是基于观察和试验取得的大量事实、数据，利用统计推断的理论和技术，并经过严格的经验检验，而且引进数量模型，对社会现象进行数量分析的一种方法，其目的在于揭示各种社会现象的本质联系。相比规范研究方法，实证研究方法主要进行定量分析，依据数据说话，使其对社会问题的研究更精确、更科学。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html#应用场景",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html#应用场景",
+    "title": "23-Empericial Analysis Intro",
+    "section": "3 应用场景",
+    "text": "3 应用场景\n实证分析广泛应用于经济学、社会学、心理学等领域，常用于市场分析、社会政策和健康医疗等实际问题的研究。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html#特点",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html#特点",
+    "title": "23-Empericial Analysis Intro",
+    "section": "4 特点",
+    "text": "4 特点\n\n强调客观性和可验证性：实证分析通过搜集和分析数据来推断某个变量与另一个变量之间的关系，强调客观性和可验证性，而不是主观臆断或理论推演。\n使用统计学和计量经济学等方法：实证分析使用统计学和计量经济学等方法对数据进行处理和分析，以获得准确、可靠的结论。\n重视样本的大小和质量：实证分析需要足够大的样本来支持结论的可靠性，同时也需要注意样本的质量和代表性。\n推崇可重复性：实证分析的研究结果需要可重复，以验证结论的可靠性和稳定性。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html#实证研究的优势与局限",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html#实证研究的优势与局限",
+    "title": "23-Empericial Analysis Intro",
+    "section": "5 实证研究的优势与局限",
+    "text": "5 实证研究的优势与局限\n实证研究方法的优势体现在以下三个方面：一是坚持因果规律是基本前提。有利于提升实证研究的逻辑可靠性。二是坚持归纳主义的原则。归纳主义注重从广泛的经验中总结出规律性的东西，这能提升实证研究的普遍适用性。三是坚持价值中立的原则。这从研究立场上提升了实证研究的客观性和科学性，中立的价值判断也让实证研究的结果更令人信服。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html#实证分析-stata-实现",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html#实证分析-stata-实现",
+    "title": "23-Empericial Analysis Intro",
+    "section": "6 实证分析 Stata 实现",
+    "text": "6 实证分析 Stata 实现\n\n预备知识: 基本统计信息回顾\n线性模型: 线性回归，模型假设及预测量特性\n线性模型: 约束模型，哑变量交叉项\n线性模型: 异方差与序列相关，\n面板模型: 面板数据、内生性、固定效应\n计量方法: 因果识别、工具变量、DID与RDD\n非线性模型: 最大似然原理，Logit/Probit等\n时间序列模型: 稳定性及检验，AR,MA,ARMA等\n\n实证分析的学习笔记来着【实证计量及STATA操作】应用数据分析（全13集）",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-05-11-1-empirical-ana.html#统计学基本知识",
+    "href": "Guide/Stata/25-05-11-1-empirical-ana.html#统计学基本知识",
+    "title": "23-Empericial Analysis Intro",
+    "section": "7 统计学基本知识",
+    "text": "7 统计学基本知识\n\n随机变量\n分布函数 和 密度函数\n联合分布，边缘分布，条件分布\n期望、方差、协方差、相关系数、偏度、峰度\n条件期望、性质、迭代期望法则\n条件方差\n典型分布:正态分布、卡方分布、t分布、F分布",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "Stata",
+      "23-Empericial Analysis Intro"
     ]
   }
 ]

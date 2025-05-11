@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simonzhou">
+<meta name="author" content="Simon Zhou">
 
-<title>统计软件 – 医学统计学笔记</title>
+<title>23-Empericial Analysis Intro – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,64 +21,30 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../Guide/R/2025-02-22-CLHLS.html" rel="next">
-<link href="../Learn/Bayes/01-Bayes-PGM.html" rel="prev">
-<link href="../images/logo.png" rel="icon" type="image/png">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../Guide/Stata/25-05-11-2-DID.html" rel="next">
+<link href="../../Guide/Stata/25-05-10-coefplot.html" rel="prev">
+<link href="../../images/logo.png" rel="icon" type="image/png">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -117,26 +83,26 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="统计软件 – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
-<meta property="og:image" content="www.lazyzhou.cn/Guide/images/logo.png">
+<meta property="og:title" content="23-Empericial Analysis Intro – 医学统计学笔记">
+<meta property="og:description" content="实证分析介绍">
+<meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="统计软件 – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
+<meta name="twitter:title" content="23-Empericial Analysis Intro – 医学统计学笔记">
+<meta name="twitter:description" content="实证分析介绍">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../images/logo.png" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../images/logo.png" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">医学统计学习笔记</span>
     </a>
   </div>
@@ -147,7 +113,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" aria-current="page"> 
+    <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -156,11 +122,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">    
         <li>
-    <a class="dropdown-item" href="../Learn/Basic/00-basic.html">
+    <a class="dropdown-item" href="../../Learn/Basic/00-basic.html">
  <span class="dropdown-text">Basic</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Learn/Bayes/00-About-Bayes.html">
+    <a class="dropdown-item" href="../../Learn/Bayes/00-About-Bayes.html">
  <span class="dropdown-text">Bayes</span></a>
   </li>  
     </ul>
@@ -171,23 +137,23 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">    
         <li>
-    <a class="dropdown-item" href="../Guide/Guide-intro.html">
+    <a class="dropdown-item" href="../../Guide/Guide-intro.html">
  <span class="dropdown-text">Guide</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/Python/Python-intro.html">
+    <a class="dropdown-item" href="../../Guide/Python/Python-intro.html">
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/R/R-intro.html">
+    <a class="dropdown-item" href="../../Guide/R/R-intro.html">
  <span class="dropdown-text">R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/SAS/25-02-16-SAS-intro.html">
+    <a class="dropdown-item" href="../../Guide/SAS/25-02-16-SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../Guide/Stata/25-03-09-Stata-intro.html">
+    <a class="dropdown-item" href="../../Guide/Stata/25-03-09-Stata-intro.html">
  <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
@@ -198,7 +164,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">    
         <li>
-    <a class="dropdown-item" href="../Quarto/quarto-intro.html">
+    <a class="dropdown-item" href="../../Quarto/quarto-intro.html">
  <span class="dropdown-text">Intro</span></a>
   </li>  
     </ul>
@@ -206,7 +172,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../navbar/book.html"> 
+    <a class="nav-link" href="../../navbar/book.html"> 
 <span class="menu-text">Books</span></a>
   </li>  
 </ul>
@@ -227,7 +193,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Guide/Guide-intro.html">统计软件</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-11-1-empirical-ana.html">23-Empericial Analysis Intro</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -249,13 +215,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">主页</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -273,73 +239,73 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">关于卫生统计学</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/02-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/02-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">不同资料的统计描述</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/03-Random-events-probabilities.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/03-Random-events-probabilities.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">随机事件的概率</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/04-discrete-type-random-variable.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/04-discrete-type-random-variable.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">离散型随机变量的概率分布</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/05-random-variable-of-continuous-type.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/05-random-variable-of-continuous-type.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">连续型随机变量的概率分布</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/06-parameter-estimation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/06-parameter-estimation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">参数估计</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/07-parameter-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/07-parameter-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">参数检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/08-anova-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/08-anova-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">方差分析</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">卡方检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">非参数检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">简单线性相关和回归</span></a>
   </div>
 </li>
@@ -356,13 +322,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">贝叶斯与概率推理</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Learn/Bayes/01-Bayes-PGM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Learn/Bayes/01-Bayes-PGM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">贝叶斯与概率图模型（PGM）</span></a>
   </div>
 </li>
@@ -372,7 +338,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link active">
+            <a href="../../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">统计软件</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -390,19 +356,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">CLHLS Data Analysis by R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MacOS安装 R 和 Rstudio</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">R</span></a>
   </div>
 </li>
@@ -419,37 +385,37 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python和Stata处理一份卫生费用数据</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python做生存分析和COX回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python做桑基图</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/25-04-28-DID.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/25-04-28-DID.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">DID 双重差分模型</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/25-04-28-DID-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/25-04-28-DID-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">How to Use the DID in Python</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python</span></a>
   </div>
 </li>
@@ -466,25 +432,25 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">使用SAS处理CLHLS数据</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-SAS-Record</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">01-SAS 安装与vscode 扩展</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/SAS/25-05-05-SAS-install-connect.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">02-SAS 在 Jupyter Notebook 中使用</span></a>
   </div>
 </li>
@@ -492,166 +458,166 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
  <span class="menu-text">Stata</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11-Stata 做 ITSA 分析</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-04-29-Stata-PY.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-04-29-Stata-PY.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">01-Use Stata in Quarto(ipynb)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-02-stata-obs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-02-stata-obs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">02-数据的初步观测</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-03-describe-index.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-03-describe-index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">03-统计描述指标</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-04-CI.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-04-CI.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">04-置信区间（CI）</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-05-log-do.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-05-log-do.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">06-代码的可复现性与文件管理</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-05-scatter-plot.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">05-双变量作图</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">07-t检验（t-test）</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-06-chi2-fisher-test.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">08-卡方检验与Fisher精确检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-06-RR-CAL.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-06-RR-CAL.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">09-RR值与OR值的计算</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-07-1-ANOVA.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-1-ANOVA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">10-单因素方差分析（ANOVA）</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-07-2-simple-line-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-2-simple-line-reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11-简单线性回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-07-3-multi-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-3-multi-reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">12-多元线性回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-07-4-log-binary.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-4-log-binary.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">13-二分类Logistic回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-08-1-GLM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-1-GLM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">14-广义线性模型（GLM）</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-08-2-survival-ana.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-2-survival-ana.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">15-生存分析</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-08-3-Cox-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-3-Cox-reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">16-Cox回归与比例风险假定检验</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-08-4-GEE.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-4-GEE.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">17-广义估计方程(GEE)</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">18-有序多分类Logistic回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-09-1-multinomail-logistic-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-09-1-multinomail-logistic-reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">19-无序多分类Logistic回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-09-2-data-manage.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-09-2-data-manage.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">20-数据清洗与整理</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-10-advanced-plot.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-10-advanced-plot.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">21-复杂与精准绘图</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-10-coefplot.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-10-coefplot.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">22-coefplot</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-11-1-empirical-ana.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-11-1-empirical-ana.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">23-Empericial Analysis Intro</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Guide/Stata/25-05-11-2-DID.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-11-2-DID.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">24-双重差分(DID)</span></a>
   </div>
 </li>
@@ -670,19 +636,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Qmd config giscus</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../Quarto/quarto-LaTeX.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Quarto/quarto-LaTeX.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quarto与LaTeX的记录</span></a>
   </div>
 </li>
@@ -693,13 +659,28 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#实证分析的定义" id="toc-实证分析的定义" class="nav-link active" data-scroll-target="#实证分析的定义"><span class="header-section-number">1</span> 实证分析的定义</a></li>
+  <li><a href="#基本含义" id="toc-基本含义" class="nav-link" data-scroll-target="#基本含义"><span class="header-section-number">2</span> 基本含义</a></li>
+  <li><a href="#应用场景" id="toc-应用场景" class="nav-link" data-scroll-target="#应用场景"><span class="header-section-number">3</span> 应用场景</a></li>
+  <li><a href="#特点" id="toc-特点" class="nav-link" data-scroll-target="#特点"><span class="header-section-number">4</span> 特点</a></li>
+  <li><a href="#实证研究的优势与局限" id="toc-实证研究的优势与局限" class="nav-link" data-scroll-target="#实证研究的优势与局限"><span class="header-section-number">5</span> 实证研究的优势与局限</a></li>
+  <li><a href="#实证分析-stata-实现" id="toc-实证分析-stata-实现" class="nav-link" data-scroll-target="#实证分析-stata-实现"><span class="header-section-number">6</span> 实证分析 Stata 实现</a></li>
+  <li><a href="#统计学基本知识" id="toc-统计学基本知识" class="nav-link" data-scroll-target="#统计学基本知识"><span class="header-section-number">7</span> 统计学基本知识</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-11-1-empirical-ana.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-11-1-empirical-ana.html">23-Empericial Analysis Intro</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">统计软件</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<h1 class="title">23-Empericial Analysis Intro</h1>
+<p class="subtitle lead">实证分析介绍</p>
 </div>
 
 
@@ -709,23 +690,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simonzhou </p>
+             <p>Simon Zhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年2月22日</p>
+      <p class="date">2025年5月11日</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">修改于</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月11日</p>
-    </div>
-  </div>
     
   </div>
   
@@ -734,24 +709,59 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>一些统计软件的使用记录。</p>
-<p>最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。</p>
-<p>后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。</p>
-<p>21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。</p>
-<p>21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。</p>
-<p>23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛<a href="https://www.dxy.cn/">丁香园</a>的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、Markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。</p>
-<p>其实23年的时候Posit已经在开发Quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用Quarto，和社区交流后无果，只能使用VS Code来作为编辑器。</p>
-<p>直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。</p>
-<p>24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。</p>
-<p>25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。</p>
-<p>我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。</p>
-<p>2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。</p>
-<p>2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 <code>.ipynb</code> 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 <code>.ipynb</code> 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 <code>.ipynb</code> 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。</p>
-<p>2025-05-05 看着桌边的 《SAS统计软件应用》，想了一下 SAS ，软件自带的编辑器很糟糕，又想，vscode 是万能编辑器，是不是也有 SAS 的扩展，搜了一下，嘿，还真有，那是不是也可以像 Stata 一样通过 <code>.ipynb</code> 文件进行编辑和运行，然后通过 Quarto 进行编译转为 <code>.html</code> 文件然后网页输出，看了下也是可以的，有趣，感觉 Quarto 真的可以借助 <code>.ipynb</code> 和 <code>.qmd</code>/<code>rmd</code> 实现统计软件的展现大一统。</p>
+<section id="实证分析的定义" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="实证分析的定义"><span class="header-section-number">1</span> 实证分析的定义</h2>
+<p>社会科学研究方法之一，着眼于当前社会或学科现实，通过事例和经验等从理论上推理说明，那就属于实证分析。</p>
+</section>
+<section id="基本含义" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="基本含义"><span class="header-section-number">2</span> 基本含义</h2>
+<p>实证研究方法概述实证研究（Empirical Research）方法是一种与规范研究（Normative Research）方法相对应的方法，它是基于观察和试验取得的大量事实、数据，利用统计推断的理论和技术，并经过严格的经验检验，而且引进数量模型，对社会现象进行数量分析的一种方法，其目的在于揭示各种社会现象的本质联系。相比规范研究方法，实证研究方法主要进行定量分析，依据数据说话，使其对社会问题的研究更精确、更科学。</p>
+</section>
+<section id="应用场景" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="应用场景"><span class="header-section-number">3</span> 应用场景</h2>
+<p>实证分析广泛应用于经济学、社会学、心理学等领域，常用于市场分析、社会政策和健康医疗等实际问题的研究。</p>
+</section>
+<section id="特点" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="特点"><span class="header-section-number">4</span> 特点</h2>
+<ol type="1">
+<li>强调客观性和可验证性：实证分析通过搜集和分析数据来推断某个变量与另一个变量之间的关系，强调客观性和可验证性，而不是主观臆断或理论推演。</li>
+<li>使用统计学和计量经济学等方法：实证分析使用统计学和计量经济学等方法对数据进行处理和分析，以获得准确、可靠的结论。</li>
+<li>重视样本的大小和质量：实证分析需要足够大的样本来支持结论的可靠性，同时也需要注意样本的质量和代表性。</li>
+<li>推崇可重复性：实证分析的研究结果需要可重复，以验证结论的可靠性和稳定性。</li>
+</ol>
+</section>
+<section id="实证研究的优势与局限" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="实证研究的优势与局限"><span class="header-section-number">5</span> 实证研究的优势与局限</h2>
+<p>实证研究方法的优势体现在以下三个方面：一是坚持因果规律是基本前提。有利于提升实证研究的逻辑可靠性。二是坚持归纳主义的原则。归纳主义注重从广泛的经验中总结出规律性的东西，这能提升实证研究的普遍适用性。三是坚持价值中立的原则。这从研究立场上提升了实证研究的客观性和科学性，中立的价值判断也让实证研究的结果更令人信服。</p>
+</section>
+<section id="实证分析-stata-实现" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="实证分析-stata-实现"><span class="header-section-number">6</span> 实证分析 Stata 实现</h2>
+<ul>
+<li>预备知识: 基本统计信息回顾</li>
+<li>线性模型: 线性回归，模型假设及预测量特性</li>
+<li>线性模型: 约束模型，哑变量交叉项</li>
+<li>线性模型: 异方差与序列相关，</li>
+<li>面板模型: 面板数据、内生性、固定效应</li>
+<li>计量方法: 因果识别、工具变量、DID与RDD</li>
+<li>非线性模型: 最大似然原理，Logit/Probit等</li>
+<li>时间序列模型: 稳定性及检验，AR,MA,ARMA等</li>
+</ul>
+<p>实证分析的学习笔记来着<a href="https://www.bilibili.com/video/BV1Bd4y157DR/?share_source=copy_web&amp;vd_source=d0641c4a71563b0ce36f5be30b4bb59c">【实证计量及STATA操作】应用数据分析（全13集）</a></p>
+</section>
+<section id="统计学基本知识" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="统计学基本知识"><span class="header-section-number">7</span> 统计学基本知识</h2>
+<ul>
+<li>随机变量</li>
+<li>分布函数 和 密度函数</li>
+<li>联合分布，边缘分布，条件分布</li>
+<li>期望、方差、协方差、相关系数、偏度、峰度</li>
+<li>条件期望、性质、迭代期望法则</li>
+<li>条件方差</li>
+<li>典型分布:正态分布、卡方分布、t分布、F分布</li>
+</ul>
 
 
-<!-- -->
-
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1377,55 +1387,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../Learn/Bayes/01-Bayes-PGM.html" class="pagination-link" aria-label="贝叶斯与概率图模型（PGM）">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">贝叶斯与概率图模型（PGM）</span>
+      <a href="../../Guide/Stata/25-05-10-coefplot.html" class="pagination-link" aria-label="22-coefplot">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">22-coefplot</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../Guide/R/2025-02-22-CLHLS.html" class="pagination-link" aria-label="CLHLS Data Analysis by R">
-        <span class="nav-page-text">CLHLS Data Analysis by R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-05-11-2-DID.html" class="pagination-link" aria-label="24-双重差分(DID)">
+        <span class="nav-page-text">24-双重差分(DID)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "统计软件"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-22"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> "today"</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>一些统计软件的使用记录。</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛<span class="co">[</span><span class="ot">丁香园</span><span class="co">](https://www.dxy.cn/)</span>的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、Markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>其实23年的时候Posit已经在开发Quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用Quarto，和社区交流后无果，只能使用VS Code来作为编辑器。</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 <span class="in">`.ipynb`</span> 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 <span class="in">`.ipynb`</span> 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 <span class="in">`.ipynb`</span> 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>2025-05-05 看着桌边的 《SAS统计软件应用》，想了一下 SAS ，软件自带的编辑器很糟糕，又想，vscode 是万能编辑器，是不是也有 SAS 的扩展，搜了一下，嘿，还真有，那是不是也可以像 Stata 一样通过 <span class="in">`.ipynb`</span> 文件进行编辑和运行，然后通过 Quarto 进行编译转为 <span class="in">`.html`</span> 文件然后网页输出，看了下也是可以的，有趣，感觉 Quarto 真的可以借助 <span class="in">`.ipynb`</span> 和 <span class="in">`.qmd`</span>/<span class="in">`rmd`</span> 实现统计软件的展现大一统。</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>2025-05-11 昨天学完了stata的初级课程，今天开始捣鼓advanced course，一直听闻实证分析的妙用，有点抽象，而且没有找到特别合适的课程，Princeton 的一些教案挺好的，对着教案翻译然后跑代码，复现还可以。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1438,7 +1409,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Guide-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-11-1-empirical-ana.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -1455,5 +1426,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

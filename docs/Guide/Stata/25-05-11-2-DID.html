@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Simonzhou">
+<meta name="author" content="Simon Zhou">
 
-<title>00-Stata Intro and Record – 医学统计学笔记</title>
+<title>24-双重差分(DID) – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="next">
-<link href="../../Guide/SAS/25-05-05-SAS-install-connect.html" rel="prev">
+<link href="../../Quarto/config-giscus-github.html" rel="next">
+<link href="../../Guide/Stata/25-05-11-1-empirical-ana.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -116,17 +116,47 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="24-双重差分(DID) – 医学统计学笔记">
+<meta property="og:description" content="双重差分模型与示例">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="00-Stata Intro and Record – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="24-双重差分(DID) – 医学统计学笔记">
+<meta name="twitter:description" content="双重差分模型与示例">
+<meta name="twitter:image" content="www.lazyzhou.cn/Guide/Stata/25-05-11-2-DID_files/figure-html/cell-22-output-2.svg">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -227,7 +257,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-11-2-DID.html">24-双重差分(DID)</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -501,7 +531,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
   </div>
 </li>
@@ -651,7 +681,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-11-2-DID.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-11-2-DID.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">24-双重差分(DID)</span></a>
   </div>
 </li>
@@ -693,13 +723,34 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#什么是-did" id="toc-什么是-did" class="nav-link active" data-scroll-target="#什么是-did"><span class="header-section-number">1</span> 什么是 DID</a></li>
+  <li><a href="#导入数据" id="toc-导入数据" class="nav-link" data-scroll-target="#导入数据"><span class="header-section-number">2</span> 导入数据</a></li>
+  <li><a href="#创建变量" id="toc-创建变量" class="nav-link" data-scroll-target="#创建变量"><span class="header-section-number">3</span> 创建变量</a></li>
+  <li><a href="#创建交互项" id="toc-创建交互项" class="nav-link" data-scroll-target="#创建交互项"><span class="header-section-number">4</span> 创建交互项</a></li>
+  <li><a href="#估计-did-估计量" id="toc-估计-did-估计量" class="nav-link" data-scroll-target="#估计-did-估计量"><span class="header-section-number">5</span> 估计 DID 估计量</a></li>
+  <li><a href="#使用-diff-命令" id="toc-使用-diff-命令" class="nav-link" data-scroll-target="#使用-diff-命令"><span class="header-section-number">6</span> 使用 diff 命令</a></li>
+  <li><a href="#双重差分" id="toc-双重差分" class="nav-link" data-scroll-target="#双重差分"><span class="header-section-number">7</span> 双重差分</a></li>
+  <li><a href="#前后虚拟变量" id="toc-前后虚拟变量" class="nav-link" data-scroll-target="#前后虚拟变量"><span class="header-section-number">8</span> 前后虚拟变量</a></li>
+  <li><a href="#干预变量" id="toc-干预变量" class="nav-link" data-scroll-target="#干预变量"><span class="header-section-number">9</span> 干预变量</a></li>
+  <li><a href="#did-指示变量" id="toc-did-指示变量" class="nav-link" data-scroll-target="#did-指示变量"><span class="header-section-number">10</span> DID 指示变量</a></li>
+  <li><a href="#使用-stata-的-xtdidregress-命令" id="toc-使用-stata-的-xtdidregress-命令" class="nav-link" data-scroll-target="#使用-stata-的-xtdidregress-命令"><span class="header-section-number">11</span> 使用 Stata 的 <code>xtdidregress</code> 命令</a></li>
+  <li><a href="#xtdidregress-的可视化" id="toc-xtdidregress-的可视化" class="nav-link" data-scroll-target="#xtdidregress-的可视化"><span class="header-section-number">12</span> xtdidregress 的可视化</a></li>
+  <li><a href="#使用-ols-固定效应回归手动估计" id="toc-使用-ols-固定效应回归手动估计" class="nav-link" data-scroll-target="#使用-ols-固定效应回归手动估计"><span class="header-section-number">13</span> 使用 OLS 固定效应回归（手动估计）</a></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-11-2-DID.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-05-11-2-DID.html">24-双重差分(DID)</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">00-Stata Intro and Record</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<h1 class="title">24-双重差分(DID)</h1>
+<p class="subtitle lead">双重差分模型与示例</p>
 </div>
 
 
@@ -709,23 +760,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">作者</div>
     <div class="quarto-title-meta-contents">
-             <p>Simonzhou </p>
+             <p>Simon Zhou </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年3月9日</p>
+      <p class="date">2025年5月11日</p>
     </div>
   </div>
   
-    <div>
-    <div class="quarto-title-meta-heading">修改于</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月11日</p>
-    </div>
-  </div>
     
   </div>
   
@@ -734,17 +779,606 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
-<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
-<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
-<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
-<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
-<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
-<p>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</p>
+<section id="什么是-did" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="什么是-did"><span class="header-section-number">1</span> 什么是 DID</h2>
+<p>双重差分回归 (DID) 用于评估一个事件的因果效应，其方法是比较事件发生的单元集合（处理组）与事件未发生的单元集合（控制组）。</p>
+<p>DID 背后的逻辑是，如果事件从未发生，处理组和控制组之间的差异应该随着时间的推移保持不变。</p>
+<p>DID 通过比较处理组和控制组在事件发生前后的差异来估计事件的因果效应。</p>
+<p>DID 法是一种无法随机分配样本情况下的替代方法，主要应用于区域行的策略评估问题。</p>
+<p>目标：获取相对同质的策略组和控制组，这个“相对”是指除策略影响外，策略组和控制组的结果变量随时间的变化存在一个基本固定的差异。</p>
+<p>对于相对同质的策略组和控制组，DID法通过第一次的差分消除这个基本固定的差异，通过第二次的差分消除时间趋势的影响，评估策略带来的实际效应。</p>
+<p>从DID 法的目标中可知，该方法面对的实验数据是面板数据（多个时间点的截面数据组成面板数据），即在策略干预时间点前，至少有两个时间点的数据。</p>
+<p><span class="math display">\[
+y = \alpha_0 +\alpha_1g +\alpha_2T + \alpha_3gT + \epsilon
+\]</span> <span class="math inline">\(\alpha_0\)</span>为常数项，<span class="math inline">\(\alpha_1\)</span>为处理组和控制组的差异，<span class="math inline">\(\alpha_2\)</span>为时间效应，<span class="math inline">\(\epsilon\)</span>为误差项。 <span class="math inline">\(\alpha_3\)</span>为交互项的系数，表示处理组和控制组在事件发生前后的差异。</p>
+<p>其中，<span class="math inline">\(y\)</span>为结果变量，<span class="math inline">\(g\)</span>为处理组和控制组的虚拟变量，<span class="math inline">\(T\)</span>为时间虚拟变量，<span class="math inline">\(gT\)</span>为交互项。 <span class="math inline">\(\alpha_3\)</span>为DID估计量，表示处理组和控制组在事件发生前后的差异。</p>
+<p>DID 模型的有效性检验</p>
+<p>为了保证该模型的有效性，在试验设计时需要满足平行趋势假设：在事件发生前，处理组和控制组的结果变量随时间的变化存在一个基本固定的差异。</p>
+<p>平行趋势，即策略组和控制组在干预前保持相同的变化趋势。</p>
+<p>3种常见的平行趋势的检验方法：</p>
+<ol type="1">
+<li>画图法：画出处理组和控制组在事件发生前后的结果变量的变化趋势图，观察两组的变化趋势是否平行。</li>
+<li>统计检验法：使用t检验或F检验等统计方法，检验处理组和控制组在事件发生前的结果变量的差异是否显著。</li>
+<li>伪DID法：在事件发生前，随机选择一个时间点，将处理组和控制组的结果变量进行差分，检验差分后的结果变量是否显著。</li>
+</ol>
+<div id="3ea22d1f" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="导入数据" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="导入数据"><span class="header-section-number">2</span> 导入数据</h2>
+<p>使用 Princeton University 提供的示例程序与数据集，具体参见：<a href="https://reformship.github.io/pages/1capacity/3program/Stata/Princeton/DID101.pdf">Differences‐in‐Differences&nbsp;(using&nbsp;Stata)</a></p>
+<div id="22541e37" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>use <span class="st">"http://dss.princeton.edu/training/Panel101.dta"</span>, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="创建变量" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="创建变量"><span class="header-section-number">3</span> 创建变量</h2>
+<section id="创建时间虚拟变量" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="创建时间虚拟变量"><span class="header-section-number">3.1</span> 创建时间虚拟变量</h3>
+<p>创建一个虚拟变量来指示治疗开始的时间。假设治疗始于 1994 年。在这种情况下，1994 年之前的值为 0，1994 年之后的值为 1。如果您已经创建了虚拟变量，请跳过此步骤。</p>
+<div id="820fddde" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gen time <span class="op">=</span> (year<span class="op">&gt;=</span><span class="dv">1994</span>) <span class="op">&amp;</span> <span class="op">!</span>missing(year)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="创建治疗虚拟变量" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="创建治疗虚拟变量"><span class="header-section-number">3.2</span> 创建治疗虚拟变量</h3>
+<p>创建一个虚拟变量来标识接受治疗的组。在本例中，假设代码为 5、6 和 7 的国家/地区接受了治疗 (=1)。代码为 1-4 的国家/地区未接受治疗 (=0)。如果您已经创建了虚拟变量，请跳过此步骤。</p>
+<div id="6aea53f3" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gen treated <span class="op">=</span> (country<span class="op">&gt;</span><span class="dv">4</span>) <span class="op">&amp;</span> <span class="op">!</span>missing(country)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="创建交互项" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="创建交互项"><span class="header-section-number">4</span> 创建交互项</h2>
+<p>在时间和治疗之间创建交互。我们将此交互称为 “did”</p>
+<div id="3995d822" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>gen did <span class="op">=</span> time<span class="op">*</span>treated</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="估计-did-估计量" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="估计-did-估计量"><span class="header-section-number">5</span> 估计 DID 估计量</h2>
+<div id="96559ebf" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>reg y time treated did, r</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =         70
+                                                F(3, 66)          =       2.17
+                                                Prob &gt; F          =     0.0998
+                                                R-squared         =     0.0827
+                                                Root MSE          =     3.0e+09
+
+------------------------------------------------------------------------------
+             |               Robust
+           y | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        time |   2.29e+09   9.00e+08     2.54   0.013     4.92e+08    4.09e+09
+     treated |   1.78e+09   1.05e+09     1.70   0.094    -3.11e+08    3.86e+09
+         did |  -2.52e+09   1.45e+09    -1.73   0.088    -5.42e+09    3.81e+08
+       _cons |   3.58e+08   7.61e+08     0.47   0.640    -1.16e+09    1.88e+09
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p><code>did</code> 的系数是 双重差分 的估计量。效果在置信水准为 10% 时显著，且治疗措施产生了负面影响。</p>
+<p>估计 DID 中的差分估计量（使用 <code>#</code> 方法，无需生成交互项）</p>
+<div id="2838e056" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>reg y time<span class="co">##treated, r</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =         70
+                                                F(3, 66)          =       2.17
+                                                Prob &gt; F          =     0.0998
+                                                R-squared         =     0.0827
+                                                Root MSE          =     3.0e+09
+
+------------------------------------------------------------------------------
+             |               Robust
+           y | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+      1.time |   2.29e+09   9.00e+08     2.54   0.013     4.92e+08    4.09e+09
+   1.treated |   1.78e+09   1.05e+09     1.70   0.094    -3.11e+08    3.86e+09
+             |
+time#treated |
+        1 1  |  -2.52e+09   1.45e+09    -1.73   0.088    -5.42e+09    3.81e+08
+             |
+       _cons |   3.58e+08   7.61e+08     0.47   0.640    -1.16e+09    1.88e+09
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>变量 <code>time#treated</code> 的系数即为 DID 估计量（对应前述示例中的 <code>did</code> ）。该估计在10%的显著性水平下显著，显示处理措施产生了负向影响</p>
+</section>
+<section id="使用-diff-命令" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="使用-diff-命令"><span class="header-section-number">6</span> 使用 diff 命令</h2>
+<p><code>diff</code> 由外部宏包提供，需要用户进行安装才可以使用：</p>
+<div id="a29f0142" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>ssc install diff</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>checking diff consistency and verifying not already installed...
+installing into C:\Users\asus\ado\plus\...
+installation complete.</code></pre>
+</div>
+</div>
+<div id="5bca9198" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>diff y, t(treated) p(time)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+DIFFERENCE-IN-DIFFERENCES ESTIMATION RESULTS
+--------------------------------------------
+Number of observations in the DIFF-IN-DIFF: 70
+            Before         After    
+   Control: 16             24          40
+   Treated: 12             18          30
+            28             42
+--------------------------------------------------------
+ Outcome var.   | y       | S. Err. |   |t|   |  P&gt;|t|
+----------------+---------+---------+---------+---------
+Before          |         |         |         | 
+   Control      |  3.6e+08|         |         | 
+   Treated      |  2.1e+09|         |         | 
+   Diff (T-C)   |  1.8e+09|  1.1e+09| 1.58    | 0.120
+After           |         |         |         | 
+   Control      |  2.6e+09|         |         | 
+   Treated      |  1.9e+09|         |         | 
+   Diff (T-C)   | -7.4e+08|  9.2e+08| 0.81    | 0.422
+                |         |         |         | 
+Diff-in-Diff    | -2.5e+09|  1.5e+09| 1.73    | 0.088*
+--------------------------------------------------------
+R-square:    0.08
+* Means and Standard Errors are estimated by linear regression
+**Inference: *** p&lt;0.01; ** p&lt;0.05; * p&lt;0.1</code></pre>
+</div>
+</div>
+<p>使用 <code>help diff</code> 查看更多的细节和选项。</p>
+</section>
+<section id="双重差分" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="双重差分"><span class="header-section-number">7</span> 双重差分</h2>
+</section>
+<section id="前后虚拟变量" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="前后虚拟变量"><span class="header-section-number">8</span> 前后虚拟变量</h2>
+<section id="创建一个指示变量" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="创建一个指示变量"><span class="header-section-number">8.1</span> 创建一个指示变量</h3>
+<ul>
+<li>0 ：表示事件发生之前的时间</li>
+<li>1 ：表示事件发生之时及其之后的时间</li>
+</ul>
+</section>
+<section id="导入数据-1" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="导入数据-1"><span class="header-section-number">8.2</span> 导入数据</h3>
+<div id="15977eee" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>use <span class="st">"C:\Users</span><span class="ch">\a</span><span class="st">sus\Desktop\R\quarto\Med-Stat-Notes\Data\WDI.dta"</span>, clear</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>虚拟事件 X 在 2009 年发生，影响所有国家</li>
+<li>构建一个事件前后虚拟变量：0 表示事件发生前，1 表示事件发生后</li>
+</ul>
+<div id="b1919ef9" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>gen after <span class="op">=</span> (year <span class="op">&gt;=</span> <span class="dv">2009</span>) <span class="cf">if</span> <span class="op">!</span>missing(year)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="检查数据类型" class="level3" data-number="8.3">
+<h3 data-number="8.3" class="anchored" data-anchor-id="检查数据类型"><span class="header-section-number">8.3</span> 检查数据类型</h3>
+<div id="1ab6ca22" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>tab year after</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+           |         after
+      Time |         0          1 |     Total
+-----------+----------------------+----------
+      2000 |       126          0 |       126 
+      2001 |       126          0 |       126 
+      2002 |       126          0 |       126 
+      2003 |       126          0 |       126 
+      2004 |       126          0 |       126 
+      2005 |       126          0 |       126 
+      2006 |       126          0 |       126 
+      2007 |       126          0 |       126 
+      2008 |       126          0 |       126 
+      2009 |         0        126 |       126 
+      2010 |         0        126 |       126 
+      2011 |         0        126 |       126 
+      2012 |         0        126 |       126 
+      2013 |         0        126 |       126 
+      2014 |         0        126 |       126 
+      2015 |         0        126 |       126 
+      2016 |         0        126 |       126 
+      2017 |         0        126 |       126 
+      2018 |         0        126 |       126 
+      2019 |         0        126 |       126 
+      2020 |         0        126 |       126 
+      2021 |         0        126 |       126 
+-----------+----------------------+----------
+     Total |     1,134      1,638 |     2,772 </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="干预变量" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="干预变量"><span class="header-section-number">9</span> 干预变量</h2>
+<p>创建一个指示变量，用于识别接受处理的观测单位，其中：</p>
+<ul>
+<li>0 表示从未接受处理的单位，例如，从未实施相关政策的州；</li>
+<li>1 表示接受过处理的单位，例如，实施过相关政策的州。</li>
+</ul>
+<p>例如，若 <code>abc</code>、<code>xyz</code> 和 <code>cgi</code> 三个州属于处理组，且州名称为字符串格式，则可按如下方式创建处理变量：</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> treated = (state == <span class="st">"abc"</span> | <span class="co">/// state == "xyz" | ///</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>state == <span class="st">"cgi"</span>)  <span class="kw">if</span> !<span class="fu">missing</span>(state)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>在本示例中，接受处理的国家已另存为一个虚拟的 Stata 数据集，其中包含一个名为 <code>treated</code>、取值为 <code>1</code> 的变量。</p>
+<p>接下来我们将该文件合并，以便在主数据集中获得处理变量。</p>
+<div id="bb94cdaf" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>merge m:<span class="dv">1</span> country using <span class="st">"C:\Users</span><span class="ch">\a</span><span class="st">sus\Desktop\R\quarto\Med-Stat-Notes\Data\Treated.dta"</span>, gen(merge1)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Result                      Number of obs
+    -----------------------------------------
+    Not matched                         1,276
+        from master                     1,276  (merge1==1)
+        from using                          0  (merge1==2)
+
+    Matched                             1,496  (merge1==3)
+    -----------------------------------------</code></pre>
+</div>
+</div>
+<p>未处理的单位将显示为缺失值（<code>.</code>）</p>
+<div id="23050970" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>replace treated <span class="op">=</span> <span class="dv">0</span> <span class="cf">if</span> treated <span class="op">==</span> .</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1,276 real changes made)</code></pre>
+</div>
+</div>
+<p>查看数据</p>
+<div id="fe35157b" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>tab country treated</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+                      |        treated
+         Country Name |         0          1 |     Total
+----------------------+----------------------+----------
+              Albania |         0         22 |        22 
+              Algeria |        22          0 |        22 
+            Argentina |        22          0 |        22 
+              Armenia |         0         22 |        22 
+            Australia |        22          0 |        22 
+              Austria |        22          0 |        22 
+         Bahamas, The |        22          0 |        22 
+           Bangladesh |         0         22 |        22 
+              Belarus |         0         22 |        22 
+              Belgium |        22          0 |        22 
+               Belize |        22          0 |        22 
+                Benin |        22          0 |        22 
+               Bhutan |         0         22 |        22 
+              Bolivia |         0         22 |        22 
+Bosnia and Herzegov.. |         0         22 |        22 
+             Botswana |        22          0 |        22 
+               Brazil |        22          0 |        22 
+    Brunei Darussalam |         0         22 |        22 
+             Bulgaria |         0         22 |        22 
+              Burundi |         0         22 |        22 
+             Cambodia |         0         22 |        22 
+             Cameroon |         0         22 |        22 
+               Canada |        22          0 |        22 
+                Chile |         0         22 |        22 
+             Colombia |         0         22 |        22 
+              Comoros |        22          0 |        22 
+     Congo, Dem. Rep. |        22          0 |        22 
+          Congo, Rep. |        22          0 |        22 
+           Costa Rica |         0         22 |        22 
+        Cote d'Ivoire |        22          0 |        22 
+              Croatia |         0         22 |        22 
+                 Cuba |        22          0 |        22 
+               Cyprus |         0         22 |        22 
+              Czechia |         0         22 |        22 
+              Denmark |        22          0 |        22 
+   Dominican Republic |         0         22 |        22 
+              Ecuador |        22          0 |        22 
+     Egypt, Arab Rep. |         0         22 |        22 
+          El Salvador |         0         22 |        22 
+              Estonia |         0         22 |        22 
+             Eswatini |         0         22 |        22 
+              Finland |        22          0 |        22 
+               France |        22          0 |        22 
+                Gabon |        22          0 |        22 
+              Germany |        22          0 |        22 
+               Greece |         0         22 |        22 
+            Guatemala |         0         22 |        22 
+                Haiti |        22          0 |        22 
+             Honduras |        22          0 |        22 
+ Hong Kong SAR, China |         0         22 |        22 
+              Hungary |        22          0 |        22 
+              Iceland |         0         22 |        22 
+                India |        22          0 |        22 
+            Indonesia |         0         22 |        22 
+   Iran, Islamic Rep. |         0         22 |        22 
+              Ireland |         0         22 |        22 
+               Israel |        22          0 |        22 
+                Italy |        22          0 |        22 
+                Japan |         0         22 |        22 
+               Jordan |        22          0 |        22 
+           Kazakhstan |         0         22 |        22 
+                Kenya |        22          0 |        22 
+          Korea, Rep. |        22          0 |        22 
+      Kyrgyz Republic |        22          0 |        22 
+               Latvia |        22          0 |        22 
+              Lebanon |        22          0 |        22 
+            Lithuania |         0         22 |        22 
+           Luxembourg |         0         22 |        22 
+     Macao SAR, China |         0         22 |        22 
+           Madagascar |         0         22 |        22 
+             Malaysia |         0         22 |        22 
+                 Mali |         0         22 |        22 
+                Malta |        22          0 |        22 
+           Mauritania |         0         22 |        22 
+            Mauritius |        22          0 |        22 
+               Mexico |         0         22 |        22 
+              Moldova |         0         22 |        22 
+              Morocco |         0         22 |        22 
+           Mozambique |         0         22 |        22 
+              Namibia |        22          0 |        22 
+          Netherlands |         0         22 |        22 
+          New Zealand |         0         22 |        22 
+            Nicaragua |         0         22 |        22 
+                Niger |        22          0 |        22 
+              Nigeria |        22          0 |        22 
+      North Macedonia |         0         22 |        22 
+               Norway |        22          0 |        22 
+                 Oman |         0         22 |        22 
+             Pakistan |        22          0 |        22 
+               Panama |         0         22 |        22 
+             Paraguay |         0         22 |        22 
+                 Peru |        22          0 |        22 
+          Philippines |        22          0 |        22 
+               Poland |         0         22 |        22 
+             Portugal |        22          0 |        22 
+              Romania |         0         22 |        22 
+   Russian Federation |        22          0 |        22 
+               Rwanda |         0         22 |        22 
+         Saudi Arabia |         0         22 |        22 
+              Senegal |        22          0 |        22 
+               Serbia |        22          0 |        22 
+         Sierra Leone |        22          0 |        22 
+            Singapore |         0         22 |        22 
+      Slovak Republic |        22          0 |        22 
+             Slovenia |         0         22 |        22 
+      Solomon Islands |        22          0 |        22 
+         South Africa |        22          0 |        22 
+                Spain |         0         22 |        22 
+            Sri Lanka |         0         22 |        22 
+                Sudan |         0         22 |        22 
+               Sweden |         0         22 |        22 
+          Switzerland |         0         22 |        22 
+             Tanzania |        22          0 |        22 
+             Thailand |        22          0 |        22 
+          Timor-Leste |        22          0 |        22 
+              Tunisia |         0         22 |        22 
+              Turkiye |         0         22 |        22 
+               Uganda |         0         22 |        22 
+              Ukraine |         0         22 |        22 
+       United Kingdom |        22          0 |        22 
+        United States |         0         22 |        22 
+              Uruguay |         0         22 |        22 
+           Uzbekistan |        22          0 |        22 
+              Vietnam |         0         22 |        22 
+   West Bank and Gaza |        22          0 |        22 
+             Zimbabwe |        22          0 |        22 
+----------------------+----------------------+----------
+                Total |     1,276      1,496 |     2,772 </code></pre>
+</div>
+</div>
+</section>
+<section id="did-指示变量" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="did-指示变量"><span class="header-section-number">10</span> DID 指示变量</h2>
+<p>DID（双重差分）指示变量是”处理变量”和”事件前后变量”的交互项。</p>
+<p>在本示例中，我们将处理变量命名为 <code>treated</code>，事件前后变量命名为 <code>after</code>（可根据自己的数据替换变量名）。</p>
+<p><strong>下面创建 DID 指示变量:</strong></p>
+<div id="b7902331" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>gen did <span class="op">=</span> after <span class="op">*</span> treated</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>创建一个<strong>带标签的数值型变量</strong>，用作分组或面板变量。这是为了让 Stata 的相关命令能够识别数据中的面板结构</p>
+<div id="bb257746" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>encode country, gen(country1)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>将数据设置为面板数据格式（仅适用于以 <code>xt</code> 开头的命令）</p>
+<div id="e1e83a06" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>xtset country1 year</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Panel variable: country1 (strongly balanced)
+ Time variable: year, 2000 to 2021
+         Delta: 1 unit</code></pre>
+</div>
+</div>
+<p><strong>事件在所有处理组中同时发生</strong></p>
+<p>使用 Stata 的 <code>xtdidregress</code> 或 <code>didregress</code> 命令进行差分中的差分分析</p>
+<ul>
+<li>如果是面板数据，使用 <code>xtdidregress</code>；</li>
+<li>如果是重复截面数据（即不同时点的抽样调查），使用 <code>didregress</code></li>
+<li>面板数据（panel data）：同一组单位在多个时间点被观察（如同一批国家或个人被多次追踪）</li>
+<li>重复截面数据（repeated cross-sectional data）：每个时间点抽取不同的单位样本（如每年全国抽样调查）</li>
+</ul>
+</section>
+<section id="使用-stata-的-xtdidregress-命令" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="使用-stata-的-xtdidregress-命令"><span class="header-section-number">11</span> 使用 Stata 的 <code>xtdidregress</code> 命令</h2>
+<p>仅适用于 Stata 17 及以上版本（手动估计方法见后续）。</p>
+<p>如需查看该命令的详细说明与示例，请输入：<code>help xtdidregress</code></p>
+<div id="5a990eae" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>xtdidregress (gdppc) (did), group(country1) time(year)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment and time information
+
+Time variable: year
+Control:       did = 0
+Treatment:     did = 1
+-----------------------------------
+             |   Control  Treatment
+-------------+---------------------
+Group        |
+    country1 |        58         68
+-------------+---------------------
+Time         |
+     Minimum |      2000       2009
+     Maximum |      2000       2009
+-----------------------------------
+
+Difference-in-differences regression                     Number of obs = 2,772
+Data type: Longitudinal
+
+                             (Std. err. adjusted for 126 clusters in country1)
+------------------------------------------------------------------------------
+             |               Robust
+       gdppc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+         did |
+   (1 vs 0)  |   1164.492   610.0838     1.91   0.059    -42.93971    2371.923
+------------------------------------------------------------------------------
+Note: ATET estimate adjusted for panel effects and time effects.</code></pre>
+</div>
+</div>
+<section id="平行趋势" class="level3" data-number="11.1">
+<h3 data-number="11.1" class="anchored" data-anchor-id="平行趋势"><span class="header-section-number">11.1</span> 平行趋势</h3>
+<p>如需了解 didregress 的后估计命令的详细信息和示例，请输入：<code>help xtdidregress_postestimation</code></p>
+<p>运行 <code>xtdidregress</code></p>
+<div id="ae18fc05" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>xtdidregress (gdppc) (did), group(country1) time(year)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment and time information
+
+Time variable: year
+Control:       did = 0
+Treatment:     did = 1
+-----------------------------------
+             |   Control  Treatment
+-------------+---------------------
+Group        |
+    country1 |        58         68
+-------------+---------------------
+Time         |
+     Minimum |      2000       2009
+     Maximum |      2000       2009
+-----------------------------------
+
+Difference-in-differences regression                     Number of obs = 2,772
+Data type: Longitudinal
+
+                             (Std. err. adjusted for 126 clusters in country1)
+------------------------------------------------------------------------------
+             |               Robust
+       gdppc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+         did |
+   (1 vs 0)  |   1164.492   610.0838     1.91   0.059    -42.93971    2371.923
+------------------------------------------------------------------------------
+Note: ATET estimate adjusted for panel effects and time effects.</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="xtdidregress-的可视化" class="level2" data-number="12">
+<h2 data-number="12" class="anchored" data-anchor-id="xtdidregress-的可视化"><span class="header-section-number">12</span> xtdidregress 的可视化</h2>
+<p>可视化的示例和更多信息，请输入：<code>help xtdidregress_postestimation</code></p>
+<div id="479e3e2f" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>xtdidregress (gdppc) (did), group(country1) time(year) </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>estat trendplots, ytitle(GDP pc)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. xtdidregress (gdppc) (did), group(country1) time(year) 
+
+Treatment and time information
+
+Time variable: year
+Control:       did = 0
+Treatment:     did = 1
+-----------------------------------
+             |   Control  Treatment
+-------------+---------------------
+Group        |
+    country1 |        58         68
+-------------+---------------------
+Time         |
+     Minimum |      2000       2009
+     Maximum |      2000       2009
+-----------------------------------
+
+Difference-in-differences regression                     Number of obs = 2,772
+Data type: Longitudinal
+
+                             (Std. err. adjusted for 126 clusters in country1)
+------------------------------------------------------------------------------
+             |               Robust
+       gdppc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+         did |
+   (1 vs 0)  |   1164.492   610.0838     1.91   0.059    -42.93971    2371.923
+------------------------------------------------------------------------------
+Note: ATET estimate adjusted for panel effects and time effects.
+
+. estat trendplots, ytitle(GDP pc)
+
+. </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-11-2-DID_files/figure-html/cell-22-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="使用-ols-固定效应回归手动估计" class="level2" data-number="13">
+<h2 data-number="13" class="anchored" data-anchor-id="使用-ols-固定效应回归手动估计"><span class="header-section-number">13</span> 使用 OLS 固定效应回归（手动估计）</h2>
+<section id="双重差分的基础回归所有单位在同一时间经历事件" class="level3" data-number="13.1">
+<h3 data-number="13.1" class="anchored" data-anchor-id="双重差分的基础回归所有单位在同一时间经历事件"><span class="header-section-number">13.1</span> 双重差分的基础回归：所有单位在同一时间经历事件</h3>
+<ul>
+<li>创建一个带标签的数值型变量，用作分组或面板变量</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">encode</span> country, <span class="kw">gen</span>(country1)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>DID 回归中不需要单独包括 after 和 treated 变量，因为已包含面板和时间固定效应</li>
+</ul>
+<p>在使用固定效应模型（如 <code>xtreg</code>, <code>fe</code> 或 <code>areg</code> 带 <code>absorb()</code>）进行差分中的差分回归时，只需要包含处理组与时间的交互项（即 <code>treated#after</code>），因为：</p>
+<ul>
+<li>个体固定效应 已控制了处理组与对照组之间的时间不变差异；</li>
+<li>时间固定效应 已控制了所有单位随时间的共同趋势。</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="kw">xtreg</span> gdppc did i.<span class="fu">year</span>, <span class="kw">fe</span> <span class="kw">vce</span>(<span class="kw">cluster</span> country1)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>变量 <code>did</code> 的回归系数即为双重差分（DID）的估计量。该效应在 95% 显著性水平下不显著（P&gt;|t| &gt; 0.05），因此我们可以认为该事件对因变量没有显著影响。</p>
+</section>
+<section id="可视化平行趋势" class="level3" data-number="13.2">
+<h3 data-number="13.2" class="anchored" data-anchor-id="可视化平行趋势"><span class="header-section-number">13.2</span> 可视化平行趋势</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> <span class="fu">year</span> treated: <span class="kw">egen</span> mean_gdppc = <span class="kw">mean</span>(gdppc) </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">line</span> mean_gdppc <span class="fu">year</span> <span class="kw">if</span> treated == 0, <span class="kw">sort</span> || <span class="co">/// </span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="kw">line</span> mean_gdppc <span class="fu">year</span> <span class="kw">if</span> treated == 1, <span class="kw">sort</span> lpattern(<span class="kw">dash</span>) <span class="co">/// </span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="bn">legend</span>(<span class="kw">label</span>(1 <span class="st">"Control"</span>) <span class="kw">label</span>(2 <span class="st">"Treated"</span>)) <span class="co">/// </span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="bn">xline</span>(2009)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
-<!-- -->
-
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1370,39 +2004,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="pagination-link" aria-label="02-SAS 在 Jupyter Notebook 中使用">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">02-SAS 在 Jupyter Notebook 中使用</span>
+      <a href="../../Guide/Stata/25-05-11-1-empirical-ana.html" class="pagination-link" aria-label="23-Empericial Analysis Intro">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">23-Empericial Analysis Intro</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="11-Stata 做 ITSA 分析">
-        <span class="nav-page-text">11-Stata 做 ITSA 分析</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Quarto/config-giscus-github.html" class="pagination-link" aria-label="Qmd config giscus">
+        <span class="nav-page-text">Qmd config giscus</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "00-Stata Intro and Record"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1415,7 +2026,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-03-09-Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/Stata/25-05-11-2-DID.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

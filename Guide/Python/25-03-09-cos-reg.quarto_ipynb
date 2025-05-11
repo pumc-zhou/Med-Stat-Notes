@@ -1,0 +1,420 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"用Python做生存分析和COX回归\"\n",
+        "output: \n",
+        "  html:\n",
+        "    code-fold: true\n",
+        "    code-tools: true\n",
+        "number-sections: true\n",
+        "toc: true\n",
+        "date: \"2025-03-09\"\n",
+        "author: \"Simonzhou\"\n",
+        "jupyter: python3\n",
+        "execute:\n",
+        "  enabled: true\n",
+        "  echo: true      # 在输出中显示代码\n",
+        "  eval: true      # 执行代码\n",
+        "  warning: false  # 隐藏警告信息\n",
+        "  message: false  # 隐藏消息\n",
+        "tags:\n",
+        "  - \"Python\"\n",
+        "  - \"数据可视化\"\n",
+        "---\n",
+        "\n",
+        "\n",
+        "# 生存分析\n",
+        "\n",
+        "生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析中，每个研究对象的结局变量由 \"time\"（生存时间） 和 \"status\"（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。\n",
+        "\n",
+        "生存分析的主要应用领域是医学、生物学、工程学、经济学等。\n",
+        "\n",
+        "## 生存函数\n",
+        "\n",
+        "生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 $S(t)$ 表示。\n",
+        "\n",
+        "风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 $h(t)$ 表示。\n",
+        "\n",
+        "如果记寿命分布的密度为 $f(t)$，则有： $h(t) = f(t) / S(t)$ 。\n",
+        "\n",
+        "## 数据集及来源\n",
+        "\n",
+        "这里使用 R 语言 `survival` 包中的 `ovarian` 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。\n",
+        "\n",
+        "首先找到 `ovarian` 数据集，你可以从互联网上寻找相关资源；或者从 R 的 `survival` 包中导出这一数据集，操作如下：\n",
+        "\n",
+        "``` r\n",
+        "# install.packages(\"survival\")\n",
+        "library(survival)\n",
+        "ovarian\n",
+        "data(cancer, package=\"survival\")\n",
+        "\n",
+        "df <- ovarian\n",
+        "write.csv(df, \"your-file-path\\\\ovarian.csv\", row.names = FALSE)\n",
+        "```\n",
+        "\n",
+        "将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：\n"
+      ],
+      "id": "0ca482c4"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import pandas as pd\n",
+        "ovarian = pd.read_csv(r\"C:\\Users\\asus\\Desktop\\R\\quarto\\Med-Stat-Notes\\Data\\ovarian.csv\")\n",
+        "ovarian.head()"
+      ],
+      "id": "bbe78c69",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "数据集包括 26 个观测值，6 个变量。变量如下：`futime`（随访时间），`fustat`（研究结束时的状态：0 表示存活，1表示死亡），`age`（患者的年龄），`resid.ds`（疾病残留情况：1 表示有残留，2 表示没有残留），`rx`（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 `ecog.ps`（患者的 ECOG 评分：1 表示较好，2 表示较差）。\n",
+        "\n",
+        "对年龄进行分组，分为 `<50` 和 `>50` 两组，并将其他三个变量的各水平加上相应的标签。\n"
+      ],
+      "id": "3be2c29e"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "# 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别\n",
+        "print(ovarian.columns)\n",
+        "\n",
+        "# 将 age 列转换为数值类型\n",
+        "ovarian['age'] = pd.to_numeric(ovarian['age'], errors='coerce')\n",
+        "\n",
+        "ovarian.age = pd.cut(ovarian.age, [0,50,75], labels = ['<=50','>50'])\n",
+        "\n",
+        "ovarian['resid.ds'] = ovarian['resid.ds'].map({1: \"NO\", 2: \"Yes\"})\n",
+        "ovarian['rx'] = ovarian['rx'].map({1: \"A\", 2: \"B\"})\n",
+        "ovarian['ecog.ps'] = ovarian['ecog.ps'].map({1: \"Good\", 2: \"Bad\"})"
+      ],
+      "id": "c6784b9e",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 生存率的 Kaplan-Meier 估计\n",
+        "\n",
+        "生存率的 Kaplan-Meier 估计的计算可以调用 `lifelines` 库中的 `KaplanMeierFitter` 函数实现。\n",
+        "\n",
+        "`pip` 安装：`pip install lifelines`\n",
+        "\n",
+        "`conda` 安装： `conda install lifelines`\n",
+        "\n",
+        "拟合 `fit` :\n"
+      ],
+      "id": "8da2f12b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from lifelines import KaplanMeierFitter\n",
+        "kmf = KaplanMeierFitter()\n",
+        "fit = kmf.fit(ovarian.futime,ovarian.fustat)\n",
+        "fit"
+      ],
+      "id": "22b554a8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "拟合结果 `fit` 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：\n"
+      ],
+      "id": "ce210c3a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fit.median_survival_time_"
+      ],
+      "id": "6bbf7ae9",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：\n"
+      ],
+      "id": "a593658c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "pd.concat([fit.event_table,fit.survival_function_], axis = 1)"
+      ],
+      "id": "b842a55a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### 绘制生存曲线\n",
+        "\n",
+        "Kaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：\n"
+      ],
+      "id": "ff593653"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "import matplotlib.pyplot as plt\n",
+        "fit.plot(show_censors = True)\n",
+        "plt.show()"
+      ],
+      "id": "2716ade8",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "## 生存率的比较\n",
+        "\n",
+        "在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：\n"
+      ],
+      "id": "619d49ee"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "g1 = ovarian.rx == \"A\"\n",
+        "g2 = ovarian.rx == \"B\"\n",
+        "kmf_A = KaplanMeierFitter()\n",
+        "kmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label = \"Treatmeat A\")\n",
+        "kmf_B = KaplanMeierFitter()\n",
+        "kmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = \"Treatmeat B\")"
+      ],
+      "id": "58ae7fbd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "### Kaplan-Meier 比较图\n",
+        "\n",
+        "可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。\n"
+      ],
+      "id": "67efffb2"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "fig, axes = plt.subplots()\n",
+        "kmf_A.plot(ax = axes,show_censors = True)\n",
+        "kmf_B.plot(ax = axes,show_censors = True)\n",
+        "plt.show()"
+      ],
+      "id": "85df1704",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "从上图中可以看出，治疗方式 “B” 的生存率高于治疗方式 “A” 的生存率，但是这种差异是由随机误差引起还是真是的治疗方式的不同所造成的差异，需要做进一步的统计学检验。\n",
+        "\n",
+        "![因果关联的推断步骤](images/Causal-association.jpg)\n",
+        "\n",
+        "### 统计学检验\n",
+        "\n",
+        "生存分析中常用的统计学检验是 时序检验（log rank test），其基本思想是先计算出不同时间两种治疗方式的暴露人数和死亡人数，并由此在两种治疗方式效果相同的假设下计算出预期死亡人数，如果不拒绝零假设（ $H_0$ ：两种治疗方式的效果相同，即预期死亡人数一致），则实际观测值和期望值的差异不会很大，如果差异过大则不能认为该差异是由随机误差引起的。\n",
+        "\n",
+        "对此，用 $\\chi^2$ 检验做判断。时序检验可以用 `lifetimes` 库的函数 `logrank_test` 实现。\n"
+      ],
+      "id": "1a00962c"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from lifelines.statistics import logrank_test\n",
+        "lr = logrank_test(ovarian.futime[g1], ovarian.futime[g2],\n",
+        "                  ovarian.fustat[g1], ovarian.fustat[g2])\n",
+        "lr.p_value"
+      ],
+      "id": "2187807c",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "这里得到的结果为 $P>0.05$ ，在一般情况下，我们会认为这是没有统计学意义的，即无法排除差异是由随机误差引起的。\n",
+        "\n",
+        "这种结果不显著的情况下，我们可以做一些思考，即是否有其他因素干预了结果的显著性，以及是否是样本量过小，导致差异不显著。（样本量的大小会影响检验效能，如果检验效能太低，即使有差异，也很难被检验方法发现）\n",
+        "\n",
+        "这里我们无法改变样本量的大小，但是可以考虑其他混杂因素的影响，并且使用更全面的模型进行检验。\n",
+        "\n",
+        "# Cox 回归\n",
+        "\n",
+        "所有的参数回归模型需要对风险函数做出假设，这些模型可以对每个时间点的生存概率进行估计。而 Cox 回归没有关于风险函数的假设，他所遵循的唯一重要假设是 “比例风险” 。\n",
+        "\n",
+        "$$\n",
+        "h(t,X)=h_0(t)e^{\\sum{\\beta_i}{X_i}}\n",
+        "$$\n",
+        "\n",
+        "等式左边表示风险收时间和自变量的影响，等式右边的 $h_0(t)$ 是所有自变量 $X_i$ 都为 0 时的基线风险函数， $e^{\\sum{\\beta_i}{X_i}}$ 表示所有自变量 $X_i$ 和对应的估计系数 $\\beta_i$ 的乘积之和。\n",
+        "\n",
+        "因此有：\n",
+        "\n",
+        "$$\n",
+        "\\frac{h(t,X)}{h_0(t)}=e^{\\sum{\\beta_i}{X_i}}\n",
+        "$$\n",
+        "\n",
+        "## 建立模型\n",
+        "\n",
+        "在建立模型前，需要对分类变量进行哑变量处理：\n"
+      ],
+      "id": "3b33414a"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "df_dummy = pd.get_dummies(ovarian,drop_first = True)\n",
+        "df_dummy.head()"
+      ],
+      "id": "982cbbd5",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "使用 `drop_first = True` 参数是为了去掉各个参考类别。\n",
+        "\n",
+        "下面将所有的协变量都纳入，建立 Cox 回归模型：\n"
+      ],
+      "id": "a3bf9061"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "from lifelines import CoxPHFitter\n",
+        "cox = CoxPHFitter()\n",
+        "cox.fit(df_dummy,duration_col = 'futime', event_col = 'fustat')\n",
+        "cox.print_summary()"
+      ],
+      "id": "ccb14764",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "结果显示，在调整了协变量后，两种治疗方式的死亡风险的差异具有统计学意义（P\\<0.05）。\n",
+        "\n",
+        "模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：\n"
+      ],
+      "id": "797a62fe"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cox.plot()"
+      ],
+      "id": "9eb5e396",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "Cox 回归是一种半参数回归模型，也像多元线性回归一样，存在变量选择的问题。通常可以用 AIC 进行变量选择。[^1]\n",
+        "\n",
+        "[^1]: 赤池信息量准则，即Akaike information criterion，简称AIC，是衡量统计模型拟合优良性的一种标准，是由日本统计学家赤池弘次创立和发展的。赤池信息量准则建立在熵的概念基础上。\\\n",
+        "    **AIC越小，模型越好，通常选择AIC最小的模型**\n",
+        "\n",
+        "查看当前模型的 AIC 值：\n"
+      ],
+      "id": "f16ed0bb"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cox.AIC_partial_"
+      ],
+      "id": "1123bd0a",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "根据前序的结果，变量 `ecog.ps` 对应的 *P* 值最大，对其进行剔除后再次拟合模型：\n"
+      ],
+      "id": "025e8c60"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "cox1 = CoxPHFitter()\n",
+        "df_dummy_sub = df_dummy.drop('ecog.ps_Good', axis = 1)\n",
+        "cox1.fit(df_dummy_sub, duration_col = 'futime', event_col = 'fustat')\n",
+        "cox1.print_summary()\n",
+        "cox1.AIC_partial_"
+      ],
+      "id": "cdd10469",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "剔除 `ecog_ps` 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。"
+      ],
+      "id": "4449509f"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\asus\\AppData\\Local\\Programs\\Python\\Python312\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
