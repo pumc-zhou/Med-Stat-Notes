@@ -473,7 +473,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">00-SAS-Record</span></a>
+ <span class="menu-text">00-SAS-Intro and Record</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -486,6 +486,12 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../Guide/SAS/25-05-05-SAS-install-connect.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">02-SAS 在 Jupyter Notebook 中使用</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-22-SAS-Base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-SAS Base</span></a>
   </div>
 </li>
       </ul>
@@ -723,7 +729,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月11日</p>
+      <p class="date-modified">2025年5月22日</p>
     </div>
   </div>
     
@@ -748,6 +754,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。</p>
 <p>2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 <code>.ipynb</code> 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 <code>.ipynb</code> 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 <code>.ipynb</code> 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。</p>
 <p>2025-05-05 看着桌边的 《SAS统计软件应用》，想了一下 SAS ，软件自带的编辑器很糟糕，又想，vscode 是万能编辑器，是不是也有 SAS 的扩展，搜了一下，嘿，还真有，那是不是也可以像 Stata 一样通过 <code>.ipynb</code> 文件进行编辑和运行，然后通过 Quarto 进行编译转为 <code>.html</code> 文件然后网页输出，看了下也是可以的，有趣，感觉 Quarto 真的可以借助 <code>.ipynb</code> 和 <code>.qmd</code>/<code>rmd</code> 实现统计软件的展现大一统。</p>
+<p>2025-05-11 昨天学完了stata的初级课程，今天开始捣鼓advanced course，一直听闻实证分析的妙用，有点抽象，而且没有找到特别合适的课程，Princeton 的一些教案挺好的，对着教案翻译然后跑代码，复现还可以。</p>
 
 
 <!-- -->

@@ -717,7 +717,7 @@
     "href": "Guide/Guide-intro.html",
     "title": "统计软件",
     "section": "",
-    "text": "一些统计软件的使用记录。\n最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。\n后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。\n21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。\n21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。\n23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛丁香园的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、Markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。\n其实23年的时候Posit已经在开发Quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用Quarto，和社区交流后无果，只能使用VS Code来作为编辑器。\n直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。\n24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。\n25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。\n我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。\n2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。\n2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 .ipynb 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 .ipynb 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 .ipynb 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。\n2025-05-05 看着桌边的 《SAS统计软件应用》，想了一下 SAS ，软件自带的编辑器很糟糕，又想，vscode 是万能编辑器，是不是也有 SAS 的扩展，搜了一下，嘿，还真有，那是不是也可以像 Stata 一样通过 .ipynb 文件进行编辑和运行，然后通过 Quarto 进行编译转为 .html 文件然后网页输出，看了下也是可以的，有趣，感觉 Quarto 真的可以借助 .ipynb 和 .qmd/rmd 实现统计软件的展现大一统。",
+    "text": "一些统计软件的使用记录。\n最早是学的Python，应该是20年的时候，看的MOOC上的北理嵩天老师的课程，过了一遍，没有深入研究。\n后来学的SPSS，21年，因为开始上统计学课了，课上老师用SPSS做分析演示，我还负责给全专业分发SPSS安装包和密钥，并帮他们安装。\n21年还试着用过MATLAB，因为20年的时候数学老师说可以准备数学建模的比赛，20年疫请然后没人管事，21年计算机学院的一位老师担下了这个活，随机我们组队在21年秋天比赛，但是数理教研组所承诺的培训和指导都是泡影，我和队友在数理教研室办公室待了两个晚上，不断地从互联网上查找相关的资料和代码，然后在MATLAB中进行复现，其实这个时候的认识和技能是很糟糕的，数学上了微积分和线代，但是和建模关系最大的运筹学要在大二的下学期才上。就这样，紧张又无聊的三天就这么过去了，现在来看（2025年）真的是既心酸又好笑，但是也不失为一个有趣的记忆。\n21年写完大创的论文后，就逐渐没有再关注这些软件的使用了，因为用不上，直到23年毕业的时候，又拿着SPSS做了一下毕业论文的分析。\n23年毕业后，选择了二战，暑假又回了学校和同学租房备考，在逛丁香园的时候，发现本校的一位老师在上面更新了Rmarkdown的课程，我好奇，随机花了一周的时间学了一下，是一个很好用的“thing”，结合了R、Markdown和LaTeX。正好当时需要整理统计学的笔记，随开始尝试并使用。\n其实23年的时候Posit已经在开发Quarto了，但是新事物到达普通人的视野中总是需要多耗费一些时间，到了24年我才知道有这么个“thing”，但是后面的学习节奏，不允许我抽出大量的时间来“改换门庭”。同时我的Rstudio一直无法正确的创建和使用Quarto，和社区交流后无果，只能使用VS Code来作为编辑器。\n直到24年考完空闲下来，我才开始系统地转换这个笔记并重新部署在GitHub上。\n24年上半年在长沙的时候，二战失败，五月找工作也失败。安慰自己说，没事，我可以干点别的，就重新开始学Python，并尝试学了SAS。\n25年开年朋友请我帮他做一些Stata的分析，我便拿出了22年朋友送的《Stata统计分析·社会科学应用指南》开始速成，得益于AI的发展，专供某一个方向也是不难的。在这种理解下，我开始系统地学习统计学和数据分析的内容，这个网站被用来记录和整理相关的内容与想法。\n我也不知道最后会学成什么样，但是希望能留下一些有意义的东西，以供后来者。\n2025-04-28 Stata作为一个商业软件，确有其独到之处，稳定，简便，支持很好是很好的有点，相较于R的开源与不稳定，这在多次使用与复现中是很重要的一点。最近在用R做概率图模型的时候就复现不出来，功能强大是优点，但是无法复现也就意味着断层，对于学习者来说是一件很麻烦的事情。\n2025-04-29 昨晚弄好 Stata 18 以后，晚上想起 Stata 官网说可以和 Python 联用，开发了包在 Ipython 中调用 Stata ，这很有意思，我在想，既然 Quarto 可以编译 .ipynb 文件为 PDF、html 等文件，那么是否可以在 Quarto 中使用 .ipynb 文件做一个容器，然后将 Satat 程序放在里面进行编译后，再由 Quarto 生成 html 文件，最后再组成网站，可以无损/流畅地展示 Stata 程序和输出结果。网上有 Python + Stata 结合使用的相关信息，但是没有和 Quarto 配合的，于是自己进行尝试，成功，能够实现在 .ipynb 中编辑 Stata 代码，并通过 Quarto 编译成网页，在网站进行展示。\n2025-05-05 看着桌边的 《SAS统计软件应用》，想了一下 SAS ，软件自带的编辑器很糟糕，又想，vscode 是万能编辑器，是不是也有 SAS 的扩展，搜了一下，嘿，还真有，那是不是也可以像 Stata 一样通过 .ipynb 文件进行编辑和运行，然后通过 Quarto 进行编译转为 .html 文件然后网页输出，看了下也是可以的，有趣，感觉 Quarto 真的可以借助 .ipynb 和 .qmd/rmd 实现统计软件的展现大一统。\n2025-05-11 昨天学完了stata的初级课程，今天开始捣鼓advanced course，一直听闻实证分析的妙用，有点抽象，而且没有找到特别合适的课程，Princeton 的一些教案挺好的，对着教案翻译然后跑代码，复现还可以。",
     "crumbs": [
       "Home",
       "统计软件"
@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-11},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 11, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-22},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 22, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -3238,7 +3238,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3251,7 +3251,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3264,7 +3264,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3277,7 +3277,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3290,7 +3290,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3303,7 +3303,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3316,7 +3316,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3329,7 +3329,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "01-SAS 安装与vscode 扩展"
     ]
   },
@@ -3661,27 +3661,27 @@
   {
     "objectID": "Guide/SAS/25-02-16-SAS-intro.html",
     "href": "Guide/SAS/25-02-16-SAS-intro.html",
-    "title": "00-SAS-Record",
+    "title": "00-SAS-Intro and Record",
     "section": "",
     "text": "SAS的历史很长，很强大，但是现代化做的一般（交互界面）。\n使用场景也是有限的，至少一般情况下用不上这么高级的工具。\n但是在某些领域又是极其重要的，像银行和药企，他们要追求足够的稳定和严谨，那么多年不曾有重大改变且一向以稳定著称的 SAS 自然可以很好的满足这一需求。\n\nSAS 对学术研究的支持是比较不友好的。正版太贵，除非学校有提供，个人基本不可能使用正版，这里下载破解版，搞SID(SAS的授权证书)需要时间成本，还容易有安装问题，没错你可以选择使用SAS的教育版，不过谁用谁知道。\n安装比较麻烦，尤其是在Linux上，我曾用两周的时间折腾在 Linux 上安装一个 SAS ，最后以失败告终，且在互联网上找不到解决的方案，AI也束手无策。\nSAS不开源，意味着你看到某些论文，里面使用一些比较新的统计分析方法，SAS不大可能有现成代码可以使用，而 Python 和 R 则大几率有现成的包可以调用，这里也会节省不少时间。\nSAS的强大一方面是性能稳定，可以处理几十上百GB的数据而不容易崩溃，但是医学数据一般容量比较小，并不是非得SAS才能跑的动。\nSAS相比其他编程语言来说是独树一帜(奇葩)的存在（proc和data步独步天下），从语法上面来说并没有什么和它相接近的语言，相反 R 和 Python 则会和一般的编程语言例如 Java, C 等有一些类似的地方，对以后万一还需要学习其他语言或者学习以后新诞生的编程软件诞有一定帮助。\nSAS 的支持有限，互联网上关于 SAS 的使用信息较少，一般都在出版的书中有可复现的内容，也没有像 Python 和 R 等活跃的社区可以提供较多的互动和支持，编程遇上问题不容易找到答案。\n\n用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。\n每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。",
     "crumbs": [
       "Home",
       "统计软件",
       "SAS",
-      "00-SAS-Record"
+      "00-SAS-Intro and Record"
     ]
   },
   {
     "objectID": "Guide/SAS/25-02-16-SAS-intro.html#footnotes",
     "href": "Guide/SAS/25-02-16-SAS-intro.html#footnotes",
-    "title": "00-SAS-Record",
+    "title": "00-SAS-Intro and Record",
     "section": "脚注",
     "text": "脚注\n\n\nSAS 程式(SAS 9.4) 繁體中文出現亂碼怎麼辦?↩︎",
     "crumbs": [
       "Home",
       "统计软件",
       "SAS",
-      "00-SAS-Record"
+      "00-SAS-Intro and Record"
     ]
   },
   {
@@ -5177,6 +5177,149 @@
       "统计软件",
       "Stata",
       "23-Empericial Analysis Intro"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html",
+    "title": "03-SAS Base",
+    "section": "",
+    "text": "逻辑概念：行、列结构的表格，每行称为一个观测，每列称为一个变量。类似于矩阵，但可以整列都取字符型值，并且变量名也是数据集 的一部分。\n等同于数据库术语“表(table)”。\n物理存储：操作系统中的文件。包括描述部分（文件创建信息、变量 名、变量的类型等属性）和数据部分。\n名字（变量名、数据集名等）：大小写不区分，其它规定与一般的高级 语言相同(由字母、下划线、数字组成，第一个字符必须是字母或下划 线，不允许使用汉字以及小数点、空格、减号等特殊字符)，不超过32 个字符长。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-数据集",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-数据集",
+    "title": "03-SAS Base",
+    "section": "",
+    "text": "逻辑概念：行、列结构的表格，每行称为一个观测，每列称为一个变量。类似于矩阵，但可以整列都取字符型值，并且变量名也是数据集 的一部分。\n等同于数据库术语“表(table)”。\n物理存储：操作系统中的文件。包括描述部分（文件创建信息、变量 名、变量的类型等属性）和数据部分。\n名字（变量名、数据集名等）：大小写不区分，其它规定与一般的高级 语言相同(由字母、下划线、数字组成，第一个字符必须是字母或下划 线，不允许使用汉字以及小数点、空格、减号等特殊字符)，不超过32 个字符长。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-逻辑库",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-逻辑库",
+    "title": "03-SAS Base",
+    "section": "2 SAS 逻辑库",
+    "text": "2 SAS 逻辑库\n\nSAS 逻辑库(library，也称数据库) 与SAS 数据集的关系，基本等同 于操作系统中子目录与子目录中文件的关系。\nSAS 逻辑库有一个“库名(libref)”，可以认做是操作系统中子目录的 一个SAS 中使用的别名。库名长度不超过8 个字符。\n建立SAS 逻辑库，实际是指把一个操作系统子目录与一个库名联系起 来。用 libname 语句或快捷图标中的 “New library” 图标。\n三个预定义的库: WORK、SASUSER、SASHELP。\n数据集的访问格式为“库名. 数据集名”格式，比如SASHELP 库中 的CLASS 数据集写成 SASHELP.CLASS 。\nWORK 库是“临时库”：其中的SAS 文件在退出SAS 系统时自动删 除。\n另外，WORK 库中的数据集可以用“一水平名”访问，即可以省略 “WORK.”。\nSashelp :永久逻辑库，包含样本数据及控制 SAS 在您的环境下如何工作的其他文件， 它是只读逻辑库。\nSasuser :永久逻辑库，包含的 SAS 文件位于存储个人设置的 Profile 目录下， 这也是便于您存储个人文件的逻辑库。\nSAS 资源管理器(Explorer) 管理SAS 文件。\n除数据集外，SAS 数据库中还可以包含叫做“SAS 目录簿”(SAS catalog) 的SAS 文件，主要用来保存设置、程序代码、图形这样的非 规整数据。\n在SAS 资源管理器中双击某一数据集进入 VIEWTABLE 数据管理界面。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sasinsight",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sasinsight",
+    "title": "03-SAS Base",
+    "section": "3 SAS/INSIGHT",
+    "text": "3 SAS/INSIGHT\n注意，在SAS 9.4版本，不再支持 INSIGHT 。\nNote that SAS/INSIGHT® software was discontinued beginning in SAS 9.4 TS1M0.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-语句",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-语句",
+    "title": "03-SAS Base",
+    "section": "4 SAS 语句",
+    "text": "4 SAS 语句\n\nSAS 系统强大的数据管理能力、计算能力、分析能力依赖于作为其基 础的SAS 语言。\nSAS 语言是一个专用的数据管理与分析语言，它的数据管理功能类似 于数据库语言(如FoxPro1)，但又添加了一般高级程序设计语言的许多 成分(如分支、循环、数组)，以及专用于数据管理、统计计算的函数。\nSAS 系统的数据管理、报表、图形、统计分析等功能都可以用SAS 语 言程序来调用，只要指定要完成的任务就可以由SAS 系统按照预先设 计好的程序去执行。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-语句的基本构成",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-语句的基本构成",
+    "title": "03-SAS Base",
+    "section": "5 SAS 语句的基本构成",
+    "text": "5 SAS 语句的基本构成\n\nSAS 语言程序由数据步和过程步组成。\n数据步用来生成数据集、计算、整理数据;\n过程步用来对数据进行分析、报告。\nSAS 语言的基本单位是语句, 每个SAS 语句一般由一个关键字(如 DATA, PROC, INPUT, CARDS, BY) 开头, 包含SAS 名字、特殊字 符、运算符等, 以分号结束。\nSAS 关键字是用于SAS 语句开头的特殊单词, SAS 语句除了赋值、累 加、注释、空语句以外都以关键字开头。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-表达式",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-表达式",
+    "title": "03-SAS Base",
+    "section": "6 SAS 表达式",
+    "text": "6 SAS 表达式\n\nSAS 数据步程序中的计算用表达式完成。\n表达式把常量、变量、函数调用用运算符、括号连接起来得到一个计算结果。\n\n\n6.1 SAS 常量\n\nSAS 常量主要有数值型、字符型两种, 并且还提供了用于表达日期、时 间的数据类型。例如\n\n数值型：12, -7.5, 2:5E-10\n字符型：’Beijing’, ”Li Ming”, ” 李明”\n\n数值型常数可以用整数、定点实数、科学计数法实数表示。\n字符型常数为两边用单撇号或两边用双撇号包围的若干字符。当字符 串内容有单撇号时，可以用双撇号界定，当字符串内容有双撇号时，可 以用单撇号界定。另外，在字符串中，重复的单撇号可以作为一个单 撇号内容，如 ’Tom” cat’ 内容是 “Tom’s cat” 。\n\n\n\n6.2 SAS 日期和时间\n\nSAS 日期型常量如：’13JUL1998’d;\n日期型常数是在表示日期的字符串后加一个字母d(大小写均可), 中间 没有空格。日期值保存为从1960 年1 月1 日后经过的天数。\n时间型常量如：’14:20:15.32’t, ’14:20’t(没有秒);\n时间型常数是在表示时间的字符串后加一个字母t。保存为秒数。\n日期时间型常量如: ’13JUL1998:14:20:15.32’dt;\n日期时间型常数在表示日期时间的字符串后加字母 dt。保存为从1960 年1 月1 日0 时后经过的秒数。\n\n\n\n6.3 缺失值\n\n数据处理时经常遇到缺失值，如：\n\n数据遗失；\n被访者拒绝回答；\n节假日无数据。\n\nSAS 程序中用一个单独的小数点来表示数值型缺失值常量。\n对于字符型数据，用只有一个空格的字符串’ ’表示缺失值。\n变量X 是否数值型缺失值可以用X=.来判断，是否字符型缺失值可以用X=’ ’ 来判断。\n数值型缺失值在排序和比较时排在最小端。\n数值型缺失值参与计算的结果也是缺失的。\n\n\n\n6.4 SAS 变量及类型\n\nSAS 变量的基本类型有两种：数值型和字符型。\n日期、时间等变量存为数值型。\n存储长度：SAS 的数值型变量可以存储任意整数、定点实数、浮点实 数, 一般不关心其区别。缺省用8 个字符存储, 精度有16 到17 位有 效数字。\nSAS 在读入字符型变量时缺省的长度是8 个字符, 但是如果在INPUT 语句中输入字符型变量时指定了长度则不受此限制，最多可存32767 个字符。\n直接用赋值语句定义的字符型变量的缺省长度是第一次赋值的字符串 长度。\n可以用LENGTH 语句直接指定变量长度, LENGTH 语句一般应出现 在变量定义之前, 格式为:\n\nLENGTH 字符型变量名 $ 长度;",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-运算符",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-运算符",
+    "title": "03-SAS Base",
+    "section": "7 SAS 运算符",
+    "text": "7 SAS 运算符\n\n7.1 SAS 算数运算符\n\nSAS 运算符包括算术、比较、逻辑等运算符。\n算术运算符为+, -, *, /, **, 运算优先级按通常的优先规则。其中两个星号**表示乘方运算。\n\n\n\n7.2 SAS 比较运算符\n\n比较运算符用于比较值大小, 包括\n\n\n\n=\nˆ=\n&gt;\n&lt;\n&gt;=\n&lt;=\nIN\n\n\n\n\nEQ\nNE\nGT\nLT\nGE\nLE\n\n\n\n\n比较运算符得到“真”或“假”的结果，真用1 表示，假用0 表示。\n两个字符型的比较是把短的一个右边补空格到两个长度相同后比较。\n在=, &gt;, &lt;, &gt;=, &lt;= 后面加一个冒号变成如 =: 这样则可以只比较与短的一个等长的部分。\n运算符 IN 是一个SAS 特有的比较运算符, 用来检查某个变量的取值 是否在一个给定列表中, 比如 prov in (' 北京', ' 天津', ' 上海', ' 重庆') 可以判断变量prov 的取值是否为四个直辖市之一。\n列表为圆括号界定的用逗号或空格分开的若干常量。\n也可以使用 NOT IN 表示 “不属于”。\n\n\n\n7.3 SAS 逻辑运算符\n\n逻辑运算符用来连接比较得到的结果以构成复杂的条件, 有三种逻辑 运算符: &(AND)  |(OR) ˆ(NOT)\n复杂的逻辑表达式最好用括号表示其运算优先级以免误记优先规则，这样也有利于阅读程序。\n\n\n\n7.4 其它运算符\n\n||(两个连续的 | 号)：连接两个字符串；\n&lt;&gt;：用于取两个运算值中较大一个(比如3 &lt;&gt; 5 结果为5)；\n&gt;&lt;：用于取两个运算值中较小一个(比如 3 &gt;&lt; 5 结果为3)。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-程序规则",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-程序规则",
+    "title": "03-SAS Base",
+    "section": "8 SAS 程序规则",
+    "text": "8 SAS 程序规则\n\n8.1 基本规则\n\nSAS 程序由语句构成。\n每个语句以分号结尾(最常见的 SAS 编程错误就是丢失分号)。\n一个语句可以写到多行(不需任何续行标志), 也可以在一行连续写几个语句。\nSAS 语言中只要允许用一个空格的地方就可以加入任意多个空白(空格、制表符、回车)。\n允许用空格的地方是名字周围、运算符周围。\n\n\n\n8.2 SAS 程序规则示例\nproc print\n        data=c9501;\n    by avg;\nrun;\n等价于：\nproc print data=c9501;by avg;run;",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#sas-注释",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#sas-注释",
+    "title": "03-SAS Base",
+    "section": "9 SAS 注释",
+    "text": "9 SAS 注释\n\n在SAS 程序中可以加入注释, 注释使用C 语言语法, 用 /* 和 */ 在两端界定注释, 这种注释可以出现在任何允许加入空格的位置, 可以占多行。\n另一种注释是把以星号 * 开头的行作为注释。\n一般只把注释单独占一行或若干行, 不把注释与程序代码放在同 一行。\n注释的另一个作用是把某些代码暂时屏蔽使其不能运行。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-22-SAS-Base.html#footnotes",
+    "href": "Guide/SAS/25-05-22-SAS-Base.html#footnotes",
+    "title": "03-SAS Base",
+    "section": "脚注",
+    "text": "脚注\n\n\nFoxPro是一种面向过程的编程语言和数据库管理系统，也是一种面向对象的编程语言，适用于MS-DOS 、Windows、Macintosh和UNIX。最初由Fox Software发布，FoxPro在1992年被微软整体收购后，由Microsoft负责发布和支持工作。FoxPro的最终发布版本是2.6。https://zh.wikipedia.org/zh-cn/FoxPro↩︎",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "03-SAS Base"
     ]
   }
 ]
