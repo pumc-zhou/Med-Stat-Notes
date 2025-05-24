@@ -88,7 +88,8 @@ bibliography: references.bib
 #| eval: false
 /* 导入必要的库 */
 proc import 
-    datafile = 'C:\Users\asus\Desktop\test\CLHLS\Analysis-0214\clhls_2018_15874.sav'  /* 请将这里替换为你的SAV文件的实际路径 */
+    datafile = 'C:\Users\asus\Desktop\test\CLHLS\Analysis-0214\clhls_2018_15874.sav'  
+    /* 请将这里替换为你的SAV文件的实际路径 */
     out = raw_data 
     dbms = sav 
     replace;
@@ -378,15 +379,20 @@ run;
 
 Notes:在Qmd中输入SAS代码时，不可以直接使用
 
-``` bash
-```{sas eval=false} your SAS code here ```
+```` bash
+```{sas eval=false} 
+your SAS code here 
 ```
+````
 
 进行标注，应使用如下形式：
 
-``` bash
-```{sas} #| eval: false your code here ```
+```` bash
+```{sas} 
+#| eval: false 
+your code here 
 ```
+````
 
 否则会在输出报错，使用了错误的
 
@@ -397,5 +403,7 @@ Notes:在Qmd中输入SAS代码时，不可以直接使用
 原因是因为，在 Quarto 中，fenced div 的正确语法是：
 
 ``` bash
-::: {.class-name}  Content here  :::
+::: {.class-name}  
+Content here  
+:::
 ```

@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-09-Stata-intro.html" rel="next">
+<link href="../../Guide/SAS/25-05-24-SAS-program.html" rel="next">
 <link href="../../Guide/SAS/25-05-05-SAS-install-connect.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -494,6 +494,12 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="menu-text">03-SAS Base</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-SAS 程序基础</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -713,6 +719,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   <li><a href="#sas-运算符" id="toc-sas-运算符" class="nav-link" data-scroll-target="#sas-运算符"><span class="header-section-number">7</span> SAS 运算符</a></li>
   <li><a href="#sas-程序规则" id="toc-sas-程序规则" class="nav-link" data-scroll-target="#sas-程序规则"><span class="header-section-number">8</span> SAS 程序规则</a></li>
   <li><a href="#sas-注释" id="toc-sas-注释" class="nav-link" data-scroll-target="#sas-注释"><span class="header-section-number">9</span> SAS 注释</a></li>
+  <li><a href="#常用指令" id="toc-常用指令" class="nav-link" data-scroll-target="#常用指令"><span class="header-section-number">10</span> 常用指令</a></li>
+  <li><a href="#功能键" id="toc-功能键" class="nav-link" data-scroll-target="#功能键"><span class="header-section-number">11</span> 功能键</a></li>
   </ul>
 <div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-05-22-SAS-Base.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
@@ -745,7 +753,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月22日</p>
+      <p class="date-modified">2025年5月24日</p>
     </div>
   </div>
     
@@ -954,6 +962,93 @@ run;</code></pre>
 <li><p>一般只把注释单独占一行或若干行, 不把注释与程序代码放在同 一行。</p></li>
 <li><p>注释的另一个作用是把某些代码暂时屏蔽使其不能运行。</p></li>
 </ul>
+</section>
+<section id="常用指令" class="level2" data-number="10">
+<h2 data-number="10" class="anchored" data-anchor-id="常用指令"><span class="header-section-number">10</span> 常用指令</h2>
+<p>命令框在 SAS视窗管理系统中主菜单的下方,是一个执行 SAS 指令的工具，在该工具的文本输人框中可以输人指令,用于实现对窗口的管理功能。有些指令只能在指定窗口执行,而有些指令是可以用于大多数窗口,称为窗口通用指令。输入一个指令,点击命令框前面的 “√” 或按下 “ENTER” 键,就可以执行该指令</p>
+<p>以下是几条比较常用的指令:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>指令</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>BYE</td>
+<td>退出 SAS 系统</td>
+</tr>
+<tr class="even">
+<td>CLEAR</td>
+<td>清除当前窗口中的内容</td>
+</tr>
+<tr class="odd">
+<td>END</td>
+<td>退出当前窗口,返回编辑窗口</td>
+</tr>
+<tr class="even">
+<td>ENDSAS</td>
+<td>退出 SAS系统</td>
+</tr>
+<tr class="odd">
+<td>FILE ’filename</td>
+<td>将当前窗口的内容存储到指定文件</td>
+</tr>
+<tr class="even">
+<td>HELP</td>
+<td>进入帮助窗口</td>
+</tr>
+<tr class="odd">
+<td>INCLUDE ’filename‘</td>
+<td>调用指定文件</td>
+</tr>
+<tr class="even">
+<td>KEYS</td>
+<td>进入快捷键定义窗口</td>
+</tr>
+<tr class="odd">
+<td>LIBNAME</td>
+<td>确定 SAS 数据库的内容</td>
+</tr>
+<tr class="even">
+<td>LOG</td>
+<td>进入日志窗口</td>
+</tr>
+<tr class="odd">
+<td>NUMS</td>
+<td>打开编辑窗口的数字区</td>
+</tr>
+<tr class="even">
+<td>NUMS OFF</td>
+<td>关闭编辑窗口的数字区</td>
+</tr>
+<tr class="odd">
+<td>OPTIONS</td>
+<td>进入参数定义窗口</td>
+</tr>
+<tr class="even">
+<td>OUTPUT</td>
+<td>进入输出窗口</td>
+</tr>
+<tr class="odd">
+<td>PROGRAM</td>
+<td>进入编辑窗口</td>
+</tr>
+<tr class="even">
+<td>RECALL</td>
+<td>调用上次执行的程序</td>
+</tr>
+<tr class="odd">
+<td>SUBMIT</td>
+<td>提交编辑窗口编辑的程序代码</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="功能键" class="level2" data-number="11">
+<h2 data-number="11" class="anchored" data-anchor-id="功能键"><span class="header-section-number">11</span> 功能键</h2>
+<p>上述有些指令可以通过SAS系统定义的功 能键来完成,这些功能键都是 SAS 系统预先设定的。在指令工具中键入“KEYS”,点击 “√”或按“ENTER”,或按“F9”,就可以查看和自定义功能键。用户可以自己定义功能,同时可以根据自己的习惯,改变功能键的位置。</p>
 
 
 <!-- -->
@@ -1595,8 +1690,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="pagination-link" aria-label="00-Stata Intro and Record">
-        <span class="nav-page-text">00-Stata Intro and Record</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-05-24-SAS-program.html" class="pagination-link" aria-label="04-SAS 程序基础">
+        <span class="nav-page-text">04-SAS 程序基础</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1825,7 +1920,37 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>一般只把注释单独占一行或若干行, 不把注释与程序代码放在同 一行。</span>
 <span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>注释的另一个作用是把某些代码暂时屏蔽使其不能运行。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>注释的另一个作用是把某些代码暂时屏蔽使其不能运行。</span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常用指令</span></span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a>命令框在 SAS视窗管理系统中主菜单的下方,是一个执行 SAS 指令的工具，在该工具的文本输人框中可以输人指令,用于实现对窗口的管理功能。有些指令只能在指定窗口执行,而有些指令是可以用于大多数窗口,称为窗口通用指令。输入一个指令,点击命令框前面的 “√” 或按下 “ENTER” 键,就可以执行该指令</span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a>以下是几条比较常用的指令:</span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a>| 指令               | 作用                           |</span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a>|--------------------|--------------------------------|</span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a>| BYE                | 退出 SAS 系统                  |</span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a>| CLEAR              | 清除当前窗口中的内容           |</span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a>| END                | 退出当前窗口,返回编辑窗口      |</span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a>| ENDSAS             | 退出 SAS系统                   |</span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>| FILE 'filename     | 将当前窗口的内容存储到指定文件 |</span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a>| HELP               | 进入帮助窗口                   |</span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a>| INCLUDE 'filename‘ | 调用指定文件                   |</span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>| KEYS               | 进入快捷键定义窗口             |</span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>| LIBNAME            | 确定 SAS 数据库的内容          |</span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>| LOG                | 进入日志窗口                   |</span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>| NUMS               | 打开编辑窗口的数字区           |</span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a>| NUMS OFF           | 关闭编辑窗口的数字区           |</span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a>| OPTIONS            | 进入参数定义窗口               |</span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a>| OUTPUT             | 进入输出窗口                   |</span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a>| PROGRAM            | 进入编辑窗口                   |</span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a>| RECALL             | 调用上次执行的程序             |</span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a>| SUBMIT             | 提交编辑窗口编辑的程序代码     |</span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## 功能键</span></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a>上述有些指令可以通过SAS系统定义的功 能键来完成,这些功能键都是 SAS 系统预先设定的。在指令工具中键入“KEYS”,点击 “√”或按“ENTER”,或按“F9”,就可以查看和自定义功能键。用户可以自己定义功能,同时可以根据自己的习惯,改变功能键的位置。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
