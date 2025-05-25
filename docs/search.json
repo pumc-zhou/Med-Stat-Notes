@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-24},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 24, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-25},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 25, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -5340,7 +5340,7 @@
     "href": "Guide/SAS/25-05-24-SAS-program.html#什么是-sas-程序",
     "title": "04-SAS 程序基础",
     "section": "1 什么是 SAS 程序",
-    "text": "1 什么是 SAS 程序\nSAS 程序是在编辑器窗口中编辑的一段SAS语句,提交后可以在日志窗口中显示有关信息和提示,在输出窗口中显示运行过程的结果。下面通过一个简单的例子,来说明程序的结构。\n\n1.1 12份肝炎患者血清谷丙转氨酶——计算均数\n\n%%SAS\ndata prg1_1;\n    input x @@;\ndatalines;\n60 142 195 80 242 220 190 25 212 38 236 95\n;\nrun;\nproc means data=prg1_1;\n    var x;\n    quit;\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 25752\n\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nMEANS PROCEDURE\n\n\n\n\n\n\n分析变量: x\n\n\n数目\n均值\n标准差\n最小值\n最大值\n\n\n\n\n12\n144.5833333\n80.9797487\n25.0000000\n242.0000000\n\n\n\n\n\n\n\n\n\n\n\n\n1.2 程序结构\n一个完整的 SAS程序一般由数据步(DATA STEP)和过程步(PROC STEP)两部分组成。\n数据步以关键词 DATA 开头,过程步以 PROC 开头,以 RUN 结束。PROC 为英文单词 PROCEDURE 的缩写,读作 prok。\n数据步的作用为指定数据集的名称,定义数据集的变量(如变量名称、变量类型等)和读入原始数据。\n本例数据步从 data prgl_1; 开始到数据下面出现的 run; 结束,建立了名为 prg1-1 的数据集。如果后面还有 SAS语句,该 run; 可省略不写。\n过程步的作用是调用现有的 SAS 过程对指定的数据集进行统计分析。\n本例过程步执行的是 means 过程,计算数据集( 默认数据集为 prg1-1 ,可用 data= 数据集 指定要分析的数据集,本例为 prg1-1)中数据的例数、均数、标准差、最小值和最大值等统计量。\n过程步从 proc means; 开始,到 quit; 结束。有时也可用 run; 结束。\n\n\n1.3 程序语法规范\nSAS程序由语句组成,每个语句以分号 ; 作为结束符号。同一行中可以有多个语句,一个语句也可以分几行编写。为方便检查和修改,每 行可输人一个语句,每个语句中各个元素以一个或几个空格分隔。输入程序语句时,可在光标闪烁处逐个字母输入,一行语句结束后,按 ENTER 换行,继续输人。值得注意的是, datalines 语句后面的数据必须另起一行输人,数据输入完毕后,必须另起一行,输入分号 ; 表示数据输入结束。\n\n\n1.4 程序运行\n当程序语句被确认正确无误后,可以将程序提交系统运行。提交程序的方法有以下几种:\n\n在执行指令的文本框中键入 SUBMIT 或 SUB ,然后点击“√”或按 ENTER 键。\n点击主菜单中的 运行(run) ,再点击 提交(submit)。\n使用功能键 F8 或自己定义的功能键。\n点击工具栏上的 run(submit) 一个奔跑的小人进行运行。\n\n\n\n1.5 程序修改\n通常情况下,在程序运行完毕后,要先检查日志窗口中的日志,看程序语句有无错误。 如果程序语句编写有误,而且该错误能被 SAS 系统纠正,则在日志窗口中会出现红色下划线和 错误标记,并用绿色字体提示错误,而程序照常运行。\n修改程序语句,首先将窗口切换到编辑器窗口,在原来有错误的地方修改程序语句,然后再提交运行。 有时需反复几次,直到日志窗口不再出现错误提示为止。\n\n\n1.6 程序保存",
+    "text": "1 什么是 SAS 程序\nSAS 程序是在编辑器窗口中编辑的一段SAS语句,提交后可以在日志窗口中显示有关信息和提示,在输出窗口中显示运行过程的结果。下面通过一个简单的例子,来说明程序的结构。\n\n1.1 12份肝炎患者血清谷丙转氨酶——计算均数\n\n%%SAS\ndata prg1_1;\n    input x @@;\ndatalines;\n60 142 195 80 242 220 190 25 212 38 236 95\n;\nrun;\nproc means data=prg1_1;\n    var x;\n    quit;\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 25752\n\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nMEANS PROCEDURE\n\n\n\n\n\n\n分析变量: x\n\n\n数目\n均值\n标准差\n最小值\n最大值\n\n\n\n\n12\n144.5833333\n80.9797487\n25.0000000\n242.0000000\n\n\n\n\n\n\n\n\n\n\n\n\n1.2 程序结构\n一个完整的 SAS程序一般由数据步(DATA STEP)和过程步(PROC STEP)两部分组成。\n数据步以关键词 DATA 开头,过程步以 PROC 开头,以 RUN 结束。PROC 为英文单词 PROCEDURE 的缩写,读作 prok。\n数据步的作用为指定数据集的名称,定义数据集的变量(如变量名称、变量类型等)和读入原始数据。\n本例数据步从 data prgl_1; 开始到数据下面出现的 run; 结束,建立了名为 prg1-1 的数据集。如果后面还有 SAS语句,该 run; 可省略不写。\n过程步的作用是调用现有的 SAS 过程对指定的数据集进行统计分析。\n本例过程步执行的是 means 过程,计算数据集( 默认数据集为 prg1-1 ,可用 data= 数据集 指定要分析的数据集,本例为 prg1-1)中数据的例数、均数、标准差、最小值和最大值等统计量。\n过程步从 proc means; 开始,到 quit; 结束。有时也可用 run; 结束。\n\n\n1.3 程序语法规范\nSAS程序由语句组成,每个语句以分号 ; 作为结束符号。同一行中可以有多个语句,一个语句也可以分几行编写。为方便检查和修改,每 行可输人一个语句,每个语句中各个元素以一个或几个空格分隔。输入程序语句时,可在光标闪烁处逐个字母输入,一行语句结束后,按 ENTER 换行,继续输人。值得注意的是, datalines 语句后面的数据必须另起一行输人,数据输入完毕后,必须另起一行,输入分号 ; 表示数据输入结束。\n\n\n1.4 程序运行\n当程序语句被确认正确无误后,可以将程序提交系统运行。提交程序的方法有以下几种:\n\n在执行指令的文本框中键入 SUBMIT 或 SUB ,然后点击“√”或按 ENTER 键。\n点击主菜单中的 运行(run) ,再点击 提交(submit)。\n使用功能键 F8 或自己定义的功能键。\n点击工具栏上的 run(submit) 一个奔跑的小人进行运行。\n\n\n\n1.5 程序修改\n通常情况下,在程序运行完毕后,要先检查日志窗口中的日志,看程序语句有无错误。 如果程序语句编写有误,而且该错误能被 SAS 系统纠正,则在日志窗口中会出现红色下划线和 错误标记,并用绿色字体提示错误,而程序照常运行。\n修改程序语句,首先将窗口切换到编辑器窗口,在原来有错误的地方修改程序语句,然后再提交运行。 有时需反复几次,直到日志窗口不再出现错误提示为止。\n\n\n1.6 程序保存\n程序语句编辑无误后,可以将编辑好的程序以文件的形式保存下来,以备以后检查或修改。\n保存程序可在命令框中键入指令 file '路径+文件名',该处路径为绝对路径,文件名的后缀必须是 .sas ,而且路径 + 文件名必须用单引号 括起来，如 file 'c:\\prgl.sas' 也可以通过 文件 菜单中的 保存 选项来保存程序文件。在出现的 保存 对话框中选择好路径,再键入文件名,此时不必加后缀,因为系统将默认后缀名为 sas 。也可以通过工具栏上的快捷方式保存程序文件,只需点击工具栏上的回就会出现 保存 对话框,然后按上述方法保存文件。\n\n\n1.7 程序调用\n有时,程序已经以文件的形式保存下来了，再作同样的处理时可不必再编辑程序,可以调用已有的程序完成统计运算。调用程序可用指令 INCLUDE 指令后面需加上用单引号括起来的文件所在的绝对路径和带后缀名为 .sas 的文件名,也可以用 文件 菜单中的 打开程序 选项来完成。\n也可以用快捷方式调用程序文件,点击工具栏上的 file 图标,以后的操作与上述 打开程序 操作相同同。",
     "crumbs": [
       "Home",
       "统计软件",
@@ -5372,6 +5372,71 @@
       "统计软件",
       "SAS",
       "03-SAS Base"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-25-SAS-DATA-LIB.html",
+    "href": "Guide/SAS/25-05-25-SAS-DATA-LIB.html",
+    "title": "05-SAS 数据库与数据集",
+    "section": "",
+    "text": "import saspy\nsas = saspy.SASsession()\n%load_ext saspy.sas_magic\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 6976",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "05-SAS 数据库与数据集"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-25-SAS-DATA-LIB.html#数据库",
+    "href": "Guide/SAS/25-05-25-SAS-DATA-LIB.html#数据库",
+    "title": "05-SAS 数据库与数据集",
+    "section": "1 数据库",
+    "text": "1 数据库\n\n1.1 数据库与库标记\nSAS 数据库是一个包含数据集的文件夹。每个数据库都包含一个或多个数据集。SAS 数据库的扩展名为 .sas7bdat。SAS 数据库可以存储在本地计算机上，也可以存储在远程服务器上。\nSAS 数据库可以通过 SAS 程序或 SAS 界面创建和管理。SAS 数据库可以包含多种类型的数据集，包括 SAS 数据集、Excel 数据集、CSV 数据集等。SAS 数据库可以通过 SAS 程序或 SAS 界面进行访问和管理。\n数据库使得 SAS 系统能够在 SAS 程序中调用指定的文件。\n为了使用 SAS 数据库，需要为每个数据库制定一个库标记来识别。库标记又称库逻辑名或库关联名。库标记是一个 SAS 程序中的变量名，用于引用数据库中的数据集。库标记可以是任意合法的 SAS 变量名，但通常使用大写字母和下划线来命名。例如，WORK、SASUSER、MYDATA 等都是合法的库标记。\n\n\n1.2 数据库类型\nSAS 数据库有两种类型：永久数据库和临时数据库。 - 永久数据库：永久数据库是指在 SAS 程序运行结束后仍然存在的数据库。永久数据库通常存储在本地计算机或远程服务器上。永久数据库可以通过 SAS 程序或 SAS 界面进行访问和管理；在安装 SAS 时，SAS 会自动创建一个永久数据库，名为 SASUSER，用于存储用户的个人数据集。永久数据库的库标记通常以大写字母和下划线命名，例如 MYDATA。 - 临时数据库：临时数据库是指在 SAS 程序运行结束后自动删除的数据库。临时数据库通常存储在内存中。临时数据库只能通过 SAS 程序进行访问和管理，不能通过 SAS 界面进行访问和管理；临时数据库一般存储在 WORK 目录中，WORK 目录是一个临时数据库，用于存储临时数据集。临时数据库的库标记通常以小写字母和下划线命名，例如 work、temp 等。\n永久型数据库的库标记也可以由用户使用 libname 语句来自行定义，libname 语句的一般形式为：\nlibname libref 'path';\n其中，libref 是库标记，path 是数据库的路径。libname 语句可以在 SAS 程序的任何位置使用，但通常在程序的开头使用。libname 语句可以用于创建永久数据库，也可以用于访问已有的永久数据库。\n启动 SAS 后，除了 Sasuser 数据库外，还会自动生成另外两个永久型数据库，他们的库标记分别为 Sashelp 和 Maps 。\n另外，根据用户安装的模块，在启动 SAS 后，会自动生成一些特殊的永久型数据库。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "05-SAS 数据库与数据集"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-25-SAS-DATA-LIB.html#数据集",
+    "href": "Guide/SAS/25-05-25-SAS-DATA-LIB.html#数据集",
+    "title": "05-SAS 数据库与数据集",
+    "section": "2 数据集",
+    "text": "2 数据集\n\n2.1 数据集的类型\nSAS 数据集有两种类型: SAS 数据文件（SAS data files）和 SAS 数据视窗（SAS data views）。\nSAS 的数据文件不仅包括描述部分，也包括数据部分。SAS 的视窗文件只有描述部分，没有数据部分，它的描述部分包括的信息使 SAS 过程可以访问到实际上并不包含在数据视窗内部的数据。\n一般情况下所说的 SAS 数据集指的是 SAS 数据文件。\n\n\n2.2 变量类型\n数据集中的变量可以有两种类型:数值型和字符型。\n数值型变量只允许变量值为数字,SAS 过程可以对这些数字进行统计运算,如计算变量的均数、标准差等。一般情况下, SAS 默认数值型变量小数点后保留两位有效数值,而小数点前的位数就是该变量值所有数值中的最大位数。\n用户也可以用 length 语句或 attrib 语句自己定义变量长度。 数值型变量当数据缺失时,SAS 表示为 .。\n字符型变量允许变量值为中、英文字母、各种符号和数字,此时的数字被当作字符处理,无法进行统计运算。字符型变量的默认长度为8个字 节,然而 SAS 规定字符型变量的最大长度不能超过 200 个字节。字符型变量数据缺失时,SAS表示为空格。\n\n\n2.3 数据集的命令\n每个 SAS 数据集都有一个两级文件名,第一级是库标记,第二级是文件名,两者之间用 . 分隔。在建立 SAS数据集时,可以通过指定两级文 件名定义 SAS 数据集,便于以后用 SAS 过程来识别和处理。\n如例 data prg1-1,表示该数据集为临时数据集,临时数据集的第一级库标记应为 Work,也可以省略该库标记。 如果将该数据集存放在硬盘的另一个目录中如 Sasuser,则数据集名为 sasuser.prg1-1,其物理位置就是 Sasuser 这个库标记所指定的文件夹,该数据集将永久保留在硬盘上。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "05-SAS 数据库与数据集"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-25-SAS-DATA-LIB.html#数据集的建立",
+    "href": "Guide/SAS/25-05-25-SAS-DATA-LIB.html#数据集的建立",
+    "title": "05-SAS 数据库与数据集",
+    "section": "3 数据集的建立",
+    "text": "3 数据集的建立\n\n3.1 创建 SAS 数据集\n建立数据集一般在数据步中完成,可以通过直接录人数据或者导人其他格式的数据文件中的数据,来建立 SAS 可以识别的 SAS 数据集。主要有如下几种方法：\n\ninput 和 datalines 语句\n\n\n%%SAS\n/*程序2-1*/\n/*10例肾移植患者的部分数据*/\n/*M为男性,F为女性*/\ndata prg2_1;\n    input no sex $ age blood $ surt;\ndatalines;\n1 M 41 A 368\n2 M 26 B 745\n3 F 35 B 401\n4 M 37 AB 552\n5 F 37 A 478\n6 F 39 0 628\n7 M 28 0 549\n8 M 31 B 128\n9 M 43 AB 463\n10 M 29 A 512\n;\nrun;\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 1952\n\n\n\n\n\n\n\n  \n  \n  \n\n\n\n\n\u00145                                                             SAS 系统                                    21:14 Sunday, May 25, 202524         ods listing close;ods html5 (id=saspy_internal) file=_tomods1 options(bitmap_mode='inline') device=svg style=HTMLBlue;24       ! ods graphics on / outputfmt=png;NOTE: 正在写入 HTML5(SASPY_INTERNAL) Body（主体）文件: _TOMODS125         26         /*10例肾移植患者的部分数据*/27         /*M为男性,F为女性*/28         data prg2_1;29             input no sex $ age blood $ surt;30         datalines;NOTE: 数据集 WORK.PRG2_1 有 10 个观测和 5 个变量。NOTE: “DATA 语句”所用时间（总处理时间）:      实际时间          0.01 秒      CPU 时间          0.00 秒      41         ;42         run;43         44         45         46         ods html5 (id=saspy_internal) close;ods listing;47         \u00146                                                             SAS 系统                                    21:14 Sunday, May 25, 202548         \n\n\n\n\n程序 2-1 中第一行 data prg2_1; 是要求建立一个文件名为 prg2_1 的数据集,该数据集是一个临时数据集,系统会自动将其存放在 Work目录中。第二行 input 语句定义了数据集的变量名和变量类型,其中 @ 符号表示在同一行中输入数据,而 datalines 语句则表示数据的输入结束。最后一行 run; 表示程序结束。\n第一行会建立一个名为 prg2_1 的数据集,该数据集是一个临时数据集,系统会自动将其存放在 Work 数据库目录中。文件的后缀名为 sas7bdat,所以从 Windows资源管理器中查看该文件,文件名为 prg2_1.sas7bdat。如果需建立永久型数据集,可在 prg2_1 前面加上库标记,如 sasuser.prg2_1,则该 数据集将保存 Sasuser 数据库中,退出 SAS 也不会将该数据集删除。\n第二行 input no sex $ age blood $ surt; 是要求在 prg2_1.sas7bdat 数据集中建立5个变量, 它们的变量名分别为 no、sex、age、blood 和 surt,其中sex和blood变量名后面加上了一个符号 $,表示这些变量为字符型变量,其他未加 $ 的变量则默认为数值型变量。\n第三行 datalines; 表明开始对变量进行赋值,它向 SAS 指示下一行开始是数据行,直到分号出现,数据行赋值结束。而该分号必须出现在所有数据的下一行,才表示结束数据行。数据行中不同变量的数据之间可用一个或多个空格 分开。\n最后一行 run; 表示 data 步的结束,当后面还有其他数据步或过程步语句,该语句可省略。\n打印数据集\n\n%%SAS\n/*程序2-2*/\n/*print过程将数据显示在输出窗口中*/\nproc print data = prg2_1;\nrun;\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\nno\nsex\nage\nblood\nsurt\n\n\n\n\n1\n1\nM\n41\nA\n368\n\n\n2\n2\nM\n26\nB\n745\n\n\n3\n3\nF\n35\nB\n401\n\n\n4\n4\nM\n37\nAB\n552\n\n\n5\n5\nF\n37\nA\n478\n\n\n6\n6\nF\n39\n0\n628\n\n\n7\n7\nM\n28\n0\n549\n\n\n8\n8\nM\n31\nB\n128\n\n\n9\n9\nM\n43\nAB\n463\n\n\n10\n10\nM\n29\nA\n512\n\n\n\n\n\n\n\n\n\n\n横向输入\n如果数据集中变量较少，而观测值较多，可以使用横向输入的方法来输入数据，具体方法是在 input 语句中的变量名加上两个 @@ 符号，表示在同一行中输入数据，则在数据行中的数据可以横行排列,每个数据之间用空格分隔。\n具体如下程序 2-3 所示：\n\n%%SAS\n/*程序2-3*/\n/*变量比较少，观测比较多，可以采用横向输入方法；具体方法是在input语句中的变量名后加上两个@@，则在数据行中的数据可以横行排列*/\ndata prg2_2;\n    input test @@;\ndatalines;\n41 26 35 47 37 39 28 31 43 29\n;\nrun;\n\nproc print data = prg2_2;\nrun;\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\ntest\n\n\n\n\n1\n41\n\n\n2\n26\n\n\n3\n35\n\n\n4\n47\n\n\n5\n37\n\n\n6\n39\n\n\n7\n28\n\n\n8\n31\n\n\n9\n43\n\n\n10\n29",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "05-SAS 数据库与数据集"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-24-SAS-program.html#sas-帮助",
+    "href": "Guide/SAS/25-05-24-SAS-program.html#sas-帮助",
+    "title": "04-SAS 程序基础",
+    "section": "2 SAS 帮助",
+    "text": "2 SAS 帮助\n启动 SAS 帮助文档的方法有以下几种， 1. 在命令框中键人 HELP ,然后点击 √ 或按 ENTER 2. 点击主菜单中的 帮助 ,再点击 SAS帮助和文档 。 3. 点击工具栏上的 ? 图标。 4. 使用功能键F1。\n要访问特定窗口的帮助信息,请在此窗口处于活动状态时从命令框中发出 HELP 命令,或者点击工具栏上的,或者使用功能键 F1。\n要访问特定主题的帮助,可以通过在命令框中键入 help keyword,keyword 值对应需要帮助的值。例如,若需要关于 SAS/EIS 软件的帮助,则键入 help sas/eis;若需要关于 proc ttest 的帮助,则键入 help ttest; 关键字的值不区分大小写。另 外,也可将光标置于编辑器窗口中的关键字(如 ttest )上,再按 F1 键调用关于 PROC ttest 的帮助, 或者直接在 SAS帮助文档中键入该关键字进行搜索。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "04-SAS 程序基础"
     ]
   }
 ]
