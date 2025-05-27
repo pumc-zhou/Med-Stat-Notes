@@ -788,7 +788,11 @@ SAS Connection established. Subprocess id is 30068
 </section>
 <section id="数据库类型" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="数据库类型"><span class="header-section-number">1.2</span> 数据库类型</h3>
-<p>SAS 数据库有两种类型：永久数据库和临时数据库。 - <strong>永久数据库</strong>：永久数据库是指在 SAS 程序运行结束后仍然存在的数据库。永久数据库通常存储在本地计算机或远程服务器上。永久数据库可以通过 SAS 程序或 SAS 界面进行访问和管理；在安装 SAS 时，SAS 会自动创建一个永久数据库，名为 <code>SASUSER</code>，用于存储用户的个人数据集。永久数据库的库标记通常以大写字母和下划线命名，例如 <code>MYDATA</code>。 - <strong>临时数据库</strong>：临时数据库是指在 SAS 程序运行结束后自动删除的数据库。临时数据库通常存储在内存中。临时数据库只能通过 SAS 程序进行访问和管理，不能通过 SAS 界面进行访问和管理；临时数据库一般存储在 <code>WORK</code> 目录中，<code>WORK</code> 目录是一个临时数据库，用于存储临时数据集。临时数据库的库标记通常以小写字母和下划线命名，例如 <code>work</code>、<code>temp</code> 等。</p>
+<p>SAS 数据库有两种类型：永久数据库和临时数据库。</p>
+<ul>
+<li><strong>永久数据库</strong>：永久数据库是指在 SAS 程序运行结束后仍然存在的数据库。永久数据库通常存储在本地计算机或远程服务器上。永久数据库可以通过 SAS 程序或 SAS 界面进行访问和管理；在安装 SAS 时，SAS 会自动创建一个永久数据库，名为 <code>SASUSER</code>，用于存储用户的个人数据集。永久数据库的库标记通常以大写字母和下划线命名，例如 <code>MYDATA</code>。</li>
+<li><strong>临时数据库</strong>：临时数据库是指在 SAS 程序运行结束后自动删除的数据库。临时数据库通常存储在内存中。临时数据库只能通过 SAS 程序进行访问和管理，不能通过 SAS 界面进行访问和管理；临时数据库一般存储在 <code>WORK</code> 目录中，<code>WORK</code> 目录是一个临时数据库，用于存储临时数据集。临时数据库的库标记通常以小写字母和下划线命名，例如 <code>work</code>、<code>temp</code> 等。</li>
+</ul>
 <p>永久型数据库的库标记也可以由用户使用 <code>libname</code> 语句来自行定义，<code>libname</code> 语句的一般形式为：</p>
 <pre class="sas"><code>libname libref 'path';</code></pre>
 <p>其中，<code>libref</code> 是库标记，<code>path</code> 是数据库的路径。<code>libname</code> 语句可以在 SAS 程序的任何位置使用，但通常在程序的开头使用。<code>libname</code> 语句可以用于创建永久数据库，也可以用于访问已有的永久数据库。</p>
@@ -808,12 +812,12 @@ SAS Connection established. Subprocess id is 30068
 <h3 data-number="2.2" class="anchored" data-anchor-id="变量类型"><span class="header-section-number">2.2</span> 变量类型</h3>
 <p>数据集中的变量可以有两种类型:数值型和字符型。</p>
 <p>数值型变量只允许变量值为数字,SAS 过程可以对这些数字进行统计运算,如计算变量的均数、标准差等。一般情况下, SAS 默认数值型变量小数点后保留两位有效数值,而小数点前的位数就是该变量值所有数值中的最大位数。</p>
-<p>用户也可以用 <code>length</code> 语句或 <code>attrib</code> 语句自己定义变量长度。 数值型变量当数据缺失时,SAS 表示为 <code>.</code>。</p>
-<p>字符型变量允许变量值为中、英文字母、各种符号和数字,此时的数字被当作字符处理,无法进行统计运算。字符型变量的默认长度为8个字 节,然而 SAS 规定字符型变量的最大长度不能超过 200 个字节。字符型变量数据缺失时,SAS表示为空格。</p>
+<p>用户也可以用 <code>length</code> 语句或 <code>attrib</code> 语句自己定义变量长度。 数值型变量当数据缺失时, SAS 表示为 <code>.</code>。</p>
+<p>字符型变量允许变量值为中、英文字母、各种符号和数字,此时的数字被当作字符处理,无法进行统计运算。字符型变量的默认长度为8个字 节,然而 SAS 规定字符型变量的最大长度不能超过 200 个字节。字符型变量数据缺失时, SAS 表示为空格。</p>
 </section>
 <section id="数据集的命令" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="数据集的命令"><span class="header-section-number">2.3</span> 数据集的命令</h3>
-<p>每个 SAS 数据集都有一个两级文件名,第一级是库标记,第二级是文件名,两者之间用 <code>.</code> 分隔。在建立 SAS数据集时,可以通过指定两级文 件名定义 SAS 数据集,便于以后用 SAS 过程来识别和处理。</p>
+<p>每个 SAS 数据集都有一个两级文件名,第一级是库标记,第二级是文件名,两者之间用 <code>.</code> 分隔。在建立 SAS 数据集时,可以通过指定两级文 件名定义 SAS 数据集,便于以后用 SAS 过程来识别和处理。</p>
 <p>如例 <code>data prg1-1</code>,表示该数据集为临时数据集,临时数据集的第一级库标记应为 <code>Work</code>,也可以省略该库标记。 如果将该数据集存放在硬盘的另一个目录中如 <code>Sasuser</code>,则数据集名为 <code>sasuser.prg1-1</code>,其物理位置就是 <code>Sasuser</code> 这个库标记所指定的文件夹,该数据集将永久保留在硬盘上。</p>
 </section>
 </section>
@@ -825,7 +829,7 @@ SAS Connection established. Subprocess id is 30068
 <ol type="1">
 <li><code>input</code> 和 <code>datalines</code> 语句</li>
 </ol>
-<div id="46b7a7d2" class="cell" data-execution_count="2">
+<div id="46b7a7d2" class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">1</span><span class="op">*/</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span><span class="dv">10</span><span class="er">例肾移植患者的部分数据</span><span class="op">*/</span></span>
@@ -838,8 +842,8 @@ SAS Connection established. Subprocess id is 30068
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> F <span class="dv">35</span> B <span class="dv">401</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> M <span class="dv">37</span> AB <span class="dv">552</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> F <span class="dv">37</span> A <span class="dv">478</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> F <span class="dv">39</span> <span class="dv">0</span> <span class="dv">628</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> M <span class="dv">28</span> <span class="dv">0</span> <span class="dv">549</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> F <span class="dv">39</span> O <span class="dv">628</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> M <span class="dv">28</span> O <span class="dv">549</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> M <span class="dv">31</span> B <span class="dv">128</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> M <span class="dv">43</span> AB <span class="dv">463</span></span>
 <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> M <span class="dv">29</span> A <span class="dv">512</span></span>
