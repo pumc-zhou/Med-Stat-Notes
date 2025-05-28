@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-27},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 27, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-28},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 28, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -5567,6 +5567,45 @@
       "统计软件",
       "SAS",
       "06-SAS 数据集的整理"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-28-SAS-function.html",
+    "href": "Guide/SAS/25-05-28-SAS-function.html",
+    "title": "07-SAS 运算符与常用函数",
+    "section": "",
+    "text": "算术运算符\n\n\n符号\n含义\n\n\n\n\n**\n乘方\n\n\n*\n乘\n\n\n+\n加\n\n\n-\n减\n\n\n/\n除\n\n\n\n\n\n\n\n比较运算符\n\n\n符号\n含义\n\n\n\n\n= 或 EQ\n等于\n\n\n^ 或 NE\n不等于\n\n\n&gt; 或 GT\n大于\n\n\n&gt;= 或 GE\ng\n\n\n&lt; 或 LT\n小于\n\n\n&lt;= 或 LE\n小于等于\n\n\n\n\n\n\n\n逻辑运算符\n\n\n符号\n含义\n\n\n\n\n& 或 AND\n逻辑与\n\n\n| 或 OR\n逻辑或\n\n\n^ 或 NOT\n逻辑非",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "07-SAS 运算符与常用函数"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-28-SAS-function.html#sas-运算符",
+    "href": "Guide/SAS/25-05-28-SAS-function.html#sas-运算符",
+    "title": "07-SAS 运算符与常用函数",
+    "section": "",
+    "text": "算术运算符\n\n\n符号\n含义\n\n\n\n\n**\n乘方\n\n\n*\n乘\n\n\n+\n加\n\n\n-\n减\n\n\n/\n除\n\n\n\n\n\n\n\n比较运算符\n\n\n符号\n含义\n\n\n\n\n= 或 EQ\n等于\n\n\n^ 或 NE\n不等于\n\n\n&gt; 或 GT\n大于\n\n\n&gt;= 或 GE\ng\n\n\n&lt; 或 LT\n小于\n\n\n&lt;= 或 LE\n小于等于\n\n\n\n\n\n\n\n逻辑运算符\n\n\n符号\n含义\n\n\n\n\n& 或 AND\n逻辑与\n\n\n| 或 OR\n逻辑或\n\n\n^ 或 NOT\n逻辑非",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "07-SAS 运算符与常用函数"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-28-SAS-function.html#常用函数",
+    "href": "Guide/SAS/25-05-28-SAS-function.html#常用函数",
+    "title": "07-SAS 运算符与常用函数",
+    "section": "2 常用函数",
+    "text": "2 常用函数\n\n2.1 算术函数\n\n\n\n\n\n\n\n函数\n含义\n\n\n\n\n\\(ABS(x)\\)\nx 的绝对值\n\n\n\\(MAX(x_1,x_2…,x_n)\\)\nx 中的最大值\n\n\n\\(MIN(x_1,x_2…,x_n)\\)\nx 中的最小值\n\n\n\\(MOD(x,y)\\)\nxy 的余数\n\n\n\\(SIGN(x)\\)\n当 x &lt; 0 时,取值为 -1;\n当 x &gt; 0 时,取值为 1;\nx = 0 时,取值为 0.\n\n\n\\(SORT(x)\\)\nx 的平方根\n\n\n\n\n\n2.2 截取函数\n\n\n\n\n\n\n\n函数\n含义\n\n\n\n\n\\(CEIL(x)\\)\n大于等于 x 的最小整数\n\n\n\\(FLOOR(x)\\)\n小于等于 x 的最大整数\n\n\n\\(INT(x)\\)\nx 的整数部分\n\n\n\\(ROUND(x,n)\\)\nx 按 n 指定的精度取舍入值\n\n\n\\(SUBSTR( s,p,n)\\)\n从字符串 s 中的第 p 个字符开始抽取 n 个字符的子串\n\n\n\n\n\n2.3 数组函数\n\n\n\n\n\n\n\n函数\n含义\n\n\n\n\nDIM( x )\n计算数组 x 第一维的元素个数\n\n\nDIMk( x)\n计算数组 x 第 k 维的元素个数\n\n\nHBOUND( x )\n计算数组 x 第一维的上界\n\n\nHBOUNDk( x )\n计算数组 x 第 k 维的上界\n\n\nLBOUND( x )\n计算数组 x 第一维的下界\n\n\nLBOUNDk( x )\n计算数组 x 第 k 维的下界\n\n\n\n\n\n2.4 数学函数\n\n\n\n\n\n\n\n函数\n含义\n\n\n\n\nDIGAMMA( x )\n对 x 计算 GAMMA 函数对数的导数\n\n\nERF( x )\nx 的误差函数\n\n\nERFC( x )\nx 的误差函数的余函数\n\n\nEXP( x )\ne 的 x 次方\n\n\nGAMMA( x )\n对 x 计算完全 GAMMA 函数\n\n\nLGMAMMA( x )\n对 x 计算 GAMMA 函 数的自然对数\n\n\nL0G( x )\n以 e 为底的对数\n\n\nLOG2( x )\n以 2 为底的对数\n\n\nLOG10( x )\n以 10 为底的对数\n\n\n\\(ORDINAL(k,x_1,...)\\)\n返回由 k 确定的部分序列的最大值\n\n\nTRIGAMMA( x )\n计算 DIGAMMA(x) 函数的导数\n\n\nAIRY( x )\n计算微分方程的解\n\n\nDAIRY( x )\n求 AIRY(x) 的导数\n\n\nJBESSEL( nu,x )\n计算 BESSEL 函数\n\n\nIBESSEL( nu, x, kode )\n计算修正 BESSEL 函数\n\n\n\n\n\n2.5 三角函数\n\n三角函数\n\n\n\n\n\n\n函数\n含义\n\n\n\n\nARCOS( x )\n反余弦函数\n\n\nARSIN( x )\n反正弦函数\n\n\nATAN( x )\n反正切函数\n\n\nCOS( x )\n余弦函数\n\n\nCOSH( x )\n双曲余弦函数\n\n\nSIN( x )\n正弦函数\n\n\nSINH( x )\n双曲正弦函数\n\n\nTAN( x )\n正切函数\n\n\nTANH( x )\n双曲正切函数\n\n\n\n\n\n2.6 概率函数\n\n概率函数\n\n\n\n\n\n\n函数\n含义\n\n\n\n\nPOISSON( lambda,n )\n泊松分布的概率分布函数\n\n\nPROBBETA( x,a,b )\n\\(\\beta\\) 分布的分布函数\n\n\nPROBBNML( p,n,m )\n二项分布的概率分布函数\n\n\nPROBCHI( x, df, nc )\n\\(\\chi^2\\) 分布的分布函数\n\n\nPROBF( x, ndf, ddf, nc )\nF分布的分布函数\n\n\nPROBGAM( x,a )\n\\(\\gamma\\) 分布的分布函数\n\n\nPROBHYPR( nn,k,n,x, or )\n超几何分布的概率分布函数\n\n\nPROBNEGB( p,n,m )\n负二项分布的概率分布函数\n\n\nPROBNORM( x )\n标准正态分布函数\n\n\nPROBT( x, df, nc )\nt 分布函数\n\n\n\n\n\n2.7 随机函数\n\n随机函数\n\n\n\n\n\n\n函数\n含义\n\n\n\n\nNORMAL( seed )\n产生标准正态分布随机数\n\n\nRANBIN( seed, n, p)\n产生二项分布随机数\n\n\nRANCAU( seed )\n产生柯西分布随机数\n\n\nRANEXP( seed )\n产生指数分布随机数\n\n\nRANGAM( seed, alpha )\n产生 \\(\\gamma\\) 分布的随机数\n\n\nRANNOR( seed )\n产生标准正态离差随机数\n\n\nRANPOI( seed , lambda )\n产生泊松分布随机数\n\n\nRANTBL( seed, p1 , p2…, pn)\n产生离散分布随机数\n\n\nRANTRI( seed, h )\n产生三角分布随机数\n\n\nRANUNI( seed )\n产生均匀离差随机数\n\n\nUNIFORM( seed )\n产生均匀分布随机数\n\n\n\n\n\n2.8 样本统计函数\n\n样本统计函数\n\n\n\n\n\n\n函数\n含义\n\n\n\n\nCV( x,y,…)\n产生一组数据的变异系数\n\n\nKURTOSIS( x,y,…)\n产生一组数据的峰度系数\n\n\nMAX( x,y,…)\n产生一组数据的最大值\n\n\nMIN( x,y,…)\n产生一组数据的最小值\n\n\nMEAN( x,y,…)\n产生一组数据的均数\n\n\nN( x,y,…)\n产生一组数据的例数\n\n\nNMISS( x,y,…)\n产生一组数据的缺失例数\n\n\nRANGE( x,y,…..)\n产生一组数据的极差\n\n\nSKEWNESS( x,y,….)\n产生一组数据的偏度系数\n\n\nSTD( x,y,…. )\n产生一组数据的标准差\n\n\nSTDERR( x,y,….. )\n产生一组数据的标准误\n\n\nSUM( x,y,…..)\n产生一组数据的总和\n\n\nVAR( x,y,….)\n产生一组数据的方差\n\n\nCSS( x,y,….)\n产生一组数据的离均差平方和\n\n\nUSS( x,y,….)\n产生一组数据的平方和\n\n\n\n\n\n2.9 分位函数\n\n分位函数\n\n\n函数\n含义\n\n\n\n\nCINV( p, df, ne )\n\\(\\chi^2\\) 分布的分位数\n\n\nBETAINV( p, a, b)\n\\(\\beta\\) 分布的分位数\n\n\nFINV ( p, ndf, ddf, nc )\nF 分布的分位数\n\n\nTINV( p, df, nc )\nT 分布的分位数\n\n\nPROBIT(p)\n正态分布的分位数\n\n\nGAMINV(p,a)\n\\(\\gamma\\) 分布的分位数\n\n\n\n\n\n2.10 日期与时间函数\n\n日期与时间函数\n\n\n\n\n\n\n函数\n含义\n\n\n\n\nDATE( )\n取电脑系统今天的日期作为 SAS 日期值\n\n\nDATEPART( dt )\n抽取 SAS 日期时间值的日期部分\n\n\nDATETIME( )\n取当前日期和时间\n\n\nDAY( date )\n从 SAS 日期值计算出某月的那一天\n\n\nDHMS( d,h,m,s )\n从日期、小时、分钟、秒得到 SAS 日期时间值\n\n\nHMS( h,m,s )\n从小时、分钟和秒得到 SAS 时间值\n\n\nHOUR ( dt | time )\n从 SAS 日期时间值或时间值或文字计算小 时(点钟)\n\n\nINTCK( in, from, to )\n取时间间隔数字\n\n\nINTNX( in,from,nu )\n按给定间隔推算日期时间或日期时间值\n\n\nMDY( m, d, yr )\n从年、月和日得到 SAS 日期值\n\n\nMINUTE ( t | dt )\n从 SAS 时间或日期时间值或文字得到分钟数\n\n\nQ( date )\n从 SAS 日期值或文字得到月份\n\n\nSECOND( t | dt )\n从 SAS 时间或日期时间值或文字得到秒数\n\n\nTIME( )\n取当日的时间\n\n\nTIMEPART ( dt )\n抽取 SAS 日期时间值或文字的时间部分\n\n\nTODAY( )\n取当前日期作为 SAS 日期值\n\n\nWEEKDAY( date )\n从 SAS 日期值或文字得到星期几\n\n\nYEAR( date )\n从 SAS 日期值得到年\n\n\nYYQ( yr,q )\n从年和季节得到 SAS 日期值",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "07-SAS 运算符与常用函数"
     ]
   }
 ]
