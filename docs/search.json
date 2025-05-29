@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-28},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 28, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-29},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 29, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -5606,6 +5606,58 @@
       "统计软件",
       "SAS",
       "07-SAS 运算符与常用函数"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-function-example.html",
+    "href": "Guide/SAS/25-05-29-SAS-function-example.html",
+    "title": "08-SAS 运算符与常用函数示例",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "08-SAS 运算符与常用函数示例"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-function-example.html#正态分布随机数的产生",
+    "href": "Guide/SAS/25-05-29-SAS-function-example.html#正态分布随机数的产生",
+    "title": "08-SAS 运算符与常用函数示例",
+    "section": "1 正态分布随机数的产生",
+    "text": "1 正态分布随机数的产生\n利用 rannor(seed) 函数生成两组各15个来自于均数为 170、方差为 30 的正态分布的随机数。\n\n\n代码\n%%SAS\n/*程序3-1*/\n/*利用rannor(seed)函数生成两组各15个来自于均数为170、方差为30的正态分布的随机数*/\n\ndata prg3_1;\n    do seed = 1 to 15;\n    x = 170 + sqrt(30)*rannor(seed);\n    y = 170 + sqrt(30)*rannor(seed);\n    output;\n    end;\nrun;\nproc print;\n    title '程序3-1';\nrun;\n\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 17612\n\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n程序3-1 \n\n\n\n\n\n\n观测\nseed\nx\ny\n\n\n\n\n1\n1\n179.885\n169.562\n\n\n2\n2\n172.172\n164.066\n\n\n3\n3\n182.260\n166.581\n\n\n4\n4\n172.813\n169.526\n\n\n5\n5\n166.746\n170.175\n\n\n6\n6\n165.959\n168.630\n\n\n7\n7\n173.752\n165.595\n\n\n8\n8\n165.923\n165.643\n\n\n9\n9\n171.866\n168.354\n\n\n10\n10\n162.607\n172.370\n\n\n11\n11\n177.152\n177.806\n\n\n12\n12\n167.723\n178.842\n\n\n13\n13\n164.207\n164.806\n\n\n14\n14\n175.223\n172.147\n\n\n15\n15\n169.583\n176.685\n\n\n\n\n\n\n\n\n\n\n程序说明：\n\n创建 数据集 prg3_1，包含变量 x 和 y。\n利用函数 SORT(x) 和 RANNOR(seed) 产生两个随机变量 x 和 y ,均来自均数为 170,方差为 30 的正态分布。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "08-SAS 运算符与常用函数示例"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-function-example.html#单一总体均数的置信区间的估计",
+    "href": "Guide/SAS/25-05-29-SAS-function-example.html#单一总体均数的置信区间的估计",
+    "title": "08-SAS 运算符与常用函数示例",
+    "section": "2 单一总体均数的置信区间的估计",
+    "text": "2 单一总体均数的置信区间的估计\n从某市随机抽取 10 例 18 岁男生,测得他们的身高的均数为 166.95cm,标准差为 3.64cm,试求其总体均数的 95% 置信区间：\n\n\n代码\n%%SAS\n/*程序3-2*/\n/*10例18岁的男生，身高均数为166.95cm，标准差为3.64cm，试求其总体均数的95%置信区间*/\ndata prg3_2;\n    n = 10;\n    mean = 166.95;\n    std = 3.64;\n    t = tinv(0.975,n-1);\n    /*95%的置信区间，双侧，右侧的界值为97.5%*/\n    in = t*std/sqrt(n);\n    lclm = mean-in;\n    uclm = mean+in;\nrun;\nproc print;\n    var lclm uclm;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n程序3-1 \n\n\n\n\n\n\n观测\nlclm\nuclm\n\n\n\n\n1\n164.346\n169.554\n\n\n\n\n\n\n\n\n\n\n程序说明:\n\n创建数据集 prg3_2;\n变量 n、mean 和 std 分别代表样本的例数、均数和标准差；\ntinv(0.975,n-1) 表示自由度为 n-1 时双侧 0.05 水平的 t 界值；\nin 的值等于 t 界值乘以标准误, lclm 为置信区间的下限, uclm 为置信区间的上限；\n最后调用 print 过程将双侧 95% 置信区间的上限和下限输出到输出到窗口。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "08-SAS 运算符与常用函数示例"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-function-example.html#两总体均数之差的置信区间估计",
+    "href": "Guide/SAS/25-05-29-SAS-function-example.html#两总体均数之差的置信区间估计",
+    "title": "08-SAS 运算符与常用函数示例",
+    "section": "3 两总体均数之差的置信区间估计",
+    "text": "3 两总体均数之差的置信区间估计\n为了解氨甲蝶呤( MTX)对外周血白细胞介素 -2(IL-2) 水平的影响,某医生将 61 例哮喘患 者随机分为两组。其中对照组 29 例,采用安慰剂治疗;试验组 32 例,采用小剂量 MTX 进行治疗。 测得对照组治疗前 IL-2 的平均数为 20.10IU/ml.标准差为 7.02IU/ml; 试验组治疗前 IL-2 的平均数 为 16.89IU/ml,标准差为 8.46IU/ml。问两组治疗前基线的 IL-2 总体均数相差有多大?\n\n\n代码\n%%SAS\n/*程序3-3*/\n/*61名患者随机分为两组，对照组29，实验组32\n对照组治疗前均数为20.10，标准差为7.02\n试验组治疗前均数为16.89，标准差为8.46\n问两组治疗前基线的总体均数相差有多大*/\ndata prg3_3;\n    n1 = 29;\n    n2 = 32;\n    m1 = 20.10;\n    m2 = 16.89;\n    s1 = 7.02;\n    s2 = 8.46;\n    sc2 = (s1**2*(n1-1)+s2**2*(n2-1))/(n1+n2-2);\n    st = sqrt(sc2*(1/n1+1/n2));\n    t = tinv(0.975,n1+n2-2);\n    in = t*st;\n    lclm = abs(m1-m2)-in;\n    uclm = abs(m1-m2)+in;\nproc print;\n    var lclm uclm;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n程序3-1 \n\n\n\n\n\n\n观测\nlclm\nuclm\n\n\n\n\n1\n-0.79660\n7.21660\n\n\n\n\n\n\n\n\n\n\n程序说明:\n\n创建数据集 prg3_3;\n变量 n1 和 n2 分别表示两组数据的例数,m1 和 m2 分别表示两组数据的均数, s1 和 s2 分别表示两组数据的标准差, sc2 为合并方差, st 为两均数相差的标准误\nt 为双侧 0.05 的界值;\nin 为 t 界值和标准误的乘积;\nlclm 和 uclm 分别是两均数相差 95% 置信区间的下限和上限;\n再调用print 过程将置信区间的结果输出到输出窗口。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "08-SAS 运算符与常用函数示例"
     ]
   }
 ]
