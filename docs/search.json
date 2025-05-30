@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-29},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 29, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-30},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 30, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -5731,6 +5731,110 @@
     "title": "09-SAS 计量资料的单变量分析",
     "section": "1.5 几何均数的计算",
     "text": "1.5 几何均数的计算",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html#频数表的编制",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html#频数表的编制",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "1.1 频数表的编制",
+    "text": "1.1 频数表的编制\n频数表是对分类变量进行单变量分析的常用方法,可以显示每个类别的频数和百分比。\n\n检查数据集，选择变量\n\n\n\n代码\n%%SAS\n/*check the dataset*/\nproc print data = sashelp.cars(obs=5) label;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\nMake\nModel\nType\nOrigin\nDriveTrain\nMSRP\nInvoice\nEngine Size (L)\nCylinders\nHorsepower\nMPG (City)\nMPG (Highway)\nWeight (LBS)\nWheelbase (IN)\nLength (IN)\n\n\n\n\n1\nAcura\nMDX\nSUV\nAsia\nAll\n$36,945\n$33,337\n3.5\n6\n265\n17\n23\n4451\n106\n189\n\n\n2\nAcura\nRSX Type S 2dr\nSedan\nAsia\nFront\n$23,820\n$21,761\n2.0\n4\n200\n24\n31\n2778\n101\n172\n\n\n3\nAcura\nTSX 4dr\nSedan\nAsia\nFront\n$26,990\n$24,647\n2.4\n4\n200\n22\n29\n3230\n105\n183\n\n\n4\nAcura\nTL 4dr\nSedan\nAsia\nFront\n$33,195\n$30,299\n3.2\n6\n270\n20\n28\n3575\n108\n186\n\n\n5\nAcura\n3.5 RL 4dr\nSedan\nAsia\nFront\n$43,755\n$39,014\n3.5\n6\n225\n18\n24\n3880\n115\n197\n\n\n\n\n\n\n\n\n\n\n\n使用 cars 数据集中的 MPG(City) 变量进行频数表的编制\n\n\n\n代码\n%%SAS\n/*frequency table for MPG_City*/\nproc freq data=sashelp.cars;\n    tables MPG_City;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\nMPG (City)\n\n\nMPG_City\n频数\n百分比\n累积\n频数\n累积\n百分比\n\n\n\n\n10\n2\n0.47\n2\n0.47\n\n\n12\n4\n0.93\n6\n1.40\n\n\n13\n12\n2.80\n18\n4.21\n\n\n14\n13\n3.04\n31\n7.24\n\n\n15\n17\n3.97\n48\n11.21\n\n\n16\n31\n7.24\n79\n18.46\n\n\n17\n41\n9.58\n120\n28.04\n\n\n18\n69\n16.12\n189\n44.16\n\n\n19\n37\n8.64\n226\n52.80\n\n\n20\n57\n13.32\n283\n66.12\n\n\n21\n38\n8.88\n321\n75.00\n\n\n22\n18\n4.21\n339\n79.21\n\n\n23\n7\n1.64\n346\n80.84\n\n\n24\n22\n5.14\n368\n85.98\n\n\n25\n9\n2.10\n377\n88.08\n\n\n26\n22\n5.14\n399\n93.22\n\n\n27\n1\n0.23\n400\n93.46\n\n\n28\n5\n1.17\n405\n94.63\n\n\n29\n7\n1.64\n412\n96.26\n\n\n31\n1\n0.23\n413\n96.50\n\n\n32\n7\n1.64\n420\n98.13\n\n\n33\n1\n0.23\n421\n98.36\n\n\n35\n2\n0.47\n423\n98.83\n\n\n36\n1\n0.23\n424\n99.07\n\n\n38\n1\n0.23\n425\n99.30\n\n\n46\n1\n0.23\n426\n99.53\n\n\n59\n1\n0.23\n427\n99.77\n\n\n60\n1\n0.23\n428\n100.00",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html#单变量描述",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html#单变量描述",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "1.2 单变量描述",
+    "text": "1.2 单变量描述\n单变量描述是对数值变量进行统计分析的过程,可以计算均值、标准差、最小值、最大值等统计量。\n\n1.2.1 means 过程\n\n\n代码\n%%SAS\n/*simple descriptive statistics for MPG_City*/\nproc means data = sashelp.cars;\n    var MPG_City;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nMEANS PROCEDURE\n\n\n\n\n\n\n分析变量: MPG_City MPG (City)\n\n\n数目\n均值\n标准差\n最小值\n最大值\n\n\n\n\n428\n20.0607477\n5.2382176\n10.0000000\n60.0000000\n\n\n\n\n\n\n\n\n\n\nmeans 过程默认给出均值、标准差、最小值和最大值，但是用户可以指定其他统计量，如下：\n\nStderr:均数的标准差,即标准误;\nSum:合计值;\nVariance:方差\nCV:变异系数;\nNmiss:缺失变量值的观测例数;\nRange:极差;\nUSS:平方和;\nCSS:离均差平方和;\nT:检验假设为总体均数为 0 的 student-t 检验的检验统计量 t 值;\nProbt:总体均数为0的检验假设中,值所对应的概率值(P值);\nSumweight:权重变量值的和;\nSkewness:偏度系数;\nKurtosis:峰度系数;\nCLM:双侧 95%置信区间的下限( lclm)和上限( uclm );\nMedian | P50:中位数或 50% 分位数;\nP1:1%分位数;\nP5:5%分位数;\nP10:10% 分位数;\nQ1 | P25:下四分位数或 25%分位数;\nQ3 | P75:上四分位数或 75% 分位数:\nP90:90%分位数;\nP95:95% 分位数:\nP99:99%分位数:\nQrange:四分位数间距\n\n多个统计量输出示例：\n\n\n代码\n%%SAS\n/*complex descriptive statistics for MPG_City*/\nproc means data = sashelp.cars n mean std stderr cv clm Qrange;\n    var MPG_City;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nMEANS PROCEDURE\n\n\n\n\n\n\n分析变量: MPG_City MPG (City)\n\n\n数目\n均值\n标准差\n标准误差\n变异系数\n均值的95% 置信下限\n均值的95% 置信上限\n四分位间距\n\n\n\n\n428\n20.0607477\n5.2382176\n0.2531988\n26.1117767\n19.5630765\n20.5584188\n4.5000000\n\n\n\n\n\n\n\n\n\n\n\n\n1.2.2 保留小数\nmeans 过程给出的结果中,每个统计量均在小数点后保留七位有效数字,可以通过 maxdec 语句改变有效位数,该语句是 means 过程的一个选 项,可加在 proc means 的后面。示例如下：\n\n\n代码\n%%SAS\n/*design the decimal*/\nproc means maxdec = 2 data = sashelp.cars n mean std stderr cv clm;\n    var MPG_City;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nMEANS PROCEDURE\n\n\n\n\n\n\n分析变量: MPG_City MPG (City)\n\n\n数目\n均值\n标准差\n标准误差\n变异系数\n均值的95% 置信下限\n均值的95% 置信上限\n\n\n\n\n428\n20.06\n5.24\n0.25\n26.11\n19.56\n20.56\n\n\n\n\n\n\n\n\n\n\n\n\n1.2.3 频数表资料的描述性统计\n如果数据已经被整理成频数表资料，means 过程通过 freq 语句定义频数变量,用 var 语句定义组中值变量,同样可以计算简单的描述性统计量。\n\n\n代码\n%%SAS\n/*程序4-4 freq*/\ndata prg4_4;\n    input x f @@;\ndatalines;\n3.17 2 3.37 3 3.57 9 3.77 22 4.17 30\n4.37 21 4.57 15 4.77 10 4.97 6 5.17 4 5.37 2\n;\nrun;\nproc means;\n    freq f;\n    var x;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nMEANS PROCEDURE\n\n\n\n\n\n\n分析变量: x\n\n\n数目\n均值\n标准差\n最小值\n最大值\n\n\n\n\n124\n4.2409677\n0.4738313\n3.1700000\n5.3700000",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html#univariate-过程",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html#univariate-过程",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "1.3 univariate 过程",
+    "text": "1.3 univariate 过程\nunivariate 过程能够给出的描述性统计量比较多,除了上述 means 过程给出的统计量外,它还能输出符号统计量、正态性检验的统计量以及用户自己定义的百分位数,而且可以生成若干个描述变量分布的茎叶图、箱式图、正态概率图等统计图。\n\n\n代码\n%%SAS\n/*程序4-6 univariate过程*/\ndata prg4_6;\n    input x f @@;\ndatalines;\n18 4 30 17 42 32 54 24 66 18 78 12 90 5 102 4 114 2\n;\nrun;\nproc univariate;\n    var x;\n    freq f;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n变量:  x\n \n频数:  f\n\n\n\n\n\n\n\n矩\n\n\n\n\n数目\n118\n权重总和\n118\n\n\n均值\n54.5084746\n观测总和\n6432\n\n\n标准差\n21.0724212\n方差\n444.046936\n\n\n偏度\n0.69543247\n峰度\n0.17594659\n\n\n未校平方和\n402552\n校正平方和\n51953.4915\n\n\n变异系数\n38.6589817\n标准误差均值\n1.93987361\n\n\n\n\n\n\n\n\n\n\n基本统计测度\n\n\n位置\n变异性\n\n\n\n\n均值\n54.50847\n标准差\n21.07242\n\n\n中位数\n54.00000\n方差\n444.04694\n\n\n众数\n42.00000\n极差\n96.00000\n\n\n \n \n四分位间距\n24.00000\n\n\n\n\n\n\n\n\n\n\n位置检验: Mu0=0\n\n\n检验\n统计量\np 值\n\n\n\n\nStudent t\nt\n28.09898\nPr &gt; |t|\n&lt;.0001\n\n\n符号\nM\n59\nPr &gt;= |M|\n&lt;.0001\n\n\n符号秩\nS\n3510.5\nPr &gt;= |S|\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n分位数（定义 5）\n\n\n水平\n分位数\n\n\n\n\n100% 最大值\n114\n\n\n99%\n114\n\n\n95%\n102\n\n\n90%\n78\n\n\n75% Q3\n66\n\n\n50% 中位数\n54\n\n\n25% Q1\n42\n\n\n10%\n30\n\n\n5%\n30\n\n\n1%\n18\n\n\n0% 最小值\n18\n\n\n\n\n\n\n\n\n\n\n极值观测\n\n\n最小值\n最大值\n\n\n值\n频数\n观测\n值\n频数\n观测\n\n\n\n\n18\n4\n1\n66\n18\n5\n\n\n30\n17\n2\n78\n12\n6\n\n\n42\n32\n3\n90\n5\n7\n\n\n54\n24\n4\n102\n4\n8\n\n\n66\n18\n5\n114\n2\n9\n\n\n\n\n\n\n\n\n\n\n\n程序说明:\n\n数据集 prg4_6 中的变量为 x 和 f ;\n调用 univariate 过程时,var x;语句指明 x 为分析变量;\nfreq f,语句表示 f 为频数变量。\n\n整个分析结果输出的统计量分为五个部分:\n\n矩(Moments)、\n基本统计测度( Basic Statistical Measures)、\n位置检验( Tests for Location:Mu0=0)、\n分位数[Quantiles(Definition 5)]\n和极值观测(Extreme Observations )\n\n\n矩(Moments) 部分的统计量包括:\n\n\n非缺失值的例数(N)\n权重总和(Sum Weights)\n均数(Mean)\n观测总和(Sum Observations)\n标准差(Std Deviation)\n方差(Variance)\n偏度(Skewness,即偏度系数)\n峰度(Kurtosis,即峰度系数)\n未校正平方和(Uncorrected SS,即平方和)\n校正平方和(Corrected SS,即离均差平方和)\n变异系数(Coeff Variation)\n标准误差均数(Std Error Mean,即标准误)。\n\n\n基本统计测度(Basic Statistical Measures)部分统计量包括:\n\n\n均数(Mean)\n标准差(StdDeviation)\n中位数(Median)\n方差(Variance)\n众数(Mode)\n极差(Range)\n四分位极差(Interquartile Range,即四分位数间距)。\n\n\n位置检验(Tests for Location: Mu0=0)部分的统计量包括:\n\n\nStudent’s t: 总体均数为0的 student-t 检验的检验统计量u值;\nPr &gt; |t|: 总体均数为0的t检验中,检验统计量所对应的概率值(P值);\nSign M: 总体中位数为0的符号检验的检验统计量 M值;\nPr &gt;= |M|: 总体中位数为0的符号检验中检验统计量所对应的概率值(P值);\nSigned Ranks: 总体中位数为0的符号秩检验的检验统计量S值;\nPr &gt;= |S|: 总体中位数为0的符号秩检验中，检验统计量所对应的概率值(P值)。\n\n\n分位数[Quantiles(Definition 5)] 部分的统计量包括:\n\n\n100% 分位数( 100% Max，即最大值)\n99% 分位数\n95% 分位数\n90% 分位数\n75% (即 Q3,上四分位数)\n50% 分位数(即 Median,中位数)\n25% 分位数(即 Q1,下四分位数)\n10% 分位数\n5% 分位数\n1% 分位数和 0% 分位数( 0% Min,即最小值)。\n\n\n极值观测(Extreme Observations) 部分列出了五个最小值和五个最大值以及这些值分别对应的频数和观测号。\n\numivariate 过程除了能够给出几个特定的百分位数,还能输出用户自己定义的百分位数。此时在过程中要使用 output 语句.\n\n\n代码\n%%SAS\ndata prg4_6;\n    input x f @@;\ndatalines;\n18 4 30 17 42 32 54 24 66 18 78 12 90 5 102 4 114 2\n;\nrun;\n/*程序4-7 univariate 自定义百分数，需要使用 output 语句*/\n/**/\nproc univariate data = prg4_6;\n    var x;\n    freq f;\n    output out = pct pctlpre = p pctlpts = 2.5 97.5;\nrun;\nproc print data = pct;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n变量:  x\n \n频数:  f\n\n\n\n\n\n\n\n矩\n\n\n\n\n数目\n118\n权重总和\n118\n\n\n均值\n54.5084746\n观测总和\n6432\n\n\n标准差\n21.0724212\n方差\n444.046936\n\n\n偏度\n0.69543247\n峰度\n0.17594659\n\n\n未校平方和\n402552\n校正平方和\n51953.4915\n\n\n变异系数\n38.6589817\n标准误差均值\n1.93987361\n\n\n\n\n\n\n\n\n\n\n基本统计测度\n\n\n位置\n变异性\n\n\n\n\n均值\n54.50847\n标准差\n21.07242\n\n\n中位数\n54.00000\n方差\n444.04694\n\n\n众数\n42.00000\n极差\n96.00000\n\n\n \n \n四分位间距\n24.00000\n\n\n\n\n\n\n\n\n\n\n位置检验: Mu0=0\n\n\n检验\n统计量\np 值\n\n\n\n\nStudent t\nt\n28.09898\nPr &gt; |t|\n&lt;.0001\n\n\n符号\nM\n59\nPr &gt;= |M|\n&lt;.0001\n\n\n符号秩\nS\n3510.5\nPr &gt;= |S|\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n分位数（定义 5）\n\n\n水平\n分位数\n\n\n\n\n100% 最大值\n114\n\n\n99%\n114\n\n\n95%\n102\n\n\n90%\n78\n\n\n75% Q3\n66\n\n\n50% 中位数\n54\n\n\n25% Q1\n42\n\n\n10%\n30\n\n\n5%\n30\n\n\n1%\n18\n\n\n0% 最小值\n18\n\n\n\n\n\n\n\n\n\n\n极值观测\n\n\n最小值\n最大值\n\n\n值\n频数\n观测\n值\n频数\n观测\n\n\n\n\n18\n4\n1\n66\n18\n5\n\n\n30\n17\n2\n78\n12\n6\n\n\n42\n32\n3\n90\n5\n7\n\n\n54\n24\n4\n102\n4\n8\n\n\n66\n18\n5\n114\n2\n9\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\np2_5\np97_5\n\n\n\n\n1\n18\n102\n\n\n\n\n\n\n\n\n\n\n程序说明：\n\nunivariate 产生的部分统计量输出到新建的数据集中,数据集的名称由 out= 来定义,本例 out=pct 就是表示将要新建的数据集名称定为 pct。\noutput 语句中的选项 pctlpts 表示需要计算的百分位数,本例需要输出第 2.5% 和第 97.5%分位数;\npctlpre 表示在新数据集中的变量中百分位数的前缀,本例表示百分位数前缀为 p。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html#正态性检验",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html#正态性检验",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "1.4 正态性检验",
+    "text": "1.4 正态性检验\n正态性检验是检验数据是否符合正态分布的统计方法,常用的正态性检验方法有 Shapiro-Wilk 检验、Kolmogorov-Smirnov 检验等。\n在 SAS 中,可以使用 univariate 过程进行正态性检验，其语法只需要在 proc univariate 语句中加上 normal 选项即可，normal 和 plot 选项,就能输出该组数据正态性检验的结果和茎叶图、箱式图及正态概率图。\n\n\n代码\n%%SAS\nproc univariate normal plot data = sashelp.cars;\n    var MPG_City;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n变量:  MPG_City  (MPG (City))\n\n\n\n\n\n\n\n矩\n\n\n\n\n数目\n428\n权重总和\n428\n\n\n均值\n20.0607477\n观测总和\n8586\n\n\n标准差\n5.23821764\n方差\n27.438924\n\n\n偏度\n2.7820718\n峰度\n15.7911473\n\n\n未校平方和\n183958\n校正平方和\n11716.4206\n\n\n变异系数\n26.1117767\n标准误差均值\n0.25319881\n\n\n\n\n\n\n\n\n\n\n基本统计测度\n\n\n位置\n变异性\n\n\n\n\n均值\n20.06075\n标准差\n5.23822\n\n\n中位数\n19.00000\n方差\n27.43892\n\n\n众数\n18.00000\n极差\n50.00000\n\n\n \n \n四分位间距\n4.50000\n\n\n\n\n\n\n\n\n\n\n位置检验: Mu0=0\n\n\n检验\n统计量\np 值\n\n\n\n\nStudent t\nt\n79.22923\nPr &gt; |t|\n&lt;.0001\n\n\n符号\nM\n214\nPr &gt;= |M|\n&lt;.0001\n\n\n符号秩\nS\n45903\nPr &gt;= |S|\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n正态性检验\n\n\n检验\n统计量\np 值\n\n\n\n\nShapiro-Wilk\nW\n0.80784\nPr &lt; W\n&lt;0.0001\n\n\nKolmogorov-Smirnov\nD\n0.178848\nPr &gt; D\n&lt;0.0100\n\n\nCramer-von Mises\nW-Sq\n2.686108\nPr &gt; W-Sq\n&lt;0.0050\n\n\nAnderson-Darling\nA-Sq\n14.67298\nPr &gt; A-Sq\n&lt;0.0050\n\n\n\n\n\n\n\n\n\n\n分位数（定义 5）\n\n\n水平\n分位数\n\n\n\n\n100% 最大值\n60.0\n\n\n99%\n36.0\n\n\n95%\n29.0\n\n\n90%\n26.0\n\n\n75% Q3\n21.5\n\n\n50% 中位数\n19.0\n\n\n25% Q1\n17.0\n\n\n10%\n15.0\n\n\n5%\n14.0\n\n\n1%\n12.0\n\n\n0% 最小值\n10.0\n\n\n\n\n\n\n\n\n\n\n极值观测\n\n\n最小值\n最大值\n\n\n值\n观测\n值\n观测\n\n\n\n\n10\n167\n36\n156\n\n\n10\n119\n38\n405\n\n\n12\n413\n46\n150\n\n\n12\n217\n59\n374\n\n\n12\n216\n60\n151\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.4.1 正态性检验部分”Tests for Normality”\n正态性检验部分包括 Shapiro-Wilk 检验以及基于经验分布函数的拟合优度检验:Kolmogorov-Smirnov 检验、Cramer-von Mises 检验、 Anderson-Darling 检验。\n样本量\n\n当 n≤2000 时,选用 Shapiro-Wilks 检验的检验统计量;\n当 n&gt;2000 时则选用 Kolmogorov-Smirnov 检验的检验统计量。\n\n总体参数 根据总体参数是否已知来选用不同的拟合优度检验及其对应的检验统计量\n\n正态分布总体均数和标准差都已知或都未知时上述三种基于经验分布函数的拟合优度检验都可选用;\n正态分布总体均数和标准差有一者未知时,选用 Cramer-von Mises 检验或 Anderson-Darling 检验。\n\n本例由于样本例数仅为 428,所以选用 Shapiro-Wilks 检验统计量 W=0.80784 所对应的 P= &lt; 0.001,说明该资料不服从正态分布。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html#几何均数的计算",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html#几何均数的计算",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "1.5 几何均数的计算",
+    "text": "1.5 几何均数的计算\nSAS 无法直接计算几何均数,必须通过 SAS 语句编写一段程序,用 means 过程或 univariate 过程间接计算出几何均数。\n例 4-3 69例类风湿关节炎(RA)患者血清 EBV-VCA-lgG 抗体滴度的分布结果如下,求其平均抗体滴度\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n抗体滴度\n1:10\n1:20\n1:40\n1:80\n1:160\n1:320\n1:640\n1:1280\n\n\n\n\n人数\n4\n3\n10\n10\n11\n15\n14\n2\n\n\n\n\n\n代码\n%%SAS\ndata prg4 _9;\n    input x f @@;\n    y = log10(x);\ndatalines;\n10 4 20 3 40 10 80 10 160 11 320 15 640 14 1280 2\nrun;\nproc means noprint;\n    var y;\n    freq f;\n    output out = b mean = logmean;\nrun;\ndata c;\n    set b;\n    g = 10**logmean;\nrun;\nproc print data = c;\n    var g;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\ng\n\n\n\n\n1\n150.641\n\n\n\n\n\n\n\n\n\n\n\n1.5.1 程序说明:\n\n第一步创建数据集 prg4_9;,它有三个变量 x、f 和 y, x 为抗体滴度的倒数, f 为某抗体滴度所对应的频数, y 是 x 的对数(以10为底)。\n第二步是用 means 过程计算y的描述性统计量,将计算所得到的均数输出到数据集 b 中用变量名 logmean 表示,则数据集 b 有一个变量 logmean,一个观测,其值为y的均数。\nnoprint 语句表示不在 Output 窗口显示 means 过程的结果;\n第三步新建数据集 c ,调用数据集 b 中的内容,新产生变量 g ,该变量的值为变量 logmean 的反对数。\n第四步将数据集 c 的结果显示在 Output 窗口内。\n\n得出这组数据的几何均数为：\\(1:150.641\\)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html#means-过程常用选项和语句",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html#means-过程常用选项和语句",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "1.6 means 过程常用选项和语句",
+    "text": "1.6 means 过程常用选项和语句\n运用 means 和 univariate 过程进行计量资料的统计描述时,可根据需求增加一些选项或语句,以满足用户的输入/输出要求。\n\n1.6.1 means 过程的基本格式\nproc means &lt;options&gt; &lt;统计量关键字&gt;;\n    by &lt;descending&gt; 变量名1 &lt;变量名 2&gt; &lt;notsorted&gt;;\n    class 变量名1 &lt;变量名 2&gt;...;\n    var 变量名 1 &lt;变量名 2&gt;...;\n    freq 变量名;\n    output out = 数据集名 统计量名(变量列表) = 新列名;\nrun;\n\n\n1.6.2 means 过程常用选项\n\nnoprint：不在 Output 窗口输出结果,但仍然将结果输出到数据集中;\nmaxdec=: 指定输出结果的小数点后有效位数，默认是 7 位，常用有 maxdec=2、maxdec=4 等;\nalpha=value: 用于指定均数置信区间的置信水平,默认值为 0.05.\nmissing: 将 class 语句所指定变量的缺失值作为合法的水平用以创建代表分组的组合,否则 class 语句所指定变量为缺失值的观测将会被排除在分析过程之外.\n\n\n\n1.6.3 means 过程的常用语句\n\nby: 用于指定分组变量,以便按照该变量将输人数据集分割为多个子数据集，从而在各子数据集内分别执行相应的分析过程，使用该语句前需使用 sort 过程对输人数据集进行排序。可以在 by 语句中设置 notsorted 或 descending 选项,前者表示数据未按照 by 语句所指定变量进行排列,后者是在输人数据集时先按照 by 语句所指定变量进行降序排列时使用.\nclass: 也用于指定分组变量,但其作用与 by 语句稍有不同。每一个 class 语句所指定变量的水平或多个 class 语句所指定变量的每一个水平组合均定义一个分组,有关全体样本和各分组内样本的相应统计量均会被计算并显示.",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-29-SAS-univariate.html#univariate-过程常用选项和语句",
+    "href": "Guide/SAS/25-05-29-SAS-univariate.html#univariate-过程常用选项和语句",
+    "title": "09-SAS 计量资料的单变量分析",
+    "section": "1.7 univariate 过程常用选项和语句",
+    "text": "1.7 univariate 过程常用选项和语句\n\n1.7.1 univariate 过程的基本格式\nproc univariate &lt;options&gt;;\n    by &lt;descending&gt; 变量名1 &lt;变量名 2&gt; &lt;notsorted&gt;;\n    class 变量名1 &lt;变量名 2&gt;...;\n    var 变量名 1 &lt;变量名 2&gt;...;\n    freq 变量名;\n    histogram 变量名1 &lt;变量名 2&gt;/&lt;选项&gt;;\n    probplot 变量名1 &lt;变量名 2&gt;/&lt;选项&gt;;\n    qqplot 变量名1 &lt;变量名 2&gt;/&lt;选项&gt;;\n    output out=数据集名称 &lt;选项&gt;;\nrun;\n\n\n1.7.2 univariate 过程常用选项\n\ndata = 输入资料文件名称 指明到底对那一个资料文件进行分析，若省略此选项则 SAS 会自动找出在本程序之前最后形成的资料文件并对它进行分析。\nnoprint 使用此选项分析结果将不在 result 里输出。\nplot 使用此选项 UNIVARIATE 过程将产生三种图形：茎叶图 (Stem-And-Leaf Plot) 、平行条状图 (Horizontal Bar Chart)、盒状图(Box Plot)、正态分布拟合图 (Normal Probability Plot)\ncibasic 选项 以正态分布为基础,为均数、标准差、方差等计算置信区间,该选项还可以设定次级选项设定置信区间类型及置信区间的置信水平。\ncipctldf 选项以非参数方法为各分位数计算置信区间,该选项的用法和功能与 cibasic 类似。\ncipctdfnormal 选项以正态分布假设为基础为各分位数计算置信区间,该选项的用法和功能与 cibasic 类似\n\n\n\n1.7.3 univariate 过程常用语句\n\nhistogram语句 该语句用于对指定的变量绘制高分辨率的直方图,同时还可以为直方图添加分布密度曲线。在一个 univariate 过程中可以同时调用多条 histogram 语句,同时还可以为 histogram 语句设定相应的变量及选项来对生成的图形进行相应的调整。\nprobplot 语句 该语句用于对指定变量绘制高分辨率的概率图。与 histogram 语句一样，该语句也可以指定对应的分析变量及控制选项来执行不同的控制功能。\nqqplot 语句 该语句用于对指定变量绘制高分辨率的 q-q 图,用于判断数据是否符合所指定的理论分布。该语句的用法与 probplot 语句类似,也可设定相应的变量及控制选项。\nppplot 语句 该语句用于对指定变量绘制高分辨率的 p-p 图,用于判断数据是否符合所指定的理论分布。该语句的用法与 probplot 语句类似,也可设定相应的变量及控制选项。\ncdfplot 语句 该语句用于对指定变量绘制高分辨率的经验分布函数图,用于判断数据是否符合所指定的理论分布。该语句的用法与 probplot 语句类似,也可设定相应的变量及控制选项。\n\n\n\n1.7.4 直方图示例\n\n\n代码\n%%SAS\nPROC UNIVARIATE DATA=SASHELP.FISH NOPRINT;\n    WHERE SPECIES='Bream';\n    VAR HEIGHT;\n    HISTOGRAM;\nRUN;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.7.5 正态拟合曲线\n加一个 NORMAL 选项则在直方图上面加了一根拟合后的正态分布图，并且还增加了拟合正太分布的参数估计、拟合优度、分位数，这里的括号中的意思可理解为均值（MU）和标准差（SIGMA）的值为原始数据本身的均值和标准差.\n\n\n代码\n%%SAS\nPROC UNIVARIATE DATA=SASHELP.FISH NOPRINT;\n    WHERE SPECIES='Bream';\n    VAR HEIGHT;\n    HISTOGRAM / NORMAL(MU=EST SIGMA=EST);\nRUN;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n“Height”的拟合正态分布\n\n\n\n\n\n\n\n“正态”分布的参数\n\n\n参数\n符号\n估计\n\n\n\n\n均值\nMu\n15.18321\n\n\n标准差\nSigma\n1.964707\n\n\n\n\n\n\n\n\n\n\n“正态”分布的拟合优度检验\n\n\n检验\n统计量\np 值\n\n\n\n\nKolmogorov-Smirnov\nD\n0.06967244\nPr &gt; D\n&gt;0.150\n\n\nCramer-von Mises\nW-Sq\n0.03567178\nPr &gt; W-Sq\n&gt;0.250\n\n\nAnderson-Darling\nA-Sq\n0.29075434\nPr &gt; A-Sq\n&gt;0.250\n\n\n\n\n\n\n\n\n\n\n“正态”分布的分位数\n\n\n百分比\n分位数\n\n\n观测\n估计\n\n\n\n\n1.0\n11.5200\n10.6126\n\n\n5.0\n12.3778\n11.9516\n\n\n10.0\n12.4800\n12.6653\n\n\n25.0\n13.9129\n13.8580\n\n\n50.0\n14.9544\n15.1832\n\n\n75.0\n16.3618\n16.5084\n\n\n90.0\n18.0840\n17.7011\n\n\n95.0\n18.7542\n18.4149\n\n\n99.0\n18.9570\n19.7538\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.7.6 实际数据核分布的密度曲线\n\n\n代码\n%%SAS\nPROC UNIVARIATE DATA=SASHELP.FISH NOPRINT;\n    WHERE SPECIES = 'Bream';\n    VAR HEIGHT;\n    HISTOGRAM / NORMAL(MU=EST SIGMA=EST) KERNEL;\nRUN;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n“Height”的拟合正态分布\n\n\n\n\n\n\n\n“正态”分布的参数\n\n\n参数\n符号\n估计\n\n\n\n\n均值\nMu\n15.18321\n\n\n标准差\nSigma\n1.964707\n\n\n\n\n\n\n\n\n\n\n“正态”分布的拟合优度检验\n\n\n检验\n统计量\np 值\n\n\n\n\nKolmogorov-Smirnov\nD\n0.06967244\nPr &gt; D\n&gt;0.150\n\n\nCramer-von Mises\nW-Sq\n0.03567178\nPr &gt; W-Sq\n&gt;0.250\n\n\nAnderson-Darling\nA-Sq\n0.29075434\nPr &gt; A-Sq\n&gt;0.250\n\n\n\n\n\n\n\n\n\n\n“正态”分布的分位数\n\n\n百分比\n分位数\n\n\n观测\n估计\n\n\n\n\n1.0\n11.5200\n10.6126\n\n\n5.0\n12.3778\n11.9516\n\n\n10.0\n12.4800\n12.6653\n\n\n25.0\n13.9129\n13.8580\n\n\n50.0\n14.9544\n15.1832\n\n\n75.0\n16.3618\n16.5084\n\n\n90.0\n18.0840\n17.7011\n\n\n95.0\n18.7542\n18.4149\n\n\n99.0\n18.9570\n19.7538\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n1.7.7 plot\nplot 选项，在结果中增加了分析变量数据的分布图、盒形图、以及概率图.\n\n\n代码\n%%SAS\nPROC UNIVARIATE DATA=SASHELP.FISH PLOT;\n    WHERE SPECIES = 'Bream';\n    VAR HEIGHT;\n    HISTOGRAM / NORMAL(MU=EST SIGMA=EST) KERNEL;\nRUN;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n变量:  Height\n\n\n\n\n\n\n\n矩\n\n\n\n\n数目\n35\n权重总和\n35\n\n\n均值\n15.1832114\n观测总和\n531.4124\n\n\n标准差\n1.96470673\n方差\n3.86007253\n\n\n偏度\n0.24174068\n峰度\n-0.5914026\n\n\n未校平方和\n8199.78929\n校正平方和\n131.242466\n\n\n变异系数\n12.9399945\n标准误差均值\n0.33209605\n\n\n\n\n\n\n\n\n\n\n基本统计测度\n\n\n位置\n变异性\n\n\n\n\n均值\n15.18321\n标准差\n1.96471\n\n\n中位数\n14.95440\n方差\n3.86007\n\n\n众数\n.\n极差\n7.43700\n\n\n \n \n四分位间距\n2.44890\n\n\n\n\n\n\n\n\n\n\n位置检验: Mu0=0\n\n\n检验\n统计量\np 值\n\n\n\n\nStudent t\nt\n45.71934\nPr &gt; |t|\n&lt;.0001\n\n\n符号\nM\n17.5\nPr &gt;= |M|\n&lt;.0001\n\n\n符号秩\nS\n315\nPr &gt;= |S|\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n分位数（定义 5）\n\n\n水平\n分位数\n\n\n\n\n100% 最大值\n18.9570\n\n\n99%\n18.9570\n\n\n95%\n18.7542\n\n\n90%\n18.0840\n\n\n75% Q3\n16.3618\n\n\n50% 中位数\n14.9544\n\n\n25% Q1\n13.9129\n\n\n10%\n12.4800\n\n\n5%\n12.3778\n\n\n1%\n11.5200\n\n\n0% 最小值\n11.5200\n\n\n\n\n\n\n\n\n\n\n极值观测\n\n\n最小值\n最大值\n\n\n值\n观测\n值\n观测\n\n\n\n\n11.5200\n1\n18.0369\n31\n\n\n12.3778\n3\n18.0840\n32\n\n\n12.4440\n5\n18.6354\n34\n\n\n12.4800\n2\n18.7542\n33\n\n\n12.6700\n8\n18.9570\n30\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n“Height”的拟合正态分布\n\n\n\n\n\n\n\n“正态”分布的参数\n\n\n参数\n符号\n估计\n\n\n\n\n均值\nMu\n15.18321\n\n\n标准差\nSigma\n1.964707\n\n\n\n\n\n\n\n\n\n\n“正态”分布的拟合优度检验\n\n\n检验\n统计量\np 值\n\n\n\n\nKolmogorov-Smirnov\nD\n0.06967244\nPr &gt; D\n&gt;0.150\n\n\nCramer-von Mises\nW-Sq\n0.03567178\nPr &gt; W-Sq\n&gt;0.250\n\n\nAnderson-Darling\nA-Sq\n0.29075434\nPr &gt; A-Sq\n&gt;0.250\n\n\n\n\n\n\n\n\n\n\n“正态”分布的分位数\n\n\n百分比\n分位数\n\n\n观测\n估计\n\n\n\n\n1.0\n11.5200\n10.6126\n\n\n5.0\n12.3778\n11.9516\n\n\n10.0\n12.4800\n12.6653\n\n\n25.0\n13.9129\n13.8580\n\n\n50.0\n14.9544\n15.1832\n\n\n75.0\n16.3618\n16.5084\n\n\n90.0\n18.0840\n17.7011\n\n\n95.0\n18.7542\n18.4149\n\n\n99.0\n18.9570\n19.7538",
     "crumbs": [
       "Home",
       "统计软件",
