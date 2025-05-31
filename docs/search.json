@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-30},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 30, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-31},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 31, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -5840,6 +5840,84 @@
       "统计软件",
       "SAS",
       "09-SAS 计量资料的单变量分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-31-two-sample-univariate.html",
+    "href": "Guide/SAS/25-05-31-two-sample-univariate.html",
+    "title": "10-SAS 两样本均数的比较分析",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "10-SAS 两样本均数的比较分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-31-two-sample-univariate.html#两样本均数的比较的概述",
+    "href": "Guide/SAS/25-05-31-two-sample-univariate.html#两样本均数的比较的概述",
+    "title": "10-SAS 两样本均数的比较分析",
+    "section": "1 两样本均数的比较的概述",
+    "text": "1 两样本均数的比较的概述\n两均数比较有三种情况: 样本均数和总体均数比较﹑配对设计资料两样本均数的比较和非配对设计资料的两样本均数比较。\n\n前两种比较除了可用 means 和 univariate 过程完成外,还能用 ttest 过程完成;\n而后者一般可用 ttest 过程完成.\n置信区间估计和假设检验在原理上无根本区别,只是考虑问题的角度不同,故也可以利用置信区间估计得到假设检验的结论.\n单一总体均数的置信区间估计可运用 means 过程完成.\n两独立样本总体均数的置信区间估计可运用 ttest 过程完成.\n\n\n1.1 什么是 t test\n用于评估来自至多两个样本的变量的均值间差异的统计学手段。变量必须是可量化的， 比如身高，产量，体重变化等等指标。\nt test反映了基于期望的显著性水平，你所观察到的差异是否 “显著”。t test使用t分布来评估期望变异程度。\n如果你的样本数量大于30，那么假定样本符合正态分布，也就是 z-test 的检验模型。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "10-SAS 两样本均数的比较分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-31-two-sample-univariate.html#单样本均数的-t-检验",
+    "href": "Guide/SAS/25-05-31-two-sample-univariate.html#单样本均数的-t-检验",
+    "title": "10-SAS 两样本均数的比较分析",
+    "section": "2 单样本均数的 t 检验",
+    "text": "2 单样本均数的 t 检验\n例 5-1 某医生测量 30 例从事铅作业男性工人的血红蛋白含量( g/L),具体数值如下:\n\n\n\n171\n79\n135\n78\n118\n175\n122\n105\n111\n140\n\n\n\n\n138\n132\n142\n140\n168\n113\n131\n145\n128\n124\n\n\n134\n116\n129\n155\n135\n134\n136\n113\n119\n132\n\n\n\n问这批工人的血红蛋白是否不同于正常成年男性平均数140g/L?\n\n\n代码\n%%SAS\ndata prg5_1;\n    input x @@;\ndatalines;\n171 79 135 78 118 175 122 105 111 140\n138 132 142 140 168 113 131 145 128 124\n134 116 129 155 135 134 136 113 119 132\n;\nrun;\nproc ttest h0=140;\nvar x;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\nSAS 系统 \n\n\nTTEST 过程\n \n变量:   x\n\n\n\n\n\n\n数目\n均值\n标准差\n标准误差\n最小值\n最大值\n\n\n\n\n30\n129.9\n21.9481\n4.0072\n78.0000\n175.0\n\n\n\n\n\n\n\n\n\n\n均值\n95% 置信均值\n标准差\n95% 置信限标准差\n\n\n\n\n129.9\n121.7\n138.1\n21.9481\n17.4796\n29.5052\n\n\n\n\n\n\n\n\n\n\n自由度\nt 值\nPr &gt; |t|\n\n\n\n\n29\n-2.51\n0.0178\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.1 结果说明\n\n第一部分结果显示了分析变量 x 的一些描述性统计量,包括例数(N),均数(Mean),标准差(Std Dev),标准误( Std Err),最小值( Minimum )和最大值(Maximum )。\n第二部分结果显示了分析变量 x 置信区间的情况,包括均数(Mean)及其95%置信区间(95%CL Mean)、标准差(Std Dev)及其置信区间(95%CL Std Dev)。\n第三部分结果显示了 t 检验的结果,内容包括自由度(DF)检验统计量t值(t Value)和该值所对应的概率值(Pr&gt; |t|)。\n本例 t 检验的检验统计量等于 -2.51 ,所对应的P值为 0.0178&lt;0.05 ,说明该样本均数和总体均数的差异有统计学意义,即从事铅工作的男性工人血红蛋白的含量要低于正常成人。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "10-SAS 两样本均数的比较分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-31-two-sample-univariate.html#配对资料两样本均数比较的t检验",
+    "href": "Guide/SAS/25-05-31-two-sample-univariate.html#配对资料两样本均数比较的t检验",
+    "title": "10-SAS 两样本均数的比较分析",
+    "section": "3 配对资料两样本均数比较的t检验",
+    "text": "3 配对资料两样本均数比较的t检验\n当配对资料原始变量值是已知的,可用 means、univariate 和 ttest 过程完成t检验。\n例5-2 为比较两种方法对乳酸饮料中脂肪含量测定结果是否不同,某人随机抽取了10份乳酸饮料制品,分别用哥特里-罗紫法和脂肪酸水解法测定,其结果见表5-1。问两法测定结果是否不同?\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n方法\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n\n\n\n\n哥特里-罗紫法\n0.840\n0.591\n0.674\n0.632\n0.687\n0.978\n0.750\n0.730\n1.200\n0.870\n\n\n脂肪酸水解法\n0.580\n0.509\n0.500\n0.316\n0.337\n0.517\n0.454\n0.512\n0.997\n0.506\n\n\n\n\n3.1 means 过程\n\n\n代码\n%%SAS\n/* programme 5-2*/\ndata prg5_2;\n    input x1 x2 @@;\n    d = x1 - x2;\ndatalines;\n0.840 0.580 0.591 0.509 0.674 0.500 0.632 0.316 0.687 0.337 \n0.978 0.517 0.750 0.454 0.730 0.512 1.200 0.997 0.870 0.506\n;\nrun;\nproc means n mean std stderr t prt;\n    var d;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nMEANS PROCEDURE\n\n\n\n\n\n\n分析变量: d\n\n\n数目\n均值\n标准差\n标准误差\nt 值\nPr &gt; |t|\n\n\n\n\n10\n0.2724000\n0.1086812\n0.0343680\n7.93\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n\n\n3.2 univariate 过程\n\n\n代码\n%%SAS\n/* programme 5-3*/\nproc univariate data = prg5_2;\n    var d;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n变量:  d\n\n\n\n\n\n\n\n矩\n\n\n\n\n数目\n10\n权重总和\n10\n\n\n均值\n0.2724\n观测总和\n2.724\n\n\n标准差\n0.10868119\n方差\n0.0118116\n\n\n偏度\n-0.0337503\n峰度\n0.06565577\n\n\n未校平方和\n0.848322\n校正平方和\n0.1063044\n\n\n变异系数\n39.8976451\n标准误差均值\n0.03436801\n\n\n\n\n\n\n\n\n\n\n基本统计测度\n\n\n位置\n变异性\n\n\n\n\n均值\n0.272400\n标准差\n0.10868\n\n\n中位数\n0.278000\n方差\n0.01181\n\n\n众数\n.\n极差\n0.37900\n\n\n \n \n四分位间距\n0.14700\n\n\n\n\n\n\n\n\n\n\n位置检验: Mu0=0\n\n\n检验\n统计量\np 值\n\n\n\n\nStudent t\nt\n7.925976\nPr &gt; |t|\n&lt;.0001\n\n\n符号\nM\n5\nPr &gt;= |M|\n0.0020\n\n\n符号秩\nS\n27.5\nPr &gt;= |S|\n0.0020\n\n\n\n\n\n\n\n\n\n\n分位数（定义 5）\n\n\n水平\n分位数\n\n\n\n\n100% 最大值\n0.4610\n\n\n99%\n0.4610\n\n\n95%\n0.4610\n\n\n90%\n0.4125\n\n\n75% Q3\n0.3500\n\n\n50% 中位数\n0.2780\n\n\n25% Q1\n0.2030\n\n\n10%\n0.1280\n\n\n5%\n0.0820\n\n\n1%\n0.0820\n\n\n0% 最小值\n0.0820\n\n\n\n\n\n\n\n\n\n\n极值观测\n\n\n最小值\n最大值\n\n\n值\n观测\n值\n观测\n\n\n\n\n0.082\n2\n0.296\n7\n\n\n0.174\n3\n0.316\n4\n\n\n0.203\n9\n0.350\n5\n\n\n0.218\n8\n0.364\n10\n\n\n0.260\n1\n0.461\n6\n\n\n\n\n\n\n\n\n\n\n\n\n\n3.3 ttest 过程\n\n\n代码\n%%SAS\n/* programme 5-4*/\nproc ttest data = prg5_2;\n    var d;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\nSAS 系统 \n\n\nTTEST 过程\n \n变量:   d\n\n\n\n\n\n\n数目\n均值\n标准差\n标准误差\n最小值\n最大值\n\n\n\n\n10\n0.2724\n0.1087\n0.0344\n0.0820\n0.4610\n\n\n\n\n\n\n\n\n\n\n均值\n95% 置信均值\n标准差\n95% 置信限标准差\n\n\n\n\n0.2724\n0.1947\n0.3501\n0.1087\n0.0748\n0.1984\n\n\n\n\n\n\n\n\n\n\n自由度\nt 值\nPr &gt; |t|\n\n\n\n\n9\n7.93\n&lt;.0001",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "10-SAS 两样本均数的比较分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-31-two-sample-univariate.html#两样本均数比较的-t-检验",
+    "href": "Guide/SAS/25-05-31-two-sample-univariate.html#两样本均数比较的-t-检验",
+    "title": "10-SAS 两样本均数的比较分析",
+    "section": "4 两样本均数比较的 t 检验",
+    "text": "4 两样本均数比较的 t 检验\n两样本均数比较的t检验—般用ttest过程。\n例 5-3 欲考察牙周炎患者和正常人血清中肿瘤坏死因子-α(TNF-a,U/ml)平均含量是否不同。研究者随机选取了牙周炎患者和正常人各12例,所测定TNF-α的含量见表5-2。问牙周炎患者和正常人间血清中TNF-α平均含量是否不同。\n\n\n\n分组\n1\n2\n3\n4\n5\n6\n\n\n\n\n牙周炎患者 x₁\n9.71\n10.58\n11.00\n7.10\n7.55\n8.65\n\n\n（n₁ = 12）\n8.87\n9.02\n9.88\n8.68\n10.52\n11.02\n\n\n正常人 x₂\n6.52\n6.80\n7.12\n5.50\n4.89\n7.03\n\n\n（n₂ = 12）\n8.00\n4.55\n5.67\n6.77\n6.89\n7.05\n\n\n\n\n\n代码\n%%SAS\n/* programme 5-5*/\ndata prg5_3;\n    input x num @@;\ndatalines;\n9.71 1 10.58 1 11.00 1 7.10 1 7.55 1 8.65 1 \n8.87 1 9.02 1 9.88 1 8.68 1 10.52 1 11.02 1 \n6.52 2 6.80 2 7.12 2 5.50 2 4.89 2 7.03 2 \n8.00 2 4.55 2 5.67 2 6.77 2 6.89 2 7.05 2\n;\nrun;\nproc ttest;\n    var x;\n    class num;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\nSAS 系统 \n\n\nTTEST 过程\n \n变量:   x\n\n\n\n\n\n\nnum\n方法\n数目\n均值\n标准差\n标准误差\n最小值\n最大值\n\n\n\n\n1\n \n12\n9.3817\n1.2924\n0.3731\n7.1000\n11.0200\n\n\n2\n \n12\n6.3992\n1.0222\n0.2951\n4.5500\n8.0000\n\n\n差 (1-2)\n汇总\n \n2.9825\n1.1652\n0.4757\n \n \n\n\n差 (1-2)\nSatterthwaite\n \n2.9825\n \n0.4757\n \n \n\n\n\n\n\n\n\n\n\n\nnum\n方法\n均值\n95% 置信均值\n标准差\n95% 置信限标准差\n\n\n\n\n1\n \n9.3817\n8.5605\n10.2028\n1.2924\n0.9155\n2.1943\n\n\n2\n \n6.3992\n5.7497\n7.0487\n1.0222\n0.7241\n1.7356\n\n\n差 (1-2)\n汇总\n2.9825\n1.9960\n3.9690\n1.1652\n0.9011\n1.6491\n\n\n差 (1-2)\nSatterthwaite\n2.9825\n1.9930\n3.9720\n \n \n \n\n\n\n\n\n\n\n\n\n\n方法\n方差\n自由度\nt 值\nPr &gt; |t|\n\n\n\n\n汇总\n等于\n22\n6.27\n&lt;.0001\n\n\nSatterthwaite\n不等于\n20.892\n6.27\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n方差齐性\n\n\n方法\n分子自由度\n分母自由度\nF 值\nPr &gt; F\n\n\n\n\n折叠的 F\n11\n11\n1.60\n0.4491\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4.1 结果说明\n\n第一部分是两个组的一些简单描述性统计量,包括每组的例数、均数、标准差、标准误、最小值和最大值,以及两组均数差值的均数、标准差和标准误。\n第二部分是两组的均数和标准差及其置信区间,还分别用两种方法( Pooled 法和 Satterthwaite 法)计算的两组均数差值及其95%置信区间，以及用Pooled 方法计算两组标准差的差值及其95%置信区间。\n第三部分是 t 检验的结果,该结果包括方差齐性和方差不齐两种情况下的结果。由于本例两组方差齐性(见第四部分说明),故在考察t检验的结果时,应选择方差齐性条件下( method 为 Pooled)的检验结果,本例为检验统计量 t=6.27,所对应的 P&lt;0.000 1 ,可以认为两样本均数的差异有统计学意义,可认为牙周炎患者与正常人血清中TNF-α平均含量不同。\n第四部分方差齐性检验的结果。本例方差齐性检验的检验统计量 F=1.60 ,其对应的 P=0.449 1 ,可以认为两方差是齐性的。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "10-SAS 两样本均数的比较分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-05-31-two-sample-univariate.html#ttest-过程常用选项和语句",
+    "href": "Guide/SAS/25-05-31-two-sample-univariate.html#ttest-过程常用选项和语句",
+    "title": "10-SAS 两样本均数的比较分析",
+    "section": "5 ttest 过程常用选项和语句",
+    "text": "5 ttest 过程常用选项和语句\n运用 ttest 过程进行 t 检验时,可根据需求增加一些选项或语句,使得到的结果更加符合用户的要求。\n\n5.1 ttest过程的基本格式\nproc ttest &lt;选项&gt;;\n    BOOTSTRAP &lt;/ options&gt;;\n    class 变量名;\n    by 变量名1 &lt;变量名2&gt;...;\n    var 变量名1 &lt;变量名2&gt;...&lt;选项&gt;;\n    paired 变量名 &lt;变量名2&gt;...;\n    freq 变量名;\n    weight 变量名;\nrun;\n\n\n5.2 ttest过程的常用选项\n\nalpha=value 选项将设置一个为 0~1 之间的任意值作为概率值( value ),也可用于指定统计量置信区间的置信水平,默认值为0.05。当此选项设置为0~1区间之外的值时,SAS将提示出错。\nCI = type 指定标准差的置信区间的类型，EQUAL（默认）为 equal-tailed 的置信区间，UMPU 为基于一致最优无偏检验的置信区间，NONE 不输出置信区间；\nSIDES = type 指定单侧、双侧检验，默认 type=2 为双侧检验，L 为左侧检验，U 右侧检验；\ncochran 选项用于指定在方差不齐情况下进行近似 t 检验时,使用 Cochran-Cox 近似法计算近似 t 统计量对应的概率值。\n\n\n\n5.3 ttest过程的常用语句\n\nclass 语句用于指定分组变量,该变量的取值将决定样本的分组情况。该语句后面只能跟一个变量名,且该变量必须是分类变量。\nby 语句用于按照某个变量的不同取值,分别进行 ttest 过程分析。\npaired 语句用于指定配对 t 检验中要进行比较的变量对。组成变量对的变量或变量列表之间可用 * 或 : 连接。仅在配对 t 检验时使用,不能和 class 语句同时使用,数据格式为将要检验的变量对分成两列(即设置为两个变量)。对于每一个变量对, ttest 过程用 * 或 : 左侧的变量减去右侧的变量,将所得的差值当做新的变量,执行单组样本均数比较的 t 检验。\nvar 语句用于指定要进行 t 检验的变量,该语句后面可以跟一个或多个变量名,且这些变量必须是连续变量。\nfreq 语句用于指定频数变量,该变量的值将作为每个观测值的权重,即每个观测值的频数。该语句后面只能跟一个变量名,且该变量必须是整数型。\nweight 语句用于指定权重变量,该变量的值将作为每个观测值的权重,即每个观测值的权重。该语句后面只能跟一个变量名,且该变量必须是连续型。\n\n\n\n5.4 ttest 绘图\nPROC TTEST DATA = DATASET PLOTS = (绘图类型);\n可选的绘图类型：\n\nALL 或 NONE: 绘制全部图形或不绘制任何图形；\nBOXPLOT: 箱型图；\nHISTOGRAM: 直方图（包括正态分布、核密度线）；\nINTERVALPLOT: 均值的置信区间的图形；\nQQPLOT: QQ图；\nSUMMARYPLOT: 在一张图中绘制直方图和盒形图；\nAGREEMENTPLOT: AGREEMENT图；\nPROFILESPLOT: PROFILESPLOT图.\n\n注意：TTEST 过程步都默认绘制 QQ 图和 SUMMARYPLOT 图，配对 T 检验还默认绘制 AGREEMENTPLOT 图和 PROFILESPLOT 图。 另外，指定绘制图形类型之后，那些默认图仍然会绘制，除非加上( ONLY ):\nPROC TTEST data = 数据集 PLOTS(ONLY) = (绘图类型);\nRUN;\n\n\n代码\n%%SAS\n/*test programme only plot*/\nproc ttest data = prg5_2 plots(only) = boxplot;\n    var d;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\nSAS 系统 \n\n\nTTEST 过程\n \n变量:   d\n\n\n\n\n\n\n数目\n均值\n标准差\n标准误差\n最小值\n最大值\n\n\n\n\n10\n0.2724\n0.1087\n0.0344\n0.0820\n0.4610\n\n\n\n\n\n\n\n\n\n\n均值\n95% 置信均值\n标准差\n95% 置信限标准差\n\n\n\n\n0.2724\n0.1947\n0.3501\n0.1087\n0.0748\n0.1984\n\n\n\n\n\n\n\n\n\n\n自由度\nt 值\nPr &gt; |t|\n\n\n\n\n9\n7.93\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n代码\n%%SAS\n/*test programme multiple plots*/\nPROC TTEST data = prg5_2 PLOTS = (BOXPLOT HISTOGRAM QQPLOT);\n   var d;\nRUN;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\nSAS 系统 \n\n\nTTEST 过程\n \n变量:   d\n\n\n\n\n\n\n数目\n均值\n标准差\n标准误差\n最小值\n最大值\n\n\n\n\n10\n0.2724\n0.1087\n0.0344\n0.0820\n0.4610\n\n\n\n\n\n\n\n\n\n\n均值\n95% 置信均值\n标准差\n95% 置信限标准差\n\n\n\n\n0.2724\n0.1947\n0.3501\n0.1087\n0.0748\n0.1984\n\n\n\n\n\n\n\n\n\n\n自由度\nt 值\nPr &gt; |t|\n\n\n\n\n9\n7.93\n&lt;.0001",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "10-SAS 两样本均数的比较分析"
     ]
   }
 ]
