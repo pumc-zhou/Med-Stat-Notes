@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-05-31T11:31:59.668Z</lastmod>
+    <lastmod>2025-06-01T07:44:33.202Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -298,7 +298,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-22-SAS-Base.html</loc>
-    <lastmod>2025-05-31T10:17:08.789Z</lastmod>
+    <lastmod>2025-06-01T06:01:36.312Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-24-SAS-program.html</loc>
@@ -331,5 +331,9 @@
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-31-two-sample-univariate.html</loc>
     <lastmod>2025-05-31T11:31:45.682Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/SAS/25-06-01-multi-sample-ANOVA.html</loc>
+    <lastmod>2025-06-01T07:44:28.773Z</lastmod>
   </url>
 </urlset>

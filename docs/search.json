@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-05-31},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” May 31, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-01},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 1, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -5918,6 +5918,84 @@
       "统计软件",
       "SAS",
       "10-SAS 两样本均数的比较分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-01-multi-sample-ANOVA.html",
+    "href": "Guide/SAS/25-06-01-multi-sample-ANOVA.html",
+    "title": "11-SAS 多个样本均数比较的方差分析",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "11-SAS 多个样本均数比较的方差分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#方差分析概述",
+    "href": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#方差分析概述",
+    "title": "11-SAS 多个样本均数比较的方差分析",
+    "section": "1 方差分析概述",
+    "text": "1 方差分析概述\n方差分析可用于多个样本均数的比较,当然也可以用于两个样本均数的比较;还可以分析因素间的交互作用和进行回归方程的线性假设检验等。\n方差分析能够分析的实验设计类型包括完全随机设计、随机区组设计、拉丁方设计、析因设计、正交设计、系统设计、裂区设计和重复测量设计等。\nSAS系统提供的有关方差分析的过程有 anova、glm、lattice、nested、genmod、mixed 和 varcomp 等,其中以 anova 和 glm 过程最为常用。\n相对于 anova 过程, glm 过程的适用范围更广,适用于平衡和不平衡的方差分析。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "11-SAS 多个样本均数比较的方差分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#anova-过程做完全随机设计资料的方差分析",
+    "href": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#anova-过程做完全随机设计资料的方差分析",
+    "title": "11-SAS 多个样本均数比较的方差分析",
+    "section": "2 anova 过程做完全随机设计资料的方差分析",
+    "text": "2 anova 过程做完全随机设计资料的方差分析\nANOVA过程步主要处理均衡数据（分类变量的每个水平的观察数是相等），该过程考虑到均衡设计的特殊构造，处理起来速度更快更省内存，也可以处理拉丁方设计、若干不完全的均衡区组设计数据等。\n若试验设计不均衡，也不是前面几种实验设计数据，则应该使用 GLM 过程。\n\n2.1 基本语法\nPROC ANOVA data = 数据集 &lt;可选项&gt; ;\n    CLASS 分类变量列表;\n    MODEL 因变量 = 效应变量列表 &lt;/可选项&gt;;\n    &lt;MEANS 效应变量列表 &lt;/可选项&gt; ;&gt;\n    &lt;TEST &lt;H=效应变量列表&gt; E=效应变量列表;&gt;\nrun;\n\n\n2.2 说明\n\nCLASS 语句是必不可少的，必须放在 MODEL 语句之前，用来指定分类、区组变量（单因素方差分析只有一个变量）；\nMODEL 语句也是必不可少的，该语句用来规定因变量和自变量效应（单因素方差分析的自变量就是分类变量）。若没有规定自变量的效应，则只拟合截距，假设检验为因变量的均值是否为0. Model语句的主要形式有4种：\n\n主效应模型: model y=a b c;\n含有交叉因素的模型: model y=a b c a*b a*c b*c a*b*c;\n嵌套模型: model y=a b c(a b);\n包含嵌套、交叉和主效应的模型: model y=a b(a) c(a) b*c(a);\n\nMEANS 语句必须出现在 MODEL 语句之后，用来计算在效应变量所对应的因变量均值，但这些均值没有针对模型中的效应进行修正。若要计算修正的均值需要用GLM过程步的LSMEANS语句；\nMEANS 语句的可选项主要有两个内容，一是选择多重比较的检验方法，二是设定这些检验的参数（只能用于主效应）；\n\nbon: 对所有主效应均值之差进行 Bonferroni 的 t 检验；\nduncan: 对所有主效应均值进行 Duncan 的多重极差检验；\nsmm|gt2: 当样本量不等时，基于学生化最大模和 Sidak 不相关 t 不等式，等到 Hochberg 的 GT2 方法，对主效应均值进行两两对比检验；\nsnk: 对所有主效应均值进行 Student-Newman-Keuls 的多重极差检验；\nt|lsd: 对所有主效应均值进行两两 t 检验，它相当于在单元观察数相等时 Fisher 的最小显著差检验；\ntukey: 对所有主效应均值进行 Tukey 的学生化极差检验；\nwaller: 对所有主效应均值进行 Waller-Duncan 的 k 比率检验；\nalpha=p : 设置显著水平；\nclm: 对变量的每个水平的均值按置信区间形式输出；\ne=效应变量: 指定在多重对比检验中所使用的误差均方。默认使用残差均方。指定的效应变量必须是在model语句中出现过的；\nkratio=值: 给出 Waller-Duncan 检验的类型1/类型2的误差限制比例。Kratio 的合理值为50、100（默认）、500，大约相当于两水平时 alpha 值为0.1、0.05、0.01.\nhovtest: 要求输出组间方差齐性的 Levene 检验；\n\nTEST 语句指定效应变量（H=）和误差变量（E=）做 F 检验，误差变量必须要指定且只能指定1个效应变量。默认是用残差均方作为误差项对所有平方和（SS）计算F值。\n默认情况下，结果中包括盒形图、均值图和最小二乘均值差图。也可以指定包括可在面板中显示或作为单个图显示的任何诊断图。也可指定包含于这些图中的最大点数。\n\n\n\n2.3 示例：按汽车类型划分的 MPG_Highway 均值差值的检验\n代码说明：\n\nCLASS 语句：指定分类变量 Type，该变量有 6 个水平（SUV、轿车、跑车等）\nMODEL 语句：\n\n分析变量为 MPG_Highway（公路油耗）\n效应变量为 Type（汽车类型）\n\nMEANS 语句：计算不同 Type 水平下 MPG_Highway 的均值\n\n/ SNK 选项指定使用 SNK 方法进行多重比较\nALPHA=0.05 设置显著性水平\n\n\n\n\n代码\n%%SAS\nPROC ANOVA data = sashelp.cars;\n    CLASS Type;\n    MODEL MPG_Highway = Type;\n    MEANS Type / SNK ALPHA=0.05;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\n\nSAS 系统 \n\n\nANOVA 过程\n\n\n\n\n\n\n\n分类水平信息\n\n\n分类\n水平\n值\n\n\n\n\nType\n6\nHybrid SUV Sedan Sports Truck Wagon\n\n\n\n\n\n\n\n\n\n\n读取的观测数\n428\n\n\n使用的观测数\n428\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nANOVA 过程\n \n因变量: MPG_Highway   MPG (Highway)\n\n\n\n\n\n\n\n\n源\n自由度\n平方和\n均方\nF 值\nPr &gt; F\n\n\n\n\n模型\n5\n6743.47900\n1348.69580\n77.64\n&lt;.0001\n\n\n误差\n422\n7331.03268\n17.37212\n \n \n\n\n校正合计\n427\n14074.51168\n \n \n \n\n\n\n\n\n\n\n\n\n\nR 方\n变异系数\n均方根误差\nMPG_Highway 均值\n\n\n\n\n0.479127\n15.52701\n4.167987\n26.84346\n\n\n\n\n\n\n\n\n\n\n源\n自由度\nAnova SS\n均方\nF 值\nPr &gt; F\n\n\n\n\nType\n5\n6743.478998\n1348.695800\n77.64\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nANOVA 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nANOVA 过程\n \nStudent-Newman-Keuls Test for MPG_Highway\n\n\n注意:This test controls the Type I experimentwise error rate under the complete null hypothesis but not under partial null hypotheses.\n\n\n\n\n\n\nAlpha\n0.05\n\n\nError Degrees of Freedom\n422\n\n\nError Mean Square\n17.37212\n\n\nHarmonic Mean of Cell Sizes\n13.35634\n\n\n\n\n\n\n注意:Cell sizes are not equal.\n\n\n\n\n\n\nNumber of Means\n2\n3\n4\n5\n6\n\n\n\n\nCritical Range\n3.1702475\n3.7934753\n4.1600539\n4.4186173\n4.6174103",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "11-SAS 多个样本均数比较的方差分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#glm-过程做完全随机设计资料的方差分析",
+    "href": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#glm-过程做完全随机设计资料的方差分析",
+    "title": "11-SAS 多个样本均数比较的方差分析",
+    "section": "3 glm 过程做完全随机设计资料的方差分析",
+    "text": "3 glm 过程做完全随机设计资料的方差分析\nGLM 过程步是一个通用的线性模型过程步，适用于平衡和不平衡的方差分析。它可以处理多种实验设计，包括完全随机设计、随机区组设计、拉丁方设计、析因设计等。\n\n3.1 基本语法\nPROC GLM data = 数据集 &lt;可选项&gt; ;\n    CLASS 分类变量列表;\n    MODEL 因变量 = 效应变量列表 &lt;/可选项&gt;;\n    &lt;MEANS 效应变量列表 &lt;/可选项&gt; ;&gt;\n    &lt;LSMEANS 效应变量列表 &lt;/可选项&gt; ;&gt;\n    &lt;TEST &lt;H=效应变量列表&gt; E=效应变量列表;&gt;\n    &lt;OUTPUT OUT=输出数据集 &lt;可选项&gt; ;&gt;\nrun;\n\nclass 语句是定义处理因素中不同水平的分组情况,称为分组变量,本例为变量 Type。\nmodel 语句用来指定分析变量(效应)和分组变量(自变量),两者用 = 相连,效应在 = 左侧,本例为变量 MPG_Highway,自变量在 = 右侧,本例为变量 Type。\nmeans 语句表示需要计算处理因素不同水平组中分析变量的均数和标准差,后面可加选项,表示对均数进行多重两两比较,并确定两两比较的方法。\nSAS 系统提供了多种两两比较的方法可供选择,如 SNK(Student-Newman-Keuls) 检验、最小显著差异 (least significant difference,LSD) t 检验、Scheffe 检验、Dunnett 法、Tukey 检验、Duncan 检验等,本例选择 LSD t 检验。\n\n\n\n代码\n%%SAS\nPROC GLM data = sashelp.cars;\n    CLASS Type;\n    MODEL MPG_Highway = Type;\n    MEANS Type;\n    MEANS Type / LSD ALPHA=0.05;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n分类水平信息\n\n\n分类\n水平\n值\n\n\n\n\nType\n6\nHybrid SUV Sedan Sports Truck Wagon\n\n\n\n\n\n\n\n\n\n\n读取的观测数\n428\n\n\n使用的观测数\n428\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n \n因变量: MPG_Highway   MPG (Highway)\n\n\n\n\n\n\n\n\n源\n自由度\n平方和\n均方\nF 值\nPr &gt; F\n\n\n\n\n模型\n5\n6743.47900\n1348.69580\n77.64\n&lt;.0001\n\n\n误差\n422\n7331.03268\n17.37212\n \n \n\n\n校正合计\n427\n14074.51168\n \n \n \n\n\n\n\n\n\n\n\n\n\nR 方\n变异系数\n均方根误差\nMPG_Highway 均值\n\n\n\n\n0.479127\n15.52701\n4.167987\n26.84346\n\n\n\n\n\n\n\n\n\n\n源\n自由度\nI 型 SS\n均方\nF 值\nPr &gt; F\n\n\n\n\nType\n5\n6743.478998\n1348.695800\n77.64\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n源\n自由度\nIII 型 SS\n均方\nF 值\nPr &gt; F\n\n\n\n\nType\n5\n6743.478998\n1348.695800\n77.64\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n“Type”的\n水平\n数目\nMPG_Highway\n\n\n均值\n标准差\n\n\n\n\nHybrid\n3\n56.0000000\n8.66025404\n\n\nSUV\n60\n20.5000000\n3.33700363\n\n\nSedan\n262\n28.6297710\n4.46745909\n\n\nSports\n49\n25.4897959\n2.90202838\n\n\nTruck\n24\n21.0000000\n3.87859230\n\n\nWagon\n30\n27.9000000\n4.41275580\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n \nt Tests (LSD) for MPG_Highway\n\n\n注意:This test controls the Type I comparisonwise error rate, not the experimentwise error rate.\n\n\n\n\n\n\nAlpha\n0.05\n\n\nError Degrees of Freedom\n422\n\n\nError Mean Square\n17.37212\n\n\nCritical Value of t\n1.96560\n\n\n\n\n\n\n\n\n\n\nComparisons significant at the 0.05 level are indicated by ***.\n\n\nType\n比较\n均值\n间\n差值\n95% 置信限\n \n\n\n\n\nHybrid - Sedan\n27.3702\n22.6132\n32.1272\n***\n\n\nHybrid - Wagon\n28.1000\n23.1391\n33.0609\n***\n\n\nHybrid - Sports\n30.5102\n25.6376\n35.3828\n***\n\n\nHybrid - Truck\n35.0000\n29.9831\n40.0169\n***\n\n\nHybrid - SUV\n35.5000\n30.6532\n40.3468\n***\n\n\nSedan - Hybrid\n-27.3702\n-32.1272\n-22.6132\n***\n\n\nSedan - Wagon\n0.7298\n-0.8493\n2.3088\n \n\n\nSedan - Sports\n3.1400\n1.8648\n4.4151\n***\n\n\nSedan - Truck\n7.6298\n5.8825\n9.3770\n***\n\n\nSedan - SUV\n8.1298\n6.9572\n9.3023\n***\n\n\nWagon - Hybrid\n-28.1000\n-33.0609\n-23.1391\n***\n\n\nWagon - Sedan\n-0.7298\n-2.3088\n0.8493\n \n\n\nWagon - Sports\n2.4102\n0.5110\n4.3094\n***\n\n\nWagon - Truck\n6.9000\n4.6564\n9.1436\n***\n\n\nWagon - SUV\n7.4000\n5.5681\n9.2319\n***\n\n\nSports - Hybrid\n-30.5102\n-35.3828\n-25.6376\n***\n\n\nSports - Sedan\n-3.1400\n-4.4151\n-1.8648\n***\n\n\nSports - Wagon\n-2.4102\n-4.3094\n-0.5110\n***\n\n\nSports - Truck\n4.4898\n2.4486\n6.5310\n***\n\n\nSports - SUV\n4.9898\n3.4123\n6.5673\n***\n\n\nTruck - Hybrid\n-35.0000\n-40.0169\n-29.9831\n***\n\n\nTruck - Sedan\n-7.6298\n-9.3770\n-5.8825\n***\n\n\nTruck - Wagon\n-6.9000\n-9.1436\n-4.6564\n***\n\n\nTruck - Sports\n-4.4898\n-6.5310\n-2.4486\n***\n\n\nTruck - SUV\n0.5000\n-1.4787\n2.4787\n \n\n\nSUV - Hybrid\n-35.5000\n-40.3468\n-30.6532\n***\n\n\nSUV - Sedan\n-8.1298\n-9.3023\n-6.9572\n***\n\n\nSUV - Wagon\n-7.4000\n-9.2319\n-5.5681\n***\n\n\nSUV - Sports\n-4.9898\n-6.5673\n-3.4123\n***\n\n\nSUV - Truck\n-0.5000\n-2.4787\n1.4787\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n3.2 两两比较采用 Dunnett 法\n如果两两比较采用的是 Dunnett 检验,将程序中 MEANS Type / LSD ALPHA=0.05; 部分中的的 LSD 改为 Dunnett 即可.\nSAS 默认分组变量中的变量值最小的组为对照组。如果在 Dunnett 后面加条件,可以将任何一组定义为对照组。这里选择 Sedan 为对照组,语句为: means c/dunnett ('Sedan');,上述 dunnett 语句后面的括号内为作为对照组的变量值,该变量值需用单引号表示。\n\n\n代码\n%%SAS\nPROC GLM data = sashelp.cars;\n    CLASS Type;\n    MODEL MPG_Highway = Type;\n    MEANS Type;\n    MEANS Type / dunnett ('Sedan') ALPHA=0.05;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n分类水平信息\n\n\n分类\n水平\n值\n\n\n\n\nType\n6\nHybrid SUV Sedan Sports Truck Wagon\n\n\n\n\n\n\n\n\n\n\n读取的观测数\n428\n\n\n使用的观测数\n428\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n \n因变量: MPG_Highway   MPG (Highway)\n\n\n\n\n\n\n\n\n源\n自由度\n平方和\n均方\nF 值\nPr &gt; F\n\n\n\n\n模型\n5\n6743.47900\n1348.69580\n77.64\n&lt;.0001\n\n\n误差\n422\n7331.03268\n17.37212\n \n \n\n\n校正合计\n427\n14074.51168\n \n \n \n\n\n\n\n\n\n\n\n\n\nR 方\n变异系数\n均方根误差\nMPG_Highway 均值\n\n\n\n\n0.479127\n15.52701\n4.167987\n26.84346\n\n\n\n\n\n\n\n\n\n\n源\n自由度\nI 型 SS\n均方\nF 值\nPr &gt; F\n\n\n\n\nType\n5\n6743.478998\n1348.695800\n77.64\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n源\n自由度\nIII 型 SS\n均方\nF 值\nPr &gt; F\n\n\n\n\nType\n5\n6743.478998\n1348.695800\n77.64\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n“Type”的\n水平\n数目\nMPG_Highway\n\n\n均值\n标准差\n\n\n\n\nHybrid\n3\n56.0000000\n8.66025404\n\n\nSUV\n60\n20.5000000\n3.33700363\n\n\nSedan\n262\n28.6297710\n4.46745909\n\n\nSports\n49\n25.4897959\n2.90202838\n\n\nTruck\n24\n21.0000000\n3.87859230\n\n\nWagon\n30\n27.9000000\n4.41275580\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n \nDunnett's t Tests for MPG_Highway\n\n\n注意:This test controls the Type I experimentwise error for comparisons of all treatments against a control.\n\n\n\n\n\n\nAlpha\n0.05\n\n\nError Degrees of Freedom\n422\n\n\nError Mean Square\n17.37212\n\n\nCritical Value of Dunnett's t\n2.57769\n\n\n\n\n\n\n\n\n\n\nComparisons significant at the 0.05 level are indicated by ***.\n\n\nType\n比较\n均值\n间\n差值\nSimultaneous 95% 置信限\n \n\n\n\n\nHybrid - Sedan\n27.3702\n21.1319\n33.6086\n***\n\n\nWagon - Sedan\n-0.7298\n-2.8006\n1.3410\n \n\n\nSports - Sedan\n-3.1400\n-4.8122\n-1.4678\n***\n\n\nTruck - Sedan\n-7.6298\n-9.9211\n-5.3385\n***\n\n\nSUV - Sedan\n-8.1298\n-9.6674\n-6.5921\n***",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "11-SAS 多个样本均数比较的方差分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#随机区组设计资料的方差分析",
+    "href": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#随机区组设计资料的方差分析",
+    "title": "11-SAS 多个样本均数比较的方差分析",
+    "section": "4 随机区组设计资料的方差分析",
+    "text": "4 随机区组设计资料的方差分析\n随机区组设计又称为配伍组设计,是先将除处理因素外其他条件相同或相近的受试对象归人一个区组,再将一个区组内的受试对象随机分配 到不同的实验组内,从而保证同一个区组内的受试对象接受的处理是不同的。由于区组内各受试 对象的其他条件相同或相近,因此彼此间实验效应的差异主要是由处理因素引起的,而且处理因素和区组因素没有交互作用。\n\n4.1 基本语法\n其语法与完全随机设计的方差分析类似,只是在 CLASS 语句中增加了区组变量,并在 MODEL 语句中指定区组变量。\n\n\n4.2 示例\n在一项“纤维蛋白胶干粉在肝损伤模型上的止血作用”的研究中，某研究者对9个窝别的27只大鼠建立肝损伤模型，每个窝别中的3只大鼠随机接受不同的处理，即空白组、凝血酶组和纤维蛋白胶组。观测大鼠在30分钟内的失血量，数据集如下：\n\n\n\n窝别\n空白组\n凝血酶组\n纤维蛋白胶组\n\n\n\n\n1\n3.85\n2.14\n0.87\n\n\n2\n3.88\n1.98\n0.36\n\n\n3\n4.56\n1.21\n0.42\n\n\n4\n3.33\n1.45\n0.51\n\n\n5\n2.22\n0.76\n0.83\n\n\n6\n4.44\n1.78\n0.82\n\n\n7\n4.29\n1.55\n0.44\n\n\n8\n6.23\n4.22\n1.23\n\n\n9\n5.55\n2.22\n0.23\n\n\n\n\n\n4.3 程序说明\n\na：代表区组\nb：代表处理因素\ndo：利用一个循环语句建立数据集\n这里不同的止血效果相互比较用 SNK 方法\n\n\n\n代码\n%%SAS\ndata prg11_1;\n    do a = 1 to 9;\n    do b = 1 to 3;\n        input x @@;\n        output;\n    end;\nend;\ndatalines;\n3.85 2.14 0.87 3.88 1.98 0.36\n4.56 1.21 0.42 3.33 1.45 0.51\n2.22 0.76 0.83 4.44 1.78 0.82\n4.29 1.55 0.44 6.23 4.22 1.23\n5.55 2.22 0.23\n;\nrun;\nproc glm;\n    class a b;\n    model x= a b;\n    means b/snk alpha=0.05;\nrun;\nquit;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n分类水平信息\n\n\n分类\n水平\n值\n\n\n\n\na\n9\n1 2 3 4 5 6 7 8 9\n\n\nb\n3\n1 2 3\n\n\n\n\n\n\n\n\n\n\n读取的观测数\n27\n\n\n使用的观测数\n27\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n \n因变量: x\n\n\n\n\n\n\n\n\n源\n自由度\n平方和\n均方\nF 值\nPr &gt; F\n\n\n\n\n模型\n10\n73.34128148\n7.33412815\n16.80\n&lt;.0001\n\n\n误差\n16\n6.98348148\n0.43646759\n \n \n\n\n校正合计\n26\n80.32476296\n \n \n \n\n\n\n\n\n\n\n\n\n\nR 方\n变异系数\n均方根误差\nx 均值\n\n\n\n\n0.913059\n29.06589\n0.660657\n2.272963\n\n\n\n\n\n\n\n\n\n\n源\n自由度\nI 型 SS\n均方\nF 值\nPr &gt; F\n\n\n\n\na\n8\n12.50382963\n1.56297870\n3.58\n0.0143\n\n\nb\n2\n60.83745185\n30.41872593\n69.69\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n源\n自由度\nIII 型 SS\n均方\nF 值\nPr &gt; F\n\n\n\n\na\n8\n12.50382963\n1.56297870\n3.58\n0.0143\n\n\nb\n2\n60.83745185\n30.41872593\n69.69\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nGLM 过程\n \nStudent-Newman-Keuls Test for x\n\n\n注意:This test controls the Type I experimentwise error rate under the complete null hypothesis but not under partial null hypotheses.\n\n\n\n\n\n\nAlpha\n0.05\n\n\nError Degrees of Freedom\n16\n\n\nError Mean Square\n0.436468\n\n\n\n\n\n\n\n\n\n\nNumber of Means\n2\n3\n\n\n\n\nCritical Range\n0.6601857\n0.8036097\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n4.4 结果说明\n\n结果的形式与完全随机设计资料的结果是一样的。由于随机区组设计有两个分组变量,所以在针对分组变量的方差分析表中,有两个分组变量的情况需分析。本例模型的方差分析表中的 \\(F= 16.80,P&lt;0.0001\\),说明模型有统计学意义。\n区组和处理变量中,选择 Type Ⅲ SS 的结果,区组变量 a 的 \\(F=3.58 ,P=0.0143\\),说明各区组均数之间的差异有统计学意义。\n处理组变量 b 的 \\(F=69.69,P&lt;0.0001\\),说明各处理组均数之间的差异也有统计学意义。\n多个均数两两比较 SNK 检验的结果与 LSD t 检验有些类似,只是在确定界值时的表达方式有所不同。SNK 检验比较中列出了按均数大小排序时的组数及其检验统计量的界值,分别为: Number of Means 表示组数, Critical Range 表示不同组数时的统计量的界值。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "11-SAS 多个样本均数比较的方差分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#拉丁方设计资料的方差分析",
+    "href": "Guide/SAS/25-06-01-multi-sample-ANOVA.html#拉丁方设计资料的方差分析",
+    "title": "11-SAS 多个样本均数比较的方差分析",
+    "section": "5 拉丁方设计资料的方差分析",
+    "text": "5 拉丁方设计资料的方差分析\n拉丁方设计是有三个因素的设计类型,是在随机区组设计的基础上,又增加了一个已知的对实验结果有影响的因素,增加了均衡性,减少了误差,提高了实验效率。\n主要用于用于控制两个额外变量（blocking factors）的影响，同时研究一个处理因素的效应。\n不过,在拉丁方设计中,三个因素的水平数必须相同,而且这三个因素不存在交互作用。假设水平数为 r ,整个设计可以组成一个由 r 个拉丁字母排成 r 行 r 列的方阵,使得每行每列的每个字母都只出现一次,这样的方阵叫 r 阶拉丁方或 r*r 拉丁方。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "11-SAS 多个样本均数比较的方差分析"
     ]
   }
 ]
