@@ -149,6 +149,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="11-SAS 多个样本均数比较的方差分析 – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/SAS/images/logo.png">
@@ -845,7 +846,7 @@ window.Quarto = {
 <p>若试验设计不均衡，也不是前面几种实验设计数据，则应该使用 <code>GLM</code> 过程。</p>
 <section id="基本语法" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="基本语法"><span class="header-section-number">2.1</span> 基本语法</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>PROC ANOVA data = 数据集 &lt;可选项&gt; ;</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource {sas} number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>PROC ANOVA data = 数据集 &lt;可选项&gt; ;</span>
 <span id="cb2-2"><a href="#cb2-2"></a>    CLASS 分类变量列表;</span>
 <span id="cb2-3"><a href="#cb2-3"></a>    MODEL 因变量 = 效应变量列表 &lt;/可选项&gt;;</span>
 <span id="cb2-4"><a href="#cb2-4"></a>    &lt;MEANS 效应变量列表 &lt;/可选项&gt; ;&gt;</span>
@@ -2281,7 +2282,7 @@ a:visited { color: #800080 }
 <p><code>GLM</code> 过程步是一个通用的线性模型过程步，适用于平衡和不平衡的方差分析。它可以处理多种实验设计，包括完全随机设计、随机区组设计、拉丁方设计、析因设计等。</p>
 <section id="基本语法-1" class="level3" data-number="3.1">
 <h3 data-number="3.1" class="anchored" data-anchor-id="基本语法-1"><span class="header-section-number">3.1</span> 基本语法</h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>PROC GLM data = 数据集 &lt;可选项&gt; ;</span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource {sas} number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>PROC GLM data = 数据集 &lt;可选项&gt; ;</span>
 <span id="cb4-2"><a href="#cb4-2"></a>    CLASS 分类变量列表;</span>
 <span id="cb4-3"><a href="#cb4-3"></a>    MODEL 因变量 = 效应变量列表 &lt;/可选项&gt;;</span>
 <span id="cb4-4"><a href="#cb4-4"></a>    &lt;MEANS 效应变量列表 &lt;/可选项&gt; ;&gt;</span>

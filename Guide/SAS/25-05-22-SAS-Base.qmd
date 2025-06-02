@@ -6,6 +6,8 @@ date-modified: today
 format: 
     html:
         code-fold: true
+        code-line-numbers: true
+        code-highlight: true
         fig_caption: true
         number-sections: true
         toc: true
@@ -202,7 +204,7 @@ format:
 
 ### SAS 程序规则示例
 
-``` sas
+``` {.sas .sas style="color"}
 proc print
         data=c9501;
     by avg;

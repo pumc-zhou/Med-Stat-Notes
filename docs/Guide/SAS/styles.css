@@ -1,0 +1,7 @@
+/* 自定义 SAS 高亮样式 */
+.sourceCode.sas .kw { color: #0000FF; font-weight: bold; } /* 关键字 */
+.sourceCode.sas .dt { color: #007020; } /* 数据类型 */
+.sourceCode.sas .dv { color: #40A070; } /* 数值 */
+.sourceCode.sas .st { color: #4070A0; } /* 字符串 */
+.sourceCode.sas .co { color: #60a0b0; font-style: italic; } /* 注释 */
+.sourceCode.sas .fu { color: #06287e; } /* 函数 */

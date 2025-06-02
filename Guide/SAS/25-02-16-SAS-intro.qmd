@@ -45,3 +45,5 @@ SAS的历史很长，很强大，但是现代化做的一般（交互界面）�
 ``` {.html .quarto}
 <iframe src="means_output.html" width="700" height="400"></iframe>
 ```
+
+2025-06-02，使用中发现，当含有 SAS 程序和输出结果的.ipynb文件被编译后，出现了两个问题，一个是markdown内的 SAS 代码块无法正确显示高亮格式，尝试了 `code-fold: true code-line-numbers: true` 来高亮代码块，但是效果一般；第二个问题是输出的 .html 以及网页显示时，含有 SAS 数据的页面都会 “变质”，目前网络上没有相应的问题和解决办法，问 AI 说是因为格式不一致，所以导致的变质，这个问题暂时无解，尝试对第一个问题进行完善，使其能够正确对 SAS 代码块高亮显示。

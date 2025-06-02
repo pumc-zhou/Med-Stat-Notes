@@ -801,6 +801,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 :::</code></pre>
 <p>或用HTML 的 <code>&lt;iframe&gt;</code> 进行嵌入：</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode html quarto code-with-copy"><code class="sourceCode html"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">iframe</span><span class="ot"> src</span><span class="op">=</span><span class="st">"means_output.html"</span><span class="ot"> width</span><span class="op">=</span><span class="st">"700"</span><span class="ot"> height</span><span class="op">=</span><span class="st">"400"</span><span class="dt">&gt;&lt;/</span><span class="kw">iframe</span><span class="dt">&gt;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>2025-06-02，使用中发现，当含有 SAS 程序和输出结果的.ipynb文件被编译后，出现了两个问题，一个是markdown内的 SAS 代码块无法正确显示高亮格式，尝试了 <code>code-fold: true code-line-numbers: true</code> 来高亮代码块，但是效果一般；第二个问题是输出的 .html 以及网页显示时，含有 SAS 数据的页面都会 “变质”，目前网络上没有相应的问题和解决办法，问 AI 说是因为格式不一致，所以导致的变质，这个问题暂时无解，尝试对第一个问题进行完善，使其能够正确对 SAS 代码块高亮显示。</p>
 
 
 <!-- -->
@@ -1493,7 +1494,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.html .quarto}</span></span>
 <span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;iframe src="means_output.html" width="700" height="400"&gt;&lt;/iframe&gt;</span></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>2025-06-02，使用中发现，当含有 SAS 程序和输出结果的.ipynb文件被编译后，出现了两个问题，一个是markdown内的 SAS 代码块无法正确显示高亮格式，尝试了 <span class="in">`code-fold: true code-line-numbers: true`</span> 来高亮代码块，但是效果一般；第二个问题是输出的 .html 以及网页显示时，含有 SAS 数据的页面都会 “变质”，目前网络上没有相应的问题和解决办法，问 AI 说是因为格式不一致，所以导致的变质，这个问题暂时无解，尝试对第一个问题进行完善，使其能够正确对 SAS 代码块高亮显示。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

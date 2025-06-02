@@ -783,7 +783,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年6月1日</p>
+      <p class="date-modified">2025年6月2日</p>
     </div>
   </div>
     
@@ -976,12 +976,12 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </section>
 <section id="sas-程序规则示例" class="level3" data-number="8.2">
 <h3 data-number="8.2" class="anchored" data-anchor-id="sas-程序规则示例"><span class="header-section-number">8.2</span> SAS 程序规则示例</h3>
-<pre class="sas"><code>proc print
-        data=c9501;
-    by avg;
-run;</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb1-1"><a href="#cb1-1"></a>proc print</span>
+<span id="cb1-2"><a href="#cb1-2"></a>        data=c9501;</span>
+<span id="cb1-3"><a href="#cb1-3"></a>    by avg;</span>
+<span id="cb1-4"><a href="#cb1-4"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>等价于：</p>
-<pre class="sas"><code>proc print data=c9501;by avg;run;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>proc print data=c9501;by avg;run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="sas-注释" class="level2" data-number="9">
@@ -1725,262 +1725,264 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "03-SAS Base"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simon Zhou"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-05-22"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">    html:</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co">        code-fold: true</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">        fig_caption: true</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">        number-sections: true</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co">        toc: true</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">        toc-depth: 2</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 数据集</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>逻辑概念：行、列结构的表格，每行称为一个观测，每列称为一个变量。类似于矩阵，但可以整列都取字符型值，并且变量名也是数据集 的一部分。</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>等同于数据库术语“表(table)”。</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>物理存储：操作系统中的文件。包括描述部分（文件创建信息、变量 名、变量的类型等属性）和数据部分。</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>名字（变量名、数据集名等）：大小写不区分，其它规定与一般的高级 语言相同(由字母、下划线、数字组成，第一个字符必须是字母或下划 线，不允许使用汉字以及小数点、空格、减号等特殊字符)，不超过32 个字符长。</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 逻辑库</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 逻辑库(library，也称数据库) 与SAS 数据集的关系，基本等同 于操作系统中子目录与子目录中文件的关系。</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 逻辑库有一个“库名(libref)”，可以认做是操作系统中子目录的 一个SAS 中使用的别名。库名长度不超过8 个字符。</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>建立SAS 逻辑库，实际是指把一个操作系统子目录与一个库名联系起 来。用 <span class="in">`libname`</span> 语句或快捷图标中的 “New library” 图标。</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>三个预定义的库: WORK、SASUSER、SASHELP。</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>数据集的访问格式为“库名. 数据集名”格式，比如SASHELP 库中 的CLASS 数据集写成 SASHELP.CLASS 。</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>WORK 库是“临时库”：其中的SAS 文件在退出SAS 系统时自动删 除。</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>另外，WORK 库中的数据集可以用“一水平名”访问，即可以省略 “WORK.”。</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Sashelp :永久逻辑库，包含样本数据及控制 SAS 在您的环境下如何工作的其他文件， 它是只读逻辑库。</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Sasuser :永久逻辑库，包含的 SAS 文件位于存储个人设置的 Profile 目录下， 这也是便于您存储个人文件的逻辑库。</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 资源管理器(Explorer) 管理SAS 文件。</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>除数据集外，SAS 数据库中还可以包含叫做“SAS 目录簿”(SAS catalog) 的SAS 文件，主要用来保存设置、程序代码、图形这样的非 规整数据。</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>在SAS 资源管理器中双击某一数据集进入 VIEWTABLE 数据管理界面。</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS/INSIGHT</span></span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>注意，在SAS 9.4版本，不再支持 INSIGHT 。</span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Note that SAS/INSIGHT^®^&nbsp;software was discontinued beginning in SAS 9.4 TS1M0.</span><span class="co">](https://support.sas.com/kb/23/991.html)</span></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 语句</span></span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 系统强大的数据管理能力、计算能力、分析能力依赖于作为其基 础的SAS 语言。</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 语言是一个专用的数据管理与分析语言，它的数据管理功能类似 于数据库语言(如FoxPro<span class="ot">[^1]</span>)，但又添加了一般高级程序设计语言的许多 成分(如分支、循环、数组)，以及专用于数据管理、统计计算的函数。</span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 系统的数据管理、报表、图形、统计分析等功能都可以用SAS 语 言程序来调用，只要指定要完成的任务就可以由SAS 系统按照预先设 计好的程序去执行。</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span>**FoxPro**是一种<span class="co">[</span><span class="ot">面向过程</span><span class="co">](https://zh.wikipedia.org/wiki/%E8%BF%87%E7%A8%8B%E5%BC%8F%E7%BC%96%E7%A8%8B "过程式编程")</span>的<span class="co">[</span><span class="ot">编程语言</span><span class="co">](https://zh.wikipedia.org/wiki/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80 "编程语言")</span>和<span class="co">[</span><span class="ot">数据库管理系统</span><span class="co">](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93 "数据库")</span>，也是一种<span class="co">[</span><span class="ot">面向对象</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1 "面向对象程序设计")</span>的编程语言，适用于<span class="co">[</span><span class="ot">MS-DOS</span><span class="co">](https://zh.wikipedia.org/wiki/MS-DOS "MS-DOS")</span>&nbsp;、<span class="co">[</span><span class="ot">Windows</span><span class="co">](https://zh.wikipedia.org/wiki/Microsoft_Windows "Microsoft Windows")</span>、<span class="co">[</span><span class="ot">Macintosh</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%BA%A5%E9%87%91%E5%A1%94 "麦金塔")</span>和<span class="co">[</span><span class="ot">UNIX</span><span class="co">](https://zh.wikipedia.org/wiki/UNIX "UNIX")</span>。最初由Fox Software发布，FoxPro在1992年被微软整体收购后，由<span class="co">[</span><span class="ot">Microsoft</span><span class="co">](https://zh.wikipedia.org/wiki/%E5%BE%AE%E8%BD%AF "微软")</span>负责发布和支持工作。FoxPro的最终发布版本是2.6。<span class="ot">&lt;https://zh.wikipedia.org/zh-cn/FoxPro&gt;</span></span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 语句的基本构成</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 语言程序由数据步和过程步组成。</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>数据步用来生成数据集、计算、整理数据;</span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>过程步用来对数据进行分析、报告。</span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 语言的基本单位是语句, 每个SAS 语句一般由一个关键字(如 <span class="in">`DATA`</span>, <span class="in">`PROC`</span>, <span class="in">`INPUT`</span>, <span class="in">`CARDS`</span>, <span class="in">`BY`</span>) 开头, 包含SAS 名字、特殊字 符、运算符等, 以分号结束。</span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 关键字是用于SAS 语句开头的特殊单词, SAS 语句除了赋值、累 加、注释、空语句以外都以关键字开头。</span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 表达式</span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 数据步程序中的计算用表达式完成。</span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>表达式把常量、变量、函数调用用运算符、括号连接起来得到一个计算结果。</span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS 常量</span></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 常量主要有数值型、字符型两种, 并且还提供了用于表达日期、时 间的数据类型。例如</span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>数值型：12, -7.5, 2:5E-10</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>字符型：’Beijing’, ”Li Ming”, ” 李明”</span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>数值型常数可以用整数、定点实数、科学计数法实数表示。</span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>字符型常数为两边用单撇号或两边用双撇号包围的若干字符。当字符 串内容有单撇号时，可以用双撇号界定，当字符串内容有双撇号时，可 以用单撇号界定。另外，在字符串中，重复的单撇号可以作为一个单 撇号内容，如 ’Tom” cat’ 内容是 “Tom’s cat” 。</span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS 日期和时间</span></span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 日期型常量如：<span class="in">`’13JUL1998’d`</span>;</span>
-<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>日期型常数是在表示日期的字符串后加一个字母d(大小写均可), 中间 没有空格。日期值保存为从1960 年1 月1 日后经过的天数。</span>
-<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>时间型常量如：<span class="in">`’14:20:15.32’t, ’14:20’t`</span>(没有秒);</span>
-<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>时间型常数是在表示时间的字符串后加一个字母t。保存为秒数。</span>
-<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>日期时间型常量如: <span class="in">`’13JUL1998:14:20:15.32’dt`</span>;</span>
-<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>日期时间型常数在表示日期时间的字符串后加字母 <span class="in">`dt`</span>。保存为从1960 年1 月1 日0 时后经过的秒数。</span>
-<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="fu">### 缺失值</span></span>
-<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>数据处理时经常遇到缺失值，如：</span>
-<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>数据遗失；</span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>被访者拒绝回答；</span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>节假日无数据。</span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 程序中用一个单独的小数点来表示数值型缺失值常量。</span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>对于字符型数据，用只有一个空格的字符串<span class="in">`’ ’`</span>表示缺失值。</span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>变量X 是否数值型缺失值可以用<span class="in">`X=.`</span>来判断，是否字符型缺失值可以用<span class="in">`X=’ ’`</span> 来判断。</span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>数值型缺失值在排序和比较时排在最小端。</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>数值型缺失值参与计算的结果也是缺失的。</span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS 变量及类型</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 变量的基本类型有两种：数值型和字符型。</span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>日期、时间等变量存为数值型。</span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>存储长度：SAS 的数值型变量可以存储任意整数、定点实数、浮点实 数, 一般不关心其区别。缺省用8 个字符存储, 精度有16 到17 位有 效数字。</span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 在读入字符型变量时缺省的长度是8 个字符, 但是如果在INPUT 语句中输入字符型变量时指定了长度则不受此限制，最多可存32767 个字符。</span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>直接用赋值语句定义的字符型变量的缺省长度是第一次赋值的字符串 长度。</span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>可以用LENGTH 语句直接指定变量长度, LENGTH 语句一般应出现 在变量定义之前, 格式为:</span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a><span class="in">`LENGTH 字符型变量名 $ 长度;`</span></span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 运算符</span></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS 算数运算符</span></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 运算符包括算术、比较、逻辑等运算符。</span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>算术运算符为<span class="in">`+`</span>, <span class="in">`-`</span>, <span class="in">`*`</span>, <span class="in">`/`</span>, <span class="in">`**`</span>, 运算优先级按通常的优先规则。其中两个星号<span class="in">`**`</span>表示乘方运算。</span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS 比较运算符</span></span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>比较运算符用于比较值大小, 包括</span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>    | <span class="in">`=`</span> | <span class="in">`ˆ=`</span> | <span class="in">`&gt;`</span> | <span class="in">`&lt;`</span> | <span class="in">`&gt;=`</span> | <span class="in">`&lt;=`</span> | <span class="in">`IN`</span> |</span>
-<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>    |-----|------|-----|-----|------|------|------|</span>
-<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>    | EQ  | NE   | GT  | LT  | GE   | LE   |      |</span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>比较运算符得到“真”或“假”的结果，真用1 表示，假用0 表示。</span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>两个字符型的比较是把短的一个右边补空格到两个长度相同后比较。</span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>在<span class="in">`=`</span>, <span class="in">`&gt;`</span>, <span class="in">`&lt;`</span>, <span class="in">`&gt;=`</span>, <span class="in">`&lt;=`</span> 后面加一个冒号变成如 <span class="in">`=:`</span> 这样则可以只比较与短的一个等长的部分。</span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>运算符 <span class="in">`IN`</span> 是一个SAS 特有的比较运算符, 用来检查某个变量的取值 是否在一个给定列表中, 比如 <span class="in">`prov in (' 北京', ' 天津', ' 上海', ' 重庆')`</span> 可以判断变量prov 的取值是否为四个直辖市之一。</span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>列表为圆括号界定的用逗号或空格分开的若干常量。</span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>也可以使用 <span class="in">`NOT IN`</span> 表示 “不属于”。</span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS 逻辑运算符</span></span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>逻辑运算符用来连接比较得到的结果以构成复杂的条件, 有三种逻辑 运算符: <span class="in">`&amp;(AND)  |(OR) ˆ(NOT)`</span></span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>复杂的逻辑表达式最好用括号表示其运算优先级以免误记优先规则，这样也有利于阅读程序。</span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="fu">### 其它运算符</span></span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`||`</span>(两个连续的 <span class="in">`|`</span> 号)：连接两个字符串；</span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`&lt;&gt;`</span>：用于取两个运算值中较大一个(比如<span class="in">`3 &lt;&gt; 5`</span> 结果为5)；</span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span><span class="in">`&gt;&lt;`</span>：用于取两个运算值中较小一个(比如 <span class="in">`3 &gt;&lt; 5`</span> 结果为3)。</span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 程序规则</span></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="fu">### 基本规则</span></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 程序由语句构成。</span>
-<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>每个语句以分号结尾(最常见的 SAS 编程错误就是丢失分号)。</span>
-<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>一个语句可以写到多行(不需任何续行标志), 也可以在一行连续写几个语句。</span>
-<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>SAS 语言中只要允许用一个空格的地方就可以加入任意多个空白(空格、制表符、回车)。</span>
-<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>允许用空格的地方是名字周围、运算符周围。</span>
-<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS 程序规则示例</span></span>
-<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a><span class="in">``` sas</span></span>
-<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a><span class="in">proc print</span></span>
-<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a><span class="in">        data=c9501;</span></span>
-<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="in">    by avg;</span></span>
-<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
-<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>等价于：</span>
-<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="in">``` sas</span></span>
-<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a><span class="in">proc print data=c9501;by avg;run;</span></span>
-<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a><span class="fu">## SAS 注释</span></span>
-<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>在SAS 程序中可以加入注释, 注释使用C 语言语法, 用 <span class="in">`/*`</span> 和 <span class="in">`*/`</span> 在两端界定注释, 这种注释可以出现在任何允许加入空格的位置, 可以占多行。</span>
-<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>另一种注释是把以星号 <span class="in">`*`</span> 开头的行作为注释。</span>
-<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>一般只把注释单独占一行或若干行, 不把注释与程序代码放在同 一行。</span>
-<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>注释的另一个作用是把某些代码暂时屏蔽使其不能运行。</span>
-<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## 常用指令</span></span>
-<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a>命令框在 SAS视窗管理系统中主菜单的下方,是一个执行 SAS 指令的工具，在该工具的文本输人框中可以输人指令,用于实现对窗口的管理功能。有些指令只能在指定窗口执行,而有些指令是可以用于大多数窗口,称为窗口通用指令。输入一个指令,点击命令框前面的 “√” 或按下 “ENTER” 键,就可以执行该指令</span>
-<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a>以下是几条比较常用的指令:</span>
-<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a>| 指令               | 作用                           |</span>
-<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a>|--------------------|--------------------------------|</span>
-<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a>| BYE                | 退出 SAS 系统                  |</span>
-<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a>| CLEAR              | 清除当前窗口中的内容           |</span>
-<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a>| END                | 退出当前窗口,返回编辑窗口      |</span>
-<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a>| ENDSAS             | 退出 SAS系统                   |</span>
-<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>| FILE 'filename     | 将当前窗口的内容存储到指定文件 |</span>
-<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a>| HELP               | 进入帮助窗口                   |</span>
-<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a>| INCLUDE 'filename‘ | 调用指定文件                   |</span>
-<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>| KEYS               | 进入快捷键定义窗口             |</span>
-<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>| LIBNAME            | 确定 SAS 数据库的内容          |</span>
-<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>| LOG                | 进入日志窗口                   |</span>
-<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>| NUMS               | 打开编辑窗口的数字区           |</span>
-<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a>| NUMS OFF           | 关闭编辑窗口的数字区           |</span>
-<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a>| OPTIONS            | 进入参数定义窗口               |</span>
-<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a>| OUTPUT             | 进入输出窗口                   |</span>
-<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a>| PROGRAM            | 进入编辑窗口                   |</span>
-<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a>| RECALL             | 调用上次执行的程序             |</span>
-<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a>| SUBMIT             | 提交编辑窗口编辑的程序代码     |</span>
-<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a><span class="fu">## 功能键</span></span>
-<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a>上述有些指令可以通过SAS系统定义的功 能键来完成,这些功能键都是 SAS 系统预先设定的。在指令工具中键入“KEYS”,点击 “√”或按“ENTER”,或按“F9”,就可以查看和自定义功能键。用户可以自己定义功能,同时可以根据自己的习惯,改变功能键的位置。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="an">title:</span><span class="co"> "03-SAS Base"</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="an">author:</span><span class="co"> "Simon Zhou"</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="an">date:</span><span class="co"> "2025-05-22"</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">    html:</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">        code-fold: true</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">        code-line-numbers: true</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">        code-highlight: true</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">        fig_caption: true</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">        number-sections: true</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">        toc: true</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">        toc-depth: 2</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">---</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="fu">## SAS 数据集</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="ss">-   </span>逻辑概念：行、列结构的表格，每行称为一个观测，每列称为一个变量。类似于矩阵，但可以整列都取字符型值，并且变量名也是数据集 的一部分。</span>
+<span id="cb3-20"><a href="#cb3-20"></a></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="ss">-   </span>等同于数据库术语“表(table)”。</span>
+<span id="cb3-22"><a href="#cb3-22"></a></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="ss">-   </span>物理存储：操作系统中的文件。包括描述部分（文件创建信息、变量 名、变量的类型等属性）和数据部分。</span>
+<span id="cb3-24"><a href="#cb3-24"></a></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="ss">-   </span>名字（变量名、数据集名等）：大小写不区分，其它规定与一般的高级 语言相同(由字母、下划线、数字组成，第一个字符必须是字母或下划 线，不允许使用汉字以及小数点、空格、减号等特殊字符)，不超过32 个字符长。</span>
+<span id="cb3-26"><a href="#cb3-26"></a></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="fu">## SAS 逻辑库</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="ss">-   </span>SAS 逻辑库(library，也称数据库) 与SAS 数据集的关系，基本等同 于操作系统中子目录与子目录中文件的关系。</span>
+<span id="cb3-30"><a href="#cb3-30"></a></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="ss">-   </span>SAS 逻辑库有一个“库名(libref)”，可以认做是操作系统中子目录的 一个SAS 中使用的别名。库名长度不超过8 个字符。</span>
+<span id="cb3-32"><a href="#cb3-32"></a></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="ss">-   </span>建立SAS 逻辑库，实际是指把一个操作系统子目录与一个库名联系起 来。用 <span class="in">`libname`</span> 语句或快捷图标中的 “New library” 图标。</span>
+<span id="cb3-34"><a href="#cb3-34"></a></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="ss">-   </span>三个预定义的库: WORK、SASUSER、SASHELP。</span>
+<span id="cb3-36"><a href="#cb3-36"></a></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="ss">-   </span>数据集的访问格式为“库名. 数据集名”格式，比如SASHELP 库中 的CLASS 数据集写成 SASHELP.CLASS 。</span>
+<span id="cb3-38"><a href="#cb3-38"></a></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="ss">-   </span>WORK 库是“临时库”：其中的SAS 文件在退出SAS 系统时自动删 除。</span>
+<span id="cb3-40"><a href="#cb3-40"></a></span>
+<span id="cb3-41"><a href="#cb3-41"></a><span class="ss">-   </span>另外，WORK 库中的数据集可以用“一水平名”访问，即可以省略 “WORK.”。</span>
+<span id="cb3-42"><a href="#cb3-42"></a></span>
+<span id="cb3-43"><a href="#cb3-43"></a><span class="ss">-   </span>Sashelp :永久逻辑库，包含样本数据及控制 SAS 在您的环境下如何工作的其他文件， 它是只读逻辑库。</span>
+<span id="cb3-44"><a href="#cb3-44"></a></span>
+<span id="cb3-45"><a href="#cb3-45"></a><span class="ss">-   </span>Sasuser :永久逻辑库，包含的 SAS 文件位于存储个人设置的 Profile 目录下， 这也是便于您存储个人文件的逻辑库。</span>
+<span id="cb3-46"><a href="#cb3-46"></a></span>
+<span id="cb3-47"><a href="#cb3-47"></a><span class="ss">-   </span>SAS 资源管理器(Explorer) 管理SAS 文件。</span>
+<span id="cb3-48"><a href="#cb3-48"></a></span>
+<span id="cb3-49"><a href="#cb3-49"></a><span class="ss">-   </span>除数据集外，SAS 数据库中还可以包含叫做“SAS 目录簿”(SAS catalog) 的SAS 文件，主要用来保存设置、程序代码、图形这样的非 规整数据。</span>
+<span id="cb3-50"><a href="#cb3-50"></a></span>
+<span id="cb3-51"><a href="#cb3-51"></a><span class="ss">-   </span>在SAS 资源管理器中双击某一数据集进入 VIEWTABLE 数据管理界面。</span>
+<span id="cb3-52"><a href="#cb3-52"></a></span>
+<span id="cb3-53"><a href="#cb3-53"></a><span class="fu">## SAS/INSIGHT</span></span>
+<span id="cb3-54"><a href="#cb3-54"></a></span>
+<span id="cb3-55"><a href="#cb3-55"></a>注意，在SAS 9.4版本，不再支持 INSIGHT 。</span>
+<span id="cb3-56"><a href="#cb3-56"></a></span>
+<span id="cb3-57"><a href="#cb3-57"></a><span class="co">[</span><span class="ot">Note that SAS/INSIGHT^®^&nbsp;software was discontinued beginning in SAS 9.4 TS1M0.</span><span class="co">](https://support.sas.com/kb/23/991.html)</span></span>
+<span id="cb3-58"><a href="#cb3-58"></a></span>
+<span id="cb3-59"><a href="#cb3-59"></a><span class="fu">## SAS 语句</span></span>
+<span id="cb3-60"><a href="#cb3-60"></a></span>
+<span id="cb3-61"><a href="#cb3-61"></a><span class="ss">-   </span>SAS 系统强大的数据管理能力、计算能力、分析能力依赖于作为其基 础的SAS 语言。</span>
+<span id="cb3-62"><a href="#cb3-62"></a></span>
+<span id="cb3-63"><a href="#cb3-63"></a><span class="ss">-   </span>SAS 语言是一个专用的数据管理与分析语言，它的数据管理功能类似 于数据库语言(如FoxPro<span class="ot">[^1]</span>)，但又添加了一般高级程序设计语言的许多 成分(如分支、循环、数组)，以及专用于数据管理、统计计算的函数。</span>
+<span id="cb3-64"><a href="#cb3-64"></a></span>
+<span id="cb3-65"><a href="#cb3-65"></a><span class="ss">-   </span>SAS 系统的数据管理、报表、图形、统计分析等功能都可以用SAS 语 言程序来调用，只要指定要完成的任务就可以由SAS 系统按照预先设 计好的程序去执行。</span>
+<span id="cb3-66"><a href="#cb3-66"></a></span>
+<span id="cb3-67"><a href="#cb3-67"></a><span class="ot">[^1]: </span>**FoxPro**是一种<span class="co">[</span><span class="ot">面向过程</span><span class="co">](https://zh.wikipedia.org/wiki/%E8%BF%87%E7%A8%8B%E5%BC%8F%E7%BC%96%E7%A8%8B "过程式编程")</span>的<span class="co">[</span><span class="ot">编程语言</span><span class="co">](https://zh.wikipedia.org/wiki/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80 "编程语言")</span>和<span class="co">[</span><span class="ot">数据库管理系统</span><span class="co">](https://zh.wikipedia.org/wiki/%E6%95%B0%E6%8D%AE%E5%BA%93 "数据库")</span>，也是一种<span class="co">[</span><span class="ot">面向对象</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1 "面向对象程序设计")</span>的编程语言，适用于<span class="co">[</span><span class="ot">MS-DOS</span><span class="co">](https://zh.wikipedia.org/wiki/MS-DOS "MS-DOS")</span>&nbsp;、<span class="co">[</span><span class="ot">Windows</span><span class="co">](https://zh.wikipedia.org/wiki/Microsoft_Windows "Microsoft Windows")</span>、<span class="co">[</span><span class="ot">Macintosh</span><span class="co">](https://zh.wikipedia.org/wiki/%E9%BA%A5%E9%87%91%E5%A1%94 "麦金塔")</span>和<span class="co">[</span><span class="ot">UNIX</span><span class="co">](https://zh.wikipedia.org/wiki/UNIX "UNIX")</span>。最初由Fox Software发布，FoxPro在1992年被微软整体收购后，由<span class="co">[</span><span class="ot">Microsoft</span><span class="co">](https://zh.wikipedia.org/wiki/%E5%BE%AE%E8%BD%AF "微软")</span>负责发布和支持工作。FoxPro的最终发布版本是2.6。<span class="ot">&lt;https://zh.wikipedia.org/zh-cn/FoxPro&gt;</span></span>
+<span id="cb3-68"><a href="#cb3-68"></a></span>
+<span id="cb3-69"><a href="#cb3-69"></a><span class="fu">## SAS 语句的基本构成</span></span>
+<span id="cb3-70"><a href="#cb3-70"></a></span>
+<span id="cb3-71"><a href="#cb3-71"></a><span class="ss">-   </span>SAS 语言程序由数据步和过程步组成。</span>
+<span id="cb3-72"><a href="#cb3-72"></a></span>
+<span id="cb3-73"><a href="#cb3-73"></a><span class="ss">-   </span>数据步用来生成数据集、计算、整理数据;</span>
+<span id="cb3-74"><a href="#cb3-74"></a></span>
+<span id="cb3-75"><a href="#cb3-75"></a><span class="ss">-   </span>过程步用来对数据进行分析、报告。</span>
+<span id="cb3-76"><a href="#cb3-76"></a></span>
+<span id="cb3-77"><a href="#cb3-77"></a><span class="ss">-   </span>SAS 语言的基本单位是语句, 每个SAS 语句一般由一个关键字(如 <span class="in">`DATA`</span>, <span class="in">`PROC`</span>, <span class="in">`INPUT`</span>, <span class="in">`CARDS`</span>, <span class="in">`BY`</span>) 开头, 包含SAS 名字、特殊字 符、运算符等, 以分号结束。</span>
+<span id="cb3-78"><a href="#cb3-78"></a></span>
+<span id="cb3-79"><a href="#cb3-79"></a><span class="ss">-   </span>SAS 关键字是用于SAS 语句开头的特殊单词, SAS 语句除了赋值、累 加、注释、空语句以外都以关键字开头。</span>
+<span id="cb3-80"><a href="#cb3-80"></a></span>
+<span id="cb3-81"><a href="#cb3-81"></a><span class="fu">## SAS 表达式</span></span>
+<span id="cb3-82"><a href="#cb3-82"></a></span>
+<span id="cb3-83"><a href="#cb3-83"></a><span class="ss">-   </span>SAS 数据步程序中的计算用表达式完成。</span>
+<span id="cb3-84"><a href="#cb3-84"></a></span>
+<span id="cb3-85"><a href="#cb3-85"></a><span class="ss">-   </span>表达式把常量、变量、函数调用用运算符、括号连接起来得到一个计算结果。</span>
+<span id="cb3-86"><a href="#cb3-86"></a></span>
+<span id="cb3-87"><a href="#cb3-87"></a><span class="fu">### SAS 常量</span></span>
+<span id="cb3-88"><a href="#cb3-88"></a></span>
+<span id="cb3-89"><a href="#cb3-89"></a><span class="ss">-   </span>SAS 常量主要有数值型、字符型两种, 并且还提供了用于表达日期、时 间的数据类型。例如</span>
+<span id="cb3-90"><a href="#cb3-90"></a></span>
+<span id="cb3-91"><a href="#cb3-91"></a><span class="ss">    -   </span>数值型：12, -7.5, 2:5E-10</span>
+<span id="cb3-92"><a href="#cb3-92"></a></span>
+<span id="cb3-93"><a href="#cb3-93"></a><span class="ss">    -   </span>字符型：’Beijing’, ”Li Ming”, ” 李明”</span>
+<span id="cb3-94"><a href="#cb3-94"></a></span>
+<span id="cb3-95"><a href="#cb3-95"></a><span class="ss">-   </span>数值型常数可以用整数、定点实数、科学计数法实数表示。</span>
+<span id="cb3-96"><a href="#cb3-96"></a></span>
+<span id="cb3-97"><a href="#cb3-97"></a><span class="ss">-   </span>字符型常数为两边用单撇号或两边用双撇号包围的若干字符。当字符 串内容有单撇号时，可以用双撇号界定，当字符串内容有双撇号时，可 以用单撇号界定。另外，在字符串中，重复的单撇号可以作为一个单 撇号内容，如 ’Tom” cat’ 内容是 “Tom’s cat” 。</span>
+<span id="cb3-98"><a href="#cb3-98"></a></span>
+<span id="cb3-99"><a href="#cb3-99"></a><span class="fu">### SAS 日期和时间</span></span>
+<span id="cb3-100"><a href="#cb3-100"></a></span>
+<span id="cb3-101"><a href="#cb3-101"></a><span class="ss">-   </span>SAS 日期型常量如：<span class="in">`’13JUL1998’d`</span>;</span>
+<span id="cb3-102"><a href="#cb3-102"></a></span>
+<span id="cb3-103"><a href="#cb3-103"></a><span class="ss">-   </span>日期型常数是在表示日期的字符串后加一个字母d(大小写均可), 中间 没有空格。日期值保存为从1960 年1 月1 日后经过的天数。</span>
+<span id="cb3-104"><a href="#cb3-104"></a></span>
+<span id="cb3-105"><a href="#cb3-105"></a><span class="ss">-   </span>时间型常量如：<span class="in">`’14:20:15.32’t, ’14:20’t`</span>(没有秒);</span>
+<span id="cb3-106"><a href="#cb3-106"></a></span>
+<span id="cb3-107"><a href="#cb3-107"></a><span class="ss">-   </span>时间型常数是在表示时间的字符串后加一个字母t。保存为秒数。</span>
+<span id="cb3-108"><a href="#cb3-108"></a></span>
+<span id="cb3-109"><a href="#cb3-109"></a><span class="ss">-   </span>日期时间型常量如: <span class="in">`’13JUL1998:14:20:15.32’dt`</span>;</span>
+<span id="cb3-110"><a href="#cb3-110"></a></span>
+<span id="cb3-111"><a href="#cb3-111"></a><span class="ss">-   </span>日期时间型常数在表示日期时间的字符串后加字母 <span class="in">`dt`</span>。保存为从1960 年1 月1 日0 时后经过的秒数。</span>
+<span id="cb3-112"><a href="#cb3-112"></a></span>
+<span id="cb3-113"><a href="#cb3-113"></a><span class="fu">### 缺失值</span></span>
+<span id="cb3-114"><a href="#cb3-114"></a></span>
+<span id="cb3-115"><a href="#cb3-115"></a><span class="ss">-   </span>数据处理时经常遇到缺失值，如：</span>
+<span id="cb3-116"><a href="#cb3-116"></a></span>
+<span id="cb3-117"><a href="#cb3-117"></a><span class="ss">    -   </span>数据遗失；</span>
+<span id="cb3-118"><a href="#cb3-118"></a></span>
+<span id="cb3-119"><a href="#cb3-119"></a><span class="ss">    -   </span>被访者拒绝回答；</span>
+<span id="cb3-120"><a href="#cb3-120"></a></span>
+<span id="cb3-121"><a href="#cb3-121"></a><span class="ss">    -   </span>节假日无数据。</span>
+<span id="cb3-122"><a href="#cb3-122"></a></span>
+<span id="cb3-123"><a href="#cb3-123"></a><span class="ss">-   </span>SAS 程序中用一个单独的小数点来表示数值型缺失值常量。</span>
+<span id="cb3-124"><a href="#cb3-124"></a></span>
+<span id="cb3-125"><a href="#cb3-125"></a><span class="ss">-   </span>对于字符型数据，用只有一个空格的字符串<span class="in">`’ ’`</span>表示缺失值。</span>
+<span id="cb3-126"><a href="#cb3-126"></a></span>
+<span id="cb3-127"><a href="#cb3-127"></a><span class="ss">-   </span>变量X 是否数值型缺失值可以用<span class="in">`X=.`</span>来判断，是否字符型缺失值可以用<span class="in">`X=’ ’`</span> 来判断。</span>
+<span id="cb3-128"><a href="#cb3-128"></a></span>
+<span id="cb3-129"><a href="#cb3-129"></a><span class="ss">-   </span>数值型缺失值在排序和比较时排在最小端。</span>
+<span id="cb3-130"><a href="#cb3-130"></a></span>
+<span id="cb3-131"><a href="#cb3-131"></a><span class="ss">-   </span>数值型缺失值参与计算的结果也是缺失的。</span>
+<span id="cb3-132"><a href="#cb3-132"></a></span>
+<span id="cb3-133"><a href="#cb3-133"></a><span class="fu">### SAS 变量及类型</span></span>
+<span id="cb3-134"><a href="#cb3-134"></a></span>
+<span id="cb3-135"><a href="#cb3-135"></a><span class="ss">-   </span>SAS 变量的基本类型有两种：数值型和字符型。</span>
+<span id="cb3-136"><a href="#cb3-136"></a></span>
+<span id="cb3-137"><a href="#cb3-137"></a><span class="ss">-   </span>日期、时间等变量存为数值型。</span>
+<span id="cb3-138"><a href="#cb3-138"></a></span>
+<span id="cb3-139"><a href="#cb3-139"></a><span class="ss">-   </span>存储长度：SAS 的数值型变量可以存储任意整数、定点实数、浮点实 数, 一般不关心其区别。缺省用8 个字符存储, 精度有16 到17 位有 效数字。</span>
+<span id="cb3-140"><a href="#cb3-140"></a></span>
+<span id="cb3-141"><a href="#cb3-141"></a><span class="ss">-   </span>SAS 在读入字符型变量时缺省的长度是8 个字符, 但是如果在INPUT 语句中输入字符型变量时指定了长度则不受此限制，最多可存32767 个字符。</span>
+<span id="cb3-142"><a href="#cb3-142"></a></span>
+<span id="cb3-143"><a href="#cb3-143"></a><span class="ss">-   </span>直接用赋值语句定义的字符型变量的缺省长度是第一次赋值的字符串 长度。</span>
+<span id="cb3-144"><a href="#cb3-144"></a></span>
+<span id="cb3-145"><a href="#cb3-145"></a><span class="ss">-   </span>可以用LENGTH 语句直接指定变量长度, LENGTH 语句一般应出现 在变量定义之前, 格式为:</span>
+<span id="cb3-146"><a href="#cb3-146"></a></span>
+<span id="cb3-147"><a href="#cb3-147"></a><span class="in">`LENGTH 字符型变量名 $ 长度;`</span></span>
+<span id="cb3-148"><a href="#cb3-148"></a></span>
+<span id="cb3-149"><a href="#cb3-149"></a><span class="fu">## SAS 运算符</span></span>
+<span id="cb3-150"><a href="#cb3-150"></a></span>
+<span id="cb3-151"><a href="#cb3-151"></a><span class="fu">### SAS 算数运算符</span></span>
+<span id="cb3-152"><a href="#cb3-152"></a></span>
+<span id="cb3-153"><a href="#cb3-153"></a><span class="ss">-   </span>SAS 运算符包括算术、比较、逻辑等运算符。</span>
+<span id="cb3-154"><a href="#cb3-154"></a></span>
+<span id="cb3-155"><a href="#cb3-155"></a><span class="ss">-   </span>算术运算符为<span class="in">`+`</span>, <span class="in">`-`</span>, <span class="in">`*`</span>, <span class="in">`/`</span>, <span class="in">`**`</span>, 运算优先级按通常的优先规则。其中两个星号<span class="in">`**`</span>表示乘方运算。</span>
+<span id="cb3-156"><a href="#cb3-156"></a></span>
+<span id="cb3-157"><a href="#cb3-157"></a><span class="fu">### SAS 比较运算符</span></span>
+<span id="cb3-158"><a href="#cb3-158"></a></span>
+<span id="cb3-159"><a href="#cb3-159"></a><span class="ss">-   </span>比较运算符用于比较值大小, 包括</span>
+<span id="cb3-160"><a href="#cb3-160"></a></span>
+<span id="cb3-161"><a href="#cb3-161"></a>    | <span class="in">`=`</span> | <span class="in">`ˆ=`</span> | <span class="in">`&gt;`</span> | <span class="in">`&lt;`</span> | <span class="in">`&gt;=`</span> | <span class="in">`&lt;=`</span> | <span class="in">`IN`</span> |</span>
+<span id="cb3-162"><a href="#cb3-162"></a>    |-----|------|-----|-----|------|------|------|</span>
+<span id="cb3-163"><a href="#cb3-163"></a>    | EQ  | NE   | GT  | LT  | GE   | LE   |      |</span>
+<span id="cb3-164"><a href="#cb3-164"></a></span>
+<span id="cb3-165"><a href="#cb3-165"></a><span class="ss">-   </span>比较运算符得到“真”或“假”的结果，真用1 表示，假用0 表示。</span>
+<span id="cb3-166"><a href="#cb3-166"></a></span>
+<span id="cb3-167"><a href="#cb3-167"></a><span class="ss">-   </span>两个字符型的比较是把短的一个右边补空格到两个长度相同后比较。</span>
+<span id="cb3-168"><a href="#cb3-168"></a></span>
+<span id="cb3-169"><a href="#cb3-169"></a><span class="ss">-   </span>在<span class="in">`=`</span>, <span class="in">`&gt;`</span>, <span class="in">`&lt;`</span>, <span class="in">`&gt;=`</span>, <span class="in">`&lt;=`</span> 后面加一个冒号变成如 <span class="in">`=:`</span> 这样则可以只比较与短的一个等长的部分。</span>
+<span id="cb3-170"><a href="#cb3-170"></a></span>
+<span id="cb3-171"><a href="#cb3-171"></a><span class="ss">-   </span>运算符 <span class="in">`IN`</span> 是一个SAS 特有的比较运算符, 用来检查某个变量的取值 是否在一个给定列表中, 比如 <span class="in">`prov in (' 北京', ' 天津', ' 上海', ' 重庆')`</span> 可以判断变量prov 的取值是否为四个直辖市之一。</span>
+<span id="cb3-172"><a href="#cb3-172"></a></span>
+<span id="cb3-173"><a href="#cb3-173"></a><span class="ss">-   </span>列表为圆括号界定的用逗号或空格分开的若干常量。</span>
+<span id="cb3-174"><a href="#cb3-174"></a></span>
+<span id="cb3-175"><a href="#cb3-175"></a><span class="ss">-   </span>也可以使用 <span class="in">`NOT IN`</span> 表示 “不属于”。</span>
+<span id="cb3-176"><a href="#cb3-176"></a></span>
+<span id="cb3-177"><a href="#cb3-177"></a><span class="fu">### SAS 逻辑运算符</span></span>
+<span id="cb3-178"><a href="#cb3-178"></a></span>
+<span id="cb3-179"><a href="#cb3-179"></a><span class="ss">-   </span>逻辑运算符用来连接比较得到的结果以构成复杂的条件, 有三种逻辑 运算符: <span class="in">`&amp;(AND)  |(OR) ˆ(NOT)`</span></span>
+<span id="cb3-180"><a href="#cb3-180"></a></span>
+<span id="cb3-181"><a href="#cb3-181"></a><span class="ss">-   </span>复杂的逻辑表达式最好用括号表示其运算优先级以免误记优先规则，这样也有利于阅读程序。</span>
+<span id="cb3-182"><a href="#cb3-182"></a></span>
+<span id="cb3-183"><a href="#cb3-183"></a><span class="fu">### 其它运算符</span></span>
+<span id="cb3-184"><a href="#cb3-184"></a></span>
+<span id="cb3-185"><a href="#cb3-185"></a><span class="ss">-   </span><span class="in">`||`</span>(两个连续的 <span class="in">`|`</span> 号)：连接两个字符串；</span>
+<span id="cb3-186"><a href="#cb3-186"></a></span>
+<span id="cb3-187"><a href="#cb3-187"></a><span class="ss">-   </span><span class="in">`&lt;&gt;`</span>：用于取两个运算值中较大一个(比如<span class="in">`3 &lt;&gt; 5`</span> 结果为5)；</span>
+<span id="cb3-188"><a href="#cb3-188"></a></span>
+<span id="cb3-189"><a href="#cb3-189"></a><span class="ss">-   </span><span class="in">`&gt;&lt;`</span>：用于取两个运算值中较小一个(比如 <span class="in">`3 &gt;&lt; 5`</span> 结果为3)。</span>
+<span id="cb3-190"><a href="#cb3-190"></a></span>
+<span id="cb3-191"><a href="#cb3-191"></a><span class="fu">## SAS 程序规则</span></span>
+<span id="cb3-192"><a href="#cb3-192"></a></span>
+<span id="cb3-193"><a href="#cb3-193"></a><span class="fu">### 基本规则</span></span>
+<span id="cb3-194"><a href="#cb3-194"></a></span>
+<span id="cb3-195"><a href="#cb3-195"></a><span class="ss">-   </span>SAS 程序由语句构成。</span>
+<span id="cb3-196"><a href="#cb3-196"></a></span>
+<span id="cb3-197"><a href="#cb3-197"></a><span class="ss">-   </span>每个语句以分号结尾(最常见的 SAS 编程错误就是丢失分号)。</span>
+<span id="cb3-198"><a href="#cb3-198"></a></span>
+<span id="cb3-199"><a href="#cb3-199"></a><span class="ss">-   </span>一个语句可以写到多行(不需任何续行标志), 也可以在一行连续写几个语句。</span>
+<span id="cb3-200"><a href="#cb3-200"></a></span>
+<span id="cb3-201"><a href="#cb3-201"></a><span class="ss">-   </span>SAS 语言中只要允许用一个空格的地方就可以加入任意多个空白(空格、制表符、回车)。</span>
+<span id="cb3-202"><a href="#cb3-202"></a></span>
+<span id="cb3-203"><a href="#cb3-203"></a><span class="ss">-   </span>允许用空格的地方是名字周围、运算符周围。</span>
+<span id="cb3-204"><a href="#cb3-204"></a></span>
+<span id="cb3-205"><a href="#cb3-205"></a><span class="fu">### SAS 程序规则示例</span></span>
+<span id="cb3-206"><a href="#cb3-206"></a></span>
+<span id="cb3-207"><a href="#cb3-207"></a><span class="in">``` {.sas .sas style="color"}</span></span>
+<span id="cb3-208"><a href="#cb3-208"></a><span class="in">proc print</span></span>
+<span id="cb3-209"><a href="#cb3-209"></a><span class="in">        data=c9501;</span></span>
+<span id="cb3-210"><a href="#cb3-210"></a><span class="in">    by avg;</span></span>
+<span id="cb3-211"><a href="#cb3-211"></a><span class="in">run;</span></span>
+<span id="cb3-212"><a href="#cb3-212"></a><span class="in">```</span></span>
+<span id="cb3-213"><a href="#cb3-213"></a></span>
+<span id="cb3-214"><a href="#cb3-214"></a>等价于：</span>
+<span id="cb3-215"><a href="#cb3-215"></a></span>
+<span id="cb3-216"><a href="#cb3-216"></a><span class="in">``` sas</span></span>
+<span id="cb3-217"><a href="#cb3-217"></a><span class="in">proc print data=c9501;by avg;run;</span></span>
+<span id="cb3-218"><a href="#cb3-218"></a><span class="in">```</span></span>
+<span id="cb3-219"><a href="#cb3-219"></a></span>
+<span id="cb3-220"><a href="#cb3-220"></a><span class="fu">## SAS 注释</span></span>
+<span id="cb3-221"><a href="#cb3-221"></a></span>
+<span id="cb3-222"><a href="#cb3-222"></a><span class="ss">-   </span>在SAS 程序中可以加入注释, 注释使用C 语言语法, 用 <span class="in">`/*`</span> 和 <span class="in">`*/`</span> 在两端界定注释, 这种注释可以出现在任何允许加入空格的位置, 可以占多行。</span>
+<span id="cb3-223"><a href="#cb3-223"></a></span>
+<span id="cb3-224"><a href="#cb3-224"></a><span class="ss">-   </span>另一种注释是把以星号 <span class="in">`*`</span> 开头的行作为注释。</span>
+<span id="cb3-225"><a href="#cb3-225"></a></span>
+<span id="cb3-226"><a href="#cb3-226"></a><span class="ss">-   </span>一般只把注释单独占一行或若干行, 不把注释与程序代码放在同 一行。</span>
+<span id="cb3-227"><a href="#cb3-227"></a></span>
+<span id="cb3-228"><a href="#cb3-228"></a><span class="ss">-   </span>注释的另一个作用是把某些代码暂时屏蔽使其不能运行。</span>
+<span id="cb3-229"><a href="#cb3-229"></a></span>
+<span id="cb3-230"><a href="#cb3-230"></a><span class="fu">## 常用指令</span></span>
+<span id="cb3-231"><a href="#cb3-231"></a></span>
+<span id="cb3-232"><a href="#cb3-232"></a>命令框在 SAS视窗管理系统中主菜单的下方,是一个执行 SAS 指令的工具，在该工具的文本输人框中可以输人指令,用于实现对窗口的管理功能。有些指令只能在指定窗口执行,而有些指令是可以用于大多数窗口,称为窗口通用指令。输入一个指令,点击命令框前面的 “√” 或按下 “ENTER” 键,就可以执行该指令</span>
+<span id="cb3-233"><a href="#cb3-233"></a></span>
+<span id="cb3-234"><a href="#cb3-234"></a>以下是几条比较常用的指令:</span>
+<span id="cb3-235"><a href="#cb3-235"></a></span>
+<span id="cb3-236"><a href="#cb3-236"></a>| 指令               | 作用                           |</span>
+<span id="cb3-237"><a href="#cb3-237"></a>|--------------------|--------------------------------|</span>
+<span id="cb3-238"><a href="#cb3-238"></a>| BYE                | 退出 SAS 系统                  |</span>
+<span id="cb3-239"><a href="#cb3-239"></a>| CLEAR              | 清除当前窗口中的内容           |</span>
+<span id="cb3-240"><a href="#cb3-240"></a>| END                | 退出当前窗口,返回编辑窗口      |</span>
+<span id="cb3-241"><a href="#cb3-241"></a>| ENDSAS             | 退出 SAS系统                   |</span>
+<span id="cb3-242"><a href="#cb3-242"></a>| FILE 'filename     | 将当前窗口的内容存储到指定文件 |</span>
+<span id="cb3-243"><a href="#cb3-243"></a>| HELP               | 进入帮助窗口                   |</span>
+<span id="cb3-244"><a href="#cb3-244"></a>| INCLUDE 'filename‘ | 调用指定文件                   |</span>
+<span id="cb3-245"><a href="#cb3-245"></a>| KEYS               | 进入快捷键定义窗口             |</span>
+<span id="cb3-246"><a href="#cb3-246"></a>| LIBNAME            | 确定 SAS 数据库的内容          |</span>
+<span id="cb3-247"><a href="#cb3-247"></a>| LOG                | 进入日志窗口                   |</span>
+<span id="cb3-248"><a href="#cb3-248"></a>| NUMS               | 打开编辑窗口的数字区           |</span>
+<span id="cb3-249"><a href="#cb3-249"></a>| NUMS OFF           | 关闭编辑窗口的数字区           |</span>
+<span id="cb3-250"><a href="#cb3-250"></a>| OPTIONS            | 进入参数定义窗口               |</span>
+<span id="cb3-251"><a href="#cb3-251"></a>| OUTPUT             | 进入输出窗口                   |</span>
+<span id="cb3-252"><a href="#cb3-252"></a>| PROGRAM            | 进入编辑窗口                   |</span>
+<span id="cb3-253"><a href="#cb3-253"></a>| RECALL             | 调用上次执行的程序             |</span>
+<span id="cb3-254"><a href="#cb3-254"></a>| SUBMIT             | 提交编辑窗口编辑的程序代码     |</span>
+<span id="cb3-255"><a href="#cb3-255"></a></span>
+<span id="cb3-256"><a href="#cb3-256"></a><span class="fu">## 功能键</span></span>
+<span id="cb3-257"><a href="#cb3-257"></a></span>
+<span id="cb3-258"><a href="#cb3-258"></a>上述有些指令可以通过SAS系统定义的功 能键来完成,这些功能键都是 SAS 系统预先设定的。在指令工具中键入“KEYS”,点击 “√”或按“ENTER”,或按“F9”,就可以查看和自定义功能键。用户可以自己定义功能,同时可以根据自己的习惯,改变功能键的位置。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
