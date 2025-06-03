@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-02},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 2, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-03},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 3, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6048,6 +6048,45 @@
       "统计软件",
       "SAS",
       "11-SAS 多个样本均数比较的方差分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-04-SAS-corr-reg.html",
+    "href": "Guide/SAS/25-06-04-SAS-corr-reg.html",
+    "title": "12-SAS 相关与回归分析",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "12-SAS 相关与回归分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-04-SAS-corr-reg.html#直线相关分析",
+    "href": "Guide/SAS/25-06-04-SAS-corr-reg.html#直线相关分析",
+    "title": "12-SAS 相关与回归分析",
+    "section": "1 直线相关分析",
+    "text": "1 直线相关分析\n两个变量之间的相关关系分析可以使用 corr过程。如两个变量都来自正态分布的总体,可以作直线相关分析,计算 Pearson 相关系数。\n以下数据和程序用来说明如何计算直线相关系数。\n数据集可从 Data-collection 处下载。\n如可以选择如下方式载入数据集：\n\n数据集载入 libname 目录下：\n\nlibname libname ‘C:\\syp\\data’;\ndata = dataset;\n    set libname.spec-data;\n    where spec-condition;\n    keep var1 var2...;\n    drop var1 var2...;\n    format var1 dollar12. var2 monyy.;\nrun;\n程序说明： - libname 语句定义了将在 SAS 的环境中的 SAS 资源管理器下新建一个工作目录； - ‘C:\\syp\\data’ 是数据集所在的路径，指定了你想要导入的数据； - data = dataset 是创建一个新的数据集，dataset 是数据集的名称； - set libname.spec-data 是从指定的库中读取数据集； - where spec-condition 是指定数据集的条件筛选； - keep var1 var2... 是指定保留的数据变量； - drop var1 var2... 是指定删除的数据变量； - format var1 dollar12. var2 monyy. 是指定变量的格式。 - run; 语句结束数据步。\n\n或者直接使用 infile 语句读取数据：\n\ndata 数据集名;\n    infile ‘文件路径+文件名’ &lt;可选参数&gt;;\n    input 变量1 变量2...;\nrun;\n\n\n代码\n%%SAS\ndata prg7_1;\n    input x y @@;\ncards;\n12.81 10.23\n11.89 10.01\n13.51 11.02\n10.82 9.08\n14.12 12.89\n12.53 11.28\n11.94 10.59\n11.23 10.88\n14.72 12.6\n12.45 11.26\n11.30 10.02\n12.08 11.55\n;\nproc corr;\n    var x y;\nrun;\n\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 17040\n\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nCORR 过程\n\n\n\n\n\n\n2 变量:\nx y\n\n\n\n\n\n\n\n\n\n\n简单统计量\n\n\n变量\n数目\n均值\n标准差\n总和\n最小值\n最大值\n\n\n\n\nx\n12\n12.45000\n1.18244\n149.40000\n10.82000\n14.72000\n\n\ny\n12\n10.95083\n1.08520\n131.41000\n9.08000\n12.89000\n\n\n\n\n\n\n\n\n\n\nPearson 相关系数, N = 12\nProb &gt; |r|, H0: Rho=0\n\n\n \nx\ny\n\n\n\n\nx\n\n\n1.00000\n\n\n \n\n\n\n\n0.81599\n\n\n0.0012\n\n\n\n\ny\n\n\n0.81599\n\n\n0.0012\n\n\n\n\n1.00000\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n1.1 结果说明\ncorr 过程首先给出两个变量的一些简单统计量,如例数、均数、标准差、总和、最小值和最大值。\n随后输出相关分析的结果,结果中有 Pearson 相关系数,即直线相关系数,还有判断该相关系数是否来自总体相关系数为0的总体假设检验的 P 值(当 \\(H_0:Rho=0\\) 时,\\(Prob&gt;r\\)),这两个值位于两个变量名所交叉处,相关系数位于上方,检验结果的 P 值位于下方。\n这里 Pearson 相关系数为 r=0.815 99,所对应的 P=0.001 2&lt;0.05说明两个变量之间存在正相关关系,即一个变量的值增大时,另一个变量的值也相应增大。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "12-SAS 相关与回归分析"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-04-SAS-corr-reg.html#直线回归分析",
+    "href": "Guide/SAS/25-06-04-SAS-corr-reg.html#直线回归分析",
+    "title": "12-SAS 相关与回归分析",
+    "section": "2 直线回归分析",
+    "text": "2 直线回归分析\n直线回归分析是研究一个因变量与一个或多个自变量之间的线性关系。SAS 中可以使用 reg 过程和 nlin 过程进行直线回归分析。\n直线回归分析是回归分析中较为简单的一种,即两个变量的数值在散点图上呈直线变化,完成直线回归可用 reg 过程。\n\n\n代码\n%%SAS\ndata prg_reg;\n    input x y @@;\ncards;\n56 5.32 32 3.21 41 4.67 51 5.03 25 3.01\n35 3.57 21 2.98 47 3.93 62 5.62\n;\nproc reg;\n    model y = x;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nREG 过程\n模型: MODEL1\n因变量: y\n\n\n\n\n\n\n\n\n\n读取的观测数\n9\n\n\n使用的观测数\n9\n\n\n\n\n\n\n\n\n\n\n方差分析\n\n\n源\n自由度\n平方\n和\n均方\nF 值\nPr &gt; F\n\n\n\n\n模型\n1\n7.61077\n7.61077\n59.15\n0.0001\n\n\n误差\n7\n0.90072\n0.12867\n \n \n\n\n校正合计\n8\n8.51149\n \n \n \n\n\n\n\n\n\n\n\n\n\n均方根误差\n0.35871\nR 方\n0.8942\n\n\n因变量均值\n4.14889\n调整 R 方\n0.8791\n\n\n变异系数\n8.64598\n \n \n\n\n\n\n\n\n\n\n\n\n参数估计\n\n\n变量\n自由度\n参数\n估计\n标准\n误差\nt 值\nPr &gt; |t|\n\n\n\n\nIntercept\n1\n1.29098\n0.39037\n3.31\n0.0130\n\n\nx\n1\n0.06952\n0.00904\n7.69\n0.0001\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nREG 过程\n模型: MODEL1\n因变量: y\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n2.1 model 语句常用选项\n\nstb 选项：model y = x / stb 计算标准化回归系数,即将自变量和因变量都标准化后进行回归分析,得到的回归系数可以直接比较各个自变量对因变量的影响大小。\np 选项：model y = x / p 计算预测值和残差,即在回归分析中计算每个观测值的预测值和残差,可以用于评估模型的拟合效果。\nclb 选项：model y = x / clb 计算回归系数的置信区间,即在回归分析中计算每个回归系数的置信区间,可以用于评估回归系数的可靠性。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "12-SAS 相关与回归分析"
     ]
   }
 ]
