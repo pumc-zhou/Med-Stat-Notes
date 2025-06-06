@@ -87,7 +87,11 @@ website:
     right:
       #- icon: book
       - text: "Books"
-        file: navbar/book.qmd
+        menu:
+          - text: "Small Talk"
+            file: navbar/small_talk/book.qmd
+          - text: "Translation"
+            file: navbar/translation/medicine.qmd
 
     tools:
       - icon: github

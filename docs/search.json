@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-05},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 5, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-06},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 6, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6165,6 +6165,189 @@
       "统计软件",
       "SAS",
       "12-SAS 相关与回归分析"
+    ]
+  },
+  {
+    "objectID": "navbar/translation/medicine.html",
+    "href": "navbar/translation/medicine.html",
+    "title": "",
+    "section": "",
+    "text": "代码\n\n\n\n\nFundamentals of Machine Learning and Deep Learning in Medicine"
+  },
+  {
+    "objectID": "navbar/small_talk/book.html",
+    "href": "navbar/small_talk/book.html",
+    "title": "公共卫生相关的书籍",
+    "section": "",
+    "text": "读的书有点乱，主要都在微信读书看，部分是纸质书，介绍主要以我看过或在看的书为主。\n\n1 Maybe you will be interested\n对于刚接触统计的朋友，可以先看看《女士品茶：统计学如何变革了科学和生活》这本书，也会他能激发你的一些对于统计学（家们）的兴趣，通过一些有趣的小故事，带你走进统计学的世界。\n2025-03-30，出于对 THE LADY TASTING TEA 的兴趣，后续将会整理一下出现的主要统计学家和他的主要成果（公式）。\n\n\n2 Basic\n考研的话，除了人卫第八版是一个通用教材，其他的院校各有不同，比如说赵耐青、方积乾和贺佳，根据院校给的参考书目来选择，这几个人的书都买了看过一下，个人主要用过人卫版和姜晶梅的《医学统计学》，各有见长。\n\n\n3 Advance\n提升部分可以看看 Springer 出版的 Mathematical Models in Epidemiology ，2023年科学出版社出版了中文版 《流行病学中的数学模型》\n\nThe book is a comprehensive, self-contained introduction to the mathematical modeling and analysis of disease transmission models. It includes (i) an introduction to the main concepts of compartmental models including models with heterogeneous mixing of individuals and models for vector-transmitted diseases, (ii) a detailed analysis of models for important specific diseases, including tuberculosis, HIV/AIDS, influenza, Ebola virus disease, malaria, dengue fever and the Zika virus, (iii) an introduction to more advanced mathematical topics, including age structure, spatial structure, and mobility, and (iv) some challenges and opportunities for the future.\nThere are exercises of varying degrees of difficulty, and projects leading to new research directions. For the benefit of public health professionals whose contact with mathematics may not be recent, there is an appendix covering the necessary mathematical background. There are indications which sections require a strong mathematical background so that the book can be useful for both mathematical modelers and public health professionals.\n\nend."
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-2.html",
+    "href": "Guide/SAS/25-06-06-chi2-2.html",
+    "title": "14-SAS 卡方检验2-四格表资料卡方检验",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "14-SAS 卡方检验2-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-2.html#rxc表资料的chi2检验",
+    "href": "Guide/SAS/25-06-06-chi2-2.html#rxc表资料的chi2检验",
+    "title": "14-SAS 卡方检验2-四格表资料卡方检验",
+    "section": "1 RxC表资料的\\(\\chi^2\\)检验",
+    "text": "1 RxC表资料的\\(\\chi^2\\)检验\n行x列表资料根据行变量和列变量的类型,可以分成3种类型:双向无序列联表资料、单向有序列联表资料和双向有序列联表资料。\n对于这三种类型的资料可用 SAS 提供的 CMH 统计量( Cochran-Mantel-Haenszel Statisitic)进行分析,其包括3个统计量即:\n\nNonzero Correlation:行变量和列变量为非零相关,可用于双向有序的资料;\nRow Mean Scores Difer:行均数得分差值,可用于列变量为有序变量的资料;\nGeneral Association:行、列变量为一般关联,可用于双向无序的资料。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "14-SAS 卡方检验2-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-2.html#双向无序资料",
+    "href": "Guide/SAS/25-06-06-chi2-2.html#双向无序资料",
+    "title": "14-SAS 卡方检验2-四格表资料卡方检验",
+    "section": "2 双向无序资料",
+    "text": "2 双向无序资料\n双向无序资料的行变量和列变量都是名义变量,如职业、血型、疾病的类型等,这种变量的各水平间无内在的有序关联。分析这种资料,目的在于检验两变量的关系是否独立。\n\n2.1 示例\n以下是提取后的 Markdown 表格：\n\n\n\nABO 血型\nMN 血型-M\nMN 血型-N\nMN 血型-MN\n合计\n\n\n\n\nO\n431\n490\n902\n1823\n\n\nA\n388\n410\n800\n1598\n\n\nB\n495\n587\n950\n2032\n\n\nAB\n137\n179\n32\n348\n\n\n合计\n1451\n1666\n2684\n5801\n\n\n\n\n\n代码\n%%SAS\n/*程序14-1*/\ndata chi14_1;\n    input r c f @@;\ndatalines;\n1 1 431 1 2 490 1 3 902\n2 1 388 2 2 410 2 3 800\n3 1 495 3 2 587 3 3 950\n4 1 137 4 2 179 4 3 32\n;\nproe freq;\n    weight f;\n    tables r*c/cmh norow nocol nopercent;\nrun;\n\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 5264\n\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c表\n\n\nr\nc\n\n\n1\n2\n3\n合计\n\n\n\n\n1\n\n\n431\n\n\n\n\n490\n\n\n\n\n902\n\n\n\n\n1823\n\n\n\n\n2\n\n\n388\n\n\n\n\n410\n\n\n\n\n800\n\n\n\n\n1598\n\n\n\n\n3\n\n\n495\n\n\n\n\n587\n\n\n\n\n950\n\n\n\n\n2032\n\n\n\n\n4\n\n\n137\n\n\n\n\n179\n\n\n\n\n32\n\n\n\n\n348\n\n\n\n\n合计\n\n\n1451\n\n\n\n\n1666\n\n\n\n\n2684\n\n\n\n\n5801\n\n\n\n\n\n\n\n\n\n\n\n“c-r”的汇总统计量\n\n\n\n\n\n\nCochran-Mantel-Haenszel 统计量 （基于表评分）\n\n\n统计量\n备择假设\n自由度\n值\n概率\n\n\n\n\n1\n非零相关\n1\n51.3356\n&lt;.0001\n\n\n2\n行评分均值差异\n3\n148.8630\n&lt;.0001\n\n\n3\n一般关联\n6\n213.1248\n&lt;.0001\n\n\n\n\n\n\n总样本大小 = 5801",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "14-SAS 卡方检验2-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-2.html#单向有序资料",
+    "href": "Guide/SAS/25-06-06-chi2-2.html#单向有序资料",
+    "title": "14-SAS 卡方检验2-四格表资料卡方检验",
+    "section": "3 单向有序资料",
+    "text": "3 单向有序资料\n单向有序资料表示行变量是名义变量,列变量是有序变量,如疗效分为治愈、显效、好转、无效等。\nSAS对列变量为有序变量的资料,将列变量的各水平依次进行评分,再比较行变量的各水平间的平均得分的差别是否有统计学意义。\n对行变量为有序变量的资料则按双向有序资料进行处理。\n\n3.1 示例\n\n\n\n地区\n轻度（1）\n中度（2）\n较重度（3）\n严重（4）\n合计\n\n\n\n\n城市（1）\n2211\n949\n296\n71\n3527\n\n\n农村（2）\n670\n330\n115\n52\n1167\n\n\n合计\n2881\n1279\n411\n123\n4694\n\n\n\n\n\n代码\n%%SAS\n/*程序14-2*/\ndata chi14_2;\n    do r =1 to 2;\n        do c =1 to 4;\n            input f @@;\n            output;\n        end;\n    end;\ndatalines;\n2211 949 296 71 670 330 115 52\n;\nproe freq;\n    tables r*c/cmh nopercent nocol;\n    weight f;\nrun;\n\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 37228\n\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n行百分比\n\n\n\n\n\n\n\n\nr-c表\n\n\nr\nc\n\n\n1\n2\n3\n4\n合计\n\n\n\n\n1\n\n\n2211\n\n\n62.69\n\n\n\n\n949\n\n\n26.91\n\n\n\n\n296\n\n\n8.39\n\n\n\n\n71\n\n\n2.01\n\n\n\n\n3527\n\n\n \n\n\n\n\n2\n\n\n670\n\n\n57.41\n\n\n\n\n330\n\n\n28.28\n\n\n\n\n115\n\n\n9.85\n\n\n\n\n52\n\n\n4.46\n\n\n\n\n1167\n\n\n \n\n\n\n\n合计\n\n\n2881\n\n\n\n\n1279\n\n\n\n\n411\n\n\n\n\n123\n\n\n\n\n4694\n\n\n\n\n\n\n\n\n\n\n\n“c-r”的汇总统计量\n\n\n\n\n\n\nCochran-Mantel-Haenszel 统计量 （基于表评分）\n\n\n统计量\n备择假设\n自由度\n值\n概率\n\n\n\n\n1\n非零相关\n1\n20.3626\n&lt;.0001\n\n\n2\n行评分均值差异\n1\n20.3626\n&lt;.0001\n\n\n3\n一般关联\n3\n26.6849\n&lt;.0001\n\n\n\n\n\n\n总样本大小 = 4694\n\n\n\n\n\n\n\n\n\n3.2 结果说明\n选择 2   行评分均值差异 1   20.3626 &lt;.0001 作为此处单向有序资料卡方检验的结果，说明差异具有统计学意义。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "14-SAS 卡方检验2-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-2.html#双向有序资料",
+    "href": "Guide/SAS/25-06-06-chi2-2.html#双向有序资料",
+    "title": "14-SAS 卡方检验2-四格表资料卡方检验",
+    "section": "4 双向有序资料",
+    "text": "4 双向有序资料\n双向有序资料表示行变量和列变量都是有序变量,SAS在处理这种资料时,对行变量和列变量分别依次进行评分,然后检验这两个变量之间是否有相关关系。\n\n4.1 示例\n\n\n\n年龄\n-\n+\n++\n+++\n合计\n\n\n\n\n20~\n70\n22\n4\n2\n98\n\n\n30~\n27\n24\n9\n3\n63\n\n\n40~\n16\n23\n13\n7\n59\n\n\n≥50\n9\n20\n15\n14\n58\n\n\n合计\n122\n89\n41\n26\n278\n\n\n\n\n\n代码\n%%SAS\n/*程序14-3*/\ndata chi14_3;\n    do r = 1 to 4;\n        do c =1 to 4;\n            input f@@;\n            output;\n        end;\n    end;\ndatalines;\n70 22 4 2 27 24 9 3 16 23 13 7 9 20 15 14\n;\nproc freq;\n    weight f;\n    tables r*c/cmh nopercent norow nocol;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c表\n\n\nr\nc\n\n\n1\n2\n3\n4\n合计\n\n\n\n\n1\n\n\n70\n\n\n\n\n22\n\n\n\n\n4\n\n\n\n\n2\n\n\n\n\n98\n\n\n\n\n2\n\n\n27\n\n\n\n\n24\n\n\n\n\n9\n\n\n\n\n3\n\n\n\n\n63\n\n\n\n\n3\n\n\n16\n\n\n\n\n23\n\n\n\n\n13\n\n\n\n\n7\n\n\n\n\n59\n\n\n\n\n4\n\n\n9\n\n\n\n\n20\n\n\n\n\n15\n\n\n\n\n14\n\n\n\n\n58\n\n\n\n\n合计\n\n\n122\n\n\n\n\n89\n\n\n\n\n41\n\n\n\n\n26\n\n\n\n\n278\n\n\n\n\n\n\n\n\n\n\n\n“c-r”的汇总统计量\n\n\n\n\n\n\nCochran-Mantel-Haenszel 统计量 （基于表评分）\n\n\n统计量\n备择假设\n自由度\n值\n概率\n\n\n\n\n1\n非零相关\n1\n63.3895\n&lt;.0001\n\n\n2\n行评分均值差异\n3\n63.4505\n&lt;.0001\n\n\n3\n一般关联\n9\n71.1755\n&lt;.0001\n\n\n\n\n\n\n总样本大小 = 278\n\n\n\n\n\n\n\n\n\n4.2 结果说明\n这里是双向有序资料，所以选用 1   非零相关    1   63.3895 &lt;.0001 作为这里的结果，\\(\\chi^2_{CMH}=63.3895,P&lt;0.0001\\)，差异有统计学意义，说明年龄和严重等级有相关关系。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "14-SAS 卡方检验2-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-2.html#分层资料",
+    "href": "Guide/SAS/25-06-06-chi2-2.html#分层资料",
+    "title": "14-SAS 卡方检验2-四格表资料卡方检验",
+    "section": "5 分层资料",
+    "text": "5 分层资料\nCMH 统计量也可用于多层行x列表资料的卡方检验,即按一个或多个因素分层后,研究行变量和列变量间的联系。可通过控制分层变量的影响后,检验研究行变量和列变量的关系。\n\n5.1 示例\n\n\n\n性别\n组别\n使用(c=1)\n未使用(c=2)\n\n\n\n\n男(sex=1)\n病例组(r=1)\n5\n36\n\n\n男\n对照组(r=2)\n33\n645\n\n\n女(sex=2)\n病例组(r=1)\n10\n58\n\n\n女\n对照组(r=2)\n19\n518\n\n\n\n\n\n代码\n%%SAS\n/*程序14-4*/\ndata chi14_4;\n    do c=1 to 2;\n        do sex=1 to 2;\n            do r=1 to 2;\n                input f@@;\n                output;\n            end;\n        end;\n    end;\ndatalines;\n5 33 10 19 36 645 58 518\n;\nproc freq;\n    weight f;\n    tables sex*r*c/cmh nopercent norow nocol;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c的表 1\n\n\n控制“ sex=1”\n\n\nr\nc\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n5\n\n\n\n\n36\n\n\n\n\n41\n\n\n\n\n2\n\n\n33\n\n\n\n\n645\n\n\n\n\n678\n\n\n\n\n合计\n\n\n38\n\n\n\n\n681\n\n\n\n\n719\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c的表 2\n\n\n控制“ sex=2”\n\n\nr\nc\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n10\n\n\n\n\n58\n\n\n\n\n68\n\n\n\n\n2\n\n\n19\n\n\n\n\n518\n\n\n\n\n537\n\n\n\n\n合计\n\n\n29\n\n\n\n\n576\n\n\n\n\n605\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n“c-r”的汇总统计量控制“sex”\n\n\n\n\n\n\nCochran-Mantel-Haenszel 统计量 （基于表评分）\n\n\n统计量\n备择假设\n自由度\n值\n概率\n\n\n\n\n1\n非零相关\n1\n19.5130\n&lt;.0001\n\n\n2\n行评分均值差异\n1\n19.5130\n&lt;.0001\n\n\n3\n一般关联\n1\n19.5130\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n普通优比和相对风险\n\n\n统计量\n方法\n值\n95% 置信限\n\n\n\n\n优比\nMantel-Haenszel\n3.7560\n2.0158\n6.9983\n\n\n \nLogit\n3.7775\n2.0114\n7.0941\n\n\n相对风险（第 1 列）\nMantel-Haenszel\n3.3831\n1.9403\n5.8987\n\n\n \nLogit\n3.3953\n1.9390\n5.9452\n\n\n相对风险（第 2 列）\nMantel-Haenszel\n0.8992\n0.8336\n0.9700\n\n\n \nLogit\n0.9007\n0.8351\n0.9713\n\n\n\n\n\n\n\n\n\n\n优比齐性的\nBreslow-Day 检验\n\n\n\n\n卡方\n0.7029\n\n\n自由度\n1\n\n\nPr &gt; 卡方\n0.4018\n\n\n\n\n\n\n总样本大小 = 1324\n\n\n\n\n\n\n\n\n\n5.2 结果说明\n整个结果共分三个部分：\n\n第一部分输出的是输出两张列联表,分别是 sex=1 和 sex=2 时的二维列联表。\n第二部分输出在控制分层变量sex后总的检验 Cochran-Mantel-Haenszel的统计结果,由于行变量和列变量都只有两个,可以看作双向无序资料,三种结果是一致的,结果为: \\(\\chi^2_{CHM}=19.5130\\) ,所对应的 P&lt;0.0001,说明控制了性别因素后,使用别嘌呤醇与发生药物性皮疹是有关系的。\n第三部分是一些相对数统计量的比值,第一个是病例对照(优比),即病例-对照研究中的优势比(又称比值比,OR),有两个统计结果,个是用 Mantel-Haenszel 方法计算的值,另一个是用 Logit 方法计算的值,在病例-对照研究中,优势比是非常重要的指标,本例说明使用别嘌呤醇发生药物性皮疹的危险性是不使用该药危险性的4倍(3.7560或3.7775)。后面两个是 OR的 95%置信区间,本例为(2.015 8,6.9983)或(2.011 4,7.094 1),其结论与 CMH 结论相同。下面两个都是队列研究所用的统计指标(相对危险度,RR),区别在于分别将第1列或第2列作为发病情况。\n第四部分为对优势比进行 Breslow-Day 齐性检验,本例 \\(\\chi^2=0.7029,P=0.401 8&gt;0.05\\),说明不同分层之间的优势比具有齐性，可认为它们一致。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "14-SAS 卡方检验2-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-2.html#proc-freq-过程常用选项与语句详解",
+    "href": "Guide/SAS/25-06-06-chi2-2.html#proc-freq-过程常用选项与语句详解",
+    "title": "14-SAS 卡方检验2-四格表资料卡方检验",
+    "section": "6 PROC FREQ 过程常用选项与语句详解",
+    "text": "6 PROC FREQ 过程常用选项与语句详解\n\n6.1 PROC FREQ 过程的基本格式\nproc freq &lt;选项&gt;;\n    by 变量名1 &lt;变量名2&gt;...;\n    tables 表格定义项 &lt;选项&gt;;\n    output out=输出数据集 &lt;关键词&gt;;\n    test &lt;关键词&gt;;\n    weight 权重变量;\nrun;\n\n各语句说明：\n\nby：用于对分组变量进行分层分析，需先排序。\ntables：用于指定交叉表分析的变量及表格结构，是最常用的语句。\noutput：将分析结果输出为数据集，便于后续处理。\ntest：用于指定统计检验，如卡方检验、Fisher精确检验等。\nweight：指定频数变量，适用于加权样本数据。\n\n\n\n\n6.2 TABLES 语句常用选项详解\nTABLES 是 PROC FREQ 中的核心语句之一，除了基础的交叉表功能，还可通过附加选项实现更复杂的统计分析：\n\nriskdiff\n用于二分类四格表（2×2表）中，计算两组间的事件发生率差异（即风险差 Risk Difference, RD）及其置信区间。\n提供的指标包括：\n\n每行的事件发生率（即比例或风险）\n风险差（两行比例之差）\n渐近标准误（依据正态分布近似）\n渐近 95% 置信区间\n精确 95% 置信区间（基于二项分布）\n\n应用场景：队列研究、临床试验中对比暴露组与对照组的疾病发生率。\ntables exposure*outcome / riskdiff;\n\n\nrelrisk\n用于四格表中，计算相对风险（Relative Risk, RR）或比值比（Odds Ratio, OR），及其置信区间。\n\n若数据源自队列研究：计算 RR（相对风险）\n若数据源自病例对照研究：计算 OR（比值比）\n\n返回值包括：\n\nRR 或 OR 的点估计\n渐近 95% 置信区间\n\n使用示例：\ntables exposure*disease / relrisk;\n\n\n\n6.3 其他常用选项：\n\nchisq：卡方检验（包括Pearson卡方、Yates校正和Fisher精确检验）\nnocol / norow / nopercent：抑制列百分比、行百分比、总百分比的显示\nexpected：显示期望频数（用于判断适用卡方检验的前提）\nmeasures：输出列联表的各种关联性度量指标，如 Phi、Cramer’s V、Contingency Coefficient 等\n\n\n\n6.4 补充说明：OUTPUT 与 TEST 语句\n\noutput 语句常用关键字：\n\nout=：指定输出结果数据集\nn nlevel：输出各变量频数和水平数\npct：输出比例\nchisq：输出卡方值\nrelrisk：输出相对风险及置信区间\n\n例如：\noutput out=result_freq chisq relrisk;\n\n\ntest 语句常用于非参数检验，如：\ntest chisq;\n\n\n\n\n6.5 示例代码\nproc freq data=clinic;\n    tables treatment*response / chisq riskdiff relrisk expected;\n    output out=freq_results chisq relrisk;\nrun;\n\n\n\n6.6 适用场景总结\n\n\n\n场景\n推荐选项\n\n\n\n\n检验两个分类变量是否独立\nchisq\n\n\n计算列联表中比例差异（风险差）\nriskdiff\n\n\n计算 RR/OR 及其区间\nrelrisk\n\n\n临床或流行病学数据分层分析\nby, tables",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "14-SAS 卡方检验2-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-1.html",
+    "href": "Guide/SAS/25-06-06-chi2-1.html",
+    "title": "13-SAS 卡方检验1-四格表资料卡方检验",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "13-SAS 卡方检验1-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-1.html#chi2概述",
+    "href": "Guide/SAS/25-06-06-chi2-1.html#chi2概述",
+    "title": "13-SAS 卡方检验1-四格表资料卡方检验",
+    "section": "1 \\(\\chi^2\\)概述",
+    "text": "1 \\(\\chi^2\\)概述\n卡方检验是一种基于卡方分布的假设检验方法，主要用于检验两个离散变量之间是否存在关联（独立性检验）或理论分布与观测分布是否一致（适配度检验）。其基本思想是比较实际观测值与期望值之间的偏离程度，卡方值越小，表示实际值越接近期望值。\n关于卡方检验的具体论述可查看本网站的 Learn/Basic 下的 卡方检验的章节。\n在 SAS 中卡方检验主要使用 freq 语句来完成。freq 语句主要用于产生一维或多维的频数表和列联表,并对列联表资料计算各种统计量。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "13-SAS 卡方检验1-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-1.html#基本公式",
+    "href": "Guide/SAS/25-06-06-chi2-1.html#基本公式",
+    "title": "13-SAS 卡方检验1-四格表资料卡方检验",
+    "section": "2 基本公式",
+    "text": "2 基本公式\n\n\n代码\n%%SAS\n/*程序13-1*/\ndata chi13_1;\n    set 'Data\\prg8_1.sas7bdat';  /* 从已有数据集读取 */\nrun;\n\nproc freq;\n    tables group*LDL/chisq expected;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n期望\n\n\n百分比\n\n\n行百分比\n\n\n列百分比\n\n\n\n\n\n\n\n\ngroup-LDL表\n\n\ngroup\nLDL\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n41\n\n\n25.166\n\n\n16.60\n\n\n48.81\n\n\n55.41\n\n\n\n\n43\n\n\n58.834\n\n\n17.41\n\n\n51.19\n\n\n24.86\n\n\n\n\n84\n\n\n \n\n\n34.01\n\n\n \n\n\n \n\n\n\n\n2\n\n\n33\n\n\n48.834\n\n\n13.36\n\n\n20.25\n\n\n44.59\n\n\n\n\n130\n\n\n114.17\n\n\n52.63\n\n\n79.75\n\n\n75.14\n\n\n\n\n163\n\n\n \n\n\n65.99\n\n\n \n\n\n \n\n\n\n\n合计\n\n\n74\n\n\n29.96\n\n\n\n\n173\n\n\n70.04\n\n\n\n\n247\n\n\n100.00\n\n\n\n\n\n\n\n\n\n\n\n表“LDL-group”的统计量\n\n\n\n\n\n\n统计量\n自由度\n值\n概率\n\n\n\n\n卡方\n1\n21.5540\n&lt;.0001\n\n\n似然比卡方检验\n1\n20.9621\n&lt;.0001\n\n\n连续调整卡方\n1\n20.2142\n&lt;.0001\n\n\nMantel-Haenszel 卡方\n1\n21.4667\n&lt;.0001\n\n\nPhi 系数\n \n0.2954\n \n\n\n列联系数\n \n0.2833\n \n\n\nCramer V\n \n0.2954\n \n\n\n\n\n\n\n\n\n\n\nFisher 的精确检验\n\n\n\n\n单元格 (1,1) 频数 (F)\n41\n\n\n左侧 Pr &lt;= F\n1.0000\n\n\n右侧 Pr &gt;= F\n&lt;.0001\n\n\n \n \n\n\n表概率 (P)\n&lt;.0001\n\n\n双侧 Pr &lt;= P\n&lt;.0001\n\n\n\n\n\n\n样本大小 = 247\n\n\n\n\n\n\n\n\n2.1 结果说明\n\n表“LDL-group”的统计量 部分为，检验的结果及3个分析行列变量的关联性统计量。首先是检验的结果,其中第一列列出了各种进行，检验的方法,从上至下分别为卡方(基本公式计算法)似然比法连续性校正法、Mantel-Haenszel法,第二列为自由度,第三列为各种方法计算所得的值,第四列为x值所对应的概率值(P值)。根据不同的资料可选择不同的结果。本例由于总频数&gt;40所有的理论频数均&gt;5,所以选用基本公式法,则 \\(\\chi^2=21.5540,P&lt;0.0001\\),说明两组异常率差别有统计学意义,冠心病患者的低密度脂蛋白异常率高 于正常人。\n检验结果的下方列出的3个分析行列变量的关联性统计量,分别为:Phi 系数、列联系数和 Cramer V 统计量,它们的值都在 -1 和 1 之间,绝对值越大说明关系越密切。\nFisher精确概率法结果,输出结果包括了四格表中第1行第1列所在单元格的实际频数及左侧、右侧概率、表概率和双侧概率其中左侧概率为四格表边缘合计数固定条件下表中第1行第1列所在单元格的实际频数(本例为 41)不断减少而至不可能再减少所构成的所有四格表(包括41)的概率之和,为1.0000。右侧慨率则为所有第1行第1列单元格的实际频数 ≥99 的所有四格表的概率之和,其&lt;0.0001。表概率即为当第1行第1列单元格的实际频数等于 41 时四格表的概率,其 &lt;0.0001。双侧概率则以本四格表出现的概率为 P,而将 \\(P≤P\\) ,的所有四格表的概率相加所得,本例为&lt;0.0001,结论与 \\(\\chi^2\\) 检验一致。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "13-SAS 卡方检验1-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-1.html#连续性校正公式",
+    "href": "Guide/SAS/25-06-06-chi2-1.html#连续性校正公式",
+    "title": "13-SAS 卡方检验1-四格表资料卡方检验",
+    "section": "3 连续性校正公式",
+    "text": "3 连续性校正公式\n当 \\(1≤T&lt;5\\) ,且 \\(n≥40\\) 时,需选用连续性校正公式计算的结果.\n\n\n代码\n%%SAS\n/*程序13-2*/\ndata chi13_2;\n    set 'Data\\prg8_2.sas7bdat';  /* 从已有数据集读取 */\nrun;\n\nproc freq;\n    tables group*eff/chisq expected norow nocol nopercent;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n期望\n\n\n\n\n\n\n\n\ngroup-eff表\n\n\ngroup\neff\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n31\n\n\n28.5\n\n\n\n\n1\n\n\n3.5\n\n\n\n\n32\n\n\n \n\n\n\n\n2\n\n\n26\n\n\n28.5\n\n\n\n\n6\n\n\n3.5\n\n\n\n\n32\n\n\n \n\n\n\n\n合计\n\n\n57\n\n\n\n\n7\n\n\n\n\n64\n\n\n\n\n\n\n\n\n\n\n\n表“eff-group”的统计量\n\n\n\n\n\n\n统计量\n自由度\n值\n概率\n\n\n\n\n卡方\n1\n4.0100\n0.0452\n\n\n似然比卡方检验\n1\n4.4016\n0.0359\n\n\n连续调整卡方\n1\n2.5664\n0.1092\n\n\nMantel-Haenszel 卡方\n1\n3.9474\n0.0469\n\n\nPhi 系数\n \n0.2503\n \n\n\n列联系数\n \n0.2428\n \n\n\nCramer V\n \n0.2503\n \n\n\n\nWARNING: 50% 的单元格包含小于\n5 的期望计数。卡方不是有效的检验。\n\n\n\n\n\n\n\n\n\n\n\nFisher 的精确检验\n\n\n\n\n单元格 (1,1) 频数 (F)\n31\n\n\n左侧 Pr &lt;= F\n0.9946\n\n\n右侧 Pr &gt;= F\n0.0521\n\n\n \n \n\n\n表概率 (P)\n0.0467\n\n\n双侧 Pr &lt;= P\n0.1042\n\n\n\n\n\n\n样本大小 = 64",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "13-SAS 卡方检验1-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-1.html#配对四格表资料的chi2检验",
+    "href": "Guide/SAS/25-06-06-chi2-1.html#配对四格表资料的chi2检验",
+    "title": "13-SAS 卡方检验1-四格表资料卡方检验",
+    "section": "4 配对四格表资料的\\(\\chi^2\\)检验",
+    "text": "4 配对四格表资料的\\(\\chi^2\\)检验\n配对四格表的主要目的是为了判断行列变量的一致性。\n\n\n代码\n%%SAS\n/*程序13-3*/\ndata chi13_3;\n    set 'Data\\prg8_3.sas7bdat';  /* 从已有数据集读取 */\nrun;\n\nproc freq;\n    tables A*B/agree;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n百分比\n\n\n行百分比\n\n\n列百分比\n\n\n\n\n\n\n\n\nA-B表\n\n\nA\nB\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n15\n\n\n30.00\n\n\n62.50\n\n\n93.75\n\n\n\n\n9\n\n\n18.00\n\n\n37.50\n\n\n26.47\n\n\n\n\n24\n\n\n48.00\n\n\n \n\n\n \n\n\n\n\n2\n\n\n1\n\n\n2.00\n\n\n3.85\n\n\n6.25\n\n\n\n\n25\n\n\n50.00\n\n\n96.15\n\n\n73.53\n\n\n\n\n26\n\n\n52.00\n\n\n \n\n\n \n\n\n\n\n合计\n\n\n16\n\n\n32.00\n\n\n\n\n34\n\n\n68.00\n\n\n\n\n50\n\n\n100.00\n\n\n\n\n\n\n\n\n\n\n\n表“B-A”的统计量\n\n\n\n\n\n\nMcNemar 检验\n\n\n卡方\n自由度\nPr &gt; 卡方\n\n\n\n\n6.4000\n1\n0.0114\n\n\n\n\n\n\n\n\n\n\n简单 Kappa 系数\n\n\n估计\n标准\n误差\n95% 置信限\n\n\n\n\n0.5942\n0.1085\n0.3815\n0.8068\n\n\n\n\n\n\n样本大小 = 50\n\n\n\n\n\n\n\n\n\n\n\n\n\n4.1 结果说明\n\n第一部分是 McNemar 检验的统计量、自由度和P值,本例为x=6.400 0,P=0.011 4&lt;0.05,说明两种培养基的阳性率的差异有统计学意义,甲培养基的阳性率高于乙培养基。\n第二部分是一致性检验的Kappa值、渐近标准误和 95% 置信区间,本例 Kappa 值为 0.594 2,其 95% 置信区间为(0.3815,0.8068)。\n根据经验 Kappa≥0.75 表明两者一致性较好,0.4≤Kappa&lt;0.75 表明一致性一般,Kappa&lt;0.4 则表明一致性较差。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "13-SAS 卡方检验1-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-06-chi2-1.html#fisher确切概率法",
+    "href": "Guide/SAS/25-06-06-chi2-1.html#fisher确切概率法",
+    "title": "13-SAS 卡方检验1-四格表资料卡方检验",
+    "section": "5 Fisher确切概率法",
+    "text": "5 Fisher确切概率法\n当四格表任一格子理论频数 T&lt;1,或n&lt;40时,需使用连续性校正公式（Fisher确切概率法）计算的结果。\n\n\n代码\n%%SAS\n/*程序13-4*/\ndata chi13_4;\n    set 'Data\\prg8_4.sas7bdat';  /* 从已有数据集读取 */\nrun;\n\nproc freq;\n    tables group*eff/exact;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n百分比\n\n\n行百分比\n\n\n列百分比\n\n\n\n\n\n\n\n\ngroup-eff表\n\n\ngroup\neff\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n17\n\n\n44.74\n\n\n94.44\n\n\n47.22\n\n\n\n\n1\n\n\n2.63\n\n\n5.56\n\n\n50.00\n\n\n\n\n18\n\n\n47.37\n\n\n \n\n\n \n\n\n\n\n2\n\n\n19\n\n\n50.00\n\n\n95.00\n\n\n52.78\n\n\n\n\n1\n\n\n2.63\n\n\n5.00\n\n\n50.00\n\n\n\n\n20\n\n\n52.63\n\n\n \n\n\n \n\n\n\n\n合计\n\n\n36\n\n\n94.74\n\n\n\n\n2\n\n\n5.26\n\n\n\n\n38\n\n\n100.00\n\n\n\n\n\n\n\n\n\n\n\n表“eff-group”的统计量\n\n\n\n\n\n\n统计量\n自由度\n值\n概率\n\n\n\n\n卡方\n1\n0.0059\n0.9390\n\n\n似然比卡方检验\n1\n0.0059\n0.9390\n\n\n连续调整卡方\n1\n0.0000\n1.0000\n\n\nMantel-Haenszel 卡方\n1\n0.0057\n0.9398\n\n\nPhi 系数\n \n-0.0124\n \n\n\n列联系数\n \n0.0124\n \n\n\nCramer V\n \n-0.0124\n \n\n\n\nWARNING: 50% 的单元格包含小于\n5 的期望计数。卡方不是有效的检验。\n\n\n\n\n\n\n\n\n\n\n\nFisher 的精确检验\n\n\n\n\n单元格 (1,1) 频数 (F)\n17\n\n\n左侧 Pr &lt;= F\n0.7297\n\n\n右侧 Pr &gt;= F\n0.7824\n\n\n \n \n\n\n表概率 (P)\n0.5121\n\n\n双侧 Pr &lt;= P\n1.0000\n\n\n\n\n\n\n样本大小 = 38\n\n\n\n\n\n\n\n\n5.1 结果说明\n这里使用的Fisher确切概率法，所以应该查看 Fisher 的精确检验 中的结果，这里以双侧为例，得到 P 值为 1.0000，P&gt;0.05，即说明尚不能认为两种疗法的的总体有效率有不同。\n\n\n5.2 P=1.0000\n这里的 P=1.0000 有一点反直觉，理论上，Fisher 确切概率法的 P 值范围在 0 到 1 之间，但在某些极端情况下可能出现 P=1 的结果。\n当实际观测数据完全符合零假设（即两组完全无差异）时，所有可能的排列组合中，只有当前观测数据一种情况满足零假设，且其他所有可能的排列均与零假设偏离更大（即概率更低）。此时：\n\n单侧检验：若零假设为 “组 1≤组 2”，而观测数据显示两组率完全相等（如 a/(a+b) = c/(c+d)），则所有偏离零假设的情况（如组 1 &gt; 组 2）的概率之和为 0，因此 P=1（表示 “观测数据与零假设完全一致的概率为 100%”）。\n双侧检验：若考虑两组率相等的情况，且所有偏离零假设的排列（无论是组 1 &gt; 组 2 还是组 1 &lt; 组 2）的概率之和为 0，则 P=1。\n\n注意事项\n\nP=1 的本质：并非表示 “零假设一定成立”，而是在当前样本量和数据下，没有任何证据显示两组存在差异。\n小样本局限性：Fisher 确切概率法适用于小样本，但当样本量较大时，可能因计算量过大而不适用，此时可改用卡方检验或连续性校正卡方检验。\n实际应用场景：P=1 通常出现在两组数据完全一致（如发生率相同）或极端稀疏数据（如事件发生数为 0）的情况下，属于理论上的特殊情况，实际研究中较为罕见。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "13-SAS 卡方检验1-四格表资料卡方检验"
     ]
   }
 ]
