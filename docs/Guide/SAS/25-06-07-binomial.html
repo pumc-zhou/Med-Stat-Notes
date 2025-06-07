@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simon Zhou">
 
-<title>04-SAS 程序基础 – 医学统计学笔记</title>
+<title>15-SAS 对二项分布的概率计算与假设检验 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/SAS/25-05-25-SAS-DATA-LIB.html" rel="next">
-<link href="../../Guide/SAS/25-05-22-SAS-Base.html" rel="prev">
+<link href="../../Guide/Stata/25-03-09-Stata-intro.html" rel="next">
+<link href="../../Guide/SAS/25-06-06-chi2-2.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -119,13 +119,42 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<meta property="og:title" content="04-SAS 程序基础 – 医学统计学笔记">
-<meta property="og:description" content="一个简单的 SAS 程序示例">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="15-SAS 对二项分布的概率计算与假设检验 – 医学统计学笔记">
+<meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/SAS/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="04-SAS 程序基础 – 医学统计学笔记">
-<meta name="twitter:description" content="一个简单的 SAS 程序示例">
+<meta name="twitter:title" content="15-SAS 对二项分布的概率计算与假设检验 – 医学统计学笔记">
+<meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -241,7 +270,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-24-SAS-program.html">04-SAS 程序基础</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-06-07-binomial.html">15-SAS 对二项分布的概率计算与假设检验</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -498,7 +527,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">04-SAS 程序基础</span></a>
   </div>
 </li>
@@ -564,7 +593,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
   </div>
 </li>
@@ -777,19 +806,22 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
     <h2 id="toc-title">该页面内容</h2>
    
+  <ul>
+  <li><a href="#sas-与-binomial" id="toc-sas-与-binomial" class="nav-link active" data-scroll-target="#sas-与-binomial"><span class="header-section-number">1</span> SAS 与 Binomial</a></li>
+  <li><a href="#阳性事件发生的概率" id="toc-阳性事件发生的概率" class="nav-link" data-scroll-target="#阳性事件发生的概率"><span class="header-section-number">2</span> 阳性事件发生的概率</a></li>
+  <li><a href="#总体率的区间估计正态近似法" id="toc-总体率的区间估计正态近似法" class="nav-link" data-scroll-target="#总体率的区间估计正态近似法"><span class="header-section-number">3</span> 总体率的区间估计(正态近似法)</a>
   <ul class="collapse">
-  <li><a href="#什么是-sas-程序" id="toc-什么是-sas-程序" class="nav-link active" data-scroll-target="#什么是-sas-程序"><span class="header-section-number">1</span> 什么是 SAS 程序</a></li>
-  <li><a href="#sas-帮助" id="toc-sas-帮助" class="nav-link" data-scroll-target="#sas-帮助"><span class="header-section-number">2</span> SAS 帮助</a></li>
+  <li><a href="#程序说明" id="toc-程序说明" class="nav-link" data-scroll-target="#程序说明"><span class="header-section-number">3.1</span> 程序说明</a></li>
+  </ul></li>
   </ul>
-<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-05-24-SAS-program.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-06-07-binomial.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-24-SAS-program.html">04-SAS 程序基础</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-06-07-binomial.html">15-SAS 对二项分布的概率计算与假设检验</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">04-SAS 程序基础</h1>
-<p class="subtitle lead">一个简单的 SAS 程序示例</p>
+<div class="quarto-title-block"><div><h1 class="title">15-SAS 对二项分布的概率计算与假设检验</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
 </div>
 
 
@@ -806,10 +838,16 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年5月24日</p>
+      <p class="date">2025年6月7日</p>
     </div>
   </div>
   
+    <div>
+    <div class="quarto-title-meta-heading">修改于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年6月7日</p>
+    </div>
+  </div>
     
   </div>
   
@@ -818,40 +856,41 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<div id="1de55778" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> saspy</span>
-<span id="cb1-2"><a href="#cb1-2"></a>sas <span class="op">=</span> saspy.SASsession()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="528d0bf1" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="sas-与-binomial" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="sas-与-binomial"><span class="header-section-number">1</span> SAS 与 Binomial</h2>
+<p>在 SAS 中,与二项分布有关的函数为 <code>probbnm(p,n,r)</code>,函数中 <code>p</code> 为某事件的发生概率,<code>n</code> 为样本含量，为阳性事件的例数,该函数可以计算出发生阳性事件的例数从 <code>0</code> 到 <code>r</code> 的累计概率。利用该函数可以对服从二项分布的数据进行概率计算和假设检验。</p>
+</section>
+<section id="阳性事件发生的概率" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="阳性事件发生的概率"><span class="header-section-number">2</span> 阳性事件发生的概率</h2>
+<p>某种医学技能测试的通过率为0.80。今有10例学生参加测试,试分别计算这10例学生中有6、7、8人获得通过的概率。本例 π=0.8,n=10,计算 r=6、7、8的概率.</p>
+<div id="4c056ee8" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="op">/*</span>程序<span class="dv">15</span><span class="op">-</span><span class="dv">1</span><span class="op">*/</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>data binomial15_1<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    do r<span class="op">=</span><span class="dv">6</span> to <span class="dv">8</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>        p1<span class="op">=</span>probbnml(<span class="fl">0.8</span>,<span class="dv">10</span>,r)<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        p2<span class="op">=</span>probbnml(<span class="fl">0.8</span>,<span class="dv">10</span>,r<span class="op">-</span><span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        p<span class="op">=</span>p1<span class="op">-</span>p2<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>        output<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    end<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    var r p<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Using SAS Config named: winlocal
-SAS Connection established. Subprocess id is 34172
+SAS Connection established. Subprocess id is 30048
 </code></pre>
 </div>
-</div>
-<div id="05ca81e8" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="什么是-sas-程序" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="什么是-sas-程序"><span class="header-section-number">1</span> 什么是 SAS 程序</h2>
-<p>SAS 程序是在编辑器窗口中编辑的一段SAS语句,提交后可以在日志窗口中显示有关信息和提示,在输出窗口中显示运行过程的结果。下面通过一个简单的例子,来说明程序的结构。</p>
-<section id="份肝炎患者血清谷丙转氨酶计算均数" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="份肝炎患者血清谷丙转氨酶计算均数"><span class="header-section-number">1.1</span> 12份肝炎患者血清谷丙转氨酶——计算均数</h3>
-<div id="ff89a3db" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb4-2"><a href="#cb4-2"></a>data prg1_1<span class="op">;</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>    <span class="bu">input</span> x <span class="op">@@;</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>datalines<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="dv">60</span> <span class="dv">142</span> <span class="dv">195</span> <span class="dv">80</span> <span class="dv">242</span> <span class="dv">220</span> <span class="dv">190</span> <span class="dv">25</span> <span class="dv">212</span> <span class="dv">38</span> <span class="dv">236</span> <span class="dv">95</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a>run<span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a>proc means data<span class="op">=</span>prg1_1<span class="op">;</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>    var x<span class="op">;</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>    quit<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Using SAS Config named: winlocal
-SAS Connection established. Subprocess id is 25752
-</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="2">
 
 
 
@@ -1965,31 +2004,31 @@ a:visited { color: #800080 }
 <div id="IDX" class="systitleandfootercontainer" style="border-spacing: 1px">
 <p><span class="c systemtitle">SAS 系统</span> </p>
 </div>
-<div class="proc_title_group">
-<p class="c proctitle">MEANS PROCEDURE</p>
-</div>
 <div style="padding-bottom: 8px; padding-top: 1px">
 
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="汇总统计量">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="数据集 WORK.BINOMIAL15_1">
 <thead>
 <tr class="header">
-<th colspan="5" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">分析变量: x</th>
-</tr>
-<tr class="even">
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">数目</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">均值</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">标准差</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">最小值</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">最大值</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">观测</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">r</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">p</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td class="r data">12</td>
-<td class="r data">144.5833333</td>
-<td class="r data">80.9797487</td>
-<td class="r data">25.0000000</td>
-<td class="r data">242.0000000</td>
+<td class="r rowheader" data-quarto-table-cell-role="th" scope="row">1</td>
+<td class="r data">6</td>
+<td class="r data">0.08808</td>
+</tr>
+<tr class="even">
+<td class="r rowheader" data-quarto-table-cell-role="th" scope="row">2</td>
+<td class="r data">7</td>
+<td class="r data">0.20133</td>
+</tr>
+<tr class="odd">
+<td class="r rowheader" data-quarto-table-cell-role="th" scope="row">3</td>
+<td class="r data">8</td>
+<td class="r data">0.30199</td>
 </tr>
 </tbody>
 </table>
@@ -2001,53 +2040,1176 @@ a:visited { color: #800080 }
 </div>
 </div>
 </section>
-<section id="程序结构" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="程序结构"><span class="header-section-number">1.2</span> 程序结构</h3>
-<p>一个完整的 SAS程序一般由数据步(DATA STEP)和过程步(PROC STEP)两部分组成。</p>
-<p>数据步以关键词 <code>DATA</code> 开头,过程步以 <code>PROC</code> 开头,以 <code>RUN</code> 结束。<code>PROC</code> 为英文单词 PROCEDURE 的缩写,读作 prok。</p>
-<p>数据步的作用为指定数据集的名称,定义数据集的变量(如变量名称、变量类型等)和读入原始数据。</p>
-<p>本例数据步从 <code>data prgl_1;</code> 开始到数据下面出现的 <code>run;</code> 结束,建立了名为 <code>prg1-1</code> 的数据集。如果后面还有 SAS语句,该 <code>run;</code> 可省略不写。</p>
-<p>过程步的作用是调用现有的 SAS 过程对指定的数据集进行统计分析。</p>
-<p>本例过程步执行的是 <code>means</code> 过程,计算数据集( 默认数据集为 <code>prg1-1</code> ,可用 <code>data= 数据集</code> 指定要分析的数据集,本例为 <code>prg1-1</code>)中数据的例数、均数、标准差、最小值和最大值等统计量。</p>
-<p>过程步从 <code>proc means;</code> 开始,到 <code>quit;</code> 结束。有时也可用 <code>run;</code> 结束。</p>
-</section>
-<section id="程序语法规范" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="程序语法规范"><span class="header-section-number">1.3</span> 程序语法规范</h3>
-<p>SAS程序由语句组成,每个语句以分号 <code>;</code> 作为结束符号。同一行中可以有多个语句,一个语句也可以分几行编写。为方便检查和修改,每 行可输人一个语句,每个语句中各个元素以一个或几个空格分隔。输入程序语句时,可在光标闪烁处逐个字母输入,一行语句结束后,按 <code>ENTER</code> 换行,继续输人。值得注意的是, <code>datalines</code> 语句后面的数据必须另起一行输人,数据输入完毕后,必须另起一行,输入分号 <code>;</code> 表示数据输入结束。</p>
-</section>
-<section id="程序运行" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="程序运行"><span class="header-section-number">1.4</span> 程序运行</h3>
-<p>当程序语句被确认正确无误后,可以将程序提交系统运行。提交程序的方法有以下几种:</p>
-<ol type="1">
-<li>在执行指令的文本框中键入 <code>SUBMIT</code> 或 <code>SUB</code> ,然后点击“√”或按 <code>ENTER</code> 键。</li>
-<li>点击主菜单中的 <code>运行(run)</code> ,再点击 <code>提交(submit)</code>。</li>
-<li>使用功能键 F8 或自己定义的功能键。</li>
-<li>点击工具栏上的 <code>run(submit)</code> 一个奔跑的小人进行运行。</li>
-</ol>
-</section>
-<section id="程序修改" class="level3" data-number="1.5">
-<h3 data-number="1.5" class="anchored" data-anchor-id="程序修改"><span class="header-section-number">1.5</span> 程序修改</h3>
-<p>通常情况下,在程序运行完毕后,要先检查日志窗口中的日志,看程序语句有无错误。 如果程序语句编写有误,而且该错误能被 SAS 系统纠正,则在日志窗口中会出现红色下划线和 错误标记,并用绿色字体提示错误,而程序照常运行。</p>
-<p>修改程序语句,首先将窗口切换到编辑器窗口,在原来有错误的地方修改程序语句,然后再提交运行。 有时需反复几次,直到日志窗口不再出现错误提示为止。</p>
-</section>
-<section id="程序保存" class="level3" data-number="1.6">
-<h3 data-number="1.6" class="anchored" data-anchor-id="程序保存"><span class="header-section-number">1.6</span> 程序保存</h3>
-<p>程序语句编辑无误后,可以将编辑好的程序以文件的形式保存下来,以备以后检查或修改。</p>
-<p>保存程序可在命令框中键入指令 <code>file '路径+文件名'</code>,该处路径为绝对路径,文件名的后缀必须是 <code>.sas</code> ,而且路径 + 文件名必须用单引号 括起来，如 <code>file 'c:\prgl.sas'</code> 也可以通过 <code>文件</code> 菜单中的 <code>保存</code> 选项来保存程序文件。在出现的 <code>保存</code> 对话框中选择好路径,再键入文件名,此时不必加后缀,因为系统将默认后缀名为 <code>sas</code> 。也可以通过工具栏上的快捷方式保存程序文件,只需点击工具栏上的回就会出现 <code>保存</code> 对话框,然后按上述方法保存文件。</p>
-</section>
-<section id="程序调用" class="level3" data-number="1.7">
-<h3 data-number="1.7" class="anchored" data-anchor-id="程序调用"><span class="header-section-number">1.7</span> 程序调用</h3>
-<p>有时,程序已经以文件的形式保存下来了，再作同样的处理时可不必再编辑程序,可以调用已有的程序完成统计运算。调用程序可用指令 <code>INCLUDE</code> 指令后面需加上用单引号括起来的文件所在的绝对路径和带后缀名为 <code>.sas</code> 的文件名,也可以用 <code>文件</code> 菜单中的 <code>打开程序</code> 选项来完成。</p>
-<p>也可以用快捷方式调用程序文件,点击工具栏上的 <code>file</code> 图标,以后的操作与上述 <code>打开程序</code> 操作相同同。</p>
-</section>
-</section>
-<section id="sas-帮助" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="sas-帮助"><span class="header-section-number">2</span> SAS 帮助</h2>
-<p>启动 SAS 帮助文档的方法有以下几种， 1. 在命令框中键人 <code>HELP</code> ,然后点击 <code>√</code> 或按 <code>ENTER</code> 2. 点击主菜单中的 <code>帮助</code> ,再点击 <code>SAS帮助和文档</code> 。 3. 点击工具栏上的 <code>?</code> 图标。 4. 使用功能键F1。</p>
-<p>要访问特定窗口的帮助信息,请在此窗口处于活动状态时从命令框中发出 HELP 命令,或者点击工具栏上的,或者使用功能键 F1。</p>
-<p>要访问特定主题的帮助,可以通过在命令框中键入 <code>help keyword</code>,<code>keyword</code> 值对应需要帮助的值。例如,若需要关于 SAS/EIS 软件的帮助,则键入 <code>help sas/eis</code>;若需要关于 <code>proc ttest</code> 的帮助,则键入 <code>help ttest</code>; 关键字的值不区分大小写。另 外,也可将光标置于编辑器窗口中的关键字(如 <code>ttest</code> )上,再按 <code>F1</code> 键调用关于 <code>PROC ttest</code> 的帮助, 或者直接在 SAS帮助文档中键入该关键字进行搜索。</p>
+<section id="总体率的区间估计正态近似法" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="总体率的区间估计正态近似法"><span class="header-section-number">3</span> 总体率的区间估计(正态近似法)</h2>
+<p>根据数理统计学的中心极限定理可得,当 n 较大、π 不接近 0 也不接近 1 时,二项分布 <span class="math inline">\(B(n,π)\)</span> 近似正态分布 <span class="math inline">\(N[n \pi,nπ(1-π)]\)</span>,相应的样本率 p 的分布也近似正态分布 <span class="math inline">\(N(\pi,\sigma_{p}^2)\)</span>。为此,当 n 较大、p 和 1-p 均不太小,如 np 和 n(1-p) 均&gt;5时,可利用样本率 p 的分布近似正态分布来估计总体率的 1-α 置信区间。</p>
+<div id="bbbe350f" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb4-2"><a href="#cb4-2"></a>data binomial15_2<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    n<span class="op">=</span><span class="dv">100</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    p<span class="op">=</span><span class="fl">0.45</span><span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    sp<span class="op">=</span>sqrt(p<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span>p)<span class="op">/</span>n)<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    u<span class="op">=</span>probit(<span class="fl">0.975</span>)<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    usp<span class="op">=</span>u<span class="op">*</span>sp<span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    lclm<span class="op">=</span>p<span class="op">-</span>usp<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    uclm<span class="op">=</span>p<span class="op">+</span>usp<span class="op">;</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    var n p sp lclm uclm<span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
 
 
+
+<meta charset="utf-8">
+<meta content="SAS 9.4" name="generator">
+<title>SAS 输出</title>
+<style>
+/*<![CDATA[*/
+.body.c > table, .body.c > pre, .body.c div > table,
+.body.c div > pre, .body.c > table, .body.c > pre,
+.body.j > table, .body.j > pre, .body.j div > table,
+.body.j div > pre, .body.j > table, .body.j > pre,
+.body.c p.note, .body.c p.warning, .body.c p.error, .body.c p.fatal,
+.body.j p.note, .body.j p.warning, .body.j p.error, .body.j p.fatal,
+.body.c > table.layoutcontainer, .body.j > table.layoutcontainer { margin-left: auto; margin-right: auto }
+.layoutregion.l table, .layoutregion.l pre, .layoutregion.l p.note,
+.layoutregion.l p.warning, .layoutregion.l p.error, .layoutregion.l p.fatal { margin-left: 0 }
+.layoutregion.c table, .layoutregion.c pre, .layoutregion.c p.note,
+.layoutregion.c p.warning, .layoutregion.c p.error, .layoutregion.c p.fatal { margin-left: auto; margin-right: auto }
+.layoutregion.r table, .layoutregion.r pre, .layoutregion.r p.note,
+.layoutregion.r table, .layoutregion.r pre, .layoutregion.r p.note,
+.layoutregion.r p.warning, .layoutregion.r p.error, .layoutregion.r p.fatal { margin-right: 0 }
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block }
+html{ font-size: 100% }
+.body { margin: 1em; font-size: 13px; line-height: 1.231 }
+sup { position: relative; vertical-align: baseline; bottom: 0.25em; font-size: 0.8em }
+sub { position: relative; vertical-align: baseline; top: 0.25em; font-size: 0.8em }
+ul, ol { margin: 1em 0; padding: 0 0 0 40px }
+dd { margin: 0 0 0 40px }
+nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0 }
+img { border: 0; vertical-align: middle }
+svg:not(:root) { overflow: hidden }
+figure { margin: 0 }
+table { border-collapse: collapse; border-spacing: 0 }
+.layoutcontainer { border-collapse: separate; border-spacing: 0 }
+p { margin-top: 0; text-align: left }
+h1.heading1 { text-align: left }
+h2.heading2 { text-align: left }
+h3.heading3 { text-align: left }
+h4.heading4 { text-align: left }
+h5.heading5 { text-align: left }
+h6.heading6 { text-align: left }
+span { text-align: left }
+table { margin-bottom: 1em }
+td, th { text-align: left; padding: 3px 6px; vertical-align: top }
+td[class$="fixed"], th[class$="fixed"] { white-space: pre }
+section, article { padding-top: 1px; padding-bottom: 8px }
+hr.pagebreak { height: 0px; border: 0; border-bottom: 1px solid #c0c0c0; margin: 1em 0 }
+.stacked-value { text-align: left; display: block }
+.stacked-cell > .stacked-value, td.data > td.data, th.data > td.data, th.data > th.data, td.data > th.data, th.header > th.header { border: 0 }
+.stacked-cell > div.data { border-width: 0 }
+.systitleandfootercontainer { white-space: nowrap; margin-bottom: 1em }
+.systitleandfootercontainer > p { margin: 0 }
+.systitleandfootercontainer > p > span { display: inline-block; width: 100%; white-space: normal }
+.batch { display: table }
+.toc { display: none }
+.proc_note_group, .proc_title_group { margin-bottom: 1em }
+p.proctitle { margin: 0 }
+p.note, p.warning, p.error, p.fatal { display: table }
+.notebanner, .warnbanner, .errorbanner, .fatalbanner,
+.notecontent, .warncontent, .errorcontent, .fatalcontent { display: table-cell; padding: 0.5em }
+.notebanner, .warnbanner, .errorbanner, .fatalbanner { padding-right: 0 }
+.body > div > ol li { text-align: left }
+.beforecaption > h4 { margin-top: 0; margin-bottom: 0 }
+.c { text-align: center }
+.r { text-align: right }
+.l { text-align: left }
+.j { text-align: justify }
+.d { text-align: right }
+.b { vertical-align: bottom }
+.m { vertical-align: middle }
+.t { vertical-align: top }
+.accessiblecaption {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+a:active { color: #800080 }
+.aftercaption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+    padding-top: 4pt;
+}
+.batch > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.batch > tbody, .batch > thead, .batch > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.batch { border: hidden; }
+.batch {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    padding: 7px;
+    }
+.beforecaption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.body {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.bodydate {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    text-align: right;
+    vertical-align: top;
+    width: 100%;
+}
+.bycontentfolder {
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.byline {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.bylinecontainer > col, .bylinecontainer > colgroup > col, .bylinecontainer > colgroup, .bylinecontainer > tr, .bylinecontainer > * > tr, .bylinecontainer > thead, .bylinecontainer > tbody, .bylinecontainer > tfoot { border: none; }
+.bylinecontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.caption {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.cell, .container {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.contentfolder, .contentitem {
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.contentproclabel, .contentprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.contents {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.contentsdate {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.contenttitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: bold;
+}
+.continued {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+    width: 100%;
+}
+.data, .dataemphasis {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.dataemphasisfixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.dataempty {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.datafixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.datastrong {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.datastrongfixed {
+    background-color: #ffffff;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.date {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.document {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.errorbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.errorcontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.errorcontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.extendedpage {
+    background-color: #fafbfe;
+    border-style: solid;
+    border-width: 1pt;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+    text-align: center;
+}
+.fatalbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.fatalcontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.fatalcontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.folderaction {
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.footer {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.footeremphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.footeremphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.footerempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.footerfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.footerstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.footerstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.frame {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.graph > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.graph > tbody, .graph > thead, .graph > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.graph { border: hidden; }
+.graph {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    }
+.header {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.headeremphasis {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.headeremphasisfixed {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.headerempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.headerfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.headersandfooters {
+    background-color: #edf2f9;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.headerstrong {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.headerstrongfixed {
+    background-color: #d8dbd3;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #000000;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.heading1, .heading2, .heading3, .heading4, .heading5, .heading6 { font-family: MYingHei_18030_C-Medium, Helvetica, sans-serif }
+.index {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.indexaction, .indexitem {
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.indexprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.indextitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: bold;
+}
+.layoutcontainer, .layoutregion {
+    border-width: 0;
+    border-spacing: 30px;
+}
+.linecontent {
+    background-color: #fafbfe;
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+a:link { color: #0000ff }
+.list {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.list10 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.list2 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.list3, .list4, .list5, .list6, .list7, .list8, .list9 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.listitem {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: disc;
+}
+.listitem10 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.listitem2 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: circle;
+}
+.listitem3, .listitem4, .listitem5, .listitem6, .listitem7, .listitem8, .listitem9 {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: square;
+}
+.note {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.notebanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.notecontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.notecontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.output > colgroup {
+    border-left: 1px solid #c1c1c1;
+    border-right: 1px solid #c1c1c1;
+}
+.output > tbody, .output > thead, .output > tfoot {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 1px solid #c1c1c1;
+}
+.output { border: hidden; }
+.output {
+    background-color: #fafbfe;
+    border: 1px solid #c1c1c1;
+    border-collapse: separate;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    }
+.pageno {
+    background-color: #fafbfe;
+    border-spacing: 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+    text-align: right;
+    vertical-align: top;
+}
+.pages {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: decimal;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.pagesdate {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.pagesitem {
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    list-style-type: none;
+    margin-left: 6pt;
+}
+.pagesproclabel, .pagesprocname {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.pagestitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: bold;
+}
+.paragraph {
+    background-color: #fafbfe;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.parskip > col, .parskip > colgroup > col, .parskip > colgroup, .parskip > tr, .parskip > * > tr, .parskip > thead, .parskip > tbody, .parskip > tfoot { border: none; }
+.parskip {
+    border: none;
+    border-spacing: 0;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+    }
+.prepage {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    text-align: left;
+}
+.proctitle {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.proctitlefixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowfooter {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowfooteremphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.rowfooteremphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.rowfooterempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowfooterfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.rowfooterstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowfooterstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowheader {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowheaderemphasis {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.rowheaderemphasisfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: italic;
+    font-weight: normal;
+}
+.rowheaderempty {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowheaderfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.rowheaderstrong {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.rowheaderstrongfixed {
+    background-color: #edf2f9;
+    border-color: #b0b7bb;
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.systemfooter, .systemfooter10, .systemfooter2, .systemfooter3, .systemfooter4, .systemfooter5, .systemfooter6, .systemfooter7, .systemfooter8, .systemfooter9 {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.systemtitle, .systemtitle10, .systemtitle2, .systemtitle3, .systemtitle4, .systemtitle5, .systemtitle6, .systemtitle7, .systemtitle8, .systemtitle9 {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size: small;
+    font-style: normal;
+    font-weight: bold;
+}
+.systitleandfootercontainer > col, .systitleandfootercontainer > colgroup > col, .systitleandfootercontainer > colgroup, .systitleandfootercontainer > tr, .systitleandfootercontainer > * > tr, .systitleandfootercontainer > thead, .systitleandfootercontainer > tbody, .systitleandfootercontainer > tfoot { border: none; }
+.systitleandfootercontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.table > col, .table > colgroup > col {
+    border-left: 1px solid #c1c1c1;
+    border-right: 0 solid #c1c1c1;
+}
+.table > tr, .table > * > tr {
+    border-top: 1px solid #c1c1c1;
+    border-bottom: 0 solid #c1c1c1;
+}
+.table { border: hidden; }
+.table {
+    border-color: #c1c1c1;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    }
+.titleandnotecontainer > col, .titleandnotecontainer > colgroup > col, .titleandnotecontainer > colgroup, .titleandnotecontainer > tr, .titleandnotecontainer > * > tr, .titleandnotecontainer > thead, .titleandnotecontainer > tbody, .titleandnotecontainer > tfoot { border: none; }
+.titleandnotecontainer {
+    background-color: #fafbfe;
+    border: none;
+    border-spacing: 1px;
+    color: #000000;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+    width: 100%;
+}
+.titlesandfooters {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.usertext {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+a:visited { color: #800080 }
+.warnbanner {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: bold;
+}
+.warncontent {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+.warncontentfixed {
+    background-color: #fafbfe;
+    color: #112277;
+    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
+    font-size:  normal;
+    font-style: normal;
+    font-weight: normal;
+}
+/*]]>*/
+</style>
+
+
+<div style="padding-bottom: 8px; padding-top: 1px">
+<div id="IDX" class="systitleandfootercontainer" style="border-spacing: 1px">
+<p><span class="c systemtitle">SAS 系统</span> </p>
+</div>
+<div style="padding-bottom: 8px; padding-top: 1px">
+
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="数据集 WORK.BINOMIAL15_2">
+<thead>
+<tr class="header">
+<th class="r header" data-quarto-table-cell-role="th" scope="col">观测</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">n</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">p</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">sp</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">lclm</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">uclm</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td class="r rowheader" data-quarto-table-cell-role="th" scope="row">1</td>
+<td class="r data">100</td>
+<td class="r data">0.45</td>
+<td class="r data">0.049749</td>
+<td class="r data">0.35249</td>
+<td class="r data">0.54751</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+
+
+</div>
+</div>
+<section id="程序说明" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="程序说明"><span class="header-section-number">3.1</span> 程序说明</h3>
+<p>数据集中 n 为观察的患者人数 p 为样本率,驴为率的标准误,u 为置信水准为 0.05 时标准正态分布的双侧界值, lclm 为 95% 置信区间的下限,uclm 为 95% 置信区间的上限。</p>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -2674,13 +3836,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-05-22-SAS-Base.html" class="pagination-link" aria-label="03-SAS Base">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">03-SAS Base</span>
+      <a href="../../Guide/SAS/25-06-06-chi2-2.html" class="pagination-link" aria-label="14-SAS 卡方检验2-四格表资料卡方检验">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">14-SAS 卡方检验2-四格表资料卡方检验</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/SAS/25-05-25-SAS-DATA-LIB.html" class="pagination-link" aria-label="05-SAS 数据库与数据集">
-        <span class="nav-page-text">05-SAS 数据库与数据集</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="pagination-link" aria-label="00-Stata Intro and Record">
+        <span class="nav-page-text">00-Stata Intro and Record</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -2696,7 +3858,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-05-24-SAS-program.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-06-07-binomial.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

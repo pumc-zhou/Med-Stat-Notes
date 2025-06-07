@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-09-Stata-intro.html" rel="next">
+<link href="../../Guide/SAS/25-05-28-SAS-function.html" rel="next">
 <link href="../../Guide/SAS/25-05-25-SAS-DATA-LIB.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -208,10 +208,21 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../navbar/book.html"> 
-<span class="menu-text">Books</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
+        <li>
+    <a class="dropdown-item" href="../../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
@@ -230,7 +241,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-26-SAS-DATA-tidy.html">06-SAS 数据集的整理</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-26-SAS-DATA-tidy.html">06-SAS 数据集的整理</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -393,12 +404,6 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CLHLS Data Analysis by R</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MacOS安装 R 和 Rstudio</span></a>
   </div>
@@ -469,12 +474,6 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">使用SAS处理CLHLS数据</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-SAS-Intro and Record</span></a>
   </div>
@@ -513,6 +512,60 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/25-05-26-SAS-DATA-tidy.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">06-SAS 数据集的整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-28-SAS-function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-SAS 运算符与常用函数</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-29-SAS-function-example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-SAS 运算符与常用函数示例</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-29-SAS-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-SAS 计量资料的单变量分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-31-two-sample-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-SAS 两样本均数的比较分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-01-multi-sample-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
   </div>
 </li>
       </ul>
@@ -739,7 +792,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-26-SAS-DATA-tidy.html">06-SAS 数据集的整理</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-26-SAS-DATA-tidy.html">06-SAS 数据集的整理</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">06-SAS 数据集的整理</h1>
 <p class="subtitle lead">SAS 数据集的基本整理与变换</p>
@@ -772,7 +825,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 
 
 <div id="8a3fd140" class="cell" data-execution_count="1">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="浏览与修改数据集" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="浏览与修改数据集"><span class="header-section-number">1</span> 浏览与修改数据集</h2>
@@ -784,54 +837,54 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <h3 data-number="2.1" class="anchored" data-anchor-id="直接生成新变量"><span class="header-section-number">2.1</span> 直接生成新变量</h3>
 <p>在数据集中可以通过SAS 提供的运算符和函数直接产生新变量,如将 程序 2-1 中生存时间的单位由天改为年,可产生一个新变量 <code>surt_y</code>,</p>
 <p>该变量的值等于变量 <code>surt</code> 除以 365.25,所以变量 <code>surl_y</code> 将表示单位为年的生存时间。可用如下程序:</p>
-<pre class="sas"><code>/*程序2-9*/
-/*产生新变量，改天为年*/
-data prg2_6;
-    infile 'C:\Document\SASData\syz.txt';
-    input no sex $ age blood $ surt;
-    surt_y = surt/365.25;
-proc print data = prg2_6;
-run;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>/*程序2-9*/</span>
+<span id="cb2-2"><a href="#cb2-2"></a>/*产生新变量，改天为年*/</span>
+<span id="cb2-3"><a href="#cb2-3"></a>data prg2_6;</span>
+<span id="cb2-4"><a href="#cb2-4"></a>    infile 'C:\Document\SASData\syz.txt';</span>
+<span id="cb2-5"><a href="#cb2-5"></a>    input no sex $ age blood $ surt;</span>
+<span id="cb2-6"><a href="#cb2-6"></a>    surt_y = surt/365.25;</span>
+<span id="cb2-7"><a href="#cb2-7"></a>proc print data = prg2_6;</span>
+<span id="cb2-8"><a href="#cb2-8"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="if-thenelse-语句生成变量" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="if-thenelse-语句生成变量"><span class="header-section-number">2.2</span> if-then/else 语句生成变量</h3>
 <p>通过 <code>if-then/else</code> 语句也可以产生新变量。</p>
 <p>仍用 程序 2-1 的数据,程序 2-11 表示将产生一个新的分组变量,变量名为 <code>group</code> ,其中变量值为 <code>1</code> 表示年龄 <code>&gt;40</code> 岁的患者,变量值为 <code>2</code> 表示年龄 <code>≤40</code> 岁的患者。</p>
-<pre class="sas"><code>/*程序2-1`*/
-/*使用if-then/else来产生新变量*/
-data prg2_7;
-    infile 'C:\Document\SASData\syz.txt';
-    input no sex $ age blood $ surt; 
-    if age&gt;40 then group =1;
-    else group = 2;
-datalines;
-......
-;
-run;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>/*程序2-1`*/</span>
+<span id="cb3-2"><a href="#cb3-2"></a>/*使用if-then/else来产生新变量*/</span>
+<span id="cb3-3"><a href="#cb3-3"></a>data prg2_7;</span>
+<span id="cb3-4"><a href="#cb3-4"></a>    infile 'C:\Document\SASData\syz.txt';</span>
+<span id="cb3-5"><a href="#cb3-5"></a>    input no sex $ age blood $ surt; </span>
+<span id="cb3-6"><a href="#cb3-6"></a>    if age&gt;40 then group =1;</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    else group = 2;</span>
+<span id="cb3-8"><a href="#cb3-8"></a>datalines;</span>
+<span id="cb3-9"><a href="#cb3-9"></a>......</span>
+<span id="cb3-10"><a href="#cb3-10"></a>;</span>
+<span id="cb3-11"><a href="#cb3-11"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="多条件下的-if-then-语句" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="多条件下的-if-then-语句"><span class="header-section-number">2.3</span> 多条件下的 if-then 语句</h3>
 <p>如果满足的条件超过两个,可以使用 <code>and</code> 和 <code>or</code> 语句来控制。<code>and</code> 语句表示同时满足几个条件,就执行 <code>then</code> 后面的语句; <code>or</code> 表示只需满足几个 条件中的一个条件,就执行 <code>then</code> 后面的语句。程序 2-12 表示将年龄 <code>&gt;40</code> 岁的男性患者归为一组, 将年龄 <code>≤40</code> 岁的男性患者归为另一组。</p>
-<pre class="sas"><code>/*程序2-12*/
-/*满足条件超过2个，可以使用and和or语句来控制*/
-/*由于sex为字符型变量，所以在表示其变量值时，需要在变量值两侧加上引号，单引号、双引号均可*/
-data prg2_8;
-    infile 'C:\Document\SASData\syz.txt';
-    input no sex $ age blood $ surt; 
-    if sex = 'M' and age&gt;40 then group =1;
-    if sex = 'M' and age&lt;=40 then group =2;
-datalines;
-......
-;
-run;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb4-1"><a href="#cb4-1"></a>/*程序2-12*/</span>
+<span id="cb4-2"><a href="#cb4-2"></a>/*满足条件超过2个，可以使用and和or语句来控制*/</span>
+<span id="cb4-3"><a href="#cb4-3"></a>/*由于sex为字符型变量，所以在表示其变量值时，需要在变量值两侧加上引号，单引号、双引号均可*/</span>
+<span id="cb4-4"><a href="#cb4-4"></a>data prg2_8;</span>
+<span id="cb4-5"><a href="#cb4-5"></a>    infile 'C:\Document\SASData\syz.txt';</span>
+<span id="cb4-6"><a href="#cb4-6"></a>    input no sex $ age blood $ surt; </span>
+<span id="cb4-7"><a href="#cb4-7"></a>    if sex = 'M' and age&gt;40 then group =1;</span>
+<span id="cb4-8"><a href="#cb4-8"></a>    if sex = 'M' and age&lt;=40 then group =2;</span>
+<span id="cb4-9"><a href="#cb4-9"></a>datalines;</span>
+<span id="cb4-10"><a href="#cb4-10"></a>......</span>
+<span id="cb4-11"><a href="#cb4-11"></a>;</span>
+<span id="cb4-12"><a href="#cb4-12"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="数据集的排序" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="数据集的排序"><span class="header-section-number">3</span> 数据集的排序</h2>
 <p>将数据集中的所有观测按照一个或几个变 量的数值大小进行排序,可以使用 <code>sort</code> 过程。<code>sort</code>过程的语法结构如下:</p>
-<pre class="sas"><code>proc sort options;
-by [descending] variable-list;
-run;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb5-1"><a href="#cb5-1"></a>proc sort options;</span>
+<span id="cb5-2"><a href="#cb5-2"></a>by [descending] variable-list;</span>
+<span id="cb5-3"><a href="#cb5-3"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>语句中的 <code>options</code> 是表示 <code>sort</code> 过程可以使用的某些选项,其中一些常用的选项如下:</p>
 <ul>
 <li><code>data = 数据集</code>: 表示 <code>sort</code> 过程将对哪个数据集进行排序,如缺省该项,则使用最新创建的数据集;</li>
@@ -844,31 +897,31 @@ run;</code></pre>
 <li>如果变量是数值型, <code>sort</code> 过程则按数值的大小排序;如果变量是字符型的，<code>sort</code> 过程先按每个变量值的第一个字母排序,如果第一个字母相同,则按第二个字母排序,依此类推。</li>
 </ul>
 <div id="c1b4d204" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">12</span><span class="op">*/</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>data prg2_1<span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> no sex $ age blood $ surt<span class="op">;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> M <span class="dv">41</span> A <span class="dv">368</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> M <span class="dv">26</span> B <span class="dv">745</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> F <span class="dv">35</span> B <span class="dv">401</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> M <span class="dv">37</span> AB <span class="dv">552</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> F <span class="dv">37</span> A <span class="dv">478</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> F <span class="dv">39</span> O <span class="dv">628</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> M <span class="dv">28</span> O <span class="dv">549</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> M <span class="dv">31</span> B <span class="dv">128</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> M <span class="dv">43</span> AB <span class="dv">463</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> M <span class="dv">29</span> A <span class="dv">512</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>proc sort data <span class="op">=</span> prg2_1 out <span class="op">=</span> prg2_9<span class="op">;</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>    by descending sex surt<span class="op">;</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span> data <span class="op">=</span>prg2_9<span class="op">;</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-12'</span><span class="op">;</span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">12</span><span class="op">*/</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>data prg2_1<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="bu">input</span> no sex $ age blood $ surt<span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>datalines<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="dv">1</span> M <span class="dv">41</span> A <span class="dv">368</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="dv">2</span> M <span class="dv">26</span> B <span class="dv">745</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="dv">3</span> F <span class="dv">35</span> B <span class="dv">401</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="dv">4</span> M <span class="dv">37</span> AB <span class="dv">552</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="dv">5</span> F <span class="dv">37</span> A <span class="dv">478</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="dv">6</span> F <span class="dv">39</span> O <span class="dv">628</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="dv">7</span> M <span class="dv">28</span> O <span class="dv">549</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="dv">8</span> M <span class="dv">31</span> B <span class="dv">128</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="dv">9</span> M <span class="dv">43</span> AB <span class="dv">463</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="dv">10</span> M <span class="dv">29</span> A <span class="dv">512</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>run<span class="op">;</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a></span>
+<span id="cb6-19"><a href="#cb6-19"></a>proc sort data <span class="op">=</span> prg2_1 out <span class="op">=</span> prg2_9<span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>    by descending sex surt<span class="op">;</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a>run<span class="op">;</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a></span>
+<span id="cb6-23"><a href="#cb6-23"></a>proc <span class="bu">print</span> data <span class="op">=</span>prg2_9<span class="op">;</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a>    title <span class="st">'程序2-12'</span><span class="op">;</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
 
@@ -2090,70 +2143,70 @@ a:visited { color: #800080 }
 <section id="数据集的连接" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="数据集的连接"><span class="header-section-number">4</span> 数据集的连接</h2>
 <p>数据集的连接是把几个数据集中的数据纵向相加,组成一个新的数据集,新数据集中的观测数量是原来几个数据集中观测的总和。<code>set</code> 语句可以完成数据集的连接,语法结构为:</p>
-<pre class="sas"><code>data newname;
-set name1 name2:
-run;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href="#cb7-1"></a>data newname;</span>
+<span id="cb7-2"><a href="#cb7-2"></a>set name1 name2:</span>
+<span id="cb7-3"><a href="#cb7-3"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>其中 <code>newname</code> 是新数据集的名称, <code>namel</code> 和 <code>name2</code> 是要连接的原数据集的名称,如果有多个数据集,则可以用逗号分隔开。 如果要连接的数据集的变量名相同,则新数据集中的变量名与原数据集中的变量名相同,如果原数据集中的变量名不同,则新数据集中的变量名为原数据集中所有变量名的并集;其中原数据集中没有的变量,在新数据集中将表示为缺省值.</p>
 </section>
 <section id="数据集的合并" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="数据集的合并"><span class="header-section-number">5</span> 数据集的合并</h2>
 <p>数据集的合并是将几个数据集中的观测横向合并成一个新的数据集,合并数据集可使用 <code>merge</code> 语句, <code>merge</code> 语句的语法结构为:</p>
-<pre class="sas"><code>data newname;
-merge name1 name2.
-by keyvar;
-run;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a>data newname;</span>
+<span id="cb8-2"><a href="#cb8-2"></a>merge name1 name2.</span>
+<span id="cb8-3"><a href="#cb8-3"></a>by keyvar;</span>
+<span id="cb8-4"><a href="#cb8-4"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><code>data</code> 步中的 <code>newname</code> 为新数据集的名称, <code>name1</code> 和 <code>name2</code> 为原数据集的名称,还可以有多个数据集名,彼此之间用空格分隔,合并前需对原数据集按 <code>keyvar</code> 排序。</p>
 <p><code>by</code> 语句表示可以根据 <code>keyvar</code> 所规定的关键变量进行合并,原数据集必须都有 <code>keyvar</code> 变量。</p>
 <p>如果没有 <code>by</code> 语句,合并时将一个数据集的第一个观测值和另一个数据集中第一个观测值合并成新数据集中的第一个观测值,第二个观测值和另一个数据集中的第二个观测值合并成新数据集的第二观测值,依次类推。</p>
 <div id="05c77dfc" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">13</span><span class="op">*/</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>数据的合并，merge语句的使用<span class="op">*/</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>创建两个数据集<span class="op">*/</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>data prg_a<span class="op">;</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> no sex $ age<span class="op">;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> M <span class="dv">41</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> M <span class="dv">26</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> F <span class="dv">35</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> M <span class="dv">37</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> F <span class="dv">37</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> F <span class="dv">39</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> M <span class="dv">28</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> M <span class="dv">31</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> M <span class="dv">43</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> M <span class="dv">29</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span> data <span class="op">=</span> prg_a<span class="op">;</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-13'</span><span class="op">;</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>data prg_b<span class="op">;</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> num blood $ surt<span class="op">;</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="dv">41</span> A <span class="dv">368</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="dv">26</span> B <span class="dv">745</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="dv">35</span> B <span class="dv">401</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> AB <span class="dv">552</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> A <span class="dv">478</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="dv">39</span> O <span class="dv">628</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span> O <span class="dv">549</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="dv">31</span> B <span class="dv">128</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="dv">43</span> AB <span class="dv">463</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="dv">29</span> A <span class="dv">512</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span> data <span class="op">=</span> prg_b<span class="op">;</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-14'</span><span class="op">;</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*/</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>对两个数据集进行合并<span class="op">*/</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>data prg2_11<span class="op">;</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    merge prg_a prg_b<span class="op">;</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-15'</span><span class="op">;</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">13</span><span class="op">*/</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="op">/*</span>数据的合并，merge语句的使用<span class="op">*/</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="op">/*</span>创建两个数据集<span class="op">*/</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>data prg_a<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="bu">input</span> no sex $ age<span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>datalines<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="dv">1</span> M <span class="dv">41</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="dv">2</span> M <span class="dv">26</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="dv">3</span> F <span class="dv">35</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="dv">4</span> M <span class="dv">37</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="dv">5</span> F <span class="dv">37</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="dv">6</span> F <span class="dv">39</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="dv">7</span> M <span class="dv">28</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="dv">8</span> M <span class="dv">31</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="dv">9</span> M <span class="dv">43</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="dv">10</span> M <span class="dv">29</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="op">;</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>proc <span class="bu">print</span> data <span class="op">=</span> prg_a<span class="op">;</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>    title <span class="st">'程序2-13'</span><span class="op">;</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>run<span class="op">;</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a></span>
+<span id="cb9-23"><a href="#cb9-23"></a>data prg_b<span class="op">;</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>    <span class="bu">input</span> num blood $ surt<span class="op">;</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>datalines<span class="op">;</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a><span class="dv">41</span> A <span class="dv">368</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a><span class="dv">26</span> B <span class="dv">745</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a><span class="dv">35</span> B <span class="dv">401</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a><span class="dv">37</span> AB <span class="dv">552</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="dv">37</span> A <span class="dv">478</span></span>
+<span id="cb9-31"><a href="#cb9-31"></a><span class="dv">39</span> O <span class="dv">628</span></span>
+<span id="cb9-32"><a href="#cb9-32"></a><span class="dv">28</span> O <span class="dv">549</span></span>
+<span id="cb9-33"><a href="#cb9-33"></a><span class="dv">31</span> B <span class="dv">128</span></span>
+<span id="cb9-34"><a href="#cb9-34"></a><span class="dv">43</span> AB <span class="dv">463</span></span>
+<span id="cb9-35"><a href="#cb9-35"></a><span class="dv">29</span> A <span class="dv">512</span></span>
+<span id="cb9-36"><a href="#cb9-36"></a><span class="op">;</span></span>
+<span id="cb9-37"><a href="#cb9-37"></a>proc <span class="bu">print</span> data <span class="op">=</span> prg_b<span class="op">;</span></span>
+<span id="cb9-38"><a href="#cb9-38"></a>    title <span class="st">'程序2-14'</span><span class="op">;</span></span>
+<span id="cb9-39"><a href="#cb9-39"></a>run<span class="op">;</span></span>
+<span id="cb9-40"><a href="#cb9-40"></a></span>
+<span id="cb9-41"><a href="#cb9-41"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">15</span><span class="op">*/</span></span>
+<span id="cb9-42"><a href="#cb9-42"></a><span class="op">/*</span>对两个数据集进行合并<span class="op">*/</span></span>
+<span id="cb9-43"><a href="#cb9-43"></a>data prg2_11<span class="op">;</span></span>
+<span id="cb9-44"><a href="#cb9-44"></a>    merge prg_a prg_b<span class="op">;</span></span>
+<span id="cb9-45"><a href="#cb9-45"></a>run<span class="op">;</span></span>
+<span id="cb9-46"><a href="#cb9-46"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb9-47"><a href="#cb9-47"></a>    title <span class="st">'程序2-15'</span><span class="op">;</span></span>
+<span id="cb9-48"><a href="#cb9-48"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
 
@@ -3549,27 +3602,27 @@ a:visited { color: #800080 }
 <section id="含有缺失值的合并" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="含有缺失值的合并"><span class="header-section-number">5.1</span> 含有缺失值的合并</h3>
 <div id="d322541f" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">16</span><span class="op">*/</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>缺失值<span class="op">*/</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>data prg_c<span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> num blood $ surt<span class="op">;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="dv">41</span> A <span class="dv">368</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="dv">26</span> B <span class="dv">745</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="dv">35</span> B <span class="dv">401</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> AB <span class="dv">552</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="dv">37</span> A <span class="dv">478</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="dv">39</span> O <span class="dv">628</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="dv">28</span> O <span class="dv">549</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>data prg2_12<span class="op">;</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    merge prg_a prg_c<span class="op">;</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span> data <span class="op">=</span> prg2_12<span class="op">;</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-16'</span><span class="op">;</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">16</span><span class="op">*/</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="op">/*</span>缺失值<span class="op">*/</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>data prg_c<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>    <span class="bu">input</span> num blood $ surt<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>datalines<span class="op">;</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="dv">41</span> A <span class="dv">368</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="dv">26</span> B <span class="dv">745</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="dv">35</span> B <span class="dv">401</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="dv">37</span> AB <span class="dv">552</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="dv">37</span> A <span class="dv">478</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="dv">39</span> O <span class="dv">628</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="dv">28</span> O <span class="dv">549</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="op">;</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a>run<span class="op">;</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a></span>
+<span id="cb10-17"><a href="#cb10-17"></a>data prg2_12<span class="op">;</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a>    merge prg_a prg_c<span class="op">;</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a>proc <span class="bu">print</span> data <span class="op">=</span> prg2_12<span class="op">;</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a>    title <span class="st">'程序2-16'</span><span class="op">;</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 
 
@@ -4803,44 +4856,44 @@ a:visited { color: #800080 }
 <h3 data-number="5.2" class="anchored" data-anchor-id="by-语句"><span class="header-section-number">5.2</span> by 语句</h3>
 <p><code>by</code> 语句可以对数据集进行分组,并对每个组进行处理。</p>
 <div id="d4d2f091" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">17</span><span class="op">*/</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>使用by语句来进行排序在合并<span class="op">*/</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>data prg_f<span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> no sex $ age<span class="op">;</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> M <span class="dv">41</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> M <span class="dv">26</span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> M <span class="dv">37</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> F <span class="dv">37</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> M <span class="dv">28</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> M <span class="dv">31</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>data prg_g<span class="op">;</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> no blood $ surt<span class="op">;</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> A <span class="dv">368</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> B <span class="dv">745</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> AB <span class="dv">552</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> A <span class="dv">478</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> O <span class="dv">549</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>proc sort data <span class="op">=</span> prg_f<span class="op">;</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    by no<span class="op">;</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>proc sort data <span class="op">=</span> prg_g<span class="op">;</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    by no<span class="op">;</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>data prg2_14<span class="op">;</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    merge prg_f prg_g<span class="op">;</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    by no<span class="op">;</span></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-17'</span><span class="op">;</span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">17</span><span class="op">*/</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="op">/*</span>使用by语句来进行排序在合并<span class="op">*/</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>data prg_f<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>    <span class="bu">input</span> no sex $ age<span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>datalines<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="dv">1</span> M <span class="dv">41</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="dv">2</span> M <span class="dv">26</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="dv">4</span> M <span class="dv">37</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="dv">5</span> F <span class="dv">37</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="dv">7</span> M <span class="dv">28</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="dv">8</span> M <span class="dv">31</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="op">;</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a>run<span class="op">;</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a>data prg_g<span class="op">;</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a>    <span class="bu">input</span> no blood $ surt<span class="op">;</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a>datalines<span class="op">;</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="dv">2</span> A <span class="dv">368</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="dv">3</span> B <span class="dv">745</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="dv">6</span> AB <span class="dv">552</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="dv">8</span> A <span class="dv">478</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="dv">9</span> O <span class="dv">549</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="op">;</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a>run<span class="op">;</span></span>
+<span id="cb11-25"><a href="#cb11-25"></a></span>
+<span id="cb11-26"><a href="#cb11-26"></a>proc sort data <span class="op">=</span> prg_f<span class="op">;</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a>    by no<span class="op">;</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a>run<span class="op">;</span></span>
+<span id="cb11-29"><a href="#cb11-29"></a>proc sort data <span class="op">=</span> prg_g<span class="op">;</span></span>
+<span id="cb11-30"><a href="#cb11-30"></a>    by no<span class="op">;</span></span>
+<span id="cb11-31"><a href="#cb11-31"></a>run<span class="op">;</span></span>
+<span id="cb11-32"><a href="#cb11-32"></a>data prg2_14<span class="op">;</span></span>
+<span id="cb11-33"><a href="#cb11-33"></a>    merge prg_f prg_g<span class="op">;</span></span>
+<span id="cb11-34"><a href="#cb11-34"></a>    by no<span class="op">;</span></span>
+<span id="cb11-35"><a href="#cb11-35"></a>run<span class="op">;</span></span>
+<span id="cb11-36"><a href="#cb11-36"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb11-37"><a href="#cb11-37"></a>    title <span class="st">'程序2-17'</span><span class="op">;</span></span>
+<span id="cb11-38"><a href="#cb11-38"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 
 
@@ -6056,10 +6109,10 @@ a:visited { color: #800080 }
 <h2 data-number="6" class="anchored" data-anchor-id="数据集的求秩"><span class="header-section-number">6</span> 数据集的求秩</h2>
 <p>利用 <code>rank</code> 过程可以对数据集中的一个或者多个变量进行求秩。<code>rank</code> 过程把未缺失的数值从最小值到最大值排列,对最小值赋予秩1,对第二小值赋 予秩 2,等等,一直赋予秩n,即未缺失的观测个数出现数值相同的观测值时,其秩可以取两者的平均秩或最高秩或最低秩。</p>
 <p>rank 过程的语法结构如下:</p>
-<pre class="sas"><code>proc rank options;
-    var variable-list:
-    ranks variable-list;
-run;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb12-1"><a href="#cb12-1"></a>proc rank options;</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    var variable-list:</span>
+<span id="cb12-3"><a href="#cb12-3"></a>    ranks variable-list;</span>
+<span id="cb12-4"><a href="#cb12-4"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="语句中的-options" class="level3" data-number="6.1">
 <h3 data-number="6.1" class="anchored" data-anchor-id="语句中的-options"><span class="header-section-number">6.1</span> 语句中的 <code>options</code></h3>
 <p>语句中的 <code>options</code> 是表示 <code>rank</code> 过程可以使用的某些选项,其中一些常用的选项如下: - <code>data = 数据集</code>: 表示 rank 过程将对哪个数据集进行排秩,如缺省该项,则使用最新创建的数据集。 - <code>out = 数据集</code>: 表示 rank 过程将排好秩的数据输出到哪个数据集,如缺省该项,则将数据存放原来的数据集中,将原来数据集中的内容替换掉。 - <code>var 语句</code>: 表示 rank 过程将对哪个变量进行排秩,如果有多个变量,则用逗号分隔开。 - <code>descending</code>: 求秩顺序选项,如果选择该项,则表示按变量值的下降次序求秩,如缺省该项,则按上升次序求秩。 - <code>ties=mean|high|low</code>:表示对数值相同的观测值如何取秩。<code>ties</code> 等于 <code>mean</code> 表示数值相同的观测值取平均秩,等于 <code>high</code> 表示取相应秩中的最大值,等于 <code>low</code> 表示取相应秩中的最小值。 ### var语句</p>
@@ -6070,16 +6123,16 @@ run;</code></pre>
 <p>如果希望在输出数据集中除了秩变量外还包括原始变量,使用 <code>ranks</code> 语句对求秩变量分配求秩后的名称。命名的次序和 <code>var</code> 语句变量列表中的次序相对应。如果省略 <code>ranks</code> 语句,则输出数据集中只有求秩后的结果而没有原始变量。<code>ranks</code> 语句必须与 <code>var</code> 语句同时使用。</p>
 <p>程序 2-18 表示将数据集 <code>prg2_1</code> 中的 <code>age</code> 和 <code>surt</code> 变量按从小到大的顺序求秩,相应的秩变量分别为 <code>age_rank</code> 和 <code>surt_rank</code>,将结果输出到数据集 <code>prg2_14</code> 中,并将求秩后的结果显示到输出窗口中:</p>
 <div id="407ef4c2" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">18</span><span class="op">*/</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>数据集的求秩过程<span class="op">*/</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>proc rank data <span class="op">=</span> prg2_1 out <span class="op">=</span> prg2_15 ties <span class="op">=</span> mean<span class="op">;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    var age surt<span class="op">;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    ranks age_rank surt_rank<span class="op">;</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-18'</span><span class="op">;</span></span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">18</span><span class="op">*/</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="op">/*</span>数据集的求秩过程<span class="op">*/</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>proc rank data <span class="op">=</span> prg2_1 out <span class="op">=</span> prg2_15 ties <span class="op">=</span> mean<span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>    var age surt<span class="op">;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    ranks age_rank surt_rank<span class="op">;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>run<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a>    title <span class="st">'程序2-18'</span><span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 
 
@@ -7324,11 +7377,11 @@ a:visited { color: #800080 }
 <section id="数据集的转置过程" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="数据集的转置过程"><span class="header-section-number">7</span> 数据集的转置过程</h2>
 <p>对数据集进行转置,即行变成列,列变成行可以使用 <code>transpose</code> 过程。<code>transpose</code> 过程的基本语法结构如下:</p>
-<pre class="sas"><code>proc transpose options;
-    var variable-list:
-    id variable;
-    by variable-list;
-run;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb14-1"><a href="#cb14-1"></a>proc transpose options;</span>
+<span id="cb14-2"><a href="#cb14-2"></a>    var variable-list:</span>
+<span id="cb14-3"><a href="#cb14-3"></a>    id variable;</span>
+<span id="cb14-4"><a href="#cb14-4"></a>    by variable-list;</span>
+<span id="cb14-5"><a href="#cb14-5"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <section id="语句中的-options-1" class="level3" data-number="7.1">
 <h3 data-number="7.1" class="anchored" data-anchor-id="语句中的-options-1"><span class="header-section-number">7.1</span> 语句中的 options</h3>
 <p>是表示 <code>transpose</code> 过程可以使用的某些选项,其中一些常用的选项如下:</p>
@@ -7351,16 +7404,16 @@ run;</code></pre>
 <p>该语句表示 <code>transpose</code> 过程将对哪个变量进行分组转置,如果有多个变量,则用逗号分隔开。如果省略 <code>by</code> 语句,则对整个数据集进行转置。</p>
 <p>使用by语句可以对每个 <code>by</code> 组进行转置, <code>by</code> 变量包含在输出数据集中但没有被转置。使用 <code>by</code> 语句,要求数据集按照 <code>by</code> 语句后面的变量进行排序</p>
 <div id="75afa8eb" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">19</span><span class="op">*/</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>数据集的转置过程<span class="op">*/</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>proc transpose data <span class="op">=</span> prg2_1 out <span class="op">=</span> prg2_16<span class="op">;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    var sex age surt<span class="op">;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">id</span> no<span class="op">;</span></span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序2-19'</span><span class="op">;</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="op">/*</span>程序<span class="dv">2</span><span class="op">-</span><span class="dv">19</span><span class="op">*/</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="op">/*</span>数据集的转置过程<span class="op">*/</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>proc transpose data <span class="op">=</span> prg2_1 out <span class="op">=</span> prg2_16<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a>    var sex age surt<span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a>    <span class="bu">id</span> no<span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a>run<span class="op">;</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a>    title <span class="st">'程序2-19'</span><span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 
 
@@ -9184,8 +9237,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="pagination-link" aria-label="00-Stata Intro and Record">
-        <span class="nav-page-text">00-Stata Intro and Record</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-05-28-SAS-function.html" class="pagination-link" aria-label="07-SAS 运算符与常用函数">
+        <span class="nav-page-text">07-SAS 运算符与常用函数</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

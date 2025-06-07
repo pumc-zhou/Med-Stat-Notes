@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-09-Stata-intro.html" rel="next">
+<link href="../../Guide/SAS/25-05-22-SAS-Base.html" rel="next">
 <link href="../../Guide/SAS/25-03-11-SAS-install.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -189,11 +189,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="dropdown-text">R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.qmd">
+    <a class="dropdown-item" href="../../Guide/SAS/25-02-16-SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/Stata/Stata-intro.qmd">
+    <a class="dropdown-item" href="../../Guide/Stata/25-03-09-Stata-intro.html">
  <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
@@ -211,10 +211,21 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../navbar/book.html"> 
-<span class="menu-text">Books</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
+        <li>
+    <a class="dropdown-item" href="../../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
@@ -233,7 +244,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">Guide/SAS/SAS-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-05-SAS-install-connect.html">02-SAS 在 Jupyter Notebook 中使用</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-05-SAS-install-connect.html">02-SAS 在 Jupyter Notebook 中使用</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -270,8 +281,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">医学统计学基础</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Basic</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -353,8 +364,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">贝叶斯与概率推理</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bayes</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -387,19 +398,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
  <span class="menu-text">R</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CLHLS Data Analysis by R</span></a>
-  </div>
-</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
@@ -416,7 +421,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">Python</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
@@ -464,7 +469,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
- <span class="menu-text">Guide/SAS/SAS-intro.qmd</span></a>
+ <span class="menu-text">SAS</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -472,14 +477,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">使用SAS处理CLHLS数据</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">00-SAS-Record</span></a>
+ <span class="menu-text">00-SAS-Intro and Record</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -494,12 +493,90 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="menu-text">02-SAS 在 Jupyter Notebook 中使用</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-22-SAS-Base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-SAS Base</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-SAS 程序基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-25-SAS-DATA-LIB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-SAS 数据库与数据集</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-26-SAS-DATA-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06-SAS 数据集的整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-28-SAS-function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-SAS 运算符与常用函数</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-29-SAS-function-example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-SAS 运算符与常用函数示例</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-29-SAS-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-SAS 计量资料的单变量分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-31-two-sample-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-SAS 两样本均数的比较分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-01-multi-sample-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
- <span class="menu-text">Guide/Stata/Stata-intro.qmd</span></a>
+ <span class="menu-text">Stata</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -573,32 +650,92 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-07-ANOVA.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-1-ANOVA.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">10-单因素方差分析（ANOVA）</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-07-log-binary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">13-二分类Logistic回归</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-07-multi-reg.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">12-多元线性回归</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-07-simple-line-reg.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-2-simple-line-reg.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11-简单线性回归</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-05-08-GLM.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-05-07-3-multi-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-多元线性回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-07-4-log-binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-二分类Logistic回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-1-GLM.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">14-广义线性模型（GLM）</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-2-survival-ana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-生存分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-3-Cox-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16-Cox回归与比例风险假定检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-4-GEE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17-广义估计方程(GEE)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18-有序多分类Logistic回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-09-1-multinomail-logistic-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19-无序多分类Logistic回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-09-2-data-manage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">20-数据清洗与整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-10-advanced-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">21-复杂与精准绘图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-10-coefplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22-coefplot</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-11-1-empirical-ana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23-Empericial Analysis Intro</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-11-2-DID.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">24-双重差分(DID)</span></a>
   </div>
 </li>
       </ul>
@@ -607,8 +744,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quarto introduction</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Quarto</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -655,7 +792,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/2025-02-16-CLHLS.html">Guide/SAS/SAS-intro.qmd</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-05-SAS-install-connect.html">02-SAS 在 Jupyter Notebook 中使用</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Guide/Guide-intro.html">统计软件</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-05-05-SAS-install-connect.html">02-SAS 在 Jupyter Notebook 中使用</a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">02-SAS 在 Jupyter Notebook 中使用</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
 </div>
@@ -689,7 +826,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <div id="237e1127" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="在-jupyter-notebook-中使用-sas" class="level2" data-number="1">
@@ -702,10 +839,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <section id="安装sas_kernel" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="安装sas_kernel"><span class="header-section-number">1.2</span> 安装SAS_KERNEL</h3>
 <p>启动 <code>cmd</code>，输入命令：</p>
-<pre class="{python}"><code>pip install sas_kernel</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource {python} number-lines code-with-copy"><code class="sourceCode"><span id="cb2-1"><a href="#cb2-1"></a>pip install sas_kernel</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>然后就会自动安装 <code>sas_kernel</code> 及其相应的依赖项。</p>
 <p>安装完成后可以输入命令：</p>
-<pre class="{python}"><code>jupyter kernelspec list</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource {python} number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>jupyter kernelspec list</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>来检测 <code>sas_kernel</code> 是否安装成功，如果成功，理论上会看到如下形式的输出：</p>
 <pre><code>Available kernels:
     python3    /home/sas/anaconda3/lib/python3.5/site-packages/ipykernel/resources
@@ -745,23 +882,23 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <section id="在-jupyter-notebook-中使用-sas-1" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="在-jupyter-notebook-中使用-sas-1"><span class="header-section-number">2</span> 在 jupyter notebook 中使用 SAS</h2>
 <p>新建文件，选择使用 SAS 内核，或者在 cell 中通过 magic command 指定内核。</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">%%</span>SAS</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>warning:</strong> 在单元格中直接调用 SAS 之前，需要在文档中加载一次 <code>magic 扩展</code> 以定义 <code>%%SAS</code></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>使用语法如下所示：</p>
 <div id="3dd4d5e9" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data prg1_1<span class="op">;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> x <span class="op">@@;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dv">60</span> <span class="dv">142</span> <span class="dv">195</span> <span class="dv">80</span> <span class="dv">242</span> <span class="dv">220</span> <span class="dv">190</span> <span class="dv">25</span> <span class="dv">212</span> <span class="dv">38</span> <span class="dv">236</span> <span class="dv">95</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>proc means data<span class="op">=</span>prg1_1<span class="op">;</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    var x<span class="op">;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    quit<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb9-2"><a href="#cb9-2"></a>data prg1_1<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="bu">input</span> x <span class="op">@@;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>datalines<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="dv">60</span> <span class="dv">142</span> <span class="dv">195</span> <span class="dv">80</span> <span class="dv">242</span> <span class="dv">220</span> <span class="dv">190</span> <span class="dv">25</span> <span class="dv">212</span> <span class="dv">38</span> <span class="dv">236</span> <span class="dv">95</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>run<span class="op">;</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>proc means data<span class="op">=</span>prg1_1<span class="op">;</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>    var x<span class="op">;</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>    quit<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Using SAS Config named: winlocal
@@ -1924,9 +2061,9 @@ a:visited { color: #800080 }
 <section id="安装sas日志组件" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="安装sas日志组件"><span class="header-section-number">3</span> 安装SAS日志组件</h2>
 <p>如果想要像SAS Base一样，随时查看所有程序运行的日志结果也没问题。安装一个 Notebook 的 SAS 日志扩展组件就可以了。打开 Anaconda Prompt，输入以下命令安装：</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>jupyter nbextension install <span class="op">--</span>py sas_kernel.showSASLog</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>jupyter nbextension install <span class="op">--</span>py sas_kernel.showSASLog</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>运行完毕后，输入以下命令启用 SAS 日志组件：</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>jupyter nbextension enable sas_kernel.showSASLog –py</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>jupyter nbextension enable sas_kernel.showSASLog –py</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="连接sas-server" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="连接sas-server"><span class="header-section-number">4</span> 连接SAS Server</h2>
@@ -1947,7 +2084,7 @@ a:visited { color: #800080 }
 <section id="jupyterlab-扩展" class="level3" data-number="5.2">
 <h3 data-number="5.2" class="anchored" data-anchor-id="jupyterlab-扩展"><span class="header-section-number">5.2</span> <strong>JupyterLab 扩展</strong></h3>
 <p>SAS Kernel 支持 JupyterLab 扩展，这些扩展可以提高你在 JupyterLab 中的编程效率。你可以通过以下命令安装这些扩展：</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>pip install sas_kernel[jlab_ext] </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>pip install sas_kernel[jlab_ext] </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="nbgrader" class="level3" data-number="5.3">
 <h3 data-number="5.3" class="anchored" data-anchor-id="nbgrader"><span class="header-section-number">5.3</span> <strong>NBGrader</strong></h3>
@@ -2594,8 +2731,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="pagination-link" aria-label="00-Stata Intro and Record">
-        <span class="nav-page-text">00-Stata Intro and Record</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-05-22-SAS-Base.html" class="pagination-link" aria-label="03-SAS Base">
+        <span class="nav-page-text">03-SAS Base</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

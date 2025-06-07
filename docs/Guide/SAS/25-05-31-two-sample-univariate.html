@@ -210,10 +210,21 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../navbar/book.html"> 
-<span class="menu-text">Books</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
+        <li>
+    <a class="dropdown-item" href="../../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
@@ -535,6 +546,30 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -796,7 +831,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <div id="199b1d2b" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="两样本均数的比较的概述" class="level2" data-number="1">
@@ -865,18 +900,18 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <div id="c871d9e3" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data prg5_1<span class="op">;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> x <span class="op">@@;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dv">171</span> <span class="dv">79</span> <span class="dv">135</span> <span class="dv">78</span> <span class="dv">118</span> <span class="dv">175</span> <span class="dv">122</span> <span class="dv">105</span> <span class="dv">111</span> <span class="dv">140</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="dv">138</span> <span class="dv">132</span> <span class="dv">142</span> <span class="dv">140</span> <span class="dv">168</span> <span class="dv">113</span> <span class="dv">131</span> <span class="dv">145</span> <span class="dv">128</span> <span class="dv">124</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="dv">134</span> <span class="dv">116</span> <span class="dv">129</span> <span class="dv">155</span> <span class="dv">135</span> <span class="dv">134</span> <span class="dv">136</span> <span class="dv">113</span> <span class="dv">119</span> <span class="dv">132</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>proc ttest h0<span class="op">=</span><span class="dv">140</span><span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>var x<span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb2-2"><a href="#cb2-2"></a>data prg5_1<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>    <span class="bu">input</span> x <span class="op">@@;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a>datalines<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="dv">171</span> <span class="dv">79</span> <span class="dv">135</span> <span class="dv">78</span> <span class="dv">118</span> <span class="dv">175</span> <span class="dv">122</span> <span class="dv">105</span> <span class="dv">111</span> <span class="dv">140</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="dv">138</span> <span class="dv">132</span> <span class="dv">142</span> <span class="dv">140</span> <span class="dv">168</span> <span class="dv">113</span> <span class="dv">131</span> <span class="dv">145</span> <span class="dv">128</span> <span class="dv">124</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="dv">134</span> <span class="dv">116</span> <span class="dv">129</span> <span class="dv">155</span> <span class="dv">135</span> <span class="dv">134</span> <span class="dv">136</span> <span class="dv">113</span> <span class="dv">119</span> <span class="dv">132</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>run<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>proc ttest h0<span class="op">=</span><span class="dv">140</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>var x<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
@@ -2161,19 +2196,19 @@ a:visited { color: #800080 }
 <div id="71d9b497" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">2</span><span class="op">*/</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>data prg5_2<span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> x1 x2 <span class="op">@@;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> x1 <span class="op">-</span> x2<span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fl">0.840</span> <span class="fl">0.580</span> <span class="fl">0.591</span> <span class="fl">0.509</span> <span class="fl">0.674</span> <span class="fl">0.500</span> <span class="fl">0.632</span> <span class="fl">0.316</span> <span class="fl">0.687</span> <span class="fl">0.337</span> </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fl">0.978</span> <span class="fl">0.517</span> <span class="fl">0.750</span> <span class="fl">0.454</span> <span class="fl">0.730</span> <span class="fl">0.512</span> <span class="fl">1.200</span> <span class="fl">0.997</span> <span class="fl">0.870</span> <span class="fl">0.506</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>proc means n mean std stderr t prt<span class="op">;</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    var d<span class="op">;</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">2</span><span class="op">*/</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>data prg5_2<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="bu">input</span> x1 x2 <span class="op">@@;</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    d <span class="op">=</span> x1 <span class="op">-</span> x2<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>datalines<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="fl">0.840</span> <span class="fl">0.580</span> <span class="fl">0.591</span> <span class="fl">0.509</span> <span class="fl">0.674</span> <span class="fl">0.500</span> <span class="fl">0.632</span> <span class="fl">0.316</span> <span class="fl">0.687</span> <span class="fl">0.337</span> </span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="fl">0.978</span> <span class="fl">0.517</span> <span class="fl">0.750</span> <span class="fl">0.454</span> <span class="fl">0.730</span> <span class="fl">0.512</span> <span class="fl">1.200</span> <span class="fl">0.997</span> <span class="fl">0.870</span> <span class="fl">0.506</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="op">;</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>run<span class="op">;</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a>proc means n mean std stderr t prt<span class="op">;</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    var d<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
@@ -3332,11 +3367,11 @@ a:visited { color: #800080 }
 <div id="c4918999" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">3</span><span class="op">*/</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>proc univariate data <span class="op">=</span> prg5_2<span class="op">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    var d<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">3</span><span class="op">*/</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>proc univariate data <span class="op">=</span> prg5_2<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    var d<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 
@@ -4712,11 +4747,11 @@ a:visited { color: #800080 }
 <div id="064b0993" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">4</span><span class="op">*/</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>proc ttest data <span class="op">=</span> prg5_2<span class="op">;</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    var d<span class="op">;</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">4</span><span class="op">*/</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>proc ttest data <span class="op">=</span> prg5_2<span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    var d<span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="6">
 
@@ -5984,21 +6019,21 @@ a:visited { color: #800080 }
 <div id="54860d6b" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">5</span><span class="op">*/</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>data prg5_3<span class="op">;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">input</span> x num <span class="op">@@;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>datalines<span class="op">;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fl">9.71</span> <span class="dv">1</span> <span class="fl">10.58</span> <span class="dv">1</span> <span class="fl">11.00</span> <span class="dv">1</span> <span class="fl">7.10</span> <span class="dv">1</span> <span class="fl">7.55</span> <span class="dv">1</span> <span class="fl">8.65</span> <span class="dv">1</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fl">8.87</span> <span class="dv">1</span> <span class="fl">9.02</span> <span class="dv">1</span> <span class="fl">9.88</span> <span class="dv">1</span> <span class="fl">8.68</span> <span class="dv">1</span> <span class="fl">10.52</span> <span class="dv">1</span> <span class="fl">11.02</span> <span class="dv">1</span> </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fl">6.52</span> <span class="dv">2</span> <span class="fl">6.80</span> <span class="dv">2</span> <span class="fl">7.12</span> <span class="dv">2</span> <span class="fl">5.50</span> <span class="dv">2</span> <span class="fl">4.89</span> <span class="dv">2</span> <span class="fl">7.03</span> <span class="dv">2</span> </span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fl">8.00</span> <span class="dv">2</span> <span class="fl">4.55</span> <span class="dv">2</span> <span class="fl">5.67</span> <span class="dv">2</span> <span class="fl">6.77</span> <span class="dv">2</span> <span class="fl">6.89</span> <span class="dv">2</span> <span class="fl">7.05</span> <span class="dv">2</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="op">;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>proc ttest<span class="op">;</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    var x<span class="op">;</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">class</span> num<span class="op">;</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="op">/*</span> programme <span class="dv">5</span><span class="op">-</span><span class="dv">5</span><span class="op">*/</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>data prg5_3<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>    <span class="bu">input</span> x num <span class="op">@@;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>datalines<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="fl">9.71</span> <span class="dv">1</span> <span class="fl">10.58</span> <span class="dv">1</span> <span class="fl">11.00</span> <span class="dv">1</span> <span class="fl">7.10</span> <span class="dv">1</span> <span class="fl">7.55</span> <span class="dv">1</span> <span class="fl">8.65</span> <span class="dv">1</span> </span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="fl">8.87</span> <span class="dv">1</span> <span class="fl">9.02</span> <span class="dv">1</span> <span class="fl">9.88</span> <span class="dv">1</span> <span class="fl">8.68</span> <span class="dv">1</span> <span class="fl">10.52</span> <span class="dv">1</span> <span class="fl">11.02</span> <span class="dv">1</span> </span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="fl">6.52</span> <span class="dv">2</span> <span class="fl">6.80</span> <span class="dv">2</span> <span class="fl">7.12</span> <span class="dv">2</span> <span class="fl">5.50</span> <span class="dv">2</span> <span class="fl">4.89</span> <span class="dv">2</span> <span class="fl">7.03</span> <span class="dv">2</span> </span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="fl">8.00</span> <span class="dv">2</span> <span class="fl">4.55</span> <span class="dv">2</span> <span class="fl">5.67</span> <span class="dv">2</span> <span class="fl">6.77</span> <span class="dv">2</span> <span class="fl">6.89</span> <span class="dv">2</span> <span class="fl">7.05</span> <span class="dv">2</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>run<span class="op">;</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>proc ttest<span class="op">;</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>    var x<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>    <span class="kw">class</span> num<span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="7">
 
@@ -7327,15 +7362,15 @@ a:visited { color: #800080 }
 <p>运用 <code>ttest</code> 过程进行 t 检验时,可根据需求增加一些选项或语句,使得到的结果更加符合用户的要求。</p>
 <section id="ttest过程的基本格式" class="level3" data-number="5.1">
 <h3 data-number="5.1" class="anchored" data-anchor-id="ttest过程的基本格式"><span class="header-section-number">5.1</span> ttest过程的基本格式</h3>
-<pre class="sas"><code>proc ttest &lt;选项&gt;;
-    BOOTSTRAP &lt;/ options&gt;;
-    class 变量名;
-    by 变量名1 &lt;变量名2&gt;...;
-    var 变量名1 &lt;变量名2&gt;...&lt;选项&gt;;
-    paired 变量名 &lt;变量名2&gt;...;
-    freq 变量名;
-    weight 变量名;
-run;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb7-1"><a href="#cb7-1"></a>proc ttest &lt;选项&gt;;</span>
+<span id="cb7-2"><a href="#cb7-2"></a>    BOOTSTRAP &lt;/ options&gt;;</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    class 变量名;</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    by 变量名1 &lt;变量名2&gt;...;</span>
+<span id="cb7-5"><a href="#cb7-5"></a>    var 变量名1 &lt;变量名2&gt;...&lt;选项&gt;;</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    paired 变量名 &lt;变量名2&gt;...;</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    freq 变量名;</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    weight 变量名;</span>
+<span id="cb7-9"><a href="#cb7-9"></a>run;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="ttest过程的常用选项" class="level3" data-number="5.2">
 <h3 data-number="5.2" class="anchored" data-anchor-id="ttest过程的常用选项"><span class="header-section-number">5.2</span> ttest过程的常用选项</h3>
@@ -7359,7 +7394,7 @@ run;</code></pre>
 </section>
 <section id="ttest-绘图" class="level3" data-number="5.4">
 <h3 data-number="5.4" class="anchored" data-anchor-id="ttest-绘图"><span class="header-section-number">5.4</span> ttest 绘图</h3>
-<pre class="sas"><code>PROC TTEST DATA = DATASET PLOTS = (绘图类型);</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb8-1"><a href="#cb8-1"></a>PROC TTEST DATA = DATASET PLOTS = (绘图类型);</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>可选的绘图类型：</p>
 <ul>
 <li><code>ALL</code> 或 <code>NONE</code>: 绘制全部图形或不绘制任何图形；</li>
@@ -7372,16 +7407,16 @@ run;</code></pre>
 <li><code>PROFILESPLOT</code>: PROFILESPLOT图.</li>
 </ul>
 <p>注意：<code>TTEST</code> 过程步都默认绘制 <code>QQ</code> 图和 <code>SUMMARYPLOT</code> 图，配对 T 检验还默认绘制 <code>AGREEMENTPLOT</code> 图和 <code>PROFILESPLOT</code> 图。 另外，指定绘制图形类型之后，那些默认图仍然会绘制，除非加上( <code>ONLY</code> ):</p>
-<pre class="sas"><code>PROC TTEST data = 数据集 PLOTS(ONLY) = (绘图类型);
-RUN;</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode numberSource sas number-lines code-with-copy"><code class="sourceCode"><span id="cb9-1"><a href="#cb9-1"></a>PROC TTEST data = 数据集 PLOTS(ONLY) = (绘图类型);</span>
+<span id="cb9-2"><a href="#cb9-2"></a>RUN;</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div id="a9be00e3" class="cell">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>test programme only plot<span class="op">*/</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>proc ttest data <span class="op">=</span> prg5_2 plots(only) <span class="op">=</span> boxplot<span class="op">;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    var d<span class="op">;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="op">/*</span>test programme only plot<span class="op">*/</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>proc ttest data <span class="op">=</span> prg5_2 plots(only) <span class="op">=</span> boxplot<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>    var d<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="10">
 
@@ -8587,11 +8622,11 @@ a:visited { color: #800080 }
 <div id="8b0cc4fb" class="cell" data-execution_count="13">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>test programme multiple plots<span class="op">*/</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>PROC TTEST data <span class="op">=</span> prg5_2 PLOTS <span class="op">=</span> (BOXPLOT HISTOGRAM QQPLOT)<span class="op">;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>   var d<span class="op">;</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>RUN<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="op">/*</span>test programme multiple plots<span class="op">*/</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>PROC TTEST data <span class="op">=</span> prg5_2 PLOTS <span class="op">=</span> (BOXPLOT HISTOGRAM QQPLOT)<span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>   var d<span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>RUN<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="13">
 

@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-09-Stata-intro.html" rel="next">
+<link href="../../Guide/SAS/25-06-07-binomial.html" rel="next">
 <link href="../../Guide/SAS/25-06-06-chi2-1.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -589,6 +589,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
   </div>
 </li>
       </ul>
@@ -6686,7 +6692,7 @@ Breslow-Day 检验</th>
 <p>整个结果共分三个部分：</p>
 <ol type="1">
 <li>第一部分输出的是输出两张列联表,分别是 <code>sex=1</code> 和 <code>sex=2</code> 时的二维列联表。</li>
-<li>第二部分输出在控制分层变量sex后总的检验 Cochran-Mantel-Haenszel的统计结果,由于行变量和列变量都只有两个,可以看作双向无序资料,三种结果是一致的,结果为: <span class="math inline">\(\chi^2_{CHM}=19.5130\)</span> ,所对应的 P&lt;0.0001,说明控制了性别因素后,使用别嘌呤醇与发生药物性皮疹是有关系的。</li>
+<li>第二部分输出在控制分层变量sex后总的检验 Cochran-Mantel-Haenszel的统计结果,由于行变量和列变量都只有两个,可以看作双向无序资料,三种结果是一致的,结果为: <span class="math inline">\(\chi^2_{CMH}=19.5130\)</span> ,所对应的 P&lt;0.0001,说明控制了性别因素后,使用别嘌呤醇与发生药物性皮疹是有关系的。</li>
 <li>第三部分是一些相对数统计量的比值,第一个是病例对照(优比),即病例-对照研究中的优势比(又称比值比,OR),有两个统计结果,个是用 Mantel-Haenszel 方法计算的值,另一个是用 Logit 方法计算的值,在病例-对照研究中,优势比是非常重要的指标,本例说明使用别嘌呤醇发生药物性皮疹的危险性是不使用该药危险性的4倍(3.7560或3.7775)。后面两个是 OR的 95%置信区间,本例为(2.015 8,6.9983)或(2.011 4,7.094 1),其结论与 CMH 结论相同。下面两个都是队列研究所用的统计指标(相对危险度,RR),区别在于分别将第1列或第2列作为发病情况。</li>
 <li>第四部分为对优势比进行 Breslow-Day 齐性检验,本例 <span class="math inline">\(\chi^2=0.7029,P=0.401 8&gt;0.05\)</span>,说明不同分层之间的优势比具有齐性，可认为它们一致。</li>
 </ol>
@@ -7446,8 +7452,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="pagination-link" aria-label="00-Stata Intro and Record">
-        <span class="nav-page-text">00-Stata Intro and Record</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-06-07-binomial.html" class="pagination-link" aria-label="15-SAS 对二项分布的概率计算与假设检验">
+        <span class="nav-page-text">15-SAS 对二项分布的概率计算与假设检验</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

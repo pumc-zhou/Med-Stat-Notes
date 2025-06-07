@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-06-06T12:39:20.534Z</lastmod>
+    <lastmod>2025-06-07T13:56:28.491Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -190,7 +190,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-05-SAS-install-connect.html</loc>
-    <lastmod>2025-05-06T08:34:58.659Z</lastmod>
+    <lastmod>2025-06-07T07:29:37.769Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-03-11-SAS-install.html</loc>
@@ -298,19 +298,19 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-22-SAS-Base.html</loc>
-    <lastmod>2025-06-02T09:40:42.307Z</lastmod>
+    <lastmod>2025-06-07T07:29:41.492Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-24-SAS-program.html</loc>
-    <lastmod>2025-05-25T07:01:35.436Z</lastmod>
+    <lastmod>2025-06-07T07:29:23.242Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-25-SAS-DATA-LIB.html</loc>
-    <lastmod>2025-05-27T07:33:44.377Z</lastmod>
+    <lastmod>2025-06-07T07:29:13.017Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-26-SAS-DATA-tidy.html</loc>
-    <lastmod>2025-05-27T10:42:10.762Z</lastmod>
+    <lastmod>2025-06-07T07:28:59.354Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-28-SAS-function.html</loc>
@@ -318,7 +318,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-29-SAS-function-example.html</loc>
-    <lastmod>2025-05-29T05:21:49.379Z</lastmod>
+    <lastmod>2025-06-07T07:28:30.680Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-29-SAS-plot.html</loc>
@@ -326,11 +326,11 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-29-SAS-univariate.html</loc>
-    <lastmod>2025-05-31T10:16:55.521Z</lastmod>
+    <lastmod>2025-06-07T07:28:42.193Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-05-31-two-sample-univariate.html</loc>
-    <lastmod>2025-05-31T11:31:45.682Z</lastmod>
+    <lastmod>2025-06-07T07:27:58.387Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-06-01-multi-sample-ANOVA.html</loc>
@@ -350,10 +350,14 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-06-06-chi2-2.html</loc>
-    <lastmod>2025-06-06T12:39:15.665Z</lastmod>
+    <lastmod>2025-06-06T13:00:53.133Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/SAS/25-06-06-chi2-1.html</loc>
     <lastmod>2025-06-06T08:04:32.315Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/SAS/25-06-07-binomial.html</loc>
+    <lastmod>2025-06-07T13:56:15.501Z</lastmod>
   </url>
 </urlset>

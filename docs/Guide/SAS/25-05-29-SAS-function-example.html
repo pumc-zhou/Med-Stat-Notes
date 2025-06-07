@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-09-Stata-intro.html" rel="next">
+<link href="../../Guide/SAS/25-05-29-SAS-univariate.html" rel="next">
 <link href="../../Guide/SAS/25-05-28-SAS-function.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -208,10 +208,21 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item">
-    <a class="nav-link" href="../../navbar/book.html"> 
-<span class="menu-text">Books</span></a>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
+        <li>
+    <a class="dropdown-item" href="../../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+  </li>
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
@@ -515,6 +526,48 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="menu-text">08-SAS 运算符与常用函数示例</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-29-SAS-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-SAS 计量资料的单变量分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-31-two-sample-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-SAS 两样本均数的比较分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-01-multi-sample-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
+  </div>
+</li>
       </ul>
   </li>
           <li class="sidebar-item sidebar-item-section">
@@ -760,7 +813,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年5月29日</p>
+      <p class="date-modified">2025年6月7日</p>
     </div>
   </div>
     
@@ -774,7 +827,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <div id="b5bca628" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <section id="正态分布随机数的产生" class="level2" data-number="1">
@@ -783,20 +836,20 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <div id="1da890bc" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">3</span><span class="op">-</span><span class="dv">1</span><span class="op">*/</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>利用rannor(seed)函数生成两组各<span class="dv">15</span><span class="er">个来自于均数为170</span>、方差为<span class="dv">30</span><span class="er">的正态分布的随机数</span><span class="op">*/</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data prg3_1<span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    do seed <span class="op">=</span> <span class="dv">1</span> to <span class="dv">15</span><span class="op">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">170</span> <span class="op">+</span> sqrt(<span class="dv">30</span>)<span class="op">*</span>rannor(seed)<span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> <span class="dv">170</span> <span class="op">+</span> sqrt(<span class="dv">30</span>)<span class="op">*</span>rannor(seed)<span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    output<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    end<span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    title <span class="st">'程序3-1'</span><span class="op">;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="op">/*</span>程序<span class="dv">3</span><span class="op">-</span><span class="dv">1</span><span class="op">*/</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="op">/*</span>利用rannor(seed)函数生成两组各<span class="dv">15</span><span class="er">个来自于均数为170</span>、方差为<span class="dv">30</span><span class="er">的正态分布的随机数</span><span class="op">*/</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a>data prg3_1<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    do seed <span class="op">=</span> <span class="dv">1</span> to <span class="dv">15</span><span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>    x <span class="op">=</span> <span class="dv">170</span> <span class="op">+</span> sqrt(<span class="dv">30</span>)<span class="op">*</span>rannor(seed)<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>    y <span class="op">=</span> <span class="dv">170</span> <span class="op">+</span> sqrt(<span class="dv">30</span>)<span class="op">*</span>rannor(seed)<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    output<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>    end<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>run<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    title <span class="st">'程序3-1'</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Using SAS Config named: winlocal
@@ -2040,22 +2093,22 @@ a:visited { color: #800080 }
 <div id="2bbbc385" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">3</span><span class="op">-</span><span class="dv">2</span><span class="op">*/</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span><span class="dv">10</span><span class="er">例18岁的男生</span>，身高均数为<span class="fl">166.95</span><span class="er">cm</span>，标准差为<span class="fl">3.64</span><span class="er">cm</span>，试求其总体均数的<span class="dv">95</span><span class="op">%</span>置信区间<span class="op">*/</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>data prg3_2<span class="op">;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    mean <span class="op">=</span> <span class="fl">166.95</span><span class="op">;</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    std <span class="op">=</span> <span class="fl">3.64</span><span class="op">;</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> tinv(<span class="fl">0.975</span>,n<span class="op">-</span><span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">/*</span><span class="dv">95</span><span class="op">%</span>的置信区间，双侧，右侧的界值为<span class="fl">97.5</span><span class="op">%*/</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">in</span> <span class="op">=</span> t<span class="op">*</span>std<span class="op">/</span>sqrt(n)<span class="op">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    lclm <span class="op">=</span> mean<span class="op">-</span><span class="kw">in</span><span class="op">;</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    uclm <span class="op">=</span> mean<span class="op">+</span><span class="kw">in</span><span class="op">;</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    var lclm uclm<span class="op">;</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="op">/*</span>程序<span class="dv">3</span><span class="op">-</span><span class="dv">2</span><span class="op">*/</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="op">/*</span><span class="dv">10</span><span class="er">例18岁的男生</span>，身高均数为<span class="fl">166.95</span><span class="er">cm</span>，标准差为<span class="fl">3.64</span><span class="er">cm</span>，试求其总体均数的<span class="dv">95</span><span class="op">%</span>置信区间<span class="op">*/</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>data prg3_2<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    n <span class="op">=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    mean <span class="op">=</span> <span class="fl">166.95</span><span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    std <span class="op">=</span> <span class="fl">3.64</span><span class="op">;</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    t <span class="op">=</span> tinv(<span class="fl">0.975</span>,n<span class="op">-</span><span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="op">/*</span><span class="dv">95</span><span class="op">%</span>的置信区间，双侧，右侧的界值为<span class="fl">97.5</span><span class="op">%*/</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>    <span class="kw">in</span> <span class="op">=</span> t<span class="op">*</span>std<span class="op">/</span>sqrt(n)<span class="op">;</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>    lclm <span class="op">=</span> mean<span class="op">-</span><span class="kw">in</span><span class="op">;</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    uclm <span class="op">=</span> mean<span class="op">+</span><span class="kw">in</span><span class="op">;</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>run<span class="op">;</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    var lclm uclm<span class="op">;</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="3">
 
@@ -3211,28 +3264,28 @@ a:visited { color: #800080 }
 <div id="ade347a1" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>代码</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span>程序<span class="dv">3</span><span class="op">-</span><span class="dv">3</span><span class="op">*/</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="op">/*</span><span class="dv">61</span><span class="er">名患者随机分为两组</span>，对照组<span class="dv">29</span>，实验组<span class="dv">32</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>对照组治疗前均数为<span class="fl">20.10</span>，标准差为<span class="fl">7.02</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>试验组治疗前均数为<span class="fl">16.89</span>，标准差为<span class="fl">8.46</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>问两组治疗前基线的总体均数相差有多大<span class="op">*/</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>data prg3_3<span class="op">;</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    n1 <span class="op">=</span> <span class="dv">29</span><span class="op">;</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    n2 <span class="op">=</span> <span class="dv">32</span><span class="op">;</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    m1 <span class="op">=</span> <span class="fl">20.10</span><span class="op">;</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    m2 <span class="op">=</span> <span class="fl">16.89</span><span class="op">;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    s1 <span class="op">=</span> <span class="fl">7.02</span><span class="op">;</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    s2 <span class="op">=</span> <span class="fl">8.46</span><span class="op">;</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    sc2 <span class="op">=</span> (s1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(n1<span class="op">-</span><span class="dv">1</span>)<span class="op">+</span>s2<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(n2<span class="op">-</span><span class="dv">1</span>))<span class="op">/</span>(n1<span class="op">+</span>n2<span class="op">-</span><span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    st <span class="op">=</span> sqrt(sc2<span class="op">*</span>(<span class="dv">1</span><span class="op">/</span>n1<span class="op">+</span><span class="dv">1</span><span class="op">/</span>n2))<span class="op">;</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> tinv(<span class="fl">0.975</span>,n1<span class="op">+</span>n2<span class="op">-</span><span class="dv">2</span>)<span class="op">;</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">in</span> <span class="op">=</span> t<span class="op">*</span>st<span class="op">;</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    lclm <span class="op">=</span> <span class="bu">abs</span>(m1<span class="op">-</span>m2)<span class="op">-</span><span class="kw">in</span><span class="op">;</span></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    uclm <span class="op">=</span> <span class="bu">abs</span>(m1<span class="op">-</span>m2)<span class="op">+</span><span class="kw">in</span><span class="op">;</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    var lclm uclm<span class="op">;</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a><span class="op">%%</span>SAS</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="op">/*</span>程序<span class="dv">3</span><span class="op">-</span><span class="dv">3</span><span class="op">*/</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="op">/*</span><span class="dv">61</span><span class="er">名患者随机分为两组</span>，对照组<span class="dv">29</span>，实验组<span class="dv">32</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>对照组治疗前均数为<span class="fl">20.10</span>，标准差为<span class="fl">7.02</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>试验组治疗前均数为<span class="fl">16.89</span>，标准差为<span class="fl">8.46</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>问两组治疗前基线的总体均数相差有多大<span class="op">*/</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>data prg3_3<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>    n1 <span class="op">=</span> <span class="dv">29</span><span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    n2 <span class="op">=</span> <span class="dv">32</span><span class="op">;</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>    m1 <span class="op">=</span> <span class="fl">20.10</span><span class="op">;</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>    m2 <span class="op">=</span> <span class="fl">16.89</span><span class="op">;</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>    s1 <span class="op">=</span> <span class="fl">7.02</span><span class="op">;</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>    s2 <span class="op">=</span> <span class="fl">8.46</span><span class="op">;</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>    sc2 <span class="op">=</span> (s1<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(n1<span class="op">-</span><span class="dv">1</span>)<span class="op">+</span>s2<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(n2<span class="op">-</span><span class="dv">1</span>))<span class="op">/</span>(n1<span class="op">+</span>n2<span class="op">-</span><span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>    st <span class="op">=</span> sqrt(sc2<span class="op">*</span>(<span class="dv">1</span><span class="op">/</span>n1<span class="op">+</span><span class="dv">1</span><span class="op">/</span>n2))<span class="op">;</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>    t <span class="op">=</span> tinv(<span class="fl">0.975</span>,n1<span class="op">+</span>n2<span class="op">-</span><span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>    <span class="kw">in</span> <span class="op">=</span> t<span class="op">*</span>st<span class="op">;</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>    lclm <span class="op">=</span> <span class="bu">abs</span>(m1<span class="op">-</span>m2)<span class="op">-</span><span class="kw">in</span><span class="op">;</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>    uclm <span class="op">=</span> <span class="bu">abs</span>(m1<span class="op">-</span>m2)<span class="op">+</span><span class="kw">in</span><span class="op">;</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>    var lclm uclm<span class="op">;</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 
@@ -5015,8 +5068,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="pagination-link" aria-label="00-Stata Intro and Record">
-        <span class="nav-page-text">00-Stata Intro and Record</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-05-29-SAS-univariate.html" class="pagination-link" aria-label="09-SAS 计量资料的单变量分析">
+        <span class="nav-page-text">09-SAS 计量资料的单变量分析</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

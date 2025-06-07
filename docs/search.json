@@ -909,7 +909,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-06},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 6, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-07},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 7, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -3147,7 +3147,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "02-SAS 在 Jupyter Notebook 中使用"
     ]
   },
@@ -3160,7 +3160,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "02-SAS 在 Jupyter Notebook 中使用"
     ]
   },
@@ -3173,7 +3173,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "02-SAS 在 Jupyter Notebook 中使用"
     ]
   },
@@ -3186,7 +3186,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "02-SAS 在 Jupyter Notebook 中使用"
     ]
   },
@@ -3199,7 +3199,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "02-SAS 在 Jupyter Notebook 中使用"
     ]
   },
@@ -3212,7 +3212,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "02-SAS 在 Jupyter Notebook 中使用"
     ]
   },
@@ -3225,7 +3225,7 @@
     "crumbs": [
       "Home",
       "统计软件",
-      "Guide/SAS/SAS-intro.qmd",
+      "SAS",
       "02-SAS 在 Jupyter Notebook 中使用"
     ]
   },
@@ -6251,7 +6251,7 @@
     "href": "Guide/SAS/25-06-06-chi2-2.html#分层资料",
     "title": "14-SAS 卡方检验2-四格表资料卡方检验",
     "section": "5 分层资料",
-    "text": "5 分层资料\nCMH 统计量也可用于多层行x列表资料的卡方检验,即按一个或多个因素分层后,研究行变量和列变量间的联系。可通过控制分层变量的影响后,检验研究行变量和列变量的关系。\n\n5.1 示例\n\n\n\n性别\n组别\n使用(c=1)\n未使用(c=2)\n\n\n\n\n男(sex=1)\n病例组(r=1)\n5\n36\n\n\n男\n对照组(r=2)\n33\n645\n\n\n女(sex=2)\n病例组(r=1)\n10\n58\n\n\n女\n对照组(r=2)\n19\n518\n\n\n\n\n\n代码\n%%SAS\n/*程序14-4*/\ndata chi14_4;\n    do c=1 to 2;\n        do sex=1 to 2;\n            do r=1 to 2;\n                input f@@;\n                output;\n            end;\n        end;\n    end;\ndatalines;\n5 33 10 19 36 645 58 518\n;\nproc freq;\n    weight f;\n    tables sex*r*c/cmh nopercent norow nocol;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c的表 1\n\n\n控制“ sex=1”\n\n\nr\nc\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n5\n\n\n\n\n36\n\n\n\n\n41\n\n\n\n\n2\n\n\n33\n\n\n\n\n645\n\n\n\n\n678\n\n\n\n\n合计\n\n\n38\n\n\n\n\n681\n\n\n\n\n719\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c的表 2\n\n\n控制“ sex=2”\n\n\nr\nc\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n10\n\n\n\n\n58\n\n\n\n\n68\n\n\n\n\n2\n\n\n19\n\n\n\n\n518\n\n\n\n\n537\n\n\n\n\n合计\n\n\n29\n\n\n\n\n576\n\n\n\n\n605\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n“c-r”的汇总统计量控制“sex”\n\n\n\n\n\n\nCochran-Mantel-Haenszel 统计量 （基于表评分）\n\n\n统计量\n备择假设\n自由度\n值\n概率\n\n\n\n\n1\n非零相关\n1\n19.5130\n&lt;.0001\n\n\n2\n行评分均值差异\n1\n19.5130\n&lt;.0001\n\n\n3\n一般关联\n1\n19.5130\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n普通优比和相对风险\n\n\n统计量\n方法\n值\n95% 置信限\n\n\n\n\n优比\nMantel-Haenszel\n3.7560\n2.0158\n6.9983\n\n\n \nLogit\n3.7775\n2.0114\n7.0941\n\n\n相对风险（第 1 列）\nMantel-Haenszel\n3.3831\n1.9403\n5.8987\n\n\n \nLogit\n3.3953\n1.9390\n5.9452\n\n\n相对风险（第 2 列）\nMantel-Haenszel\n0.8992\n0.8336\n0.9700\n\n\n \nLogit\n0.9007\n0.8351\n0.9713\n\n\n\n\n\n\n\n\n\n\n优比齐性的\nBreslow-Day 检验\n\n\n\n\n卡方\n0.7029\n\n\n自由度\n1\n\n\nPr &gt; 卡方\n0.4018\n\n\n\n\n\n\n总样本大小 = 1324\n\n\n\n\n\n\n\n\n\n5.2 结果说明\n整个结果共分三个部分：\n\n第一部分输出的是输出两张列联表,分别是 sex=1 和 sex=2 时的二维列联表。\n第二部分输出在控制分层变量sex后总的检验 Cochran-Mantel-Haenszel的统计结果,由于行变量和列变量都只有两个,可以看作双向无序资料,三种结果是一致的,结果为: \\(\\chi^2_{CHM}=19.5130\\) ,所对应的 P&lt;0.0001,说明控制了性别因素后,使用别嘌呤醇与发生药物性皮疹是有关系的。\n第三部分是一些相对数统计量的比值,第一个是病例对照(优比),即病例-对照研究中的优势比(又称比值比,OR),有两个统计结果,个是用 Mantel-Haenszel 方法计算的值,另一个是用 Logit 方法计算的值,在病例-对照研究中,优势比是非常重要的指标,本例说明使用别嘌呤醇发生药物性皮疹的危险性是不使用该药危险性的4倍(3.7560或3.7775)。后面两个是 OR的 95%置信区间,本例为(2.015 8,6.9983)或(2.011 4,7.094 1),其结论与 CMH 结论相同。下面两个都是队列研究所用的统计指标(相对危险度,RR),区别在于分别将第1列或第2列作为发病情况。\n第四部分为对优势比进行 Breslow-Day 齐性检验,本例 \\(\\chi^2=0.7029,P=0.401 8&gt;0.05\\),说明不同分层之间的优势比具有齐性，可认为它们一致。",
+    "text": "5 分层资料\nCMH 统计量也可用于多层行x列表资料的卡方检验,即按一个或多个因素分层后,研究行变量和列变量间的联系。可通过控制分层变量的影响后,检验研究行变量和列变量的关系。\n\n5.1 示例\n\n\n\n性别\n组别\n使用(c=1)\n未使用(c=2)\n\n\n\n\n男(sex=1)\n病例组(r=1)\n5\n36\n\n\n男\n对照组(r=2)\n33\n645\n\n\n女(sex=2)\n病例组(r=1)\n10\n58\n\n\n女\n对照组(r=2)\n19\n518\n\n\n\n\n\n代码\n%%SAS\n/*程序14-4*/\ndata chi14_4;\n    do c=1 to 2;\n        do sex=1 to 2;\n            do r=1 to 2;\n                input f@@;\n                output;\n            end;\n        end;\n    end;\ndatalines;\n5 33 10 19 36 645 58 518\n;\nproc freq;\n    weight f;\n    tables sex*r*c/cmh nopercent norow nocol;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c的表 1\n\n\n控制“ sex=1”\n\n\nr\nc\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n5\n\n\n\n\n36\n\n\n\n\n41\n\n\n\n\n2\n\n\n33\n\n\n\n\n645\n\n\n\n\n678\n\n\n\n\n合计\n\n\n38\n\n\n\n\n681\n\n\n\n\n719\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n频数\n\n\n\n\n\n\n\n\nr-c的表 2\n\n\n控制“ sex=2”\n\n\nr\nc\n\n\n1\n2\n合计\n\n\n\n\n1\n\n\n10\n\n\n\n\n58\n\n\n\n\n68\n\n\n\n\n2\n\n\n19\n\n\n\n\n518\n\n\n\n\n537\n\n\n\n\n合计\n\n\n29\n\n\n\n\n576\n\n\n\n\n605\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\nFREQ 过程\n\n\n“c-r”的汇总统计量控制“sex”\n\n\n\n\n\n\nCochran-Mantel-Haenszel 统计量 （基于表评分）\n\n\n统计量\n备择假设\n自由度\n值\n概率\n\n\n\n\n1\n非零相关\n1\n19.5130\n&lt;.0001\n\n\n2\n行评分均值差异\n1\n19.5130\n&lt;.0001\n\n\n3\n一般关联\n1\n19.5130\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n普通优比和相对风险\n\n\n统计量\n方法\n值\n95% 置信限\n\n\n\n\n优比\nMantel-Haenszel\n3.7560\n2.0158\n6.9983\n\n\n \nLogit\n3.7775\n2.0114\n7.0941\n\n\n相对风险（第 1 列）\nMantel-Haenszel\n3.3831\n1.9403\n5.8987\n\n\n \nLogit\n3.3953\n1.9390\n5.9452\n\n\n相对风险（第 2 列）\nMantel-Haenszel\n0.8992\n0.8336\n0.9700\n\n\n \nLogit\n0.9007\n0.8351\n0.9713\n\n\n\n\n\n\n\n\n\n\n优比齐性的\nBreslow-Day 检验\n\n\n\n\n卡方\n0.7029\n\n\n自由度\n1\n\n\nPr &gt; 卡方\n0.4018\n\n\n\n\n\n\n总样本大小 = 1324\n\n\n\n\n\n\n\n\n\n5.2 结果说明\n整个结果共分三个部分：\n\n第一部分输出的是输出两张列联表,分别是 sex=1 和 sex=2 时的二维列联表。\n第二部分输出在控制分层变量sex后总的检验 Cochran-Mantel-Haenszel的统计结果,由于行变量和列变量都只有两个,可以看作双向无序资料,三种结果是一致的,结果为: \\(\\chi^2_{CMH}=19.5130\\) ,所对应的 P&lt;0.0001,说明控制了性别因素后,使用别嘌呤醇与发生药物性皮疹是有关系的。\n第三部分是一些相对数统计量的比值,第一个是病例对照(优比),即病例-对照研究中的优势比(又称比值比,OR),有两个统计结果,个是用 Mantel-Haenszel 方法计算的值,另一个是用 Logit 方法计算的值,在病例-对照研究中,优势比是非常重要的指标,本例说明使用别嘌呤醇发生药物性皮疹的危险性是不使用该药危险性的4倍(3.7560或3.7775)。后面两个是 OR的 95%置信区间,本例为(2.015 8,6.9983)或(2.011 4,7.094 1),其结论与 CMH 结论相同。下面两个都是队列研究所用的统计指标(相对危险度,RR),区别在于分别将第1列或第2列作为发病情况。\n第四部分为对优势比进行 Breslow-Day 齐性检验,本例 \\(\\chi^2=0.7029,P=0.401 8&gt;0.05\\),说明不同分层之间的优势比具有齐性，可认为它们一致。",
     "crumbs": [
       "Home",
       "统计软件",
@@ -6348,6 +6348,58 @@
       "统计软件",
       "SAS",
       "13-SAS 卡方检验1-四格表资料卡方检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-07-binomial.html",
+    "href": "Guide/SAS/25-06-07-binomial.html",
+    "title": "15-SAS 对二项分布的概率计算与假设检验",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "15-SAS 对二项分布的概率计算与假设检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-07-binomial.html#sas-与-binomial",
+    "href": "Guide/SAS/25-06-07-binomial.html#sas-与-binomial",
+    "title": "15-SAS 对二项分布的概率计算与假设检验",
+    "section": "1 SAS 与 Binomial",
+    "text": "1 SAS 与 Binomial\n在 SAS 中,与二项分布有关的函数为 probbnm(p,n,r),函数中 p 为某事件的发生概率,n 为样本含量，为阳性事件的例数,该函数可以计算出发生阳性事件的例数从 0 到 r 的累计概率。利用该函数可以对服从二项分布的数据进行概率计算和假设检验。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "15-SAS 对二项分布的概率计算与假设检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-07-binomial.html#阳性事件发生的概率",
+    "href": "Guide/SAS/25-06-07-binomial.html#阳性事件发生的概率",
+    "title": "15-SAS 对二项分布的概率计算与假设检验",
+    "section": "2 阳性事件发生的概率",
+    "text": "2 阳性事件发生的概率\n某种医学技能测试的通过率为0.80。今有10例学生参加测试,试分别计算这10例学生中有6、7、8人获得通过的概率。本例 π=0.8,n=10,计算 r=6、7、8的概率.\n\n\n代码\n%%SAS\n/*程序15-1*/\ndata binomial15_1;\n    do r=6 to 8;\n        p1=probbnml(0.8,10,r);\n        p2=probbnml(0.8,10,r-1);\n        p=p1-p2;\n        output;\n    end;\nproc print;\n    var r p;\nrun;\n\n\nUsing SAS Config named: winlocal\nSAS Connection established. Subprocess id is 30048\n\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\nr\np\n\n\n\n\n1\n6\n0.08808\n\n\n2\n7\n0.20133\n\n\n3\n8\n0.30199",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "15-SAS 对二项分布的概率计算与假设检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-07-binomial.html#总体率的区间估计正态近似法",
+    "href": "Guide/SAS/25-06-07-binomial.html#总体率的区间估计正态近似法",
+    "title": "15-SAS 对二项分布的概率计算与假设检验",
+    "section": "3 总体率的区间估计(正态近似法)",
+    "text": "3 总体率的区间估计(正态近似法)\n根据数理统计学的中心极限定理可得,当 n 较大、π 不接近 0 也不接近 1 时,二项分布 \\(B(n,π)\\) 近似正态分布 \\(N[n \\pi,nπ(1-π)]\\),相应的样本率 p 的分布也近似正态分布 \\(N(\\pi,\\sigma_{p}^2)\\)。为此,当 n 较大、p 和 1-p 均不太小,如 np 和 n(1-p) 均&gt;5时,可利用样本率 p 的分布近似正态分布来估计总体率的 1-α 置信区间。\n\n\n代码\n%%SAS\ndata binomial15_2;\n    n=100;\n    p=0.45;\n    sp=sqrt(p*(1-p)/n);\n    u=probit(0.975);\n    usp=u*sp;\n    lclm=p-usp;\n    uclm=p+usp;\nproc print;\n    var n p sp lclm uclm;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\nn\np\nsp\nlclm\nuclm\n\n\n\n\n1\n100\n0.45\n0.049749\n0.35249\n0.54751\n\n\n\n\n\n\n\n\n\n\n\n3.1 程序说明\n数据集中 n 为观察的患者人数 p 为样本率,驴为率的标准误,u 为置信水准为 0.05 时标准正态分布的双侧界值, lclm 为 95% 置信区间的下限,uclm 为 95% 置信区间的上限。",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "SAS",
+      "15-SAS 对二项分布的概率计算与假设检验"
     ]
   }
 ]
