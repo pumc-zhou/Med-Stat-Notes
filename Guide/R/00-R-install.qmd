@@ -1,12 +1,17 @@
 ---
-title: "MacOS安装 R 和 Rstudio "
+title: "00-R 安装"
 author: "Simonzhou"
 date: "2025-02-19"
-#format: 
-#  html:           # 输出格式为 HTML
-#    self-contained: true  # 生成独立的 HTML 文件
-#  pdf:            # 可选：如果需要 PDF 输出
-#    default
+date-modified: today
+format: 
+    html:
+        code-fold: true
+        code-line-numbers: true
+        code-highlight: true
+        fig_caption: true
+        number-sections: true
+        toc: true
+        toc-depth: 3
 ---
 
 1.  进入官网：<https://www.r-project.org/>
@@ -52,13 +57,26 @@ WARNING: You're using a non-UTF8 locale, therefore only ASCII characters will wo
 
 ⌘+space(空格键）调出Spotlight Search，然后输入terminal再点击open，打开后输入locale查看本地的设置，得到如下
 
-```{bash,eval = FALSE}
-LANG="" LC_COLLATE="C" LC_CTYPE="UTF-8" LC_MESSAGES="C" LC_MONETARY="C" LC_NUMERIC="C" LC_TIME="C" LC_ALL=
+``` bash
+LANG="" 
+LC_COLLATE="C" 
+LC_CTYPE="UTF-8" 
+LC_MESSAGES="C" 
+LC_MONETARY="C" 
+LC_NUMERIC="C" 
+LC_TIME="C" 
+LC_ALL=
 ```
 
 这些还没有配置好，进行一些配置：
 
-`{bash，eval = FALSE}        export LC_CTYPE=en_US.UTF-8 export LC_COLLATE=en_US.UTF-8 export LC_TIME=en_US.UTF-8 export LC_MESSAGES=en_US.UTF-8 export LC_MONETARY=en_US.UTF-8`
+``` bash
+export LC_CTYPE=en_US.UTF-8 
+export LC_COLLATE=en_US.UTF-8 
+export LC_TIME=en_US.UTF-8 
+export LC_MESSAGES=en_US.UTF-8 
+export LC_MONETARY=en_US.UTF-8
+```
 
 这样就可以了。
 

@@ -1,0 +1,17 @@
+---
+title: "00-医学统计学（伪）高级部分"
+author: "Simonzhou"
+date: "2025-06-09"
+date-modified: today
+format: 
+    html:
+        code-fold: true
+        code-line-numbers: true
+        code-highlight: true
+        fig_caption: true
+        number-sections: true
+        toc: true
+        toc-depth: 3
+---
+
+此目录下记录一些复杂的统计学知识，未完待续。

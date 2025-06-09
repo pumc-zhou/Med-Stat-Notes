@@ -65,6 +65,8 @@ website:
         menu:
           - text: "Basic"
             file: Learn/Basic/00-basic.qmd
+          - text: "Advance"
+            file: Learn/Advance/00-advance.qmd
           - text: "Bayes"
             file : Learn/Bayes/00-About-Bayes.qmd
       - text: "Guide"
@@ -74,7 +76,7 @@ website:
           - text: "Python"
             file: Guide/Python/Python-intro.qmd
           - text: "R"
-            file: Guide/R/R-intro.qmd
+            file: Guide/R/01-R-intro.qmd
           - text: "SAS"
             file: Guide/SAS/25-02-16-SAS-intro.qmd
           - text: "Stata"
@@ -107,13 +109,15 @@ website:
     contents:
       - text: 主页
         file: index.qmd
-      - section: Learn/Basic/00-basic.qmd
+      - section: Learn
         contents: 
           - section: Basic
-            contents: Learn/Basic/*.qmd
+            contents: Learn/Basic/*.{qmd,ipynb}
+          - section: Advance
+            contents: Learn/Advance/*.{qmd,ipynb}
           - section: Bayes
-            contents: Learn/Bayes/*.qmd
-      - section: Guide/Guide-intro.qmd
+            contents: Learn/Bayes/*.{qmd,ipynb}
+      - section: Guide
         contents:
           - section: R
             contents: Guide/R/*.{qmd,ipynb}

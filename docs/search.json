@@ -882,13 +882,14 @@
   {
     "objectID": "Guide/R/R-intro.html",
     "href": "Guide/R/R-intro.html",
-    "title": "R introduction",
+    "title": "01-R 相关介绍与记录",
     "section": "",
     "text": "R语言是一种自由软件编程语言与操作环境，主要用于统计分析、绘图以及数据挖掘。R由新西兰奥克兰大学的统计学家罗斯·伊哈卡和罗伯特·杰特曼开发，现在由R核心小组负责开发，同时也有其他用户编写了诸多外挂的软件包。R以S语言为基础，其词法作用域语义来自Scheme。R的后台程序大多由C语言、FORTRAN语言和R自己写成。\nR 语言是为数学研究工作者设计的一种数学编程语言，主要用于统计分析、绘图、数据挖掘。\n如果你是一个计算机程序的初学者并且急切地想了解计算机的通用编程，R 语言不是一个很理想的选择，可以选择 Python、C 或 Java。\nR 语言与 C 语言都是贝尔实验室的研究成果，但两者有不同的侧重领域，R 语言是一种解释型的面向数学理论研究工作者的语言，而 C 语言是为计算机软件工程师设计的。\nR 语言是解释运行的语言（与 C 语言的编译运行不同），它的执行速度比 C 语言慢得多，不利于优化。但它在语法层面提供了更加丰富的数据结构操作并且能够十分方便地输出文字和图形信息，所以它广泛应用于数学尤其是统计学领域https://www.runoob.com/r/r-tutorial.html\n近些年 R 的发展也是极为迅速，在 Rstudio 改名为 Posit 后，R 的生态在快速发展。\n本网站就是其中一个分支的成果： Quarto\n\nAn open-source scientific and technical publishing system\n\n其他的还有诸如：\n\n0.1 Posit Workbench（数据科学家协同开发平台）\n\nJupyter, RStudio, and VS Code environments centrally maintained and ready to use\n\n\n\n0.2 MLOps（机器学习模型部署）\n\nMachine learning operations, or MLOps, is a set of practices to deploy and maintain machine learning models in production reliably and efficiently. The vetiver framework is for MLOps tasks in Python and R.\n\n\n\n0.3 Shiny for python\n\nEffortless Python web applications with the power of reactive programming.",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
-      "R"
+      "统计软件",
+      "R",
+      "01-R 相关介绍与记录"
     ]
   },
   {
@@ -909,7 +910,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-08},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 8, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-09},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 9, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6478,6 +6479,136 @@
       "统计软件",
       "SAS",
       "15-SAS 对二项分布的概率计算与假设检验"
+    ]
+  },
+  {
+    "objectID": "Guide/R/25-06-09-ggplot2-base.html",
+    "href": "Guide/R/25-06-09-ggplot2-base.html",
+    "title": "02-ggplot2 绘图基础",
+    "section": "",
+    "text": "1 实践参考\nR 可视化的内容主要来源于 [R Graphics Cookbook, 2nd edition](https://r-graphics.org/) 和 [Beautiful-Visualization-with-R](https://github.com/EasyChart/Beautiful-Visualization-with-R)",
+    "crumbs": [
+      "Home",
+      "统计软件",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html",
+    "href": "Learn/Advance/01-negative-binomial.html",
+    "title": "01-负二项分布",
+    "section": "",
+    "text": "负二项分布（Negative Binomial Distribution）是离散型概率分布，描述的是：\n\n“在一系列独立的伯努利试验中，直到出现第 kk 次成功为止，所需的失败次数（或总次数）。”\n\n你可以把它看作是二项分布的“逆过程”：\n\n二项分布：给定试验次数 nn，观察“成功”次数；\n负二项分布：给定成功次数 kk，观察要达成这些成功，需要进行多少次试验。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html#基本概念什么是负二项分布",
+    "href": "Learn/Advance/01-negative-binomial.html#基本概念什么是负二项分布",
+    "title": "01-负二项分布",
+    "section": "",
+    "text": "负二项分布（Negative Binomial Distribution）是离散型概率分布，描述的是：\n\n“在一系列独立的伯努利试验中，直到出现第 kk 次成功为止，所需的失败次数（或总次数）。”\n\n你可以把它看作是二项分布的“逆过程”：\n\n二项分布：给定试验次数 nn，观察“成功”次数；\n负二项分布：给定成功次数 kk，观察要达成这些成功，需要进行多少次试验。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html#举个例子",
+    "href": "Learn/Advance/01-negative-binomial.html#举个例子",
+    "title": "01-负二项分布",
+    "section": "2 举个例子",
+    "text": "2 举个例子\n\n比如你在投篮，命中率是 0.3，你想看看你需要投几次，才能命中 3 个球。这时就用负二项分布。\n\n假设：\n\n每投一次是一次“伯努利试验”（成/败）；\n投中是“成功”，不中是“失败”；\n你想知道，为了投中 3 次，可能要投几次（或者会有几个“失败”）？\n\n这时候就服从负二项分布。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html#负二项分布的定义与公式",
+    "href": "Learn/Advance/01-negative-binomial.html#负二项分布的定义与公式",
+    "title": "01-负二项分布",
+    "section": "3 负二项分布的定义与公式",
+    "text": "3 负二项分布的定义与公式\n\n3.1 参数：\n\nk：成功次数（固定的）\np：单次成功的概率\nx：失败次数（我们想知道的随机变量）\n\n\n\n3.2 概率质量函数（PMF）：\n\\(P(X=x)=(x+k−1k−1)pk(1−p)x,x=0,1,2,...P(X = x) = \\binom{x + k - 1}{k - 1} p^k (1-p)^x, \\quad x = 0, 1, 2, ...\\)\n这表示：在出现第 k 次成功之前，有 x 次失败。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html#负二项分布的均值和方差",
+    "href": "Learn/Advance/01-negative-binomial.html#负二项分布的均值和方差",
+    "title": "01-负二项分布",
+    "section": "4 负二项分布的均值和方差",
+    "text": "4 负二项分布的均值和方差\n记住两个重要的公式：\n\n期望（均值）：\n\\(μ= \\frac{k(1-p)}{p}\\)\n方差：\n\\(σ^2= \\frac{k(1-p)}{p^2}\\)\n\n它的方差 &gt; 均值，也就是 “过度离散”（overdispersion），这点很重要，是很多统计模型选择它的原因。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html#与二项分布的比较",
+    "href": "Learn/Advance/01-negative-binomial.html#与二项分布的比较",
+    "title": "01-负二项分布",
+    "section": "5 与二项分布的比较",
+    "text": "5 与二项分布的比较\n\n\n\n特征\n二项分布\n负二项分布\n\n\n固定参数\n总试验次数 nn\n成功次数 kk\n\n\n随机变量\n成功次数 xx\n失败次数 xx 或试验总次数\n\n\n常用于\n有限次数内成功次数\n达成几次成功需失败多少次\n\n\n期望\nnp\n\\(k(1−p)/p\\)\n\n\n方差\nnp(1−p)\n\\(k(1−p)/p^2\\)\n\n\n\n\n生物统计学：如动物聚集数目建模；\n毒理学试验：比如记录小白鼠死亡个数；\n保险/风险建模：建模事故、疾病发生次数；\n回归分析中的离散因变量建模（如负二项回归），适用于计数数据方差 &gt; 均值的情况。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html#负二项分布的两种形式",
+    "href": "Learn/Advance/01-negative-binomial.html#负二项分布的两种形式",
+    "title": "01-负二项分布",
+    "section": "6 负二项分布的两种形式",
+    "text": "6 负二项分布的两种形式\n在统计学里，负二项分布还有两种理解方式：\n\n\n\n\n\n\n\n\n类型\n描述\n用于\n\n\n失败数模型\n固定成功次数 k，求失败数 x\n生物试验、理论建模\n\n\n计数模型（r, μ形式）\n固定均值 μ 和形状参数 k\n回归分析中常用\n\n\n\n第二种形式用的是“均值-方差”形式，更适用于建模。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/01-negative-binomial.html#总结记忆法",
+    "href": "Learn/Advance/01-negative-binomial.html#总结记忆法",
+    "title": "01-负二项分布",
+    "section": "7 总结记忆法",
+    "text": "7 总结记忆法\n\n“负二项 = 重复试验直到成功k次”\n\n它解决的是：“我得失败几次，才能成功这么多次？”",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "01-负二项分布"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/00-advance.html",
+    "href": "Learn/Advance/00-advance.html",
+    "title": "00-医学统计学（伪）高级部分",
+    "section": "",
+    "text": "此目录下记录一些复杂的统计学知识，未完待续。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "00-医学统计学（伪）高级部分"
     ]
   }
 ]

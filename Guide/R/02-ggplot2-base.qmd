@@ -1,0 +1,21 @@
+---
+title: "02-ggplot2 绘图基础"
+author: "Simonzhou"
+date: "2025-06-08"
+date-modified: today
+format: 
+    html:
+        code-fold: true
+        code-line-numbers: true
+        code-highlight: true
+        fig_caption: true
+        number-sections: true
+        toc: true
+        toc-depth: 3
+---
+
+# 笔记与练习参考
+
+R 可视化的内容主要来源于 \[R Graphics Cookbook, 2nd edition\](<https://r-graphics.org/>) 和 \[[**Beautiful-Visualization-with-R**](https://github.com/EasyChart/Beautiful-Visualization-with-R)\]([https://github.com/EasyChart/Beautiful-Visualization-with-R](#0){style="font-size: 13pt; font-weight: var(--fontWeightRegular);"})[@Zhang2019r]
+
+# 准备工作
