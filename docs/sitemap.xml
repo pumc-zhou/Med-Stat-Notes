@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-06-09T10:23:23.510Z</lastmod>
+    <lastmod>2025-06-10T12:25:33.350Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/Python/25-03-09-cos-reg.html</loc>
-    <lastmod>2025-03-14T09:41:07.490Z</lastmod>
+    <lastmod>2025-06-10T08:26:59.457Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/Stata/Stata-intro.html</loc>
@@ -366,10 +366,26 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Advance/01-negative-binomial.html</loc>
-    <lastmod>2025-06-09T10:23:21.588Z</lastmod>
+    <lastmod>2025-06-10T12:24:17.704Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Advance/00-advance.html</loc>
-    <lastmod>2025-06-09T10:22:17.509Z</lastmod>
+    <lastmod>2025-06-10T12:24:09.820Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/SAS/25-06-10-poisson-reg.html</loc>
+    <lastmod>2025-06-10T12:23:43.349Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/SAS/25-06-09-negative-binomial.html</loc>
+    <lastmod>2025-06-10T11:51:43.503Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/R/02-ggplot2-base.html</loc>
+    <lastmod>2025-06-10T08:18:57.210Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/SAS/25-06-10-Goodness-of-Fit.html</loc>
+    <lastmod>2025-06-10T12:16:29.236Z</lastmod>
   </url>
 </urlset>

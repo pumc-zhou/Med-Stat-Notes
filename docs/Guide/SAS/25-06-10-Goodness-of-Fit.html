@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simon Zhou">
 
-<title>17-SAS 与负二项分布 – 医学统计学笔记</title>
+<title>18-SAS 拟合优度检验 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/SAS/25-06-10-Goodness-of-Fit.html" rel="next">
-<link href="../../Guide/SAS/25-06-08-poisson.html" rel="prev">
+<link href="../../Guide/SAS/25-06-10-poisson-reg.html" rel="next">
+<link href="../../Guide/SAS/25-06-09-negative-binomial.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -149,11 +149,11 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="17-SAS 与负二项分布 – 医学统计学笔记">
+<meta property="og:title" content="18-SAS 拟合优度检验 – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/SAS/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="17-SAS 与负二项分布 – 医学统计学笔记">
+<meta name="twitter:title" content="18-SAS 拟合优度检验 – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -274,7 +274,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-06-09-negative-binomial.html">17-SAS 与负二项分布</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-06-10-Goodness-of-Fit.html">18-SAS 拟合优度检验</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -638,13 +638,13 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/25-06-09-negative-binomial.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/SAS/25-06-09-negative-binomial.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">17-SAS 与负二项分布</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/25-06-10-Goodness-of-Fit.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-06-10-Goodness-of-Fit.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">18-SAS 拟合优度检验</span></a>
   </div>
 </li>
@@ -864,26 +864,23 @@ window.Quarto = {
     <h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#负二项分布中的参数估计" id="toc-负二项分布中的参数估计" class="nav-link active" data-scroll-target="#负二项分布中的参数估计"><span class="header-section-number">1</span> 负二项分布中的参数估计</a>
+  <li><a href="#拟合优度检验" id="toc-拟合优度检验" class="nav-link active" data-scroll-target="#拟合优度检验"><span class="header-section-number">1</span> 拟合优度检验</a>
   <ul class="collapse">
-  <li><a href="#动差法示例" id="toc-动差法示例" class="nav-link" data-scroll-target="#动差法示例"><span class="header-section-number">1.1</span> 动差法示例</a>
+  <li><a href="#示例" id="toc-示例" class="nav-link" data-scroll-target="#示例"><span class="header-section-number">1.1</span> 示例</a>
   <ul class="collapse">
-  <li><a href="#动差法原理method-of-moments" id="toc-动差法原理method-of-moments" class="nav-link" data-scroll-target="#动差法原理method-of-moments"><span class="header-section-number">1.1.1</span> 动差法原理（Method of Moments）</a></li>
-  <li><a href="#其他参数估计方法" id="toc-其他参数估计方法" class="nav-link" data-scroll-target="#其他参数估计方法"><span class="header-section-number">1.1.2</span> 其他参数估计方法</a></li>
-  <li><a href="#程序说明" id="toc-程序说明" class="nav-link" data-scroll-target="#程序说明"><span class="header-section-number">1.1.3</span> 程序说明</a></li>
-  <li><a href="#结果说明" id="toc-结果说明" class="nav-link" data-scroll-target="#结果说明"><span class="header-section-number">1.1.4</span> 结果说明</a></li>
+  <li><a href="#程序说明" id="toc-程序说明" class="nav-link" data-scroll-target="#程序说明"><span class="header-section-number">1.1.1</span> 程序说明</a></li>
+  <li><a href="#结果说明" id="toc-结果说明" class="nav-link" data-scroll-target="#结果说明"><span class="header-section-number">1.1.2</span> 结果说明</a></li>
   </ul></li>
-  <li><a href="#零频数法" id="toc-零频数法" class="nav-link" data-scroll-target="#零频数法"><span class="header-section-number">1.2</span> 零频数法</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-06-09-negative-binomial.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-06-10-Goodness-of-Fit.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-06-09-negative-binomial.html">17-SAS 与负二项分布</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-02-16-SAS-intro.html">SAS</a></li><li class="breadcrumb-item"><a href="../../Guide/SAS/25-06-10-Goodness-of-Fit.html">18-SAS 拟合优度检验</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">17-SAS 与负二项分布</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">18-SAS 拟合优度检验</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
 </div>
 
 
@@ -900,14 +897,14 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年6月9日</p>
+      <p class="date">2025年6月10日</p>
     </div>
   </div>
   
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年6月9日</p>
+      <p class="date-modified">2025年6月10日</p>
     </div>
   </div>
     
@@ -918,1574 +915,118 @@ window.Quarto = {
 </header>
 
 
-<div id="0dd32e9f" class="cell">
+<div id="086e2fc9" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="op">%</span>load_ext saspy.sas_magic</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<section id="负二项分布中的参数估计" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 负二项分布中的参数估计</h1>
-<p>负二项分布( negative binomial distribution )是一种离散型分布,常用于描述生物的群聚性:在毒理学的显性致死试验或致癌试验中也都有应用。</p>
-<p>二项分布中的 n 是固定的,当 n 不固定,并用 x+k 来替换 n 后,所得到的在 x+k 次试验中得到此种结果恰为 k 次的概率,这时的概率函数就是负二项分布,所以在是负二项分布中的一个重要的参数。</p>
-<p>计算参数k的常用方法有动差法、频数法、零频数法、最大似然法等。这里介绍相对较为简单的动差法。</p>
-<section id="动差法示例" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="动差法示例"><span class="header-section-number">1.1</span> 动差法示例</h2>
-<p>在研究某种毒物的致死作用时,对 60 只小白鼠进行了显性致死试验,得到数据资料见表。若该样本计数服从负二项分布,试估计其参数 μ 和 k。</p>
+<section id="拟合优度检验" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 拟合优度检验</h1>
+<p>医学研究中常需推断某现象的频数分布是否服从某一理论分布,如正态性检验就是推断某资料是否服从正态分布的一种检验方法，而且只适用于正态分布。而要推断资料是否服从二项分布、Poisson分布或负二项分布等则需用到检验。</p>
+<p>因为 Pearsonx值能反映实际频数和理论频数的吻合程度,所以，检验可用于推断频数分布的拟合优度(Goodness offit )。</p>
+<section id="示例" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="示例"><span class="header-section-number">1.1</span> 示例</h2>
+<p>观察某克山病区克山病患者的空间分布情况。调查者将该地区划分为279个取样单位,统计各取样单位历年累计病例数,资料见下表。问此资料是否服从 Poisson 分布?</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>胚胎死亡数</th>
-<th>0</th>
-<th>1</th>
-<th>2</th>
-<th>3</th>
-<th>4</th>
-<th>5</th>
-<th>6</th>
-<th>合计</th>
+<th>取样单位内病例数</th>
+<th>观察频数</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>观察雌鼠数</td>
-<td>30</td>
-<td>14</td>
-<td>8</td>
-<td>4</td>
-<td>2</td>
 <td>0</td>
-<td>2</td>
-<td>60</td>
-</tr>
-</tbody>
-</table>
-<section id="动差法原理method-of-moments" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="动差法原理method-of-moments"><span class="header-section-number">1.1.1</span> 动差法原理（Method of Moments）</h3>
-<p><strong>动差法</strong>是一种参数估计方法，通过令样本矩（如样本均值、样本方差）等于理论分布的对应矩，解方程得到参数估计。</p>
-<p>对于<strong>负二项分布</strong>：</p>
-<ul>
-<li><p>参数：</p>
-<ul>
-<li><span class="math inline">\(\mu = \text{E}(X)\)</span></li>
-<li><span class="math inline">\(\text{Var}(X) = \mu + \mu^2/k\)</span></li>
-</ul></li>
-</ul>
-<p>由样本数据可得样本均值 <span class="math inline">\(\bar{x}\)</span> 和样本方差 <span class="math inline">\(s^2\)</span>，则可解出：</p>
-<ul>
-<li><span class="math inline">\(\hat{k} = \mu^2 / (s^2 - \mu)\)</span></li>
-</ul>
-<p>这个估计在 <span class="math inline">\(s^2 &gt; \mu\)</span> 时成立（即数据存在<strong>过度离散</strong>）。</p>
-</section>
-<section id="其他参数估计方法" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="其他参数估计方法"><span class="header-section-number">1.1.2</span> 其他参数估计方法</h3>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 39%">
-<col style="width: 31%">
-<col style="width: 13%">
-<col style="width: 15%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>方法</th>
-<th>思路</th>
-<th>优点</th>
-<th>缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>频数法（Frequency Method）</strong></td>
-<td>利用频数分布构造估计量，如通过最大频数位置反推参数</td>
-<td>直观，适用于整数型数据</td>
-<td>精度差，参数间依赖强</td>
+<td>26</td>
 </tr>
 <tr class="even">
-<td><strong>零频数法（Zero Frequency Method）</strong></td>
-<td>利用观测中“零”的频率推断参数</td>
-<td>简便，只需零频数</td>
-<td>精度有限，需大量样本支持</td>
+<td>1</td>
+<td>51</td>
 </tr>
 <tr class="odd">
-<td><strong>最大似然估计（MLE）</strong></td>
-<td>构造似然函数，以数值优化求得参数估计</td>
-<td>统计效率高，常用于建模</td>
-<td>需要迭代计算，依赖软件</td>
+<td>2</td>
+<td>75</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>63</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>38</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>7</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>≥8</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>合计</td>
+<td>279</td>
 </tr>
 </tbody>
 </table>
-<div id="a4e253cd" class="cell" data-execution_count="4">
+<div id="894bdd32" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="op">/*</span>程序<span class="dv">17</span><span class="op">-</span><span class="dv">1</span><span class="op">*/</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a>data nbinomial<span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="op">/*</span>程序<span class="dv">18</span><span class="op">-</span><span class="dv">1</span><span class="op">*/</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>data prg9_12<span class="op">;</span></span>
 <span id="cb2-4"><a href="#cb2-4"></a>    <span class="bu">input</span> x f <span class="op">@@;</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>datalines<span class="op">;</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="dv">0</span> <span class="dv">30</span> <span class="dv">1</span> <span class="dv">14</span> <span class="dv">2</span> <span class="dv">8</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">2</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="op">;</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a>run<span class="op">;</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>proc univariate<span class="op">;</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a>    var x<span class="op">;</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>    freq f<span class="op">;</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>output out<span class="op">=</span> mv2 mean <span class="op">=</span> mu var <span class="op">=</span> v<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    t<span class="op">=</span> x<span class="op">*</span>f<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>datalines<span class="op">;</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="dv">0</span> <span class="dv">26</span> <span class="dv">1</span> <span class="dv">51</span> <span class="dv">2</span> <span class="dv">75</span> <span class="dv">3</span> <span class="dv">63</span> <span class="dv">4</span> <span class="dv">38</span> <span class="dv">5</span> <span class="dv">17</span> <span class="dv">6</span> <span class="dv">5</span> <span class="dv">7</span> <span class="dv">3</span> <span class="dv">8</span> <span class="dv">1</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>run<span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>proc means <span class="bu">sum</span> noprint<span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    var t f<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>output out <span class="op">=</span> b <span class="bu">sum</span> <span class="op">=</span> sumt sumf<span class="op">;</span></span>
 <span id="cb2-13"><a href="#cb2-13"></a>run<span class="op">;</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a>data k<span class="op">;</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a>    <span class="bu">set</span> mv2<span class="op">;</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>    k <span class="op">=</span> mu<span class="op">**</span><span class="dv">2</span><span class="op">/</span>(v<span class="op">-</span>mu)<span class="op">;</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a>proc <span class="bu">print</span><span class="op">;</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a>    var mu k<span class="op">;</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-14"><a href="#cb2-14"></a>data c<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    <span class="bu">set</span> b<span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>        do x<span class="op">=</span><span class="dv">0</span> to <span class="dv">8</span><span class="op">;</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>            lamda<span class="op">=</span>sumt<span class="op">/</span>sumf<span class="op">;</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>            output<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>        end<span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>run<span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a>data d<span class="op">;</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a>    merge prg9_12 c<span class="op">;</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a>    by x<span class="op">;</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a>run<span class="op">;</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a>data e<span class="op">;</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a>    <span class="bu">set</span> d<span class="op">;</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a>    <span class="cf">if</span> x <span class="op">=</span> <span class="dv">0</span> then p <span class="op">=</span> poisson(lamda,<span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a>    <span class="cf">if</span> x <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">and</span> x <span class="op">&lt;</span> <span class="dv">8</span> then p <span class="op">=</span> poisson(lamda,x)<span class="op">-</span> poisson(lamda,x<span class="op">-</span><span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a>    <span class="cf">if</span> x <span class="op">=</span> <span class="dv">8</span> then p <span class="op">=</span> <span class="dv">1</span><span class="op">-</span>poisson(amda,x<span class="op">-</span><span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a>    retain chisq o p <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a>    t1 <span class="op">=</span> sumf<span class="op">*</span>p<span class="op">;</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a>    chisq <span class="op">=</span>((f<span class="op">-</span>t1)<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>t1<span class="op">;</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a>run<span class="op">;</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a>proc means <span class="bu">sum</span> noprint<span class="op">;</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a>    var chisq<span class="op">;</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a>    output out <span class="op">=</span>f <span class="bu">sum</span> <span class="op">=</span> sumchi<span class="op">;</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a>run<span class="op">;</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a>data g<span class="op">;</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a>    <span class="bu">set</span> f<span class="op">;</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a>    p_chi<span class="op">=</span> <span class="dv">1</span><span class="op">-</span>probchi(sumchi,<span class="dv">8</span>)<span class="op">;</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a>run<span class="op">;</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a>proc <span class="bu">print</span><span class="op">;</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a>    var sumchi p_chi<span class="op">;</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="4">
-
-
-
-<meta charset="utf-8">
-<meta content="SAS 9.4" name="generator">
-<title>SAS 输出</title>
-<style>
-/*<![CDATA[*/
-.body.c > table, .body.c > pre, .body.c div > table,
-.body.c div > pre, .body.c > table, .body.c > pre,
-.body.j > table, .body.j > pre, .body.j div > table,
-.body.j div > pre, .body.j > table, .body.j > pre,
-.body.c p.note, .body.c p.warning, .body.c p.error, .body.c p.fatal,
-.body.j p.note, .body.j p.warning, .body.j p.error, .body.j p.fatal,
-.body.c > table.layoutcontainer, .body.j > table.layoutcontainer { margin-left: auto; margin-right: auto }
-.layoutregion.l table, .layoutregion.l pre, .layoutregion.l p.note,
-.layoutregion.l p.warning, .layoutregion.l p.error, .layoutregion.l p.fatal { margin-left: 0 }
-.layoutregion.c table, .layoutregion.c pre, .layoutregion.c p.note,
-.layoutregion.c p.warning, .layoutregion.c p.error, .layoutregion.c p.fatal { margin-left: auto; margin-right: auto }
-.layoutregion.r table, .layoutregion.r pre, .layoutregion.r p.note,
-.layoutregion.r table, .layoutregion.r pre, .layoutregion.r p.note,
-.layoutregion.r p.warning, .layoutregion.r p.error, .layoutregion.r p.fatal { margin-right: 0 }
-article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block }
-html{ font-size: 100% }
-.body { margin: 1em; font-size: 13px; line-height: 1.231 }
-sup { position: relative; vertical-align: baseline; bottom: 0.25em; font-size: 0.8em }
-sub { position: relative; vertical-align: baseline; top: 0.25em; font-size: 0.8em }
-ul, ol { margin: 1em 0; padding: 0 0 0 40px }
-dd { margin: 0 0 0 40px }
-nav ul, nav ol { list-style: none; list-style-image: none; margin: 0; padding: 0 }
-img { border: 0; vertical-align: middle }
-svg:not(:root) { overflow: hidden }
-figure { margin: 0 }
-table { border-collapse: collapse; border-spacing: 0 }
-.layoutcontainer { border-collapse: separate; border-spacing: 0 }
-p { margin-top: 0; text-align: left }
-h1.heading1 { text-align: left }
-h2.heading2 { text-align: left }
-h3.heading3 { text-align: left }
-h4.heading4 { text-align: left }
-h5.heading5 { text-align: left }
-h6.heading6 { text-align: left }
-span { text-align: left }
-table { margin-bottom: 1em }
-td, th { text-align: left; padding: 3px 6px; vertical-align: top }
-td[class$="fixed"], th[class$="fixed"] { white-space: pre }
-section, article { padding-top: 1px; padding-bottom: 8px }
-hr.pagebreak { height: 0px; border: 0; border-bottom: 1px solid #c0c0c0; margin: 1em 0 }
-.stacked-value { text-align: left; display: block }
-.stacked-cell > .stacked-value, td.data > td.data, th.data > td.data, th.data > th.data, td.data > th.data, th.header > th.header { border: 0 }
-.stacked-cell > div.data { border-width: 0 }
-.systitleandfootercontainer { white-space: nowrap; margin-bottom: 1em }
-.systitleandfootercontainer > p { margin: 0 }
-.systitleandfootercontainer > p > span { display: inline-block; width: 100%; white-space: normal }
-.batch { display: table }
-.toc { display: none }
-.proc_note_group, .proc_title_group { margin-bottom: 1em }
-p.proctitle { margin: 0 }
-p.note, p.warning, p.error, p.fatal { display: table }
-.notebanner, .warnbanner, .errorbanner, .fatalbanner,
-.notecontent, .warncontent, .errorcontent, .fatalcontent { display: table-cell; padding: 0.5em }
-.notebanner, .warnbanner, .errorbanner, .fatalbanner { padding-right: 0 }
-.body > div > ol li { text-align: left }
-.beforecaption > h4 { margin-top: 0; margin-bottom: 0 }
-.c { text-align: center }
-.r { text-align: right }
-.l { text-align: left }
-.j { text-align: justify }
-.d { text-align: right }
-.b { vertical-align: bottom }
-.m { vertical-align: middle }
-.t { vertical-align: top }
-.accessiblecaption {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-a:active { color: #800080 }
-.aftercaption {
-    background-color: #fafbfe;
-    border-spacing: 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-    padding-top: 4pt;
-}
-.batch > colgroup {
-    border-left: 1px solid #c1c1c1;
-    border-right: 1px solid #c1c1c1;
-}
-.batch > tbody, .batch > thead, .batch > tfoot {
-    border-top: 1px solid #c1c1c1;
-    border-bottom: 1px solid #c1c1c1;
-}
-.batch { border: hidden; }
-.batch {
-    background-color: #fafbfe;
-    border: 1px solid #c1c1c1;
-    border-collapse: separate;
-    border-spacing: 1px;
-    color: #000000;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    padding: 7px;
-    }
-.beforecaption {
-    background-color: #fafbfe;
-    border-spacing: 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.body {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    margin-left: 8px;
-    margin-right: 8px;
-}
-.bodydate {
-    background-color: #fafbfe;
-    border-spacing: 0;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    text-align: right;
-    vertical-align: top;
-    width: 100%;
-}
-.bycontentfolder {
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: none;
-    margin-left: 6pt;
-}
-.byline {
-    background-color: #fafbfe;
-    border-spacing: 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.bylinecontainer > col, .bylinecontainer > colgroup > col, .bylinecontainer > colgroup, .bylinecontainer > tr, .bylinecontainer > * > tr, .bylinecontainer > thead, .bylinecontainer > tbody, .bylinecontainer > tfoot { border: none; }
-.bylinecontainer {
-    background-color: #fafbfe;
-    border: none;
-    border-spacing: 1px;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    width: 100%;
-}
-.caption {
-    background-color: #fafbfe;
-    border-spacing: 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.cell, .container {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.contentfolder, .contentitem {
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: none;
-    margin-left: 6pt;
-}
-.contentproclabel, .contentprocname {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.contents {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: decimal;
-    margin-left: 8px;
-    margin-right: 8px;
-}
-.contentsdate {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    width: 100%;
-}
-.contenttitle {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: bold;
-}
-.continued {
-    background-color: #fafbfe;
-    border-spacing: 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-    width: 100%;
-}
-.data, .dataemphasis {
-    background-color: #ffffff;
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.dataemphasisfixed {
-    background-color: #ffffff;
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.dataempty {
-    background-color: #ffffff;
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.datafixed {
-    background-color: #ffffff;
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.datastrong {
-    background-color: #ffffff;
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.datastrongfixed {
-    background-color: #ffffff;
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #000000;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.date {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    width: 100%;
-}
-.document {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.errorbanner {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.errorcontent {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.errorcontentfixed {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.extendedpage {
-    background-color: #fafbfe;
-    border-style: solid;
-    border-width: 1pt;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-    text-align: center;
-}
-.fatalbanner {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.fatalcontent {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.fatalcontentfixed {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.folderaction {
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: none;
-    margin-left: 6pt;
-}
-.footer {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.footeremphasis {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.footeremphasisfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.footerempty {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.footerfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.footerstrong {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.footerstrongfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.frame {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.graph > colgroup {
-    border-left: 1px solid #c1c1c1;
-    border-right: 1px solid #c1c1c1;
-}
-.graph > tbody, .graph > thead, .graph > tfoot {
-    border-top: 1px solid #c1c1c1;
-    border-bottom: 1px solid #c1c1c1;
-}
-.graph { border: hidden; }
-.graph {
-    background-color: #fafbfe;
-    border: 1px solid #c1c1c1;
-    border-collapse: separate;
-    border-spacing: 1px;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    }
-.header {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.headeremphasis {
-    background-color: #d8dbd3;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.headeremphasisfixed {
-    background-color: #d8dbd3;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #000000;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.headerempty {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.headerfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.headersandfooters {
-    background-color: #edf2f9;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.headerstrong {
-    background-color: #d8dbd3;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.headerstrongfixed {
-    background-color: #d8dbd3;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #000000;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.heading1, .heading2, .heading3, .heading4, .heading5, .heading6 { font-family: MYingHei_18030_C-Medium, Helvetica, sans-serif }
-.index {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.indexaction, .indexitem {
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: none;
-    margin-left: 6pt;
-}
-.indexprocname {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.indextitle {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: bold;
-}
-.layoutcontainer, .layoutregion {
-    border-width: 0;
-    border-spacing: 30px;
-}
-.linecontent {
-    background-color: #fafbfe;
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-a:link { color: #0000ff }
-.list {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: disc;
-}
-.list10 {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: square;
-}
-.list2 {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: circle;
-}
-.list3, .list4, .list5, .list6, .list7, .list8, .list9 {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: square;
-}
-.listitem {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: disc;
-}
-.listitem10 {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: square;
-}
-.listitem2 {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: circle;
-}
-.listitem3, .listitem4, .listitem5, .listitem6, .listitem7, .listitem8, .listitem9 {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: square;
-}
-.note {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.notebanner {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.notecontent {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.notecontentfixed {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.output > colgroup {
-    border-left: 1px solid #c1c1c1;
-    border-right: 1px solid #c1c1c1;
-}
-.output > tbody, .output > thead, .output > tfoot {
-    border-top: 1px solid #c1c1c1;
-    border-bottom: 1px solid #c1c1c1;
-}
-.output { border: hidden; }
-.output {
-    background-color: #fafbfe;
-    border: 1px solid #c1c1c1;
-    border-collapse: separate;
-    border-spacing: 1px;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    }
-.pageno {
-    background-color: #fafbfe;
-    border-spacing: 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-    text-align: right;
-    vertical-align: top;
-}
-.pages {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: decimal;
-    margin-left: 8px;
-    margin-right: 8px;
-}
-.pagesdate {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    width: 100%;
-}
-.pagesitem {
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    list-style-type: none;
-    margin-left: 6pt;
-}
-.pagesproclabel, .pagesprocname {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.pagestitle {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: bold;
-}
-.paragraph {
-    background-color: #fafbfe;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.parskip > col, .parskip > colgroup > col, .parskip > colgroup, .parskip > tr, .parskip > * > tr, .parskip > thead, .parskip > tbody, .parskip > tfoot { border: none; }
-.parskip {
-    border: none;
-    border-spacing: 0;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-    }
-.prepage {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    text-align: left;
-}
-.proctitle {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.proctitlefixed {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowfooter {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowfooteremphasis {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.rowfooteremphasisfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.rowfooterempty {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowfooterfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.rowfooterstrong {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowfooterstrongfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowheader {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowheaderemphasis {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.rowheaderemphasisfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: italic;
-    font-weight: normal;
-}
-.rowheaderempty {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowheaderfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.rowheaderstrong {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.rowheaderstrongfixed {
-    background-color: #edf2f9;
-    border-color: #b0b7bb;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, monospace, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.systemfooter, .systemfooter10, .systemfooter2, .systemfooter3, .systemfooter4, .systemfooter5, .systemfooter6, .systemfooter7, .systemfooter8, .systemfooter9 {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.systemtitle, .systemtitle10, .systemtitle2, .systemtitle3, .systemtitle4, .systemtitle5, .systemtitle6, .systemtitle7, .systemtitle8, .systemtitle9 {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size: small;
-    font-style: normal;
-    font-weight: bold;
-}
-.systitleandfootercontainer > col, .systitleandfootercontainer > colgroup > col, .systitleandfootercontainer > colgroup, .systitleandfootercontainer > tr, .systitleandfootercontainer > * > tr, .systitleandfootercontainer > thead, .systitleandfootercontainer > tbody, .systitleandfootercontainer > tfoot { border: none; }
-.systitleandfootercontainer {
-    background-color: #fafbfe;
-    border: none;
-    border-spacing: 1px;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    width: 100%;
-}
-.table > col, .table > colgroup > col {
-    border-left: 1px solid #c1c1c1;
-    border-right: 0 solid #c1c1c1;
-}
-.table > tr, .table > * > tr {
-    border-top: 1px solid #c1c1c1;
-    border-bottom: 0 solid #c1c1c1;
-}
-.table { border: hidden; }
-.table {
-    border-color: #c1c1c1;
-    border-style: solid;
-    border-width: 1px 0 0 1px;
-    border-collapse: collapse;
-    border-spacing: 0;
-    }
-.titleandnotecontainer > col, .titleandnotecontainer > colgroup > col, .titleandnotecontainer > colgroup, .titleandnotecontainer > tr, .titleandnotecontainer > * > tr, .titleandnotecontainer > thead, .titleandnotecontainer > tbody, .titleandnotecontainer > tfoot { border: none; }
-.titleandnotecontainer {
-    background-color: #fafbfe;
-    border: none;
-    border-spacing: 1px;
-    color: #000000;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-    width: 100%;
-}
-.titlesandfooters {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.usertext {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-a:visited { color: #800080 }
-.warnbanner {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: bold;
-}
-.warncontent {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: MYingHei_18030_C-Medium, Helvetica, Helv, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-.warncontentfixed {
-    background-color: #fafbfe;
-    color: #112277;
-    font-family: CSongGB18030C-LightHWL, Courier, sans-serif;
-    font-size:  normal;
-    font-style: normal;
-    font-weight: normal;
-}
-/*]]>*/
-</style>
-
-
-<div style="padding-bottom: 8px; padding-top: 1px">
-<div id="IDX" class="systitleandfootercontainer" style="border-spacing: 1px">
-<p><span class="c systemtitle">SAS 系统</span> </p>
-</div>
-<div class="proc_title_group">
-<p class="c proctitle">UNIVARIATE 过程</p>
-<p class="c proctitle">变量:  x</p>
-<p class="c proctitle">&nbsp;</p>
-<p class="c proctitle">频数:  f</p>
-</div>
-<div style="padding-bottom: 8px; padding-top: 1px">
-<div style="padding-bottom: 8px; padding-top: 1px">
-
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="矩">
-<thead>
-<tr class="header">
-<th colspan="4" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">矩</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">数目</td>
-<td class="r data">60</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">权重总和</td>
-<td class="r data">60</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">均值</td>
-<td class="r data">1.03333333</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">观测总和</td>
-<td class="r data">62</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">标准差</td>
-<td class="r data">1.43759058</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">方差</td>
-<td class="r data">2.06666667</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">偏度</td>
-<td class="r data">1.78111198</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">峰度</td>
-<td class="r data">3.3122114</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">未校平方和</td>
-<td class="r data">186</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">校正平方和</td>
-<td class="r data">121.933333</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">变异系数</td>
-<td class="r data">139.121669</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">标准误差均值</td>
-<td class="r data">0.18559215</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-<div id="IDX1" style="padding-bottom: 8px; padding-top: 1px">
-
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="位置和可变性的基本测度">
-<thead>
-<tr class="header">
-<th colspan="4" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">基本统计测度</th>
-</tr>
-<tr class="even">
-<th colspan="2" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">位置</th>
-<th colspan="2" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">变异性</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">均值</td>
-<td class="r data">1.033333</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">标准差</td>
-<td class="r data">1.43759</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">中位数</td>
-<td class="r data">0.500000</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">方差</td>
-<td class="r data">2.06667</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">众数</td>
-<td class="r data">0.000000</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">极差</td>
-<td class="r data">6.00000</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">&nbsp;</td>
-<td class="r data">&nbsp;</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">四分位间距</td>
-<td class="r data">2.00000</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-<div id="IDX2" style="padding-bottom: 8px; padding-top: 1px">
-
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="位置检验">
-<thead>
-<tr class="header">
-<th colspan="5" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">位置检验:&nbsp;Mu0=0</th>
-</tr>
-<tr class="even">
-<th class="b header" data-quarto-table-cell-role="th" scope="col">检验</th>
-<th colspan="2" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">统计量</th>
-<th colspan="2" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">p 值</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">Student t</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">t</td>
-<td class="r data">5.567764</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">Pr &gt; |t|</td>
-<td class="r data">&lt;.0001</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">符号</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">M</td>
-<td class="r data">15</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">Pr &gt;= |M|</td>
-<td class="r data">&lt;.0001</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">符号秩</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">S</td>
-<td class="r data">232.5</td>
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">Pr &gt;= |S|</td>
-<td class="r data">&lt;.0001</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-<div id="IDX3" style="padding-bottom: 8px; padding-top: 1px">
-
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="分位数">
-<thead>
-<tr class="header">
-<th colspan="2" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">分位数（定义&nbsp;5）</th>
-</tr>
-<tr class="even">
-<th class="b header" data-quarto-table-cell-role="th" scope="col">水平</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">分位数</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">100% 最大值</td>
-<td class="r data">6.0</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">99%</td>
-<td class="r data">6.0</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">95%</td>
-<td class="r data">4.0</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">90%</td>
-<td class="r data">3.0</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">75% Q3</td>
-<td class="r data">2.0</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">50% 中位数</td>
-<td class="r data">0.5</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">25% Q1</td>
-<td class="r data">0.0</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">10%</td>
-<td class="r data">0.0</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">5%</td>
-<td class="r data">0.0</td>
-</tr>
-<tr class="even">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">1%</td>
-<td class="r data">0.0</td>
-</tr>
-<tr class="odd">
-<td class="rowheader" data-quarto-table-cell-role="th" scope="row">0% 最小值</td>
-<td class="r data">0.0</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-<div id="IDX4" style="padding-bottom: 8px; padding-top: 1px">
-
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="极值观测">
-<thead>
-<tr class="header">
-<th colspan="6" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">极值观测</th>
-</tr>
-<tr class="even">
-<th colspan="3" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">最小值</th>
-<th colspan="3" class="c b header" data-quarto-table-cell-role="th" scope="colgroup">最大值</th>
-</tr>
-<tr class="header">
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">值</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">频数</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">观测</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">值</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">频数</th>
-<th class="r b header" data-quarto-table-cell-role="th" scope="col">观测</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td class="r data">0</td>
-<td class="r data">30</td>
-<td class="r data">1</td>
-<td class="r data">1</td>
-<td class="r data">14</td>
-<td class="r data">2</td>
-</tr>
-<tr class="even">
-<td class="r data">1</td>
-<td class="r data">14</td>
-<td class="r data">2</td>
-<td class="r data">2</td>
-<td class="r data">8</td>
-<td class="r data">3</td>
-</tr>
-<tr class="odd">
-<td class="r data">2</td>
-<td class="r data">8</td>
-<td class="r data">3</td>
-<td class="r data">3</td>
-<td class="r data">4</td>
-<td class="r data">4</td>
-</tr>
-<tr class="even">
-<td class="r data">3</td>
-<td class="r data">4</td>
-<td class="r data">4</td>
-<td class="r data">4</td>
-<td class="r data">2</td>
-<td class="r data">5</td>
-</tr>
-<tr class="odd">
-<td class="r data">4</td>
-<td class="r data">2</td>
-<td class="r data">5</td>
-<td class="r data">6</td>
-<td class="r data">2</td>
-<td class="r data">7</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div style="padding-bottom: 8px; padding-top: 1px">
-<hr class="pagebreak">
-<div id="IDX5" class="systitleandfootercontainer" style="border-spacing: 1px">
-<p><span class="c systemtitle">SAS 系统</span> </p>
-</div>
-<div style="padding-bottom: 8px; padding-top: 1px">
-
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="数据集 WORK.K">
-<thead>
-<tr class="header">
-<th class="r header" data-quarto-table-cell-role="th" scope="col">观测</th>
-<th class="r header" data-quarto-table-cell-role="th" scope="col">mu</th>
-<th class="r header" data-quarto-table-cell-role="th" scope="col">k</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td class="r rowheader" data-quarto-table-cell-role="th" scope="row">1</td>
-<td class="r data">1.03333</td>
-<td class="r data">1.03333</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-
-
-</div>
-</div>
-</section>
-<section id="程序说明" class="level3" data-number="1.1.3">
-<h3 data-number="1.1.3" class="anchored" data-anchor-id="程序说明"><span class="header-section-number">1.1.3</span> 程序说明</h3>
-<p>数据集中的x和f分别表示胚胎死亡数和雌鼠数,首先通过 univariate 过程计算均数和方差,并将该两项指标输出到 mv2 数据集中,再用数据集k调用mv2的内容,用专用公式计算k的值。</p>
-</section>
-<section id="结果说明" class="level3" data-number="1.1.4">
-<h3 data-number="1.1.4" class="anchored" data-anchor-id="结果说明"><span class="header-section-number">1.1.4</span> 结果说明</h3>
-<p>univariate 过程的输出结果不再叙述,最后输出的两个参数分别为u=1.033 33,k=1.033 33.</p>
-</section>
-</section>
-<section id="零频数法" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="零频数法"><span class="header-section-number">1.2</span> 零频数法</h2>
-<p>理论上，</p>
-<p><span class="math display">\[
-P(X=0) = \left( \frac{k}{k+\mu} \right)^k
-\]</span></p>
-<p>设观察零频率 <span class="math inline">\(f_0 = 30/60 = 0.5\)</span>，解此方程估计 k。</p>
-<div id="c9d5d0cb" class="cell" data-execution_count="5">
-<details class="code-fold">
-<summary>代码</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a><span class="op">%%</span>SAS</span>
-<span id="cb3-2"><a href="#cb3-2"></a>data zerofreq<span class="op">;</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>    f0 <span class="op">=</span> <span class="fl">0.5</span><span class="op">;</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    mu <span class="op">=</span> <span class="fl">1.0</span><span class="op">;</span>  <span class="op">/*</span> 可以先用动差法得出的均值 <span class="op">*/</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a>    do k <span class="op">=</span> <span class="fl">0.01</span> to <span class="dv">20</span> by <span class="fl">0.01</span><span class="op">;</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>        p0 <span class="op">=</span> (k<span class="op">/</span>(k<span class="op">+</span>mu))<span class="op">**</span>k<span class="op">;</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>        diff <span class="op">=</span> <span class="bu">abs</span>(p0 <span class="op">-</span> f0)<span class="op">;</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a>        output<span class="op">;</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>    end<span class="op">;</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a>run<span class="op">;</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a></span>
-<span id="cb3-12"><a href="#cb3-12"></a>proc sort data<span class="op">=</span>zerofreq<span class="op">;</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a>    by diff<span class="op">;</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a>run<span class="op">;</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16"></a>proc <span class="bu">print</span> data<span class="op">=</span>zerofreq(obs<span class="op">=</span><span class="dv">1</span>)<span class="op">;</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a>    var mu k p0<span class="op">;</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a>run<span class="op">;</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<div class="cell-output cell-output-display" data-execution_count="3">
 
 
 
@@ -3601,21 +2142,19 @@ a:visited { color: #800080 }
 </div>
 <div style="padding-bottom: 8px; padding-top: 1px">
 
-<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="数据集 WORK.ZEROFREQ">
+<table class="table caption-top table-sm table-striped small" data-quarto-postprocess="true" aria-label="数据集 WORK.G">
 <thead>
 <tr class="header">
 <th class="r header" data-quarto-table-cell-role="th" scope="col">观测</th>
-<th class="r header" data-quarto-table-cell-role="th" scope="col">mu</th>
-<th class="r header" data-quarto-table-cell-role="th" scope="col">k</th>
-<th class="r header" data-quarto-table-cell-role="th" scope="col">p0</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">sumchi</th>
+<th class="r header" data-quarto-table-cell-role="th" scope="col">p_chi</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td class="r rowheader" data-quarto-table-cell-role="th" scope="row">1</td>
-<td class="r data">1</td>
-<td class="r data">1</td>
-<td class="r data">0.5</td>
+<td class="r data">2.48975</td>
+<td class="r data">0.96221</td>
 </tr>
 </tbody>
 </table>
@@ -3626,8 +2165,25 @@ a:visited { color: #800080 }
 
 </div>
 </div>
+<section id="程序说明" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="程序说明"><span class="header-section-number">1.1.1</span> 程序说明</h3>
+<p>这里的程序有点复杂，主要可以拆分为 7 个步骤：</p>
+<ol type="1">
+<li>首先建立数据集 prg9_12,其中拥有两个变量 x 和 f ,变量 x 表示取样单位内的病例数,变量 f 为发生病例数的频数。另外产生一个变量,该变量表示取样单位内的总发病人数。</li>
+<li>然后对该数据集用 <code>means</code> 过程计算总发病人数和总人数,并将这两个统计量输出到数据集 b 中。</li>
+<li>创建数据集 c ,调用数据集 b ,计算总发病率(lamda),并用 <code>do-end</code> 语句产生 x 变量,该变量的值从 0 到 8 ,所以此时数据集中有四个变量:总发病人数(sumt)、总人数(sumf)、总发病率(lamda)和x(单位病例数),观测数有9例这9例观测变量x的值从 0 到 8,其他变量值都相同。</li>
+<li>将数据集 prg9_12 和 c 以 x 为关键变量进行合并,产生数据集 d。再建数据集 e,调用数据集 d,根据数据集 d 的变量x的数值产生每个 x 值的 Poisson 的概率值(P)。</li>
+<li>然后通过 Poisson 的概率值计算每个单位病例数的理论发病人数(t),从而计算出各单位病例数所对应的 x 值( chisq )。</li>
+<li>用 <code>means</code> 过程计算，值的总和( sumchi )。并将结果输出到数据集 f。</li>
+<li>另建立数据集 g,调用数据集 f,根据 X 值的合计,用 <code>probchi</code> 函数计算出该 <span class="math inline">\(\chi^2\)</span> 值所对应的 P 值(p_chi),最后将结果输出到 Outpu 窗口。</li>
+</ol>
+</section>
+<section id="结果说明" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="结果说明"><span class="header-section-number">1.1.2</span> 结果说明</h3>
+<p>本例 <span class="math inline">\(\chi^2=2.48975,P=0.96221&gt;0.05\)</span>,说明该克山病区克山病患者的空间分布服从 Poisson 分布.</p>
 
 
+</section>
 </section>
 </section>
 
@@ -4255,13 +2811,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-06-08-poisson.html" class="pagination-link" aria-label="16-SAS 对泊松分布的概率计算与假设检验">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">16-SAS 对泊松分布的概率计算与假设检验</span>
+      <a href="../../Guide/SAS/25-06-09-negative-binomial.html" class="pagination-link" aria-label="17-SAS 与负二项分布">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">17-SAS 与负二项分布</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/SAS/25-06-10-Goodness-of-Fit.html" class="pagination-link" aria-label="18-SAS 拟合优度检验">
-        <span class="nav-page-text">18-SAS 拟合优度检验</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/SAS/25-06-10-poisson-reg.html" class="pagination-link" aria-label="19-SAS Poisson 回归与负二项回归">
+        <span class="nav-page-text">19-SAS Poisson 回归与负二项回归</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -4277,7 +2833,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-06-09-negative-binomial.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/SAS/25-06-10-Goodness-of-Fit.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

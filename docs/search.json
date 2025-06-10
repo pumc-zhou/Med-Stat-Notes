@@ -910,7 +910,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-09},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 9, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-10},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 10, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -1380,7 +1380,7 @@
     "text": "生存分析（survival analysis）是一种统计方法，用于分析时间数据， 主要研究生存时间和结局的分布及其影响因素的统计方法。在生存分析中，每个研究对象的结局变量由 “time”（生存时间） 和 “status”（生存状态）组成。生存时间是指从某个特定时间点开始，到某个事件的节点时，事件数据是指某个事件是否发生。 生存时间是一个非负实数，生存状态是一个二元变量，通常用1表示事件发生，0表示事件未发生。\n生存分析的主要应用领域是医学、生物学、工程学、经济学等。\n\n\n生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 \\(S(t)\\) 表示。\n风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 \\(h(t)\\) 表示。\n如果记寿命分布的密度为 \\(f(t)\\)，则有： \\(h(t) = f(t) / S(t)\\) 。\n\n\n\n这里使用 R 语言 survival 包中的 ovarian 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。\n首先找到 ovarian 数据集，你可以从互联网上寻找相关资源；或者从 R 的 survival 包中导出这一数据集，操作如下：\n# install.packages(\"survival\")\nlibrary(survival)\novarian\ndata(cancer, package=\"survival\")\n\ndf &lt;- ovarian\nwrite.csv(df, \"your-file-path\\\\ovarian.csv\", row.names = FALSE)\n将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：\n\nimport pandas as pd\novarian = pd.read_csv(r\"C:\\Users\\asus\\Desktop\\R\\quarto\\Med-Stat-Notes\\Data\\ovarian.csv\")\novarian.head()\n\n\n\n\n\n\n\n\nfutime\nfustat\nage\nresid.ds\nrx\necog.ps\n\n\n\n\n0\n59\n1\n72.3315\n2\n1\n1\n\n\n1\n115\n1\n74.4932\n2\n1\n1\n\n\n2\n156\n1\n66.4658\n2\n1\n2\n\n\n3\n421\n0\n53.3644\n2\n2\n1\n\n\n4\n431\n1\n50.3397\n2\n1\n1\n\n\n\n\n\n\n\n数据集包括 26 个观测值，6 个变量。变量如下：futime（随访时间），fustat（研究结束时的状态：0 表示存活，1表示死亡），age（患者的年龄），resid.ds（疾病残留情况：1 表示有残留，2 表示没有残留），rx（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 ecog.ps（患者的 ECOG 评分：1 表示较好，2 表示较差）。\n对年龄进行分组，分为 &lt;50 和 &gt;50 两组，并将其他三个变量的各水平加上相应的标签。\n\n# 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别\nprint(ovarian.columns)\n\n# 将 age 列转换为数值类型\novarian['age'] = pd.to_numeric(ovarian['age'], errors='coerce')\n\novarian.age = pd.cut(ovarian.age, [0,50,75], labels = ['&lt;=50','&gt;50'])\n\novarian['resid.ds'] = ovarian['resid.ds'].map({1: \"NO\", 2: \"Yes\"})\novarian['rx'] = ovarian['rx'].map({1: \"A\", 2: \"B\"})\novarian['ecog.ps'] = ovarian['ecog.ps'].map({1: \"Good\", 2: \"Bad\"})\n\nIndex(['futime', 'fustat', 'age', 'resid.ds', 'rx', 'ecog.ps'], dtype='object')\n\n\n\n\n\n生存率的 Kaplan-Meier 估计的计算可以调用 lifelines 库中的 KaplanMeierFitter 函数实现。\npip 安装：pip install lifelines\nconda 安装： conda install lifelines\n拟合 fit :\n\nfrom lifelines import KaplanMeierFitter\nkmf = KaplanMeierFitter()\nfit = kmf.fit(ovarian.futime,ovarian.fustat)\nfit\n\n&lt;lifelines.KaplanMeierFitter:\"KM_estimate\", fitted with 26 total observations, 14 right-censored observations&gt;\n\n\n拟合结果 fit 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：\n\nfit.median_survival_time_\n\n638.0\n\n\n中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：\n\npd.concat([fit.event_table,fit.survival_function_], axis = 1)\n\n\n\n\n\n\n\n\nremoved\nobserved\ncensored\nentrance\nat_risk\nKM_estimate\n\n\n\n\n0.0\n0\n0\n0\n26\n26\n1.000000\n\n\n59.0\n1\n1\n0\n0\n26\n0.961538\n\n\n115.0\n1\n1\n0\n0\n25\n0.923077\n\n\n156.0\n1\n1\n0\n0\n24\n0.884615\n\n\n268.0\n1\n1\n0\n0\n23\n0.846154\n\n\n329.0\n1\n1\n0\n0\n22\n0.807692\n\n\n353.0\n1\n1\n0\n0\n21\n0.769231\n\n\n365.0\n1\n1\n0\n0\n20\n0.730769\n\n\n377.0\n1\n0\n1\n0\n19\n0.730769\n\n\n421.0\n1\n0\n1\n0\n18\n0.730769\n\n\n431.0\n1\n1\n0\n0\n17\n0.687783\n\n\n448.0\n1\n0\n1\n0\n16\n0.687783\n\n\n464.0\n1\n1\n0\n0\n15\n0.641931\n\n\n475.0\n1\n1\n0\n0\n14\n0.596078\n\n\n477.0\n1\n0\n1\n0\n13\n0.596078\n\n\n563.0\n1\n1\n0\n0\n12\n0.546405\n\n\n638.0\n1\n1\n0\n0\n11\n0.496732\n\n\n744.0\n1\n0\n1\n0\n10\n0.496732\n\n\n769.0\n1\n0\n1\n0\n9\n0.496732\n\n\n770.0\n1\n0\n1\n0\n8\n0.496732\n\n\n803.0\n1\n0\n1\n0\n7\n0.496732\n\n\n855.0\n1\n0\n1\n0\n6\n0.496732\n\n\n1040.0\n1\n0\n1\n0\n5\n0.496732\n\n\n1106.0\n1\n0\n1\n0\n4\n0.496732\n\n\n1129.0\n1\n0\n1\n0\n3\n0.496732\n\n\n1206.0\n1\n0\n1\n0\n2\n0.496732\n\n\n1227.0\n1\n0\n1\n0\n1\n0.496732\n\n\n\n\n\n\n\n\n\nKaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：\n\nimport matplotlib.pyplot as plt\nfit.plot(show_censors = True)\nplt.show()\n\n\n\n\n\n\n\n\n\n\n\n\n在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：\n\ng1 = ovarian.rx == \"A\"\ng2 = ovarian.rx == \"B\"\nkmf_A = KaplanMeierFitter()\nkmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label = \"Treatmeat A\")\nkmf_B = KaplanMeierFitter()\nkmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = \"Treatmeat B\")\n\n&lt;lifelines.KaplanMeierFitter:\"Treatmeat B\", fitted with 13 total observations, 8 right-censored observations&gt;\n\n\n\n\n可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。\n\nfig, axes = plt.subplots()\nkmf_A.plot(ax = axes,show_censors = True)\nkmf_B.plot(ax = axes,show_censors = True)\nplt.show()\n\n\n\n\n\n\n\n\n从上图中可以看出，治疗方式 “B” 的生存率高于治疗方式 “A” 的生存率，但是这种差异是由随机误差引起还是真是的治疗方式的不同所造成的差异，需要做进一步的统计学检验。\n\n\n\n因果关联的推断步骤\n\n\n\n\n\n生存分析中常用的统计学检验是 时序检验（log rank test），其基本思想是先计算出不同时间两种治疗方式的暴露人数和死亡人数，并由此在两种治疗方式效果相同的假设下计算出预期死亡人数，如果不拒绝零假设（ \\(H_0\\) ：两种治疗方式的效果相同，即预期死亡人数一致），则实际观测值和期望值的差异不会很大，如果差异过大则不能认为该差异是由随机误差引起的。\n对此，用 \\(\\chi^2\\) 检验做判断。时序检验可以用 lifetimes 库的函数 logrank_test 实现。\n\nfrom lifelines.statistics import logrank_test\nlr = logrank_test(ovarian.futime[g1], ovarian.futime[g2],\n                  ovarian.fustat[g1], ovarian.fustat[g2])\nlr.p_value\n\n0.3025911169890923\n\n\n这里得到的结果为 \\(P&gt;0.05\\) ，在一般情况下，我们会认为这是没有统计学意义的，即无法排除差异是由随机误差引起的。\n这种结果不显著的情况下，我们可以做一些思考，即是否有其他因素干预了结果的显著性，以及是否是样本量过小，导致差异不显著。（样本量的大小会影响检验效能，如果检验效能太低，即使有差异，也很难被检验方法发现）\n这里我们无法改变样本量的大小，但是可以考虑其他混杂因素的影响，并且使用更全面的模型进行检验。",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "Guide",
       "Python",
       "用Python做生存分析和COX回归"
     ]
@@ -1393,7 +1393,7 @@
     "text": "生存函数（survival function）是生存分析的基本概念之一，它是一个函数，用于刻画研究对象在某个时刻 t 内存存活的概率。 生存函数通常用 \\(S(t)\\) 表示。\n风险函数（hazard function）是生存分析的另一个基本概念，用于刻画研究对象在某个时刻 t 还存活但是极短的时间内死亡的风险。 风险函数通常用 \\(h(t)\\) 表示。\n如果记寿命分布的密度为 \\(f(t)\\)，则有： \\(h(t) = f(t) / S(t)\\) 。",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "Guide",
       "Python",
       "用Python做生存分析和COX回归"
     ]
@@ -1406,7 +1406,7 @@
     "text": "这里使用 R 语言 survival 包中的 ovarian 数据集，该数据集来自一项比较卵巢癌患者在两种治疗方式下的生存率比较的随机对照试验。\n首先找到 ovarian 数据集，你可以从互联网上寻找相关资源；或者从 R 的 survival 包中导出这一数据集，操作如下：\n# install.packages(\"survival\")\nlibrary(survival)\novarian\ndata(cancer, package=\"survival\")\n\ndf &lt;- ovarian\nwrite.csv(df, \"your-file-path\\\\ovarian.csv\", row.names = FALSE)\n将数据集下载到你的工作目录，然后使用 Pandas 导入与读取：\n\nimport pandas as pd\novarian = pd.read_csv(r\"C:\\Users\\asus\\Desktop\\R\\quarto\\Med-Stat-Notes\\Data\\ovarian.csv\")\novarian.head()\n\n\n\n\n\n\n\n\nfutime\nfustat\nage\nresid.ds\nrx\necog.ps\n\n\n\n\n0\n59\n1\n72.3315\n2\n1\n1\n\n\n1\n115\n1\n74.4932\n2\n1\n1\n\n\n2\n156\n1\n66.4658\n2\n1\n2\n\n\n3\n421\n0\n53.3644\n2\n2\n1\n\n\n4\n431\n1\n50.3397\n2\n1\n1\n\n\n\n\n\n\n\n数据集包括 26 个观测值，6 个变量。变量如下：futime（随访时间），fustat（研究结束时的状态：0 表示存活，1表示死亡），age（患者的年龄），resid.ds（疾病残留情况：1 表示有残留，2 表示没有残留），rx（治疗方式：1 表示环磷酰胺，2 表示环磷酰胺+阿霉素）和 ecog.ps（患者的 ECOG 评分：1 表示较好，2 表示较差）。\n对年龄进行分组，分为 &lt;50 和 &gt;50 两组，并将其他三个变量的各水平加上相应的标签。\n\n# 查看 ovarian(DataFrame)的变量名，因为不同的渠道下载的 Dataset 可能会有区别\nprint(ovarian.columns)\n\n# 将 age 列转换为数值类型\novarian['age'] = pd.to_numeric(ovarian['age'], errors='coerce')\n\novarian.age = pd.cut(ovarian.age, [0,50,75], labels = ['&lt;=50','&gt;50'])\n\novarian['resid.ds'] = ovarian['resid.ds'].map({1: \"NO\", 2: \"Yes\"})\novarian['rx'] = ovarian['rx'].map({1: \"A\", 2: \"B\"})\novarian['ecog.ps'] = ovarian['ecog.ps'].map({1: \"Good\", 2: \"Bad\"})\n\nIndex(['futime', 'fustat', 'age', 'resid.ds', 'rx', 'ecog.ps'], dtype='object')",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "Guide",
       "Python",
       "用Python做生存分析和COX回归"
     ]
@@ -1419,7 +1419,7 @@
     "text": "生存率的 Kaplan-Meier 估计的计算可以调用 lifelines 库中的 KaplanMeierFitter 函数实现。\npip 安装：pip install lifelines\nconda 安装： conda install lifelines\n拟合 fit :\n\nfrom lifelines import KaplanMeierFitter\nkmf = KaplanMeierFitter()\nfit = kmf.fit(ovarian.futime,ovarian.fustat)\nfit\n\n&lt;lifelines.KaplanMeierFitter:\"KM_estimate\", fitted with 26 total observations, 14 right-censored observations&gt;\n\n\n拟合结果 fit 包含了很多属性，我们可以通过点操作符单独提取其中的属性。例如，查看中位生存时间：\n\nfit.median_survival_time_\n\n638.0\n\n\n中位数生存时间表示，有 50% 的患者生存时间达到了 638 天。还可以提取寿命表和生存函数等属性，通过以下方式实现合并查看：\n\npd.concat([fit.event_table,fit.survival_function_], axis = 1)\n\n\n\n\n\n\n\n\nremoved\nobserved\ncensored\nentrance\nat_risk\nKM_estimate\n\n\n\n\n0.0\n0\n0\n0\n26\n26\n1.000000\n\n\n59.0\n1\n1\n0\n0\n26\n0.961538\n\n\n115.0\n1\n1\n0\n0\n25\n0.923077\n\n\n156.0\n1\n1\n0\n0\n24\n0.884615\n\n\n268.0\n1\n1\n0\n0\n23\n0.846154\n\n\n329.0\n1\n1\n0\n0\n22\n0.807692\n\n\n353.0\n1\n1\n0\n0\n21\n0.769231\n\n\n365.0\n1\n1\n0\n0\n20\n0.730769\n\n\n377.0\n1\n0\n1\n0\n19\n0.730769\n\n\n421.0\n1\n0\n1\n0\n18\n0.730769\n\n\n431.0\n1\n1\n0\n0\n17\n0.687783\n\n\n448.0\n1\n0\n1\n0\n16\n0.687783\n\n\n464.0\n1\n1\n0\n0\n15\n0.641931\n\n\n475.0\n1\n1\n0\n0\n14\n0.596078\n\n\n477.0\n1\n0\n1\n0\n13\n0.596078\n\n\n563.0\n1\n1\n0\n0\n12\n0.546405\n\n\n638.0\n1\n1\n0\n0\n11\n0.496732\n\n\n744.0\n1\n0\n1\n0\n10\n0.496732\n\n\n769.0\n1\n0\n1\n0\n9\n0.496732\n\n\n770.0\n1\n0\n1\n0\n8\n0.496732\n\n\n803.0\n1\n0\n1\n0\n7\n0.496732\n\n\n855.0\n1\n0\n1\n0\n6\n0.496732\n\n\n1040.0\n1\n0\n1\n0\n5\n0.496732\n\n\n1106.0\n1\n0\n1\n0\n4\n0.496732\n\n\n1129.0\n1\n0\n1\n0\n3\n0.496732\n\n\n1206.0\n1\n0\n1\n0\n2\n0.496732\n\n\n1227.0\n1\n0\n1\n0\n1\n0.496732\n\n\n\n\n\n\n\n\n\nKaplan-Meier 法估计的生存率是一个阶梯状的函数，其阶梯跳跃点是给定的时间点，我们可以通过调用 plot 方法绘制生存曲线，如图所示：\n\nimport matplotlib.pyplot as plt\nfit.plot(show_censors = True)\nplt.show()",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "Guide",
       "Python",
       "用Python做生存分析和COX回归"
     ]
@@ -1432,7 +1432,7 @@
     "text": "在生存分析中，经常需要比较不同情形下的生存率。在本例中，想要比较不同治疗方式下生存率，可以输入下面的命令：\n\ng1 = ovarian.rx == \"A\"\ng2 = ovarian.rx == \"B\"\nkmf_A = KaplanMeierFitter()\nkmf_A.fit(ovarian.futime[g1],ovarian.fustat[g1],label = \"Treatmeat A\")\nkmf_B = KaplanMeierFitter()\nkmf_B.fit(ovarian.futime[g2],ovarian.fustat[g2],label = \"Treatmeat B\")\n\n&lt;lifelines.KaplanMeierFitter:\"Treatmeat B\", fitted with 13 total observations, 8 right-censored observations&gt;\n\n\n\n\n可以单独提取两组的生存函数进行比较，但在同一个图中显示多条生存曲线更有助于生存率的比较。\n\nfig, axes = plt.subplots()\nkmf_A.plot(ax = axes,show_censors = True)\nkmf_B.plot(ax = axes,show_censors = True)\nplt.show()\n\n\n\n\n\n\n\n\n从上图中可以看出，治疗方式 “B” 的生存率高于治疗方式 “A” 的生存率，但是这种差异是由随机误差引起还是真是的治疗方式的不同所造成的差异，需要做进一步的统计学检验。\n\n\n\n因果关联的推断步骤\n\n\n\n\n\n生存分析中常用的统计学检验是 时序检验（log rank test），其基本思想是先计算出不同时间两种治疗方式的暴露人数和死亡人数，并由此在两种治疗方式效果相同的假设下计算出预期死亡人数，如果不拒绝零假设（ \\(H_0\\) ：两种治疗方式的效果相同，即预期死亡人数一致），则实际观测值和期望值的差异不会很大，如果差异过大则不能认为该差异是由随机误差引起的。\n对此，用 \\(\\chi^2\\) 检验做判断。时序检验可以用 lifetimes 库的函数 logrank_test 实现。\n\nfrom lifelines.statistics import logrank_test\nlr = logrank_test(ovarian.futime[g1], ovarian.futime[g2],\n                  ovarian.fustat[g1], ovarian.fustat[g2])\nlr.p_value\n\n0.3025911169890923\n\n\n这里得到的结果为 \\(P&gt;0.05\\) ，在一般情况下，我们会认为这是没有统计学意义的，即无法排除差异是由随机误差引起的。\n这种结果不显著的情况下，我们可以做一些思考，即是否有其他因素干预了结果的显著性，以及是否是样本量过小，导致差异不显著。（样本量的大小会影响检验效能，如果检验效能太低，即使有差异，也很难被检验方法发现）\n这里我们无法改变样本量的大小，但是可以考虑其他混杂因素的影响，并且使用更全面的模型进行检验。",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "Guide",
       "Python",
       "用Python做生存分析和COX回归"
     ]
@@ -1445,7 +1445,7 @@
     "text": "2.1 建立模型\n在建立模型前，需要对分类变量进行哑变量处理：\n\ndf_dummy = pd.get_dummies(ovarian,drop_first = True)\ndf_dummy.head()\n\n\n\n\n\n\n\n\nfutime\nfustat\nage_&gt;50\nresid.ds_Yes\nrx_B\necog.ps_Good\n\n\n\n\n0\n59\n1\nTrue\nTrue\nFalse\nTrue\n\n\n1\n115\n1\nTrue\nTrue\nFalse\nTrue\n\n\n2\n156\n1\nTrue\nTrue\nFalse\nFalse\n\n\n3\n421\n0\nTrue\nTrue\nTrue\nTrue\n\n\n4\n431\n1\nTrue\nTrue\nFalse\nTrue\n\n\n\n\n\n\n\n使用 drop_first = True 参数是为了去掉各个参考类别。\n下面将所有的协变量都纳入，建立 Cox 回归模型：\n\nfrom lifelines import CoxPHFitter\ncox = CoxPHFitter()\ncox.fit(df_dummy,duration_col = 'futime', event_col = 'fustat')\ncox.print_summary()\n\n\n\n\n\n\n\nmodel\nlifelines.CoxPHFitter\n\n\nduration col\n'futime'\n\n\nevent col\n'fustat'\n\n\nbaseline estimation\nbreslow\n\n\nnumber of observations\n26\n\n\nnumber of events observed\n12\n\n\npartial log-likelihood\n-28.89\n\n\ntime fit was run\n2025-03-10 05:46:54 UTC\n\n\n\n\n\n\n\n\n\ncoef\nexp(coef)\nse(coef)\ncoef lower 95%\ncoef upper 95%\nexp(coef) lower 95%\nexp(coef) upper 95%\ncmp to\nz\np\n-log2(p)\n\n\n\n\nage_&gt;50\n2.20\n9.04\n1.11\n0.03\n4.37\n1.03\n79.10\n0.00\n1.99\n0.05\n4.42\n\n\nresid.ds_Yes\n1.45\n4.25\n0.73\n0.02\n2.88\n1.02\n17.75\n0.00\n1.98\n0.05\n4.40\n\n\nrx_B\n-1.38\n0.25\n0.64\n-2.65\n-0.12\n0.07\n0.89\n0.00\n-2.14\n0.03\n4.96\n\n\necog.ps_Good\n-0.59\n0.56\n0.63\n-1.83\n0.65\n0.16\n1.92\n0.00\n-0.93\n0.35\n1.50\n\n\n\n\n\n\n\n\n\nConcordance\n0.79\n\n\nPartial AIC\n65.78\n\n\nlog-likelihood ratio test\n12.19 on 4 df\n\n\n-log2(p) of ll-ratio test\n5.97\n\n\n\n\n\n\n\n结果显示，在调整了协变量后，两种治疗方式的死亡风险的差异具有统计学意义（P&lt;0.05）。\n模型的回归系数及其置信区间可以通过 plot 方法进行直观展示：\n\ncox.plot()\n\n\n\n\n\n\n\n\nCox 回归是一种半参数回归模型，也像多元线性回归一样，存在变量选择的问题。通常可以用 AIC 进行变量选择。1\n查看当前模型的 AIC 值：\n\ncox.AIC_partial_\n\n65.77513405570859\n\n\n根据前序的结果，变量 ecog.ps 对应的 P 值最大，对其进行剔除后再次拟合模型：\n\ncox1 = CoxPHFitter()\ndf_dummy_sub = df_dummy.drop('ecog.ps_Good', axis = 1)\ncox1.fit(df_dummy_sub, duration_col = 'futime', event_col = 'fustat')\ncox1.print_summary()\ncox1.AIC_partial_\n\n\n\n\n\n\n\nmodel\nlifelines.CoxPHFitter\n\n\nduration col\n'futime'\n\n\nevent col\n'fustat'\n\n\nbaseline estimation\nbreslow\n\n\nnumber of observations\n26\n\n\nnumber of events observed\n12\n\n\npartial log-likelihood\n-29.33\n\n\ntime fit was run\n2025-03-10 05:46:54 UTC\n\n\n\n\n\n\n\n\n\ncoef\nexp(coef)\nse(coef)\ncoef lower 95%\ncoef upper 95%\nexp(coef) lower 95%\nexp(coef) upper 95%\ncmp to\nz\np\n-log2(p)\n\n\n\n\nage_&gt;50\n2.11\n8.29\n1.09\n-0.02\n4.25\n0.98\n70.32\n0.00\n1.94\n0.05\n4.25\n\n\nresid.ds_Yes\n1.25\n3.50\n0.69\n-0.10\n2.61\n0.90\n13.58\n0.00\n1.81\n0.07\n3.83\n\n\nrx_B\n-1.28\n0.28\n0.62\n-2.50\n-0.06\n0.08\n0.94\n0.00\n-2.06\n0.04\n4.67\n\n\n\n\n\n\n\n\n\nConcordance\n0.77\n\n\nPartial AIC\n64.66\n\n\nlog-likelihood ratio test\n11.31 on 3 df\n\n\n-log2(p) of ll-ratio test\n6.62\n\n\n\n\n\n\n\n64.65793573545281\n\n\n剔除 ecog_ps 后的模型， AIC 值有所下降，但是不多（谨慎对待），能认为新模型优于原有模型。",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "Guide",
       "Python",
       "用Python做生存分析和COX回归"
     ]
@@ -1458,7 +1458,7 @@
     "text": "脚注\n\n\n赤池信息量准则，即Akaike information criterion，简称AIC，是衡量统计模型拟合优良性的一种标准，是由日本统计学家赤池弘次创立和发展的。赤池信息量准则建立在熵的概念基础上。\nAIC越小，模型越好，通常选择AIC最小的模型↩︎",
     "crumbs": [
       "Home",
-      "统计软件使用指南",
+      "Guide",
       "Python",
       "用Python做生存分析和COX回归"
     ]
@@ -6609,6 +6609,97 @@
       "Learn",
       "Advance",
       "00-医学统计学（伪）高级部分"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-10-poisson-reg.html",
+    "href": "Guide/SAS/25-06-10-poisson-reg.html",
+    "title": "19-SAS Poisson 回归与负二项回归",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic\n\n\n\n1 什么是 Poisson 回归\nPossion分布是一种描述和分析稀有事件发生次数的概率分析方法。泊松分布是偏态分布，线性回归不能解决相关问题，一般推荐使用Poisson回归(Poisson Regression)。Poisson回归主要用于分析服从Poisson分布的因变量与影响其取值的自变量之间变化关系的一种模型，即单位时间(或空间)内某稀有事件发生数的影响因素分析，如某罕见疾病的发病率的影响因素分析。\n医学研究中有不少现象可使用泊松回归进行分析，对于以人群为基础的稀有疾病如肿瘤或卫生事件等资料,宜用 Poisson 回归分析，比如对浅表性胃炎病人长期随访一段时间后的胃癌发生数。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "SAS",
+      "19-SAS Poisson 回归与负二项回归"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-09-negative-binomial.html",
+    "href": "Guide/SAS/25-06-09-negative-binomial.html",
+    "title": "17-SAS 与负二项分布",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "SAS",
+      "17-SAS 与负二项分布"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-09-negative-binomial.html#动差法示例",
+    "href": "Guide/SAS/25-06-09-negative-binomial.html#动差法示例",
+    "title": "17-SAS 与负二项分布",
+    "section": "1.1 动差法示例",
+    "text": "1.1 动差法示例\n在研究某种毒物的致死作用时,对 60 只小白鼠进行了显性致死试验,得到数据资料见表。若该样本计数服从负二项分布,试估计其参数 μ 和 k。\n\n\n\n胚胎死亡数\n0\n1\n2\n3\n4\n5\n6\n合计\n\n\n\n\n观察雌鼠数\n30\n14\n8\n4\n2\n0\n2\n60\n\n\n\n\n1.1.1 动差法原理（Method of Moments）\n动差法是一种参数估计方法，通过令样本矩（如样本均值、样本方差）等于理论分布的对应矩，解方程得到参数估计。\n对于负二项分布：\n\n参数：\n\n\\(\\mu = \\text{E}(X)\\)\n\\(\\text{Var}(X) = \\mu + \\mu^2/k\\)\n\n\n由样本数据可得样本均值 \\(\\bar{x}\\) 和样本方差 \\(s^2\\)，则可解出：\n\n\\(\\hat{k} = \\mu^2 / (s^2 - \\mu)\\)\n\n这个估计在 \\(s^2 &gt; \\mu\\) 时成立（即数据存在过度离散）。\n\n\n1.1.2 其他参数估计方法\n\n\n\n\n\n\n\n\n\n方法\n思路\n优点\n缺点\n\n\n\n\n频数法（Frequency Method）\n利用频数分布构造估计量，如通过最大频数位置反推参数\n直观，适用于整数型数据\n精度差，参数间依赖强\n\n\n零频数法（Zero Frequency Method）\n利用观测中“零”的频率推断参数\n简便，只需零频数\n精度有限，需大量样本支持\n\n\n最大似然估计（MLE）\n构造似然函数，以数值优化求得参数估计\n统计效率高，常用于建模\n需要迭代计算，依赖软件\n\n\n\n\n\n代码\n%%SAS\n/*程序17-1*/\ndata nbinomial;\n    input x f @@;\ndatalines;\n0 30 1 14 2 8 3 4 4 2 5 0 6 2\n;\nrun;\nproc univariate;\n    var x;\n    freq f;\noutput out= mv2 mean = mu var = v;\nrun;\ndata k;\n    set mv2;\n    k = mu**2/(v-mu);\nproc print;\n    var mu k;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\nUNIVARIATE 过程\n变量:  x\n \n频数:  f\n\n\n\n\n\n\n\n矩\n\n\n\n\n数目\n60\n权重总和\n60\n\n\n均值\n1.03333333\n观测总和\n62\n\n\n标准差\n1.43759058\n方差\n2.06666667\n\n\n偏度\n1.78111198\n峰度\n3.3122114\n\n\n未校平方和\n186\n校正平方和\n121.933333\n\n\n变异系数\n139.121669\n标准误差均值\n0.18559215\n\n\n\n\n\n\n\n\n\n\n基本统计测度\n\n\n位置\n变异性\n\n\n\n\n均值\n1.033333\n标准差\n1.43759\n\n\n中位数\n0.500000\n方差\n2.06667\n\n\n众数\n0.000000\n极差\n6.00000\n\n\n \n \n四分位间距\n2.00000\n\n\n\n\n\n\n\n\n\n\n位置检验: Mu0=0\n\n\n检验\n统计量\np 值\n\n\n\n\nStudent t\nt\n5.567764\nPr &gt; |t|\n&lt;.0001\n\n\n符号\nM\n15\nPr &gt;= |M|\n&lt;.0001\n\n\n符号秩\nS\n232.5\nPr &gt;= |S|\n&lt;.0001\n\n\n\n\n\n\n\n\n\n\n分位数（定义 5）\n\n\n水平\n分位数\n\n\n\n\n100% 最大值\n6.0\n\n\n99%\n6.0\n\n\n95%\n4.0\n\n\n90%\n3.0\n\n\n75% Q3\n2.0\n\n\n50% 中位数\n0.5\n\n\n25% Q1\n0.0\n\n\n10%\n0.0\n\n\n5%\n0.0\n\n\n1%\n0.0\n\n\n0% 最小值\n0.0\n\n\n\n\n\n\n\n\n\n\n极值观测\n\n\n最小值\n最大值\n\n\n值\n频数\n观测\n值\n频数\n观测\n\n\n\n\n0\n30\n1\n1\n14\n2\n\n\n1\n14\n2\n2\n8\n3\n\n\n2\n8\n3\n3\n4\n4\n\n\n3\n4\n4\n4\n2\n5\n\n\n4\n2\n5\n6\n2\n7\n\n\n\n\n\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\nmu\nk\n\n\n\n\n1\n1.03333\n1.03333\n\n\n\n\n\n\n\n\n\n\n\n\n1.1.3 程序说明\n数据集中的x和f分别表示胚胎死亡数和雌鼠数,首先通过 univariate 过程计算均数和方差,并将该两项指标输出到 mv2 数据集中,再用数据集k调用mv2的内容,用专用公式计算k的值。\n\n\n1.1.4 结果说明\nunivariate 过程的输出结果不再叙述,最后输出的两个参数分别为u=1.033 33,k=1.033 33.",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "SAS",
+      "17-SAS 与负二项分布"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-09-negative-binomial.html#零频数法",
+    "href": "Guide/SAS/25-06-09-negative-binomial.html#零频数法",
+    "title": "17-SAS 与负二项分布",
+    "section": "1.2 零频数法",
+    "text": "1.2 零频数法\n理论上，\n\\[\nP(X=0) = \\left( \\frac{k}{k+\\mu} \\right)^k\n\\]\n设观察零频率 \\(f_0 = 30/60 = 0.5\\)，解此方程估计 k。\n\n\n代码\n%%SAS\ndata zerofreq;\n    f0 = 0.5;\n    mu = 1.0;  /* 可以先用动差法得出的均值 */\n    do k = 0.01 to 20 by 0.01;\n        p0 = (k/(k+mu))**k;\n        diff = abs(p0 - f0);\n        output;\n    end;\nrun;\n\nproc sort data=zerofreq;\n    by diff;\nrun;\n\nproc print data=zerofreq(obs=1);\n    var mu k p0;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\nmu\nk\np0\n\n\n\n\n1\n1\n1\n0.5",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "SAS",
+      "17-SAS 与负二项分布"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html",
+    "href": "Guide/R/02-ggplot2-base.html",
+    "title": "02-ggplot2 绘图基础",
+    "section": "",
+    "text": "1 笔记与练习参考\nR 可视化的内容主要来源于 [R Graphics Cookbook, 2nd edition](https://r-graphics.org/) 和 [Beautiful-Visualization-with-R](https://github.com/EasyChart/Beautiful-Visualization-with-R)(Zhang 2019)\n\n\n\n\n\n\n\n\n\n\n2 准备工作\n\nZhang, Jie. 2019. Beautiful Data Visualization of R- How to Make Professional Charts. Publishing House of Electronic Industry. https://books.google.com.hk/books?id=aDxYzQEACAAJ.",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-10-Goodness-of-Fit.html",
+    "href": "Guide/SAS/25-06-10-Goodness-of-Fit.html",
+    "title": "18-SAS 拟合优度检验",
+    "section": "",
+    "text": "代码\n%load_ext saspy.sas_magic",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "SAS",
+      "18-SAS 拟合优度检验"
+    ]
+  },
+  {
+    "objectID": "Guide/SAS/25-06-10-Goodness-of-Fit.html#示例",
+    "href": "Guide/SAS/25-06-10-Goodness-of-Fit.html#示例",
+    "title": "18-SAS 拟合优度检验",
+    "section": "1.1 示例",
+    "text": "1.1 示例\n观察某克山病区克山病患者的空间分布情况。调查者将该地区划分为279个取样单位,统计各取样单位历年累计病例数,资料见下表。问此资料是否服从 Poisson 分布?\n\n\n\n取样单位内病例数\n观察频数\n\n\n\n\n0\n26\n\n\n1\n51\n\n\n2\n75\n\n\n3\n63\n\n\n4\n38\n\n\n5\n17\n\n\n6\n5\n\n\n7\n3\n\n\n≥8\n1\n\n\n合计\n279\n\n\n\n\n\n代码\n%%SAS\n/*程序18-1*/\ndata prg9_12;\n    input x f @@;\n    t= x*f;\ndatalines;\n0 26 1 51 2 75 3 63 4 38 5 17 6 5 7 3 8 1\n;\nrun;\nproc means sum noprint;\n    var t f;\noutput out = b sum = sumt sumf;\nrun;\ndata c;\n    set b;\n        do x=0 to 8;\n            lamda=sumt/sumf;\n            output;\n        end;\nrun;\ndata d;\n    merge prg9_12 c;\n    by x;\nrun;\ndata e;\n    set d;\n    if x = 0 then p = poisson(lamda,0);\n    if x &gt; 0 and x &lt; 8 then p = poisson(lamda,x)- poisson(lamda,x-1);\n    if x = 8 then p = 1-poisson(amda,x-1);\n    retain chisq o p 0;\n    t1 = sumf*p;\n    chisq =((f-t1)**2)/t1;\nrun;\nproc means sum noprint;\n    var chisq;\n    output out =f sum = sumchi;\nrun;\ndata g;\n    set f;\n    p_chi= 1-probchi(sumchi,8);\nrun;\nproc print;\n    var sumchi p_chi;\nrun;\n\n\n\n\n\n\n\nSAS 输出\n\n\n\n\n\nSAS 系统 \n\n\n\n\n\n\n观测\nsumchi\np_chi\n\n\n\n\n1\n2.48975\n0.96221\n\n\n\n\n\n\n\n\n\n\n\n1.1.1 程序说明\n这里的程序有点复杂，主要可以拆分为 7 个步骤：\n\n首先建立数据集 prg9_12,其中拥有两个变量 x 和 f ,变量 x 表示取样单位内的病例数,变量 f 为发生病例数的频数。另外产生一个变量,该变量表示取样单位内的总发病人数。\n然后对该数据集用 means 过程计算总发病人数和总人数,并将这两个统计量输出到数据集 b 中。\n创建数据集 c ,调用数据集 b ,计算总发病率(lamda),并用 do-end 语句产生 x 变量,该变量的值从 0 到 8 ,所以此时数据集中有四个变量:总发病人数(sumt)、总人数(sumf)、总发病率(lamda)和x(单位病例数),观测数有9例这9例观测变量x的值从 0 到 8,其他变量值都相同。\n将数据集 prg9_12 和 c 以 x 为关键变量进行合并,产生数据集 d。再建数据集 e,调用数据集 d,根据数据集 d 的变量x的数值产生每个 x 值的 Poisson 的概率值(P)。\n然后通过 Poisson 的概率值计算每个单位病例数的理论发病人数(t),从而计算出各单位病例数所对应的 x 值( chisq )。\n用 means 过程计算，值的总和( sumchi )。并将结果输出到数据集 f。\n另建立数据集 g,调用数据集 f,根据 X 值的合计,用 probchi 函数计算出该 \\(\\chi^2\\) 值所对应的 P 值(p_chi),最后将结果输出到 Outpu 窗口。\n\n\n\n1.1.2 结果说明\n本例 \\(\\chi^2=2.48975,P=0.96221&gt;0.05\\),说明该克山病区克山病患者的空间分布服从 Poisson 分布.",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "SAS",
+      "18-SAS 拟合优度检验"
     ]
   }
 ]
