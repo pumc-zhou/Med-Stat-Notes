@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.6.40">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
 <meta name="author" content="Simonzhou">
-
 <title>02-ggplot2 绘图基础 – 医学统计学笔记</title>
 <style>
 code{white-space: pre-wrap;}
@@ -77,7 +74,6 @@ div.csl-indent {
   margin-left: 2em;
 }</style>
 
-
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
@@ -98,8 +94,7 @@ div.csl-indent {
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -124,38 +119,31 @@ div.csl-indent {
     "search-submit-button-title": "提交",
     "search-label": "搜索"
   }
-}</script>
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G2HZEXHNCE"></script>
-
-<script type="text/javascript">
+}</script><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G2HZEXHNCE"></script><script type="text/javascript">
 
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
-</script>
-<style>html{ scroll-behavior: smooth; }</style>
-
-
+</script><style>html{ scroll-behavior: smooth; }</style>
 <meta property="og:title" content="02-ggplot2 绘图基础 – 医学统计学笔记">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/R/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
 <meta name="twitter:title" content="02-ggplot2 绘图基础 – 医学统计学笔记">
 <meta name="twitter:description" content="This is a Note site.">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="www.lazyzhou.cn/Guide/R/02-ggplot2-base_files/figure-html/unnamed-chunk-5-1.png">
+<meta name="twitter:image-height" content="960">
+<meta name="twitter:image-width" content="1344">
+<meta name="twitter:card" content="summary_large_image">
 </head>
-
 <body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
-      <div class="navbar-container container-fluid">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/logo.png" alt="" class="navbar-logo">
-    </a>
+    <img src="../../images/logo.png" alt="" class="navbar-logo"></a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">医学统计学习笔记</span>
     </a>
@@ -166,7 +154,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item">
+<li class="nav-item">
     <a class="nav-link active" href="../../index.html" aria-current="page"> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -174,8 +162,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learn" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Learn</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">
+<li>
     <a class="dropdown-item" href="../../Learn/Basic/00-basic.html">
  <span class="dropdown-text">Basic</span></a>
   </li>  
@@ -188,13 +176,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="dropdown-text">Bayes</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Guide</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">
+<li>
     <a class="dropdown-item" href="../../Guide/Guide-intro.html">
  <span class="dropdown-text">Guide</span></a>
   </li>  
@@ -215,26 +203,26 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
-  </li>
+</li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-quarto" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Quarto</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">    
-        <li>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">
+<li>
     <a class="dropdown-item" href="../../Quarto/quarto-intro.html">
  <span class="dropdown-text">Intro</span></a>
   </li>  
     </ul>
-  </li>
+</li>
 </ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item dropdown ">
+<ul class="navbar-nav navbar-nav-scroll ms-auto">
+<li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Books</span>
     </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
-        <li>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">
+<li>
     <a class="dropdown-item" href="../../navbar/small_talk/book.html">
  <span class="dropdown-text">Small Talk</span></a>
   </li>  
@@ -243,9 +231,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="dropdown-text">Translation</span></a>
   </li>  
     </ul>
-  </li>
+</li>
 </ul>
-          </div> <!-- /navcollapse -->
+</div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
     <a href="https://github.com/zhoulvbang" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
@@ -256,9 +244,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </a>
 </div>
       </div> <!-- /container-fluid -->
-    </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
+    </nav><nav class="quarto-secondary-nav"><div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
@@ -269,20 +255,16 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
         <i class="bi bi-search"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
-        <div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="搜索"></div>
         </div>
         </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">主页</span></a>
@@ -296,8 +278,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
  <span class="menu-text">Basic</span></a>
@@ -305,8 +287,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">医学统计学基础</span></a>
@@ -379,7 +361,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
@@ -388,8 +370,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Learn/Advance/00-advance.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-医学统计学（伪）高级部分</span></a>
@@ -402,7 +384,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
@@ -411,8 +393,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">贝叶斯与概率推理</span></a>
@@ -425,9 +407,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
@@ -436,8 +418,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item sidebar-item-section">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
  <span class="menu-text">R</span></a>
@@ -445,8 +427,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/R/00-R-install.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-R 安装</span></a>
@@ -465,7 +447,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
@@ -474,8 +456,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">用Python和Stata处理一份卫生费用数据</span></a>
@@ -512,7 +494,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
@@ -521,8 +503,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-SAS-Intro and Record</span></a>
@@ -643,7 +625,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
@@ -652,8 +634,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
@@ -810,9 +792,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
@@ -821,8 +803,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Qmd config giscus</span></a>
@@ -841,28 +823,62 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   </div>
 </li>
       </ul>
-  </li>
+</li>
     </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+</div>
+</nav><div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
-    <h2 id="toc-title">该页面内容</h2>
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1"><h2 id="toc-title">该页面内容</h2>
    
   <ul>
-  <li><a href="#笔记与练习参考" id="toc-笔记与练习参考" class="nav-link active" data-scroll-target="#笔记与练习参考"><span class="header-section-number">1</span> 笔记与练习参考</a></li>
-  <li><a href="#准备工作" id="toc-准备工作" class="nav-link" data-scroll-target="#准备工作"><span class="header-section-number">2</span> 准备工作</a></li>
+<li><a href="#%E7%AC%94%E8%AE%B0%E4%B8%8E%E7%BB%83%E4%B9%A0%E5%8F%82%E8%80%83" id="toc-笔记与练习参考" class="nav-link active" data-scroll-target="#%E7%AC%94%E8%AE%B0%E4%B8%8E%E7%BB%83%E4%B9%A0%E5%8F%82%E8%80%83"><span class="header-section-number">1</span> 笔记与练习参考</a></li>
+  <li>
+<a href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C" id="toc-准备工作" class="nav-link" data-scroll-target="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="header-section-number">2</span> 准备工作</a>
+  <ul class="collapse">
+<li><a href="#%E5%AE%89%E8%A3%85package" id="toc-安装package" class="nav-link" data-scroll-target="#%E5%AE%89%E8%A3%85package"><span class="header-section-number">2.1</span> 安装package</a></li>
+  <li>
+<a href="#%E8%BD%BD%E5%85%A5package" id="toc-载入package" class="nav-link" data-scroll-target="#%E8%BD%BD%E5%85%A5package"><span class="header-section-number">2.2</span> 载入package</a>
+  <ul class="collapse">
+<li><a href="#%E6%B3%A8%E6%84%8F" id="toc-注意" class="nav-link" data-scroll-target="#%E6%B3%A8%E6%84%8F"><span class="header-section-number">2.2.1</span> 注意</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/R/02-ggplot2-base.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+</li>
+  <li>
+<a href="#%E6%9B%B4%E6%96%B0package" id="toc-更新package" class="nav-link" data-scroll-target="#%E6%9B%B4%E6%96%B0package"><span class="header-section-number">2.3</span> 更新package</a>
+  <ul class="collapse">
+<li><a href="#%E6%B3%A8%E6%84%8F-1" id="toc-注意-1" class="nav-link" data-scroll-target="#%E6%B3%A8%E6%84%8F-1"><span class="header-section-number">2.3.1</span> 注意</a></li>
+  </ul>
+</li>
+  <li><a href="#%E5%8A%A0%E8%BD%BD%E4%BB%A5%E7%AC%A6%E5%8F%B7%E5%88%86%E9%9A%94%E7%9A%84%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6" id="toc-加载以符号分隔的文本文件" class="nav-link" data-scroll-target="#%E5%8A%A0%E8%BD%BD%E4%BB%A5%E7%AC%A6%E5%8F%B7%E5%88%86%E9%9A%94%E7%9A%84%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6"><span class="header-section-number">2.4</span> 加载以符号分隔的文本文件</a></li>
+  <li><a href="#%E4%BB%8Eexcel%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE" id="toc-从excel文件中加载数据" class="nav-link" data-scroll-target="#%E4%BB%8Eexcel%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="header-section-number">2.5</span> 从Excel文件中加载数据</a></li>
+  <li>
+<a href="#%E4%BB%8Espsssasstata%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE" id="toc-从spsssasstata文件中加载数据" class="nav-link" data-scroll-target="#%E4%BB%8Espsssasstata%E6%96%87%E4%BB%B6%E4%B8%AD%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE"><span class="header-section-number">2.6</span> 从SPSS/SAS/Stata文件中加载数据</a>
+  <ul class="collapse">
+<li><a href="#%E4%BD%BF%E7%94%A8-haven-%E5%8C%85%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0" id="toc-使用-haven-包中的函数" class="nav-link" data-scroll-target="#%E4%BD%BF%E7%94%A8-haven-%E5%8C%85%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0"><span class="header-section-number">2.6.1</span> 使用 <code>haven</code> 包中的函数</a></li>
+  <li><a href="#%E4%BD%BF%E7%94%A8-foreign-%E5%8C%85%E6%9B%BF%E4%BB%A3" id="toc-使用-foreign-包替代" class="nav-link" data-scroll-target="#%E4%BD%BF%E7%94%A8-foreign-%E5%8C%85%E6%9B%BF%E4%BB%A3"><span class="header-section-number">2.6.2</span> 使用 <code>foreign</code> 包替代</a></li>
+  </ul>
+</li>
+  <li>
+<a href="#%E9%93%BE%E6%8E%A5%E5%87%BD%E6%95%B0%E5%92%8C%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6" id="toc-链接函数和管道操作符" class="nav-link" data-scroll-target="#%E9%93%BE%E6%8E%A5%E5%87%BD%E6%95%B0%E5%92%8C%E7%AE%A1%E9%81%93%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="header-section-number">2.7</span> 链接函数和管道操作符 <code>%&gt;%</code></a>
+  <ul class="collapse">
+<li><a href="#%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0" id="toc-普通函数" class="nav-link" data-scroll-target="#%E6%99%AE%E9%80%9A%E5%87%BD%E6%95%B0"><span class="header-section-number">2.7.1</span> 普通函数</a></li>
+  </ul>
+</li>
+  <li><a href="#%E7%BB%98%E5%88%B6%E6%95%A3%E7%82%B9%E5%9B%BE" id="toc-绘制散点图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="header-section-number">2.8</span> 绘制散点图</a></li>
+  <li>
+<a href="#%E7%BB%98%E5%88%B6%E6%8A%98%E7%BA%BF%E5%9B%BE" id="toc-绘制折线图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="header-section-number">2.9</span> 绘制折线图</a>
+  <ul class="collapse">
+<li><a href="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E7%82%B9%E5%92%8C%E5%A4%9A%E6%9D%A1%E6%8A%98%E7%BA%BF" id="toc-增加数据点和多条折线" class="nav-link" data-scroll-target="#%E5%A2%9E%E5%8A%A0%E6%95%B0%E6%8D%AE%E7%82%B9%E5%92%8C%E5%A4%9A%E6%9D%A1%E6%8A%98%E7%BA%BF"><span class="header-section-number">2.9.1</span> 增加数据点和多条折线</a></li>
+  <li><a href="#ggplot2-%E4%B8%AD%E7%9A%84-geom_line" id="toc-ggplot2-中的-geom_line" class="nav-link" data-scroll-target="#ggplot2-%E4%B8%AD%E7%9A%84-geom_line"><span class="header-section-number">2.9.2</span> <code>ggplot2</code> 中的 <code>geom_line()</code></a></li>
+  </ul>
+</li>
+  </ul>
+</li>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/R/02-ggplot2-base.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/R/00-R-install.html">R</a></li><li class="breadcrumb-item"><a href="../../Guide/R/02-ggplot2-base.html">02-ggplot2 绘图基础</a></li></ol></nav>
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">02-ggplot2 绘图基础</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/R/00-R-install.html">R</a></li><li class="breadcrumb-item"><a href="../../Guide/R/02-ggplot2-base.html">02-ggplot2 绘图基础</a></li></ol></nav><div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">02-ggplot2 绘图基础</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">查看源代码</a></li></ul></div></div>
 </div>
 
 
@@ -886,7 +902,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年6月10日</p>
+      <p class="date-modified">2025年6月12日</p>
     </div>
   </div>
     
@@ -894,28 +910,318 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   
 
 
-</header>
-
-
-<section id="笔记与练习参考" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> 笔记与练习参考</h1>
+</header><section id="笔记与练习参考" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> 笔记与练习参考</h1>
 <p>R 可视化的内容主要来源于 [R Graphics Cookbook, 2nd edition](<a href="https://r-graphics.org/" class="uri">https://r-graphics.org/</a>) 和 [<a href="https://github.com/EasyChart/Beautiful-Visualization-with-R"><strong>Beautiful-Visualization-with-R</strong></a>](<a href="#0" style="font-size: 13pt; font-weight: var(--fontWeightRegular);">https://github.com/EasyChart/Beautiful-Visualization-with-R</a>)<span class="citation" data-cites="Zhang2019r">(<a href="#ref-Zhang2019r" role="doc-biblioref">Zhang 2019</a>)</span></p>
-</section>
-<section id="准备工作" class="level1" data-number="2">
-
+</section><section id="准备工作" class="level1" data-number="2"><h1 data-number="2">
+<span class="header-section-number">2</span> 准备工作</h1>
+<p>ggplot2 绘图基础需要安装 <code>ggplot2</code>,<code>dplyr</code>,<code>gcookbook</code>三个包，其中<code>gcookbook</code>包含了需要使用的数据集。</p>
+<section id="安装package" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="安装package">
+<span class="header-section-number">2.1</span> 安装package</h2>
+<p>可以通过如下方式安装：</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">install.packages</span>(<span class="st">"gcookbook"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section><section id="载入package" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="载入package">
+<span class="header-section-number">2.2</span> 载入package</h2>
+<p>在每个R会话中，需要再运行代码之前加载这几个包：</p>
+<p><code>{r，eval=false} library(tidyverse) library(gcookbook)</code></p>
+<section id="注意" class="level3" data-number="2.2.1"><h3 data-number="2.2.1" class="anchored" data-anchor-id="注意">
+<span class="header-section-number">2.2.1</span> 注意</h3>
+<p>运行<code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>会加载 <code>ggplot2</code>,<code>dplyr</code>等许多其他包，如果想要R会话更加流畅高效，可以分别加载<code>ggplot2</code>,<code>dplyr</code>,<code>gcookbook</code>等。</p>
+</section></section><section id="更新package" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="更新package">
+<span class="header-section-number">2.3</span> 更新package</h2>
+<p>运行 <code><a href="https://rdrr.io/r/utils/update.packages.html">update.packages()</a></code> 可以查看那些包可以被更新，如果想要不加提示的更新说有的package，可以加入参数：<code>ask=FALSE</code>。</p>
+<p><code>{r，eval=FALSE} update.packages(ask=FALSE)</code></p>
+<section id="注意-1" class="level3" data-number="2.3.1"><h3 data-number="2.3.1" class="anchored" data-anchor-id="注意-1">
+<span class="header-section-number">2.3.1</span> 注意</h3>
+<p>一般来说package的作者会发布一些新版本来修复旧版本中的问题，并提供一些新特征或功能，通常是建议将packages更新到最新版。但是有时候可能会出现一些bug或package之间的冲突，可以通过版本控制/构建虚拟环境来进行解决。</p>
+</section></section><section id="加载以符号分隔的文本文件" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="加载以符号分隔的文本文件">
+<span class="header-section-number">2.4</span> 加载以符号分隔的文本文件</h2>
+<ol type="1">
+<li>一般的加载语法</li>
+</ol>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dataname.csv"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ol start="2" type="1">
+<li>render 包中的 <code>read_csv()</code> 函数，这个函数的运行速度比 <code><a href="https://rdrr.io/r/utils/read.table.html">read.csv()</a></code> 快很多，且更适合处理字符串、日期和时间数据。</li>
+<li>如果数据文件首列没有列明：</li>
+</ol>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dataname.csv"</span>,<span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># 手动为列名赋值</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"colum_1"</span>,<span class="st">"colum_2"</span>,<span class="st">"colum_3"</span>...)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="从excel文件中加载数据" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="从excel文件中加载数据">
+<span class="header-section-number">2.5</span> 从Excel文件中加载数据</h2>
+<p>可以使用 <code>readxl</code> 包中的 <code>read_excel()</code> 函数用于读取 <code>.xls</code>、<code>.xlsx</code>等Excel文件。</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># just install once</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># install.packages("readxl")</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb4-5"><a href="#cb4-5"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_name.xlsx"</span>,<span class="dv">1</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># designate the sheet</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_name.xlsx"</span>,<span class="at">sheet =</span> sheet_number)</span>
+<span id="cb4-9"><a href="#cb4-9"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_name.xlsx"</span>,<span class="at">sheet =</span> sheet_name)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>read_excel()</code> 默认使用工作标的第一行作为列名，如果不想以第一行作为列名，可以设置参数 <code>col_names = FALSE</code> ，相应的，各列会被命名为 X1,X2 等。</p>
+</section><section id="从spsssasstata文件中加载数据" class="level2" data-number="2.6"><h2 data-number="2.6" class="anchored" data-anchor-id="从spsssasstata文件中加载数据">
+<span class="header-section-number">2.6</span> 从SPSS/SAS/Stata文件中加载数据</h2>
+<section id="使用-haven-包中的函数" class="level3" data-number="2.6.1"><h3 data-number="2.6.1" class="anchored" data-anchor-id="使用-haven-包中的函数">
+<span class="header-section-number">2.6.1</span> 使用 <code>haven</code> 包中的函数</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># just install once</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># install.packages("haven")</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="fu">library</span>(haven)</span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#for SPSS</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"data_name.sav"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#for SAS</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>data <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"data_name.sas7bdat"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#for Stata</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"data_name.dta"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section><section id="使用-foreign-包替代" class="level3" data-number="2.6.2"><h3 data-number="2.6.2" class="anchored" data-anchor-id="使用-foreign-包替代">
+<span class="header-section-number">2.6.2</span> 使用 <code>foreign</code> 包替代</h3>
+<p>这个同样支持 SPSS 和 Stata 数据，但是这个包更新缓慢。</p>
+<p>它还可以支持octave/MATLAB,SYSTAT,SAS XPORT等数据的读取。</p>
+<p>通过 <code>ls("package:foreign")</code> 查看所有的函数列表。</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># install.packages("foreign")</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">ls</span>(<span class="st">"package:foreign"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code> [1] "data.restore"  "lookup.xport"  "read.arff"     "read.dbf"     
+ [5] "read.dta"      "read.epiinfo"  "read.mtp"      "read.octave"  
+ [9] "read.S"        "read.spss"     "read.ssd"      "read.systat"  
+[13] "read.xport"    "write.arff"    "write.dbf"     "write.dta"    
+[17] "write.foreign"</code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">ls</span>(<span class="st">"package:foreign"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2"></a> [<span class="dv">1</span>] <span class="st">"data.restore"</span>  <span class="st">"lookup.xport"</span>  <span class="st">"read.arff"</span>     <span class="st">"read.dbf"</span>     </span>
+<span id="cb8-3"><a href="#cb8-3"></a> [<span class="dv">5</span>] <span class="st">"read.dta"</span>      <span class="st">"read.epiinfo"</span>  <span class="st">"read.mtp"</span>      <span class="st">"read.octave"</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a> [<span class="dv">9</span>] <span class="st">"read.S"</span>        <span class="st">"read.spss"</span>     <span class="st">"read.ssd"</span>      <span class="st">"read.systat"</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>[<span class="dv">13</span>] <span class="st">"read.xport"</span>    <span class="st">"write.arff"</span>    <span class="st">"write.dbf"</span>     <span class="st">"write.dta"</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>[<span class="dv">17</span>] <span class="st">"write.foreign"</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section><section id="链接函数和管道操作符" class="level2" data-number="2.7"><h2 data-number="2.7" class="anchored" data-anchor-id="链接函数和管道操作符">
+<span class="header-section-number">2.7</span> 链接函数和管道操作符 <code>%&gt;%</code>
+</h2>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># view the morley dataset</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>morley</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>    Expt Run Speed
+001    1   1   850
+002    1   2   740
+003    1   3   900
+004    1   4  1070
+005    1   5   930
+006    1   6   850
+007    1   7   950
+008    1   8   980
+009    1   9   980
+010    1  10   880
+011    1  11  1000
+012    1  12   980
+013    1  13   930
+014    1  14   650
+015    1  15   760
+016    1  16   810
+017    1  17  1000
+018    1  18  1000
+019    1  19   960
+020    1  20   960
+021    2   1   960
+022    2   2   940
+023    2   3   960
+024    2   4   940
+025    2   5   880
+026    2   6   800
+027    2   7   850
+028    2   8   880
+029    2   9   900
+030    2  10   840
+031    2  11   830
+032    2  12   790
+033    2  13   810
+034    2  14   880
+035    2  15   880
+036    2  16   830
+037    2  17   800
+038    2  18   790
+039    2  19   760
+040    2  20   800
+041    3   1   880
+042    3   2   880
+043    3   3   880
+044    3   4   860
+045    3   5   720
+046    3   6   720
+047    3   7   620
+048    3   8   860
+049    3   9   970
+050    3  10   950
+051    3  11   880
+052    3  12   910
+053    3  13   850
+054    3  14   870
+055    3  15   840
+056    3  16   840
+057    3  17   850
+058    3  18   840
+059    3  19   840
+060    3  20   840
+061    4   1   890
+062    4   2   810
+063    4   3   810
+064    4   4   820
+065    4   5   800
+066    4   6   770
+067    4   7   760
+068    4   8   740
+069    4   9   750
+070    4  10   760
+071    4  11   910
+072    4  12   920
+073    4  13   890
+074    4  14   860
+075    4  15   880
+076    4  16   720
+077    4  17   840
+078    4  18   850
+079    4  19   850
+080    4  20   780
+081    5   1   890
+082    5   2   840
+083    5   3   780
+084    5   4   810
+085    5   5   760
+086    5   6   810
+087    5   7   790
+088    5   8   810
+089    5   9   820
+090    5  10   850
+091    5  11   870
+092    5  12   870
+093    5  13   810
+094    5  14   740
+095    5  15   810
+096    5  16   940
+097    5  17   950
+098    5  18   800
+099    5  19   810
+100    5  20   870</code></pre>
+</div>
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>morley <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Expt <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>      Expt        Run            Speed     
+ Min.   :1   Min.   : 1.00   Min.   : 650  
+ 1st Qu.:1   1st Qu.: 5.75   1st Qu.: 850  
+ Median :1   Median :10.50   Median : 940  
+ Mean   :1   Mean   :10.50   Mean   : 909  
+ 3rd Qu.:1   3rd Qu.:15.25   3rd Qu.: 980  
+ Max.   :1   Max.   :20.00   Max.   :1070  </code></pre>
+</div>
+</div>
+<section id="普通函数" class="level3" data-number="2.7.1"><h3 data-number="2.7.1" class="anchored" data-anchor-id="普通函数">
+<span class="header-section-number">2.7.1</span> 普通函数</h3>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">summary</span>(<span class="fu">filter</span>(morley,Expt <span class="sc">==</span> <span class="dv">1</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output cell-output-stdout">
+<pre><code>      Expt        Run            Speed     
+ Min.   :1   Min.   : 1.00   Min.   : 650  
+ 1st Qu.:1   1st Qu.: 5.75   1st Qu.: 850  
+ Median :1   Median :10.50   Median : 940  
+ Mean   :1   Mean   :10.50   Mean   : 909  
+ 3rd Qu.:1   3rd Qu.:15.25   3rd Qu.: 980  
+ Max.   :1   Max.   :20.00   Max.   :1070  </code></pre>
+</div>
+</div>
+</section></section><section id="绘制散点图" class="level2" data-number="2.8"><h2 data-number="2.8" class="anchored" data-anchor-id="绘制散点图">
+<span class="header-section-number">2.8</span> 绘制散点图</h2>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="fu">plot</span>(mtcars<span class="sc">$</span>wt,mtcars<span class="sc">$</span>mpg)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02-ggplot2-base_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>使用 <code>ggplot2</code> 绘制</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x =</span> wt,<span class="at">y =</span> mpg))<span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="fu">geom_point</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02-ggplot2-base_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="绘制折线图" class="level2" data-number="2.9"><h2 data-number="2.9" class="anchored" data-anchor-id="绘制折线图">
+<span class="header-section-number">2.9</span> 绘制折线图</h2>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="fu">plot</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure,<span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02-ggplot2-base_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="增加数据点和多条折线" class="level3" data-number="2.9.1"><h3 data-number="2.9.1" class="anchored" data-anchor-id="增加数据点和多条折线">
+<span class="header-section-number">2.9.1</span> 增加数据点和多条折线</h3>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">plot</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure,<span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">points</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="fu">lines</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure<span class="sc">/</span><span class="dv">2</span>,<span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">points</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure<span class="sc">/</span><span class="dv">2</span>,<span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02-ggplot2-base_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="ggplot2-中的-geom_line" class="level3" data-number="2.9.2"><h3 data-number="2.9.2" class="anchored" data-anchor-id="ggplot2-中的-geom_line">
+<span class="header-section-number">2.9.2</span> <code>ggplot2</code> 中的 <code>geom_line()</code>
+</h3>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">ggplot</span>(pressure,<span class="fu">aes</span>(<span class="at">x =</span> temperature,<span class="at">y =</span> pressure))<span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02-ggplot2-base_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="fu">ggplot</span>(pressure,<span class="fu">aes</span>(<span class="at">x =</span> temperature,<span class="at">y =</span> pressure))<span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="fu">geom_point</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="02-ggplot2-base_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <!-- -->
 
 
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">2 准备工作</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+</section></section></section><div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">参考文献</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-Zhang2019r" class="csl-entry" role="listitem">
 Zhang, Jie. 2019. <em>Beautiful Data Visualization of <span>R</span>- How to Make Professional Charts</em>. Publishing House of Electronic Industry. <a href="https://books.google.com.hk/books?id=aDxYzQEACAAJ">https://books.google.com.hk/books?id=aDxYzQEACAAJ</a>.
 </div>
-</div></section></div></main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</div></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1531,13 +1837,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
-</script>
-<script src="https://giscus.app/client.js" data-repo="zhoulvbang/comments" data-repo-id="R_kgDON9RmWA" data-category="General" data-category-id="DIC_kwDON9RmWM4CnLUH" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
-</script>
-<input type="hidden" id="giscus-base-theme" value="light">
-<input type="hidden" id="giscus-alt-theme" value="dark">
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><script src="https://giscus.app/client.js" data-repo="zhoulvbang/comments" data-repo-id="R_kgDON9RmWA" data-category="General" data-category-id="DIC_kwDON9RmWM4CnLUH" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../../Guide/R/01-R-intro.html" class="pagination-link" aria-label="01-R 相关介绍与记录">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">01-R 相关介绍与记录</span>
       </a>          
@@ -1548,55 +1849,257 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="an">title:</span><span class="co"> "02-ggplot2 绘图基础"</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="an">date:</span><span class="co"> "2025-06-08"</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co">    html:</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="co">        code-fold: true</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a><span class="co">        code-line-numbers: true</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a><span class="co">        code-highlight: true</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a><span class="co">        fig_caption: true</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a><span class="co">        number-sections: true</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a><span class="co">        toc: true</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a><span class="co">        toc-depth: 3</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a><span class="co">---</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a></span>
-<span id="cb1-17"><a href="#cb1-17"></a><span class="fu"># 笔记与练习参考</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a></span>
-<span id="cb1-19"><a href="#cb1-19"></a>R 可视化的内容主要来源于 <span class="sc">\[</span>R Graphics Cookbook, 2nd edition<span class="sc">\]</span>(<span class="ot">&lt;https://r-graphics.org/&gt;</span>) 和 <span class="sc">\[</span><span class="co">[</span><span class="ot">**Beautiful-Visualization-with-R**</span><span class="co">](https://github.com/EasyChart/Beautiful-Visualization-with-R)</span><span class="sc">\]</span>(<span class="co">[</span><span class="ot">https://github.com/EasyChart/Beautiful-Visualization-with-R</span><span class="co">](#0)</span>{style="font-size: 13pt; font-weight: var(--fontWeightRegular);"})<span class="co">[</span><span class="ot">@Zhang2019r</span><span class="co">]</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a></span>
-<span id="cb1-21"><a href="#cb1-21"></a><span class="fu"># 准备工作</span></span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">---</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="an">title:</span><span class="co"> "02-ggplot2 绘图基础"</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb21-4"><a href="#cb21-4"></a><span class="an">date:</span><span class="co"> "2025-06-08"</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="co">    html:</span></span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="co">        code-fold: true</span></span>
+<span id="cb21-9"><a href="#cb21-9"></a><span class="co">        code-line-numbers: true</span></span>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">        code-highlight: true</span></span>
+<span id="cb21-11"><a href="#cb21-11"></a><span class="co">        fig_caption: true</span></span>
+<span id="cb21-12"><a href="#cb21-12"></a><span class="co">        number-sections: true</span></span>
+<span id="cb21-13"><a href="#cb21-13"></a><span class="co">        toc: true</span></span>
+<span id="cb21-14"><a href="#cb21-14"></a><span class="co">        toc-depth: 3</span></span>
+<span id="cb21-15"><a href="#cb21-15"></a><span class="co">---</span></span>
+<span id="cb21-16"><a href="#cb21-16"></a></span>
+<span id="cb21-17"><a href="#cb21-17"></a><span class="fu"># 笔记与练习参考</span></span>
+<span id="cb21-18"><a href="#cb21-18"></a></span>
+<span id="cb21-19"><a href="#cb21-19"></a>R 可视化的内容主要来源于 <span class="sc">\[</span>R Graphics Cookbook, 2nd edition<span class="sc">\]</span>(<span class="ot">&lt;https://r-graphics.org/&gt;</span>) 和 <span class="sc">\[</span><span class="co">[</span><span class="ot">**Beautiful-Visualization-with-R**</span><span class="co">](https://github.com/EasyChart/Beautiful-Visualization-with-R)</span><span class="sc">\]</span>(<span class="co">[</span><span class="ot">https://github.com/EasyChart/Beautiful-Visualization-with-R</span><span class="co">](#0)</span>{style="font-size: 13pt; font-weight: var(--fontWeightRegular);"})<span class="co">[</span><span class="ot">@Zhang2019r</span><span class="co">]</span></span>
+<span id="cb21-20"><a href="#cb21-20"></a></span>
+<span id="cb21-21"><a href="#cb21-21"></a><span class="fu"># 准备工作</span></span>
+<span id="cb21-22"><a href="#cb21-22"></a></span>
+<span id="cb21-23"><a href="#cb21-23"></a>ggplot2 绘图基础需要安装 <span class="in">`ggplot2`</span>,<span class="in">`dplyr`</span>,<span class="in">`gcookbook`</span>三个包，其中<span class="in">`gcookbook`</span>包含了需要使用的数据集。</span>
+<span id="cb21-24"><a href="#cb21-24"></a></span>
+<span id="cb21-25"><a href="#cb21-25"></a><span class="fu">## 安装package</span></span>
+<span id="cb21-26"><a href="#cb21-26"></a></span>
+<span id="cb21-27"><a href="#cb21-27"></a>可以通过如下方式安装：</span>
+<span id="cb21-28"><a href="#cb21-28"></a></span>
+<span id="cb21-29"><a href="#cb21-29"></a><span class="in">```{r,eval = FALSE}</span></span>
+<span id="cb21-30"><a href="#cb21-30"></a><span class="in">install.packages("tidyverse")</span></span>
+<span id="cb21-31"><a href="#cb21-31"></a><span class="in">install.packages("gcookbook")</span></span>
+<span id="cb21-32"><a href="#cb21-32"></a><span class="in">```</span></span>
+<span id="cb21-33"><a href="#cb21-33"></a></span>
+<span id="cb21-34"><a href="#cb21-34"></a><span class="fu">## 载入package</span></span>
+<span id="cb21-35"><a href="#cb21-35"></a></span>
+<span id="cb21-36"><a href="#cb21-36"></a>在每个R会话中，需要再运行代码之前加载这几个包：</span>
+<span id="cb21-37"><a href="#cb21-37"></a></span>
+<span id="cb21-38"><a href="#cb21-38"></a><span class="in">`{r，eval=false} library(tidyverse) library(gcookbook)`</span></span>
+<span id="cb21-39"><a href="#cb21-39"></a></span>
+<span id="cb21-40"><a href="#cb21-40"></a><span class="fu">### 注意</span></span>
+<span id="cb21-41"><a href="#cb21-41"></a></span>
+<span id="cb21-42"><a href="#cb21-42"></a>运行<span class="in">`library(tidyverse)`</span>会加载 <span class="in">`ggplot2`</span>,<span class="in">`dplyr`</span>等许多其他包，如果想要R会话更加流畅高效，可以分别加载<span class="in">`ggplot2`</span>,<span class="in">`dplyr`</span>,<span class="in">`gcookbook`</span>等。</span>
+<span id="cb21-43"><a href="#cb21-43"></a></span>
+<span id="cb21-44"><a href="#cb21-44"></a><span class="fu">## 更新package</span></span>
+<span id="cb21-45"><a href="#cb21-45"></a></span>
+<span id="cb21-46"><a href="#cb21-46"></a>运行 <span class="in">`update.packages()`</span> 可以查看那些包可以被更新，如果想要不加提示的更新说有的package，可以加入参数：<span class="in">`ask=FALSE`</span>。</span>
+<span id="cb21-47"><a href="#cb21-47"></a></span>
+<span id="cb21-48"><a href="#cb21-48"></a><span class="in">`{r，eval=FALSE} update.packages(ask=FALSE)`</span></span>
+<span id="cb21-49"><a href="#cb21-49"></a></span>
+<span id="cb21-50"><a href="#cb21-50"></a><span class="fu">### 注意</span></span>
+<span id="cb21-51"><a href="#cb21-51"></a></span>
+<span id="cb21-52"><a href="#cb21-52"></a>一般来说package的作者会发布一些新版本来修复旧版本中的问题，并提供一些新特征或功能，通常是建议将packages更新到最新版。但是有时候可能会出现一些bug或package之间的冲突，可以通过版本控制/构建虚拟环境来进行解决。</span>
+<span id="cb21-53"><a href="#cb21-53"></a></span>
+<span id="cb21-54"><a href="#cb21-54"></a><span class="fu">## 加载以符号分隔的文本文件</span></span>
+<span id="cb21-55"><a href="#cb21-55"></a></span>
+<span id="cb21-56"><a href="#cb21-56"></a><span class="ss">1.  </span>一般的加载语法</span>
+<span id="cb21-57"><a href="#cb21-57"></a></span>
+<span id="cb21-58"><a href="#cb21-58"></a><span class="in">``` r</span></span>
+<span id="cb21-59"><a href="#cb21-59"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dataname.csv"</span>)</span>
+<span id="cb21-60"><a href="#cb21-60"></a><span class="in">```</span></span>
+<span id="cb21-61"><a href="#cb21-61"></a></span>
+<span id="cb21-62"><a href="#cb21-62"></a><span class="ss">2.  </span>render 包中的 <span class="in">`read_csv()`</span> 函数，这个函数的运行速度比 <span class="in">`read.csv()`</span> 快很多，且更适合处理字符串、日期和时间数据。</span>
+<span id="cb21-63"><a href="#cb21-63"></a><span class="ss">3.  </span>如果数据文件首列没有列明：</span>
+<span id="cb21-64"><a href="#cb21-64"></a></span>
+<span id="cb21-65"><a href="#cb21-65"></a><span class="in">``` r</span></span>
+<span id="cb21-66"><a href="#cb21-66"></a>data <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dataname.csv"</span>,<span class="at">header =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb21-67"><a href="#cb21-67"></a><span class="co"># 手动为列名赋值</span></span>
+<span id="cb21-68"><a href="#cb21-68"></a><span class="fu">names</span>(data) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"colum_1"</span>,<span class="st">"colum_2"</span>,<span class="st">"colum_3"</span>...)</span>
+<span id="cb21-69"><a href="#cb21-69"></a><span class="in">```</span></span>
+<span id="cb21-70"><a href="#cb21-70"></a></span>
+<span id="cb21-71"><a href="#cb21-71"></a><span class="fu">## 从Excel文件中加载数据</span></span>
+<span id="cb21-72"><a href="#cb21-72"></a></span>
+<span id="cb21-73"><a href="#cb21-73"></a>可以使用 <span class="in">`readxl`</span> 包中的 <span class="in">`read_excel()`</span> 函数用于读取 <span class="in">`.xls`</span>、<span class="in">`.xlsx`</span>等Excel文件。</span>
+<span id="cb21-74"><a href="#cb21-74"></a></span>
+<span id="cb21-75"><a href="#cb21-75"></a><span class="in">``` r</span></span>
+<span id="cb21-76"><a href="#cb21-76"></a><span class="co"># just install once</span></span>
+<span id="cb21-77"><a href="#cb21-77"></a><span class="co"># install.packages("readxl")</span></span>
+<span id="cb21-78"><a href="#cb21-78"></a></span>
+<span id="cb21-79"><a href="#cb21-79"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb21-80"><a href="#cb21-80"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_name.xlsx"</span>,<span class="dv">1</span>)</span>
+<span id="cb21-81"><a href="#cb21-81"></a></span>
+<span id="cb21-82"><a href="#cb21-82"></a><span class="co"># designate the sheet</span></span>
+<span id="cb21-83"><a href="#cb21-83"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_name.xlsx"</span>,<span class="at">sheet =</span> sheet_number)</span>
+<span id="cb21-84"><a href="#cb21-84"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"data_name.xlsx"</span>,<span class="at">sheet =</span> sheet_name)</span>
+<span id="cb21-85"><a href="#cb21-85"></a><span class="in">```</span></span>
+<span id="cb21-86"><a href="#cb21-86"></a></span>
+<span id="cb21-87"><a href="#cb21-87"></a><span class="in">`read_excel()`</span> 默认使用工作标的第一行作为列名，如果不想以第一行作为列名，可以设置参数 <span class="in">`col_names = FALSE`</span> ，相应的，各列会被命名为 X1,X2 等。</span>
+<span id="cb21-88"><a href="#cb21-88"></a></span>
+<span id="cb21-89"><a href="#cb21-89"></a><span class="fu">## 从SPSS/SAS/Stata文件中加载数据</span></span>
+<span id="cb21-90"><a href="#cb21-90"></a></span>
+<span id="cb21-91"><a href="#cb21-91"></a><span class="fu">### 使用 `haven` 包中的函数</span></span>
+<span id="cb21-92"><a href="#cb21-92"></a></span>
+<span id="cb21-93"><a href="#cb21-93"></a><span class="in">``` r</span></span>
+<span id="cb21-94"><a href="#cb21-94"></a><span class="co"># just install once</span></span>
+<span id="cb21-95"><a href="#cb21-95"></a><span class="co"># install.packages("haven")</span></span>
+<span id="cb21-96"><a href="#cb21-96"></a></span>
+<span id="cb21-97"><a href="#cb21-97"></a><span class="fu">library</span>(haven)</span>
+<span id="cb21-98"><a href="#cb21-98"></a><span class="co">#for SPSS</span></span>
+<span id="cb21-99"><a href="#cb21-99"></a>data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"data_name.sav"</span>)</span>
+<span id="cb21-100"><a href="#cb21-100"></a><span class="co">#for SAS</span></span>
+<span id="cb21-101"><a href="#cb21-101"></a>data <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"data_name.sas7bdat"</span>)</span>
+<span id="cb21-102"><a href="#cb21-102"></a><span class="co">#for Stata</span></span>
+<span id="cb21-103"><a href="#cb21-103"></a>data <span class="ot">&lt;-</span> <span class="fu">read_dta</span>(<span class="st">"data_name.dta"</span>)</span>
+<span id="cb21-104"><a href="#cb21-104"></a><span class="in">```</span></span>
+<span id="cb21-105"><a href="#cb21-105"></a></span>
+<span id="cb21-106"><a href="#cb21-106"></a><span class="fu">### 使用 `foreign` 包替代</span></span>
+<span id="cb21-107"><a href="#cb21-107"></a></span>
+<span id="cb21-108"><a href="#cb21-108"></a>这个同样支持 SPSS 和 Stata 数据，但是这个包更新缓慢。</span>
+<span id="cb21-109"><a href="#cb21-109"></a></span>
+<span id="cb21-110"><a href="#cb21-110"></a>它还可以支持octave/MATLAB,SYSTAT,SAS XPORT等数据的读取。</span>
+<span id="cb21-111"><a href="#cb21-111"></a></span>
+<span id="cb21-112"><a href="#cb21-112"></a>通过 <span class="in">`ls("package:foreign")`</span> 查看所有的函数列表。</span>
+<span id="cb21-113"><a href="#cb21-113"></a></span>
+<span id="cb21-116"><a href="#cb21-116"></a><span class="in">```{r}</span></span>
+<span id="cb21-117"><a href="#cb21-117"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-118"><a href="#cb21-118"></a><span class="co">#| output: true</span></span>
+<span id="cb21-119"><a href="#cb21-119"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-120"><a href="#cb21-120"></a></span>
+<span id="cb21-121"><a href="#cb21-121"></a><span class="co"># install.packages("foreign")</span></span>
+<span id="cb21-122"><a href="#cb21-122"></a><span class="fu">library</span>(foreign)</span>
+<span id="cb21-123"><a href="#cb21-123"></a><span class="fu">ls</span>(<span class="st">"package:foreign"</span>)</span>
+<span id="cb21-124"><a href="#cb21-124"></a><span class="in">```</span></span>
+<span id="cb21-125"><a href="#cb21-125"></a></span>
+<span id="cb21-126"><a href="#cb21-126"></a><span class="in">``` r</span></span>
+<span id="cb21-127"><a href="#cb21-127"></a><span class="fu">ls</span>(<span class="st">"package:foreign"</span>)</span>
+<span id="cb21-128"><a href="#cb21-128"></a> [<span class="dv">1</span>] <span class="st">"data.restore"</span>  <span class="st">"lookup.xport"</span>  <span class="st">"read.arff"</span>     <span class="st">"read.dbf"</span>     </span>
+<span id="cb21-129"><a href="#cb21-129"></a> [<span class="dv">5</span>] <span class="st">"read.dta"</span>      <span class="st">"read.epiinfo"</span>  <span class="st">"read.mtp"</span>      <span class="st">"read.octave"</span></span>
+<span id="cb21-130"><a href="#cb21-130"></a> [<span class="dv">9</span>] <span class="st">"read.S"</span>        <span class="st">"read.spss"</span>     <span class="st">"read.ssd"</span>      <span class="st">"read.systat"</span></span>
+<span id="cb21-131"><a href="#cb21-131"></a>[<span class="dv">13</span>] <span class="st">"read.xport"</span>    <span class="st">"write.arff"</span>    <span class="st">"write.dbf"</span>     <span class="st">"write.dta"</span></span>
+<span id="cb21-132"><a href="#cb21-132"></a>[<span class="dv">17</span>] <span class="st">"write.foreign"</span></span>
+<span id="cb21-133"><a href="#cb21-133"></a><span class="in">```</span></span>
+<span id="cb21-134"><a href="#cb21-134"></a></span>
+<span id="cb21-135"><a href="#cb21-135"></a><span class="fu">## 链接函数和管道操作符 `%&gt;%`</span></span>
+<span id="cb21-136"><a href="#cb21-136"></a></span>
+<span id="cb21-139"><a href="#cb21-139"></a><span class="in">```{r}</span></span>
+<span id="cb21-140"><a href="#cb21-140"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-141"><a href="#cb21-141"></a><span class="co">#| output: true</span></span>
+<span id="cb21-142"><a href="#cb21-142"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-143"><a href="#cb21-143"></a></span>
+<span id="cb21-144"><a href="#cb21-144"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb21-145"><a href="#cb21-145"></a></span>
+<span id="cb21-146"><a href="#cb21-146"></a><span class="co"># view the morley dataset</span></span>
+<span id="cb21-147"><a href="#cb21-147"></a>morley</span>
+<span id="cb21-148"><a href="#cb21-148"></a></span>
+<span id="cb21-149"><a href="#cb21-149"></a>morley <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Expt <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">summary</span>()</span>
+<span id="cb21-150"><a href="#cb21-150"></a><span class="in">```</span></span>
+<span id="cb21-151"><a href="#cb21-151"></a></span>
+<span id="cb21-152"><a href="#cb21-152"></a><span class="fu">### 普通函数</span></span>
+<span id="cb21-153"><a href="#cb21-153"></a></span>
+<span id="cb21-156"><a href="#cb21-156"></a><span class="in">```{r}</span></span>
+<span id="cb21-157"><a href="#cb21-157"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-158"><a href="#cb21-158"></a><span class="co">#| output: true</span></span>
+<span id="cb21-159"><a href="#cb21-159"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-160"><a href="#cb21-160"></a></span>
+<span id="cb21-161"><a href="#cb21-161"></a><span class="fu">summary</span>(<span class="fu">filter</span>(morley,Expt <span class="sc">==</span> <span class="dv">1</span>))</span>
+<span id="cb21-162"><a href="#cb21-162"></a><span class="in">```</span></span>
+<span id="cb21-163"><a href="#cb21-163"></a></span>
+<span id="cb21-164"><a href="#cb21-164"></a><span class="fu">## 绘制散点图</span></span>
+<span id="cb21-165"><a href="#cb21-165"></a></span>
+<span id="cb21-168"><a href="#cb21-168"></a><span class="in">```{r}</span></span>
+<span id="cb21-169"><a href="#cb21-169"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-170"><a href="#cb21-170"></a><span class="co">#| output: true</span></span>
+<span id="cb21-171"><a href="#cb21-171"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-172"><a href="#cb21-172"></a></span>
+<span id="cb21-173"><a href="#cb21-173"></a><span class="fu">plot</span>(mtcars<span class="sc">$</span>wt,mtcars<span class="sc">$</span>mpg)</span>
+<span id="cb21-174"><a href="#cb21-174"></a><span class="in">```</span></span>
+<span id="cb21-175"><a href="#cb21-175"></a></span>
+<span id="cb21-176"><a href="#cb21-176"></a>使用 <span class="in">`ggplot2`</span> 绘制</span>
+<span id="cb21-177"><a href="#cb21-177"></a></span>
+<span id="cb21-180"><a href="#cb21-180"></a><span class="in">```{r}</span></span>
+<span id="cb21-181"><a href="#cb21-181"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-182"><a href="#cb21-182"></a><span class="co">#| output: true</span></span>
+<span id="cb21-183"><a href="#cb21-183"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-184"><a href="#cb21-184"></a></span>
+<span id="cb21-185"><a href="#cb21-185"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-186"><a href="#cb21-186"></a><span class="fu">ggplot</span>(mtcars,<span class="fu">aes</span>(<span class="at">x =</span> wt,<span class="at">y =</span> mpg))<span class="sc">+</span></span>
+<span id="cb21-187"><a href="#cb21-187"></a><span class="fu">geom_point</span>()</span>
+<span id="cb21-188"><a href="#cb21-188"></a><span class="in">```</span></span>
+<span id="cb21-189"><a href="#cb21-189"></a></span>
+<span id="cb21-190"><a href="#cb21-190"></a><span class="fu">## 绘制折线图</span></span>
+<span id="cb21-191"><a href="#cb21-191"></a></span>
+<span id="cb21-194"><a href="#cb21-194"></a><span class="in">```{r}</span></span>
+<span id="cb21-195"><a href="#cb21-195"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-196"><a href="#cb21-196"></a><span class="co">#| output: true</span></span>
+<span id="cb21-197"><a href="#cb21-197"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-198"><a href="#cb21-198"></a></span>
+<span id="cb21-199"><a href="#cb21-199"></a><span class="fu">plot</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure,<span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb21-200"><a href="#cb21-200"></a><span class="in">```</span></span>
+<span id="cb21-201"><a href="#cb21-201"></a></span>
+<span id="cb21-202"><a href="#cb21-202"></a><span class="fu">### 增加数据点和多条折线</span></span>
+<span id="cb21-203"><a href="#cb21-203"></a></span>
+<span id="cb21-206"><a href="#cb21-206"></a><span class="in">```{r}</span></span>
+<span id="cb21-207"><a href="#cb21-207"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-208"><a href="#cb21-208"></a><span class="co">#| output: true</span></span>
+<span id="cb21-209"><a href="#cb21-209"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-210"><a href="#cb21-210"></a></span>
+<span id="cb21-211"><a href="#cb21-211"></a><span class="fu">plot</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure,<span class="at">type =</span> <span class="st">"l"</span>)</span>
+<span id="cb21-212"><a href="#cb21-212"></a><span class="fu">points</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure)</span>
+<span id="cb21-213"><a href="#cb21-213"></a></span>
+<span id="cb21-214"><a href="#cb21-214"></a><span class="fu">lines</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure<span class="sc">/</span><span class="dv">2</span>,<span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb21-215"><a href="#cb21-215"></a><span class="fu">points</span>(pressure<span class="sc">$</span>temperature,pressure<span class="sc">$</span>pressure<span class="sc">/</span><span class="dv">2</span>,<span class="at">col =</span> <span class="st">"red"</span>)</span>
+<span id="cb21-216"><a href="#cb21-216"></a><span class="in">```</span></span>
+<span id="cb21-217"><a href="#cb21-217"></a></span>
+<span id="cb21-218"><a href="#cb21-218"></a><span class="fu">### `ggplot2` 中的 `geom_line()`</span></span>
+<span id="cb21-219"><a href="#cb21-219"></a></span>
+<span id="cb21-222"><a href="#cb21-222"></a><span class="in">```{r}</span></span>
+<span id="cb21-223"><a href="#cb21-223"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-224"><a href="#cb21-224"></a><span class="co">#| output: true</span></span>
+<span id="cb21-225"><a href="#cb21-225"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-226"><a href="#cb21-226"></a></span>
+<span id="cb21-227"><a href="#cb21-227"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-228"><a href="#cb21-228"></a><span class="fu">ggplot</span>(pressure,<span class="fu">aes</span>(<span class="at">x =</span> temperature,<span class="at">y =</span> pressure))<span class="sc">+</span></span>
+<span id="cb21-229"><a href="#cb21-229"></a><span class="fu">geom_line</span>()</span>
+<span id="cb21-230"><a href="#cb21-230"></a><span class="in">```</span></span>
+<span id="cb21-231"><a href="#cb21-231"></a></span>
+<span id="cb21-234"><a href="#cb21-234"></a><span class="in">```{r}</span></span>
+<span id="cb21-235"><a href="#cb21-235"></a><span class="co">#| echo: true</span></span>
+<span id="cb21-236"><a href="#cb21-236"></a><span class="co">#| output: true</span></span>
+<span id="cb21-237"><a href="#cb21-237"></a><span class="co">#| cache: true</span></span>
+<span id="cb21-238"><a href="#cb21-238"></a></span>
+<span id="cb21-239"><a href="#cb21-239"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-240"><a href="#cb21-240"></a><span class="fu">ggplot</span>(pressure,<span class="fu">aes</span>(<span class="at">x =</span> temperature,<span class="at">y =</span> pressure))<span class="sc">+</span></span>
+<span id="cb21-241"><a href="#cb21-241"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb21-242"><a href="#cb21-242"></a><span class="fu">geom_point</span>()</span>
+<span id="cb21-243"><a href="#cb21-243"></a><span class="in">```</span></span>
+</code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item">
+<li class="nav-item">
  This website was built with Quarto
   </li>  
 </ul>
-    </div>   
+</div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, simonzhou</p>
 <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/R/02-ggplot2-base.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
-    <li class="nav-item compact">
+<li class="nav-item compact">
     <a class="nav-link" href="https://github.com/zhoulvbang">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
   </li>  
 </ul>
-    </div>
+</div>
   </div>
 </footer>
-
-
 
 
 <script src="../../site_libs/quarto-html/zenscroll-min.js"></script>

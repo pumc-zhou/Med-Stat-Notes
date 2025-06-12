@@ -910,7 +910,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-10},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 10, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-12},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 12, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6668,7 +6668,7 @@
     "href": "Guide/R/02-ggplot2-base.html",
     "title": "02-ggplot2 绘图基础",
     "section": "",
-    "text": "1 笔记与练习参考\nR 可视化的内容主要来源于 [R Graphics Cookbook, 2nd edition](https://r-graphics.org/) 和 [Beautiful-Visualization-with-R](https://github.com/EasyChart/Beautiful-Visualization-with-R)(Zhang 2019)\n\n\n\n\n\n\n\n\n\n\n2 准备工作\n\nZhang, Jie. 2019. Beautiful Data Visualization of R- How to Make Professional Charts. Publishing House of Electronic Industry. https://books.google.com.hk/books?id=aDxYzQEACAAJ.",
+    "text": "R 可视化的内容主要来源于 [R Graphics Cookbook, 2nd edition](https://r-graphics.org/) 和 [Beautiful-Visualization-with-R](https://github.com/EasyChart/Beautiful-Visualization-with-R)(Zhang 2019)",
     "crumbs": [
       "Home",
       "Guide",
@@ -6700,6 +6700,136 @@
       "Guide",
       "SAS",
       "18-SAS 拟合优度检验"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#安装package",
+    "href": "Guide/R/02-ggplot2-base.html#安装package",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.1 安装package",
+    "text": "2.1 安装package\n可以通过如下方式安装：\n\n代码install.packages(\"tidyverse\")\ninstall.packages(\"gcookbook\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#载入package",
+    "href": "Guide/R/02-ggplot2-base.html#载入package",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.2 载入package",
+    "text": "2.2 载入package\n在每个R会话中，需要再运行代码之前加载这几个包：\n{r，eval=false} library(tidyverse) library(gcookbook)\n\n2.2.1 注意\n运行library(tidyverse)会加载 ggplot2,dplyr等许多其他包，如果想要R会话更加流畅高效，可以分别加载ggplot2,dplyr,gcookbook等。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#更新package",
+    "href": "Guide/R/02-ggplot2-base.html#更新package",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.3 更新package",
+    "text": "2.3 更新package\n运行 update.packages() 可以查看那些包可以被更新，如果想要不加提示的更新说有的package，可以加入参数：ask=FALSE。\n{r，eval=FALSE} update.packages(ask=FALSE)\n\n2.3.1 注意\n一般来说package的作者会发布一些新版本来修复旧版本中的问题，并提供一些新特征或功能，通常是建议将packages更新到最新版。但是有时候可能会出现一些bug或package之间的冲突，可以通过版本控制/构建虚拟环境来进行解决。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#加载以符号分隔的文本文件",
+    "href": "Guide/R/02-ggplot2-base.html#加载以符号分隔的文本文件",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.4 加载以符号分隔的文本文件",
+    "text": "2.4 加载以符号分隔的文本文件\n\n一般的加载语法\n\ndata &lt;- read.csv(\"dataname.csv\")\n\nrender 包中的 read_csv() 函数，这个函数的运行速度比 read.csv() 快很多，且更适合处理字符串、日期和时间数据。\n如果数据文件首列没有列明：\n\ndata &lt;- read.csv(\"dataname.csv\",header = FALSE)\n# 手动为列名赋值\nnames(data) &lt;- c(\"colum_1\",\"colum_2\",\"colum_3\"...)",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#从excel文件中加载数据",
+    "href": "Guide/R/02-ggplot2-base.html#从excel文件中加载数据",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.5 从Excel文件中加载数据",
+    "text": "2.5 从Excel文件中加载数据\n可以使用 readxl 包中的 read_excel() 函数用于读取 .xls、.xlsx等Excel文件。\n# just install once\n# install.packages(\"readxl\")\n\nlibrary(readxl)\ndata &lt;- read_excel(\"data_name.xlsx\",1)\n\n# designate the sheet\ndata &lt;- read_excel(\"data_name.xlsx\",sheet = sheet_number)\ndata &lt;- read_excel(\"data_name.xlsx\",sheet = sheet_name)\nread_excel() 默认使用工作标的第一行作为列名，如果不想以第一行作为列名，可以设置参数 col_names = FALSE ，相应的，各列会被命名为 X1,X2 等。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#从spsssasstata文件中加载数据",
+    "href": "Guide/R/02-ggplot2-base.html#从spsssasstata文件中加载数据",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.6 从SPSS/SAS/Stata文件中加载数据",
+    "text": "2.6 从SPSS/SAS/Stata文件中加载数据\n\n2.6.1 使用 haven 包中的函数\n# just install once\n# install.packages(\"haven\")\n\nlibrary(haven)\n#for SPSS\ndata &lt;- read_sav(\"data_name.sav\")\n#for SAS\ndata &lt;- read_sas(\"data_name.sas7bdat\")\n#for Stata\ndata &lt;- read_dta(\"data_name.dta\")\n\n2.6.2 使用 foreign 包替代\n这个同样支持 SPSS 和 Stata 数据，但是这个包更新缓慢。\n它还可以支持octave/MATLAB,SYSTAT,SAS XPORT等数据的读取。\n通过 ls(\"package:foreign\") 查看所有的函数列表。\n\n代码# install.packages(\"foreign\")\nlibrary(foreign)\nls(\"package:foreign\")\n\n [1] \"data.restore\"  \"lookup.xport\"  \"read.arff\"     \"read.dbf\"     \n [5] \"read.dta\"      \"read.epiinfo\"  \"read.mtp\"      \"read.octave\"  \n [9] \"read.S\"        \"read.spss\"     \"read.ssd\"      \"read.systat\"  \n[13] \"read.xport\"    \"write.arff\"    \"write.dbf\"     \"write.dta\"    \n[17] \"write.foreign\"\n\n\nls(\"package:foreign\")\n [1] \"data.restore\"  \"lookup.xport\"  \"read.arff\"     \"read.dbf\"     \n [5] \"read.dta\"      \"read.epiinfo\"  \"read.mtp\"      \"read.octave\"\n [9] \"read.S\"        \"read.spss\"     \"read.ssd\"      \"read.systat\"\n[13] \"read.xport\"    \"write.arff\"    \"write.dbf\"     \"write.dta\"\n[17] \"write.foreign\"",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#链接函数和管道操作符",
+    "href": "Guide/R/02-ggplot2-base.html#链接函数和管道操作符",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.7 链接函数和管道操作符 %>%\n",
+    "text": "2.7 链接函数和管道操作符 %&gt;%\n\n\n代码library(dplyr)\n\n# view the morley dataset\nmorley\n\n    Expt Run Speed\n001    1   1   850\n002    1   2   740\n003    1   3   900\n004    1   4  1070\n005    1   5   930\n006    1   6   850\n007    1   7   950\n008    1   8   980\n009    1   9   980\n010    1  10   880\n011    1  11  1000\n012    1  12   980\n013    1  13   930\n014    1  14   650\n015    1  15   760\n016    1  16   810\n017    1  17  1000\n018    1  18  1000\n019    1  19   960\n020    1  20   960\n021    2   1   960\n022    2   2   940\n023    2   3   960\n024    2   4   940\n025    2   5   880\n026    2   6   800\n027    2   7   850\n028    2   8   880\n029    2   9   900\n030    2  10   840\n031    2  11   830\n032    2  12   790\n033    2  13   810\n034    2  14   880\n035    2  15   880\n036    2  16   830\n037    2  17   800\n038    2  18   790\n039    2  19   760\n040    2  20   800\n041    3   1   880\n042    3   2   880\n043    3   3   880\n044    3   4   860\n045    3   5   720\n046    3   6   720\n047    3   7   620\n048    3   8   860\n049    3   9   970\n050    3  10   950\n051    3  11   880\n052    3  12   910\n053    3  13   850\n054    3  14   870\n055    3  15   840\n056    3  16   840\n057    3  17   850\n058    3  18   840\n059    3  19   840\n060    3  20   840\n061    4   1   890\n062    4   2   810\n063    4   3   810\n064    4   4   820\n065    4   5   800\n066    4   6   770\n067    4   7   760\n068    4   8   740\n069    4   9   750\n070    4  10   760\n071    4  11   910\n072    4  12   920\n073    4  13   890\n074    4  14   860\n075    4  15   880\n076    4  16   720\n077    4  17   840\n078    4  18   850\n079    4  19   850\n080    4  20   780\n081    5   1   890\n082    5   2   840\n083    5   3   780\n084    5   4   810\n085    5   5   760\n086    5   6   810\n087    5   7   790\n088    5   8   810\n089    5   9   820\n090    5  10   850\n091    5  11   870\n092    5  12   870\n093    5  13   810\n094    5  14   740\n095    5  15   810\n096    5  16   940\n097    5  17   950\n098    5  18   800\n099    5  19   810\n100    5  20   870\n\n代码morley %&gt;% filter(Expt == 1) %&gt;% summary()\n\n      Expt        Run            Speed     \n Min.   :1   Min.   : 1.00   Min.   : 650  \n 1st Qu.:1   1st Qu.: 5.75   1st Qu.: 850  \n Median :1   Median :10.50   Median : 940  \n Mean   :1   Mean   :10.50   Mean   : 909  \n 3rd Qu.:1   3rd Qu.:15.25   3rd Qu.: 980  \n Max.   :1   Max.   :20.00   Max.   :1070  \n\n\n\n2.7.1 普通函数\n\n代码summary(filter(morley,Expt == 1))\n\n      Expt        Run            Speed     \n Min.   :1   Min.   : 1.00   Min.   : 650  \n 1st Qu.:1   1st Qu.: 5.75   1st Qu.: 850  \n Median :1   Median :10.50   Median : 940  \n Mean   :1   Mean   :10.50   Mean   : 909  \n 3rd Qu.:1   3rd Qu.:15.25   3rd Qu.: 980  \n Max.   :1   Max.   :20.00   Max.   :1070",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#绘制散点图",
+    "href": "Guide/R/02-ggplot2-base.html#绘制散点图",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.8 绘制散点图",
+    "text": "2.8 绘制散点图\n\n代码plot(mtcars$wt,mtcars$mpg)\n\n\n\n\n\n\n\n使用 ggplot2 绘制\n\n代码library(ggplot2)\nggplot(mtcars,aes(x = wt,y = mpg))+\ngeom_point()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#绘制折线图",
+    "href": "Guide/R/02-ggplot2-base.html#绘制折线图",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.9 绘制折线图",
+    "text": "2.9 绘制折线图\n\n代码plot(pressure$temperature,pressure$pressure,type = \"l\")\n\n\n\n\n\n\n\n\n2.9.1 增加数据点和多条折线\n\n代码plot(pressure$temperature,pressure$pressure,type = \"l\")\npoints(pressure$temperature,pressure$pressure)\n\nlines(pressure$temperature,pressure$pressure/2,col = \"red\")\npoints(pressure$temperature,pressure$pressure/2,col = \"red\")\n\n\n\n\n\n\n\n\n2.9.2 ggplot2 中的 geom_line()\n\n\n代码library(ggplot2)\nggplot(pressure,aes(x = temperature,y = pressure))+\ngeom_line()\n\n\n\n\n\n\n\n\n代码library(ggplot2)\nggplot(pressure,aes(x = temperature,y = pressure))+\ngeom_line()+\ngeom_point()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/01-R-intro.html",
+    "href": "Guide/R/01-R-intro.html",
+    "title": "01-R 相关介绍与记录",
+    "section": "",
+    "text": "R语言是一种自由软件编程语言与操作环境，主要用于统计分析、绘图以及数据挖掘。R由新西兰奥克兰大学的统计学家罗斯·伊哈卡和罗伯特·杰特曼开发，现在由R核心小组负责开发，同时也有其他用户编写了诸多外挂的软件包。R以S语言为基础，其词法作用域语义来自Scheme。R的后台程序大多由C语言、FORTRAN语言和R自己写成。\nR 语言是为数学研究工作者设计的一种数学编程语言，主要用于统计分析、绘图、数据挖掘。\n如果你是一个计算机程序的初学者并且急切地想了解计算机的通用编程，R 语言不是一个很理想的选择，可以选择 Python、C 或 Java。\nR 语言与 C 语言都是贝尔实验室的研究成果，但两者有不同的侧重领域，R 语言是一种解释型的面向数学理论研究工作者的语言，而 C 语言是为计算机软件工程师设计的。\nR 语言是解释运行的语言（与 C 语言的编译运行不同），它的执行速度比 C 语言慢得多，不利于优化。但它在语法层面提供了更加丰富的数据结构操作并且能够十分方便地输出文字和图形信息，所以它广泛应用于数学尤其是统计学领域https://www.runoob.com/r/r-tutorial.html\n近些年 R 的发展也是极为迅速，在 Rstudio 改名为 Posit 后，R 的生态在快速发展。\n本网站就是其中一个分支的成果： Quarto\n\nAn open-source scientific and technical publishing system\n\n其他的还有诸如：\n\n0.1 Posit Workbench（数据科学家协同开发平台）\n\nJupyter, RStudio, and VS Code environments centrally maintained and ready to use\n\n\n\n0.2 MLOps（机器学习模型部署）\n\nMachine learning operations, or MLOps, is a set of practices to deploy and maintain machine learning models in production reliably and efficiently. The vetiver framework is for MLOps tasks in Python and R.\n\n\n\n0.3 Shiny for python\n\nEffortless Python web applications with the power of reactive programming.",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "01-R 相关介绍与记录"
     ]
   }
 ]

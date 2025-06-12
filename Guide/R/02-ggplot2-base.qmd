@@ -19,3 +19,207 @@ format:
 R 可视化的内容主要来源于 \[R Graphics Cookbook, 2nd edition\](<https://r-graphics.org/>) 和 \[[**Beautiful-Visualization-with-R**](https://github.com/EasyChart/Beautiful-Visualization-with-R)\]([https://github.com/EasyChart/Beautiful-Visualization-with-R](#0){style="font-size: 13pt; font-weight: var(--fontWeightRegular);"})[@Zhang2019r]
 
 # 准备工作
+
+ggplot2 绘图基础需要安装 `ggplot2`,`dplyr`,`gcookbook`三个包，其中`gcookbook`包含了需要使用的数据集。
+
+## 安装package
+
+可以通过如下方式安装：
+
+```{r,eval = FALSE}
+install.packages("tidyverse")
+install.packages("gcookbook")
+```
+
+## 载入package
+
+在每个R会话中，需要再运行代码之前加载这几个包：
+
+`{r，eval=false} library(tidyverse) library(gcookbook)`
+
+### 注意
+
+运行`library(tidyverse)`会加载 `ggplot2`,`dplyr`等许多其他包，如果想要R会话更加流畅高效，可以分别加载`ggplot2`,`dplyr`,`gcookbook`等。
+
+## 更新package
+
+运行 `update.packages()` 可以查看那些包可以被更新，如果想要不加提示的更新说有的package，可以加入参数：`ask=FALSE`。
+
+`{r，eval=FALSE} update.packages(ask=FALSE)`
+
+### 注意
+
+一般来说package的作者会发布一些新版本来修复旧版本中的问题，并提供一些新特征或功能，通常是建议将packages更新到最新版。但是有时候可能会出现一些bug或package之间的冲突，可以通过版本控制/构建虚拟环境来进行解决。
+
+## 加载以符号分隔的文本文件
+
+1.  一般的加载语法
+
+``` r
+data <- read.csv("dataname.csv")
+```
+
+2.  render 包中的 `read_csv()` 函数，这个函数的运行速度比 `read.csv()` 快很多，且更适合处理字符串、日期和时间数据。
+3.  如果数据文件首列没有列明：
+
+``` r
+data <- read.csv("dataname.csv",header = FALSE)
+# 手动为列名赋值
+names(data) <- c("colum_1","colum_2","colum_3"...)
+```
+
+## 从Excel文件中加载数据
+
+可以使用 `readxl` 包中的 `read_excel()` 函数用于读取 `.xls`、`.xlsx`等Excel文件。
+
+``` r
+# just install once
+# install.packages("readxl")
+
+library(readxl)
+data <- read_excel("data_name.xlsx",1)
+
+# designate the sheet
+data <- read_excel("data_name.xlsx",sheet = sheet_number)
+data <- read_excel("data_name.xlsx",sheet = sheet_name)
+```
+
+`read_excel()` 默认使用工作标的第一行作为列名，如果不想以第一行作为列名，可以设置参数 `col_names = FALSE` ，相应的，各列会被命名为 X1,X2 等。
+
+## 从SPSS/SAS/Stata文件中加载数据
+
+### 使用 `haven` 包中的函数
+
+``` r
+# just install once
+# install.packages("haven")
+
+library(haven)
+#for SPSS
+data <- read_sav("data_name.sav")
+#for SAS
+data <- read_sas("data_name.sas7bdat")
+#for Stata
+data <- read_dta("data_name.dta")
+```
+
+### 使用 `foreign` 包替代
+
+这个同样支持 SPSS 和 Stata 数据，但是这个包更新缓慢。
+
+它还可以支持octave/MATLAB,SYSTAT,SAS XPORT等数据的读取。
+
+通过 `ls("package:foreign")` 查看所有的函数列表。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+# install.packages("foreign")
+library(foreign)
+ls("package:foreign")
+```
+
+``` r
+ls("package:foreign")
+ [1] "data.restore"  "lookup.xport"  "read.arff"     "read.dbf"     
+ [5] "read.dta"      "read.epiinfo"  "read.mtp"      "read.octave"
+ [9] "read.S"        "read.spss"     "read.ssd"      "read.systat"
+[13] "read.xport"    "write.arff"    "write.dbf"     "write.dta"
+[17] "write.foreign"
+```
+
+## 链接函数和管道操作符 `%>%`
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+library(dplyr)
+
+# view the morley dataset
+morley
+
+morley %>% filter(Expt == 1) %>% summary()
+```
+
+### 普通函数
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+summary(filter(morley,Expt == 1))
+```
+
+## 绘制散点图
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+plot(mtcars$wt,mtcars$mpg)
+```
+
+使用 `ggplot2` 绘制
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+library(ggplot2)
+ggplot(mtcars,aes(x = wt,y = mpg))+
+geom_point()
+```
+
+## 绘制折线图
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+plot(pressure$temperature,pressure$pressure,type = "l")
+```
+
+### 增加数据点和多条折线
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+plot(pressure$temperature,pressure$pressure,type = "l")
+points(pressure$temperature,pressure$pressure)
+
+lines(pressure$temperature,pressure$pressure/2,col = "red")
+points(pressure$temperature,pressure$pressure/2,col = "red")
+```
+
+### `ggplot2` 中的 `geom_line()`
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+library(ggplot2)
+ggplot(pressure,aes(x = temperature,y = pressure))+
+geom_line()
+```
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+library(ggplot2)
+ggplot(pressure,aes(x = temperature,y = pressure))+
+geom_line()+
+geom_point()
+```
