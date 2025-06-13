@@ -121,15 +121,6 @@ library(foreign)
 ls("package:foreign")
 ```
 
-``` r
-ls("package:foreign")
- [1] "data.restore"  "lookup.xport"  "read.arff"     "read.dbf"     
- [5] "read.dta"      "read.epiinfo"  "read.mtp"      "read.octave"
- [9] "read.S"        "read.spss"     "read.ssd"      "read.systat"
-[13] "read.xport"    "write.arff"    "write.dbf"     "write.dta"
-[17] "write.foreign"
-```
-
 ## 链接函数和管道操作符 `%>%`
 
 ```{r}
@@ -223,3 +214,198 @@ ggplot(pressure,aes(x = temperature,y = pressure))+
 geom_line()+
 geom_point()
 ```
+
+## 绘制条形图
+
+### 使用 `barplot()` 函数
+
+向 `barplot()` 函数传递两个参数，第一个向量用来设定条形的高度，第二个向量用来设定每个条形对应的标签（可选）；如果向量中的元素已被命名，则系统会自动使用元素的名字作为条形标签。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+# check dataset
+BOD
+
+barplot(BOD$demand,names.arg = BOD$Time)
+```
+
+### 使用 `ggplot2` 中的 `geom_col` 函数
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+
+library(ggplot2)
+
+# 变量值的频数表，使用 BOD 数据框，时间（Time）对应X值，需求（demand）对应Y值.
+ggplot(BOD,aes(x = Time,y = demand))+
+geom_col()
+
+# 将x转换为因子型变量，从而使系统将其视作离散值
+ggplot(BOD,aes(x = factor(Time),y = demand))+
+geom_col()
+```
+
+## 绘制直方图
+
+使用 `hist()` 函数#\| echo: true #\| output: true #\| cache: true
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+hist(mtcars$mpg)
+
+# designate the interval
+hist(mtcars$mpg,breaks = 10)
+```
+
+### 使用 `ggplot2` 中的 `geom_histogram()`
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(ggplot2)
+ggplot(mtcars,aes(x = mpg))+
+geom_histogram()
+
+# use a bigger interval
+ggplot(mtcars,aes(x = mpg))+
+geom_histogram(binwidth = 4)
+```
+
+## 绘制箱型图
+
+## 使用 `plot()` 函数
+
+当 X 为因子型变量（与数值型变量对应）时，会默认绘制线形图。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+plot(ToothGrowth$supp,ToothGrowth$len)
+```
+
+当两个参数向量在同一个数据框时，也可以使用 `boxplot()` 函数和语法。公式语法允许用户在 x 轴上使用变量组合。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+# 公式语法
+boxplot(len ~ supp,data = ToothGrowth)
+```
+
+引入交互,基于多组变量的箱型图。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+# 公式语法
+boxplot(len ~ supp + dose,data = ToothGrowth)
+```
+
+### 使用 `ggplot2` 中的 `geom_boxplot()` 函数
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(ggplot2)
+ggplot(ToothGrowth,aes(x = supp,y = len))+
+geom_boxplot()
+```
+
+使用 `interaction()` 函数将分组变量组合在一起来绘制基于多组变量的箱型图。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(ggplot2)
+ggplot(ToothGrowth,aes(x = interaction(supp,dose),y = len))+
+geom_boxplot()
+```
+
+## 绘制函数图像
+
+### 使用 `curve()` 函数绘制函数图像
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+curve(x^3 - 5*x,from = -4,to = 4)
+```
+
+绘制用户自定义的函数图像
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+myfun <- function(xvar){1/(1+exp(-xvar+10))}
+curve(myfun(x),from = 0,to = 20)
+# add straight line
+curve(1 - myfun(x),add = TRUE,col = "red")
+```
+
+### 使用 `ggplot2` 中的 `stat_function(geom = "Line")` 函数
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(ggplot2)
+ggplot(data.frame(x = c(0,20)),aes(x=x))+
+stat_function(fun = myfun,geom = "line")
+```
+
+end.

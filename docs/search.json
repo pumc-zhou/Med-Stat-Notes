@@ -910,7 +910,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-12},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 12, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-13},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 13, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6772,7 +6772,7 @@
     "href": "Guide/R/02-ggplot2-base.html#从spsssasstata文件中加载数据",
     "title": "02-ggplot2 绘图基础",
     "section": "\n2.6 从SPSS/SAS/Stata文件中加载数据",
-    "text": "2.6 从SPSS/SAS/Stata文件中加载数据\n\n2.6.1 使用 haven 包中的函数\n# just install once\n# install.packages(\"haven\")\n\nlibrary(haven)\n#for SPSS\ndata &lt;- read_sav(\"data_name.sav\")\n#for SAS\ndata &lt;- read_sas(\"data_name.sas7bdat\")\n#for Stata\ndata &lt;- read_dta(\"data_name.dta\")\n\n2.6.2 使用 foreign 包替代\n这个同样支持 SPSS 和 Stata 数据，但是这个包更新缓慢。\n它还可以支持octave/MATLAB,SYSTAT,SAS XPORT等数据的读取。\n通过 ls(\"package:foreign\") 查看所有的函数列表。\n\n代码# install.packages(\"foreign\")\nlibrary(foreign)\nls(\"package:foreign\")\n\n [1] \"data.restore\"  \"lookup.xport\"  \"read.arff\"     \"read.dbf\"     \n [5] \"read.dta\"      \"read.epiinfo\"  \"read.mtp\"      \"read.octave\"  \n [9] \"read.S\"        \"read.spss\"     \"read.ssd\"      \"read.systat\"  \n[13] \"read.xport\"    \"write.arff\"    \"write.dbf\"     \"write.dta\"    \n[17] \"write.foreign\"\n\n\nls(\"package:foreign\")\n [1] \"data.restore\"  \"lookup.xport\"  \"read.arff\"     \"read.dbf\"     \n [5] \"read.dta\"      \"read.epiinfo\"  \"read.mtp\"      \"read.octave\"\n [9] \"read.S\"        \"read.spss\"     \"read.ssd\"      \"read.systat\"\n[13] \"read.xport\"    \"write.arff\"    \"write.dbf\"     \"write.dta\"\n[17] \"write.foreign\"",
+    "text": "2.6 从SPSS/SAS/Stata文件中加载数据\n\n2.6.1 使用 haven 包中的函数\n# just install once\n# install.packages(\"haven\")\n\nlibrary(haven)\n#for SPSS\ndata &lt;- read_sav(\"data_name.sav\")\n#for SAS\ndata &lt;- read_sas(\"data_name.sas7bdat\")\n#for Stata\ndata &lt;- read_dta(\"data_name.dta\")\n\n2.6.2 使用 foreign 包替代\n这个同样支持 SPSS 和 Stata 数据，但是这个包更新缓慢。\n它还可以支持octave/MATLAB,SYSTAT,SAS XPORT等数据的读取。\n通过 ls(\"package:foreign\") 查看所有的函数列表。\n\n代码# install.packages(\"foreign\")\nlibrary(foreign)\nls(\"package:foreign\")\n\n [1] \"data.restore\"  \"lookup.xport\"  \"read.arff\"     \"read.dbf\"     \n [5] \"read.dta\"      \"read.epiinfo\"  \"read.mtp\"      \"read.octave\"  \n [9] \"read.S\"        \"read.spss\"     \"read.ssd\"      \"read.systat\"  \n[13] \"read.xport\"    \"write.arff\"    \"write.dbf\"     \"write.dta\"    \n[17] \"write.foreign\"",
     "crumbs": [
       "Home",
       "Guide",
@@ -6830,6 +6830,71 @@
       "Guide",
       "R",
       "01-R 相关介绍与记录"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#绘制条形图",
+    "href": "Guide/R/02-ggplot2-base.html#绘制条形图",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.10 绘制条形图",
+    "text": "2.10 绘制条形图\n\n2.10.1 使用 barplot() 函数\n向 barplot() 函数传递两个参数，第一个向量用来设定条形的高度，第二个向量用来设定每个条形对应的标签（可选）；如果向量中的元素已被命名，则系统会自动使用元素的名字作为条形标签。\n\n代码# check dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\n代码barplot(BOD$demand,names.arg = BOD$Time)\n\n\n\n\n\n\n\n\n2.10.2 使用 ggplot2 中的 geom_col 函数\n\n代码library(ggplot2)\n\n# 变量值的频数表，使用 BOD 数据框，时间（Time）对应X值，需求（demand）对应Y值.\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_col()\n\n\n\n\n\n\n代码# 将x转换为因子型变量，从而使系统将其视作离散值\nggplot(BOD,aes(x = factor(Time),y = demand))+\ngeom_col()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#绘制直方图",
+    "href": "Guide/R/02-ggplot2-base.html#绘制直方图",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.11 绘制直方图",
+    "text": "2.11 绘制直方图\n使用 hist() 函数#| echo: true #| output: true #| cache: true\n\n代码hist(mtcars$mpg)\n\n\n\n\n\n\n代码# designate the interval\nhist(mtcars$mpg,breaks = 10)\n\n\n\n\n\n\n\n\n2.11.1 使用 ggplot2 中的 geom_histogram()\n\n\n代码library(ggplot2)\nggplot(mtcars,aes(x = mpg))+\ngeom_histogram()\n\n\n\n\n\n\n代码# use a bigger interval\nggplot(mtcars,aes(x = mpg))+\ngeom_histogram(binwidth = 4)",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#绘制箱型图",
+    "href": "Guide/R/02-ggplot2-base.html#绘制箱型图",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.12 绘制箱型图",
+    "text": "2.12 绘制箱型图",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#使用-plot-函数",
+    "href": "Guide/R/02-ggplot2-base.html#使用-plot-函数",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.13 使用 plot() 函数",
+    "text": "2.13 使用 plot() 函数\n当 X 为因子型变量（与数值型变量对应）时，会默认绘制线形图。\n\n代码plot(ToothGrowth$supp,ToothGrowth$len)\n\n\n\n\n\n\n\n当两个参数向量在同一个数据框时，也可以使用 boxplot() 函数和语法。公式语法允许用户在 x 轴上使用变量组合。\n\n代码# 公式语法\nboxplot(len ~ supp,data = ToothGrowth)\n\n\n\n\n\n\n\n引入交互,基于多组变量的箱型图。\n\n代码# 公式语法\nboxplot(len ~ supp + dose,data = ToothGrowth)\n\n\n\n\n\n\n\n\n2.13.1 使用 ggplot2 中的 geom_boxplot() 函数\n\n代码library(ggplot2)\nggplot(ToothGrowth,aes(x = supp,y = len))+\ngeom_boxplot()\n\n\n\n\n\n\n\n使用 interaction() 函数将分组变量组合在一起来绘制基于多组变量的箱型图。\n\n代码library(ggplot2)\nggplot(ToothGrowth,aes(x = interaction(supp,dose),y = len))+\ngeom_boxplot()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/02-ggplot2-base.html#绘制函数图像",
+    "href": "Guide/R/02-ggplot2-base.html#绘制函数图像",
+    "title": "02-ggplot2 绘图基础",
+    "section": "\n2.14 绘制函数图像",
+    "text": "2.14 绘制函数图像\n\n2.14.1 使用 curve() 函数绘制函数图像\n\n代码curve(x^3 - 5*x,from = -4,to = 4)\n\n\n\n\n\n\n\n绘制用户自定义的函数图像\n\n代码myfun &lt;- function(xvar){1/(1+exp(-xvar+10))}\ncurve(myfun(x),from = 0,to = 20)\n# add straight line\ncurve(1 - myfun(x),add = TRUE,col = \"red\")\n\n\n\n\n\n\n\n\n2.14.2 使用 ggplot2 中的 stat_function(geom = \"Line\") 函数\n\n代码library(ggplot2)\nggplot(data.frame(x = c(0,20)),aes(x=x))+\nstat_function(fun = myfun,geom = \"line\")\n\n\n\n\n\n\n\nend.",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "02-ggplot2 绘图基础"
     ]
   }
 ]
