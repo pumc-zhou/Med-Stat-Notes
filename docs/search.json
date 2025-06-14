@@ -910,7 +910,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-13},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 13, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-14},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 14, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6895,6 +6895,201 @@
       "Guide",
       "R",
       "02-ggplot2 绘图基础"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html",
+    "href": "Guide/R/03-ggplot2-barplot.html",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "",
+    "text": "代码library(gcookbook)  # Load gcookbook for the pg_mean data set\nlibrary(ggplot2)\nggplot(pg_mean, aes(x = group, y = weight)) +\n  geom_col()\n\n\n\n\n\n\n\n\n\n\n代码# There's no entry for Time == 6\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\n代码# Time is numeric (continuous)\nstr(BOD)\n\n'data.frame':   6 obs. of  2 variables:\n $ Time  : num  1 2 3 4 5 7\n $ demand: num  8.3 10.3 19 16 15.6 19.8\n - attr(*, \"reference\")= chr \"A1.4, p. 270\"\n\n代码#&gt; 'data.frame':    6 obs. of  2 variables:\n#&gt;  $ Time  : num  1 2 3 4 5 7\n#&gt;  $ demand: num  8.3 10.3 19 16 15.6 19.8\n#&gt;  - attr(*, \"reference\")= chr \"A1.4, p. 270\"\n\nggplot(BOD, aes(x = Time, y = demand)) +\n  geom_col()\n\n\n\n\n\n\n\n\n\n代码# There's no entry for Time == 6\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\n代码# Convert Time to a discrete (categorical) variable with factor()\nggplot(BOD, aes(x = factor(Time), y = demand)) +\n  geom_col()\n\n\n\n\n\n\n\n\n在默认的设置下，条形图的填充色为深灰色且条形图没有边框线，用户可以通过调整 fill 参数来改变填充色和调整 colour/color 参数为条形图添加边框线。\n将填充色设置为浅蓝色，边框现的颜色设置为黑色：\n\n代码library(gcookbook)  # Load gcookbook for the pg_mean data set\nlibrary(ggplot2)\nggplot(pg_mean, aes(x = group, y = weight)) +\n  geom_col(fill = \"lightblue\",colour = \"black\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#x-是离散型变量",
+    "href": "Guide/R/03-ggplot2-barplot.html#x-是离散型变量",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "",
+    "text": "代码library(gcookbook)  # Load gcookbook for the pg_mean data set\nlibrary(ggplot2)\nggplot(pg_mean, aes(x = group, y = weight)) +\n  geom_col()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#x-是连续型变量",
+    "href": "Guide/R/03-ggplot2-barplot.html#x-是连续型变量",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "",
+    "text": "代码# There's no entry for Time == 6\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\n代码# Time is numeric (continuous)\nstr(BOD)\n\n'data.frame':   6 obs. of  2 variables:\n $ Time  : num  1 2 3 4 5 7\n $ demand: num  8.3 10.3 19 16 15.6 19.8\n - attr(*, \"reference\")= chr \"A1.4, p. 270\"\n\n代码#&gt; 'data.frame':    6 obs. of  2 variables:\n#&gt;  $ Time  : num  1 2 3 4 5 7\n#&gt;  $ demand: num  8.3 10.3 19 16 15.6 19.8\n#&gt;  - attr(*, \"reference\")= chr \"A1.4, p. 270\"\n\nggplot(BOD, aes(x = Time, y = demand)) +\n  geom_col()\n\n\n\n\n\n\n\n\n\n代码# There's no entry for Time == 6\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\n代码# Convert Time to a discrete (categorical) variable with factor()\nggplot(BOD, aes(x = factor(Time), y = demand)) +\n  geom_col()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#调整配色",
+    "href": "Guide/R/03-ggplot2-barplot.html#调整配色",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "",
+    "text": "在默认的设置下，条形图的填充色为深灰色且条形图没有边框线，用户可以通过调整 fill 参数来改变填充色和调整 colour/color 参数为条形图添加边框线。\n将填充色设置为浅蓝色，边框现的颜色设置为黑色：\n\n代码library(gcookbook)  # Load gcookbook for the pg_mean data set\nlibrary(ggplot2)\nggplot(pg_mean, aes(x = group, y = weight)) +\n  geom_col(fill = \"lightblue\",colour = \"black\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#pastel1-调色盘",
+    "href": "Guide/R/03-ggplot2-barplot.html#pastel1-调色盘",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n2.1 pastel1 调色盘",
+    "text": "2.1 pastel1 调色盘\n\n代码library(gcookbook)  # Load gcookbook for the cabbage_exp data set\n# check dataset\ncabbage_exp\n\n  Cultivar Date Weight        sd  n         se\n1      c39  d16   3.18 0.9566144 10 0.30250803\n2      c39  d20   2.80 0.2788867 10 0.08819171\n3      c39  d21   2.74 0.9834181 10 0.31098410\n4      c52  d16   2.26 0.4452215 10 0.14079141\n5      c52  d20   3.11 0.7908505 10 0.25008887\n6      c52  d21   1.47 0.2110819 10 0.06674995\n\n代码# load ggplot2\nlibrary(ggplot2)\nggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(position = \"dodge\", colour = \"black\") +\n  scale_fill_brewer(palette = \"Pastel1\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#缺失项",
+    "href": "Guide/R/03-ggplot2-barplot.html#缺失项",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n2.2 缺失项",
+    "text": "2.2 缺失项\n如果分类变量各水平的组合中有缺失项，那么绘图结果中的条形则相应地略去不绘，同时，临近的条形将自动扩充到相应的位置，示例如下：\n\n代码library(gcookbook)  # Load gcookbook for the cabbage_exp data set\n# check dataset\ncabbage_exp\n\n  Cultivar Date Weight        sd  n         se\n1      c39  d16   3.18 0.9566144 10 0.30250803\n2      c39  d20   2.80 0.2788867 10 0.08819171\n3      c39  d21   2.74 0.9834181 10 0.31098410\n4      c52  d16   2.26 0.4452215 10 0.14079141\n5      c52  d20   3.11 0.7908505 10 0.25008887\n6      c52  d21   1.47 0.2110819 10 0.06674995\n\n代码# delete last row\nce &lt;- cabbage_exp[1:5,]\nce\n\n  Cultivar Date Weight        sd  n         se\n1      c39  d16   3.18 0.9566144 10 0.30250803\n2      c39  d20   2.80 0.2788867 10 0.08819171\n3      c39  d21   2.74 0.9834181 10 0.31098410\n4      c52  d16   2.26 0.4452215 10 0.14079141\n5      c52  d20   3.11 0.7908505 10 0.25008887\n\n代码# load ggplot2\nlibrary(ggplot2)\nggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(position = \"dodge\", colour = \"black\") +\n  scale_fill_brewer(palette = \"Pastel1\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#使用-geom_bar-函数",
+    "href": "Guide/R/03-ggplot2-barplot.html#使用-geom_bar-函数",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n3.1 使用 geom_bar() 函数",
+    "text": "3.1 使用 geom_bar() 函数\n使用 geom_bar() 函数，同时不映射任何变量到y参数\n\n代码# Equivalent to using geom_bar(stat = \"bin\")\nggplot(diamonds, aes(x = cut)) +\n  geom_bar()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#条形图着色",
+    "href": "Guide/R/03-ggplot2-barplot.html#条形图着色",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n3.2 条形图着色",
+    "text": "3.2 条形图着色\n\n代码library(gcookbook) # Load gcookbook for the uspopchange data set\nlibrary(dplyr)\n\n# select top 10 state with population growth\nupc &lt;- uspopchange %&gt;%\n  arrange(desc(Change)) %&gt;%\n  slice(1:10)\n\nupc\n\n            State Abb Region Change\n1          Nevada  NV   West   35.1\n2         Arizona  AZ   West   24.6\n3            Utah  UT   West   23.8\n4           Idaho  ID   West   21.1\n5           Texas  TX  South   20.6\n6  North Carolina  NC  South   18.5\n7         Georgia  GA  South   18.3\n8         Florida  FL  South   17.6\n9        Colorado  CO   West   16.9\n10 South Carolina  SC  South   15.3\n\n\n将 Region 映射到 fill 是上兵绘制条形图：\n\n代码ggplot(upc, aes(x = Abb, y = Change, fill = Region)) +\n  geom_col()\n\n\n\n\n\n\n\n\n3.2.1 设定图形颜色\n借助函数 scale_fill_brewer() or scale_fill_manual() 重新设定图形颜色：\n\n代码ggplot(upc, aes(x = reorder(Abb, Change), y = Change, fill = Region)) +\n  geom_col(colour = \"black\") +\n  scale_fill_manual(values = c(\"#669933\", \"#FFCC66\")) +\n  xlab(\"State\")\n\n\n\n\n\n\n\n\n3.2.2 注意\n颜色的映射是在 aes() 内部完成的，但是颜色的设定是在 aes() 外部完成的。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#pos-映射到-fill-中",
+    "href": "Guide/R/03-ggplot2-barplot.html#pos-映射到-fill-中",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n4.1 pos 映射到 fill 中",
+    "text": "4.1 pos 映射到 fill 中\n\n代码library(ggplot2)\nggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +\n  geom_col(position = \"identity\")\n\n\n\n\n\n\n\n\n4.1.1 注意\n这里条形图的参数设定为 position = \"identity\" ，可以避免系统因对负值绘制堆积条形而发出的警告信息。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#调整配色-1",
+    "href": "Guide/R/03-ggplot2-barplot.html#调整配色-1",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n4.2 调整配色",
+    "text": "4.2 调整配色\n\n4.2.1 scale_fill_manual() 参数\n设定 scale_fill_manual() 参数对图形进行调整，设定参数 guide = FALSE 可以删除图例；设定边框颜色（color/colour）和边框线宽度（size），这里边框线的单位是毫米。\n\n代码ggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +\n  geom_col(position = \"identity\", colour = \"black\", size = 0.25) +\n  scale_fill_manual(values = c(\"#CCEEFF\", \"#FFDDDD\"), guide = FALSE)\n\n\n\n\n\n\n\n出现警告信息（Warning messages）\n调整后：\n\n代码ggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +\n  geom_col(position = \"identity\", colour = \"black\", linewidth = 0.25) +\n  scale_fill_manual(values = c(\"#CCEEFF\", \"#FFDDDD\"), guide = \"none\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#标准宽度",
+    "href": "Guide/R/03-ggplot2-barplot.html#标准宽度",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n5.1 标准宽度",
+    "text": "5.1 标准宽度\n\n代码library(gcookbook) # Load gcookbook for the pg_mean data set\nlibrary(ggplot2)\nggplot(pg_mean, aes(x = group, y = weight)) +\n  geom_col()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#更窄",
+    "href": "Guide/R/03-ggplot2-barplot.html#更窄",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n5.2 更窄",
+    "text": "5.2 更窄\n\n代码library(gcookbook) # Load gcookbook for the pg_mean data set\nlibrary(ggplot2)\nggplot(pg_mean, aes(x = group, y = weight)) +\n  geom_col(width = 0.5)",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#更宽",
+    "href": "Guide/R/03-ggplot2-barplot.html#更宽",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n5.3 更宽",
+    "text": "5.3 更宽\n条形宽度的最大宽度值为1.\n\n代码library(gcookbook) # Load gcookbook for the pg_mean data set\nlibrary(ggplot2)\nggplot(pg_mean, aes(x = group, y = weight)) +\n  geom_col(width = 1)",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#调整组内间距",
+    "href": "Guide/R/03-ggplot2-barplot.html#调整组内间距",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n5.4 调整组内间距",
+    "text": "5.4 调整组内间距\n簇状条形图默认组内间距为0，如果希望增加组内间距，可以通过将 width() 的值设定的小一些，并将 position_dodge() 的值设定大于 width() 来实现。\n\n5.4.1 条形更窄的簇状条形图\n\n代码ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(width = 0.5, position = \"dodge\")\n\n\n\n\n\n\n\n\n5.4.2 具有条形间距的簇状条形图\n\n代码ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(width = 0.5, position = position_dodge(0.7))\n\n\n\n\n\n\n\n\n5.4.3 position 语法\n以下四条命令是等价的：\ngeom_bar(position = \"dodge\")\ngeom_bar(width = 0.9, position = position_dodge())\ngeom_bar(position = position_dodge(0.9))\ngeom_bar(width = 0.9, position = position_dodge(width=0.9))",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#使用-geom_bar-函数-1",
+    "href": "Guide/R/03-ggplot2-barplot.html#使用-geom_bar-函数-1",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n6.1 使用 geom_bar() 函数",
+    "text": "6.1 使用 geom_bar() 函数\n使用 geom_bar() 函数，并映射一个变量给填充色参数 fill 即可，该命令会将 Date 对应到 x 轴上，并以 Cultivar 作为填充色\n\n代码library(gcookbook) # Load gcookbook for the cabbage_exp data set\nlibrary(ggplot2)\nggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
     ]
   }
 ]
