@@ -910,7 +910,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-14},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 14, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-15},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 15, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -7085,6 +7085,149 @@
     "title": "03-ggplot2 绘图——条形图",
     "section": "\n6.1 使用 geom_bar() 函数",
     "text": "6.1 使用 geom_bar() 函数\n使用 geom_bar() 函数，并映射一个变量给填充色参数 fill 即可，该命令会将 Date 对应到 x 轴上，并以 Cultivar 作为填充色\n\n代码library(gcookbook) # Load gcookbook for the cabbage_exp data set\nlibrary(ggplot2)\nggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#反转堆积顺序和图例顺序",
+    "href": "Guide/R/03-ggplot2-barplot.html#反转堆积顺序和图例顺序",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n6.2 反转堆积顺序和图例顺序",
+    "text": "6.2 反转堆积顺序和图例顺序\n默认情况下，条形的堆积顺序和图例顺序是一致的，但是都某些数据集而言需要调整图例顺序，用户可以通过 guide() 函数来对图例顺序进行调整，并指定图例所对应的需要调整的图形属性（fill)，并使用 position_stack(reverse = TRUE) 参数来实现反转条形的堆积顺序，通过上述两种函数来保证图例顺序与条形顺序一致。\n\n代码library(gcookbook) # Load gcookbook for the cabbage_exp data set\nlibrary(ggplot2)\nggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(position = position_stack(reverse = TRUE)) +\n  guides(fill = guide_legend(reverse = TRUE))",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#获得效果更好的条形图",
+    "href": "Guide/R/03-ggplot2-barplot.html#获得效果更好的条形图",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n6.3 获得效果更好的条形图",
+    "text": "6.3 获得效果更好的条形图\n使用 scale_fill_brewer() 函数得到一个新的调色板，最后设定 colour=\"black\" 为条形添加一个黑色边框线。\n\n代码library(gcookbook) # Load gcookbook for the cabbage_exp data set\nlibrary(ggplot2)\nggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(colour = \"black\") +\n  scale_fill_brewer(palette = \"Pastel1\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#使用-geom_colposition-fill-实现",
+    "href": "Guide/R/03-ggplot2-barplot.html#使用-geom_colposition-fill-实现",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n7.1 使用 geom_col(position =  \"fill\") 实现",
+    "text": "7.1 使用 geom_col(position =  \"fill\") 实现\n使用 geom_col(position =  \"fill\") 可以将y的值调整为0到1之间。\n\n代码library(gcookbook) # Load gcookbook for the cabbage_exp data set\n\nggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(position = \"fill\")\n\n\n\n\n\n\n\n\n7.1.1 让标签以百分比的形式展示\n\n代码ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(position = \"fill\") +\n  scale_y_continuous(labels = scales::percent)",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#更换调色板并添加边框线",
+    "href": "Guide/R/03-ggplot2-barplot.html#更换调色板并添加边框线",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n7.2 更换调色板并添加边框线",
+    "text": "7.2 更换调色板并添加边框线\n\n代码ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(colour = \"black\", position = \"fill\") +\n  scale_y_continuous(labels = scales::percent) +\n  scale_fill_brewer(palette = \"Pastel1\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#使用-geom_text-函数",
+    "href": "Guide/R/03-ggplot2-barplot.html#使用-geom_text-函数",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n8.1 使用 geom_text() 函数",
+    "text": "8.1 使用 geom_text() 函数\n需要分别制定一个变量映射给x、y和标签本身，通过设定 vjust （竖直调整数据标签位置）来将标签位置移动至条形图顶端的上方或下方\n\n代码library(gcookbook) # Load gcookbook for the cabbage_exp data set\n\n# Below the top\nggplot(cabbage_exp, aes(x = interaction(Date, Cultivar), y = Weight)) +\n  geom_col() +\n  geom_text(aes(label = Weight), vjust = 1.5, colour = \"white\")\n\n\n\n\n\n\n代码# Above the top\nggplot(cabbage_exp, aes(x = interaction(Date, Cultivar), y = Weight)) +\n  geom_col() +\n  geom_text(aes(label = Weight), vjust = -0.2)",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#给频数条形图添加标签",
+    "href": "Guide/R/03-ggplot2-barplot.html#给频数条形图添加标签",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n8.2 给频数条形图添加标签",
+    "text": "8.2 给频数条形图添加标签\n\n代码ggplot(mtcars, aes(x = factor(cyl))) +\n  geom_bar() +\n  geom_text(aes(label = after_stat(count)), stat = \"count\", \n            vjust = 1.5, colour = \"white\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#给簇状条形图添加标签",
+    "href": "Guide/R/03-ggplot2-barplot.html#给簇状条形图添加标签",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n8.3 给簇状条形图添加标签",
+    "text": "8.3 给簇状条形图添加标签\n需要设定 position = position_dodge() 并给其一个参数来设定分类间距，分类间距默认值是0.9，因为簇状图的条形更窄，所以需要使用字号 size 来匹配条形宽度，数据标签的默认字号是5，用户可以设定为 3 使其看起来更小（适配）。\n\n代码ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(position = \"dodge\") +\n  geom_text(\n    aes(label = Weight),\n    colour = \"white\", size = 3,\n    vjust = 1.5, position = position_dodge(.9)\n  )",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#堆积图添加数据标签",
+    "href": "Guide/R/03-ggplot2-barplot.html#堆积图添加数据标签",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n8.4 堆积图添加数据标签",
+    "text": "8.4 堆积图添加数据标签\n要对堆积图添加数据标签，先要对每组条形所对应的数据进行累计求和，有需要在此之前保证数据的合理排序，否则可能会计算出错误的累计和。\n使用 dplyr 包中的 arrange() 函数完成上述操作，使用 rev() 函数调整 Cultivar 的顺序。\n\n代码library(dplyr)\n\n# Sort by the Date and Cultivar columns\nce &lt;- cabbage_exp %&gt;%\n  arrange(Date, rev(Cultivar))\n\n# Get the cumulative sum\nce &lt;- ce %&gt;%\n  group_by(Date) %&gt;%\n  mutate(label_y = cumsum(Weight))\n\nce\n\n# A tibble: 6 × 7\n# Groups:   Date [3]\n  Cultivar Date  Weight    sd     n     se label_y\n  &lt;fct&gt;    &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;\n1 c52      d16     2.26 0.445    10 0.141     2.26\n2 c39      d16     3.18 0.957    10 0.303     5.44\n3 c52      d20     3.11 0.791    10 0.250     3.11\n4 c39      d20     2.8  0.279    10 0.0882    5.91\n5 c52      d21     1.47 0.211    10 0.0667    1.47\n6 c39      d21     2.74 0.983    10 0.311     4.21\n\n代码ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col() +\n  geom_text(aes(y = label_y, label = Weight), vjust = 1.5, colour = \"white\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#堆积图数据标签放置在中部",
+    "href": "Guide/R/03-ggplot2-barplot.html#堆积图数据标签放置在中部",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n8.5 堆积图数据标签放置在中部",
+    "text": "8.5 堆积图数据标签放置在中部\n如果想把数据标签放在条形中部，需要对累计求和的结果加以调整，并同时略去 geom_bar() 函数对 y 偏移量 offset 的设置。\n\n代码library(dplyr)\n\nce &lt;- cabbage_exp %&gt;%\n  arrange(Date, rev(Cultivar))\n\n# Calculate y position, placing it in the middle\nce &lt;- ce %&gt;%\n  group_by(Date) %&gt;%\n  mutate(label_y = cumsum(Weight) - 0.5 * Weight)\n\nggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col() +\n  geom_text(aes(y = label_y, label = Weight), colour = \"white\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#添加要素",
+    "href": "Guide/R/03-ggplot2-barplot.html#添加要素",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n8.6 添加要素",
+    "text": "8.6 添加要素\n\n修改颜色\n将数据标签置于中间\n缩小标签字号 size\n\n调用 paste() 函数给标签添加后缀\n使用 format() 函数保留两位小数\n\n\n代码ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(colour = \"black\") +\n  geom_text(aes(y = label_y, label = paste(format(Weight, nsmall = 2), \"kg\")), size = 4) +\n  scale_fill_brewer(palette = \"Pastel1\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#使用-geom_point-命令",
+    "href": "Guide/R/03-ggplot2-barplot.html#使用-geom_point-命令",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n9.1 使用 geom_point() 命令",
+    "text": "9.1 使用 geom_point() 命令\n\n代码library(gcookbook) # Load gcookbook for the tophitters2001 data set\ntophit &lt;- tophitters2001[1:25, ] # Take the top 25 from the tophitters data set\n\nggplot(tophit, aes(x = avg, y = name)) +\n  geom_point()",
     "crumbs": [
       "Home",
       "Guide",

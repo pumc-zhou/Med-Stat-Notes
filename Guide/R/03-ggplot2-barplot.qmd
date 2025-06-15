@@ -436,3 +436,258 @@ library(ggplot2)
 ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
   geom_col()
 ```
+
+## 反转堆积顺序和图例顺序
+
+默认情况下，条形的堆积顺序和图例顺序是一致的，但是都某些数据集而言需要调整图例顺序，用户可以通过 `guide()` 函数来对图例顺序进行调整，并指定图例所对应的需要调整的图形属性（`fill`)，并使用 `position_stack(reverse = TRUE)` 参数来实现反转条形的堆积顺序，通过上述两种函数来保证图例顺序与条形顺序一致。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(gcookbook) # Load gcookbook for the cabbage_exp data set
+library(ggplot2)
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = position_stack(reverse = TRUE)) +
+  guides(fill = guide_legend(reverse = TRUE))
+```
+
+## 获得效果更好的条形图
+
+使用 `scale_fill_brewer()` 函数得到一个新的调色板，最后设定 `colour="black"` 为条形添加一个黑色边框线。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(gcookbook) # Load gcookbook for the cabbage_exp data set
+library(ggplot2)
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(colour = "black") +
+  scale_fill_brewer(palette = "Pastel1")
+```
+
+# 绘制百分比堆积条形图
+
+## 使用 `geom_col(position =  "fill")` 实现
+
+使用 `geom_col(position =  "fill")` 可以将y的值调整为0到1之间。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(gcookbook) # Load gcookbook for the cabbage_exp data set
+
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "fill")
+```
+
+### 让标签以百分比的形式展示
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "fill") +
+  scale_y_continuous(labels = scales::percent)
+```
+
+## 更换调色板并添加边框线
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(colour = "black", position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_brewer(palette = "Pastel1")
+```
+
+# 添加数据标签
+
+## 使用 `geom_text()` 函数
+
+需要分别制定一个变量映射给x、y和标签本身，通过设定 `vjust` （竖直调整数据标签位置）来将标签位置移动至条形图顶端的上方或下方
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(gcookbook) # Load gcookbook for the cabbage_exp data set
+
+# Below the top
+ggplot(cabbage_exp, aes(x = interaction(Date, Cultivar), y = Weight)) +
+  geom_col() +
+  geom_text(aes(label = Weight), vjust = 1.5, colour = "white")
+
+# Above the top
+ggplot(cabbage_exp, aes(x = interaction(Date, Cultivar), y = Weight)) +
+  geom_col() +
+  geom_text(aes(label = Weight), vjust = -0.2)
+```
+
+## 给频数条形图添加标签
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(mtcars, aes(x = factor(cyl))) +
+  geom_bar() +
+  geom_text(aes(label = after_stat(count)), stat = "count", 
+            vjust = 1.5, colour = "white")
+```
+
+## 给簇状条形图添加标签
+
+需要设定 `position = position_dodge()` 并给其一个参数来设定分类间距，分类间距默认值是0.9，因为簇状图的条形更窄，所以需要使用字号 `size` 来匹配条形宽度，数据标签的默认字号是5，用户可以设定为 3 使其看起来更小（适配）。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "dodge") +
+  geom_text(
+    aes(label = Weight),
+    colour = "white", size = 3,
+    vjust = 1.5, position = position_dodge(.9)
+  )
+```
+
+## 堆积图添加数据标签
+
+要对堆积图添加数据标签，先要对每组条形所对应的数据进行累计求和，有需要在此之前保证数据的合理排序，否则可能会计算出错误的累计和。
+
+使用 `dplyr` 包中的 `arrange()` 函数完成上述操作，使用 `rev()` 函数调整 Cultivar 的顺序。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(dplyr)
+
+# Sort by the Date and Cultivar columns
+ce <- cabbage_exp %>%
+  arrange(Date, rev(Cultivar))
+
+# Get the cumulative sum
+ce <- ce %>%
+  group_by(Date) %>%
+  mutate(label_y = cumsum(Weight))
+
+ce
+
+ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col() +
+  geom_text(aes(y = label_y, label = Weight), vjust = 1.5, colour = "white")
+```
+
+## 堆积图数据标签放置在中部
+
+如果想把数据标签放在条形中部，需要对累计求和的结果加以调整，并同时略去 `geom_bar()` 函数对 y 偏移量 `offset` 的设置。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(dplyr)
+
+ce <- cabbage_exp %>%
+  arrange(Date, rev(Cultivar))
+
+# Calculate y position, placing it in the middle
+ce <- ce %>%
+  group_by(Date) %>%
+  mutate(label_y = cumsum(Weight) - 0.5 * Weight)
+
+ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col() +
+  geom_text(aes(y = label_y, label = Weight), colour = "white")
+```
+
+## 添加要素
+
+1.  修改颜色
+2.  将数据标签置于中间
+3.  缩小标签字号 `size`
+4.  调用 `paste()` 函数给标签添加后缀
+5.  使用 `format()` 函数保留两位小数
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(colour = "black") +
+  geom_text(aes(y = label_y, label = paste(format(Weight, nsmall = 2), "kg")), size = 4) +
+  scale_fill_brewer(palette = "Pastel1")
+```
+
+# 绘制Cleveland点图
+
+Cleveland点图是条形图的替代方案，它可以减少图形造成的视觉混乱并使图形更具可读性。
+
+## 使用 `geom_point()` 命令
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(gcookbook) # Load gcookbook for the tophitters2001 data set
+tophit <- tophitters2001[1:25, ] # Take the top 25 from the tophitters data set
+
+ggplot(tophit, aes(x = avg, y = name)) +
+  geom_point()
+```
