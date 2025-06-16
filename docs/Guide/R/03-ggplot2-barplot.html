@@ -920,6 +920,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <a href="#%E7%BB%98%E5%88%B6cleveland%E7%82%B9%E5%9B%BE" id="toc-绘制cleveland点图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6cleveland%E7%82%B9%E5%9B%BE"><span class="header-section-number">9</span> 绘制Cleveland点图</a>
   <ul class="collapse">
 <li><a href="#%E4%BD%BF%E7%94%A8-geom_point-%E5%91%BD%E4%BB%A4" id="toc-使用-geom_point-命令" class="nav-link" data-scroll-target="#%E4%BD%BF%E7%94%A8-geom_point-%E5%91%BD%E4%BB%A4"><span class="header-section-number">9.1</span> 使用 <code>geom_point()</code> 命令</a></li>
+  <li><a href="#%E4%BF%AE%E6%94%B9%E6%8E%92%E5%BA%8F" id="toc-修改排序" class="nav-link" data-scroll-target="#%E4%BF%AE%E6%94%B9%E6%8E%92%E5%BA%8F"><span class="header-section-number">9.2</span> 修改排序</a></li>
+  <li><a href="#%E6%97%8B%E8%BD%AC%E7%82%B9%E5%9B%BE" id="toc-旋转点图" class="nav-link" data-scroll-target="#%E6%97%8B%E8%BD%AC%E7%82%B9%E5%9B%BE"><span class="header-section-number">9.3</span> 旋转点图</a></li>
+  <li><a href="#%E5%88%86%E7%BB%84" id="toc-分组" class="nav-link" data-scroll-target="#%E5%88%86%E7%BB%84"><span class="header-section-number">9.4</span> 分组</a></li>
+  <li><a href="#%E5%88%86%E7%BB%842%E5%88%86%E9%9D%A2%E5%B1%95%E7%A4%BA" id="toc-分组2分面展示" class="nav-link" data-scroll-target="#%E5%88%86%E7%BB%842%E5%88%86%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="header-section-number">9.5</span> 分组2：分面展示</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/R/03-ggplot2-barplot.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
@@ -950,7 +954,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年6月15日</p>
+      <p class="date-modified">2025年6月16日</p>
     </div>
   </div>
     
@@ -1629,6 +1633,102 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
+</section><section id="修改排序" class="level2" data-number="9.2"><h2 data-number="9.2" class="anchored" data-anchor-id="修改排序">
+<span class="header-section-number">9.2</span> 修改排序</h2>
+<p>尽管 <code>tophit</code> 函数的行排序恰好是根据 <code>avg</code> 变量进行排序的，但这并不意味着在图中的也是这样进行排序；在默认的点图设置下，坐标轴上的变量通畅会根据变量类型自动选取合适的排序方式。</p>
+<p>这里，变量 <code>name</code> 属于字符串类型，因此，点图根据字母先后顺序对其进行了排序；当变量是因子型变量时，点图会根据定义好的因子水平顺序对其进行排序。</p>
+<p>用户可以使用 <code>reorder(name,avg)</code> 函数实现这一过程，该过程会先将 <code>name</code> 变量转换为因子，然后，根据 <code>avg</code> 变量的大小对其进行排序。</p>
+<p>为了使图形效果更好，用户可以使用图形主题系统（theming system）删除垂直网格线，并将水平网格线的线性修改为虚线。</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the tophitters2001 data set</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a>tophit <span class="ot">&lt;-</span> tophitters2001[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ] <span class="co"># Take the top 25 from the tophitters data set</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb56-4"><a href="#cb56-4"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> <span class="fu">reorder</span>(name, avg))) <span class="sc">+</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Use a larger dot</span></span>
+<span id="cb56-6"><a href="#cb56-6"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb56-7"><a href="#cb56-7"></a>  <span class="fu">theme</span>(</span>
+<span id="cb56-8"><a href="#cb56-8"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb56-9"><a href="#cb56-9"></a>    <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb56-10"><a href="#cb56-10"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span>
+<span id="cb56-11"><a href="#cb56-11"></a>  )</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03-ggplot2-barplot_files/figure-html/unnamed-chunk-34-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="旋转点图" class="level2" data-number="9.3"><h2 data-number="9.3" class="anchored" data-anchor-id="旋转点图">
+<span class="header-section-number">9.3</span> 旋转点图</h2>
+<p>将点图的x轴和y轴互换，互换后，x轴对应名称，y轴对应数值，同时将标签旋转60°。</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(name, avg), <span class="at">y =</span> avg)) <span class="sc">+</span></span>
+<span id="cb57-2"><a href="#cb57-2"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Use a larger dot</span></span>
+<span id="cb57-3"><a href="#cb57-3"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb57-4"><a href="#cb57-4"></a>  <span class="fu">theme</span>(</span>
+<span id="cb57-5"><a href="#cb57-5"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb57-6"><a href="#cb57-6"></a>    <span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb57-7"><a href="#cb57-7"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>),</span>
+<span id="cb57-8"><a href="#cb57-8"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb57-9"><a href="#cb57-9"></a>  )</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03-ggplot2-barplot_files/figure-html/unnamed-chunk-35-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="分组" class="level2" data-number="9.4"><h2 data-number="9.4" class="anchored" data-anchor-id="分组">
+<span class="header-section-number">9.4</span> 分组</h2>
+<p>因为前面已将 name 转为因子型变量，可以视作为一种分类变量，现在再根据因子 lg 对样本进行分组，因子 lg 有两个水平，分别是 NL 和 AL；一次依据 lg 和 avg 对变量进行排序。</p>
+<p>需要注意的是， <code><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder()</a></code> 函数只能根据一个变量对因子水平进行排序，所以这里只能手动来实现 lg 和 avg 进行排序。</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="co"># Get the names, sorted first by lg, then by avg</span></span>
+<span id="cb58-2"><a href="#cb58-2"></a>nameorder <span class="ot">&lt;-</span> tophit<span class="sc">$</span>name[<span class="fu">order</span>(tophit<span class="sc">$</span>lg, tophit<span class="sc">$</span>avg)]</span>
+<span id="cb58-3"><a href="#cb58-3"></a></span>
+<span id="cb58-4"><a href="#cb58-4"></a><span class="co"># Turn name into a factor, with levels in the order of nameorder</span></span>
+<span id="cb58-5"><a href="#cb58-5"></a>tophit<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">factor</span>(tophit<span class="sc">$</span>name, <span class="at">levels =</span> nameorder)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>将 lg 变量映射到点的颜色属性上，借助 <code>geom_segment()</code> 函数来实现“以数据点为端点的线段”代替贯通全图的网格线。</p>
+<p>需要注意的是， <code>geom_segment()</code> 函数需要设定 <code>x</code>、<code>y</code>、<code>xend</code>和 <code>yend</code> 四个参数.</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> name)) <span class="sc">+</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> name), <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">colour =</span> lg)) <span class="sc">+</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"NL"</span>, <span class="st">"AL"</span>)) <span class="sc">+</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a>  <span class="fu">theme</span>(</span>
+<span id="cb59-7"><a href="#cb59-7"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),   <span class="co"># 无水平网格线</span></span>
+<span id="cb59-8"><a href="#cb59-8"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,              <span class="co"># 图例放在右侧</span></span>
+<span id="cb59-9"><a href="#cb59-9"></a>    <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>),       <span class="co"># 图例对齐方式</span></span>
+<span id="cb59-10"><a href="#cb59-10"></a>    <span class="at">legend.box.just =</span> <span class="st">"right"</span>               <span class="co"># 图例框靠右对齐</span></span>
+<span id="cb59-11"><a href="#cb59-11"></a>  )</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03-ggplot2-barplot_files/figure-html/unnamed-chunk-37-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+</section><section id="分组2分面展示" class="level2" data-number="9.5"><h2 data-number="9.5" class="anchored" data-anchor-id="分组2分面展示">
+<span class="header-section-number">9.5</span> 分组2：分面展示</h2>
+<p>通过调整 <code>lg</code> 变量的因子水平来修改分面显示的堆叠顺序。</p>
+<div class="cell">
+<details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> name)) <span class="sc">+</span></span>
+<span id="cb60-2"><a href="#cb60-2"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> name), <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb60-3"><a href="#cb60-3"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">colour =</span> lg)) <span class="sc">+</span></span>
+<span id="cb60-4"><a href="#cb60-4"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"NL"</span>, <span class="st">"AL"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb60-5"><a href="#cb60-5"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb60-6"><a href="#cb60-6"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb60-7"><a href="#cb60-7"></a>  <span class="fu">facet_grid</span>(lg <span class="sc">~</span> ., <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">space =</span> <span class="st">"free_y"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details><div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="03-ggplot2-barplot_files/figure-html/unnamed-chunk-38-1.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <!-- -->
@@ -2261,699 +2361,820 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb56" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb56-1"><a href="#cb56-1"></a><span class="co">---</span></span>
-<span id="cb56-2"><a href="#cb56-2"></a><span class="an">title:</span><span class="co"> "03-ggplot2 绘图——条形图"</span></span>
-<span id="cb56-3"><a href="#cb56-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb56-4"><a href="#cb56-4"></a><span class="an">date:</span><span class="co"> "2025-06-14"</span></span>
-<span id="cb56-5"><a href="#cb56-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb56-6"><a href="#cb56-6"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb56-7"><a href="#cb56-7"></a><span class="co">    html:</span></span>
-<span id="cb56-8"><a href="#cb56-8"></a><span class="co">        code-fold: true</span></span>
-<span id="cb56-9"><a href="#cb56-9"></a><span class="co">        code-line-numbers: true</span></span>
-<span id="cb56-10"><a href="#cb56-10"></a><span class="co">        code-highlight: true</span></span>
-<span id="cb56-11"><a href="#cb56-11"></a><span class="co">        fig_caption: true</span></span>
-<span id="cb56-12"><a href="#cb56-12"></a><span class="co">        number-sections: true</span></span>
-<span id="cb56-13"><a href="#cb56-13"></a><span class="co">        toc: true</span></span>
-<span id="cb56-14"><a href="#cb56-14"></a><span class="co">        toc-depth: 3</span></span>
-<span id="cb56-15"><a href="#cb56-15"></a><span class="co">---</span></span>
-<span id="cb56-16"><a href="#cb56-16"></a></span>
-<span id="cb56-17"><a href="#cb56-17"></a><span class="fu"># 绘制基本条形图</span></span>
-<span id="cb56-18"><a href="#cb56-18"></a></span>
-<span id="cb56-19"><a href="#cb56-19"></a><span class="fu">## x 是离散型变量</span></span>
-<span id="cb56-20"><a href="#cb56-20"></a></span>
-<span id="cb56-23"><a href="#cb56-23"></a><span class="in">```{r}</span></span>
-<span id="cb56-24"><a href="#cb56-24"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-25"><a href="#cb56-25"></a><span class="co">#| output: true</span></span>
-<span id="cb56-26"><a href="#cb56-26"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-27"><a href="#cb56-27"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-28"><a href="#cb56-28"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-29"><a href="#cb56-29"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-30"><a href="#cb56-30"></a></span>
-<span id="cb56-31"><a href="#cb56-31"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the pg_mean data set</span></span>
-<span id="cb56-32"><a href="#cb56-32"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-33"><a href="#cb56-33"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb56-34"><a href="#cb56-34"></a>  <span class="fu">geom_col</span>()</span>
-<span id="cb56-35"><a href="#cb56-35"></a><span class="in">```</span></span>
-<span id="cb56-36"><a href="#cb56-36"></a></span>
-<span id="cb56-37"><a href="#cb56-37"></a><span class="fu">## x 是连续型变量</span></span>
-<span id="cb56-38"><a href="#cb56-38"></a></span>
-<span id="cb56-39"><a href="#cb56-39"></a><span class="fu">### x 是原数的连续的数值型格式</span></span>
-<span id="cb56-40"><a href="#cb56-40"></a></span>
-<span id="cb56-43"><a href="#cb56-43"></a><span class="in">```{r}</span></span>
-<span id="cb56-44"><a href="#cb56-44"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-45"><a href="#cb56-45"></a><span class="co">#| output: true</span></span>
-<span id="cb56-46"><a href="#cb56-46"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-47"><a href="#cb56-47"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-48"><a href="#cb56-48"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-49"><a href="#cb56-49"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-50"><a href="#cb56-50"></a></span>
-<span id="cb56-51"><a href="#cb56-51"></a><span class="co"># There's no entry for Time == 6</span></span>
-<span id="cb56-52"><a href="#cb56-52"></a>BOD</span>
-<span id="cb56-53"><a href="#cb56-53"></a></span>
-<span id="cb56-54"><a href="#cb56-54"></a><span class="co"># Time is numeric (continuous)</span></span>
-<span id="cb56-55"><a href="#cb56-55"></a><span class="fu">str</span>(BOD)</span>
-<span id="cb56-56"><a href="#cb56-56"></a><span class="co">#&gt; 'data.frame':    6 obs. of  2 variables:</span></span>
-<span id="cb56-57"><a href="#cb56-57"></a><span class="co">#&gt;  $ Time  : num  1 2 3 4 5 7</span></span>
-<span id="cb56-58"><a href="#cb56-58"></a><span class="co">#&gt;  $ demand: num  8.3 10.3 19 16 15.6 19.8</span></span>
-<span id="cb56-59"><a href="#cb56-59"></a><span class="co">#&gt;  - attr(*, "reference")= chr "A1.4, p. 270"</span></span>
-<span id="cb56-60"><a href="#cb56-60"></a></span>
-<span id="cb56-61"><a href="#cb56-61"></a><span class="fu">ggplot</span>(BOD, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> demand)) <span class="sc">+</span></span>
-<span id="cb56-62"><a href="#cb56-62"></a>  <span class="fu">geom_col</span>()</span>
-<span id="cb56-63"><a href="#cb56-63"></a><span class="in">```</span></span>
-<span id="cb56-64"><a href="#cb56-64"></a></span>
-<span id="cb56-65"><a href="#cb56-65"></a><span class="fu">### x 转换为因子型变量</span></span>
-<span id="cb56-66"><a href="#cb56-66"></a></span>
-<span id="cb56-69"><a href="#cb56-69"></a><span class="in">```{r}</span></span>
-<span id="cb56-70"><a href="#cb56-70"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-71"><a href="#cb56-71"></a><span class="co">#| output: true</span></span>
-<span id="cb56-72"><a href="#cb56-72"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-73"><a href="#cb56-73"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-74"><a href="#cb56-74"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-75"><a href="#cb56-75"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-76"><a href="#cb56-76"></a></span>
-<span id="cb56-77"><a href="#cb56-77"></a><span class="co"># There's no entry for Time == 6</span></span>
-<span id="cb56-78"><a href="#cb56-78"></a>BOD</span>
-<span id="cb56-79"><a href="#cb56-79"></a></span>
-<span id="cb56-80"><a href="#cb56-80"></a><span class="co"># Convert Time to a discrete (categorical) variable with factor()</span></span>
-<span id="cb56-81"><a href="#cb56-81"></a><span class="fu">ggplot</span>(BOD, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time), <span class="at">y =</span> demand)) <span class="sc">+</span></span>
-<span id="cb56-82"><a href="#cb56-82"></a>  <span class="fu">geom_col</span>()</span>
-<span id="cb56-83"><a href="#cb56-83"></a><span class="in">```</span></span>
-<span id="cb56-84"><a href="#cb56-84"></a></span>
-<span id="cb56-85"><a href="#cb56-85"></a><span class="fu">## 调整配色</span></span>
-<span id="cb56-86"><a href="#cb56-86"></a></span>
-<span id="cb56-87"><a href="#cb56-87"></a>在默认的设置下，条形图的填充色为深灰色且条形图没有边框线，用户可以通过调整 <span class="in">`fill`</span> 参数来改变填充色和调整 <span class="in">`colour/color`</span> 参数为条形图添加边框线。</span>
-<span id="cb56-88"><a href="#cb56-88"></a></span>
-<span id="cb56-89"><a href="#cb56-89"></a>将填充色设置为浅蓝色，边框现的颜色设置为黑色：</span>
-<span id="cb56-90"><a href="#cb56-90"></a></span>
-<span id="cb56-93"><a href="#cb56-93"></a><span class="in">```{r}</span></span>
-<span id="cb56-94"><a href="#cb56-94"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-95"><a href="#cb56-95"></a><span class="co">#| output: true</span></span>
-<span id="cb56-96"><a href="#cb56-96"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-97"><a href="#cb56-97"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-98"><a href="#cb56-98"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-99"><a href="#cb56-99"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-100"><a href="#cb56-100"></a></span>
-<span id="cb56-101"><a href="#cb56-101"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the pg_mean data set</span></span>
-<span id="cb56-102"><a href="#cb56-102"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-103"><a href="#cb56-103"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb56-104"><a href="#cb56-104"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>,<span class="at">colour =</span> <span class="st">"black"</span>)</span>
-<span id="cb56-105"><a href="#cb56-105"></a><span class="in">```</span></span>
-<span id="cb56-106"><a href="#cb56-106"></a></span>
-<span id="cb56-107"><a href="#cb56-107"></a><span class="fu"># 绘制簇状条形图</span></span>
-<span id="cb56-108"><a href="#cb56-108"></a></span>
-<span id="cb56-109"><a href="#cb56-109"></a>通过将分类变量映射到 <span class="in">`fill`</span> 参数上，运行命令 <span class="in">`geom_col(position = "dodge")`</span> 实现。</span>
-<span id="cb56-110"><a href="#cb56-110"></a></span>
-<span id="cb56-113"><a href="#cb56-113"></a><span class="in">```{r}</span></span>
-<span id="cb56-114"><a href="#cb56-114"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-115"><a href="#cb56-115"></a><span class="co">#| output: true</span></span>
-<span id="cb56-116"><a href="#cb56-116"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-117"><a href="#cb56-117"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-118"><a href="#cb56-118"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-119"><a href="#cb56-119"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-120"><a href="#cb56-120"></a></span>
-<span id="cb56-121"><a href="#cb56-121"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-122"><a href="#cb56-122"></a><span class="co"># check dataset</span></span>
-<span id="cb56-123"><a href="#cb56-123"></a>cabbage_exp</span>
-<span id="cb56-124"><a href="#cb56-124"></a></span>
-<span id="cb56-125"><a href="#cb56-125"></a><span class="co"># load ggplot2</span></span>
-<span id="cb56-126"><a href="#cb56-126"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-127"><a href="#cb56-127"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-128"><a href="#cb56-128"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
-<span id="cb56-129"><a href="#cb56-129"></a><span class="in">```</span></span>
-<span id="cb56-130"><a href="#cb56-130"></a></span>
-<span id="cb56-131"><a href="#cb56-131"></a><span class="fu">## `pastel1` 调色盘</span></span>
-<span id="cb56-132"><a href="#cb56-132"></a></span>
-<span id="cb56-135"><a href="#cb56-135"></a><span class="in">```{r}</span></span>
-<span id="cb56-136"><a href="#cb56-136"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-137"><a href="#cb56-137"></a><span class="co">#| output: true</span></span>
-<span id="cb56-138"><a href="#cb56-138"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-139"><a href="#cb56-139"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-140"><a href="#cb56-140"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-141"><a href="#cb56-141"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-142"><a href="#cb56-142"></a></span>
-<span id="cb56-143"><a href="#cb56-143"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-144"><a href="#cb56-144"></a><span class="co"># check dataset</span></span>
-<span id="cb56-145"><a href="#cb56-145"></a>cabbage_exp</span>
-<span id="cb56-146"><a href="#cb56-146"></a></span>
-<span id="cb56-147"><a href="#cb56-147"></a><span class="co"># load ggplot2</span></span>
-<span id="cb56-148"><a href="#cb56-148"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-149"><a href="#cb56-149"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-150"><a href="#cb56-150"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb56-151"><a href="#cb56-151"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
-<span id="cb56-152"><a href="#cb56-152"></a><span class="in">```</span></span>
-<span id="cb56-153"><a href="#cb56-153"></a></span>
-<span id="cb56-154"><a href="#cb56-154"></a><span class="fu">## 缺失项</span></span>
-<span id="cb56-155"><a href="#cb56-155"></a></span>
-<span id="cb56-156"><a href="#cb56-156"></a>如果分类变量各水平的组合中有缺失项，那么绘图结果中的条形则相应地略去不绘，同时，临近的条形将自动扩充到相应的位置，示例如下：</span>
-<span id="cb56-157"><a href="#cb56-157"></a></span>
-<span id="cb56-160"><a href="#cb56-160"></a><span class="in">```{r}</span></span>
-<span id="cb56-161"><a href="#cb56-161"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-162"><a href="#cb56-162"></a><span class="co">#| output: true</span></span>
-<span id="cb56-163"><a href="#cb56-163"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-164"><a href="#cb56-164"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-165"><a href="#cb56-165"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-166"><a href="#cb56-166"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-167"><a href="#cb56-167"></a></span>
-<span id="cb56-168"><a href="#cb56-168"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-169"><a href="#cb56-169"></a><span class="co"># check dataset</span></span>
-<span id="cb56-170"><a href="#cb56-170"></a>cabbage_exp</span>
-<span id="cb56-171"><a href="#cb56-171"></a></span>
-<span id="cb56-172"><a href="#cb56-172"></a><span class="co"># delete last row</span></span>
-<span id="cb56-173"><a href="#cb56-173"></a>ce <span class="ot">&lt;-</span> cabbage_exp[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span>
-<span id="cb56-174"><a href="#cb56-174"></a>ce</span>
-<span id="cb56-175"><a href="#cb56-175"></a><span class="co"># load ggplot2</span></span>
-<span id="cb56-176"><a href="#cb56-176"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-177"><a href="#cb56-177"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-178"><a href="#cb56-178"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb56-179"><a href="#cb56-179"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
-<span id="cb56-180"><a href="#cb56-180"></a><span class="in">```</span></span>
-<span id="cb56-181"><a href="#cb56-181"></a></span>
-<span id="cb56-182"><a href="#cb56-182"></a><span class="fu"># 绘制频数条形图</span></span>
-<span id="cb56-183"><a href="#cb56-183"></a></span>
-<span id="cb56-184"><a href="#cb56-184"></a><span class="fu">## 使用 `geom_bar()` 函数</span></span>
-<span id="cb56-185"><a href="#cb56-185"></a></span>
-<span id="cb56-186"><a href="#cb56-186"></a>使用 <span class="in">`geom_bar()`</span> 函数，同时不映射任何变量到y参数</span>
-<span id="cb56-187"><a href="#cb56-187"></a></span>
-<span id="cb56-190"><a href="#cb56-190"></a><span class="in">```{r}</span></span>
-<span id="cb56-191"><a href="#cb56-191"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-192"><a href="#cb56-192"></a><span class="co">#| output: true</span></span>
-<span id="cb56-193"><a href="#cb56-193"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-194"><a href="#cb56-194"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-195"><a href="#cb56-195"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-196"><a href="#cb56-196"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-197"><a href="#cb56-197"></a></span>
-<span id="cb56-198"><a href="#cb56-198"></a><span class="co"># Equivalent to using geom_bar(stat = "bin")</span></span>
-<span id="cb56-199"><a href="#cb56-199"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut)) <span class="sc">+</span></span>
-<span id="cb56-200"><a href="#cb56-200"></a>  <span class="fu">geom_bar</span>()</span>
-<span id="cb56-201"><a href="#cb56-201"></a><span class="in">```</span></span>
-<span id="cb56-202"><a href="#cb56-202"></a></span>
-<span id="cb56-203"><a href="#cb56-203"></a><span class="fu">## 条形图着色</span></span>
-<span id="cb56-204"><a href="#cb56-204"></a></span>
-<span id="cb56-207"><a href="#cb56-207"></a><span class="in">```{r}</span></span>
-<span id="cb56-208"><a href="#cb56-208"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-209"><a href="#cb56-209"></a><span class="co">#| output: true</span></span>
-<span id="cb56-210"><a href="#cb56-210"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-211"><a href="#cb56-211"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-212"><a href="#cb56-212"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-213"><a href="#cb56-213"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-214"><a href="#cb56-214"></a></span>
-<span id="cb56-215"><a href="#cb56-215"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopchange data set</span></span>
-<span id="cb56-216"><a href="#cb56-216"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb56-217"><a href="#cb56-217"></a></span>
-<span id="cb56-218"><a href="#cb56-218"></a><span class="co"># select top 10 state with population growth</span></span>
-<span id="cb56-219"><a href="#cb56-219"></a>upc <span class="ot">&lt;-</span> uspopchange <span class="sc">%&gt;%</span></span>
-<span id="cb56-220"><a href="#cb56-220"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Change)) <span class="sc">%&gt;%</span></span>
-<span id="cb56-221"><a href="#cb56-221"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
-<span id="cb56-222"><a href="#cb56-222"></a></span>
-<span id="cb56-223"><a href="#cb56-223"></a>upc</span>
-<span id="cb56-224"><a href="#cb56-224"></a><span class="in">```</span></span>
-<span id="cb56-225"><a href="#cb56-225"></a></span>
-<span id="cb56-226"><a href="#cb56-226"></a>将 Region 映射到 fill 是上兵绘制条形图：</span>
-<span id="cb56-227"><a href="#cb56-227"></a></span>
-<span id="cb56-230"><a href="#cb56-230"></a><span class="in">```{r}</span></span>
-<span id="cb56-231"><a href="#cb56-231"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-232"><a href="#cb56-232"></a><span class="co">#| output: true</span></span>
-<span id="cb56-233"><a href="#cb56-233"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-234"><a href="#cb56-234"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-235"><a href="#cb56-235"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-236"><a href="#cb56-236"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-237"><a href="#cb56-237"></a></span>
-<span id="cb56-238"><a href="#cb56-238"></a><span class="fu">ggplot</span>(upc, <span class="fu">aes</span>(<span class="at">x =</span> Abb, <span class="at">y =</span> Change, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
-<span id="cb56-239"><a href="#cb56-239"></a>  <span class="fu">geom_col</span>()</span>
-<span id="cb56-240"><a href="#cb56-240"></a><span class="in">```</span></span>
-<span id="cb56-241"><a href="#cb56-241"></a></span>
-<span id="cb56-242"><a href="#cb56-242"></a><span class="fu">### 设定图形颜色</span></span>
-<span id="cb56-243"><a href="#cb56-243"></a></span>
-<span id="cb56-244"><a href="#cb56-244"></a>借助函数 <span class="in">`scale_fill_brewer()`</span>&nbsp;or&nbsp;<span class="in">`scale_fill_manual()`</span> 重新设定图形颜色：</span>
-<span id="cb56-245"><a href="#cb56-245"></a></span>
-<span id="cb56-248"><a href="#cb56-248"></a><span class="in">```{r}</span></span>
-<span id="cb56-249"><a href="#cb56-249"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-250"><a href="#cb56-250"></a><span class="co">#| output: true</span></span>
-<span id="cb56-251"><a href="#cb56-251"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-252"><a href="#cb56-252"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-253"><a href="#cb56-253"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-254"><a href="#cb56-254"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-255"><a href="#cb56-255"></a></span>
-<span id="cb56-256"><a href="#cb56-256"></a><span class="fu">ggplot</span>(upc, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Abb, Change), <span class="at">y =</span> Change, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
-<span id="cb56-257"><a href="#cb56-257"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb56-258"><a href="#cb56-258"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#669933"</span>, <span class="st">"#FFCC66"</span>)) <span class="sc">+</span></span>
-<span id="cb56-259"><a href="#cb56-259"></a>  <span class="fu">xlab</span>(<span class="st">"State"</span>)</span>
-<span id="cb56-260"><a href="#cb56-260"></a><span class="in">```</span></span>
-<span id="cb56-261"><a href="#cb56-261"></a></span>
-<span id="cb56-262"><a href="#cb56-262"></a><span class="fu">### 注意</span></span>
-<span id="cb56-263"><a href="#cb56-263"></a></span>
-<span id="cb56-264"><a href="#cb56-264"></a>颜色的映射是在 <span class="in">`aes()`</span> 内部完成的，但是颜色的设定是在 <span class="in">`aes()`</span> 外部完成的。</span>
-<span id="cb56-265"><a href="#cb56-265"></a></span>
-<span id="cb56-266"><a href="#cb56-266"></a><span class="fu"># 对正负条形图分别着色</span></span>
-<span id="cb56-267"><a href="#cb56-267"></a></span>
-<span id="cb56-268"><a href="#cb56-268"></a>首先创建一个取值正负性进行标识的变量 <span class="in">`pos`</span> :</span>
-<span id="cb56-269"><a href="#cb56-269"></a></span>
-<span id="cb56-272"><a href="#cb56-272"></a><span class="in">```{r}</span></span>
-<span id="cb56-273"><a href="#cb56-273"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-274"><a href="#cb56-274"></a><span class="co">#| output: true</span></span>
-<span id="cb56-275"><a href="#cb56-275"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-276"><a href="#cb56-276"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-277"><a href="#cb56-277"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-278"><a href="#cb56-278"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-279"><a href="#cb56-279"></a></span>
-<span id="cb56-280"><a href="#cb56-280"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
-<span id="cb56-281"><a href="#cb56-281"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb56-282"><a href="#cb56-282"></a></span>
-<span id="cb56-283"><a href="#cb56-283"></a>climate_sub <span class="ot">&lt;-</span> climate <span class="sc">%&gt;%</span></span>
-<span id="cb56-284"><a href="#cb56-284"></a>  <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">"Berkeley"</span> <span class="sc">&amp;</span> Year <span class="sc">&gt;=</span> <span class="dv">1900</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb56-285"><a href="#cb56-285"></a>  <span class="fu">mutate</span>(<span class="at">pos =</span> Anomaly10y <span class="sc">&gt;=</span> <span class="dv">0</span>)</span>
-<span id="cb56-286"><a href="#cb56-286"></a></span>
-<span id="cb56-287"><a href="#cb56-287"></a><span class="co"># 展示前10行</span></span>
-<span id="cb56-288"><a href="#cb56-288"></a><span class="fu">print</span>(<span class="st">"前10行数据："</span>)</span>
-<span id="cb56-289"><a href="#cb56-289"></a><span class="fu">head</span>(climate_sub, <span class="dv">10</span>)</span>
-<span id="cb56-290"><a href="#cb56-290"></a><span class="in">```</span></span>
-<span id="cb56-291"><a href="#cb56-291"></a></span>
-<span id="cb56-292"><a href="#cb56-292"></a><span class="fu">## `pos` 映射到 `fill` 中</span></span>
-<span id="cb56-293"><a href="#cb56-293"></a></span>
-<span id="cb56-296"><a href="#cb56-296"></a><span class="in">```{r}</span></span>
-<span id="cb56-297"><a href="#cb56-297"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-298"><a href="#cb56-298"></a><span class="co">#| output: true</span></span>
-<span id="cb56-299"><a href="#cb56-299"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-300"><a href="#cb56-300"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-301"><a href="#cb56-301"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-302"><a href="#cb56-302"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-303"><a href="#cb56-303"></a></span>
-<span id="cb56-304"><a href="#cb56-304"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-305"><a href="#cb56-305"></a><span class="fu">ggplot</span>(climate_sub, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y, <span class="at">fill =</span> pos)) <span class="sc">+</span></span>
-<span id="cb56-306"><a href="#cb56-306"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"identity"</span>)</span>
-<span id="cb56-307"><a href="#cb56-307"></a><span class="in">```</span></span>
-<span id="cb56-308"><a href="#cb56-308"></a></span>
-<span id="cb56-309"><a href="#cb56-309"></a><span class="fu">### 注意</span></span>
-<span id="cb56-310"><a href="#cb56-310"></a></span>
-<span id="cb56-311"><a href="#cb56-311"></a>这里条形图的参数设定为 <span class="in">`position = "identity"`</span> ，可以避免系统因对负值绘制堆积条形而发出的警告信息。</span>
-<span id="cb56-312"><a href="#cb56-312"></a></span>
-<span id="cb56-313"><a href="#cb56-313"></a><span class="fu">## 调整配色</span></span>
-<span id="cb56-314"><a href="#cb56-314"></a></span>
-<span id="cb56-315"><a href="#cb56-315"></a><span class="fu">### `scale_fill_manual()` 参数</span></span>
-<span id="cb56-316"><a href="#cb56-316"></a></span>
-<span id="cb56-317"><a href="#cb56-317"></a>设定 <span class="in">`scale_fill_manual()`</span> 参数对图形进行调整，设定参数 <span class="in">`guide = FALSE`</span> 可以删除图例；设定边框颜色（color/colour）和边框线宽度（size），这里边框线的单位是毫米。</span>
-<span id="cb56-318"><a href="#cb56-318"></a></span>
-<span id="cb56-321"><a href="#cb56-321"></a><span class="in">```{r}</span></span>
-<span id="cb56-322"><a href="#cb56-322"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-323"><a href="#cb56-323"></a><span class="co">#| output: true</span></span>
-<span id="cb56-324"><a href="#cb56-324"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-325"><a href="#cb56-325"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-326"><a href="#cb56-326"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-327"><a href="#cb56-327"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-328"><a href="#cb56-328"></a></span>
-<span id="cb56-329"><a href="#cb56-329"></a><span class="fu">ggplot</span>(climate_sub, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y, <span class="at">fill =</span> pos)) <span class="sc">+</span></span>
-<span id="cb56-330"><a href="#cb56-330"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb56-331"><a href="#cb56-331"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#CCEEFF"</span>, <span class="st">"#FFDDDD"</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb56-332"><a href="#cb56-332"></a><span class="in">```</span></span>
-<span id="cb56-333"><a href="#cb56-333"></a></span>
-<span id="cb56-334"><a href="#cb56-334"></a>出现警告信息（Warning messages）</span>
-<span id="cb56-335"><a href="#cb56-335"></a></span>
-<span id="cb56-336"><a href="#cb56-336"></a>调整后：</span>
-<span id="cb56-337"><a href="#cb56-337"></a></span>
-<span id="cb56-340"><a href="#cb56-340"></a><span class="in">```{r}</span></span>
-<span id="cb56-341"><a href="#cb56-341"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-342"><a href="#cb56-342"></a><span class="co">#| output: true</span></span>
-<span id="cb56-343"><a href="#cb56-343"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-344"><a href="#cb56-344"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-345"><a href="#cb56-345"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-346"><a href="#cb56-346"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-347"><a href="#cb56-347"></a></span>
-<span id="cb56-348"><a href="#cb56-348"></a><span class="fu">ggplot</span>(climate_sub, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y, <span class="at">fill =</span> pos)) <span class="sc">+</span></span>
-<span id="cb56-349"><a href="#cb56-349"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
-<span id="cb56-350"><a href="#cb56-350"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#CCEEFF"</span>, <span class="st">"#FFDDDD"</span>), <span class="at">guide =</span> <span class="st">"none"</span>)</span>
-<span id="cb56-351"><a href="#cb56-351"></a><span class="in">```</span></span>
-<span id="cb56-352"><a href="#cb56-352"></a></span>
-<span id="cb56-353"><a href="#cb56-353"></a><span class="fu"># 调整条形宽度和条形间距</span></span>
-<span id="cb56-354"><a href="#cb56-354"></a></span>
-<span id="cb56-355"><a href="#cb56-355"></a>通过设定 <span class="in">`geom_bar()`</span> 函数的参数 <span class="in">`width`</span> 来使条形变得更宽或更窄，该参数默认函数为 0.9，更大的值会使条形更宽，反之更窄（细）。</span>
-<span id="cb56-356"><a href="#cb56-356"></a></span>
-<span id="cb56-357"><a href="#cb56-357"></a><span class="fu">## 标准宽度</span></span>
-<span id="cb56-358"><a href="#cb56-358"></a></span>
-<span id="cb56-361"><a href="#cb56-361"></a><span class="in">```{r}</span></span>
-<span id="cb56-362"><a href="#cb56-362"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-363"><a href="#cb56-363"></a><span class="co">#| output: true</span></span>
-<span id="cb56-364"><a href="#cb56-364"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-365"><a href="#cb56-365"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-366"><a href="#cb56-366"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-367"><a href="#cb56-367"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-368"><a href="#cb56-368"></a></span>
-<span id="cb56-369"><a href="#cb56-369"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the pg_mean data set</span></span>
-<span id="cb56-370"><a href="#cb56-370"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-371"><a href="#cb56-371"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb56-372"><a href="#cb56-372"></a>  <span class="fu">geom_col</span>()</span>
-<span id="cb56-373"><a href="#cb56-373"></a><span class="in">```</span></span>
-<span id="cb56-374"><a href="#cb56-374"></a></span>
-<span id="cb56-375"><a href="#cb56-375"></a><span class="fu">## 更窄</span></span>
-<span id="cb56-376"><a href="#cb56-376"></a></span>
-<span id="cb56-379"><a href="#cb56-379"></a><span class="in">```{r}</span></span>
-<span id="cb56-380"><a href="#cb56-380"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-381"><a href="#cb56-381"></a><span class="co">#| output: true</span></span>
-<span id="cb56-382"><a href="#cb56-382"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-383"><a href="#cb56-383"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-384"><a href="#cb56-384"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-385"><a href="#cb56-385"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-386"><a href="#cb56-386"></a></span>
-<span id="cb56-387"><a href="#cb56-387"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the pg_mean data set</span></span>
-<span id="cb56-388"><a href="#cb56-388"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-389"><a href="#cb56-389"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb56-390"><a href="#cb56-390"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>)</span>
-<span id="cb56-391"><a href="#cb56-391"></a><span class="in">```</span></span>
-<span id="cb56-392"><a href="#cb56-392"></a></span>
-<span id="cb56-393"><a href="#cb56-393"></a><span class="fu">## 更宽</span></span>
-<span id="cb56-394"><a href="#cb56-394"></a></span>
-<span id="cb56-395"><a href="#cb56-395"></a>条形宽度的最大宽度值为1.</span>
-<span id="cb56-396"><a href="#cb56-396"></a></span>
-<span id="cb56-399"><a href="#cb56-399"></a><span class="in">```{r}</span></span>
-<span id="cb56-400"><a href="#cb56-400"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-401"><a href="#cb56-401"></a><span class="co">#| output: true</span></span>
-<span id="cb56-402"><a href="#cb56-402"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-403"><a href="#cb56-403"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-404"><a href="#cb56-404"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-405"><a href="#cb56-405"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-406"><a href="#cb56-406"></a></span>
-<span id="cb56-407"><a href="#cb56-407"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the pg_mean data set</span></span>
-<span id="cb56-408"><a href="#cb56-408"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-409"><a href="#cb56-409"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
-<span id="cb56-410"><a href="#cb56-410"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="dv">1</span>)</span>
-<span id="cb56-411"><a href="#cb56-411"></a><span class="in">```</span></span>
-<span id="cb56-412"><a href="#cb56-412"></a></span>
-<span id="cb56-413"><a href="#cb56-413"></a><span class="fu">## 调整组内间距</span></span>
-<span id="cb56-414"><a href="#cb56-414"></a></span>
-<span id="cb56-415"><a href="#cb56-415"></a>簇状条形图默认组内间距为0，如果希望增加组内间距，可以通过将 <span class="in">`width()`</span> 的值设定的小一些，并将 <span class="in">`position_dodge()`</span> 的值设定大于 <span class="in">`width()`</span> 来实现。</span>
-<span id="cb56-416"><a href="#cb56-416"></a></span>
-<span id="cb56-417"><a href="#cb56-417"></a><span class="fu">### 条形更窄的簇状条形图</span></span>
-<span id="cb56-418"><a href="#cb56-418"></a></span>
-<span id="cb56-421"><a href="#cb56-421"></a><span class="in">```{r}</span></span>
-<span id="cb56-422"><a href="#cb56-422"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-423"><a href="#cb56-423"></a><span class="co">#| output: true</span></span>
-<span id="cb56-424"><a href="#cb56-424"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-425"><a href="#cb56-425"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-426"><a href="#cb56-426"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-427"><a href="#cb56-427"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-428"><a href="#cb56-428"></a></span>
-<span id="cb56-429"><a href="#cb56-429"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-430"><a href="#cb56-430"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"dodge"</span>)</span>
-<span id="cb56-431"><a href="#cb56-431"></a><span class="in">```</span></span>
-<span id="cb56-432"><a href="#cb56-432"></a></span>
-<span id="cb56-433"><a href="#cb56-433"></a><span class="fu">### 具有条形间距的簇状条形图</span></span>
-<span id="cb56-434"><a href="#cb56-434"></a></span>
-<span id="cb56-437"><a href="#cb56-437"></a><span class="in">```{r}</span></span>
-<span id="cb56-438"><a href="#cb56-438"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-439"><a href="#cb56-439"></a><span class="co">#| output: true</span></span>
-<span id="cb56-440"><a href="#cb56-440"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-441"><a href="#cb56-441"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-442"><a href="#cb56-442"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-443"><a href="#cb56-443"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-444"><a href="#cb56-444"></a></span>
-<span id="cb56-445"><a href="#cb56-445"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-446"><a href="#cb56-446"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.7</span>))</span>
-<span id="cb56-447"><a href="#cb56-447"></a><span class="in">```</span></span>
-<span id="cb56-448"><a href="#cb56-448"></a></span>
-<span id="cb56-449"><a href="#cb56-449"></a><span class="fu">### `position` 语法</span></span>
-<span id="cb56-450"><a href="#cb56-450"></a></span>
-<span id="cb56-451"><a href="#cb56-451"></a>以下四条命令是等价的：</span>
-<span id="cb56-452"><a href="#cb56-452"></a></span>
-<span id="cb56-453"><a href="#cb56-453"></a><span class="in">``` r</span></span>
-<span id="cb56-454"><a href="#cb56-454"></a><span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
-<span id="cb56-455"><a href="#cb56-455"></a><span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="fl">0.9</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>())</span>
-<span id="cb56-456"><a href="#cb56-456"></a><span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>))</span>
-<span id="cb56-457"><a href="#cb56-457"></a><span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="fl">0.9</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>))</span>
-<span id="cb56-458"><a href="#cb56-458"></a><span class="in">```</span></span>
-<span id="cb56-459"><a href="#cb56-459"></a></span>
-<span id="cb56-460"><a href="#cb56-460"></a><span class="fu"># 绘制堆积条形图</span></span>
-<span id="cb56-461"><a href="#cb56-461"></a></span>
-<span id="cb56-462"><a href="#cb56-462"></a><span class="fu">## 使用 `geom_bar()` 函数</span></span>
-<span id="cb56-463"><a href="#cb56-463"></a></span>
-<span id="cb56-464"><a href="#cb56-464"></a>使用 <span class="in">`geom_bar()`</span> 函数，并映射一个变量给填充色参数 <span class="in">`fill`</span> 即可，该命令会将 Date 对应到 x 轴上，并以 Cultivar 作为填充色</span>
-<span id="cb56-465"><a href="#cb56-465"></a></span>
-<span id="cb56-468"><a href="#cb56-468"></a><span class="in">```{r}</span></span>
-<span id="cb56-469"><a href="#cb56-469"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-470"><a href="#cb56-470"></a><span class="co">#| output: true</span></span>
-<span id="cb56-471"><a href="#cb56-471"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-472"><a href="#cb56-472"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-473"><a href="#cb56-473"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-474"><a href="#cb56-474"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-475"><a href="#cb56-475"></a></span>
-<span id="cb56-476"><a href="#cb56-476"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-477"><a href="#cb56-477"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-478"><a href="#cb56-478"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-479"><a href="#cb56-479"></a>  <span class="fu">geom_col</span>()</span>
-<span id="cb56-480"><a href="#cb56-480"></a><span class="in">```</span></span>
-<span id="cb56-481"><a href="#cb56-481"></a></span>
-<span id="cb56-482"><a href="#cb56-482"></a><span class="fu">## 反转堆积顺序和图例顺序</span></span>
-<span id="cb56-483"><a href="#cb56-483"></a></span>
-<span id="cb56-484"><a href="#cb56-484"></a>默认情况下，条形的堆积顺序和图例顺序是一致的，但是都某些数据集而言需要调整图例顺序，用户可以通过 <span class="in">`guide()`</span> 函数来对图例顺序进行调整，并指定图例所对应的需要调整的图形属性（<span class="in">`fill`</span>)，并使用 <span class="in">`position_stack(reverse = TRUE)`</span> 参数来实现反转条形的堆积顺序，通过上述两种函数来保证图例顺序与条形顺序一致。</span>
-<span id="cb56-485"><a href="#cb56-485"></a></span>
-<span id="cb56-488"><a href="#cb56-488"></a><span class="in">```{r}</span></span>
-<span id="cb56-489"><a href="#cb56-489"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-490"><a href="#cb56-490"></a><span class="co">#| output: true</span></span>
-<span id="cb56-491"><a href="#cb56-491"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-492"><a href="#cb56-492"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-493"><a href="#cb56-493"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-494"><a href="#cb56-494"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-495"><a href="#cb56-495"></a></span>
-<span id="cb56-496"><a href="#cb56-496"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-497"><a href="#cb56-497"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-498"><a href="#cb56-498"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-499"><a href="#cb56-499"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
-<span id="cb56-500"><a href="#cb56-500"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb56-501"><a href="#cb56-501"></a><span class="in">```</span></span>
-<span id="cb56-502"><a href="#cb56-502"></a></span>
-<span id="cb56-503"><a href="#cb56-503"></a><span class="fu">## 获得效果更好的条形图</span></span>
-<span id="cb56-504"><a href="#cb56-504"></a></span>
-<span id="cb56-505"><a href="#cb56-505"></a>使用 <span class="in">`scale_fill_brewer()`</span>&nbsp;函数得到一个新的调色板，最后设定 <span class="in">`colour="black"`</span> 为条形添加一个黑色边框线。</span>
-<span id="cb56-506"><a href="#cb56-506"></a></span>
-<span id="cb56-509"><a href="#cb56-509"></a><span class="in">```{r}</span></span>
-<span id="cb56-510"><a href="#cb56-510"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-511"><a href="#cb56-511"></a><span class="co">#| output: true</span></span>
-<span id="cb56-512"><a href="#cb56-512"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-513"><a href="#cb56-513"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-514"><a href="#cb56-514"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-515"><a href="#cb56-515"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-516"><a href="#cb56-516"></a></span>
-<span id="cb56-517"><a href="#cb56-517"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-518"><a href="#cb56-518"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb56-519"><a href="#cb56-519"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-520"><a href="#cb56-520"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb56-521"><a href="#cb56-521"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
-<span id="cb56-522"><a href="#cb56-522"></a><span class="in">```</span></span>
-<span id="cb56-523"><a href="#cb56-523"></a></span>
-<span id="cb56-524"><a href="#cb56-524"></a><span class="fu"># 绘制百分比堆积条形图</span></span>
-<span id="cb56-525"><a href="#cb56-525"></a></span>
-<span id="cb56-526"><a href="#cb56-526"></a><span class="fu">## 使用 `geom_col(position =  "fill")` 实现</span></span>
-<span id="cb56-527"><a href="#cb56-527"></a></span>
-<span id="cb56-528"><a href="#cb56-528"></a>使用 <span class="in">`geom_col(position =  "fill")`</span> 可以将y的值调整为0到1之间。</span>
-<span id="cb56-529"><a href="#cb56-529"></a></span>
-<span id="cb56-532"><a href="#cb56-532"></a><span class="in">```{r}</span></span>
-<span id="cb56-533"><a href="#cb56-533"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-534"><a href="#cb56-534"></a><span class="co">#| output: true</span></span>
-<span id="cb56-535"><a href="#cb56-535"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-536"><a href="#cb56-536"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-537"><a href="#cb56-537"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-538"><a href="#cb56-538"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-539"><a href="#cb56-539"></a></span>
-<span id="cb56-540"><a href="#cb56-540"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-541"><a href="#cb56-541"></a></span>
-<span id="cb56-542"><a href="#cb56-542"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-543"><a href="#cb56-543"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span>
-<span id="cb56-544"><a href="#cb56-544"></a><span class="in">```</span></span>
-<span id="cb56-545"><a href="#cb56-545"></a></span>
-<span id="cb56-546"><a href="#cb56-546"></a><span class="fu">### 让标签以百分比的形式展示</span></span>
-<span id="cb56-547"><a href="#cb56-547"></a></span>
-<span id="cb56-550"><a href="#cb56-550"></a><span class="in">```{r}</span></span>
-<span id="cb56-551"><a href="#cb56-551"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-552"><a href="#cb56-552"></a><span class="co">#| output: true</span></span>
-<span id="cb56-553"><a href="#cb56-553"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-554"><a href="#cb56-554"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-555"><a href="#cb56-555"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-556"><a href="#cb56-556"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-557"><a href="#cb56-557"></a></span>
-<span id="cb56-558"><a href="#cb56-558"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-559"><a href="#cb56-559"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb56-560"><a href="#cb56-560"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span>
-<span id="cb56-561"><a href="#cb56-561"></a><span class="in">```</span></span>
-<span id="cb56-562"><a href="#cb56-562"></a></span>
-<span id="cb56-563"><a href="#cb56-563"></a><span class="fu">## 更换调色板并添加边框线</span></span>
-<span id="cb56-564"><a href="#cb56-564"></a></span>
-<span id="cb56-567"><a href="#cb56-567"></a><span class="in">```{r}</span></span>
-<span id="cb56-568"><a href="#cb56-568"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-569"><a href="#cb56-569"></a><span class="co">#| output: true</span></span>
-<span id="cb56-570"><a href="#cb56-570"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-571"><a href="#cb56-571"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-572"><a href="#cb56-572"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-573"><a href="#cb56-573"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-574"><a href="#cb56-574"></a></span>
-<span id="cb56-575"><a href="#cb56-575"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-576"><a href="#cb56-576"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb56-577"><a href="#cb56-577"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
-<span id="cb56-578"><a href="#cb56-578"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
-<span id="cb56-579"><a href="#cb56-579"></a><span class="in">```</span></span>
-<span id="cb56-580"><a href="#cb56-580"></a></span>
-<span id="cb56-581"><a href="#cb56-581"></a><span class="fu"># 添加数据标签</span></span>
-<span id="cb56-582"><a href="#cb56-582"></a></span>
-<span id="cb56-583"><a href="#cb56-583"></a><span class="fu">## 使用 `geom_text()` 函数</span></span>
-<span id="cb56-584"><a href="#cb56-584"></a></span>
-<span id="cb56-585"><a href="#cb56-585"></a>需要分别制定一个变量映射给x、y和标签本身，通过设定 <span class="in">`vjust`</span> （竖直调整数据标签位置）来将标签位置移动至条形图顶端的上方或下方</span>
-<span id="cb56-586"><a href="#cb56-586"></a></span>
-<span id="cb56-589"><a href="#cb56-589"></a><span class="in">```{r}</span></span>
-<span id="cb56-590"><a href="#cb56-590"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-591"><a href="#cb56-591"></a><span class="co">#| output: true</span></span>
-<span id="cb56-592"><a href="#cb56-592"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-593"><a href="#cb56-593"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-594"><a href="#cb56-594"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-595"><a href="#cb56-595"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-596"><a href="#cb56-596"></a></span>
-<span id="cb56-597"><a href="#cb56-597"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
-<span id="cb56-598"><a href="#cb56-598"></a></span>
-<span id="cb56-599"><a href="#cb56-599"></a><span class="co"># Below the top</span></span>
-<span id="cb56-600"><a href="#cb56-600"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">interaction</span>(Date, Cultivar), <span class="at">y =</span> Weight)) <span class="sc">+</span></span>
-<span id="cb56-601"><a href="#cb56-601"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb56-602"><a href="#cb56-602"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Weight), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
-<span id="cb56-603"><a href="#cb56-603"></a></span>
-<span id="cb56-604"><a href="#cb56-604"></a><span class="co"># Above the top</span></span>
-<span id="cb56-605"><a href="#cb56-605"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">interaction</span>(Date, Cultivar), <span class="at">y =</span> Weight)) <span class="sc">+</span></span>
-<span id="cb56-606"><a href="#cb56-606"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb56-607"><a href="#cb56-607"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Weight), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>)</span>
-<span id="cb56-608"><a href="#cb56-608"></a><span class="in">```</span></span>
-<span id="cb56-609"><a href="#cb56-609"></a></span>
-<span id="cb56-610"><a href="#cb56-610"></a><span class="fu">## 给频数条形图添加标签</span></span>
-<span id="cb56-611"><a href="#cb56-611"></a></span>
-<span id="cb56-614"><a href="#cb56-614"></a><span class="in">```{r}</span></span>
-<span id="cb56-615"><a href="#cb56-615"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-616"><a href="#cb56-616"></a><span class="co">#| output: true</span></span>
-<span id="cb56-617"><a href="#cb56-617"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-618"><a href="#cb56-618"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-619"><a href="#cb56-619"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-620"><a href="#cb56-620"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-621"><a href="#cb56-621"></a></span>
-<span id="cb56-622"><a href="#cb56-622"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
-<span id="cb56-623"><a href="#cb56-623"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb56-624"><a href="#cb56-624"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">after_stat</span>(count)), <span class="at">stat =</span> <span class="st">"count"</span>, </span>
-<span id="cb56-625"><a href="#cb56-625"></a>            <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
-<span id="cb56-626"><a href="#cb56-626"></a><span class="in">```</span></span>
-<span id="cb56-627"><a href="#cb56-627"></a></span>
-<span id="cb56-628"><a href="#cb56-628"></a><span class="fu">## 给簇状条形图添加标签</span></span>
-<span id="cb56-629"><a href="#cb56-629"></a></span>
-<span id="cb56-630"><a href="#cb56-630"></a>需要设定 <span class="in">`position = position_dodge()`</span> 并给其一个参数来设定分类间距，分类间距默认值是0.9，因为簇状图的条形更窄，所以需要使用字号 <span class="in">`size`</span> 来匹配条形宽度，数据标签的默认字号是5，用户可以设定为 3 使其看起来更小（适配）。</span>
-<span id="cb56-631"><a href="#cb56-631"></a></span>
-<span id="cb56-634"><a href="#cb56-634"></a><span class="in">```{r}</span></span>
-<span id="cb56-635"><a href="#cb56-635"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-636"><a href="#cb56-636"></a><span class="co">#| output: true</span></span>
-<span id="cb56-637"><a href="#cb56-637"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-638"><a href="#cb56-638"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-639"><a href="#cb56-639"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-640"><a href="#cb56-640"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-641"><a href="#cb56-641"></a></span>
-<span id="cb56-642"><a href="#cb56-642"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-643"><a href="#cb56-643"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb56-644"><a href="#cb56-644"></a>  <span class="fu">geom_text</span>(</span>
-<span id="cb56-645"><a href="#cb56-645"></a>    <span class="fu">aes</span>(<span class="at">label =</span> Weight),</span>
-<span id="cb56-646"><a href="#cb56-646"></a>    <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">3</span>,</span>
-<span id="cb56-647"><a href="#cb56-647"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)</span>
-<span id="cb56-648"><a href="#cb56-648"></a>  )</span>
-<span id="cb56-649"><a href="#cb56-649"></a><span class="in">```</span></span>
-<span id="cb56-650"><a href="#cb56-650"></a></span>
-<span id="cb56-651"><a href="#cb56-651"></a><span class="fu">## 堆积图添加数据标签</span></span>
-<span id="cb56-652"><a href="#cb56-652"></a></span>
-<span id="cb56-653"><a href="#cb56-653"></a>要对堆积图添加数据标签，先要对每组条形所对应的数据进行累计求和，有需要在此之前保证数据的合理排序，否则可能会计算出错误的累计和。</span>
-<span id="cb56-654"><a href="#cb56-654"></a></span>
-<span id="cb56-655"><a href="#cb56-655"></a>使用 <span class="in">`dplyr`</span> 包中的 <span class="in">`arrange()`</span> 函数完成上述操作，使用 <span class="in">`rev()`</span> 函数调整 Cultivar 的顺序。</span>
-<span id="cb56-656"><a href="#cb56-656"></a></span>
-<span id="cb56-659"><a href="#cb56-659"></a><span class="in">```{r}</span></span>
-<span id="cb56-660"><a href="#cb56-660"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-661"><a href="#cb56-661"></a><span class="co">#| output: true</span></span>
-<span id="cb56-662"><a href="#cb56-662"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-663"><a href="#cb56-663"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-664"><a href="#cb56-664"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-665"><a href="#cb56-665"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-666"><a href="#cb56-666"></a></span>
-<span id="cb56-667"><a href="#cb56-667"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb56-668"><a href="#cb56-668"></a></span>
-<span id="cb56-669"><a href="#cb56-669"></a><span class="co"># Sort by the Date and Cultivar columns</span></span>
-<span id="cb56-670"><a href="#cb56-670"></a>ce <span class="ot">&lt;-</span> cabbage_exp <span class="sc">%&gt;%</span></span>
-<span id="cb56-671"><a href="#cb56-671"></a>  <span class="fu">arrange</span>(Date, <span class="fu">rev</span>(Cultivar))</span>
-<span id="cb56-672"><a href="#cb56-672"></a></span>
-<span id="cb56-673"><a href="#cb56-673"></a><span class="co"># Get the cumulative sum</span></span>
-<span id="cb56-674"><a href="#cb56-674"></a>ce <span class="ot">&lt;-</span> ce <span class="sc">%&gt;%</span></span>
-<span id="cb56-675"><a href="#cb56-675"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
-<span id="cb56-676"><a href="#cb56-676"></a>  <span class="fu">mutate</span>(<span class="at">label_y =</span> <span class="fu">cumsum</span>(Weight))</span>
-<span id="cb56-677"><a href="#cb56-677"></a></span>
-<span id="cb56-678"><a href="#cb56-678"></a>ce</span>
-<span id="cb56-679"><a href="#cb56-679"></a></span>
-<span id="cb56-680"><a href="#cb56-680"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-681"><a href="#cb56-681"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb56-682"><a href="#cb56-682"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> label_y, <span class="at">label =</span> Weight), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
-<span id="cb56-683"><a href="#cb56-683"></a><span class="in">```</span></span>
-<span id="cb56-684"><a href="#cb56-684"></a></span>
-<span id="cb56-685"><a href="#cb56-685"></a><span class="fu">## 堆积图数据标签放置在中部</span></span>
-<span id="cb56-686"><a href="#cb56-686"></a></span>
-<span id="cb56-687"><a href="#cb56-687"></a>如果想把数据标签放在条形中部，需要对累计求和的结果加以调整，并同时略去 <span class="in">`geom_bar()`</span> 函数对 y 偏移量 <span class="in">`offset`</span> 的设置。</span>
-<span id="cb56-688"><a href="#cb56-688"></a></span>
-<span id="cb56-691"><a href="#cb56-691"></a><span class="in">```{r}</span></span>
-<span id="cb56-692"><a href="#cb56-692"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-693"><a href="#cb56-693"></a><span class="co">#| output: true</span></span>
-<span id="cb56-694"><a href="#cb56-694"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-695"><a href="#cb56-695"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-696"><a href="#cb56-696"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-697"><a href="#cb56-697"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-698"><a href="#cb56-698"></a></span>
-<span id="cb56-699"><a href="#cb56-699"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb56-700"><a href="#cb56-700"></a></span>
-<span id="cb56-701"><a href="#cb56-701"></a>ce <span class="ot">&lt;-</span> cabbage_exp <span class="sc">%&gt;%</span></span>
-<span id="cb56-702"><a href="#cb56-702"></a>  <span class="fu">arrange</span>(Date, <span class="fu">rev</span>(Cultivar))</span>
-<span id="cb56-703"><a href="#cb56-703"></a></span>
-<span id="cb56-704"><a href="#cb56-704"></a><span class="co"># Calculate y position, placing it in the middle</span></span>
-<span id="cb56-705"><a href="#cb56-705"></a>ce <span class="ot">&lt;-</span> ce <span class="sc">%&gt;%</span></span>
-<span id="cb56-706"><a href="#cb56-706"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
-<span id="cb56-707"><a href="#cb56-707"></a>  <span class="fu">mutate</span>(<span class="at">label_y =</span> <span class="fu">cumsum</span>(Weight) <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> Weight)</span>
-<span id="cb56-708"><a href="#cb56-708"></a></span>
-<span id="cb56-709"><a href="#cb56-709"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-710"><a href="#cb56-710"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb56-711"><a href="#cb56-711"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> label_y, <span class="at">label =</span> Weight), <span class="at">colour =</span> <span class="st">"white"</span>)</span>
-<span id="cb56-712"><a href="#cb56-712"></a><span class="in">```</span></span>
-<span id="cb56-713"><a href="#cb56-713"></a></span>
-<span id="cb56-714"><a href="#cb56-714"></a><span class="fu">## 添加要素</span></span>
-<span id="cb56-715"><a href="#cb56-715"></a></span>
-<span id="cb56-716"><a href="#cb56-716"></a><span class="ss">1.  </span>修改颜色</span>
-<span id="cb56-717"><a href="#cb56-717"></a><span class="ss">2.  </span>将数据标签置于中间</span>
-<span id="cb56-718"><a href="#cb56-718"></a><span class="ss">3.  </span>缩小标签字号 <span class="in">`size`</span></span>
-<span id="cb56-719"><a href="#cb56-719"></a><span class="ss">4.  </span>调用 <span class="in">`paste()`</span> 函数给标签添加后缀</span>
-<span id="cb56-720"><a href="#cb56-720"></a><span class="ss">5.  </span>使用 <span class="in">`format()`</span> 函数保留两位小数</span>
-<span id="cb56-721"><a href="#cb56-721"></a></span>
-<span id="cb56-724"><a href="#cb56-724"></a><span class="in">```{r}</span></span>
-<span id="cb56-725"><a href="#cb56-725"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-726"><a href="#cb56-726"></a><span class="co">#| output: true</span></span>
-<span id="cb56-727"><a href="#cb56-727"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-728"><a href="#cb56-728"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-729"><a href="#cb56-729"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-730"><a href="#cb56-730"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-731"><a href="#cb56-731"></a></span>
-<span id="cb56-732"><a href="#cb56-732"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
-<span id="cb56-733"><a href="#cb56-733"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb56-734"><a href="#cb56-734"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> label_y, <span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">format</span>(Weight, <span class="at">nsmall =</span> <span class="dv">2</span>), <span class="st">"kg"</span>)), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb56-735"><a href="#cb56-735"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
-<span id="cb56-736"><a href="#cb56-736"></a><span class="in">```</span></span>
-<span id="cb56-737"><a href="#cb56-737"></a></span>
-<span id="cb56-738"><a href="#cb56-738"></a><span class="fu"># 绘制Cleveland点图</span></span>
-<span id="cb56-739"><a href="#cb56-739"></a></span>
-<span id="cb56-740"><a href="#cb56-740"></a>Cleveland点图是条形图的替代方案，它可以减少图形造成的视觉混乱并使图形更具可读性。</span>
-<span id="cb56-741"><a href="#cb56-741"></a></span>
-<span id="cb56-742"><a href="#cb56-742"></a><span class="fu">## 使用 `geom_point()` 命令</span></span>
-<span id="cb56-743"><a href="#cb56-743"></a></span>
-<span id="cb56-746"><a href="#cb56-746"></a><span class="in">```{r}</span></span>
-<span id="cb56-747"><a href="#cb56-747"></a><span class="co">#| echo: true</span></span>
-<span id="cb56-748"><a href="#cb56-748"></a><span class="co">#| output: true</span></span>
-<span id="cb56-749"><a href="#cb56-749"></a><span class="co">#| cache: true</span></span>
-<span id="cb56-750"><a href="#cb56-750"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
-<span id="cb56-751"><a href="#cb56-751"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
-<span id="cb56-752"><a href="#cb56-752"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
-<span id="cb56-753"><a href="#cb56-753"></a></span>
-<span id="cb56-754"><a href="#cb56-754"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the tophitters2001 data set</span></span>
-<span id="cb56-755"><a href="#cb56-755"></a>tophit <span class="ot">&lt;-</span> tophitters2001[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ] <span class="co"># Take the top 25 from the tophitters data set</span></span>
-<span id="cb56-756"><a href="#cb56-756"></a></span>
-<span id="cb56-757"><a href="#cb56-757"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> name)) <span class="sc">+</span></span>
-<span id="cb56-758"><a href="#cb56-758"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb56-759"><a href="#cb56-759"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb61" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb61-1"><a href="#cb61-1"></a><span class="co">---</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="an">title:</span><span class="co"> "03-ggplot2 绘图——条形图"</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb61-4"><a href="#cb61-4"></a><span class="an">date:</span><span class="co"> "2025-06-14"</span></span>
+<span id="cb61-5"><a href="#cb61-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb61-6"><a href="#cb61-6"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb61-7"><a href="#cb61-7"></a><span class="co">    html:</span></span>
+<span id="cb61-8"><a href="#cb61-8"></a><span class="co">        code-fold: true</span></span>
+<span id="cb61-9"><a href="#cb61-9"></a><span class="co">        code-line-numbers: true</span></span>
+<span id="cb61-10"><a href="#cb61-10"></a><span class="co">        code-highlight: true</span></span>
+<span id="cb61-11"><a href="#cb61-11"></a><span class="co">        fig_caption: true</span></span>
+<span id="cb61-12"><a href="#cb61-12"></a><span class="co">        number-sections: true</span></span>
+<span id="cb61-13"><a href="#cb61-13"></a><span class="co">        toc: true</span></span>
+<span id="cb61-14"><a href="#cb61-14"></a><span class="co">        toc-depth: 3</span></span>
+<span id="cb61-15"><a href="#cb61-15"></a><span class="co">---</span></span>
+<span id="cb61-16"><a href="#cb61-16"></a></span>
+<span id="cb61-17"><a href="#cb61-17"></a><span class="fu"># 绘制基本条形图</span></span>
+<span id="cb61-18"><a href="#cb61-18"></a></span>
+<span id="cb61-19"><a href="#cb61-19"></a><span class="fu">## x 是离散型变量</span></span>
+<span id="cb61-20"><a href="#cb61-20"></a></span>
+<span id="cb61-23"><a href="#cb61-23"></a><span class="in">```{r}</span></span>
+<span id="cb61-24"><a href="#cb61-24"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-25"><a href="#cb61-25"></a><span class="co">#| output: true</span></span>
+<span id="cb61-26"><a href="#cb61-26"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-27"><a href="#cb61-27"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-28"><a href="#cb61-28"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-29"><a href="#cb61-29"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-30"><a href="#cb61-30"></a></span>
+<span id="cb61-31"><a href="#cb61-31"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the pg_mean data set</span></span>
+<span id="cb61-32"><a href="#cb61-32"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-33"><a href="#cb61-33"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb61-34"><a href="#cb61-34"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb61-35"><a href="#cb61-35"></a><span class="in">```</span></span>
+<span id="cb61-36"><a href="#cb61-36"></a></span>
+<span id="cb61-37"><a href="#cb61-37"></a><span class="fu">## x 是连续型变量</span></span>
+<span id="cb61-38"><a href="#cb61-38"></a></span>
+<span id="cb61-39"><a href="#cb61-39"></a><span class="fu">### x 是原数的连续的数值型格式</span></span>
+<span id="cb61-40"><a href="#cb61-40"></a></span>
+<span id="cb61-43"><a href="#cb61-43"></a><span class="in">```{r}</span></span>
+<span id="cb61-44"><a href="#cb61-44"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-45"><a href="#cb61-45"></a><span class="co">#| output: true</span></span>
+<span id="cb61-46"><a href="#cb61-46"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-47"><a href="#cb61-47"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-48"><a href="#cb61-48"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-49"><a href="#cb61-49"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-50"><a href="#cb61-50"></a></span>
+<span id="cb61-51"><a href="#cb61-51"></a><span class="co"># There's no entry for Time == 6</span></span>
+<span id="cb61-52"><a href="#cb61-52"></a>BOD</span>
+<span id="cb61-53"><a href="#cb61-53"></a></span>
+<span id="cb61-54"><a href="#cb61-54"></a><span class="co"># Time is numeric (continuous)</span></span>
+<span id="cb61-55"><a href="#cb61-55"></a><span class="fu">str</span>(BOD)</span>
+<span id="cb61-56"><a href="#cb61-56"></a><span class="co">#&gt; 'data.frame':    6 obs. of  2 variables:</span></span>
+<span id="cb61-57"><a href="#cb61-57"></a><span class="co">#&gt;  $ Time  : num  1 2 3 4 5 7</span></span>
+<span id="cb61-58"><a href="#cb61-58"></a><span class="co">#&gt;  $ demand: num  8.3 10.3 19 16 15.6 19.8</span></span>
+<span id="cb61-59"><a href="#cb61-59"></a><span class="co">#&gt;  - attr(*, "reference")= chr "A1.4, p. 270"</span></span>
+<span id="cb61-60"><a href="#cb61-60"></a></span>
+<span id="cb61-61"><a href="#cb61-61"></a><span class="fu">ggplot</span>(BOD, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> demand)) <span class="sc">+</span></span>
+<span id="cb61-62"><a href="#cb61-62"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb61-63"><a href="#cb61-63"></a><span class="in">```</span></span>
+<span id="cb61-64"><a href="#cb61-64"></a></span>
+<span id="cb61-65"><a href="#cb61-65"></a><span class="fu">### x 转换为因子型变量</span></span>
+<span id="cb61-66"><a href="#cb61-66"></a></span>
+<span id="cb61-69"><a href="#cb61-69"></a><span class="in">```{r}</span></span>
+<span id="cb61-70"><a href="#cb61-70"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-71"><a href="#cb61-71"></a><span class="co">#| output: true</span></span>
+<span id="cb61-72"><a href="#cb61-72"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-73"><a href="#cb61-73"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-74"><a href="#cb61-74"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-75"><a href="#cb61-75"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-76"><a href="#cb61-76"></a></span>
+<span id="cb61-77"><a href="#cb61-77"></a><span class="co"># There's no entry for Time == 6</span></span>
+<span id="cb61-78"><a href="#cb61-78"></a>BOD</span>
+<span id="cb61-79"><a href="#cb61-79"></a></span>
+<span id="cb61-80"><a href="#cb61-80"></a><span class="co"># Convert Time to a discrete (categorical) variable with factor()</span></span>
+<span id="cb61-81"><a href="#cb61-81"></a><span class="fu">ggplot</span>(BOD, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Time), <span class="at">y =</span> demand)) <span class="sc">+</span></span>
+<span id="cb61-82"><a href="#cb61-82"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb61-83"><a href="#cb61-83"></a><span class="in">```</span></span>
+<span id="cb61-84"><a href="#cb61-84"></a></span>
+<span id="cb61-85"><a href="#cb61-85"></a><span class="fu">## 调整配色</span></span>
+<span id="cb61-86"><a href="#cb61-86"></a></span>
+<span id="cb61-87"><a href="#cb61-87"></a>在默认的设置下，条形图的填充色为深灰色且条形图没有边框线，用户可以通过调整 <span class="in">`fill`</span> 参数来改变填充色和调整 <span class="in">`colour/color`</span> 参数为条形图添加边框线。</span>
+<span id="cb61-88"><a href="#cb61-88"></a></span>
+<span id="cb61-89"><a href="#cb61-89"></a>将填充色设置为浅蓝色，边框现的颜色设置为黑色：</span>
+<span id="cb61-90"><a href="#cb61-90"></a></span>
+<span id="cb61-93"><a href="#cb61-93"></a><span class="in">```{r}</span></span>
+<span id="cb61-94"><a href="#cb61-94"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-95"><a href="#cb61-95"></a><span class="co">#| output: true</span></span>
+<span id="cb61-96"><a href="#cb61-96"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-97"><a href="#cb61-97"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-98"><a href="#cb61-98"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-99"><a href="#cb61-99"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-100"><a href="#cb61-100"></a></span>
+<span id="cb61-101"><a href="#cb61-101"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the pg_mean data set</span></span>
+<span id="cb61-102"><a href="#cb61-102"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-103"><a href="#cb61-103"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb61-104"><a href="#cb61-104"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>,<span class="at">colour =</span> <span class="st">"black"</span>)</span>
+<span id="cb61-105"><a href="#cb61-105"></a><span class="in">```</span></span>
+<span id="cb61-106"><a href="#cb61-106"></a></span>
+<span id="cb61-107"><a href="#cb61-107"></a><span class="fu"># 绘制簇状条形图</span></span>
+<span id="cb61-108"><a href="#cb61-108"></a></span>
+<span id="cb61-109"><a href="#cb61-109"></a>通过将分类变量映射到 <span class="in">`fill`</span> 参数上，运行命令 <span class="in">`geom_col(position = "dodge")`</span> 实现。</span>
+<span id="cb61-110"><a href="#cb61-110"></a></span>
+<span id="cb61-113"><a href="#cb61-113"></a><span class="in">```{r}</span></span>
+<span id="cb61-114"><a href="#cb61-114"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-115"><a href="#cb61-115"></a><span class="co">#| output: true</span></span>
+<span id="cb61-116"><a href="#cb61-116"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-117"><a href="#cb61-117"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-118"><a href="#cb61-118"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-119"><a href="#cb61-119"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-120"><a href="#cb61-120"></a></span>
+<span id="cb61-121"><a href="#cb61-121"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-122"><a href="#cb61-122"></a><span class="co"># check dataset</span></span>
+<span id="cb61-123"><a href="#cb61-123"></a>cabbage_exp</span>
+<span id="cb61-124"><a href="#cb61-124"></a></span>
+<span id="cb61-125"><a href="#cb61-125"></a><span class="co"># load ggplot2</span></span>
+<span id="cb61-126"><a href="#cb61-126"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-127"><a href="#cb61-127"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-128"><a href="#cb61-128"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
+<span id="cb61-129"><a href="#cb61-129"></a><span class="in">```</span></span>
+<span id="cb61-130"><a href="#cb61-130"></a></span>
+<span id="cb61-131"><a href="#cb61-131"></a><span class="fu">## `pastel1` 调色盘</span></span>
+<span id="cb61-132"><a href="#cb61-132"></a></span>
+<span id="cb61-135"><a href="#cb61-135"></a><span class="in">```{r}</span></span>
+<span id="cb61-136"><a href="#cb61-136"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-137"><a href="#cb61-137"></a><span class="co">#| output: true</span></span>
+<span id="cb61-138"><a href="#cb61-138"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-139"><a href="#cb61-139"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-140"><a href="#cb61-140"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-141"><a href="#cb61-141"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-142"><a href="#cb61-142"></a></span>
+<span id="cb61-143"><a href="#cb61-143"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-144"><a href="#cb61-144"></a><span class="co"># check dataset</span></span>
+<span id="cb61-145"><a href="#cb61-145"></a>cabbage_exp</span>
+<span id="cb61-146"><a href="#cb61-146"></a></span>
+<span id="cb61-147"><a href="#cb61-147"></a><span class="co"># load ggplot2</span></span>
+<span id="cb61-148"><a href="#cb61-148"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-149"><a href="#cb61-149"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-150"><a href="#cb61-150"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb61-151"><a href="#cb61-151"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
+<span id="cb61-152"><a href="#cb61-152"></a><span class="in">```</span></span>
+<span id="cb61-153"><a href="#cb61-153"></a></span>
+<span id="cb61-154"><a href="#cb61-154"></a><span class="fu">## 缺失项</span></span>
+<span id="cb61-155"><a href="#cb61-155"></a></span>
+<span id="cb61-156"><a href="#cb61-156"></a>如果分类变量各水平的组合中有缺失项，那么绘图结果中的条形则相应地略去不绘，同时，临近的条形将自动扩充到相应的位置，示例如下：</span>
+<span id="cb61-157"><a href="#cb61-157"></a></span>
+<span id="cb61-160"><a href="#cb61-160"></a><span class="in">```{r}</span></span>
+<span id="cb61-161"><a href="#cb61-161"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-162"><a href="#cb61-162"></a><span class="co">#| output: true</span></span>
+<span id="cb61-163"><a href="#cb61-163"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-164"><a href="#cb61-164"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-165"><a href="#cb61-165"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-166"><a href="#cb61-166"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-167"><a href="#cb61-167"></a></span>
+<span id="cb61-168"><a href="#cb61-168"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-169"><a href="#cb61-169"></a><span class="co"># check dataset</span></span>
+<span id="cb61-170"><a href="#cb61-170"></a>cabbage_exp</span>
+<span id="cb61-171"><a href="#cb61-171"></a></span>
+<span id="cb61-172"><a href="#cb61-172"></a><span class="co"># delete last row</span></span>
+<span id="cb61-173"><a href="#cb61-173"></a>ce <span class="ot">&lt;-</span> cabbage_exp[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,]</span>
+<span id="cb61-174"><a href="#cb61-174"></a>ce</span>
+<span id="cb61-175"><a href="#cb61-175"></a><span class="co"># load ggplot2</span></span>
+<span id="cb61-176"><a href="#cb61-176"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-177"><a href="#cb61-177"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-178"><a href="#cb61-178"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb61-179"><a href="#cb61-179"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
+<span id="cb61-180"><a href="#cb61-180"></a><span class="in">```</span></span>
+<span id="cb61-181"><a href="#cb61-181"></a></span>
+<span id="cb61-182"><a href="#cb61-182"></a><span class="fu"># 绘制频数条形图</span></span>
+<span id="cb61-183"><a href="#cb61-183"></a></span>
+<span id="cb61-184"><a href="#cb61-184"></a><span class="fu">## 使用 `geom_bar()` 函数</span></span>
+<span id="cb61-185"><a href="#cb61-185"></a></span>
+<span id="cb61-186"><a href="#cb61-186"></a>使用 <span class="in">`geom_bar()`</span> 函数，同时不映射任何变量到y参数</span>
+<span id="cb61-187"><a href="#cb61-187"></a></span>
+<span id="cb61-190"><a href="#cb61-190"></a><span class="in">```{r}</span></span>
+<span id="cb61-191"><a href="#cb61-191"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-192"><a href="#cb61-192"></a><span class="co">#| output: true</span></span>
+<span id="cb61-193"><a href="#cb61-193"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-194"><a href="#cb61-194"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-195"><a href="#cb61-195"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-196"><a href="#cb61-196"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-197"><a href="#cb61-197"></a></span>
+<span id="cb61-198"><a href="#cb61-198"></a><span class="co"># Equivalent to using geom_bar(stat = "bin")</span></span>
+<span id="cb61-199"><a href="#cb61-199"></a><span class="fu">ggplot</span>(diamonds, <span class="fu">aes</span>(<span class="at">x =</span> cut)) <span class="sc">+</span></span>
+<span id="cb61-200"><a href="#cb61-200"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb61-201"><a href="#cb61-201"></a><span class="in">```</span></span>
+<span id="cb61-202"><a href="#cb61-202"></a></span>
+<span id="cb61-203"><a href="#cb61-203"></a><span class="fu">## 条形图着色</span></span>
+<span id="cb61-204"><a href="#cb61-204"></a></span>
+<span id="cb61-207"><a href="#cb61-207"></a><span class="in">```{r}</span></span>
+<span id="cb61-208"><a href="#cb61-208"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-209"><a href="#cb61-209"></a><span class="co">#| output: true</span></span>
+<span id="cb61-210"><a href="#cb61-210"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-211"><a href="#cb61-211"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-212"><a href="#cb61-212"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-213"><a href="#cb61-213"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-214"><a href="#cb61-214"></a></span>
+<span id="cb61-215"><a href="#cb61-215"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopchange data set</span></span>
+<span id="cb61-216"><a href="#cb61-216"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb61-217"><a href="#cb61-217"></a></span>
+<span id="cb61-218"><a href="#cb61-218"></a><span class="co"># select top 10 state with population growth</span></span>
+<span id="cb61-219"><a href="#cb61-219"></a>upc <span class="ot">&lt;-</span> uspopchange <span class="sc">%&gt;%</span></span>
+<span id="cb61-220"><a href="#cb61-220"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(Change)) <span class="sc">%&gt;%</span></span>
+<span id="cb61-221"><a href="#cb61-221"></a>  <span class="fu">slice</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span>
+<span id="cb61-222"><a href="#cb61-222"></a></span>
+<span id="cb61-223"><a href="#cb61-223"></a>upc</span>
+<span id="cb61-224"><a href="#cb61-224"></a><span class="in">```</span></span>
+<span id="cb61-225"><a href="#cb61-225"></a></span>
+<span id="cb61-226"><a href="#cb61-226"></a>将 Region 映射到 fill 是上兵绘制条形图：</span>
+<span id="cb61-227"><a href="#cb61-227"></a></span>
+<span id="cb61-230"><a href="#cb61-230"></a><span class="in">```{r}</span></span>
+<span id="cb61-231"><a href="#cb61-231"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-232"><a href="#cb61-232"></a><span class="co">#| output: true</span></span>
+<span id="cb61-233"><a href="#cb61-233"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-234"><a href="#cb61-234"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-235"><a href="#cb61-235"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-236"><a href="#cb61-236"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-237"><a href="#cb61-237"></a></span>
+<span id="cb61-238"><a href="#cb61-238"></a><span class="fu">ggplot</span>(upc, <span class="fu">aes</span>(<span class="at">x =</span> Abb, <span class="at">y =</span> Change, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
+<span id="cb61-239"><a href="#cb61-239"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb61-240"><a href="#cb61-240"></a><span class="in">```</span></span>
+<span id="cb61-241"><a href="#cb61-241"></a></span>
+<span id="cb61-242"><a href="#cb61-242"></a><span class="fu">### 设定图形颜色</span></span>
+<span id="cb61-243"><a href="#cb61-243"></a></span>
+<span id="cb61-244"><a href="#cb61-244"></a>借助函数 <span class="in">`scale_fill_brewer()`</span>&nbsp;or&nbsp;<span class="in">`scale_fill_manual()`</span> 重新设定图形颜色：</span>
+<span id="cb61-245"><a href="#cb61-245"></a></span>
+<span id="cb61-248"><a href="#cb61-248"></a><span class="in">```{r}</span></span>
+<span id="cb61-249"><a href="#cb61-249"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-250"><a href="#cb61-250"></a><span class="co">#| output: true</span></span>
+<span id="cb61-251"><a href="#cb61-251"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-252"><a href="#cb61-252"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-253"><a href="#cb61-253"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-254"><a href="#cb61-254"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-255"><a href="#cb61-255"></a></span>
+<span id="cb61-256"><a href="#cb61-256"></a><span class="fu">ggplot</span>(upc, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(Abb, Change), <span class="at">y =</span> Change, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
+<span id="cb61-257"><a href="#cb61-257"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb61-258"><a href="#cb61-258"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#669933"</span>, <span class="st">"#FFCC66"</span>)) <span class="sc">+</span></span>
+<span id="cb61-259"><a href="#cb61-259"></a>  <span class="fu">xlab</span>(<span class="st">"State"</span>)</span>
+<span id="cb61-260"><a href="#cb61-260"></a><span class="in">```</span></span>
+<span id="cb61-261"><a href="#cb61-261"></a></span>
+<span id="cb61-262"><a href="#cb61-262"></a><span class="fu">### 注意</span></span>
+<span id="cb61-263"><a href="#cb61-263"></a></span>
+<span id="cb61-264"><a href="#cb61-264"></a>颜色的映射是在 <span class="in">`aes()`</span> 内部完成的，但是颜色的设定是在 <span class="in">`aes()`</span> 外部完成的。</span>
+<span id="cb61-265"><a href="#cb61-265"></a></span>
+<span id="cb61-266"><a href="#cb61-266"></a><span class="fu"># 对正负条形图分别着色</span></span>
+<span id="cb61-267"><a href="#cb61-267"></a></span>
+<span id="cb61-268"><a href="#cb61-268"></a>首先创建一个取值正负性进行标识的变量 <span class="in">`pos`</span> :</span>
+<span id="cb61-269"><a href="#cb61-269"></a></span>
+<span id="cb61-272"><a href="#cb61-272"></a><span class="in">```{r}</span></span>
+<span id="cb61-273"><a href="#cb61-273"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-274"><a href="#cb61-274"></a><span class="co">#| output: true</span></span>
+<span id="cb61-275"><a href="#cb61-275"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-276"><a href="#cb61-276"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-277"><a href="#cb61-277"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-278"><a href="#cb61-278"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-279"><a href="#cb61-279"></a></span>
+<span id="cb61-280"><a href="#cb61-280"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
+<span id="cb61-281"><a href="#cb61-281"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb61-282"><a href="#cb61-282"></a></span>
+<span id="cb61-283"><a href="#cb61-283"></a>climate_sub <span class="ot">&lt;-</span> climate <span class="sc">%&gt;%</span></span>
+<span id="cb61-284"><a href="#cb61-284"></a>  <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">"Berkeley"</span> <span class="sc">&amp;</span> Year <span class="sc">&gt;=</span> <span class="dv">1900</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb61-285"><a href="#cb61-285"></a>  <span class="fu">mutate</span>(<span class="at">pos =</span> Anomaly10y <span class="sc">&gt;=</span> <span class="dv">0</span>)</span>
+<span id="cb61-286"><a href="#cb61-286"></a></span>
+<span id="cb61-287"><a href="#cb61-287"></a><span class="co"># 展示前10行</span></span>
+<span id="cb61-288"><a href="#cb61-288"></a><span class="fu">print</span>(<span class="st">"前10行数据："</span>)</span>
+<span id="cb61-289"><a href="#cb61-289"></a><span class="fu">head</span>(climate_sub, <span class="dv">10</span>)</span>
+<span id="cb61-290"><a href="#cb61-290"></a><span class="in">```</span></span>
+<span id="cb61-291"><a href="#cb61-291"></a></span>
+<span id="cb61-292"><a href="#cb61-292"></a><span class="fu">## `pos` 映射到 `fill` 中</span></span>
+<span id="cb61-293"><a href="#cb61-293"></a></span>
+<span id="cb61-296"><a href="#cb61-296"></a><span class="in">```{r}</span></span>
+<span id="cb61-297"><a href="#cb61-297"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-298"><a href="#cb61-298"></a><span class="co">#| output: true</span></span>
+<span id="cb61-299"><a href="#cb61-299"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-300"><a href="#cb61-300"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-301"><a href="#cb61-301"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-302"><a href="#cb61-302"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-303"><a href="#cb61-303"></a></span>
+<span id="cb61-304"><a href="#cb61-304"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-305"><a href="#cb61-305"></a><span class="fu">ggplot</span>(climate_sub, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y, <span class="at">fill =</span> pos)) <span class="sc">+</span></span>
+<span id="cb61-306"><a href="#cb61-306"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"identity"</span>)</span>
+<span id="cb61-307"><a href="#cb61-307"></a><span class="in">```</span></span>
+<span id="cb61-308"><a href="#cb61-308"></a></span>
+<span id="cb61-309"><a href="#cb61-309"></a><span class="fu">### 注意</span></span>
+<span id="cb61-310"><a href="#cb61-310"></a></span>
+<span id="cb61-311"><a href="#cb61-311"></a>这里条形图的参数设定为 <span class="in">`position = "identity"`</span> ，可以避免系统因对负值绘制堆积条形而发出的警告信息。</span>
+<span id="cb61-312"><a href="#cb61-312"></a></span>
+<span id="cb61-313"><a href="#cb61-313"></a><span class="fu">## 调整配色</span></span>
+<span id="cb61-314"><a href="#cb61-314"></a></span>
+<span id="cb61-315"><a href="#cb61-315"></a><span class="fu">### `scale_fill_manual()` 参数</span></span>
+<span id="cb61-316"><a href="#cb61-316"></a></span>
+<span id="cb61-317"><a href="#cb61-317"></a>设定 <span class="in">`scale_fill_manual()`</span> 参数对图形进行调整，设定参数 <span class="in">`guide = FALSE`</span> 可以删除图例；设定边框颜色（color/colour）和边框线宽度（size），这里边框线的单位是毫米。</span>
+<span id="cb61-318"><a href="#cb61-318"></a></span>
+<span id="cb61-321"><a href="#cb61-321"></a><span class="in">```{r}</span></span>
+<span id="cb61-322"><a href="#cb61-322"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-323"><a href="#cb61-323"></a><span class="co">#| output: true</span></span>
+<span id="cb61-324"><a href="#cb61-324"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-325"><a href="#cb61-325"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-326"><a href="#cb61-326"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-327"><a href="#cb61-327"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-328"><a href="#cb61-328"></a></span>
+<span id="cb61-329"><a href="#cb61-329"></a><span class="fu">ggplot</span>(climate_sub, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y, <span class="at">fill =</span> pos)) <span class="sc">+</span></span>
+<span id="cb61-330"><a href="#cb61-330"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb61-331"><a href="#cb61-331"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#CCEEFF"</span>, <span class="st">"#FFDDDD"</span>), <span class="at">guide =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb61-332"><a href="#cb61-332"></a><span class="in">```</span></span>
+<span id="cb61-333"><a href="#cb61-333"></a></span>
+<span id="cb61-334"><a href="#cb61-334"></a>出现警告信息（Warning messages）</span>
+<span id="cb61-335"><a href="#cb61-335"></a></span>
+<span id="cb61-336"><a href="#cb61-336"></a>调整后：</span>
+<span id="cb61-337"><a href="#cb61-337"></a></span>
+<span id="cb61-340"><a href="#cb61-340"></a><span class="in">```{r}</span></span>
+<span id="cb61-341"><a href="#cb61-341"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-342"><a href="#cb61-342"></a><span class="co">#| output: true</span></span>
+<span id="cb61-343"><a href="#cb61-343"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-344"><a href="#cb61-344"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-345"><a href="#cb61-345"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-346"><a href="#cb61-346"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-347"><a href="#cb61-347"></a></span>
+<span id="cb61-348"><a href="#cb61-348"></a><span class="fu">ggplot</span>(climate_sub, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y, <span class="at">fill =</span> pos)) <span class="sc">+</span></span>
+<span id="cb61-349"><a href="#cb61-349"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>) <span class="sc">+</span></span>
+<span id="cb61-350"><a href="#cb61-350"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#CCEEFF"</span>, <span class="st">"#FFDDDD"</span>), <span class="at">guide =</span> <span class="st">"none"</span>)</span>
+<span id="cb61-351"><a href="#cb61-351"></a><span class="in">```</span></span>
+<span id="cb61-352"><a href="#cb61-352"></a></span>
+<span id="cb61-353"><a href="#cb61-353"></a><span class="fu"># 调整条形宽度和条形间距</span></span>
+<span id="cb61-354"><a href="#cb61-354"></a></span>
+<span id="cb61-355"><a href="#cb61-355"></a>通过设定 <span class="in">`geom_bar()`</span> 函数的参数 <span class="in">`width`</span> 来使条形变得更宽或更窄，该参数默认函数为 0.9，更大的值会使条形更宽，反之更窄（细）。</span>
+<span id="cb61-356"><a href="#cb61-356"></a></span>
+<span id="cb61-357"><a href="#cb61-357"></a><span class="fu">## 标准宽度</span></span>
+<span id="cb61-358"><a href="#cb61-358"></a></span>
+<span id="cb61-361"><a href="#cb61-361"></a><span class="in">```{r}</span></span>
+<span id="cb61-362"><a href="#cb61-362"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-363"><a href="#cb61-363"></a><span class="co">#| output: true</span></span>
+<span id="cb61-364"><a href="#cb61-364"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-365"><a href="#cb61-365"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-366"><a href="#cb61-366"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-367"><a href="#cb61-367"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-368"><a href="#cb61-368"></a></span>
+<span id="cb61-369"><a href="#cb61-369"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the pg_mean data set</span></span>
+<span id="cb61-370"><a href="#cb61-370"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-371"><a href="#cb61-371"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb61-372"><a href="#cb61-372"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb61-373"><a href="#cb61-373"></a><span class="in">```</span></span>
+<span id="cb61-374"><a href="#cb61-374"></a></span>
+<span id="cb61-375"><a href="#cb61-375"></a><span class="fu">## 更窄</span></span>
+<span id="cb61-376"><a href="#cb61-376"></a></span>
+<span id="cb61-379"><a href="#cb61-379"></a><span class="in">```{r}</span></span>
+<span id="cb61-380"><a href="#cb61-380"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-381"><a href="#cb61-381"></a><span class="co">#| output: true</span></span>
+<span id="cb61-382"><a href="#cb61-382"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-383"><a href="#cb61-383"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-384"><a href="#cb61-384"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-385"><a href="#cb61-385"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-386"><a href="#cb61-386"></a></span>
+<span id="cb61-387"><a href="#cb61-387"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the pg_mean data set</span></span>
+<span id="cb61-388"><a href="#cb61-388"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-389"><a href="#cb61-389"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb61-390"><a href="#cb61-390"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>)</span>
+<span id="cb61-391"><a href="#cb61-391"></a><span class="in">```</span></span>
+<span id="cb61-392"><a href="#cb61-392"></a></span>
+<span id="cb61-393"><a href="#cb61-393"></a><span class="fu">## 更宽</span></span>
+<span id="cb61-394"><a href="#cb61-394"></a></span>
+<span id="cb61-395"><a href="#cb61-395"></a>条形宽度的最大宽度值为1.</span>
+<span id="cb61-396"><a href="#cb61-396"></a></span>
+<span id="cb61-399"><a href="#cb61-399"></a><span class="in">```{r}</span></span>
+<span id="cb61-400"><a href="#cb61-400"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-401"><a href="#cb61-401"></a><span class="co">#| output: true</span></span>
+<span id="cb61-402"><a href="#cb61-402"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-403"><a href="#cb61-403"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-404"><a href="#cb61-404"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-405"><a href="#cb61-405"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-406"><a href="#cb61-406"></a></span>
+<span id="cb61-407"><a href="#cb61-407"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the pg_mean data set</span></span>
+<span id="cb61-408"><a href="#cb61-408"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-409"><a href="#cb61-409"></a><span class="fu">ggplot</span>(pg_mean, <span class="fu">aes</span>(<span class="at">x =</span> group, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb61-410"><a href="#cb61-410"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="dv">1</span>)</span>
+<span id="cb61-411"><a href="#cb61-411"></a><span class="in">```</span></span>
+<span id="cb61-412"><a href="#cb61-412"></a></span>
+<span id="cb61-413"><a href="#cb61-413"></a><span class="fu">## 调整组内间距</span></span>
+<span id="cb61-414"><a href="#cb61-414"></a></span>
+<span id="cb61-415"><a href="#cb61-415"></a>簇状条形图默认组内间距为0，如果希望增加组内间距，可以通过将 <span class="in">`width()`</span> 的值设定的小一些，并将 <span class="in">`position_dodge()`</span> 的值设定大于 <span class="in">`width()`</span> 来实现。</span>
+<span id="cb61-416"><a href="#cb61-416"></a></span>
+<span id="cb61-417"><a href="#cb61-417"></a><span class="fu">### 条形更窄的簇状条形图</span></span>
+<span id="cb61-418"><a href="#cb61-418"></a></span>
+<span id="cb61-421"><a href="#cb61-421"></a><span class="in">```{r}</span></span>
+<span id="cb61-422"><a href="#cb61-422"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-423"><a href="#cb61-423"></a><span class="co">#| output: true</span></span>
+<span id="cb61-424"><a href="#cb61-424"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-425"><a href="#cb61-425"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-426"><a href="#cb61-426"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-427"><a href="#cb61-427"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-428"><a href="#cb61-428"></a></span>
+<span id="cb61-429"><a href="#cb61-429"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-430"><a href="#cb61-430"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"dodge"</span>)</span>
+<span id="cb61-431"><a href="#cb61-431"></a><span class="in">```</span></span>
+<span id="cb61-432"><a href="#cb61-432"></a></span>
+<span id="cb61-433"><a href="#cb61-433"></a><span class="fu">### 具有条形间距的簇状条形图</span></span>
+<span id="cb61-434"><a href="#cb61-434"></a></span>
+<span id="cb61-437"><a href="#cb61-437"></a><span class="in">```{r}</span></span>
+<span id="cb61-438"><a href="#cb61-438"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-439"><a href="#cb61-439"></a><span class="co">#| output: true</span></span>
+<span id="cb61-440"><a href="#cb61-440"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-441"><a href="#cb61-441"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-442"><a href="#cb61-442"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-443"><a href="#cb61-443"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-444"><a href="#cb61-444"></a></span>
+<span id="cb61-445"><a href="#cb61-445"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-446"><a href="#cb61-446"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.7</span>))</span>
+<span id="cb61-447"><a href="#cb61-447"></a><span class="in">```</span></span>
+<span id="cb61-448"><a href="#cb61-448"></a></span>
+<span id="cb61-449"><a href="#cb61-449"></a><span class="fu">### `position` 语法</span></span>
+<span id="cb61-450"><a href="#cb61-450"></a></span>
+<span id="cb61-451"><a href="#cb61-451"></a>以下四条命令是等价的：</span>
+<span id="cb61-452"><a href="#cb61-452"></a></span>
+<span id="cb61-453"><a href="#cb61-453"></a><span class="in">``` r</span></span>
+<span id="cb61-454"><a href="#cb61-454"></a><span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
+<span id="cb61-455"><a href="#cb61-455"></a><span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="fl">0.9</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>())</span>
+<span id="cb61-456"><a href="#cb61-456"></a><span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.9</span>))</span>
+<span id="cb61-457"><a href="#cb61-457"></a><span class="fu">geom_bar</span>(<span class="at">width =</span> <span class="fl">0.9</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width=</span><span class="fl">0.9</span>))</span>
+<span id="cb61-458"><a href="#cb61-458"></a><span class="in">```</span></span>
+<span id="cb61-459"><a href="#cb61-459"></a></span>
+<span id="cb61-460"><a href="#cb61-460"></a><span class="fu"># 绘制堆积条形图</span></span>
+<span id="cb61-461"><a href="#cb61-461"></a></span>
+<span id="cb61-462"><a href="#cb61-462"></a><span class="fu">## 使用 `geom_bar()` 函数</span></span>
+<span id="cb61-463"><a href="#cb61-463"></a></span>
+<span id="cb61-464"><a href="#cb61-464"></a>使用 <span class="in">`geom_bar()`</span> 函数，并映射一个变量给填充色参数 <span class="in">`fill`</span> 即可，该命令会将 Date 对应到 x 轴上，并以 Cultivar 作为填充色</span>
+<span id="cb61-465"><a href="#cb61-465"></a></span>
+<span id="cb61-468"><a href="#cb61-468"></a><span class="in">```{r}</span></span>
+<span id="cb61-469"><a href="#cb61-469"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-470"><a href="#cb61-470"></a><span class="co">#| output: true</span></span>
+<span id="cb61-471"><a href="#cb61-471"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-472"><a href="#cb61-472"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-473"><a href="#cb61-473"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-474"><a href="#cb61-474"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-475"><a href="#cb61-475"></a></span>
+<span id="cb61-476"><a href="#cb61-476"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-477"><a href="#cb61-477"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-478"><a href="#cb61-478"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-479"><a href="#cb61-479"></a>  <span class="fu">geom_col</span>()</span>
+<span id="cb61-480"><a href="#cb61-480"></a><span class="in">```</span></span>
+<span id="cb61-481"><a href="#cb61-481"></a></span>
+<span id="cb61-482"><a href="#cb61-482"></a><span class="fu">## 反转堆积顺序和图例顺序</span></span>
+<span id="cb61-483"><a href="#cb61-483"></a></span>
+<span id="cb61-484"><a href="#cb61-484"></a>默认情况下，条形的堆积顺序和图例顺序是一致的，但是都某些数据集而言需要调整图例顺序，用户可以通过 <span class="in">`guide()`</span> 函数来对图例顺序进行调整，并指定图例所对应的需要调整的图形属性（<span class="in">`fill`</span>)，并使用 <span class="in">`position_stack(reverse = TRUE)`</span> 参数来实现反转条形的堆积顺序，通过上述两种函数来保证图例顺序与条形顺序一致。</span>
+<span id="cb61-485"><a href="#cb61-485"></a></span>
+<span id="cb61-488"><a href="#cb61-488"></a><span class="in">```{r}</span></span>
+<span id="cb61-489"><a href="#cb61-489"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-490"><a href="#cb61-490"></a><span class="co">#| output: true</span></span>
+<span id="cb61-491"><a href="#cb61-491"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-492"><a href="#cb61-492"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-493"><a href="#cb61-493"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-494"><a href="#cb61-494"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-495"><a href="#cb61-495"></a></span>
+<span id="cb61-496"><a href="#cb61-496"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-497"><a href="#cb61-497"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-498"><a href="#cb61-498"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-499"><a href="#cb61-499"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="fu">position_stack</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span></span>
+<span id="cb61-500"><a href="#cb61-500"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">reverse =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb61-501"><a href="#cb61-501"></a><span class="in">```</span></span>
+<span id="cb61-502"><a href="#cb61-502"></a></span>
+<span id="cb61-503"><a href="#cb61-503"></a><span class="fu">## 获得效果更好的条形图</span></span>
+<span id="cb61-504"><a href="#cb61-504"></a></span>
+<span id="cb61-505"><a href="#cb61-505"></a>使用 <span class="in">`scale_fill_brewer()`</span>&nbsp;函数得到一个新的调色板，最后设定 <span class="in">`colour="black"`</span> 为条形添加一个黑色边框线。</span>
+<span id="cb61-506"><a href="#cb61-506"></a></span>
+<span id="cb61-509"><a href="#cb61-509"></a><span class="in">```{r}</span></span>
+<span id="cb61-510"><a href="#cb61-510"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-511"><a href="#cb61-511"></a><span class="co">#| output: true</span></span>
+<span id="cb61-512"><a href="#cb61-512"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-513"><a href="#cb61-513"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-514"><a href="#cb61-514"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-515"><a href="#cb61-515"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-516"><a href="#cb61-516"></a></span>
+<span id="cb61-517"><a href="#cb61-517"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-518"><a href="#cb61-518"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-519"><a href="#cb61-519"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-520"><a href="#cb61-520"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb61-521"><a href="#cb61-521"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
+<span id="cb61-522"><a href="#cb61-522"></a><span class="in">```</span></span>
+<span id="cb61-523"><a href="#cb61-523"></a></span>
+<span id="cb61-524"><a href="#cb61-524"></a><span class="fu"># 绘制百分比堆积条形图</span></span>
+<span id="cb61-525"><a href="#cb61-525"></a></span>
+<span id="cb61-526"><a href="#cb61-526"></a><span class="fu">## 使用 `geom_col(position =  "fill")` 实现</span></span>
+<span id="cb61-527"><a href="#cb61-527"></a></span>
+<span id="cb61-528"><a href="#cb61-528"></a>使用 <span class="in">`geom_col(position =  "fill")`</span> 可以将y的值调整为0到1之间。</span>
+<span id="cb61-529"><a href="#cb61-529"></a></span>
+<span id="cb61-532"><a href="#cb61-532"></a><span class="in">```{r}</span></span>
+<span id="cb61-533"><a href="#cb61-533"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-534"><a href="#cb61-534"></a><span class="co">#| output: true</span></span>
+<span id="cb61-535"><a href="#cb61-535"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-536"><a href="#cb61-536"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-537"><a href="#cb61-537"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-538"><a href="#cb61-538"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-539"><a href="#cb61-539"></a></span>
+<span id="cb61-540"><a href="#cb61-540"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-541"><a href="#cb61-541"></a></span>
+<span id="cb61-542"><a href="#cb61-542"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-543"><a href="#cb61-543"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span>
+<span id="cb61-544"><a href="#cb61-544"></a><span class="in">```</span></span>
+<span id="cb61-545"><a href="#cb61-545"></a></span>
+<span id="cb61-546"><a href="#cb61-546"></a><span class="fu">### 让标签以百分比的形式展示</span></span>
+<span id="cb61-547"><a href="#cb61-547"></a></span>
+<span id="cb61-550"><a href="#cb61-550"></a><span class="in">```{r}</span></span>
+<span id="cb61-551"><a href="#cb61-551"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-552"><a href="#cb61-552"></a><span class="co">#| output: true</span></span>
+<span id="cb61-553"><a href="#cb61-553"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-554"><a href="#cb61-554"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-555"><a href="#cb61-555"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-556"><a href="#cb61-556"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-557"><a href="#cb61-557"></a></span>
+<span id="cb61-558"><a href="#cb61-558"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-559"><a href="#cb61-559"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb61-560"><a href="#cb61-560"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span>
+<span id="cb61-561"><a href="#cb61-561"></a><span class="in">```</span></span>
+<span id="cb61-562"><a href="#cb61-562"></a></span>
+<span id="cb61-563"><a href="#cb61-563"></a><span class="fu">## 更换调色板并添加边框线</span></span>
+<span id="cb61-564"><a href="#cb61-564"></a></span>
+<span id="cb61-567"><a href="#cb61-567"></a><span class="in">```{r}</span></span>
+<span id="cb61-568"><a href="#cb61-568"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-569"><a href="#cb61-569"></a><span class="co">#| output: true</span></span>
+<span id="cb61-570"><a href="#cb61-570"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-571"><a href="#cb61-571"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-572"><a href="#cb61-572"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-573"><a href="#cb61-573"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-574"><a href="#cb61-574"></a></span>
+<span id="cb61-575"><a href="#cb61-575"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-576"><a href="#cb61-576"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb61-577"><a href="#cb61-577"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb61-578"><a href="#cb61-578"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
+<span id="cb61-579"><a href="#cb61-579"></a><span class="in">```</span></span>
+<span id="cb61-580"><a href="#cb61-580"></a></span>
+<span id="cb61-581"><a href="#cb61-581"></a><span class="fu"># 添加数据标签</span></span>
+<span id="cb61-582"><a href="#cb61-582"></a></span>
+<span id="cb61-583"><a href="#cb61-583"></a><span class="fu">## 使用 `geom_text()` 函数</span></span>
+<span id="cb61-584"><a href="#cb61-584"></a></span>
+<span id="cb61-585"><a href="#cb61-585"></a>需要分别制定一个变量映射给x、y和标签本身，通过设定 <span class="in">`vjust`</span> （竖直调整数据标签位置）来将标签位置移动至条形图顶端的上方或下方</span>
+<span id="cb61-586"><a href="#cb61-586"></a></span>
+<span id="cb61-589"><a href="#cb61-589"></a><span class="in">```{r}</span></span>
+<span id="cb61-590"><a href="#cb61-590"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-591"><a href="#cb61-591"></a><span class="co">#| output: true</span></span>
+<span id="cb61-592"><a href="#cb61-592"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-593"><a href="#cb61-593"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-594"><a href="#cb61-594"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-595"><a href="#cb61-595"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-596"><a href="#cb61-596"></a></span>
+<span id="cb61-597"><a href="#cb61-597"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
+<span id="cb61-598"><a href="#cb61-598"></a></span>
+<span id="cb61-599"><a href="#cb61-599"></a><span class="co"># Below the top</span></span>
+<span id="cb61-600"><a href="#cb61-600"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">interaction</span>(Date, Cultivar), <span class="at">y =</span> Weight)) <span class="sc">+</span></span>
+<span id="cb61-601"><a href="#cb61-601"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb61-602"><a href="#cb61-602"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Weight), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb61-603"><a href="#cb61-603"></a></span>
+<span id="cb61-604"><a href="#cb61-604"></a><span class="co"># Above the top</span></span>
+<span id="cb61-605"><a href="#cb61-605"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">interaction</span>(Date, Cultivar), <span class="at">y =</span> Weight)) <span class="sc">+</span></span>
+<span id="cb61-606"><a href="#cb61-606"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb61-607"><a href="#cb61-607"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> Weight), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.2</span>)</span>
+<span id="cb61-608"><a href="#cb61-608"></a><span class="in">```</span></span>
+<span id="cb61-609"><a href="#cb61-609"></a></span>
+<span id="cb61-610"><a href="#cb61-610"></a><span class="fu">## 给频数条形图添加标签</span></span>
+<span id="cb61-611"><a href="#cb61-611"></a></span>
+<span id="cb61-614"><a href="#cb61-614"></a><span class="in">```{r}</span></span>
+<span id="cb61-615"><a href="#cb61-615"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-616"><a href="#cb61-616"></a><span class="co">#| output: true</span></span>
+<span id="cb61-617"><a href="#cb61-617"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-618"><a href="#cb61-618"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-619"><a href="#cb61-619"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-620"><a href="#cb61-620"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-621"><a href="#cb61-621"></a></span>
+<span id="cb61-622"><a href="#cb61-622"></a><span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(cyl))) <span class="sc">+</span></span>
+<span id="cb61-623"><a href="#cb61-623"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb61-624"><a href="#cb61-624"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">after_stat</span>(count)), <span class="at">stat =</span> <span class="st">"count"</span>, </span>
+<span id="cb61-625"><a href="#cb61-625"></a>            <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb61-626"><a href="#cb61-626"></a><span class="in">```</span></span>
+<span id="cb61-627"><a href="#cb61-627"></a></span>
+<span id="cb61-628"><a href="#cb61-628"></a><span class="fu">## 给簇状条形图添加标签</span></span>
+<span id="cb61-629"><a href="#cb61-629"></a></span>
+<span id="cb61-630"><a href="#cb61-630"></a>需要设定 <span class="in">`position = position_dodge()`</span> 并给其一个参数来设定分类间距，分类间距默认值是0.9，因为簇状图的条形更窄，所以需要使用字号 <span class="in">`size`</span> 来匹配条形宽度，数据标签的默认字号是5，用户可以设定为 3 使其看起来更小（适配）。</span>
+<span id="cb61-631"><a href="#cb61-631"></a></span>
+<span id="cb61-634"><a href="#cb61-634"></a><span class="in">```{r}</span></span>
+<span id="cb61-635"><a href="#cb61-635"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-636"><a href="#cb61-636"></a><span class="co">#| output: true</span></span>
+<span id="cb61-637"><a href="#cb61-637"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-638"><a href="#cb61-638"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-639"><a href="#cb61-639"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-640"><a href="#cb61-640"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-641"><a href="#cb61-641"></a></span>
+<span id="cb61-642"><a href="#cb61-642"></a><span class="fu">ggplot</span>(cabbage_exp, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-643"><a href="#cb61-643"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb61-644"><a href="#cb61-644"></a>  <span class="fu">geom_text</span>(</span>
+<span id="cb61-645"><a href="#cb61-645"></a>    <span class="fu">aes</span>(<span class="at">label =</span> Weight),</span>
+<span id="cb61-646"><a href="#cb61-646"></a>    <span class="at">colour =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="cb61-647"><a href="#cb61-647"></a>    <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>(.<span class="dv">9</span>)</span>
+<span id="cb61-648"><a href="#cb61-648"></a>  )</span>
+<span id="cb61-649"><a href="#cb61-649"></a><span class="in">```</span></span>
+<span id="cb61-650"><a href="#cb61-650"></a></span>
+<span id="cb61-651"><a href="#cb61-651"></a><span class="fu">## 堆积图添加数据标签</span></span>
+<span id="cb61-652"><a href="#cb61-652"></a></span>
+<span id="cb61-653"><a href="#cb61-653"></a>要对堆积图添加数据标签，先要对每组条形所对应的数据进行累计求和，有需要在此之前保证数据的合理排序，否则可能会计算出错误的累计和。</span>
+<span id="cb61-654"><a href="#cb61-654"></a></span>
+<span id="cb61-655"><a href="#cb61-655"></a>使用 <span class="in">`dplyr`</span> 包中的 <span class="in">`arrange()`</span> 函数完成上述操作，使用 <span class="in">`rev()`</span> 函数调整 Cultivar 的顺序。</span>
+<span id="cb61-656"><a href="#cb61-656"></a></span>
+<span id="cb61-659"><a href="#cb61-659"></a><span class="in">```{r}</span></span>
+<span id="cb61-660"><a href="#cb61-660"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-661"><a href="#cb61-661"></a><span class="co">#| output: true</span></span>
+<span id="cb61-662"><a href="#cb61-662"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-663"><a href="#cb61-663"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-664"><a href="#cb61-664"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-665"><a href="#cb61-665"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-666"><a href="#cb61-666"></a></span>
+<span id="cb61-667"><a href="#cb61-667"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb61-668"><a href="#cb61-668"></a></span>
+<span id="cb61-669"><a href="#cb61-669"></a><span class="co"># Sort by the Date and Cultivar columns</span></span>
+<span id="cb61-670"><a href="#cb61-670"></a>ce <span class="ot">&lt;-</span> cabbage_exp <span class="sc">%&gt;%</span></span>
+<span id="cb61-671"><a href="#cb61-671"></a>  <span class="fu">arrange</span>(Date, <span class="fu">rev</span>(Cultivar))</span>
+<span id="cb61-672"><a href="#cb61-672"></a></span>
+<span id="cb61-673"><a href="#cb61-673"></a><span class="co"># Get the cumulative sum</span></span>
+<span id="cb61-674"><a href="#cb61-674"></a>ce <span class="ot">&lt;-</span> ce <span class="sc">%&gt;%</span></span>
+<span id="cb61-675"><a href="#cb61-675"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
+<span id="cb61-676"><a href="#cb61-676"></a>  <span class="fu">mutate</span>(<span class="at">label_y =</span> <span class="fu">cumsum</span>(Weight))</span>
+<span id="cb61-677"><a href="#cb61-677"></a></span>
+<span id="cb61-678"><a href="#cb61-678"></a>ce</span>
+<span id="cb61-679"><a href="#cb61-679"></a></span>
+<span id="cb61-680"><a href="#cb61-680"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-681"><a href="#cb61-681"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb61-682"><a href="#cb61-682"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> label_y, <span class="at">label =</span> Weight), <span class="at">vjust =</span> <span class="fl">1.5</span>, <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb61-683"><a href="#cb61-683"></a><span class="in">```</span></span>
+<span id="cb61-684"><a href="#cb61-684"></a></span>
+<span id="cb61-685"><a href="#cb61-685"></a><span class="fu">## 堆积图数据标签放置在中部</span></span>
+<span id="cb61-686"><a href="#cb61-686"></a></span>
+<span id="cb61-687"><a href="#cb61-687"></a>如果想把数据标签放在条形中部，需要对累计求和的结果加以调整，并同时略去 <span class="in">`geom_bar()`</span> 函数对 y 偏移量 <span class="in">`offset`</span> 的设置。</span>
+<span id="cb61-688"><a href="#cb61-688"></a></span>
+<span id="cb61-691"><a href="#cb61-691"></a><span class="in">```{r}</span></span>
+<span id="cb61-692"><a href="#cb61-692"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-693"><a href="#cb61-693"></a><span class="co">#| output: true</span></span>
+<span id="cb61-694"><a href="#cb61-694"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-695"><a href="#cb61-695"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-696"><a href="#cb61-696"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-697"><a href="#cb61-697"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-698"><a href="#cb61-698"></a></span>
+<span id="cb61-699"><a href="#cb61-699"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb61-700"><a href="#cb61-700"></a></span>
+<span id="cb61-701"><a href="#cb61-701"></a>ce <span class="ot">&lt;-</span> cabbage_exp <span class="sc">%&gt;%</span></span>
+<span id="cb61-702"><a href="#cb61-702"></a>  <span class="fu">arrange</span>(Date, <span class="fu">rev</span>(Cultivar))</span>
+<span id="cb61-703"><a href="#cb61-703"></a></span>
+<span id="cb61-704"><a href="#cb61-704"></a><span class="co"># Calculate y position, placing it in the middle</span></span>
+<span id="cb61-705"><a href="#cb61-705"></a>ce <span class="ot">&lt;-</span> ce <span class="sc">%&gt;%</span></span>
+<span id="cb61-706"><a href="#cb61-706"></a>  <span class="fu">group_by</span>(Date) <span class="sc">%&gt;%</span></span>
+<span id="cb61-707"><a href="#cb61-707"></a>  <span class="fu">mutate</span>(<span class="at">label_y =</span> <span class="fu">cumsum</span>(Weight) <span class="sc">-</span> <span class="fl">0.5</span> <span class="sc">*</span> Weight)</span>
+<span id="cb61-708"><a href="#cb61-708"></a></span>
+<span id="cb61-709"><a href="#cb61-709"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-710"><a href="#cb61-710"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb61-711"><a href="#cb61-711"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> label_y, <span class="at">label =</span> Weight), <span class="at">colour =</span> <span class="st">"white"</span>)</span>
+<span id="cb61-712"><a href="#cb61-712"></a><span class="in">```</span></span>
+<span id="cb61-713"><a href="#cb61-713"></a></span>
+<span id="cb61-714"><a href="#cb61-714"></a><span class="fu">## 添加要素</span></span>
+<span id="cb61-715"><a href="#cb61-715"></a></span>
+<span id="cb61-716"><a href="#cb61-716"></a><span class="ss">1.  </span>修改颜色</span>
+<span id="cb61-717"><a href="#cb61-717"></a><span class="ss">2.  </span>将数据标签置于中间</span>
+<span id="cb61-718"><a href="#cb61-718"></a><span class="ss">3.  </span>缩小标签字号 <span class="in">`size`</span></span>
+<span id="cb61-719"><a href="#cb61-719"></a><span class="ss">4.  </span>调用 <span class="in">`paste()`</span> 函数给标签添加后缀</span>
+<span id="cb61-720"><a href="#cb61-720"></a><span class="ss">5.  </span>使用 <span class="in">`format()`</span> 函数保留两位小数</span>
+<span id="cb61-721"><a href="#cb61-721"></a></span>
+<span id="cb61-724"><a href="#cb61-724"></a><span class="in">```{r}</span></span>
+<span id="cb61-725"><a href="#cb61-725"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-726"><a href="#cb61-726"></a><span class="co">#| output: true</span></span>
+<span id="cb61-727"><a href="#cb61-727"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-728"><a href="#cb61-728"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-729"><a href="#cb61-729"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-730"><a href="#cb61-730"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-731"><a href="#cb61-731"></a></span>
+<span id="cb61-732"><a href="#cb61-732"></a><span class="fu">ggplot</span>(ce, <span class="fu">aes</span>(<span class="at">x =</span> Date, <span class="at">y =</span> Weight, <span class="at">fill =</span> Cultivar)) <span class="sc">+</span></span>
+<span id="cb61-733"><a href="#cb61-733"></a>  <span class="fu">geom_col</span>(<span class="at">colour =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb61-734"><a href="#cb61-734"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">y =</span> label_y, <span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">format</span>(Weight, <span class="at">nsmall =</span> <span class="dv">2</span>), <span class="st">"kg"</span>)), <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb61-735"><a href="#cb61-735"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Pastel1"</span>)</span>
+<span id="cb61-736"><a href="#cb61-736"></a><span class="in">```</span></span>
+<span id="cb61-737"><a href="#cb61-737"></a></span>
+<span id="cb61-738"><a href="#cb61-738"></a><span class="fu"># 绘制Cleveland点图</span></span>
+<span id="cb61-739"><a href="#cb61-739"></a></span>
+<span id="cb61-740"><a href="#cb61-740"></a>Cleveland点图是条形图的替代方案，它可以减少图形造成的视觉混乱并使图形更具可读性。</span>
+<span id="cb61-741"><a href="#cb61-741"></a></span>
+<span id="cb61-742"><a href="#cb61-742"></a><span class="fu">## 使用 `geom_point()` 命令</span></span>
+<span id="cb61-743"><a href="#cb61-743"></a></span>
+<span id="cb61-746"><a href="#cb61-746"></a><span class="in">```{r}</span></span>
+<span id="cb61-747"><a href="#cb61-747"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-748"><a href="#cb61-748"></a><span class="co">#| output: true</span></span>
+<span id="cb61-749"><a href="#cb61-749"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-750"><a href="#cb61-750"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-751"><a href="#cb61-751"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-752"><a href="#cb61-752"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-753"><a href="#cb61-753"></a></span>
+<span id="cb61-754"><a href="#cb61-754"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the tophitters2001 data set</span></span>
+<span id="cb61-755"><a href="#cb61-755"></a>tophit <span class="ot">&lt;-</span> tophitters2001[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ] <span class="co"># Take the top 25 from the tophitters data set</span></span>
+<span id="cb61-756"><a href="#cb61-756"></a></span>
+<span id="cb61-757"><a href="#cb61-757"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> name)) <span class="sc">+</span></span>
+<span id="cb61-758"><a href="#cb61-758"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb61-759"><a href="#cb61-759"></a><span class="in">```</span></span>
+<span id="cb61-760"><a href="#cb61-760"></a></span>
+<span id="cb61-761"><a href="#cb61-761"></a><span class="fu">## 修改排序</span></span>
+<span id="cb61-762"><a href="#cb61-762"></a></span>
+<span id="cb61-763"><a href="#cb61-763"></a>尽管 <span class="in">`tophit`</span> 函数的行排序恰好是根据 <span class="in">`avg`</span> 变量进行排序的，但这并不意味着在图中的也是这样进行排序；在默认的点图设置下，坐标轴上的变量通畅会根据变量类型自动选取合适的排序方式。</span>
+<span id="cb61-764"><a href="#cb61-764"></a></span>
+<span id="cb61-765"><a href="#cb61-765"></a>这里，变量 <span class="in">`name`</span> 属于字符串类型，因此，点图根据字母先后顺序对其进行了排序；当变量是因子型变量时，点图会根据定义好的因子水平顺序对其进行排序。</span>
+<span id="cb61-766"><a href="#cb61-766"></a></span>
+<span id="cb61-767"><a href="#cb61-767"></a>用户可以使用 <span class="in">`reorder(name,avg)`</span> 函数实现这一过程，该过程会先将 <span class="in">`name`</span> 变量转换为因子，然后，根据 <span class="in">`avg`</span> 变量的大小对其进行排序。</span>
+<span id="cb61-768"><a href="#cb61-768"></a></span>
+<span id="cb61-769"><a href="#cb61-769"></a>为了使图形效果更好，用户可以使用图形主题系统（theming system）删除垂直网格线，并将水平网格线的线性修改为虚线。</span>
+<span id="cb61-770"><a href="#cb61-770"></a></span>
+<span id="cb61-773"><a href="#cb61-773"></a><span class="in">```{r}</span></span>
+<span id="cb61-774"><a href="#cb61-774"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-775"><a href="#cb61-775"></a><span class="co">#| output: true</span></span>
+<span id="cb61-776"><a href="#cb61-776"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-777"><a href="#cb61-777"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-778"><a href="#cb61-778"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-779"><a href="#cb61-779"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-780"><a href="#cb61-780"></a></span>
+<span id="cb61-781"><a href="#cb61-781"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the tophitters2001 data set</span></span>
+<span id="cb61-782"><a href="#cb61-782"></a>tophit <span class="ot">&lt;-</span> tophitters2001[<span class="dv">1</span><span class="sc">:</span><span class="dv">25</span>, ] <span class="co"># Take the top 25 from the tophitters data set</span></span>
+<span id="cb61-783"><a href="#cb61-783"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb61-784"><a href="#cb61-784"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> <span class="fu">reorder</span>(name, avg))) <span class="sc">+</span></span>
+<span id="cb61-785"><a href="#cb61-785"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Use a larger dot</span></span>
+<span id="cb61-786"><a href="#cb61-786"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb61-787"><a href="#cb61-787"></a>  <span class="fu">theme</span>(</span>
+<span id="cb61-788"><a href="#cb61-788"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb61-789"><a href="#cb61-789"></a>    <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb61-790"><a href="#cb61-790"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>)</span>
+<span id="cb61-791"><a href="#cb61-791"></a>  )</span>
+<span id="cb61-792"><a href="#cb61-792"></a><span class="in">```</span></span>
+<span id="cb61-793"><a href="#cb61-793"></a></span>
+<span id="cb61-794"><a href="#cb61-794"></a><span class="fu">## 旋转点图</span></span>
+<span id="cb61-795"><a href="#cb61-795"></a></span>
+<span id="cb61-796"><a href="#cb61-796"></a>将点图的x轴和y轴互换，互换后，x轴对应名称，y轴对应数值，同时将标签旋转60°。</span>
+<span id="cb61-797"><a href="#cb61-797"></a></span>
+<span id="cb61-800"><a href="#cb61-800"></a><span class="in">```{r}</span></span>
+<span id="cb61-801"><a href="#cb61-801"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-802"><a href="#cb61-802"></a><span class="co">#| output: true</span></span>
+<span id="cb61-803"><a href="#cb61-803"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-804"><a href="#cb61-804"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-805"><a href="#cb61-805"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-806"><a href="#cb61-806"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-807"><a href="#cb61-807"></a></span>
+<span id="cb61-808"><a href="#cb61-808"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(name, avg), <span class="at">y =</span> avg)) <span class="sc">+</span></span>
+<span id="cb61-809"><a href="#cb61-809"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># Use a larger dot</span></span>
+<span id="cb61-810"><a href="#cb61-810"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb61-811"><a href="#cb61-811"></a>  <span class="fu">theme</span>(</span>
+<span id="cb61-812"><a href="#cb61-812"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb61-813"><a href="#cb61-813"></a>    <span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb61-814"><a href="#cb61-814"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">"grey60"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>),</span>
+<span id="cb61-815"><a href="#cb61-815"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">60</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb61-816"><a href="#cb61-816"></a>  )</span>
+<span id="cb61-817"><a href="#cb61-817"></a><span class="in">```</span></span>
+<span id="cb61-818"><a href="#cb61-818"></a></span>
+<span id="cb61-819"><a href="#cb61-819"></a><span class="fu">## 分组</span></span>
+<span id="cb61-820"><a href="#cb61-820"></a></span>
+<span id="cb61-821"><a href="#cb61-821"></a>因为前面已将 name 转为因子型变量，可以视作为一种分类变量，现在再根据因子 lg 对样本进行分组，因子 lg 有两个水平，分别是 NL 和 AL；一次依据 lg 和 avg 对变量进行排序。</span>
+<span id="cb61-822"><a href="#cb61-822"></a></span>
+<span id="cb61-823"><a href="#cb61-823"></a>需要注意的是， <span class="in">`reorder()`</span> 函数只能根据一个变量对因子水平进行排序，所以这里只能手动来实现 lg 和 avg 进行排序。</span>
+<span id="cb61-824"><a href="#cb61-824"></a></span>
+<span id="cb61-827"><a href="#cb61-827"></a><span class="in">```{r}</span></span>
+<span id="cb61-828"><a href="#cb61-828"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-829"><a href="#cb61-829"></a><span class="co">#| output: true</span></span>
+<span id="cb61-830"><a href="#cb61-830"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-831"><a href="#cb61-831"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-832"><a href="#cb61-832"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-833"><a href="#cb61-833"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-834"><a href="#cb61-834"></a></span>
+<span id="cb61-835"><a href="#cb61-835"></a><span class="co"># Get the names, sorted first by lg, then by avg</span></span>
+<span id="cb61-836"><a href="#cb61-836"></a>nameorder <span class="ot">&lt;-</span> tophit<span class="sc">$</span>name[<span class="fu">order</span>(tophit<span class="sc">$</span>lg, tophit<span class="sc">$</span>avg)]</span>
+<span id="cb61-837"><a href="#cb61-837"></a></span>
+<span id="cb61-838"><a href="#cb61-838"></a><span class="co"># Turn name into a factor, with levels in the order of nameorder</span></span>
+<span id="cb61-839"><a href="#cb61-839"></a>tophit<span class="sc">$</span>name <span class="ot">&lt;-</span> <span class="fu">factor</span>(tophit<span class="sc">$</span>name, <span class="at">levels =</span> nameorder)</span>
+<span id="cb61-840"><a href="#cb61-840"></a><span class="in">```</span></span>
+<span id="cb61-841"><a href="#cb61-841"></a></span>
+<span id="cb61-842"><a href="#cb61-842"></a>将 lg 变量映射到点的颜色属性上，借助 <span class="in">`geom_segment()`</span> 函数来实现“以数据点为端点的线段”代替贯通全图的网格线。</span>
+<span id="cb61-843"><a href="#cb61-843"></a></span>
+<span id="cb61-844"><a href="#cb61-844"></a>需要注意的是， <span class="in">`geom_segment()`</span> 函数需要设定 <span class="in">`x`</span>、<span class="in">`y`</span>、<span class="in">`xend`</span>和 <span class="in">`yend`</span> 四个参数.</span>
+<span id="cb61-845"><a href="#cb61-845"></a></span>
+<span id="cb61-848"><a href="#cb61-848"></a><span class="in">```{r}</span></span>
+<span id="cb61-849"><a href="#cb61-849"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-850"><a href="#cb61-850"></a><span class="co">#| output: true</span></span>
+<span id="cb61-851"><a href="#cb61-851"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-852"><a href="#cb61-852"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-853"><a href="#cb61-853"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-854"><a href="#cb61-854"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-855"><a href="#cb61-855"></a></span>
+<span id="cb61-856"><a href="#cb61-856"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> name)) <span class="sc">+</span></span>
+<span id="cb61-857"><a href="#cb61-857"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> name), <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb61-858"><a href="#cb61-858"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">colour =</span> lg)) <span class="sc">+</span></span>
+<span id="cb61-859"><a href="#cb61-859"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"NL"</span>, <span class="st">"AL"</span>)) <span class="sc">+</span></span>
+<span id="cb61-860"><a href="#cb61-860"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb61-861"><a href="#cb61-861"></a>  <span class="fu">theme</span>(</span>
+<span id="cb61-862"><a href="#cb61-862"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>(),   <span class="co"># 无水平网格线</span></span>
+<span id="cb61-863"><a href="#cb61-863"></a>    <span class="at">legend.position =</span> <span class="st">"right"</span>,              <span class="co"># 图例放在右侧</span></span>
+<span id="cb61-864"><a href="#cb61-864"></a>    <span class="at">legend.justification =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>),       <span class="co"># 图例对齐方式</span></span>
+<span id="cb61-865"><a href="#cb61-865"></a>    <span class="at">legend.box.just =</span> <span class="st">"right"</span>               <span class="co"># 图例框靠右对齐</span></span>
+<span id="cb61-866"><a href="#cb61-866"></a>  )</span>
+<span id="cb61-867"><a href="#cb61-867"></a><span class="in">```</span></span>
+<span id="cb61-868"><a href="#cb61-868"></a></span>
+<span id="cb61-869"><a href="#cb61-869"></a><span class="fu">## 分组2：分面展示</span></span>
+<span id="cb61-870"><a href="#cb61-870"></a></span>
+<span id="cb61-871"><a href="#cb61-871"></a>通过调整 <span class="in">`lg`</span> 变量的因子水平来修改分面显示的堆叠顺序。</span>
+<span id="cb61-872"><a href="#cb61-872"></a></span>
+<span id="cb61-875"><a href="#cb61-875"></a><span class="in">```{r}</span></span>
+<span id="cb61-876"><a href="#cb61-876"></a><span class="co">#| echo: true</span></span>
+<span id="cb61-877"><a href="#cb61-877"></a><span class="co">#| output: true</span></span>
+<span id="cb61-878"><a href="#cb61-878"></a><span class="co">#| cache: true</span></span>
+<span id="cb61-879"><a href="#cb61-879"></a><span class="co">#| fig-show: true  # 确保图形显示</span></span>
+<span id="cb61-880"><a href="#cb61-880"></a><span class="co">#| fig-width: 8    # 设置图形宽度</span></span>
+<span id="cb61-881"><a href="#cb61-881"></a><span class="co">#| fig-height: 6   # 设置图形高度</span></span>
+<span id="cb61-882"><a href="#cb61-882"></a></span>
+<span id="cb61-883"><a href="#cb61-883"></a><span class="fu">ggplot</span>(tophit, <span class="fu">aes</span>(<span class="at">x =</span> avg, <span class="at">y =</span> name)) <span class="sc">+</span></span>
+<span id="cb61-884"><a href="#cb61-884"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">yend =</span> name), <span class="at">xend =</span> <span class="dv">0</span>, <span class="at">colour =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb61-885"><a href="#cb61-885"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="fu">aes</span>(<span class="at">colour =</span> lg)) <span class="sc">+</span></span>
+<span id="cb61-886"><a href="#cb61-886"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="st">"NL"</span>, <span class="st">"AL"</span>), <span class="at">guide =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb61-887"><a href="#cb61-887"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb61-888"><a href="#cb61-888"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb61-889"><a href="#cb61-889"></a>  <span class="fu">facet_grid</span>(lg <span class="sc">~</span> ., <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">space =</span> <span class="st">"free_y"</span>)</span>
+<span id="cb61-890"><a href="#cb61-890"></a><span class="in">```</span></span>
 </code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -910,7 +910,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-15},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 15, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{2025,\n  author = {, simonzhou},\n  title = {医学统计学习笔记},\n  date = {2025-06-16},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nsimonzhou. 2025. “医学统计学习笔记.” June 16, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -7228,6 +7228,58 @@
     "title": "03-ggplot2 绘图——条形图",
     "section": "\n9.1 使用 geom_point() 命令",
     "text": "9.1 使用 geom_point() 命令\n\n代码library(gcookbook) # Load gcookbook for the tophitters2001 data set\ntophit &lt;- tophitters2001[1:25, ] # Take the top 25 from the tophitters data set\n\nggplot(tophit, aes(x = avg, y = name)) +\n  geom_point()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#修改排序",
+    "href": "Guide/R/03-ggplot2-barplot.html#修改排序",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n9.2 修改排序",
+    "text": "9.2 修改排序\n尽管 tophit 函数的行排序恰好是根据 avg 变量进行排序的，但这并不意味着在图中的也是这样进行排序；在默认的点图设置下，坐标轴上的变量通畅会根据变量类型自动选取合适的排序方式。\n这里，变量 name 属于字符串类型，因此，点图根据字母先后顺序对其进行了排序；当变量是因子型变量时，点图会根据定义好的因子水平顺序对其进行排序。\n用户可以使用 reorder(name,avg) 函数实现这一过程，该过程会先将 name 变量转换为因子，然后，根据 avg 变量的大小对其进行排序。\n为了使图形效果更好，用户可以使用图形主题系统（theming system）删除垂直网格线，并将水平网格线的线性修改为虚线。\n\n代码library(gcookbook) # Load gcookbook for the tophitters2001 data set\ntophit &lt;- tophitters2001[1:25, ] # Take the top 25 from the tophitters data set\nlibrary(ggplot2)\nggplot(tophit, aes(x = avg, y = reorder(name, avg))) +\n  geom_point(size = 3) +  # Use a larger dot\n  theme_bw() +\n  theme(\n    panel.grid.major.x = element_blank(),\n    panel.grid.minor.x = element_blank(),\n    panel.grid.major.y = element_line(colour = \"grey60\", linetype = \"dashed\")\n  )",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#旋转点图",
+    "href": "Guide/R/03-ggplot2-barplot.html#旋转点图",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n9.3 旋转点图",
+    "text": "9.3 旋转点图\n将点图的x轴和y轴互换，互换后，x轴对应名称，y轴对应数值，同时将标签旋转60°。\n\n代码ggplot(tophit, aes(x = reorder(name, avg), y = avg)) +\n  geom_point(size = 3) +  # Use a larger dot\n  theme_bw() +\n  theme(\n    panel.grid.major.y = element_blank(),\n    panel.grid.minor.y = element_blank(),\n    panel.grid.major.x = element_line(colour = \"grey60\", linetype = \"dashed\"),\n    axis.text.x = element_text(angle = 60, hjust = 1)\n  )",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#分组",
+    "href": "Guide/R/03-ggplot2-barplot.html#分组",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n9.4 分组",
+    "text": "9.4 分组\n因为前面已将 name 转为因子型变量，可以视作为一种分类变量，现在再根据因子 lg 对样本进行分组，因子 lg 有两个水平，分别是 NL 和 AL；一次依据 lg 和 avg 对变量进行排序。\n需要注意的是， reorder() 函数只能根据一个变量对因子水平进行排序，所以这里只能手动来实现 lg 和 avg 进行排序。\n\n代码# Get the names, sorted first by lg, then by avg\nnameorder &lt;- tophit$name[order(tophit$lg, tophit$avg)]\n\n# Turn name into a factor, with levels in the order of nameorder\ntophit$name &lt;- factor(tophit$name, levels = nameorder)\n\n\n将 lg 变量映射到点的颜色属性上，借助 geom_segment() 函数来实现“以数据点为端点的线段”代替贯通全图的网格线。\n需要注意的是， geom_segment() 函数需要设定 x、y、xend和 yend 四个参数.\n\n代码ggplot(tophit, aes(x = avg, y = name)) +\n  geom_segment(aes(yend = name), xend = 0, colour = \"grey50\") +\n  geom_point(size = 3, aes(colour = lg)) +\n  scale_colour_brewer(palette = \"Set1\", limits = c(\"NL\", \"AL\")) +\n  theme_bw() +\n  theme(\n    panel.grid.major.y = element_blank(),   # 无水平网格线\n    legend.position = \"right\",              # 图例放在右侧\n    legend.justification = c(1, 0.5),       # 图例对齐方式\n    legend.box.just = \"right\"               # 图例框靠右对齐\n  )",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#分组2分面展示",
+    "href": "Guide/R/03-ggplot2-barplot.html#分组2分面展示",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n9.5 分组2：分面展示",
+    "text": "9.5 分组2：分面展示\n通过调整 lg 变量的因子水平来修改分面显示的堆叠顺序。\n\n代码ggplot(tophit, aes(x = avg, y = name)) +\n  geom_segment(aes(yend = name), xend = 0, colour = \"grey50\") +\n  geom_point(size = 3, aes(colour = lg)) +\n  scale_colour_brewer(palette = \"Set1\", limits = c(\"NL\", \"AL\"), guide = \"none\") +\n  theme_bw() +\n  theme(panel.grid.major.y = element_blank()) +\n  facet_grid(lg ~ ., scales = \"free_y\", space = \"free_y\")",
     "crumbs": [
       "Home",
       "Guide",

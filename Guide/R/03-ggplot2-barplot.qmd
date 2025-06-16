@@ -691,3 +691,126 @@ tophit <- tophitters2001[1:25, ] # Take the top 25 from the tophitters data set
 ggplot(tophit, aes(x = avg, y = name)) +
   geom_point()
 ```
+
+## 修改排序
+
+尽管 `tophit` 函数的行排序恰好是根据 `avg` 变量进行排序的，但这并不意味着在图中的也是这样进行排序；在默认的点图设置下，坐标轴上的变量通畅会根据变量类型自动选取合适的排序方式。
+
+这里，变量 `name` 属于字符串类型，因此，点图根据字母先后顺序对其进行了排序；当变量是因子型变量时，点图会根据定义好的因子水平顺序对其进行排序。
+
+用户可以使用 `reorder(name,avg)` 函数实现这一过程，该过程会先将 `name` 变量转换为因子，然后，根据 `avg` 变量的大小对其进行排序。
+
+为了使图形效果更好，用户可以使用图形主题系统（theming system）删除垂直网格线，并将水平网格线的线性修改为虚线。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+library(gcookbook) # Load gcookbook for the tophitters2001 data set
+tophit <- tophitters2001[1:25, ] # Take the top 25 from the tophitters data set
+library(ggplot2)
+ggplot(tophit, aes(x = avg, y = reorder(name, avg))) +
+  geom_point(size = 3) +  # Use a larger dot
+  theme_bw() +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(colour = "grey60", linetype = "dashed")
+  )
+```
+
+## 旋转点图
+
+将点图的x轴和y轴互换，互换后，x轴对应名称，y轴对应数值，同时将标签旋转60°。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(tophit, aes(x = reorder(name, avg), y = avg)) +
+  geom_point(size = 3) +  # Use a larger dot
+  theme_bw() +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor.y = element_blank(),
+    panel.grid.major.x = element_line(colour = "grey60", linetype = "dashed"),
+    axis.text.x = element_text(angle = 60, hjust = 1)
+  )
+```
+
+## 分组
+
+因为前面已将 name 转为因子型变量，可以视作为一种分类变量，现在再根据因子 lg 对样本进行分组，因子 lg 有两个水平，分别是 NL 和 AL；一次依据 lg 和 avg 对变量进行排序。
+
+需要注意的是， `reorder()` 函数只能根据一个变量对因子水平进行排序，所以这里只能手动来实现 lg 和 avg 进行排序。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+# Get the names, sorted first by lg, then by avg
+nameorder <- tophit$name[order(tophit$lg, tophit$avg)]
+
+# Turn name into a factor, with levels in the order of nameorder
+tophit$name <- factor(tophit$name, levels = nameorder)
+```
+
+将 lg 变量映射到点的颜色属性上，借助 `geom_segment()` 函数来实现“以数据点为端点的线段”代替贯通全图的网格线。
+
+需要注意的是， `geom_segment()` 函数需要设定 `x`、`y`、`xend`和 `yend` 四个参数.
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(tophit, aes(x = avg, y = name)) +
+  geom_segment(aes(yend = name), xend = 0, colour = "grey50") +
+  geom_point(size = 3, aes(colour = lg)) +
+  scale_colour_brewer(palette = "Set1", limits = c("NL", "AL")) +
+  theme_bw() +
+  theme(
+    panel.grid.major.y = element_blank(),   # 无水平网格线
+    legend.position = "right",              # 图例放在右侧
+    legend.justification = c(1, 0.5),       # 图例对齐方式
+    legend.box.just = "right"               # 图例框靠右对齐
+  )
+```
+
+## 分组2：分面展示
+
+通过调整 `lg` 变量的因子水平来修改分面显示的堆叠顺序。
+
+```{r}
+#| echo: true
+#| output: true
+#| cache: true
+#| fig-show: true  # 确保图形显示
+#| fig-width: 8    # 设置图形宽度
+#| fig-height: 6   # 设置图形高度
+
+ggplot(tophit, aes(x = avg, y = name)) +
+  geom_segment(aes(yend = name), xend = 0, colour = "grey50") +
+  geom_point(size = 3, aes(colour = lg)) +
+  scale_colour_brewer(palette = "Set1", limits = c("NL", "AL"), guide = "none") +
+  theme_bw() +
+  theme(panel.grid.major.y = element_blank()) +
+  facet_grid(lg ~ ., scales = "free_y", space = "free_y")
+```
+
+end.
