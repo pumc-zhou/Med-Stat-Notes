@@ -203,3 +203,13 @@ NBGrader 是一个用于分配和评分 Jupyter Notebook 的系统，它与 SAS 
 通过这些生态项目，SAS Kernel 不仅扩展了 Jupyter Notebook 的功能，还增强了其在数据科学和分析领域的应用能力。[^2]
 
 [^2]: [SAS Kernel for Jupyter 安装与使用教程](https://blog.csdn.net/gitblog_01103/article/details/142273387?fromshare=blogdetail&sharetype=blogdetail&sharerId=142273387&sharerefer=PC&sharesource=&sharefrom=from_link){.uri}
+
+# Quarto 中使用 jupyter 调用 SAS_kernel
+
+## idea？
+
+因为在jupyter中已经确定可以通过魔法命令来调用 Stata 和 SAS 的 engine 来实现 Pytho(jupyter) 和 Stata/SAS 的联合使用，但是 Quarto 中也可以直接使用 Python 的命令，实现的形式如下：
+
+```{python}
+1+2
+```

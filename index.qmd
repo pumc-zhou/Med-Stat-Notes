@@ -17,7 +17,7 @@ image-title: "just simonzhou"
 
 about:
   template: solana
-  image: images/logo.png
+  image: images/profile_dog.jpg
   image-shape: round
   
   links:
