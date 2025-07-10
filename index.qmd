@@ -1,6 +1,6 @@
 ---
 title: "医学统计学习笔记"
-author: simonzhou
+author: ZHOU LB
 date: today
 date-format: "YYYY[年]M[月]D[日]"
 author-title: Author # 作者栏的标签。默认标签为“AUTHOR”。

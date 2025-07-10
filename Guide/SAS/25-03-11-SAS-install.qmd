@@ -51,13 +51,9 @@ Before you can run SAS code, you must [configure the SAS extension](https://sas
 在运行 SAS 代码之前，您必须配置 SAS 扩展以访问 SAS 9.4（远程或本地）服务器或 SAS Viya 服务器。您必须获得 SAS 9.4 或 SAS Viya 的许可才能运行 SAS 代码。
 
 1.  打开 SAS 程序文件。
-
 2.  单击 VS Code 窗口左下方状态栏中的“无配置文件”。
-
     您还可以打开命令面板（`F1`，或`Ctrl+Shift+P`在 Windows 或 Linux 上，或`Shift+CMD+P`在 OSX 上）并找到`SAS: Add New Connection Profile`命令。
-
 3.  [按照“添加新连接配置文件”](https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/#add-new-connection-profile)部分中的说明添加配置文件。
-
 4.  创建配置文件后，状态栏项将从“无配置文件”更改为新配置文件的名称。
 
 ![](images/paste-2.png)
@@ -72,19 +68,51 @@ SAS 文件右上角有一个 奔跑的小人 ，点击即可开始运行所选�
 
 ### 环境准备
 
-安装 Anaconda 集成环境或 Python 和 SAS 软件，其中Anaconda要求Python3+；Python在Jupyter Notebook和SAS之间起一个桥梁的作用，Jupyter Notebook中的SAS代码会交给Python，Python负责将代码传递给SAS执行；然后将执行的结果返回给Jupyter Notebook显示。
+1. 安装 Anaconda 集成环境或 Python 和 SAS 软件，其中要求Python3.4+；
+2. SAS 需要 SAS 9.4+ 或 SAS Viya 3.1+；
+3. Python在Jupyter Notebook和SAS之间起一个桥梁的作用，Jupyter Notebook中的SAS代码会交给Python，Python负责将代码传递给SAS执行；
+4. 然后将执行的结果返回给Jupyter Notebook显示。
 
 SAS版本要求9.4，也可以是 SAS Viya。
 
-### 安装SAS_KERNEL
+### 通过 `pip` 安装 SASPY
 
 启动 `cmd`，输入命令：
 
 ``` python
-pip install sas_kernel
+pip install saspy
 ```
 
-然后就会自动安装 `sas_kernel` 及其相应的依赖项。
+specific release：
+
+```python
+pip install http://github.com/sassoftware/saspy/releases/saspy-X.X.X.tar.gz
+```
+
+然后就会自动安装 `saspy` 及其相应的依赖项。
+
+最好的更新或重装方式：
+
+```python
+pip uninstall -y saspy
+pip install saspy
+```
+
+### 通过 `uv` 安装和管理
+
+```python
+uv init name-of-project
+cd name-of-project
+uv add saspy # adds saspy to your project from PyPI
+```
+
+### 通过 `conda` 安装和管理
+
+```python
+conda create --name name-of-my-environment
+conda install --channel conda-forge saspy # Installs latest version of saspy from conda-forge channel.
+conda install --channel conda-forge saspy==X.X.X # Where X.X.X is the version you'd like to install.
+```
 
 安装完成后可以输入命令：
 
@@ -92,7 +120,7 @@ pip install sas_kernel
 jupyter kernelspec list
 ```
 
-来检测 `sas_kernel` 是否安装成功，如果成功，理论上会看到如下形式的输出：
+来检测 `saspy` 是否安装成功，如果成功，理论上会看到如下形式的输出：
 
 ```         
 Available kernels:
@@ -102,7 +130,7 @@ Available kernels:
 
 ### 修改 Python 配置文件
 
-安装好 `sas_kernel` 后找到 Anaconda 或 Python 的安装目录，会有一个相应的文件夹出现，例如我的文件路径如下：
+安装好 `saspy` 后找到 Anaconda 或 Python 的安装目录，会有一个相应的文件夹出现，例如我的文件路径如下：
 
 ```         
 C:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\saspy

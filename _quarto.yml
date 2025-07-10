@@ -133,7 +133,7 @@ website:
   page-footer:
     left:
       - text: "This website was built with Quarto"
-    center: "Copyright 2023-2025, simonzhou"
+    center: "Copyright 2023-2025, LB.ZHOU"
     right:
       - icon: github
         href: https://github.com/zhoulvbang

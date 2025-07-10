@@ -53,7 +53,7 @@ SAS的历史很长，很强大，但是现代化做的一般（交互界面）�
 
         -   运行如下程序获得 config 配置文件的物理地址：
 
-            ``` SAS
+            ``` sas
             proc options option=config;
             run;
             ```
