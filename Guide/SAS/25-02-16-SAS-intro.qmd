@@ -26,6 +26,10 @@ SAS的历史很长，很强大，但是现代化做的一般（交互界面）�
 
 每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。
 
+# 学习资料
+
+\[[**learning-sas-by-example-2nd**](https://github.com/sassoftware/learning-sas-by-example-2nd)\]([https://github.com/sassoftware/learning-sas-by-example-2nd/tree/master](#0){style="font-size: 13pt; font-weight: var(--fontWeightRegular);"})
+
 # SAS Using Record
 
 1.  2025-05-06，这几天调试 SAS 与 VSCODE 的联合使用，发现很久没有打开的 SAS 中文页面出现了乱码，调试了一天才解决，做了很多尝试，此处做一些记录，首先是修改 `encoding` ，但是没有效果，然后指定相关的语言和地区，可能是和系统设置有冲突，但是不是主要问题，最后在网上找到 SAS-TW 的一些问题指南，是因为 Windows 的 **Beta: 使用 Unicode UTF-8 提供全球語言支援** 引发的问题，最后尝试将其关闭后重启解决中文乱码问题。[^1]

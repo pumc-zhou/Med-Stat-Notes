@@ -866,7 +866,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年7月10日</p>
+      <p class="date-modified">2025年7月11日</p>
     </div>
   </div>
     
@@ -892,6 +892,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </ol>
 <p>用肯定能用，但是在使用中占多大的比重，就需要权衡一下，在 AI 时代，不一定要全部掌握，看得懂，知道怎么做，应该也可以了，当然如果要深入，那就另说。</p>
 <p>每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。</p>
+</section>
+<section id="学习资料" class="level1">
+<h1>学习资料</h1>
+<p>[<a href="https://github.com/sassoftware/learning-sas-by-example-2nd"><strong>learning-sas-by-example-2nd</strong></a>](<a href="#0" style="font-size: 13pt; font-weight: var(--fontWeightRegular);">https://github.com/sassoftware/learning-sas-by-example-2nd/tree/master</a>)</p>
 </section>
 <section id="sas-using-record" class="level1">
 <h1>SAS Using Record</h1>
@@ -1593,41 +1597,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>每个人的资源和时间都是有限的，用最少的资源和时间做最多的事才是最重要的。</span>
 <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu"># SAS Using Record</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu"># 学习资料</span></span>
 <span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>2025-05-06，这几天调试 SAS 与 VSCODE 的联合使用，发现很久没有打开的 SAS 中文页面出现了乱码，调试了一天才解决，做了很多尝试，此处做一些记录，首先是修改 <span class="in">`encoding`</span> ，但是没有效果，然后指定相关的语言和地区，可能是和系统设置有冲突，但是不是主要问题，最后在网上找到 SAS-TW 的一些问题指南，是因为 Windows 的 **Beta: 使用 Unicode UTF-8 提供全球語言支援** 引发的问题，最后尝试将其关闭后重启解决中文乱码问题。<span class="ot">[^1]</span></span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>2025-05-24，使用jupyter notebook来连接SAS后，在cell中运行 SAS 代码，挺好，但是编译后的文档在网页中会“变质”，quarto对 SAS 结果的渲染有些问题，GPT建议可以让 SAS 结果输出为小的html块，再在quarto中引用，以后可以试试。</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span><span class="co">[</span><span class="ot">SAS 程式(SAS 9.4) 繁體中文出現亂碼怎麼辦?</span><span class="co">](https://blogs.sas.com/content/sastaiwan/2022/04/08/sas-%E7%A8%8B%E5%BC%8Fsas-9-4-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E5%87%BA%E7%8F%BE%E4%BA%82%E7%A2%BC%E6%80%8E%E9%BA%BC%E8%BE%A6/)</span></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="in">``` quarto</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-tip}</span></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="in">查看完整输出：[output.html](output.html)</span></span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>或用HTML 的 <span class="in">`&lt;iframe&gt;`</span> 进行嵌入：</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.html .quarto}</span></span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;iframe src="means_output.html" width="700" height="400"&gt;&lt;/iframe&gt;</span></span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="sc">\[</span><span class="co">[</span><span class="ot">**learning-sas-by-example-2nd**</span><span class="co">](https://github.com/sassoftware/learning-sas-by-example-2nd)</span><span class="sc">\]</span>(<span class="co">[</span><span class="ot">https://github.com/sassoftware/learning-sas-by-example-2nd/tree/master</span><span class="co">](#0)</span>{style="font-size: 13pt; font-weight: var(--fontWeightRegular);"})</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="fu"># SAS Using Record</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>2025-05-06，这几天调试 SAS 与 VSCODE 的联合使用，发现很久没有打开的 SAS 中文页面出现了乱码，调试了一天才解决，做了很多尝试，此处做一些记录，首先是修改 <span class="in">`encoding`</span> ，但是没有效果，然后指定相关的语言和地区，可能是和系统设置有冲突，但是不是主要问题，最后在网上找到 SAS-TW 的一些问题指南，是因为 Windows 的 **Beta: 使用 Unicode UTF-8 提供全球語言支援** 引发的问题，最后尝试将其关闭后重启解决中文乱码问题。<span class="ot">[^1]</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>2025-05-24，使用jupyter notebook来连接SAS后，在cell中运行 SAS 代码，挺好，但是编译后的文档在网页中会“变质”，quarto对 SAS 结果的渲染有些问题，GPT建议可以让 SAS 结果输出为小的html块，再在quarto中引用，以后可以试试。</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="ot">[^1]: </span><span class="co">[</span><span class="ot">SAS 程式(SAS 9.4) 繁體中文出現亂碼怎麼辦?</span><span class="co">](https://blogs.sas.com/content/sastaiwan/2022/04/08/sas-%E7%A8%8B%E5%BC%8Fsas-9-4-%E7%B9%81%E9%AB%94%E4%B8%AD%E6%96%87%E5%87%BA%E7%8F%BE%E4%BA%82%E7%A2%BC%E6%80%8E%E9%BA%BC%E8%BE%A6/)</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="in">``` quarto</span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="in">::: {.callout-tip}</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">查看完整输出：[output.html](output.html)</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">:::</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>或用HTML 的 <span class="in">`&lt;iframe&gt;`</span> 进行嵌入：</span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>2025-06-02，使用中发现，当含有 SAS 程序和输出结果的.ipynb文件被编译后，出现了两个问题，一个是markdown内的 SAS 代码块无法正确显示高亮格式，尝试了 <span class="in">`code-fold: true code-line-numbers: true`</span> 来高亮代码块，但是效果一般；第二个问题是输出的 .html 以及网页显示时，含有 SAS 数据的页面都会 “变质”，目前网络上没有相应的问题和解决办法，问 AI 说是因为格式不一致，所以导致的变质，这个问题暂时无解，尝试对第一个问题进行完善，使其能够正确对 SAS 代码块高亮显示。</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>2025-06-04,无论实在 SAS 环境内还是在 ipynb 中调用 SAS ，都有一个问题，即输出的图像像素质量很低，特别是部署到网页后，图像基本上都是糊的，随查找了相关的解决方案，有在程序中定义像素的，但是尝试了一下不是很好用；还有一个则是修改 SAS 的环境设置，参考这篇文章：<span class="co">[</span><span class="ot">SAS 自定义输出图片DPI + 解决“ERROR：JAVA 虚拟机异常”</span><span class="co">](https://zhuanlan.zhihu.com/p/348844932)</span>。分为两个部分:</span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>一个是在输出图形的 <span class="in">`proc`</span> 步前使用 *`ODS LISTING`* 语句里的选项 *`IMAGE_DPI` 指定你所需要的 `DPI` 即可。*</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="in">``` {.html .quarto}</span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;iframe src="means_output.html" width="700" height="400"&gt;&lt;/iframe&gt;</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>第二是初次尝试的时候可能会遇到 <span class="in">`“ERROR：JAVA&nbsp;虚拟机异常”`</span> 的问题，此时需要</span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="ss">        -   </span>运行如下程序获得 config 配置文件的物理地址：</span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>2025-06-02，使用中发现，当含有 SAS 程序和输出结果的.ipynb文件被编译后，出现了两个问题，一个是markdown内的 SAS 代码块无法正确显示高亮格式，尝试了 <span class="in">`code-fold: true code-line-numbers: true`</span> 来高亮代码块，但是效果一般；第二个问题是输出的 .html 以及网页显示时，含有 SAS 数据的页面都会 “变质”，目前网络上没有相应的问题和解决办法，问 AI 说是因为格式不一致，所以导致的变质，这个问题暂时无解，尝试对第一个问题进行完善，使其能够正确对 SAS 代码块高亮显示。</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>2025-06-04,无论实在 SAS 环境内还是在 ipynb 中调用 SAS ，都有一个问题，即输出的图像像素质量很低，特别是部署到网页后，图像基本上都是糊的，随查找了相关的解决方案，有在程序中定义像素的，但是尝试了一下不是很好用；还有一个则是修改 SAS 的环境设置，参考这篇文章：<span class="co">[</span><span class="ot">SAS 自定义输出图片DPI + 解决“ERROR：JAVA 虚拟机异常”</span><span class="co">](https://zhuanlan.zhihu.com/p/348844932)</span>。分为两个部分:</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>一个是在输出图形的 <span class="in">`proc`</span> 步前使用 *`ODS LISTING`* 语句里的选项 *`IMAGE_DPI` 指定你所需要的 `DPI` 即可。*</span>
 <span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>            <span class="in">``` sas</span></span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="in">            proc options option=config;</span></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="in">            run;</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="in">            ```</span></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="ss">        -   </span>利用记事本打开这一文件，将文件中如图所示的内容修改为你需要的内存大小，从 128 修改为 1024，再重新运行程序。</span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-3.png)</span></span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>第二是初次尝试的时候可能会遇到 <span class="in">`“ERROR：JAVA&nbsp;虚拟机异常”`</span> 的问题，此时需要</span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="ss">        -   </span>运行如下程序获得 config 配置文件的物理地址：</span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>            <span class="in">``` sas</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="in">            proc options option=config;</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="in">            run;</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="in">            ```</span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="ss">        -   </span>利用记事本打开这一文件，将文件中如图所示的内容修改为你需要的内存大小，从 128 修改为 1024，再重新运行程序。</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-3.png)</span></span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

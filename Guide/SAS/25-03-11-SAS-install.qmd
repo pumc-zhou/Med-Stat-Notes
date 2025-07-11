@@ -16,22 +16,35 @@ execute:
   eval: true      # 执行代码
 ---
 
-## SAS 在 Windows 的安装
+# SAS 在各操作系统中的安装
 
-## SAS 在 Linux 的安装
+## SAS 在 Windows 系统中的安装
+
+\[**SAS9.4下载安装教程**\](<https://blog.csdn.net/wzk4869/article/details/128893187>)
+
+## SAS 在 Linux 系统中的安装
+
+\[[**Linux 环境下 SAS 软件安装与配置详细教程**](https://my.oschina.net/emacs_8839324/blog/17390712)\](<https://my.oschina.net/emacs_8839324/blog/17390712>)
+
+SAS 在 Linux 系统中的安装极为复杂，笔者曾在某短时间研究多日，最后还是没有安装成功。
+
+## SAS 在 macOS 中的安装
+
+在 macOS 中安装SAS一般有两种途径：
+
+1. 下载 SAS University Edition for mac（这个版本是免费版，目前还不了解哪些功能被阉割）
+2. 在 macOS 上搭建 Windows 虚拟机，然后按照 Windows上装 SAS 的方法进行。
+
+如果你有可用的 SID 可以考虑安装虚拟机后运行 SAS，如果没有可用的 SID，则考虑使用免费的 [免费使用 SAS 云软件](https://www.sas.com/zh_cn/software/on-demand-for-academics.html#osx-download)，需要按照身份和需求进行注册，最后登录 [SAS® OnDemand for Academics](https://welcome.oda.sas.com/)进行使用。
 
 ## SAS 与 vscode 扩展
 
 SAS VS Code 扩展轻量级，可在任何地方运行，并允许您集成 SAS 和其他语言。该工具还提供直接连接到 SAS Viya 和 SAS 9 并运行代码的功能。
 
 -   SAS 语法突出显示和帮助、代码完成和代码片段
-
 -   用于连接 SAS 和运行代码的配置文件配置
-
 -   支持 SAS Viya 和 SAS 9 连接
-
 -   访问 SAS 内容和库
-
 -   为 SAS、SQL、Python 和其他语言创建笔记本
 
 扩展程序可在 GitHub 上找到仓库与原代码：\[[vscode-sas-extension](https://github.com/sassoftware/vscode-sas-extension)\](<https://github.com/sassoftware/vscode-sas-extension>)
@@ -51,8 +64,7 @@ Before you can run SAS code, you must [configure the SAS extension](https://sas
 在运行 SAS 代码之前，您必须配置 SAS 扩展以访问 SAS 9.4（远程或本地）服务器或 SAS Viya 服务器。您必须获得 SAS 9.4 或 SAS Viya 的许可才能运行 SAS 代码。
 
 1.  打开 SAS 程序文件。
-2.  单击 VS Code 窗口左下方状态栏中的“无配置文件”。
-    您还可以打开命令面板（`F1`，或`Ctrl+Shift+P`在 Windows 或 Linux 上，或`Shift+CMD+P`在 OSX 上）并找到`SAS: Add New Connection Profile`命令。
+2.  单击 VS Code 窗口左下方状态栏中的“无配置文件”。 您还可以打开命令面板（`F1`，或`Ctrl+Shift+P`在 Windows 或 Linux 上，或`Shift+CMD+P`在 OSX 上）并找到`SAS: Add New Connection Profile`命令。
 3.  [按照“添加新连接配置文件”](https://sassoftware.github.io/vscode-sas-extension/Configurations/Profiles/#add-new-connection-profile)部分中的说明添加配置文件。
 4.  创建配置文件后，状态栏项将从“无配置文件”更改为新配置文件的名称。
 
@@ -68,10 +80,10 @@ SAS 文件右上角有一个 奔跑的小人 ，点击即可开始运行所选�
 
 ### 环境准备
 
-1. 安装 Anaconda 集成环境或 Python 和 SAS 软件，其中要求Python3.4+；
-2. SAS 需要 SAS 9.4+ 或 SAS Viya 3.1+；
-3. Python在Jupyter Notebook和SAS之间起一个桥梁的作用，Jupyter Notebook中的SAS代码会交给Python，Python负责将代码传递给SAS执行；
-4. 然后将执行的结果返回给Jupyter Notebook显示。
+1.  安装 Anaconda 集成环境或 Python 和 SAS 软件，其中要求Python3.4+；
+2.  SAS 需要 SAS 9.4+ 或 SAS Viya 3.1+；
+3.  Python在Jupyter Notebook和SAS之间起一个桥梁的作用，Jupyter Notebook中的SAS代码会交给Python，Python负责将代码传递给SAS执行；
+4.  然后将执行的结果返回给Jupyter Notebook显示。
 
 SAS版本要求9.4，也可以是 SAS Viya。
 
@@ -85,7 +97,7 @@ pip install saspy
 
 specific release：
 
-```python
+``` python
 pip install http://github.com/sassoftware/saspy/releases/saspy-X.X.X.tar.gz
 ```
 
@@ -93,14 +105,14 @@ pip install http://github.com/sassoftware/saspy/releases/saspy-X.X.X.tar.gz
 
 最好的更新或重装方式：
 
-```python
+``` python
 pip uninstall -y saspy
 pip install saspy
 ```
 
 ### 通过 `uv` 安装和管理
 
-```python
+``` python
 uv init name-of-project
 cd name-of-project
 uv add saspy # adds saspy to your project from PyPI
@@ -108,7 +120,7 @@ uv add saspy # adds saspy to your project from PyPI
 
 ### 通过 `conda` 安装和管理
 
-```python
+``` python
 conda create --name name-of-my-environment
 conda install --channel conda-forge saspy # Installs latest version of saspy from conda-forge channel.
 conda install --channel conda-forge saspy==X.X.X # Where X.X.X is the version you'd like to install.
@@ -444,13 +456,13 @@ jupyter nbextension enable sas_kernel.showSASLog –py
 
 [^1]: [SAS岩论 \| 在Jupyter Notebook中使用SAS](https://www.sohu.com/a/218339423_278472){.uri}
 
-### **典型生态项目**
+## **典型生态项目**
 
-#### **SASPy**
+### **SASPy**
 
 SASPy 是一个 Python 库，允许你通过 Python 代码与 SAS 进行交互。SAS Kernel 依赖于 SASPy，因此在使用 SAS Kernel 之前，你需要配置 SASPy。
 
-#### **JupyterLab 扩展**
+### **JupyterLab 扩展**
 
 SAS Kernel 支持 JupyterLab 扩展，这些扩展可以提高你在 JupyterLab 中的编程效率。你可以通过以下命令安装这些扩展：
 
@@ -458,7 +470,7 @@ SAS Kernel 支持 JupyterLab 扩展，这些扩展可以提高你在 JupyterLab 
 pip install sas_kernel[jlab_ext]
 ```
 
-#### **NBGrader**
+### **NBGrader**
 
 NBGrader 是一个用于分配和评分 Jupyter Notebook 的系统，它与 SAS Kernel 兼容。你可以使用 NBGrader 来创建和评分包含 SAS 代码的作业。
 
