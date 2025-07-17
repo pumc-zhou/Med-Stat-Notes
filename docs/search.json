@@ -906,7 +906,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-11},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 11, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n贝叶斯统计\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-17},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 17, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6599,7 +6599,7 @@
     "href": "Learn/Advance/00-advance.html",
     "title": "00-医学统计学（伪）高级部分",
     "section": "",
-    "text": "此目录下记录一些复杂的统计学知识，未完待续。",
+    "text": "“高级医学统计学”（Advanced Medical Statistics）是医学统计学中的高阶分支，主要研究和应用复杂统计理论与方法，以解决医学研究中更具挑战性的问题。它通常面向具有一定统计基础和医学背景的研究人员和研究生，是医学科研方法论的重要组成部分。\n\n\n高级医学统计学涵盖以下几类主要内容：\n\n\n\n广义线性模型（GLM）：如 Logistic 回归、Poisson 回归；\n广义估计方程（GEE）：用于相关数据（如重复测量）；\n混合效应模型（Mixed Models）：线性/非线性，适用于多层级数据。\n\n\n\n\n\nCox 比例风险模型：分析事件发生时间；\n竞争风险模型；\n多状态模型；\n加速失效时间模型（AFT）。\n\n\n\n\n\n先验信息的引入；\nMCMC 模拟；\n贝叶斯参数估计与预测。\n\n\n\n\n\n倾向得分匹配（PSM）、加权（IPTW）；\n工具变量（IV）；\n双重稳健估计；\n结构方程模型（SEM）；\n鲁宾因果模型（RCM）与结构因果模型（SCM）。\n\n\n\n\n\nBonferroni、Holm 方法；\nFDR（False Discovery Rate）；\n多重检验在组学/影像/大数据中的应用。\n\n\n\n\n\n多重插补（MI）；\n最大似然估计（MLE）；\n蒙特卡洛模拟。\n\n\n\n\n\n纵向数据分析；\n时间序列分析；\n空间统计分析；\n网络医学统计（如脑连接网络）；\n高维数据统计学（如组学、大数据中的变量选择）。\n\n\n\n\n\n随机对照试验（RCT）；\n自适应设计；\n非劣效设计；\n样本量估计、功效分析。\n\n\n\n\n\n\nR / Python：用于建模、可视化、高维数据分析；\nSAS / STATA：广泛用于临床试验数据管理与分析；\nWinBUGS / JAGS / Stan：贝叶斯建模；\nSPSS：较适用于传统统计分析。\n\n\n\n\n高级医学统计学的应用包括但不限于：\n\n复杂临床试验设计与分析；\n公共卫生大数据分析；\n预测模型开发（如疾病风险模型）；\n基因组学、蛋白质组学等组学研究；\n医疗政策评估；\n医学人工智能建模（统计学习、机器学习的融合）。\n\n\n\n\n\n[因果推断：从概念到实践](https://github.com/xieliaing/CausalInferenceIntro)",
     "crumbs": [
       "Home",
       "Learn",
@@ -7385,6 +7385,58 @@
       "Guide",
       "SAS",
       "01-SAS 安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/00-advance.html#一主要研究内容",
+    "href": "Learn/Advance/00-advance.html#一主要研究内容",
+    "title": "00-医学统计学（伪）高级部分",
+    "section": "",
+    "text": "高级医学统计学涵盖以下几类主要内容：\n\n\n\n广义线性模型（GLM）：如 Logistic 回归、Poisson 回归；\n广义估计方程（GEE）：用于相关数据（如重复测量）；\n混合效应模型（Mixed Models）：线性/非线性，适用于多层级数据。\n\n\n\n\n\nCox 比例风险模型：分析事件发生时间；\n竞争风险模型；\n多状态模型；\n加速失效时间模型（AFT）。\n\n\n\n\n\n先验信息的引入；\nMCMC 模拟；\n贝叶斯参数估计与预测。\n\n\n\n\n\n倾向得分匹配（PSM）、加权（IPTW）；\n工具变量（IV）；\n双重稳健估计；\n结构方程模型（SEM）；\n鲁宾因果模型（RCM）与结构因果模型（SCM）。\n\n\n\n\n\nBonferroni、Holm 方法；\nFDR（False Discovery Rate）；\n多重检验在组学/影像/大数据中的应用。\n\n\n\n\n\n多重插补（MI）；\n最大似然估计（MLE）；\n蒙特卡洛模拟。\n\n\n\n\n\n纵向数据分析；\n时间序列分析；\n空间统计分析；\n网络医学统计（如脑连接网络）；\n高维数据统计学（如组学、大数据中的变量选择）。\n\n\n\n\n\n随机对照试验（RCT）；\n自适应设计；\n非劣效设计；\n样本量估计、功效分析。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "00-医学统计学（伪）高级部分"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/00-advance.html#二常用工具和软件",
+    "href": "Learn/Advance/00-advance.html#二常用工具和软件",
+    "title": "00-医学统计学（伪）高级部分",
+    "section": "",
+    "text": "R / Python：用于建模、可视化、高维数据分析；\nSAS / STATA：广泛用于临床试验数据管理与分析；\nWinBUGS / JAGS / Stan：贝叶斯建模；\nSPSS：较适用于传统统计分析。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "00-医学统计学（伪）高级部分"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/00-advance.html#三应用场景",
+    "href": "Learn/Advance/00-advance.html#三应用场景",
+    "title": "00-医学统计学（伪）高级部分",
+    "section": "",
+    "text": "高级医学统计学的应用包括但不限于：\n\n复杂临床试验设计与分析；\n公共卫生大数据分析；\n预测模型开发（如疾病风险模型）；\n基因组学、蛋白质组学等组学研究；\n医疗政策评估；\n医学人工智能建模（统计学习、机器学习的融合）。",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "00-医学统计学（伪）高级部分"
+    ]
+  },
+  {
+    "objectID": "Learn/Advance/00-advance.html#四学习资料",
+    "href": "Learn/Advance/00-advance.html#四学习资料",
+    "title": "00-医学统计学（伪）高级部分",
+    "section": "",
+    "text": "[因果推断：从概念到实践](https://github.com/xieliaing/CausalInferenceIntro)",
+    "crumbs": [
+      "Home",
+      "Learn",
+      "Advance",
+      "00-医学统计学（伪）高级部分"
     ]
   }
 ]
