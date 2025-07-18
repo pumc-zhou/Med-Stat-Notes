@@ -2,7 +2,7 @@
 title: "01-SAS 安装与vscode 扩展"
 author: "Simon Zhou"
 date: "2025-03-11"
-date-modified: "2025-05-06"
+date-modified: "2025-07-18"
 format: 
     html:
         code-fold: true
@@ -32,8 +32,8 @@ SAS 在 Linux 系统中的安装极为复杂，笔者曾在某短时间研究多
 
 在 macOS 中安装SAS一般有两种途径：
 
-1. 下载 SAS University Edition for mac（这个版本是免费版，目前还不了解哪些功能被阉割）
-2. 在 macOS 上搭建 Windows 虚拟机，然后按照 Windows上装 SAS 的方法进行。
+1.  下载 SAS University Edition for mac（这个版本是免费版，目前还不了解哪些功能被阉割）
+2.  在 macOS 上搭建 Windows 虚拟机，然后按照 Windows上装 SAS 的方法进行。
 
 如果你有可用的 SID 可以考虑安装虚拟机后运行 SAS，如果没有可用的 SID，则考虑使用免费的 [免费使用 SAS 云软件](https://www.sas.com/zh_cn/software/on-demand-for-academics.html#osx-download)，需要按照身份和需求进行注册，最后登录 [SAS® OnDemand for Academics](https://welcome.oda.sas.com/)进行使用。
 
@@ -386,6 +386,235 @@ httpviya = {'url'     : 'https://sastpw.rndk8s.openstack.sas.com:23456',
             }
 ```
 
+------------------------------------------------------------------------
+
+### 示例配置文件
+
+这是一个示例配置文件。请使用下面的相应模板创建您自己的 **sascfg_personal.py** 文件。有关配置的详细信息，请参阅以下文档：<https://sassoftware.github.io/saspy/install.html#configuration>
+
+------------------------------------------------------------------------
+
+### SAS 的配置名称 - Python List
+
+这是允许使用的配置定义列表。定义如下所示。如果列表中有多个名称，并且在 `SASsession()` 中未指定 `cfgname=`，则系统将提示用户选择要使用的配置。
+
+`SASsession()` 中可以指定不同访问方法的各种选项，例如： `sas = SASsession(cfgname='default', options='-fullstimer', user='me')`
+
+根据下面的 `lock_down` 配置选项，您可能能够或不能够覆盖已定义的选项。任何必要但未定义的选项（如 IOM 或 HTTP 的 `user`、`pw`）将在运行时提示输入。要禁止覆盖作为 `OPTION` 的选项（当您没有值时），只需指定 `options=''`。这样它就被指定了，即使您没有要应用的特定值，也无法被覆盖。
+
+``` python
+#SAS_config_names = ['default', 'ssh', 'iomlinux', 'iomwin', 'winlocal', 'winiomlinux', 'winiomwin', 'httpsviya', 'httpviya', 'iomcom']
+
+SAS_config_names=['winlocal']
+```
+
+------------------------------------------------------------------------
+
+### Saspy 的配置选项 - Python Dict
+
+这些选项不是必需的，除非您需要更改任何默认值。有效的键包括：
+
+-   **'lock_down'**: `True` \| `False`。设置为 `True` 可防止在运行时覆盖下面的 `SAS_Config` 值。
+-   **'verbose'**: `True` \| `False`。设置为 `True` 可允许打印调试类型的消息。
+-   **'prompt'**: `True` \| `False`。设置为 `True` 可在必要时允许提示。
+
+<!-- end list -->
+
+``` python
+SAS_config_options = {'lock_down': False,
+                      'verbose'  : True,
+                      'prompt'   : True
+                     }
+```
+
+------------------------------------------------------------------------
+
+### SAS 输出配置选项
+
+SAS 输出默认为 HTML 5.0（使用 "ods html5" 语句），但某些模板可能无法与 HTML 5.0 正常工作，因此也可以将其设置为 HTML 4.0（使用 "ods html" 语句）。此选项仅在使用 IOM 本地模式时有效。请注意，HTML 4.0 会单独生成图像，这会使工作区变得杂乱；如果您将笔记本下载为 HTML，HTML 文件需要与图像放在同一文件夹中才能显示图像。
+
+有效的键包括：
+
+-   **'output'**: `['html5', 'html']`
+-   **'style'**: 任何有效的样式。这将是 `SASsession.HTML_Style` 的默认值，您也可以在代码中动态更改它。
+
+<!-- end list -->
+
+``` python
+SAS_output_options = {'output' : 'html5',       # not required unless changing any of the default
+                      'style'  : 'HTMLBlue'}
+```
+
+------------------------------------------------------------------------
+
+### 配置定义
+
+------------------------------------------------------------------------
+
+#### 针对 STDIO 和 SSH 上的 STDIO 访问方法
+
+这些需要 SASHome 的路径和可选的启动选项——Python 字典。 SAS 启动脚本的默认路径是：`/opt/sasinside/SASHome/SASFoundation/9.4/sas` 常见的安装路径是：`/opt/sasinside/SASHome`
+
+编码由 saspy 自动识别。您不需要指定它，除非您想消除有关确定编码的消息。
+
+有效的键包括：
+
+-   **'saspath'**: \[必需\] SAS 启动脚本的路径，例如：`/opt/sasinside/SASHome/SASFoundation/9.4/sas`
+-   **'options'**: 要包含在启动命令行中的 SAS 选项 - Python 列表
+-   **'encoding'**: 与您的 SAS 会话使用的 SAS 会话编码匹配的 Python 编码值
+
+对于无密码 SSH 连接，还需要以下项：
+
+-   **'ssh'**: \[必需\] 要运行的 ssh 命令
+-   **'host'**: \[必需\] 要连接的主机
+
+SSH 的其他有效键包括：
+
+-   **'port'**: \[整数\] 远程 SSH 端口
+-   **'tunnel'**: \[整数\] 如果远程主机无法连接此客户端，则通过反向隧道打开的本地端口
+
+<!-- end list -->
+
+``` python
+default  = {'saspath'  : 'C:/Program Files/SASHome/SASFoundation/9.4/sas.exe'
+            }
+
+winlocal = {
+    'saspath': 'C:\\Program Files\\SASHome\\SASFoundation\\9.4\\sas.exe'
+}
+
+# If you installed SAS by default path,the above path maybe effect for your Windows.
+
+ssh      = {'saspath' : '/opt/sasinside/SASHome/SASFoundation/9.4/bin/sas_en',
+            'ssh'     : '/usr/bin/ssh',
+            'host'    : 'remote.linux.host',
+            'encoding': 'latin1',
+            'options' : ["-fullstimer"]
+            }
+```
+
+------------------------------------------------------------------------
+
+#### 针对 IOM（Grid Manager 或任何 IOM）和通过 IOM 的本地 Windows 访问方法
+
+这些配置定义用于通过 IOM 进行连接。这旨在用于连接到任何工作区服务器，包括 SAS Grid（通过 Grid Manager），以及连接到本地 Windows SAS 会话。此访问方法的客户端（Python 和 Java）可以是 Linux 或 Windows。上面提到的 STDIO 访问方法仅适用于 Linux。PC SAS 需要此 IOM 接口。
+
+缺少 `iomhost` 选项会触发本地 Windows SAS 模式。在这种情况下，不需要 `iomhost`、`iomport`、`omruser`、`omrpw` 中的任何一个。系统会启动并连接到本地 SAS 会话。
+
+编码由 saspy 自动识别。您不需要指定它，除非您想消除有关确定编码的消息。
+
+**这些示例中的所有路径都不适合您的安装。您必须更改路径以使其与您的安装相符。**
+
+有效的键包括：
+
+-   **'java'**: \[必需\] 要使用的 Java 可执行文件的路径
+-   **'iomhost'**: \[远程 IOM 情况必需，不指定则使用本地 Windows 会话\] 要连接的 IOM 服务器的可解析主机名或 IP
+-   **'iomport'**: \[远程 IOM 情况必需，不指定则使用本地 Windows 会话\] IOM 正在监听的端口
+-   **'authkey'**: 用于从 `.authinfo` 文件读取用户/密码凭据的标识符。消除了凭据提示。
+-   **'omruser'**: 不建议使用 \[远程 IOM 情况必需，但在运行时提示输入\] 不指定则使用本地 Windows 会话
+-   **'omrpw'**: 强烈不建议使用 \[远程 IOM 情况必需，但在运行时提示输入\] 不指定则使用本地 Windows 会话
+-   **'encoding'**: 与您要连接的 IOM 服务器的 SAS 会话编码匹配的 Python 编码值
+-   **'appserver'**: 物理工作区服务器的名称（当 OMR 中定义了多个应用程序服务器时），例如：'SASApp - Workspace Server'
+-   **'sspi'**: 布尔值。使用 IWA 而不是用户/密码连接到 IOM 工作区服务器
+
+<!-- end list -->
+
+``` python
+iomlinux = {'java'      : '/usr/bin/java',
+            'iomhost'   : 'linux.iom.host',
+            'iomport'   : 8591,
+            }
+
+iomwin   = {'java'      : '/usr/bin/java',
+            'iomhost'   : 'windows.iom.host',
+            'iomport'   : 8591,
+            }
+
+winlocal = {'java'      : 'java',
+            'encoding'  : 'EUC-CN',
+            }
+
+winiomlinux = {'java'   : 'java',
+            'iomhost'   : 'linux.iom.host',
+            'iomport'   : 8591,
+            }
+
+winiomwin  = {'java'    : 'java',
+            'iomhost'   : 'windows.iom.host',
+            'iomport'   : 8591,
+            }
+
+winiomIWA  = {'java'    : 'java',
+            'iomhost'   : 'windows.iom.host',
+            'iomport'   : 8591,
+            'sspi'      : True
+            }
+```
+
+------------------------------------------------------------------------
+
+#### 针对使用 COM 接口的远程和本地 IOM 访问方法
+
+这些配置定义用于通过 COM 连接到 IOM。此访问方法适用于连接到远程主机的 Windows 客户端。本地 SAS 实例也可能受支持。
+
+此访问方法不需要 Java 依赖项。
+
+有效键：
+
+-   **iomhost**: 仅适用于远程连接。可解析的 SAS 服务器 DNS 名称。
+-   **iomport**: 仅适用于远程连接。SAS 工作区服务器端口。在标准远程安装中通常为 8591。对于本地连接，默认值为 0。
+-   **class_id**: 仅适用于远程连接。IOM 工作区服务器类标识符。使用 `PROC IOMOPERATE` 来识别正确的值。此选项在本地连接上被忽略。
+-   **provider**: \[必需\] IOM 提供程序。建议使用 "sas.iomprovider"。
+-   **encoding**: 与 IOM 服务器的 SAS 会话编码匹配的 Python 编码值。
+-   **omruser**: SAS 用户。此选项在本地连接上被忽略。
+-   **omrpw**: SAS 密码。此选项在本地连接上被忽略。
+-   **authkey**: 用于从 .authinfo 文件读取凭据的标识符。
+
+<!-- end list -->
+
+``` python
+iomcom = {
+    'iomhost' : 'mynode.mycompany.org',
+    'iomport' : 8591,
+    'provider': 'sas.iomprovider',
+    'encoding': 'windows-1252'}
+```
+
+------------------------------------------------------------------------
+
+#### 用于连接到计算服务的 HTTP 访问方法
+
+这些需要 IP 地址，其他值将在运行时提示输入 - Python Dict。
+
+有效键包括：
+
+-   **'url'**: （如果未指定 IP 则必需）Viya 的 URL，形式为 "http\[s\]://host.identifier\[:port\]"。当指定此项时，`ip=` 将不被使用，因为主机的 IP 是从 URL 中检索的。此外，`ssl=` 会根据 `http` 或 `https` 设置，并且 `port=` 也会从 URL 中解析（如果提供），否则会根据派生的 `ssl=` 值采用默认值。因此，当使用 `url=` 时，不需要 `ip`、`port` 或 `ssl`。
+-   **'ip'**: （如果未指定 URL 则必需）Viya 计算服务的可解析主机名或 IP 地址
+-   **'port'**: 端口；代码会根据 'ssl' 键将其默认为 443（如果使用 SSL）或 80（否则）
+-   **'ssl'**: 是否使用 HTTPS 或仅使用 HTTP 协议。默认为 `True`，使用 SSL 和端口 443。
+-   **'context'**: 在计算服务上定义的上下文名称 \[如果定义了多个，则在运行时提示选择\]
+-   **'authkey'**: 用于从 `.authinfo` 文件读取用户/密码凭据的标识符。消除了凭据提示。
+-   **'options'**: 要包含的 SAS 选项（不带 '-'（破折号），只有选项名称和值）
+-   **'user'**: 不建议使用 \[必需，但在运行时提示输入\]
+-   **'pw'**: 强烈不建议使用 \[必需，但在运行时提示输入\]
+
+<!-- end list -->
+
+``` python
+httpsviya = {'url'     : 'https://viya.deployment.com',
+             'context' : 'SAS Studio compute context',
+             'authkey' : 'viya_user-pw',
+             'options' : ["fullstimer", "memsize=1G"]
+             }
+
+httpviya = {'url'     : 'https://sastpw.rndk8s.openstack.sas.com:23456',
+           #'port'    :  23456,   # can put different port here or ^ if it's not using the default port
+            'context' : 'SAS Studio compute context',
+            'authkey' : 'viya_user-pw',
+            'options' : ["fullstimer", "memsize=1G"]
+            }
+```
+
 后续有一些安装步骤，但是大多是在2016-2020年更新的教程，无法找到复现的路径，可能相关的配置已被优化。
 
 包括这个 \[**SAS岩论 \| 在Jupyter Notebook中使用SAS** \](<https://www.sohu.com/a/218339423_278472>) 中写到的需要使用 cpW 定义 SAS 路径。
@@ -394,7 +623,7 @@ httpviya = {'url'     : 'https://sastpw.rndk8s.openstack.sas.com:23456',
 
 将sas相关文件 `sspiauth.dll` 添加到系统环境变量，该文件很可能在如下目录：
 
-```         
+``` bash
 C:\Program Files\SASHome\SASFoundation\9.4\core\sasext
 ```
 
@@ -478,7 +707,7 @@ NBGrader 是一个用于分配和评分 Jupyter Notebook 的系统，它与 SAS 
 
 [^2]: [SAS Kernel for Jupyter 安装与使用教程](https://blog.csdn.net/gitblog_01103/article/details/142273387?fromshare=blogdetail&sharetype=blogdetail&sharerId=142273387&sharerefer=PC&sharesource=&sharefrom=from_link){.uri}
 
-# Quarto 中使用 jupyter 调用 SAS_kernel
+# Quarto 中使用 jupyter 调用 SASPy
 
 ## idea？
 
@@ -547,3 +776,7 @@ run;
 同时 `.qmd` 对一些文档控制之处的支持更为便捷，且可以插入文献和脚注，更适合作为专业的文档编辑工具。
 
 2025.07.07 实测，在 `.qmd` 中插入 SAS 程序运行后编译网页还是有“畸变”，暂时不清楚是由 `.qmd` 还是 `.ipynb` 引起。
+
+## 格式冲突修复尝试
+
+和 AI 多聊了一下这个问题，不是很好解决，涉及到不同的 html 格式版本和 html 格式的完整程度的不同，因为 Stata 输出的格式要干净许多，所以不会和 Quarto 的格式发生冲突，但是 SAS 不行。
