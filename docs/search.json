@@ -906,7 +906,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-18},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 18, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-19},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 19, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -7450,6 +7450,19 @@
       "Guide",
       "SAS",
       "01-SAS 安装与vscode 扩展"
+    ]
+  },
+  {
+    "objectID": "Guide/R/04-ggplot2-folded-line.html",
+    "href": "Guide/R/04-ggplot2-folded-line.html",
+    "title": "04-ggplot2 绘图——折线图",
+    "section": "",
+    "text": "1 绘制基本折线图\n运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "04-ggplot2 绘图——折线图"
     ]
   }
 ]

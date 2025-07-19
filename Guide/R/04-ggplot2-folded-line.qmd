@@ -1,0 +1,33 @@
+---
+title: "04-ggplot2 绘图——折线图"
+author: "Simonzhou"
+date: "2025-07-19"
+date-modified: today
+format: 
+    html:
+        code-fold: true
+        code-line-numbers: true
+        code-highlight: true
+        fig_caption: true
+        number-sections: true
+        toc: true
+        toc-depth: 3
+---
+
+# 绘制基本折线图
+
+运行 `ggplot()` 函数和 `geom_line()` 函数，并分别指定一个变量映射到 `x` 和 `y` 。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+BOD
+
+ggplot(BOD,aes(x = Time,y = demand))+
+geom_line()
+```

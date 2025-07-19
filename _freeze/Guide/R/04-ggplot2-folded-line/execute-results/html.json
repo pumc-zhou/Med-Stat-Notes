@@ -1,0 +1,15 @@
+{
+  "hash": "9f4686c29193379ca6931696f1738728",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"04-ggplot2 绘图——折线图\"\nauthor: \"Simonzhou\"\ndate: \"2025-07-19\"\ndate-modified: today\nformat: \n    html:\n        code-fold: true\n        code-line-numbers: true\n        code-highlight: true\n        fig_caption: true\n        number-sections: true\n        toc: true\n        toc-depth: 3\n---\n\n\n\n\n\n# 绘制基本折线图\n\n运行 `ggplot()` 函数和 `geom_line()` 函数，并分别指定一个变量映射到 `x` 和 `y` 。\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code  code-fold=\"false\"}\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n```\n\n\n:::\n\n```{.r .cell-code  code-fold=\"false\"}\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()\n```\n\n::: {.cell-output-display}\n![](04-ggplot2-folded-line_files/figure-html/unnamed-chunk-1-1.png){width=672}\n:::\n:::",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
