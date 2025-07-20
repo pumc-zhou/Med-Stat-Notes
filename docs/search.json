@@ -906,7 +906,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-19},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 19, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-20},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 20, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -7457,7 +7457,7 @@
     "href": "Guide/R/04-ggplot2-folded-line.html",
     "title": "04-ggplot2 绘图——折线图",
     "section": "",
-    "text": "1 绘制基本折线图\n运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()",
+    "text": "1 绘制基本折线图\n运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()\n\n\n\n\n\n\n\n折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。\n在上图中，Demand 变量为数值型变量，但我们可以借助于 factor() 函数将其转换为因子型变量，然后，将其当作分类变量来处理。\n当 X 对应于因子型变量时，必须使用命令 aex(group = 1) 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。\n\n# load package\nlibrary(ggplot2)\n# load dataset and copy a dataset\nBOD1 &lt;- BOD\nBOD1$Time &lt;- factor(BOD1$Time)\n\nggplot(BOD1,aes(x = Time,y = demand,group = 1))+\ngeom_line()",
     "crumbs": [
       "Home",
       "Guide",

@@ -31,3 +31,25 @@ BOD
 ggplot(BOD,aes(x = Time,y = demand))+
 geom_line()
 ```
+
+折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。
+
+在上图中，Demand 变量为数值型变量，但我们可以借助于 `factor()` 函数将其转换为因子型变量，然后，将其当作分类变量来处理。
+
+当 X 对应于因子型变量时，必须使用命令 `aex(group = 1)` 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| fig-caption: 
+
+# load package
+library(ggplot2)
+# load dataset and copy a dataset
+BOD1 <- BOD
+BOD1$Time <- factor(BOD1$Time)
+
+ggplot(BOD1,aes(x = Time,y = demand,group = 1))+
+geom_line()
+```
