@@ -1,2 +1,8 @@
-*.md linguist-language=Markdown
-*.html linguist-language=HTML
+docs/ linguist-generated
+
+# 忽略常见生成的文件类型
+*.html linguist-generated
+*.pdf linguist-generated
+
+# 将 .qmd 文件识别为 R
+*.qmd linguist-language=R
