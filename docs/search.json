@@ -906,7 +906,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-20},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 20, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-21},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 21, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6599,7 +6599,7 @@
     "href": "Learn/Advance/00-advance.html",
     "title": "00-医学统计学（伪）高级部分",
     "section": "",
-    "text": "“高级医学统计学”（Advanced Medical Statistics）是医学统计学中的高阶分支，主要研究和应用复杂统计理论与方法，以解决医学研究中更具挑战性的问题。它通常面向具有一定统计基础和医学背景的研究人员和研究生，是医学科研方法论的重要组成部分。\n\n\n高级医学统计学涵盖以下几类主要内容：\n\n\n\n广义线性模型（GLM）：如 Logistic 回归、Poisson 回归；\n广义估计方程（GEE）：用于相关数据（如重复测量）；\n混合效应模型（Mixed Models）：线性/非线性，适用于多层级数据。\n\n\n\n\n\nCox 比例风险模型：分析事件发生时间；\n竞争风险模型；\n多状态模型；\n加速失效时间模型（AFT）。\n\n\n\n\n\n先验信息的引入；\nMCMC 模拟；\n贝叶斯参数估计与预测。\n\n\n\n\n\n倾向得分匹配（PSM）、加权（IPTW）；\n工具变量（IV）；\n双重稳健估计；\n结构方程模型（SEM）；\n鲁宾因果模型（RCM）与结构因果模型（SCM）。\n\n\n\n\n\nBonferroni、Holm 方法；\nFDR（False Discovery Rate）；\n多重检验在组学/影像/大数据中的应用。\n\n\n\n\n\n多重插补（MI）；\n最大似然估计（MLE）；\n蒙特卡洛模拟。\n\n\n\n\n\n纵向数据分析；\n时间序列分析；\n空间统计分析；\n网络医学统计（如脑连接网络）；\n高维数据统计学（如组学、大数据中的变量选择）。\n\n\n\n\n\n随机对照试验（RCT）；\n自适应设计；\n非劣效设计；\n样本量估计、功效分析。\n\n\n\n\n\n\nR / Python：用于建模、可视化、高维数据分析；\nSAS / STATA：广泛用于临床试验数据管理与分析；\nWinBUGS / JAGS / Stan：贝叶斯建模；\nSPSS：较适用于传统统计分析。\n\n\n\n\n高级医学统计学的应用包括但不限于：\n\n复杂临床试验设计与分析；\n公共卫生大数据分析；\n预测模型开发（如疾病风险模型）；\n基因组学、蛋白质组学等组学研究；\n医疗政策评估；\n医学人工智能建模（统计学习、机器学习的融合）。\n\n\n\n\n\n[因果推断：从概念到实践](https://github.com/xieliaing/CausalInferenceIntro)",
+    "text": "“高级医学统计学”（Advanced Medical Statistics）是医学统计学中的高阶分支，主要研究和应用复杂统计理论与方法，以解决医学研究中更具挑战性的问题。它通常面向具有一定统计基础和医学背景的研究人员和研究生，是医学科研方法论的重要组成部分。\n\n\n高级医学统计学涵盖以下几类主要内容：\n\n\n\n广义线性模型（GLM）：如 Logistic 回归、Poisson 回归；\n广义估计方程（GEE）：用于相关数据（如重复测量）；\n混合效应模型（Mixed Models）：线性/非线性，适用于多层级数据。\n\n\n\n\n\nCox 比例风险模型：分析事件发生时间；\n竞争风险模型；\n多状态模型；\n加速失效时间模型（AFT）。\n\n\n\n\n\n先验信息的引入；\nMCMC 模拟；\n贝叶斯参数估计与预测。\n\n\n\n\n\n倾向得分匹配（PSM）、加权（IPTW）；\n工具变量（IV）；\n双重稳健估计；\n结构方程模型（SEM）；\n鲁宾因果模型（RCM）与结构因果模型（SCM）。\n\n\n\n\n\nBonferroni、Holm 方法；\nFDR（False Discovery Rate）；\n多重检验在组学/影像/大数据中的应用。\n\n\n\n\n\n多重插补（MI）；\n最大似然估计（MLE）；\n蒙特卡洛模拟。\n\n\n\n\n\n纵向数据分析；\n时间序列分析；\n空间统计分析；\n网络医学统计（如脑连接网络）；\n高维数据统计学（如组学、大数据中的变量选择）。\n\n\n\n\n\n随机对照试验（RCT）；\n自适应设计；\n非劣效设计；\n样本量估计、功效分析。\n\n\n\n\n\n\nR / Python：用于建模、可视化、高维数据分析；\nSAS：广泛用于临床试验数据管理与分析；\nStata：广泛应用于经管类的数据建模与分析，适用于医疗政策评估等内容的应用；\nWinBUGS / JAGS / Stan：贝叶斯建模；\nSPSS：较适用于传统统计分析。\n\n\n\n\n高级医学统计学的应用包括但不限于：\n\n复杂临床试验设计与分析；\n公共卫生大数据分析；\n预测模型开发（如疾病风险模型）；\n基因组学、蛋白质组学等组学研究；\n医疗政策评估；\n医学人工智能建模（统计学习、机器学习的融合）。\n\n\n\n\n\n[因果推断：从概念到实践](https://github.com/xieliaing/CausalInferenceIntro)",
     "crumbs": [
       "Home",
       "Learn",
@@ -7405,7 +7405,7 @@
     "href": "Learn/Advance/00-advance.html#二常用工具和软件",
     "title": "00-医学统计学（伪）高级部分",
     "section": "",
-    "text": "R / Python：用于建模、可视化、高维数据分析；\nSAS / STATA：广泛用于临床试验数据管理与分析；\nWinBUGS / JAGS / Stan：贝叶斯建模；\nSPSS：较适用于传统统计分析。",
+    "text": "R / Python：用于建模、可视化、高维数据分析；\nSAS：广泛用于临床试验数据管理与分析；\nStata：广泛应用于经管类的数据建模与分析，适用于医疗政策评估等内容的应用；\nWinBUGS / JAGS / Stan：贝叶斯建模；\nSPSS：较适用于传统统计分析。",
     "crumbs": [
       "Home",
       "Learn",
@@ -7457,7 +7457,46 @@
     "href": "Guide/R/04-ggplot2-folded-line.html",
     "title": "04-ggplot2 绘图——折线图",
     "section": "",
-    "text": "1 绘制基本折线图\n运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()\n\n\n\n\n\n\n\n折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。\n在上图中，Demand 变量为数值型变量，但我们可以借助于 factor() 函数将其转换为因子型变量，然后，将其当作分类变量来处理。\n当 X 对应于因子型变量时，必须使用命令 aex(group = 1) 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。\n\n# load package\nlibrary(ggplot2)\n# load dataset and copy a dataset\nBOD1 &lt;- BOD\nBOD1$Time &lt;- factor(BOD1$Time)\n\nggplot(BOD1,aes(x = Time,y = demand,group = 1))+\ngeom_line()",
+    "text": "运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()\n\n\n\n\n\n\n\n折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。\n在上图中，Demand 变量为数值型变量，但我们可以借助于 factor() 函数将其转换为因子型变量，然后，将其当作分类变量来处理。\n当 X 对应于因子型变量时，必须使用命令 aex(group = 1) 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。\n\n# load package\nlibrary(ggplot2)\n# load dataset and copy a dataset\nBOD1 &lt;- BOD\nBOD1$Time &lt;- factor(BOD1$Time)\n\nggplot(BOD1,aes(x = Time,y = demand,group = 1))+\ngeom_line()\n\n\n\n\n\n\n\n\n在代码中加上 geom_point() 即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n\n有时候，在折线图上添加数据标记很有用。\n当数据点的密度较低或数据采集频率不规则时，尤其有用。\n例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。\n\nworldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。\n折线图中的数据标记表明了数据的采集时间：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n# when Y axis turn to log()\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()+\nscale_y_log10()\n\n\n\n\n\n\n\n\n除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()\n\n\n\n\n\n\n# linetype\nggplot(tg,aes(x = dose,y = length, linetype = supp))+\ngeom_line()\n\n\n\n\n\n\n\ntg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "04-ggplot2 绘图——折线图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/04-ggplot2-folded-line.html#绘制基本折线图",
+    "href": "Guide/R/04-ggplot2-folded-line.html#绘制基本折线图",
+    "title": "04-ggplot2 绘图——折线图",
+    "section": "",
+    "text": "运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()\n\n\n\n\n\n\n\n折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。\n在上图中，Demand 变量为数值型变量，但我们可以借助于 factor() 函数将其转换为因子型变量，然后，将其当作分类变量来处理。\n当 X 对应于因子型变量时，必须使用命令 aex(group = 1) 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。\n\n# load package\nlibrary(ggplot2)\n# load dataset and copy a dataset\nBOD1 &lt;- BOD\nBOD1$Time &lt;- factor(BOD1$Time)\n\nggplot(BOD1,aes(x = Time,y = demand,group = 1))+\ngeom_line()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "04-ggplot2 绘图——折线图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/04-ggplot2-folded-line.html#向折线图添加数据标记",
+    "href": "Guide/R/04-ggplot2-folded-line.html#向折线图添加数据标记",
+    "title": "04-ggplot2 绘图——折线图",
+    "section": "",
+    "text": "在代码中加上 geom_point() 即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n\n有时候，在折线图上添加数据标记很有用。\n当数据点的密度较低或数据采集频率不规则时，尤其有用。\n例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。\n\nworldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。\n折线图中的数据标记表明了数据的采集时间：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n# when Y axis turn to log()\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()+\nscale_y_log10()",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "04-ggplot2 绘图——折线图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/04-ggplot2-folded-line.html#绘制多重折线图",
+    "href": "Guide/R/04-ggplot2-folded-line.html#绘制多重折线图",
+    "title": "04-ggplot2 绘图——折线图",
+    "section": "",
+    "text": "除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()\n\n\n\n\n\n\n# linetype\nggplot(tg,aes(x = dose,y = length, linetype = supp))+\ngeom_line()\n\n\n\n\n\n\n\ntg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。",
     "crumbs": [
       "Home",
       "Guide",

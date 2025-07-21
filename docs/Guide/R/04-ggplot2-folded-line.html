@@ -107,11 +107,9 @@ gtag('js', new Date());
 gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script><style>html{ scroll-behavior: smooth; }</style>
 <meta property="og:title" content="04-ggplot2 绘图——折线图 – 医学统计学笔记">
-<meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/R/images/logo.png">
 <meta property="og:site_name" content="医学统计学笔记">
 <meta name="twitter:title" content="04-ggplot2 绘图——折线图 – 医学统计学笔记">
-<meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:image" content="www.lazyzhou.cn/Guide/R/04-ggplot2-folded-line_files/figure-html/unnamed-chunk-1-1.png">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
@@ -824,7 +822,19 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
         <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1"><h2 id="toc-title">该页面内容</h2>
    
   <ul>
-<li><a href="#%E7%BB%98%E5%88%B6%E5%9F%BA%E6%9C%AC%E6%8A%98%E7%BA%BF%E5%9B%BE" id="toc-绘制基本折线图" class="nav-link active" data-scroll-target="#%E7%BB%98%E5%88%B6%E5%9F%BA%E6%9C%AC%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="header-section-number">1</span> 绘制基本折线图</a></li>
+<li>
+<a href="#%E6%8A%98%E7%BA%BF%E5%9B%BE" id="toc-折线图" class="nav-link active" data-scroll-target="#%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="header-section-number">1</span> 折线图</a>
+  <ul class="collapse">
+<li><a href="#%E7%BB%98%E5%88%B6%E5%9F%BA%E6%9C%AC%E6%8A%98%E7%BA%BF%E5%9B%BE" id="toc-绘制基本折线图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E5%9F%BA%E6%9C%AC%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="header-section-number">1.1</span> 绘制基本折线图</a></li>
+  <li>
+<a href="#%E5%90%91%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%A0%87%E8%AE%B0" id="toc-向折线图添加数据标记" class="nav-link" data-scroll-target="#%E5%90%91%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE%E6%A0%87%E8%AE%B0"><span class="header-section-number">1.2</span> 向折线图添加数据标记</a>
+  <ul class="collapse">
+<li><a href="#worldpop%E6%95%B0%E6%8D%AE%E9%9B%86" id="toc-worldpop数据集" class="nav-link" data-scroll-target="#worldpop%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="header-section-number">1.2.1</span> worldpop数据集</a></li>
+  </ul>
+</li>
+  <li><a href="#%E7%BB%98%E5%88%B6%E5%A4%9A%E9%87%8D%E6%8A%98%E7%BA%BF%E5%9B%BE" id="toc-绘制多重折线图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E5%A4%9A%E9%87%8D%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="header-section-number">1.3</span> 绘制多重折线图</a></li>
+  </ul>
+</li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Guide/R/04-ggplot2-folded-line.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
@@ -853,7 +863,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年7月20日</p>
+      <p class="date-modified">2025年7月21日</p>
     </div>
   </div>
     
@@ -861,8 +871,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   
 
 
-</header><section id="绘制基本折线图" class="level1" data-number="1"><h1 data-number="1">
-<span class="header-section-number">1</span> 绘制基本折线图</h1>
+</header><section id="折线图" class="level1" data-number="1"><h1 data-number="1">
+<span class="header-section-number">1</span> 折线图</h1>
+<section id="绘制基本折线图" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="绘制基本折线图">
+<span class="header-section-number">1.1</span> 绘制基本折线图</h2>
 <p>运行 <code>ggplot()</code> 函数和 <code>geom_line()</code> 函数，并分别指定一个变量映射到 <code>x</code> 和 <code>y</code> 。</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load package</span></span>
@@ -889,7 +901,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 <p>折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。</p>
 <p>在上图中，Demand 变量为数值型变量，但我们可以借助于 <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> 函数将其转换为因子型变量，然后，将其当作分类变量来处理。</p>
-<p>当 X 对应于因子型变量时，必须使用命令 <code>aex(group = 1)</code> 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。</p>
+<p>当 X 对应于因子型变量时，必须使用命令 <code>aex(group = 1)</code> 以确保 <code>ggplot</code> 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。</p>
 <div class="cell" data-fig-caption="{}">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># load package</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(ggplot2)</span>
@@ -906,11 +918,101 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
+</section><section id="向折线图添加数据标记" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="向折线图添加数据标记">
+<span class="header-section-number">1.2</span> 向折线图添加数据标记</h2>
+<p>在代码中加上 <code>geom_point()</code> 即可：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># load package</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># load dataset</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>BOD</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Time demand
+1    1    8.3
+2    2   10.3
+3    3   19.0
+4    4   16.0
+5    5   15.6
+6    7   19.8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">geom_point</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-ggplot2-folded-line_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>有时候，在折线图上添加数据标记很有用。</p>
+<p>当数据点的密度较低或数据采集频率不规则时，尤其有用。</p>
+<p>例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。</p>
+<section id="worldpop数据集" class="level3" data-number="1.2.1"><h3 data-number="1.2.1" class="anchored" data-anchor-id="worldpop数据集">
+<span class="header-section-number">1.2.1</span> worldpop数据集</h3>
+<p>worldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。</p>
+<p>折线图中的数据标记表明了数据的采集时间：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># load package</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co"># load dataset</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="fu">geom_point</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-ggplot2-folded-line_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># when Y axis turn to log()</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="fu">scale_y_log10</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-ggplot2-folded-line_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section></section><section id="绘制多重折线图" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="绘制多重折线图">
+<span class="header-section-number">1.3</span> 绘制多重折线图</h2>
+<p>除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># load package</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co"># load dataset</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb10-5"><a href="#cb10-5"></a></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#colour</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-ggplot2-folded-line_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># linetype</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">linetype =</span> supp))<span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure"><p><img src="04-ggplot2-folded-line_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>tg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。</p>
 
 
 <!-- -->
 
-</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1538,61 +1640,140 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="an">title:</span><span class="co"> "04-ggplot2 绘图——折线图"</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="an">date:</span><span class="co"> "2025-07-19"</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">    html:</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">        code-fold: true</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">        code-line-numbers: true</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">        code-highlight: true</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">        fig_caption: true</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">        number-sections: true</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">        toc: true</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">        toc-depth: 3</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">---</span></span>
-<span id="cb5-16"><a href="#cb5-16"></a></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="fu"># 绘制基本折线图</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a></span>
-<span id="cb5-19"><a href="#cb5-19"></a>运行 <span class="in">`ggplot()`</span> 函数和 <span class="in">`geom_line()`</span> 函数，并分别指定一个变量映射到 <span class="in">`x`</span> 和 <span class="in">`y`</span> 。</span>
-<span id="cb5-20"><a href="#cb5-20"></a></span>
-<span id="cb5-23"><a href="#cb5-23"></a><span class="in">```{r}</span></span>
-<span id="cb5-24"><a href="#cb5-24"></a><span class="co">#| eval: true</span></span>
-<span id="cb5-25"><a href="#cb5-25"></a><span class="co">#| echo: true</span></span>
-<span id="cb5-26"><a href="#cb5-26"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb5-27"><a href="#cb5-27"></a></span>
-<span id="cb5-28"><a href="#cb5-28"></a><span class="co"># load package</span></span>
-<span id="cb5-29"><a href="#cb5-29"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-30"><a href="#cb5-30"></a><span class="co"># load dataset</span></span>
-<span id="cb5-31"><a href="#cb5-31"></a>BOD</span>
-<span id="cb5-32"><a href="#cb5-32"></a></span>
-<span id="cb5-33"><a href="#cb5-33"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
-<span id="cb5-34"><a href="#cb5-34"></a><span class="fu">geom_line</span>()</span>
-<span id="cb5-35"><a href="#cb5-35"></a><span class="in">```</span></span>
-<span id="cb5-36"><a href="#cb5-36"></a></span>
-<span id="cb5-37"><a href="#cb5-37"></a>折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。</span>
-<span id="cb5-38"><a href="#cb5-38"></a></span>
-<span id="cb5-39"><a href="#cb5-39"></a>在上图中，Demand 变量为数值型变量，但我们可以借助于 <span class="in">`factor()`</span> 函数将其转换为因子型变量，然后，将其当作分类变量来处理。</span>
-<span id="cb5-40"><a href="#cb5-40"></a></span>
-<span id="cb5-41"><a href="#cb5-41"></a>当 X 对应于因子型变量时，必须使用命令 <span class="in">`aex(group = 1)`</span> 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。</span>
-<span id="cb5-42"><a href="#cb5-42"></a></span>
-<span id="cb5-45"><a href="#cb5-45"></a><span class="in">```{r}</span></span>
-<span id="cb5-46"><a href="#cb5-46"></a><span class="co">#| eval: true</span></span>
-<span id="cb5-47"><a href="#cb5-47"></a><span class="co">#| echo: true</span></span>
-<span id="cb5-48"><a href="#cb5-48"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb5-49"><a href="#cb5-49"></a><span class="co">#| fig-caption: </span></span>
-<span id="cb5-50"><a href="#cb5-50"></a></span>
-<span id="cb5-51"><a href="#cb5-51"></a><span class="co"># load package</span></span>
-<span id="cb5-52"><a href="#cb5-52"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb5-53"><a href="#cb5-53"></a><span class="co"># load dataset and copy a dataset</span></span>
-<span id="cb5-54"><a href="#cb5-54"></a>BOD1 <span class="ot">&lt;-</span> BOD</span>
-<span id="cb5-55"><a href="#cb5-55"></a>BOD1<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">factor</span>(BOD1<span class="sc">$</span>Time)</span>
-<span id="cb5-56"><a href="#cb5-56"></a></span>
-<span id="cb5-57"><a href="#cb5-57"></a><span class="fu">ggplot</span>(BOD1,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,<span class="at">group =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
-<span id="cb5-58"><a href="#cb5-58"></a><span class="fu">geom_line</span>()</span>
-<span id="cb5-59"><a href="#cb5-59"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb12" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">---</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="an">title:</span><span class="co"> "04-ggplot2 绘图——折线图"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="an">date:</span><span class="co"> "2025-07-19"</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">    html:</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">        code-fold: true</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">        code-line-numbers: true</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">        code-highlight: true</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">        fig_caption: true</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">        number-sections: true</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">        toc: true</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">        toc-depth: 3</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">---</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="fu"># 折线图</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="fu">## 绘制基本折线图</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a></span>
+<span id="cb12-21"><a href="#cb12-21"></a>运行 <span class="in">`ggplot()`</span> 函数和 <span class="in">`geom_line()`</span> 函数，并分别指定一个变量映射到 <span class="in">`x`</span> 和 <span class="in">`y`</span> 。</span>
+<span id="cb12-22"><a href="#cb12-22"></a></span>
+<span id="cb12-25"><a href="#cb12-25"></a><span class="in">```{r}</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a><span class="co">#| eval: true</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-28"><a href="#cb12-28"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb12-29"><a href="#cb12-29"></a></span>
+<span id="cb12-30"><a href="#cb12-30"></a><span class="co"># load package</span></span>
+<span id="cb12-31"><a href="#cb12-31"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-32"><a href="#cb12-32"></a><span class="co"># load dataset</span></span>
+<span id="cb12-33"><a href="#cb12-33"></a>BOD</span>
+<span id="cb12-34"><a href="#cb12-34"></a></span>
+<span id="cb12-35"><a href="#cb12-35"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<span id="cb12-36"><a href="#cb12-36"></a><span class="fu">geom_line</span>()</span>
+<span id="cb12-37"><a href="#cb12-37"></a><span class="in">```</span></span>
+<span id="cb12-38"><a href="#cb12-38"></a></span>
+<span id="cb12-39"><a href="#cb12-39"></a>折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。</span>
+<span id="cb12-40"><a href="#cb12-40"></a></span>
+<span id="cb12-41"><a href="#cb12-41"></a>在上图中，Demand 变量为数值型变量，但我们可以借助于 <span class="in">`factor()`</span> 函数将其转换为因子型变量，然后，将其当作分类变量来处理。</span>
+<span id="cb12-42"><a href="#cb12-42"></a></span>
+<span id="cb12-43"><a href="#cb12-43"></a>当 X 对应于因子型变量时，必须使用命令 <span class="in">`aex(group = 1)`</span> 以确保 <span class="in">`ggplot`</span> 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。</span>
+<span id="cb12-44"><a href="#cb12-44"></a></span>
+<span id="cb12-47"><a href="#cb12-47"></a><span class="in">```{r}</span></span>
+<span id="cb12-48"><a href="#cb12-48"></a><span class="co">#| eval: true</span></span>
+<span id="cb12-49"><a href="#cb12-49"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-50"><a href="#cb12-50"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb12-51"><a href="#cb12-51"></a><span class="co">#| fig-caption: </span></span>
+<span id="cb12-52"><a href="#cb12-52"></a></span>
+<span id="cb12-53"><a href="#cb12-53"></a><span class="co"># load package</span></span>
+<span id="cb12-54"><a href="#cb12-54"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-55"><a href="#cb12-55"></a><span class="co"># load dataset and copy a dataset</span></span>
+<span id="cb12-56"><a href="#cb12-56"></a>BOD1 <span class="ot">&lt;-</span> BOD</span>
+<span id="cb12-57"><a href="#cb12-57"></a>BOD1<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">factor</span>(BOD1<span class="sc">$</span>Time)</span>
+<span id="cb12-58"><a href="#cb12-58"></a></span>
+<span id="cb12-59"><a href="#cb12-59"></a><span class="fu">ggplot</span>(BOD1,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,<span class="at">group =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb12-60"><a href="#cb12-60"></a><span class="fu">geom_line</span>()</span>
+<span id="cb12-61"><a href="#cb12-61"></a><span class="in">```</span></span>
+<span id="cb12-62"><a href="#cb12-62"></a></span>
+<span id="cb12-63"><a href="#cb12-63"></a><span class="fu">## 向折线图添加数据标记</span></span>
+<span id="cb12-64"><a href="#cb12-64"></a></span>
+<span id="cb12-65"><a href="#cb12-65"></a>在代码中加上 <span class="in">`geom_point()`</span> 即可：</span>
+<span id="cb12-66"><a href="#cb12-66"></a></span>
+<span id="cb12-69"><a href="#cb12-69"></a><span class="in">```{r}</span></span>
+<span id="cb12-70"><a href="#cb12-70"></a><span class="co">#| eval: true</span></span>
+<span id="cb12-71"><a href="#cb12-71"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-72"><a href="#cb12-72"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb12-73"><a href="#cb12-73"></a></span>
+<span id="cb12-74"><a href="#cb12-74"></a><span class="co"># load package</span></span>
+<span id="cb12-75"><a href="#cb12-75"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-76"><a href="#cb12-76"></a><span class="co"># load dataset</span></span>
+<span id="cb12-77"><a href="#cb12-77"></a>BOD</span>
+<span id="cb12-78"><a href="#cb12-78"></a></span>
+<span id="cb12-79"><a href="#cb12-79"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<span id="cb12-80"><a href="#cb12-80"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb12-81"><a href="#cb12-81"></a><span class="fu">geom_point</span>()</span>
+<span id="cb12-82"><a href="#cb12-82"></a><span class="in">```</span></span>
+<span id="cb12-83"><a href="#cb12-83"></a></span>
+<span id="cb12-84"><a href="#cb12-84"></a>有时候，在折线图上添加数据标记很有用。</span>
+<span id="cb12-85"><a href="#cb12-85"></a></span>
+<span id="cb12-86"><a href="#cb12-86"></a>当数据点的密度较低或数据采集频率不规则时，尤其有用。</span>
+<span id="cb12-87"><a href="#cb12-87"></a></span>
+<span id="cb12-88"><a href="#cb12-88"></a>例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。</span>
+<span id="cb12-89"><a href="#cb12-89"></a></span>
+<span id="cb12-90"><a href="#cb12-90"></a><span class="fu">### worldpop数据集</span></span>
+<span id="cb12-91"><a href="#cb12-91"></a></span>
+<span id="cb12-92"><a href="#cb12-92"></a>worldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。</span>
+<span id="cb12-93"><a href="#cb12-93"></a></span>
+<span id="cb12-94"><a href="#cb12-94"></a>折线图中的数据标记表明了数据的采集时间：</span>
+<span id="cb12-95"><a href="#cb12-95"></a></span>
+<span id="cb12-98"><a href="#cb12-98"></a><span class="in">```{r}</span></span>
+<span id="cb12-99"><a href="#cb12-99"></a><span class="co">#| eval: true</span></span>
+<span id="cb12-100"><a href="#cb12-100"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-101"><a href="#cb12-101"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb12-102"><a href="#cb12-102"></a></span>
+<span id="cb12-103"><a href="#cb12-103"></a><span class="co"># load package</span></span>
+<span id="cb12-104"><a href="#cb12-104"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-105"><a href="#cb12-105"></a><span class="co"># load dataset</span></span>
+<span id="cb12-106"><a href="#cb12-106"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb12-107"><a href="#cb12-107"></a></span>
+<span id="cb12-108"><a href="#cb12-108"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
+<span id="cb12-109"><a href="#cb12-109"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb12-110"><a href="#cb12-110"></a><span class="fu">geom_point</span>()</span>
+<span id="cb12-111"><a href="#cb12-111"></a></span>
+<span id="cb12-112"><a href="#cb12-112"></a><span class="co"># when Y axis turn to log()</span></span>
+<span id="cb12-113"><a href="#cb12-113"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
+<span id="cb12-114"><a href="#cb12-114"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb12-115"><a href="#cb12-115"></a><span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb12-116"><a href="#cb12-116"></a><span class="fu">scale_y_log10</span>()</span>
+<span id="cb12-117"><a href="#cb12-117"></a><span class="in">```</span></span>
+<span id="cb12-118"><a href="#cb12-118"></a></span>
+<span id="cb12-119"><a href="#cb12-119"></a><span class="fu">## 绘制多重折线图</span></span>
+<span id="cb12-120"><a href="#cb12-120"></a></span>
+<span id="cb12-121"><a href="#cb12-121"></a>除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：</span>
+<span id="cb12-122"><a href="#cb12-122"></a></span>
+<span id="cb12-125"><a href="#cb12-125"></a><span class="in">```{r}</span></span>
+<span id="cb12-126"><a href="#cb12-126"></a><span class="co">#| eval: true</span></span>
+<span id="cb12-127"><a href="#cb12-127"></a><span class="co">#| echo: true</span></span>
+<span id="cb12-128"><a href="#cb12-128"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb12-129"><a href="#cb12-129"></a></span>
+<span id="cb12-130"><a href="#cb12-130"></a><span class="co"># load package</span></span>
+<span id="cb12-131"><a href="#cb12-131"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb12-132"><a href="#cb12-132"></a><span class="co"># load dataset</span></span>
+<span id="cb12-133"><a href="#cb12-133"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb12-134"><a href="#cb12-134"></a></span>
+<span id="cb12-135"><a href="#cb12-135"></a><span class="co">#colour</span></span>
+<span id="cb12-136"><a href="#cb12-136"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
+<span id="cb12-137"><a href="#cb12-137"></a><span class="fu">geom_line</span>()</span>
+<span id="cb12-138"><a href="#cb12-138"></a></span>
+<span id="cb12-139"><a href="#cb12-139"></a><span class="co"># linetype</span></span>
+<span id="cb12-140"><a href="#cb12-140"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">linetype =</span> supp))<span class="sc">+</span></span>
+<span id="cb12-141"><a href="#cb12-141"></a><span class="fu">geom_line</span>()</span>
+<span id="cb12-142"><a href="#cb12-142"></a><span class="in">```</span></span>
+<span id="cb12-143"><a href="#cb12-143"></a></span>
+<span id="cb12-144"><a href="#cb12-144"></a>tg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。</span>
 </code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

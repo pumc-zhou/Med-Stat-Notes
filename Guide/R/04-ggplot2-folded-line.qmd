@@ -14,7 +14,9 @@ format:
         toc-depth: 3
 ---
 
-# 绘制基本折线图
+# 折线图
+
+## 绘制基本折线图
 
 运行 `ggplot()` 函数和 `geom_line()` 函数，并分别指定一个变量映射到 `x` 和 `y` 。
 
@@ -36,7 +38,7 @@ geom_line()
 
 在上图中，Demand 变量为数值型变量，但我们可以借助于 `factor()` 函数将其转换为因子型变量，然后，将其当作分类变量来处理。
 
-当 X 对应于因子型变量时，必须使用命令 `aex(group = 1)` 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。
+当 X 对应于因子型变量时，必须使用命令 `aex(group = 1)` 以确保 `ggplot` 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。
 
 ```{r}
 #| eval: true
@@ -53,3 +55,80 @@ BOD1$Time <- factor(BOD1$Time)
 ggplot(BOD1,aes(x = Time,y = demand,group = 1))+
 geom_line()
 ```
+
+## 向折线图添加数据标记
+
+在代码中加上 `geom_point()` 即可：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+BOD
+
+ggplot(BOD,aes(x = Time,y = demand))+
+geom_line()+
+geom_point()
+```
+
+有时候，在折线图上添加数据标记很有用。
+
+当数据点的密度较低或数据采集频率不规则时，尤其有用。
+
+例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。
+
+### worldpop数据集
+
+worldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。
+
+折线图中的数据标记表明了数据的采集时间：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+library(gcookbook)
+
+ggplot(worldpop,aes(x = Year,y = Population))+
+geom_line()+
+geom_point()
+
+# when Y axis turn to log()
+ggplot(worldpop,aes(x = Year,y = Population))+
+geom_line()+
+geom_point()+
+scale_y_log10()
+```
+
+## 绘制多重折线图
+
+除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+library(gcookbook)
+
+#colour
+ggplot(tg,aes(x = dose,y = length, colour = supp))+
+geom_line()
+
+# linetype
+ggplot(tg,aes(x = dose,y = length, linetype = supp))+
+geom_line()
+```
+
+tg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。
