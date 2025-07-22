@@ -118,7 +118,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
   geom_col(position = "dodge")
 ```
 
-## `pastel1` 调色盘
+## `pastel1` 调色板
 
 ```{r}
 #| echo: true
@@ -205,7 +205,7 @@ upc <- uspopchange %>%
 upc
 ```
 
-将 Region 映射到 fill 是上兵绘制条形图：
+将 `Region` 映射到 `fill` 是上并绘制条形图：
 
 ```{r}
 #| echo: true

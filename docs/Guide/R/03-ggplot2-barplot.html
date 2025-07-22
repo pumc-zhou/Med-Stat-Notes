@@ -841,7 +841,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   <li>
 <a href="#%E7%BB%98%E5%88%B6%E7%B0%87%E7%8A%B6%E6%9D%A1%E5%BD%A2%E5%9B%BE" id="toc-绘制簇状条形图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E7%B0%87%E7%8A%B6%E6%9D%A1%E5%BD%A2%E5%9B%BE"><span class="header-section-number">2</span> 绘制簇状条形图</a>
   <ul class="collapse">
-<li><a href="#pastel1-%E8%B0%83%E8%89%B2%E7%9B%98" id="toc-pastel1-调色盘" class="nav-link" data-scroll-target="#pastel1-%E8%B0%83%E8%89%B2%E7%9B%98"><span class="header-section-number">2.1</span> <code>pastel1</code> 调色盘</a></li>
+<li><a href="#pastel1-%E8%B0%83%E8%89%B2%E6%9D%BF" id="toc-pastel1-调色板" class="nav-link" data-scroll-target="#pastel1-%E8%B0%83%E8%89%B2%E6%9D%BF"><span class="header-section-number">2.1</span> <code>pastel1</code> 调色板</a></li>
   <li><a href="#%E7%BC%BA%E5%A4%B1%E9%A1%B9" id="toc-缺失项" class="nav-link" data-scroll-target="#%E7%BC%BA%E5%A4%B1%E9%A1%B9"><span class="header-section-number">2.2</span> 缺失项</a></li>
   </ul>
 </li>
@@ -960,7 +960,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年7月21日</p>
+      <p class="date-modified">2025年7月22日</p>
     </div>
   </div>
     
@@ -1089,8 +1089,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<section id="pastel1-调色盘" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="pastel1-调色盘">
-<span class="header-section-number">2.1</span> <code>pastel1</code> 调色盘</h2>
+<section id="pastel1-调色板" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="pastel1-调色板">
+<span class="header-section-number">2.1</span> <code>pastel1</code> 调色板</h2>
 <div class="cell">
 <details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the cabbage_exp data set</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="co"># check dataset</span></span>
@@ -1197,7 +1197,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 10 South Carolina  SC  South   15.3</code></pre>
 </div>
 </div>
-<p>将 Region 映射到 fill 是上兵绘制条形图：</p>
+<p>将 <code>Region</code> 映射到 <code>fill</code> 是上并绘制条形图：</p>
 <div class="cell">
 <details class="code-fold"><summary>代码</summary><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">ggplot</span>(upc, <span class="fu">aes</span>(<span class="at">x =</span> Abb, <span class="at">y =</span> Change, <span class="at">fill =</span> Region)) <span class="sc">+</span></span>
 <span id="cb25-2"><a href="#cb25-2"></a>  <span class="fu">geom_col</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2488,7 +2488,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb61-128"><a href="#cb61-128"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>)</span>
 <span id="cb61-129"><a href="#cb61-129"></a><span class="in">```</span></span>
 <span id="cb61-130"><a href="#cb61-130"></a></span>
-<span id="cb61-131"><a href="#cb61-131"></a><span class="fu">## `pastel1` 调色盘</span></span>
+<span id="cb61-131"><a href="#cb61-131"></a><span class="fu">## `pastel1` 调色板</span></span>
 <span id="cb61-132"><a href="#cb61-132"></a></span>
 <span id="cb61-135"><a href="#cb61-135"></a><span class="in">```{r}</span></span>
 <span id="cb61-136"><a href="#cb61-136"></a><span class="co">#| echo: true</span></span>
@@ -2575,7 +2575,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb61-223"><a href="#cb61-223"></a>upc</span>
 <span id="cb61-224"><a href="#cb61-224"></a><span class="in">```</span></span>
 <span id="cb61-225"><a href="#cb61-225"></a></span>
-<span id="cb61-226"><a href="#cb61-226"></a>将 Region 映射到 fill 是上兵绘制条形图：</span>
+<span id="cb61-226"><a href="#cb61-226"></a>将 <span class="in">`Region`</span> 映射到 <span class="in">`fill`</span> 是上并绘制条形图：</span>
 <span id="cb61-227"><a href="#cb61-227"></a></span>
 <span id="cb61-230"><a href="#cb61-230"></a><span class="in">```{r}</span></span>
 <span id="cb61-231"><a href="#cb61-231"></a><span class="co">#| echo: true</span></span>

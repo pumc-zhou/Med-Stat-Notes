@@ -131,4 +131,182 @@ ggplot(tg,aes(x = dose,y = length, linetype = supp))+
 geom_line()
 ```
 
-tg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。
+`tg` 数据集共有三列，其中一列正是我们映射到 `colour` 和 `linetype` 的 `supp` 因子（离散型变量），而将 `dose` 作为 `x` 轴，`length` 作为 `y` 轴（连续型变量）。
+
+折线图的 X 轴既可以对应于连续变量也可以对应于分类变量。
+
+有时候，映射到 X 的变量虽然被存储为数值型变量，但被看做分类变量来处理。
+
+在上述的 tg 数据集中，dose 有三个取值：0.5、1.0和2.0。
+
+或许用户更想将其当做分类变量而不是连续变量来处理，那么运行 `factor()` 函数将其转换为因子型变量。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+library(gcookbook)
+
+#colour
+ggplot(tg,aes(x = factor(dose),y = length, colour = supp,group = supp))+
+geom_line()
+```
+
+### 数据标记
+
+如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 shape 和 fill 等。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+library(gcookbook)
+
+#shape
+ggplot(tg,aes(x = dose,y = length, shape = supp))+
+geom_line()+
+geom_point(size = 4)
+
+# fill
+ggplot(tg,aes(x = dose,y = length, fill = supp))+
+geom_line()+
+geom_point(size = 4,shape = 21)
+```
+
+### 错开数据标记
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+library(gcookbook)
+
+#shape
+ggplot(tg,aes(x = dose,y = length, shape = supp))+
+geom_line(position = position_dodge(0.2))+
+geom_point(position = position_dodge(0.2),size = 4)
+```
+
+## 修改线条样式
+
+通过设置线型（`linetype`）、线宽（`linewidth`）和颜色（`colour`或`color`）参数可以分别修改折线的线性（实线、虚线、点线等），线宽（单位为毫米）和颜色。
+
+将上述参数的值传递给 `geom_line()` 函数可以设置折线图的对应属性。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+
+#shape
+ggplot(BOD,aes(x = Time,y = demand,))+
+geom_line(linetype = "dashed",linewidth = 1,colour = "blue")
+```
+
+### 使用调色板
+
+对于多重折线图而言，设定图形属性会对图上的所有折线产生影响。
+
+而将变量映射到图形属性则会使图上的每条折线具有不同的外观。
+
+折线图默认颜色并不是很吸引眼球，所以用户可以使用其他调色板[^1]着色，可以调用 `scale_colour_brewer()` 函数和 `scale_colour_manual` 函数实线。
+
+[^1]: `ggplot2` 本身内置了一些默认的调色板，但它也高度集成了其他 R 包和颜色系统的调色板，以提供更丰富的选择：
+
+    -   **R 语言内置颜色**: `ggplot2` 可以直接使用 R 语言中预定义的颜色名称（例如 "red", "blue"）或十六进制颜色代码（例如 "#FF0000"）。
+
+    -   **ColorBrewer**: 这是一个非常流行的调色板集合，由地理学家 Cynthia Brewer 开发，主要用于地图制作，但非常适用于各种数据可视化。ColorBrewer 的调色板设计考虑了**色彩感知**和**色盲友好性**，分为：
+
+        -   **顺序型 (Sequential)**：适用于表示有序数据，从低到高渐变。
+
+        -   **发散型 (Diverging)**：适用于表示有中间值的数据，例如正负值、同意/不同意等，颜色从中间值向两端发散。
+
+        -   **定性型 (Qualitative)**：适用于表示分类数据，颜色之间没有内在顺序。 `ggplot2` 通过 `scale_color_brewer()` 和 `scale_fill_brewer()` 函数来使用 ColorBrewer 调色板。
+
+    -   **viridis**: 这是一组在 ggplot2 中非常受欢迎的调色板（包括 `viridis`, `magma`, `inferno`, `plasma`, `cividis`）。它们的主要特点是**感知均匀性**和**色盲友好性**。这意味着无论颜色如何变化，人眼对颜色变化的感知是均匀的，并且即使是色盲人士也能区分不同的颜色。ggplot2 通过 `scale_color_viridis_d()` / `scale_fill_viridis_d()` （离散型）和 `scale_color_viridis_c()` / `scale_fill_viridis_c()` （连续型）来使用这些调色板。
+
+    -   **自定义调色板**: 用户可以根据需要创建自己的调色板，通过 `scale_color_manual()` 和 `scale_fill_manual()` 函数手动指定颜色。
+
+    -   **其他扩展包**: 还有许多其他 R 包提供了针对 `ggplot2` 的调色板，例如 `ggsci` 包提供了受科学期刊、数据可视化库等启发的调色板。
+
+    ### 功能
+
+    ggplot2 调色板的主要功能是**将数据映射到视觉美学属性（特别是颜色和填充色）**，从而增强数据图表的可读性和信息传递效率。
+
+    -   **区分数据类别**: 当你的数据中有离散变量（分类数据）时，调色板会为每个类别分配不同的颜色，让观众能够轻松区分不同的组别。例如，在散点图中用不同颜色表示不同的物种。
+
+    -   **表示数据强度/趋势**: 对于连续变量，调色板通常使用颜色渐变来表示数值的大小或趋势。例如，颜色从浅到深表示数值从小到大。
+
+    -   **突出数据特征**: 通过选择合适的调色板，可以突出数据中的特定模式、异常值或重要区域。
+
+    -   **提高图表美观度**: 美观的颜色选择能够提升图表的整体视觉吸引力，使其更具专业性和易读性。
+
+    -   **支持色盲友好**: 许多调色板（如 viridis 和 ColorBrewer 的部分调色板）都经过设计，以确保色盲人士也能良好地区分颜色，从而提高图表的**可访问性**。
+
+    -   **映射离散和连续数据。**
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+library(gcookbook)
+
+#shape
+ggplot(tg,aes(x = dose,y = length, colour = supp))+
+geom_line()+
+scale_colour_brewer(palette = "Set1")
+```
+
+### 进一步调整配色与线条
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+
+# load package
+library(ggplot2)
+# load dataset
+library(gcookbook)
+
+# 如果两条折线的图形属性相同，需要指定一个分组变量
+ggplot(tg,aes(x = dose,y = length, group = supp))+
+geom_line(colour = "darkgreen",size = 1.5)
+
+# 因为变量 supp 被映射到了颜色（colour）属性，所以它自动作为分组变量
+ggplot(tg,aes(x = dose,y = length, colour = supp))+
+geom_line(linetype = "dashed")+
+geom_point(shape = 22,size = 3,fill = "white")
+```
+
+## 修改数据标记样式
+
+在函数 aes() 外部设定函数 geom_point() 的参数 size（大小）、shape（形状）、colour（颜色）和fill（填充色）即可。
+
+```{r}
+# load package
+library(ggplot2)
+
+ggplot(BOD,aes(x = Time,y = demand))+
+geom_line()+
+geom_point(size = 4,shape = 22,colour = "darkred",fill = "pink")
+```

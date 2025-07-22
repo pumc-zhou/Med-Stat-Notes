@@ -906,7 +906,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-21},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 21, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-22},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 22, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -6989,7 +6989,7 @@
     "href": "Guide/R/03-ggplot2-barplot.html#条形图着色",
     "title": "03-ggplot2 绘图——条形图",
     "section": "\n3.2 条形图着色",
-    "text": "3.2 条形图着色\n\n代码library(gcookbook) # Load gcookbook for the uspopchange data set\nlibrary(dplyr)\n\n# select top 10 state with population growth\nupc &lt;- uspopchange %&gt;%\n  arrange(desc(Change)) %&gt;%\n  slice(1:10)\n\nupc\n\n            State Abb Region Change\n1          Nevada  NV   West   35.1\n2         Arizona  AZ   West   24.6\n3            Utah  UT   West   23.8\n4           Idaho  ID   West   21.1\n5           Texas  TX  South   20.6\n6  North Carolina  NC  South   18.5\n7         Georgia  GA  South   18.3\n8         Florida  FL  South   17.6\n9        Colorado  CO   West   16.9\n10 South Carolina  SC  South   15.3\n\n\n将 Region 映射到 fill 是上兵绘制条形图：\n\n代码ggplot(upc, aes(x = Abb, y = Change, fill = Region)) +\n  geom_col()\n\n\n\n\n\n\n\n\n3.2.1 设定图形颜色\n借助函数 scale_fill_brewer() or scale_fill_manual() 重新设定图形颜色：\n\n代码ggplot(upc, aes(x = reorder(Abb, Change), y = Change, fill = Region)) +\n  geom_col(colour = \"black\") +\n  scale_fill_manual(values = c(\"#669933\", \"#FFCC66\")) +\n  xlab(\"State\")\n\n\n\n\n\n\n\n\n3.2.2 注意\n颜色的映射是在 aes() 内部完成的，但是颜色的设定是在 aes() 外部完成的。",
+    "text": "3.2 条形图着色\n\n代码library(gcookbook) # Load gcookbook for the uspopchange data set\nlibrary(dplyr)\n\n# select top 10 state with population growth\nupc &lt;- uspopchange %&gt;%\n  arrange(desc(Change)) %&gt;%\n  slice(1:10)\n\nupc\n\n            State Abb Region Change\n1          Nevada  NV   West   35.1\n2         Arizona  AZ   West   24.6\n3            Utah  UT   West   23.8\n4           Idaho  ID   West   21.1\n5           Texas  TX  South   20.6\n6  North Carolina  NC  South   18.5\n7         Georgia  GA  South   18.3\n8         Florida  FL  South   17.6\n9        Colorado  CO   West   16.9\n10 South Carolina  SC  South   15.3\n\n\n将 Region 映射到 fill 是上并绘制条形图：\n\n代码ggplot(upc, aes(x = Abb, y = Change, fill = Region)) +\n  geom_col()\n\n\n\n\n\n\n\n\n3.2.1 设定图形颜色\n借助函数 scale_fill_brewer() or scale_fill_manual() 重新设定图形颜色：\n\n代码ggplot(upc, aes(x = reorder(Abb, Change), y = Change, fill = Region)) +\n  geom_col(colour = \"black\") +\n  scale_fill_manual(values = c(\"#669933\", \"#FFCC66\")) +\n  xlab(\"State\")\n\n\n\n\n\n\n\n\n3.2.2 注意\n颜色的映射是在 aes() 内部完成的，但是颜色的设定是在 aes() 外部完成的。",
     "crumbs": [
       "Home",
       "Guide",
@@ -7457,7 +7457,7 @@
     "href": "Guide/R/04-ggplot2-folded-line.html",
     "title": "04-ggplot2 绘图——折线图",
     "section": "",
-    "text": "运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()\n\n\n\n\n\n\n\n折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。\n在上图中，Demand 变量为数值型变量，但我们可以借助于 factor() 函数将其转换为因子型变量，然后，将其当作分类变量来处理。\n当 X 对应于因子型变量时，必须使用命令 aex(group = 1) 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。\n\n# load package\nlibrary(ggplot2)\n# load dataset and copy a dataset\nBOD1 &lt;- BOD\nBOD1$Time &lt;- factor(BOD1$Time)\n\nggplot(BOD1,aes(x = Time,y = demand,group = 1))+\ngeom_line()\n\n\n\n\n\n\n\n\n在代码中加上 geom_point() 即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n\n有时候，在折线图上添加数据标记很有用。\n当数据点的密度较低或数据采集频率不规则时，尤其有用。\n例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。\n\nworldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。\n折线图中的数据标记表明了数据的采集时间：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n# when Y axis turn to log()\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()+\nscale_y_log10()\n\n\n\n\n\n\n\n\n除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()\n\n\n\n\n\n\n# linetype\nggplot(tg,aes(x = dose,y = length, linetype = supp))+\ngeom_line()\n\n\n\n\n\n\n\ntg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。",
+    "text": "运行 ggplot() 函数和 geom_line() 函数，并分别指定一个变量映射到 x 和 y 。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()\n\n\n\n\n\n\n\n折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。\n在上图中，Demand 变量为数值型变量，但我们可以借助于 factor() 函数将其转换为因子型变量，然后，将其当作分类变量来处理。\n当 X 对应于因子型变量时，必须使用命令 aex(group = 1) 以确保 ggplot 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。\n\n# load package\nlibrary(ggplot2)\n# load dataset and copy a dataset\nBOD1 &lt;- BOD\nBOD1$Time &lt;- factor(BOD1$Time)\n\nggplot(BOD1,aes(x = Time,y = demand,group = 1))+\ngeom_line()\n\n\n\n\n\n\n\n\n在代码中加上 geom_point() 即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nBOD\n\n  Time demand\n1    1    8.3\n2    2   10.3\n3    3   19.0\n4    4   16.0\n5    5   15.6\n6    7   19.8\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n\n有时候，在折线图上添加数据标记很有用。\n当数据点的密度较低或数据采集频率不规则时，尤其有用。\n例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。\n\nworldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。\n折线图中的数据标记表明了数据的采集时间：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()\n\n\n\n\n\n\n# when Y axis turn to log()\nggplot(worldpop,aes(x = Year,y = Population))+\ngeom_line()+\ngeom_point()+\nscale_y_log10()\n\n\n\n\n\n\n\n\n除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()\n\n\n\n\n\n\n# linetype\nggplot(tg,aes(x = dose,y = length, linetype = supp))+\ngeom_line()\n\n\n\n\n\n\n\ntg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，length 作为 y 轴（连续型变量）。\n折线图的 X 轴既可以对应于连续变量也可以对应于分类变量。\n有时候，映射到 X 的变量虽然被存储为数值型变量，但被看做分类变量来处理。\n在上述的 tg 数据集中，dose 有三个取值：0.5、1.0和2.0。\n或许用户更想将其当做分类变量而不是连续变量来处理，那么运行 factor() 函数将其转换为因子型变量。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = factor(dose),y = length, colour = supp,group = supp))+\ngeom_line()\n\n\n\n\n\n\n\n\n如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 shape 和 fill 等。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#shape\nggplot(tg,aes(x = dose,y = length, shape = supp))+\ngeom_line()+\ngeom_point(size = 4)\n\n\n\n\n\n\n# fill\nggplot(tg,aes(x = dose,y = length, fill = supp))+\ngeom_line()+\ngeom_point(size = 4,shape = 21)\n\n\n\n\n\n\n\n\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#shape\nggplot(tg,aes(x = dose,y = length, shape = supp))+\ngeom_line(position = position_dodge(0.2))+\ngeom_point(position = position_dodge(0.2),size = 4)\n\n\n\n\n\n\n\n\n通过设置线型（linetype）、线宽（linewidth）和颜色（colour或color）参数可以分别修改折线的线性（实线、虚线、点线等），线宽（单位为毫米）和颜色。\n将上述参数的值传递给 geom_line() 函数可以设置折线图的对应属性。\n\n# load package\nlibrary(ggplot2)\n\n#shape\nggplot(BOD,aes(x = Time,y = demand,))+\ngeom_line(linetype = \"dashed\",linewidth = 1,colour = \"blue\")\n\n\n\n\n\n\n\n\n对于多重折线图而言，设定图形属性会对图上的所有折线产生影响。\n而将变量映射到图形属性则会使图上的每条折线具有不同的外观。\n折线图默认颜色并不是很吸引眼球，所以用户可以使用其他调色板1着色，可以调用 scale_colour_brewer() 函数和 scale_colour_manual 函数实线。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#shape\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()+\nscale_colour_brewer(palette = \"Set1\")\n\n\n\n\n\n\n\n\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n# 如果两条折线的图形属性相同，需要指定一个分组变量\nggplot(tg,aes(x = dose,y = length, group = supp))+\ngeom_line(colour = \"darkgreen\",size = 1.5)\n\n\n\n\n\n\n# 因为变量 supp 被映射到了颜色（colour）属性，所以它自动作为分组变量\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line(linetype = \"dashed\")+\ngeom_point(shape = 22,size = 3,fill = \"white\")\n\n\n\n\n\n\n\n\n在函数 aes() 外部设定函数 geom_point() 的参数 size（大小）、shape（形状）、colour（颜色）和fill（填充色）即可。\n\n代码# load package\nlibrary(ggplot2)\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()+\ngeom_point(size = 4,shape = 22,colour = \"darkred\",fill = \"pink\")",
     "crumbs": [
       "Home",
       "Guide",
@@ -7496,12 +7496,64 @@
     "href": "Guide/R/04-ggplot2-folded-line.html#绘制多重折线图",
     "title": "04-ggplot2 绘图——折线图",
     "section": "",
-    "text": "除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()\n\n\n\n\n\n\n# linetype\nggplot(tg,aes(x = dose,y = length, linetype = supp))+\ngeom_line()\n\n\n\n\n\n\n\ntg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，lengt 作为 y 轴（连续型变量）。",
+    "text": "除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()\n\n\n\n\n\n\n# linetype\nggplot(tg,aes(x = dose,y = length, linetype = supp))+\ngeom_line()\n\n\n\n\n\n\n\ntg 数据集共有三列，其中一列正是我们映射到 colour 和 linetype 的 supp 因子（离散型变量），而将 dose 作为 x 轴，length 作为 y 轴（连续型变量）。\n折线图的 X 轴既可以对应于连续变量也可以对应于分类变量。\n有时候，映射到 X 的变量虽然被存储为数值型变量，但被看做分类变量来处理。\n在上述的 tg 数据集中，dose 有三个取值：0.5、1.0和2.0。\n或许用户更想将其当做分类变量而不是连续变量来处理，那么运行 factor() 函数将其转换为因子型变量。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#colour\nggplot(tg,aes(x = factor(dose),y = length, colour = supp,group = supp))+\ngeom_line()\n\n\n\n\n\n\n\n\n如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 shape 和 fill 等。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#shape\nggplot(tg,aes(x = dose,y = length, shape = supp))+\ngeom_line()+\ngeom_point(size = 4)\n\n\n\n\n\n\n# fill\nggplot(tg,aes(x = dose,y = length, fill = supp))+\ngeom_line()+\ngeom_point(size = 4,shape = 21)\n\n\n\n\n\n\n\n\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#shape\nggplot(tg,aes(x = dose,y = length, shape = supp))+\ngeom_line(position = position_dodge(0.2))+\ngeom_point(position = position_dodge(0.2),size = 4)",
     "crumbs": [
       "Home",
       "Guide",
       "R",
       "04-ggplot2 绘图——折线图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/04-ggplot2-folded-line.html#修改线条样式",
+    "href": "Guide/R/04-ggplot2-folded-line.html#修改线条样式",
+    "title": "04-ggplot2 绘图——折线图",
+    "section": "",
+    "text": "通过设置线型（linetype）、线宽（linewidth）和颜色（colour或color）参数可以分别修改折线的线性（实线、虚线、点线等），线宽（单位为毫米）和颜色。\n将上述参数的值传递给 geom_line() 函数可以设置折线图的对应属性。\n\n# load package\nlibrary(ggplot2)\n\n#shape\nggplot(BOD,aes(x = Time,y = demand,))+\ngeom_line(linetype = \"dashed\",linewidth = 1,colour = \"blue\")\n\n\n\n\n\n\n\n\n对于多重折线图而言，设定图形属性会对图上的所有折线产生影响。\n而将变量映射到图形属性则会使图上的每条折线具有不同的外观。\n折线图默认颜色并不是很吸引眼球，所以用户可以使用其他调色板1着色，可以调用 scale_colour_brewer() 函数和 scale_colour_manual 函数实线。\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n#shape\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line()+\nscale_colour_brewer(palette = \"Set1\")\n\n\n\n\n\n\n\n\n\n# load package\nlibrary(ggplot2)\n# load dataset\nlibrary(gcookbook)\n\n# 如果两条折线的图形属性相同，需要指定一个分组变量\nggplot(tg,aes(x = dose,y = length, group = supp))+\ngeom_line(colour = \"darkgreen\",size = 1.5)\n\n\n\n\n\n\n# 因为变量 supp 被映射到了颜色（colour）属性，所以它自动作为分组变量\nggplot(tg,aes(x = dose,y = length, colour = supp))+\ngeom_line(linetype = \"dashed\")+\ngeom_point(shape = 22,size = 3,fill = \"white\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "04-ggplot2 绘图——折线图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/04-ggplot2-folded-line.html#修改数据标记样式",
+    "href": "Guide/R/04-ggplot2-folded-line.html#修改数据标记样式",
+    "title": "04-ggplot2 绘图——折线图",
+    "section": "",
+    "text": "在函数 aes() 外部设定函数 geom_point() 的参数 size（大小）、shape（形状）、colour（颜色）和fill（填充色）即可。\n\n代码# load package\nlibrary(ggplot2)\n\nggplot(BOD,aes(x = Time,y = demand))+\ngeom_line()+\ngeom_point(size = 4,shape = 22,colour = \"darkred\",fill = \"pink\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "04-ggplot2 绘图——折线图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/04-ggplot2-folded-line.html#footnotes",
+    "href": "Guide/R/04-ggplot2-folded-line.html#footnotes",
+    "title": "04-ggplot2 绘图——折线图",
+    "section": "脚注",
+    "text": "脚注\n\n\nggplot2 本身内置了一些默认的调色板，但它也高度集成了其他 R 包和颜色系统的调色板，以提供更丰富的选择：\n\nR 语言内置颜色: ggplot2 可以直接使用 R 语言中预定义的颜色名称（例如 “red”, “blue”）或十六进制颜色代码（例如 “#FF0000”）。\n\nColorBrewer: 这是一个非常流行的调色板集合，由地理学家 Cynthia Brewer 开发，主要用于地图制作，但非常适用于各种数据可视化。ColorBrewer 的调色板设计考虑了色彩感知和色盲友好性，分为：\n\n顺序型 (Sequential)：适用于表示有序数据，从低到高渐变。\n发散型 (Diverging)：适用于表示有中间值的数据，例如正负值、同意/不同意等，颜色从中间值向两端发散。\n定性型 (Qualitative)：适用于表示分类数据，颜色之间没有内在顺序。 ggplot2 通过 scale_color_brewer() 和 scale_fill_brewer() 函数来使用 ColorBrewer 调色板。\n\n\nviridis: 这是一组在 ggplot2 中非常受欢迎的调色板（包括 viridis, magma, inferno, plasma, cividis）。它们的主要特点是感知均匀性和色盲友好性。这意味着无论颜色如何变化，人眼对颜色变化的感知是均匀的，并且即使是色盲人士也能区分不同的颜色。ggplot2 通过 scale_color_viridis_d() / scale_fill_viridis_d() （离散型）和 scale_color_viridis_c() / scale_fill_viridis_c() （连续型）来使用这些调色板。\n自定义调色板: 用户可以根据需要创建自己的调色板，通过 scale_color_manual() 和 scale_fill_manual() 函数手动指定颜色。\n其他扩展包: 还有许多其他 R 包提供了针对 ggplot2 的调色板，例如 ggsci 包提供了受科学期刊、数据可视化库等启发的调色板。\n\n\n1.4.2 功能\nggplot2 调色板的主要功能是将数据映射到视觉美学属性（特别是颜色和填充色），从而增强数据图表的可读性和信息传递效率。\n\n区分数据类别: 当你的数据中有离散变量（分类数据）时，调色板会为每个类别分配不同的颜色，让观众能够轻松区分不同的组别。例如，在散点图中用不同颜色表示不同的物种。\n表示数据强度/趋势: 对于连续变量，调色板通常使用颜色渐变来表示数值的大小或趋势。例如，颜色从浅到深表示数值从小到大。\n突出数据特征: 通过选择合适的调色板，可以突出数据中的特定模式、异常值或重要区域。\n提高图表美观度: 美观的颜色选择能够提升图表的整体视觉吸引力，使其更具专业性和易读性。\n支持色盲友好: 许多调色板（如 viridis 和 ColorBrewer 的部分调色板）都经过设计，以确保色盲人士也能良好地区分颜色，从而提高图表的可访问性。\n映射离散和连续数据。\n\n↩︎",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "04-ggplot2 绘图——折线图"
+    ]
+  },
+  {
+    "objectID": "Guide/R/03-ggplot2-barplot.html#pastel1-调色板",
+    "href": "Guide/R/03-ggplot2-barplot.html#pastel1-调色板",
+    "title": "03-ggplot2 绘图——条形图",
+    "section": "\n2.1 pastel1 调色板",
+    "text": "2.1 pastel1 调色板\n\n代码library(gcookbook)  # Load gcookbook for the cabbage_exp data set\n# check dataset\ncabbage_exp\n\n  Cultivar Date Weight        sd  n         se\n1      c39  d16   3.18 0.9566144 10 0.30250803\n2      c39  d20   2.80 0.2788867 10 0.08819171\n3      c39  d21   2.74 0.9834181 10 0.31098410\n4      c52  d16   2.26 0.4452215 10 0.14079141\n5      c52  d20   3.11 0.7908505 10 0.25008887\n6      c52  d21   1.47 0.2110819 10 0.06674995\n\n代码# load ggplot2\nlibrary(ggplot2)\nggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +\n  geom_col(position = \"dodge\", colour = \"black\") +\n  scale_fill_brewer(palette = \"Pastel1\")",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "R",
+      "03-ggplot2 绘图——条形图"
     ]
   }
 ]
