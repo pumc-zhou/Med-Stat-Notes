@@ -24,6 +24,9 @@ format:
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-1
+#| fig: TRUE
+#| fig.cap: "基本折线图"
 
 # load package
 library(ggplot2)
@@ -44,7 +47,9 @@ geom_line()
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| fig-caption: 
+#| label: fig-2
+#| fig: TRUE
+#| fig.cap: "因子型变量折线图"
 
 # load package
 library(ggplot2)
@@ -64,6 +69,9 @@ geom_line()
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-3
+#| fig: TRUE
+#| fig.cap: "折线图添加标记"
 
 # load package
 library(ggplot2)
@@ -91,6 +99,9 @@ worldpop数据集对应的采集时间间隔不是常数，时间距今较久远
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-4
+#| fig: TRUE
+#| fig.cap: "worldpop 数据集示例"
 
 # load package
 library(ggplot2)
@@ -116,6 +127,9 @@ scale_y_log10()
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-5
+#| fig: TRUE
+#| fig.cap: "绘制多重折线图"
 
 # load package
 library(ggplot2)
@@ -145,6 +159,9 @@ geom_line()
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-6
+#| fig: TRUE
+#| fig.cap: "转换变量绘制折线图"
 
 # load package
 library(ggplot2)
@@ -158,12 +175,15 @@ geom_line()
 
 ### 数据标记
 
-如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 shape 和 fill 等。
+如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 `shape` 和 `fill` 等。
 
 ```{r}
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-7
+#| fig: TRUE
+#| fig.cap: "折线图数据标记"
 
 # load package
 library(ggplot2)
@@ -187,6 +207,9 @@ geom_point(size = 4,shape = 21)
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-8
+#| fig: TRUE
+#| fig.cap: "折线图错开数据标记"
 
 # load package
 library(ggplot2)
@@ -209,6 +232,9 @@ geom_point(position = position_dodge(0.2),size = 4)
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-9
+#| fig: TRUE
+#| fig.cap: "修改折线图线条样式"
 
 # load package
 library(ggplot2)
@@ -244,7 +270,7 @@ geom_line(linetype = "dashed",linewidth = 1,colour = "blue")
 
     -   **其他扩展包**: 还有许多其他 R 包提供了针对 `ggplot2` 的调色板，例如 `ggsci` 包提供了受科学期刊、数据可视化库等启发的调色板。
 
-    ### 功能
+        **功能**
 
     ggplot2 调色板的主要功能是**将数据映射到视觉美学属性（特别是颜色和填充色）**，从而增强数据图表的可读性和信息传递效率。
 
@@ -264,6 +290,9 @@ geom_line(linetype = "dashed",linewidth = 1,colour = "blue")
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-10
+#| fig: TRUE
+#| fig.cap: "使用调色板"
 
 # load package
 library(ggplot2)
@@ -282,6 +311,9 @@ scale_colour_brewer(palette = "Set1")
 #| eval: true
 #| echo: true
 #| code-fold: false
+#| label: fig-11
+#| fig: TRUE
+#| fig.cap: "折线图高级配色与线条"
 
 # load package
 library(ggplot2)
@@ -300,9 +332,16 @@ geom_point(shape = 22,size = 3,fill = "white")
 
 ## 修改数据标记样式
 
-在函数 aes() 外部设定函数 geom_point() 的参数 size（大小）、shape（形状）、colour（颜色）和fill（填充色）即可。
+在函数 `aes()` 外部设定函数 `geom_point()` 的参数 `size`（大小）、`shape`（形状）、`colour`（颜色）和 `fill`（填充色）即可。
 
 ```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-12
+#| fig: TRUE
+#| fig.cap: "折线图修改数据标记样式"
+
 # load package
 library(ggplot2)
 
@@ -310,3 +349,271 @@ ggplot(BOD,aes(x = Time,y = demand))+
 geom_line()+
 geom_point(size = 4,shape = 22,colour = "darkred",fill = "pink")
 ```
+
+The default `shape` for points is a solid circle, the default `size` is 2, and the default `colour` is black.The fill color is relevant only for some point shapes (numbered 21–25), which have separate outline and fill colors. The fill color is typically NA, or empty; you can fill it with white to get hollow-looking circles
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-13
+#| fig: TRUE
+#| fig.cap: "修改折线图默认样式"
+
+# load package
+library(ggplot2)
+
+ggplot(BOD, aes(x = Time, y = demand)) +
+  geom_line() +
+  geom_point(size = 4, shape = 21, fill = "white")
+```
+
+如果要将数据标记和折线设定为不同的颜色，用户必须折线绘制完成后再设定数据标记的颜色，此时，数据标记被绘制在更上面的图层，以避免被折线遮盖。
+
+这里定义了一个函数 `pd = position_dodge(0.2)` 来将图形错开，原始用法可参照 @fig-8。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-14
+#| fig: TRUE
+#| fig.cap: "折线图复杂数据标记"
+
+# load package
+library(ggplot2)
+library(gcookbook)  # Load gcookbook for the tg data set
+
+# Save the position_dodge specification because we'll use it multiple times
+pd <- position_dodge(0.2)
+
+ggplot(tg, aes(x = dose, y = length, fill = supp)) +
+  geom_line(position = pd) +
+  geom_point(shape = 21, size = 3, position = pd) +
+  scale_fill_manual(values = c("black","white"))
+```
+
+## 绘制面积图
+
+运行 `geom_area()` 函数即可绘制面积图。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-15
+#| fig: TRUE
+#| fig.cap: "绘制面积图"
+
+# load package
+library(ggplot2)
+
+# Convert the sunspot.year data set into a data frame for this example
+sunspotyear <- data.frame(
+    Year     = as.numeric(time(sunspot.year)),
+    Sunspots = as.numeric(sunspot.year)
+  )
+
+ggplot(sunspotyear, aes(x = Year, y = Sunspots)) +
+  geom_area()
+```
+
+默认情况下，面积图的填充色都是黑灰色且没有边框线，通过设定 `fill` 可以修改面积图的填充色。
+
+下图 @fig-16 将把填充色设定为蓝色，并通过 `alpha=0.2` 将面积图的透明度设定为 80% ，另外，用户可以看到面积图的网格线，通过设置 `colour` 为面积图添加边框线。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-16
+#| fig: TRUE
+#| fig.cap: "带半透明阴影区域和边框线的面积图"
+
+# load package
+library(ggplot2)
+
+sunspotyear <- data.frame(
+    Year     = as.numeric(time(sunspot.year)),
+    Sunspots = as.numeric(sunspot.year)
+  )
+
+ggplot(sunspotyear, aes(x = Year, y = Sunspots)) +
+  geom_area(colour = "black", fill = "blue", alpha = .2)
+```
+
+给整个面积图添加边框线后的效果可能并不十分令人满意，因为此时系统会在面积图的起点和终点位置分别绘制一条垂直线，且在底部绘制一条横线。
+
+为了避免上述情况，可以先绘制不带框线的面积图（不设定 colour），然后添加图层，并用 `geom_line()` 函数绘制轨迹线，如下图 @fig-17 。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-17
+#| fig: TRUE
+#| fig.cap: "不带下横线的面积图"
+
+# load package
+library(ggplot2)
+
+sunspotyear <- data.frame(
+    Year     = as.numeric(time(sunspot.year)),
+    Sunspots = as.numeric(sunspot.year)
+  )
+
+ggplot(sunspotyear, aes(x = Year, y = Sunspots)) +
+  geom_area(fill = "blue", alpha = .2)+
+  geom_line()
+```
+
+## 绘制堆积面积图
+
+依旧是运行 `geom_area()` 函数，但是需要映射一个因子型变量到 `fill` 即可，如下图 @fig-18 所示。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-18
+#| fig: TRUE
+#| fig.cap: "绘制堆积面积图"
+
+# load package
+library(ggplot2)
+library(gcookbook) # Load gcookbook for the uspopage data set
+
+ggplot(uspopage, aes(x = Year, y = Thousands, fill = AgeGroup)) +
+  geom_area()
+```
+
+堆积面积图对应的基础数据通常为宽格式（wide format），但 ggplot 要求数据必须是长格式（long format），两种格式之间需要进行转换。[^2]
+
+[^2]: 在 `ggplot2` 中绘制堆积面积图时，确实需要将宽格式数据转换为长格式。这并不是 `ggplot2` 独有的要求，而是 **"整洁数据"（Tidy Data）** 原则在数据可视化中的体现。
+
+    **为什么需要转换？**
+
+    1.  ggplot2 的设计哲学 (Grammar of Graphics)
+
+        ggplot2 基于 Leland Wilkinson 的 图形语法（Grammar of Graphics）。其核心思想是将图表分解为独立的组件：数据、几何对象（geoms）、统计变换（stats）、标度（scales）等。这种语法要求数据以特定的方式组织，以便它能直接映射到图表的视觉属性上。
+
+        -   **映射（Mapping）**: 在 `ggplot2` 中，你需要明确地将数据变量映射到美学属性（如 x 轴、y 轴、颜色、填充、大小等）。
+
+        -   **整洁数据**: `ggplot2` 最适合处理**整洁数据**。整洁数据的定义是：
+
+            -   **每个变量一列**：数据集中的每个变量都应该有自己的一列。
+
+            -   **每个观测值一行**：每个观测值（或案例）都应该有自己的一行。
+
+            -   **每个单元格一个值**：每个单元格只包含一个值。
+
+        对于堆积面积图，如果你有宽格式数据，例如：
+
+        |      |       |       |       |
+        |------|-------|-------|-------|
+        | 年份 | 产品A | 产品B | 产品C |
+        | 2020 | 100   | 50    | 20    |
+        | 2021 | 120   | 60    | 30    |
+
+        在这种格式下，"产品A"、"产品B"、"产品C" 都是独立的列。`ggplot2` 很难直接理解 "产品A"、"产品B"、"产品C" 应该被视为一个共同的“产品类型”变量，并且它们的数值应该被堆叠。
+
+    2.  堆积图的要求
+
+        堆积图的本质是按照某个分类变量（在堆积面积图通常是类别或分组）来对数值变量进行累加。为了实现这一点，ggplot2 需要一个明确的列来表示“类别”（例如，“产品类型”），以及另一个明确的列来表示“值”（例如，“销售额”）。
+
+        当数据是长格式时：
+
+        |      |          |        |
+        |------|----------|--------|
+        | 年份 | 产品类型 | 销售额 |
+        | 2020 | 产品A    | 100    |
+        | 2020 | 产品B    | 50     |
+        | 2020 | 产品C    | 20     |
+        | 2021 | 产品A    | 120    |
+        | 2021 | 产品B    | 60     |
+        | 2021 | 产品C    | 30     |
+
+        现在，`ggplot2` 可以清晰地识别：
+
+        -   **X 轴**: `年份`
+
+        -   **Y 轴**: `销售额`
+
+        -   **填充颜色（或分组）**: `产品类型`
+
+        它知道如何根据 `产品类型` 对 `销售额` 进行堆积。
+
+    **如何转换？**
+
+    在 R 语言中，最常用的数据转换包是 **`tidyr`**，它是 `tidyverse` 生态系统的一部分。`tidyr` 包提供了 `pivot_longer()`（以前是 `gather()`）函数，用于将宽格式数据转换为长格式。
+
+    假设我们有以下宽格式数据框 `df_wide`：
+
+    ``` r
+    # 创建一个示例宽格式数据 
+    df_wide <- data.frame(   
+        Year = c(2020, 2021, 2022),   
+        ProductA = c(100, 120, 150),   
+        ProductB = c(50, 60, 70),   
+        ProductC = c(20, 30, 40) )  
+    print(df_wide) 
+    ```
+
+    输出：
+
+    ``` r
+     Year ProductA ProductB ProductC 
+    1 2020      100       50       20 
+    2 2021      120       60       30 
+    3 2022      150       70       40 
+    ```
+
+    现在，我们使用 `pivot_longer()` 将其转换为长格式：
+
+    ``` r
+    library(tidyr) 
+    library(ggplot2) # 用于后续绘图  
+    df_long <- df_wide %>%   
+    pivot_longer(     
+        cols = starts_with("Product"), 
+        # 选择以 "Product" 开头的列进行转换     
+        names_to = "ProductType",     
+        # 新的类别变量的名称     
+        values_to = "Sales"           
+        # 新的数值变量的名称   
+    )  
+    print(df_long) 
+    ```
+
+    输出：
+
+    ```         
+    # A tibble: 9 × 3    
+    Year ProductType Sales   <dbl> <chr>       <dbl> 
+    1  2020 ProductA      100 
+    2  2020 ProductB       50 
+    3  2020 ProductC       20 
+    4  2021 ProductA      120 
+    5  2021 ProductB       60 
+    6  2021 ProductC       30 
+    7  2022 ProductA      150 
+    8  2022 ProductB       70 
+    9  2022 ProductC       40 
+    ```
+
+    **使用长格式数据绘制堆积面积图**
+
+    现在我们有了长格式数据 `df_long`，就可以轻松绘制堆积面积图了：
+
+    ``` R
+    ggplot(df_long, aes(x = Year, y = Sales, fill = ProductType)) +   
+    geom_area(alpha = 0.8) + 
+    # alpha 用于调整透明度   
+    labs(title = "不同产品销售额堆积面积图",        
+    x = "年份",        
+    y = "销售额",        
+    fill = "产品类型") +   
+    theme_minimal() 
+    ```
+
+    *总结来说，将宽格式数据转换为长格式是 `ggplot2` 绘制堆积图的关键步骤。这不仅符合 `ggplot2` 的图形语法和整洁数据原则，也使得数据能够清晰地映射到图表的视觉属性上，从而正确地进行堆积和可视化。*
