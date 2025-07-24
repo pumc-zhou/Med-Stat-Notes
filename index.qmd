@@ -1,12 +1,12 @@
 ---
 title: "医学统计学习笔记"
-author: ZHOU LB
+author: LB ZHOU
 date: today
 date-format: "YYYY[年]M[月]D[日]"
 author-title: Author # 作者栏的标签。默认标签为“AUTHOR”。
 published-title: 编译日期
 citation:
-  url: https://github.com/zhoulvbang/Med-Stat-Notes
+  url: https://github.com/pumc-zhou/Med-Stat-Notes
 sidebar: false #开启后会在主页面出现sidebar
 toc: false
 number-sections: false
@@ -26,7 +26,7 @@ about:
       href: https://bookdown.org
     - icon: github
       text: Github项目
-      href: https://github.com/zhoulvbang/Med-Stat-Notes
+      href: https://github.com/pumc-zhou/Med-Stat-Notes
     - icon: envelope-fill
       text: Email
       href: mailto::simonzhou01@outlook.com

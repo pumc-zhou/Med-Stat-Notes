@@ -906,7 +906,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-23},\n  url = {https://github.com/zhoulvbang/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 23, 2025. https://github.com/zhoulvbang/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{lb2025,\n  author = {LB, ZHOU},\n  title = {医学统计学习笔记},\n  date = {2025-07-24},\n  url = {https://github.com/pumc-zhou/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nLB, ZHOU. 2025. “医学统计学习笔记.” July 24, 2025. https://github.com/pumc-zhou/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -1947,7 +1947,7 @@
     "text": "双重差分回归 (DID) 用于评估一个事件的因果效应，其方法是比较事件发生的单元集合（处理组）与事件未发生的单元集合（控制组）。\nDID 背后的逻辑是，如果事件从未发生，处理组和控制组之间的差异应该随着时间的推移保持不变。\nDID 通过比较处理组和控制组在事件发生前后的差异来估计事件的因果效应。\nDID 法是一种无法随机分配样本情况下的替代方法，主要应用于区域行的策略评估问题。\n目标：获取相对同质的策略组和控制组，这个“相对”是指除策略影响外，策略组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n对于相对同质的策略组和控制组，DID法通过第一次的差分消除这个基本固定的差异，通过第二次的差分消除时间趋势的影响，评估策略带来的实际效应。\n从DID 法的目标中可知，该方法面对的实验数据是面板数据（多个时间点的截面数据组成面板数据），即在策略干预时间点前，至少有两个时间点的数据。\n\\[\ny = \\alpha_0 +\\alpha_1g +\\alpha_2T + \\alpha_3gT + \\epsilon\n\\] \\(\\alpha_0\\)为常数项，\\(\\alpha_1\\)为处理组和控制组的差异，\\(\\alpha_2\\)为时间效应，\\(\\epsilon\\)为误差项。 \\(\\alpha_3\\)为交互项的系数，表示处理组和控制组在事件发生前后的差异。\n其中，\\(y\\)为结果变量，\\(g\\)为处理组和控制组的虚拟变量，\\(T\\)为时间虚拟变量，\\(gT\\)为交互项。 \\(\\alpha_3\\)为DID估计量，表示处理组和控制组在事件发生前后的差异。\nDID 模型的有效性检验\n为了保证该模型的有效性，在试验设计时需要满足平行趋势假设：在事件发生前，处理组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n平行趋势，即策略组和控制组在干预前保持相同的变化趋势。\n3种常见的平行趋势的检验方法：\n\n画图法：画出处理组和控制组在事件发生前后的结果变量的变化趋势图，观察两组的变化趋势是否平行。\n统计检验法：使用t检验或F检验等统计方法，检验处理组和控制组在事件发生前的结果变量的差异是否显著。\n伪DID法：在事件发生前，随机选择一个时间点，将处理组和控制组的结果变量进行差分，检验差分后的结果变量是否显著。",
     "crumbs": [
       "Home",
-      "统计软件",
+      "Guide",
       "Python",
       "How to Use the DID in Python"
     ]
@@ -1960,7 +1960,7 @@
     "text": "双重差分回归 (DID) 用于评估一个事件的因果效应，其方法是比较事件发生的单元集合（处理组）与事件未发生的单元集合（控制组）。\nDID 背后的逻辑是，如果事件从未发生，处理组和控制组之间的差异应该随着时间的推移保持不变。\nDID 通过比较处理组和控制组在事件发生前后的差异来估计事件的因果效应。\nDID 法是一种无法随机分配样本情况下的替代方法，主要应用于区域行的策略评估问题。\n目标：获取相对同质的策略组和控制组，这个“相对”是指除策略影响外，策略组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n对于相对同质的策略组和控制组，DID法通过第一次的差分消除这个基本固定的差异，通过第二次的差分消除时间趋势的影响，评估策略带来的实际效应。\n从DID 法的目标中可知，该方法面对的实验数据是面板数据（多个时间点的截面数据组成面板数据），即在策略干预时间点前，至少有两个时间点的数据。\n\\[\ny = \\alpha_0 +\\alpha_1g +\\alpha_2T + \\alpha_3gT + \\epsilon\n\\] \\(\\alpha_0\\)为常数项，\\(\\alpha_1\\)为处理组和控制组的差异，\\(\\alpha_2\\)为时间效应，\\(\\epsilon\\)为误差项。 \\(\\alpha_3\\)为交互项的系数，表示处理组和控制组在事件发生前后的差异。\n其中，\\(y\\)为结果变量，\\(g\\)为处理组和控制组的虚拟变量，\\(T\\)为时间虚拟变量，\\(gT\\)为交互项。 \\(\\alpha_3\\)为DID估计量，表示处理组和控制组在事件发生前后的差异。\nDID 模型的有效性检验\n为了保证该模型的有效性，在试验设计时需要满足平行趋势假设：在事件发生前，处理组和控制组的结果变量随时间的变化存在一个基本固定的差异。\n平行趋势，即策略组和控制组在干预前保持相同的变化趋势。\n3种常见的平行趋势的检验方法：\n\n画图法：画出处理组和控制组在事件发生前后的结果变量的变化趋势图，观察两组的变化趋势是否平行。\n统计检验法：使用t检验或F检验等统计方法，检验处理组和控制组在事件发生前的结果变量的差异是否显著。\n伪DID法：在事件发生前，随机选择一个时间点，将处理组和控制组的结果变量进行差分，检验差分后的结果变量是否显著。",
     "crumbs": [
       "Home",
-      "统计软件",
+      "Guide",
       "Python",
       "How to Use the DID in Python"
     ]

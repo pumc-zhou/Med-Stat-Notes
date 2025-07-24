@@ -605,7 +605,7 @@ ggplot(uspopage, aes(x = Year, y = Thousands, fill = AgeGroup)) +
 
     现在我们有了长格式数据 `df_long`，就可以轻松绘制堆积面积图了：
 
-    ``` R
+    ``` r
     ggplot(df_long, aes(x = Year, y = Sales, fill = ProductType)) +   
     geom_area(alpha = 0.8) + 
     # alpha 用于调整透明度   

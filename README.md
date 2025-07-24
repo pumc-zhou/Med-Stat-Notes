@@ -6,7 +6,7 @@ simonzhou
 
 2024-02-06
 
-**网址：**<https://github.com/zhoulvbang/Medical-Statistics-Notes>
+**网址：**<https://github.com/pumc-zhou/Medical-Statistics-Notes>
 
 本书的前身是开始于23年暑假的 `Rmarkdown` 笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页。
 
