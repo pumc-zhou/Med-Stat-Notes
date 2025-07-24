@@ -849,6 +849,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   <li><a href="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E6%A0%87%E8%AE%B0%E6%A0%B7%E5%BC%8F" id="toc-修改数据标记样式" class="nav-link" data-scroll-target="#%E4%BF%AE%E6%94%B9%E6%95%B0%E6%8D%AE%E6%A0%87%E8%AE%B0%E6%A0%B7%E5%BC%8F"><span class="header-section-number">1.5</span> 修改数据标记样式</a></li>
   <li><a href="#%E7%BB%98%E5%88%B6%E9%9D%A2%E7%A7%AF%E5%9B%BE" id="toc-绘制面积图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E9%9D%A2%E7%A7%AF%E5%9B%BE"><span class="header-section-number">1.6</span> 绘制面积图</a></li>
   <li><a href="#%E7%BB%98%E5%88%B6%E5%A0%86%E7%A7%AF%E9%9D%A2%E7%A7%AF%E5%9B%BE" id="toc-绘制堆积面积图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E5%A0%86%E7%A7%AF%E9%9D%A2%E7%A7%AF%E5%9B%BE"><span class="header-section-number">1.7</span> 绘制堆积面积图</a></li>
+  <li><a href="#%E7%BB%98%E5%88%B6%E7%99%BE%E5%88%86%E6%AF%94%E5%A0%86%E7%A7%AF%E9%9D%A2%E7%A7%AF%E5%9B%BE" id="toc-绘制百分比堆积面积图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E7%99%BE%E5%88%86%E6%AF%94%E5%A0%86%E7%A7%AF%E9%9D%A2%E7%A7%AF%E5%9B%BE"><span class="header-section-number">1.8</span> 绘制百分比堆积面积图</a></li>
+  <li><a href="#%E4%B8%BA%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%B7%BB%E5%8A%A0%E7%BD%AE%E4%BF%A1%E5%9F%9F" id="toc-为折线图添加置信域" class="nav-link" data-scroll-target="#%E4%B8%BA%E6%8A%98%E7%BA%BF%E5%9B%BE%E6%B7%BB%E5%8A%A0%E7%BD%AE%E4%BF%A1%E5%9F%9F"><span class="header-section-number">1.9</span> 为折线图添加置信域</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/R/04-ggplot2-folded-line.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
@@ -1387,6 +1389,168 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 </div>
 <p>堆积面积图对应的基础数据通常为宽格式（wide format），但 ggplot 要求数据必须是长格式（long format），两种格式之间需要进行转换。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+<p>将 <a href="#fig-18" class="quarto-xref">图&nbsp;22</a> 的调色板设定为蓝色渐变色，并在各个区域之间添加细线（<code>size = .2</code>），同时我们将填充区域设定为半透明（<code>alpha = .4</code> )，这样可以透过填充区域看见网格线。</p>
+<div class="cell" data-fig="true">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># load package</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb28-3"><a href="#cb28-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
+<span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-19" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-ggplot2-folded-line_files/figure-html/fig-19-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;23: 绘制渐变堆积面积图
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>因为堆积面积图中的各个部分是由多边形构成的，所以其具有左、右边框线，这样的绘图效果不尽人意且可能产生误导效果。</p>
+<p>下图将绘制一个不带边框线的堆积面积图：</p>
+<div class="cell" data-fig="true">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># load package</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup, <span class="at">order =</span> dplyr<span class="sc">::</span><span class="fu">desc</span>(AgeGroup))) <span class="sc">+</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="st">"stack"</span>, <span class="at">size =</span> .<span class="dv">2</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-20" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-ggplot2-folded-line_files/figure-html/fig-20-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;24: 不带边框线的渐变堆积面积图
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="绘制百分比堆积面积图" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="绘制百分比堆积面积图">
+<span class="header-section-number">1.8</span> 绘制百分比堆积面积图</h2>
+<p>使用 <code>geom_area(position = "fill")</code> 函数实现这一效果：</p>
+<div class="cell" data-fig="true">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># load package</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb30-4"><a href="#cb30-4"></a></span>
+<span id="cb30-5"><a href="#cb30-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="st">"fill"</span>,<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-21" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-ggplot2-folded-line_files/figure-html/fig-21-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;25: 百分比堆积面积图
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>带百分比标签的百分比堆积面积图，通过运行 <code>position = "fill"</code> 可将 y 值的范围按比例调整为 0-1。</p>
+<p>再运行 <code>scale_y_continuous(labels = scales::percent)</code> 可输出百分比标签。</p>
+<div class="cell" data-fig="true">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># load package</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb31-3"><a href="#cb31-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb31-4"><a href="#cb31-4"></a></span>
+<span id="cb31-5"><a href="#cb31-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
+<span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="st">"fill"</span>,<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)<span class="sc">+</span></span>
+<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-22" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-ggplot2-folded-line_files/figure-html/fig-22-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;26: 带百分比标签的百分比堆积面积图
+</figcaption></figure>
+</div>
+</div>
+</div>
+</section><section id="为折线图添加置信域" class="level2" data-number="1.9"><h2 data-number="1.9" class="anchored" data-anchor-id="为折线图添加置信域">
+<span class="header-section-number">1.9</span> 为折线图添加置信域</h2>
+<p>使用 <code>geom_ribbon()</code> 函数，然后分别映射一个变量到 <code>ymin</code> 和 <code>ymax</code> 即可。</p>
+<p>这里使用的数据集为 <code>climate</code> 数据集，其中 <code>Anomaly10y</code> 变量表示了各年温度相对于 1950~1980 年平均水平偏差（以摄氏度衡量）的 10 年移动平均。变量 <code>Unc10y</code> 表示其 95% 置信水平下的置信区间。</p>
+<p>这里设定 ymax 和 ymin 分别等于<code>Anomaly10y+Unc10y</code> 和 <code>Anomaly10y-Unc10y</code></p>
+<div class="cell" data-fig="true">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># load package</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb32-5"><a href="#cb32-5"></a></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="co"># Grab a subset of the climate data</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a>climate_mod <span class="ot">&lt;-</span> climate <span class="sc">%&gt;%</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a>  <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">"Berkeley"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a>  <span class="fu">select</span>(Year, Anomaly10y, Unc10y)</span>
+<span id="cb32-10"><a href="#cb32-10"></a></span>
+<span id="cb32-11"><a href="#cb32-11"></a><span class="fu">head</span>(climate_mod)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Year Anomaly10y Unc10y
+1 1800     -0.435  0.505
+2 1801     -0.453  0.493
+3 1802     -0.460  0.486
+4 1803     -0.493  0.489
+5 1804     -0.536  0.483
+6 1805     -0.541  0.475</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">#&gt;     Year Anomaly10y Unc10y</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="co">#&gt; 1   1800     -0.435  0.505</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co">#&gt; 2   1801     -0.453  0.493</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="co">#&gt; 3   1802     -0.460  0.486</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="co">#&gt;  ...&lt;199 more rows&gt;...</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="co">#&gt; 203 2002      0.856  0.028</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="co">#&gt; 204 2003      0.869  0.028</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="co">#&gt; 205 2004      0.884  0.029</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a></span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="co"># Shaded region</span></span>
+<span id="cb34-11"><a href="#cb34-11"></a><span class="fu">ggplot</span>(climate_mod, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y)) <span class="sc">+</span></span>
+<span id="cb34-12"><a href="#cb34-12"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Anomaly10y <span class="sc">-</span> Unc10y, <span class="at">ymax =</span> Anomaly10y <span class="sc">+</span> Unc10y), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a>  <span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-23" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-ggplot2-folded-line_files/figure-html/fig-23-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;27: 折线图添加置信域示例
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>阴影部分的颜色实际上是黑灰色，但是看起来几乎是半透明的，这是因为通过设定 <code>alpha = 0.2</code> 将阴影部分的透明度设置为 80%。</p>
+<p>需要注意的是，如果使用这种带阴影或颜色的置信域，应该将 <code>geom_line()</code> 函数放在 <code>geom_ribbon()</code> 之后，这样折线会被绘制在阴影区域上面的图层，如果反转顺序的话，阴影区域的颜色有可能使折线模糊不清。</p>
+<p>但是用户可以选择使用虚线来表示置信域的上下边界，这样就不用考虑色域的问题，如下图 <a href="#fig-24" class="quarto-xref">图&nbsp;28</a> 所示。</p>
+<div class="cell" data-fig="true">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># load package</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb35-5"><a href="#cb35-5"></a></span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="co"># With a dotted line for upper and lower bounds</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a><span class="fu">ggplot</span>(climate_mod, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y)) <span class="sc">+</span></span>
+<span id="cb35-8"><a href="#cb35-8"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Anomaly10y <span class="sc">-</span> Unc10y), <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb35-9"><a href="#cb35-9"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Anomaly10y <span class="sc">+</span> Unc10y), <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb35-10"><a href="#cb35-10"></a>  <span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div id="fig-24" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="04-ggplot2-folded-line_files/figure-html/fig-24-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;28: 折线图的虚线置信域示例
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p>end.</p>
 
 
 <!-- -->
@@ -2194,625 +2358,779 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb28" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb28-1"><a href="#cb28-1"></a><span class="co">---</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a><span class="an">title:</span><span class="co"> "04-ggplot2 绘图——折线图"</span></span>
-<span id="cb28-3"><a href="#cb28-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb28-4"><a href="#cb28-4"></a><span class="an">date:</span><span class="co"> "2025-07-19"</span></span>
-<span id="cb28-5"><a href="#cb28-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb28-6"><a href="#cb28-6"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb28-7"><a href="#cb28-7"></a><span class="co">    html:</span></span>
-<span id="cb28-8"><a href="#cb28-8"></a><span class="co">        code-fold: true</span></span>
-<span id="cb28-9"><a href="#cb28-9"></a><span class="co">        code-line-numbers: true</span></span>
-<span id="cb28-10"><a href="#cb28-10"></a><span class="co">        code-highlight: true</span></span>
-<span id="cb28-11"><a href="#cb28-11"></a><span class="co">        fig_caption: true</span></span>
-<span id="cb28-12"><a href="#cb28-12"></a><span class="co">        number-sections: true</span></span>
-<span id="cb28-13"><a href="#cb28-13"></a><span class="co">        toc: true</span></span>
-<span id="cb28-14"><a href="#cb28-14"></a><span class="co">        toc-depth: 3</span></span>
-<span id="cb28-15"><a href="#cb28-15"></a><span class="co">---</span></span>
-<span id="cb28-16"><a href="#cb28-16"></a></span>
-<span id="cb28-17"><a href="#cb28-17"></a><span class="fu"># 折线图</span></span>
-<span id="cb28-18"><a href="#cb28-18"></a></span>
-<span id="cb28-19"><a href="#cb28-19"></a><span class="fu">## 绘制基本折线图</span></span>
-<span id="cb28-20"><a href="#cb28-20"></a></span>
-<span id="cb28-21"><a href="#cb28-21"></a>运行 <span class="in">`ggplot()`</span> 函数和 <span class="in">`geom_line()`</span> 函数，并分别指定一个变量映射到 <span class="in">`x`</span> 和 <span class="in">`y`</span> 。</span>
-<span id="cb28-22"><a href="#cb28-22"></a></span>
-<span id="cb28-25"><a href="#cb28-25"></a><span class="in">```{r}</span></span>
-<span id="cb28-26"><a href="#cb28-26"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-27"><a href="#cb28-27"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-28"><a href="#cb28-28"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-29"><a href="#cb28-29"></a><span class="co">#| label: fig-1</span></span>
-<span id="cb28-30"><a href="#cb28-30"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-31"><a href="#cb28-31"></a><span class="co">#| fig.cap: "基本折线图"</span></span>
-<span id="cb28-32"><a href="#cb28-32"></a></span>
-<span id="cb28-33"><a href="#cb28-33"></a><span class="co"># load package</span></span>
-<span id="cb28-34"><a href="#cb28-34"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-35"><a href="#cb28-35"></a><span class="co"># load dataset</span></span>
-<span id="cb28-36"><a href="#cb28-36"></a>BOD</span>
-<span id="cb28-37"><a href="#cb28-37"></a></span>
-<span id="cb28-38"><a href="#cb28-38"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
-<span id="cb28-39"><a href="#cb28-39"></a><span class="fu">geom_line</span>()</span>
-<span id="cb28-40"><a href="#cb28-40"></a><span class="in">```</span></span>
-<span id="cb28-41"><a href="#cb28-41"></a></span>
-<span id="cb28-42"><a href="#cb28-42"></a>折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。</span>
-<span id="cb28-43"><a href="#cb28-43"></a></span>
-<span id="cb28-44"><a href="#cb28-44"></a>在上图中，Demand 变量为数值型变量，但我们可以借助于 <span class="in">`factor()`</span> 函数将其转换为因子型变量，然后，将其当作分类变量来处理。</span>
-<span id="cb28-45"><a href="#cb28-45"></a></span>
-<span id="cb28-46"><a href="#cb28-46"></a>当 X 对应于因子型变量时，必须使用命令 <span class="in">`aex(group = 1)`</span> 以确保 <span class="in">`ggplot`</span> 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。</span>
-<span id="cb28-47"><a href="#cb28-47"></a></span>
-<span id="cb28-50"><a href="#cb28-50"></a><span class="in">```{r}</span></span>
-<span id="cb28-51"><a href="#cb28-51"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-52"><a href="#cb28-52"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-53"><a href="#cb28-53"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-54"><a href="#cb28-54"></a><span class="co">#| label: fig-2</span></span>
-<span id="cb28-55"><a href="#cb28-55"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-56"><a href="#cb28-56"></a><span class="co">#| fig.cap: "因子型变量折线图"</span></span>
-<span id="cb28-57"><a href="#cb28-57"></a></span>
-<span id="cb28-58"><a href="#cb28-58"></a><span class="co"># load package</span></span>
-<span id="cb28-59"><a href="#cb28-59"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-60"><a href="#cb28-60"></a><span class="co"># load dataset and copy a dataset</span></span>
-<span id="cb28-61"><a href="#cb28-61"></a>BOD1 <span class="ot">&lt;-</span> BOD</span>
-<span id="cb28-62"><a href="#cb28-62"></a>BOD1<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">factor</span>(BOD1<span class="sc">$</span>Time)</span>
-<span id="cb28-63"><a href="#cb28-63"></a></span>
-<span id="cb28-64"><a href="#cb28-64"></a><span class="fu">ggplot</span>(BOD1,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,<span class="at">group =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
-<span id="cb28-65"><a href="#cb28-65"></a><span class="fu">geom_line</span>()</span>
-<span id="cb28-66"><a href="#cb28-66"></a><span class="in">```</span></span>
-<span id="cb28-67"><a href="#cb28-67"></a></span>
-<span id="cb28-68"><a href="#cb28-68"></a><span class="fu">## 向折线图添加数据标记</span></span>
-<span id="cb28-69"><a href="#cb28-69"></a></span>
-<span id="cb28-70"><a href="#cb28-70"></a>在代码中加上 <span class="in">`geom_point()`</span> 即可：</span>
-<span id="cb28-71"><a href="#cb28-71"></a></span>
-<span id="cb28-74"><a href="#cb28-74"></a><span class="in">```{r}</span></span>
-<span id="cb28-75"><a href="#cb28-75"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-76"><a href="#cb28-76"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-77"><a href="#cb28-77"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-78"><a href="#cb28-78"></a><span class="co">#| label: fig-3</span></span>
-<span id="cb28-79"><a href="#cb28-79"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-80"><a href="#cb28-80"></a><span class="co">#| fig.cap: "折线图添加标记"</span></span>
-<span id="cb28-81"><a href="#cb28-81"></a></span>
-<span id="cb28-82"><a href="#cb28-82"></a><span class="co"># load package</span></span>
-<span id="cb28-83"><a href="#cb28-83"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-84"><a href="#cb28-84"></a><span class="co"># load dataset</span></span>
-<span id="cb28-85"><a href="#cb28-85"></a>BOD</span>
-<span id="cb28-86"><a href="#cb28-86"></a></span>
-<span id="cb28-87"><a href="#cb28-87"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
-<span id="cb28-88"><a href="#cb28-88"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb28-89"><a href="#cb28-89"></a><span class="fu">geom_point</span>()</span>
-<span id="cb28-90"><a href="#cb28-90"></a><span class="in">```</span></span>
-<span id="cb28-91"><a href="#cb28-91"></a></span>
-<span id="cb28-92"><a href="#cb28-92"></a>有时候，在折线图上添加数据标记很有用。</span>
-<span id="cb28-93"><a href="#cb28-93"></a></span>
-<span id="cb28-94"><a href="#cb28-94"></a>当数据点的密度较低或数据采集频率不规则时，尤其有用。</span>
-<span id="cb28-95"><a href="#cb28-95"></a></span>
-<span id="cb28-96"><a href="#cb28-96"></a>例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。</span>
-<span id="cb28-97"><a href="#cb28-97"></a></span>
-<span id="cb28-98"><a href="#cb28-98"></a><span class="fu">### worldpop数据集</span></span>
-<span id="cb28-99"><a href="#cb28-99"></a></span>
-<span id="cb28-100"><a href="#cb28-100"></a>worldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。</span>
-<span id="cb28-101"><a href="#cb28-101"></a></span>
-<span id="cb28-102"><a href="#cb28-102"></a>折线图中的数据标记表明了数据的采集时间：</span>
-<span id="cb28-103"><a href="#cb28-103"></a></span>
-<span id="cb28-106"><a href="#cb28-106"></a><span class="in">```{r}</span></span>
-<span id="cb28-107"><a href="#cb28-107"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-108"><a href="#cb28-108"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-109"><a href="#cb28-109"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-110"><a href="#cb28-110"></a><span class="co">#| label: fig-4</span></span>
-<span id="cb28-111"><a href="#cb28-111"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-112"><a href="#cb28-112"></a><span class="co">#| fig.cap: "worldpop 数据集示例"</span></span>
-<span id="cb28-113"><a href="#cb28-113"></a></span>
-<span id="cb28-114"><a href="#cb28-114"></a><span class="co"># load package</span></span>
-<span id="cb28-115"><a href="#cb28-115"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-116"><a href="#cb28-116"></a><span class="co"># load dataset</span></span>
-<span id="cb28-117"><a href="#cb28-117"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-118"><a href="#cb28-118"></a></span>
-<span id="cb28-119"><a href="#cb28-119"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
-<span id="cb28-120"><a href="#cb28-120"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb28-121"><a href="#cb28-121"></a><span class="fu">geom_point</span>()</span>
-<span id="cb28-122"><a href="#cb28-122"></a></span>
-<span id="cb28-123"><a href="#cb28-123"></a><span class="co"># when Y axis turn to log()</span></span>
-<span id="cb28-124"><a href="#cb28-124"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
-<span id="cb28-125"><a href="#cb28-125"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb28-126"><a href="#cb28-126"></a><span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb28-127"><a href="#cb28-127"></a><span class="fu">scale_y_log10</span>()</span>
-<span id="cb28-128"><a href="#cb28-128"></a><span class="in">```</span></span>
-<span id="cb28-129"><a href="#cb28-129"></a></span>
-<span id="cb28-130"><a href="#cb28-130"></a><span class="fu">## 绘制多重折线图</span></span>
-<span id="cb28-131"><a href="#cb28-131"></a></span>
-<span id="cb28-132"><a href="#cb28-132"></a>除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：</span>
-<span id="cb28-133"><a href="#cb28-133"></a></span>
-<span id="cb28-136"><a href="#cb28-136"></a><span class="in">```{r}</span></span>
-<span id="cb28-137"><a href="#cb28-137"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-138"><a href="#cb28-138"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-139"><a href="#cb28-139"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-140"><a href="#cb28-140"></a><span class="co">#| label: fig-5</span></span>
-<span id="cb28-141"><a href="#cb28-141"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-142"><a href="#cb28-142"></a><span class="co">#| fig.cap: "绘制多重折线图"</span></span>
-<span id="cb28-143"><a href="#cb28-143"></a></span>
-<span id="cb28-144"><a href="#cb28-144"></a><span class="co"># load package</span></span>
-<span id="cb28-145"><a href="#cb28-145"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-146"><a href="#cb28-146"></a><span class="co"># load dataset</span></span>
-<span id="cb28-147"><a href="#cb28-147"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-148"><a href="#cb28-148"></a></span>
-<span id="cb28-149"><a href="#cb28-149"></a><span class="co">#colour</span></span>
-<span id="cb28-150"><a href="#cb28-150"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-151"><a href="#cb28-151"></a><span class="fu">geom_line</span>()</span>
-<span id="cb28-152"><a href="#cb28-152"></a></span>
-<span id="cb28-153"><a href="#cb28-153"></a><span class="co"># linetype</span></span>
-<span id="cb28-154"><a href="#cb28-154"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">linetype =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-155"><a href="#cb28-155"></a><span class="fu">geom_line</span>()</span>
-<span id="cb28-156"><a href="#cb28-156"></a><span class="in">```</span></span>
-<span id="cb28-157"><a href="#cb28-157"></a></span>
-<span id="cb28-158"><a href="#cb28-158"></a><span class="in">`tg`</span> 数据集共有三列，其中一列正是我们映射到 <span class="in">`colour`</span> 和 <span class="in">`linetype`</span> 的 <span class="in">`supp`</span> 因子（离散型变量），而将 <span class="in">`dose`</span> 作为 <span class="in">`x`</span> 轴，<span class="in">`length`</span> 作为 <span class="in">`y`</span> 轴（连续型变量）。</span>
-<span id="cb28-159"><a href="#cb28-159"></a></span>
-<span id="cb28-160"><a href="#cb28-160"></a>折线图的 X 轴既可以对应于连续变量也可以对应于分类变量。</span>
-<span id="cb28-161"><a href="#cb28-161"></a></span>
-<span id="cb28-162"><a href="#cb28-162"></a>有时候，映射到 X 的变量虽然被存储为数值型变量，但被看做分类变量来处理。</span>
-<span id="cb28-163"><a href="#cb28-163"></a></span>
-<span id="cb28-164"><a href="#cb28-164"></a>在上述的 tg 数据集中，dose 有三个取值：0.5、1.0和2.0。</span>
-<span id="cb28-165"><a href="#cb28-165"></a></span>
-<span id="cb28-166"><a href="#cb28-166"></a>或许用户更想将其当做分类变量而不是连续变量来处理，那么运行 <span class="in">`factor()`</span> 函数将其转换为因子型变量。</span>
-<span id="cb28-167"><a href="#cb28-167"></a></span>
-<span id="cb28-170"><a href="#cb28-170"></a><span class="in">```{r}</span></span>
-<span id="cb28-171"><a href="#cb28-171"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-172"><a href="#cb28-172"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-173"><a href="#cb28-173"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-174"><a href="#cb28-174"></a><span class="co">#| label: fig-6</span></span>
-<span id="cb28-175"><a href="#cb28-175"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-176"><a href="#cb28-176"></a><span class="co">#| fig.cap: "转换变量绘制折线图"</span></span>
-<span id="cb28-177"><a href="#cb28-177"></a></span>
-<span id="cb28-178"><a href="#cb28-178"></a><span class="co"># load package</span></span>
-<span id="cb28-179"><a href="#cb28-179"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-180"><a href="#cb28-180"></a><span class="co"># load dataset</span></span>
-<span id="cb28-181"><a href="#cb28-181"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-182"><a href="#cb28-182"></a></span>
-<span id="cb28-183"><a href="#cb28-183"></a><span class="co">#colour</span></span>
-<span id="cb28-184"><a href="#cb28-184"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(dose),<span class="at">y =</span> length, <span class="at">colour =</span> supp,<span class="at">group =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-185"><a href="#cb28-185"></a><span class="fu">geom_line</span>()</span>
-<span id="cb28-186"><a href="#cb28-186"></a><span class="in">```</span></span>
-<span id="cb28-187"><a href="#cb28-187"></a></span>
-<span id="cb28-188"><a href="#cb28-188"></a><span class="fu">### 数据标记</span></span>
-<span id="cb28-189"><a href="#cb28-189"></a></span>
-<span id="cb28-190"><a href="#cb28-190"></a>如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 <span class="in">`shape`</span> 和 <span class="in">`fill`</span> 等。</span>
-<span id="cb28-191"><a href="#cb28-191"></a></span>
-<span id="cb28-194"><a href="#cb28-194"></a><span class="in">```{r}</span></span>
-<span id="cb28-195"><a href="#cb28-195"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-196"><a href="#cb28-196"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-197"><a href="#cb28-197"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-198"><a href="#cb28-198"></a><span class="co">#| label: fig-7</span></span>
-<span id="cb28-199"><a href="#cb28-199"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-200"><a href="#cb28-200"></a><span class="co">#| fig.cap: "折线图数据标记"</span></span>
-<span id="cb28-201"><a href="#cb28-201"></a></span>
-<span id="cb28-202"><a href="#cb28-202"></a><span class="co"># load package</span></span>
-<span id="cb28-203"><a href="#cb28-203"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-204"><a href="#cb28-204"></a><span class="co"># load dataset</span></span>
-<span id="cb28-205"><a href="#cb28-205"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-206"><a href="#cb28-206"></a></span>
-<span id="cb28-207"><a href="#cb28-207"></a><span class="co">#shape</span></span>
-<span id="cb28-208"><a href="#cb28-208"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">shape =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-209"><a href="#cb28-209"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb28-210"><a href="#cb28-210"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>)</span>
-<span id="cb28-211"><a href="#cb28-211"></a></span>
-<span id="cb28-212"><a href="#cb28-212"></a><span class="co"># fill</span></span>
-<span id="cb28-213"><a href="#cb28-213"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">fill =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-214"><a href="#cb28-214"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb28-215"><a href="#cb28-215"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">21</span>)</span>
-<span id="cb28-216"><a href="#cb28-216"></a><span class="in">```</span></span>
-<span id="cb28-217"><a href="#cb28-217"></a></span>
-<span id="cb28-218"><a href="#cb28-218"></a><span class="fu">### 错开数据标记</span></span>
-<span id="cb28-219"><a href="#cb28-219"></a></span>
-<span id="cb28-222"><a href="#cb28-222"></a><span class="in">```{r}</span></span>
-<span id="cb28-223"><a href="#cb28-223"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-224"><a href="#cb28-224"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-225"><a href="#cb28-225"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-226"><a href="#cb28-226"></a><span class="co">#| label: fig-8</span></span>
-<span id="cb28-227"><a href="#cb28-227"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-228"><a href="#cb28-228"></a><span class="co">#| fig.cap: "折线图错开数据标记"</span></span>
-<span id="cb28-229"><a href="#cb28-229"></a></span>
-<span id="cb28-230"><a href="#cb28-230"></a><span class="co"># load package</span></span>
-<span id="cb28-231"><a href="#cb28-231"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-232"><a href="#cb28-232"></a><span class="co"># load dataset</span></span>
-<span id="cb28-233"><a href="#cb28-233"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-234"><a href="#cb28-234"></a></span>
-<span id="cb28-235"><a href="#cb28-235"></a><span class="co">#shape</span></span>
-<span id="cb28-236"><a href="#cb28-236"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">shape =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-237"><a href="#cb28-237"></a><span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>))<span class="sc">+</span></span>
-<span id="cb28-238"><a href="#cb28-238"></a><span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>),<span class="at">size =</span> <span class="dv">4</span>)</span>
-<span id="cb28-239"><a href="#cb28-239"></a><span class="in">```</span></span>
-<span id="cb28-240"><a href="#cb28-240"></a></span>
-<span id="cb28-241"><a href="#cb28-241"></a><span class="fu">## 修改线条样式</span></span>
-<span id="cb28-242"><a href="#cb28-242"></a></span>
-<span id="cb28-243"><a href="#cb28-243"></a>通过设置线型（<span class="in">`linetype`</span>）、线宽（<span class="in">`linewidth`</span>）和颜色（<span class="in">`colour`</span>或<span class="in">`color`</span>）参数可以分别修改折线的线性（实线、虚线、点线等），线宽（单位为毫米）和颜色。</span>
-<span id="cb28-244"><a href="#cb28-244"></a></span>
-<span id="cb28-245"><a href="#cb28-245"></a>将上述参数的值传递给 <span class="in">`geom_line()`</span> 函数可以设置折线图的对应属性。</span>
-<span id="cb28-246"><a href="#cb28-246"></a></span>
-<span id="cb28-249"><a href="#cb28-249"></a><span class="in">```{r}</span></span>
-<span id="cb28-250"><a href="#cb28-250"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-251"><a href="#cb28-251"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-252"><a href="#cb28-252"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-253"><a href="#cb28-253"></a><span class="co">#| label: fig-9</span></span>
-<span id="cb28-254"><a href="#cb28-254"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-255"><a href="#cb28-255"></a><span class="co">#| fig.cap: "修改折线图线条样式"</span></span>
-<span id="cb28-256"><a href="#cb28-256"></a></span>
-<span id="cb28-257"><a href="#cb28-257"></a><span class="co"># load package</span></span>
-<span id="cb28-258"><a href="#cb28-258"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-259"><a href="#cb28-259"></a></span>
-<span id="cb28-260"><a href="#cb28-260"></a><span class="co">#shape</span></span>
-<span id="cb28-261"><a href="#cb28-261"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,))<span class="sc">+</span></span>
-<span id="cb28-262"><a href="#cb28-262"></a><span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>,<span class="at">colour =</span> <span class="st">"blue"</span>)</span>
-<span id="cb28-263"><a href="#cb28-263"></a><span class="in">```</span></span>
-<span id="cb28-264"><a href="#cb28-264"></a></span>
-<span id="cb28-265"><a href="#cb28-265"></a><span class="fu">### 使用调色板</span></span>
-<span id="cb28-266"><a href="#cb28-266"></a></span>
-<span id="cb28-267"><a href="#cb28-267"></a>对于多重折线图而言，设定图形属性会对图上的所有折线产生影响。</span>
-<span id="cb28-268"><a href="#cb28-268"></a></span>
-<span id="cb28-269"><a href="#cb28-269"></a>而将变量映射到图形属性则会使图上的每条折线具有不同的外观。</span>
-<span id="cb28-270"><a href="#cb28-270"></a></span>
-<span id="cb28-271"><a href="#cb28-271"></a>折线图默认颜色并不是很吸引眼球，所以用户可以使用其他调色板<span class="ot">[^1]</span>着色，可以调用 <span class="in">`scale_colour_brewer()`</span> 函数和 <span class="in">`scale_colour_manual`</span> 函数实线。</span>
-<span id="cb28-272"><a href="#cb28-272"></a></span>
-<span id="cb28-273"><a href="#cb28-273"></a><span class="ot">[^1]: </span><span class="in">`ggplot2`</span> 本身内置了一些默认的调色板，但它也高度集成了其他 R 包和颜色系统的调色板，以提供更丰富的选择：</span>
-<span id="cb28-274"><a href="#cb28-274"></a></span>
-<span id="cb28-275"><a href="#cb28-275"></a><span class="in">    -   **R 语言内置颜色**: `ggplot2` 可以直接使用 R 语言中预定义的颜色名称（例如 "red", "blue"）或十六进制颜色代码（例如 "#FF0000"）。</span></span>
-<span id="cb28-276"><a href="#cb28-276"></a></span>
-<span id="cb28-277"><a href="#cb28-277"></a><span class="in">    -   **ColorBrewer**: 这是一个非常流行的调色板集合，由地理学家 Cynthia Brewer 开发，主要用于地图制作，但非常适用于各种数据可视化。ColorBrewer 的调色板设计考虑了**色彩感知**和**色盲友好性**，分为：</span></span>
-<span id="cb28-278"><a href="#cb28-278"></a></span>
-<span id="cb28-279"><a href="#cb28-279"></a><span class="in">        -   **顺序型 (Sequential)**：适用于表示有序数据，从低到高渐变。</span></span>
-<span id="cb28-280"><a href="#cb28-280"></a></span>
-<span id="cb28-281"><a href="#cb28-281"></a><span class="in">        -   **发散型 (Diverging)**：适用于表示有中间值的数据，例如正负值、同意/不同意等，颜色从中间值向两端发散。</span></span>
-<span id="cb28-282"><a href="#cb28-282"></a></span>
-<span id="cb28-283"><a href="#cb28-283"></a><span class="in">        -   **定性型 (Qualitative)**：适用于表示分类数据，颜色之间没有内在顺序。 `ggplot2` 通过 `scale_color_brewer()` 和 `scale_fill_brewer()` 函数来使用 ColorBrewer 调色板。</span></span>
-<span id="cb28-284"><a href="#cb28-284"></a></span>
-<span id="cb28-285"><a href="#cb28-285"></a><span class="in">    -   **viridis**: 这是一组在 ggplot2 中非常受欢迎的调色板（包括 `viridis`, `magma`, `inferno`, `plasma`, `cividis`）。它们的主要特点是**感知均匀性**和**色盲友好性**。这意味着无论颜色如何变化，人眼对颜色变化的感知是均匀的，并且即使是色盲人士也能区分不同的颜色。ggplot2 通过 `scale_color_viridis_d()` / `scale_fill_viridis_d()` （离散型）和 `scale_color_viridis_c()` / `scale_fill_viridis_c()` （连续型）来使用这些调色板。</span></span>
-<span id="cb28-286"><a href="#cb28-286"></a></span>
-<span id="cb28-287"><a href="#cb28-287"></a><span class="in">    -   **自定义调色板**: 用户可以根据需要创建自己的调色板，通过 `scale_color_manual()` 和 `scale_fill_manual()` 函数手动指定颜色。</span></span>
-<span id="cb28-288"><a href="#cb28-288"></a></span>
-<span id="cb28-289"><a href="#cb28-289"></a><span class="in">    -   **其他扩展包**: 还有许多其他 R 包提供了针对 `ggplot2` 的调色板，例如 `ggsci` 包提供了受科学期刊、数据可视化库等启发的调色板。</span></span>
-<span id="cb28-290"><a href="#cb28-290"></a></span>
-<span id="cb28-291"><a href="#cb28-291"></a><span class="in">        **功能**</span></span>
-<span id="cb28-292"><a href="#cb28-292"></a></span>
-<span id="cb28-293"><a href="#cb28-293"></a><span class="in">    ggplot2 调色板的主要功能是**将数据映射到视觉美学属性（特别是颜色和填充色）**，从而增强数据图表的可读性和信息传递效率。</span></span>
-<span id="cb28-294"><a href="#cb28-294"></a></span>
-<span id="cb28-295"><a href="#cb28-295"></a><span class="in">    -   **区分数据类别**: 当你的数据中有离散变量（分类数据）时，调色板会为每个类别分配不同的颜色，让观众能够轻松区分不同的组别。例如，在散点图中用不同颜色表示不同的物种。</span></span>
-<span id="cb28-296"><a href="#cb28-296"></a></span>
-<span id="cb28-297"><a href="#cb28-297"></a><span class="in">    -   **表示数据强度/趋势**: 对于连续变量，调色板通常使用颜色渐变来表示数值的大小或趋势。例如，颜色从浅到深表示数值从小到大。</span></span>
-<span id="cb28-298"><a href="#cb28-298"></a></span>
-<span id="cb28-299"><a href="#cb28-299"></a><span class="in">    -   **突出数据特征**: 通过选择合适的调色板，可以突出数据中的特定模式、异常值或重要区域。</span></span>
-<span id="cb28-300"><a href="#cb28-300"></a></span>
-<span id="cb28-301"><a href="#cb28-301"></a><span class="in">    -   **提高图表美观度**: 美观的颜色选择能够提升图表的整体视觉吸引力，使其更具专业性和易读性。</span></span>
-<span id="cb28-302"><a href="#cb28-302"></a></span>
-<span id="cb28-303"><a href="#cb28-303"></a><span class="in">    -   **支持色盲友好**: 许多调色板（如 viridis 和 ColorBrewer 的部分调色板）都经过设计，以确保色盲人士也能良好地区分颜色，从而提高图表的**可访问性**。</span></span>
-<span id="cb28-304"><a href="#cb28-304"></a></span>
-<span id="cb28-305"><a href="#cb28-305"></a><span class="in">    -   **映射离散和连续数据。**</span></span>
-<span id="cb28-306"><a href="#cb28-306"></a></span>
-<span id="cb28-309"><a href="#cb28-309"></a><span class="in">```{r}</span></span>
-<span id="cb28-310"><a href="#cb28-310"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-311"><a href="#cb28-311"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-312"><a href="#cb28-312"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-313"><a href="#cb28-313"></a><span class="co">#| label: fig-10</span></span>
-<span id="cb28-314"><a href="#cb28-314"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-315"><a href="#cb28-315"></a><span class="co">#| fig.cap: "使用调色板"</span></span>
-<span id="cb28-316"><a href="#cb28-316"></a></span>
-<span id="cb28-317"><a href="#cb28-317"></a><span class="co"># load package</span></span>
-<span id="cb28-318"><a href="#cb28-318"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-319"><a href="#cb28-319"></a><span class="co"># load dataset</span></span>
-<span id="cb28-320"><a href="#cb28-320"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-321"><a href="#cb28-321"></a></span>
-<span id="cb28-322"><a href="#cb28-322"></a><span class="co">#shape</span></span>
-<span id="cb28-323"><a href="#cb28-323"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-324"><a href="#cb28-324"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb28-325"><a href="#cb28-325"></a><span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
-<span id="cb28-326"><a href="#cb28-326"></a><span class="in">```</span></span>
-<span id="cb28-327"><a href="#cb28-327"></a></span>
-<span id="cb28-328"><a href="#cb28-328"></a><span class="fu">### 进一步调整配色与线条</span></span>
-<span id="cb28-329"><a href="#cb28-329"></a></span>
-<span id="cb28-332"><a href="#cb28-332"></a><span class="in">```{r}</span></span>
-<span id="cb28-333"><a href="#cb28-333"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-334"><a href="#cb28-334"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-335"><a href="#cb28-335"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-336"><a href="#cb28-336"></a><span class="co">#| label: fig-11</span></span>
-<span id="cb28-337"><a href="#cb28-337"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-338"><a href="#cb28-338"></a><span class="co">#| fig.cap: "折线图高级配色与线条"</span></span>
-<span id="cb28-339"><a href="#cb28-339"></a></span>
-<span id="cb28-340"><a href="#cb28-340"></a><span class="co"># load package</span></span>
-<span id="cb28-341"><a href="#cb28-341"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-342"><a href="#cb28-342"></a><span class="co"># load dataset</span></span>
-<span id="cb28-343"><a href="#cb28-343"></a><span class="fu">library</span>(gcookbook)</span>
-<span id="cb28-344"><a href="#cb28-344"></a></span>
-<span id="cb28-345"><a href="#cb28-345"></a><span class="co"># 如果两条折线的图形属性相同，需要指定一个分组变量</span></span>
-<span id="cb28-346"><a href="#cb28-346"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">group =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-347"><a href="#cb28-347"></a><span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"darkgreen"</span>,<span class="at">size =</span> <span class="fl">1.5</span>)</span>
-<span id="cb28-348"><a href="#cb28-348"></a></span>
-<span id="cb28-349"><a href="#cb28-349"></a><span class="co"># 因为变量 supp 被映射到了颜色（colour）属性，所以它自动作为分组变量</span></span>
-<span id="cb28-350"><a href="#cb28-350"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
-<span id="cb28-351"><a href="#cb28-351"></a><span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
-<span id="cb28-352"><a href="#cb28-352"></a><span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">size =</span> <span class="dv">3</span>,<span class="at">fill =</span> <span class="st">"white"</span>)</span>
-<span id="cb28-353"><a href="#cb28-353"></a><span class="in">```</span></span>
-<span id="cb28-354"><a href="#cb28-354"></a></span>
-<span id="cb28-355"><a href="#cb28-355"></a><span class="fu">## 修改数据标记样式</span></span>
-<span id="cb28-356"><a href="#cb28-356"></a></span>
-<span id="cb28-357"><a href="#cb28-357"></a>在函数 <span class="in">`aes()`</span> 外部设定函数 <span class="in">`geom_point()`</span> 的参数 <span class="in">`size`</span>（大小）、<span class="in">`shape`</span>（形状）、<span class="in">`colour`</span>（颜色）和 <span class="in">`fill`</span>（填充色）即可。</span>
-<span id="cb28-358"><a href="#cb28-358"></a></span>
-<span id="cb28-361"><a href="#cb28-361"></a><span class="in">```{r}</span></span>
-<span id="cb28-362"><a href="#cb28-362"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-363"><a href="#cb28-363"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-364"><a href="#cb28-364"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-365"><a href="#cb28-365"></a><span class="co">#| label: fig-12</span></span>
-<span id="cb28-366"><a href="#cb28-366"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-367"><a href="#cb28-367"></a><span class="co">#| fig.cap: "折线图修改数据标记样式"</span></span>
-<span id="cb28-368"><a href="#cb28-368"></a></span>
-<span id="cb28-369"><a href="#cb28-369"></a><span class="co"># load package</span></span>
-<span id="cb28-370"><a href="#cb28-370"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-371"><a href="#cb28-371"></a></span>
-<span id="cb28-372"><a href="#cb28-372"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
-<span id="cb28-373"><a href="#cb28-373"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb28-374"><a href="#cb28-374"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">colour =</span> <span class="st">"darkred"</span>,<span class="at">fill =</span> <span class="st">"pink"</span>)</span>
-<span id="cb28-375"><a href="#cb28-375"></a><span class="in">```</span></span>
-<span id="cb28-376"><a href="#cb28-376"></a></span>
-<span id="cb28-377"><a href="#cb28-377"></a>The default <span class="in">`shape`</span> for points is a solid circle, the default <span class="in">`size`</span> is 2, and the default <span class="in">`colour`</span> is black.The fill color is relevant only for some point shapes (numbered 21–25), which have separate outline and fill colors. The fill color is typically NA, or empty; you can fill it with white to get hollow-looking circles</span>
-<span id="cb28-378"><a href="#cb28-378"></a></span>
-<span id="cb28-381"><a href="#cb28-381"></a><span class="in">```{r}</span></span>
-<span id="cb28-382"><a href="#cb28-382"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-383"><a href="#cb28-383"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-384"><a href="#cb28-384"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-385"><a href="#cb28-385"></a><span class="co">#| label: fig-13</span></span>
-<span id="cb28-386"><a href="#cb28-386"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-387"><a href="#cb28-387"></a><span class="co">#| fig.cap: "修改折线图默认样式"</span></span>
-<span id="cb28-388"><a href="#cb28-388"></a></span>
-<span id="cb28-389"><a href="#cb28-389"></a><span class="co"># load package</span></span>
-<span id="cb28-390"><a href="#cb28-390"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-391"><a href="#cb28-391"></a></span>
-<span id="cb28-392"><a href="#cb28-392"></a><span class="fu">ggplot</span>(BOD, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> demand)) <span class="sc">+</span></span>
-<span id="cb28-393"><a href="#cb28-393"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb28-394"><a href="#cb28-394"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span>
-<span id="cb28-395"><a href="#cb28-395"></a><span class="in">```</span></span>
-<span id="cb28-396"><a href="#cb28-396"></a></span>
-<span id="cb28-397"><a href="#cb28-397"></a>如果要将数据标记和折线设定为不同的颜色，用户必须折线绘制完成后再设定数据标记的颜色，此时，数据标记被绘制在更上面的图层，以避免被折线遮盖。</span>
-<span id="cb28-398"><a href="#cb28-398"></a></span>
-<span id="cb28-399"><a href="#cb28-399"></a>这里定义了一个函数 <span class="in">`pd = position_dodge(0.2)`</span> 来将图形错开，原始用法可参照 @fig-8。</span>
-<span id="cb28-400"><a href="#cb28-400"></a></span>
-<span id="cb28-403"><a href="#cb28-403"></a><span class="in">```{r}</span></span>
-<span id="cb28-404"><a href="#cb28-404"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-405"><a href="#cb28-405"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-406"><a href="#cb28-406"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-407"><a href="#cb28-407"></a><span class="co">#| label: fig-14</span></span>
-<span id="cb28-408"><a href="#cb28-408"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-409"><a href="#cb28-409"></a><span class="co">#| fig.cap: "折线图复杂数据标记"</span></span>
-<span id="cb28-410"><a href="#cb28-410"></a></span>
-<span id="cb28-411"><a href="#cb28-411"></a><span class="co"># load package</span></span>
-<span id="cb28-412"><a href="#cb28-412"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-413"><a href="#cb28-413"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the tg data set</span></span>
-<span id="cb28-414"><a href="#cb28-414"></a></span>
-<span id="cb28-415"><a href="#cb28-415"></a><span class="co"># Save the position_dodge specification because we'll use it multiple times</span></span>
-<span id="cb28-416"><a href="#cb28-416"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>)</span>
-<span id="cb28-417"><a href="#cb28-417"></a></span>
-<span id="cb28-418"><a href="#cb28-418"></a><span class="fu">ggplot</span>(tg, <span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> length, <span class="at">fill =</span> supp)) <span class="sc">+</span></span>
-<span id="cb28-419"><a href="#cb28-419"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb28-420"><a href="#cb28-420"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb28-421"><a href="#cb28-421"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"white"</span>))</span>
-<span id="cb28-422"><a href="#cb28-422"></a><span class="in">```</span></span>
-<span id="cb28-423"><a href="#cb28-423"></a></span>
-<span id="cb28-424"><a href="#cb28-424"></a><span class="fu">## 绘制面积图</span></span>
-<span id="cb28-425"><a href="#cb28-425"></a></span>
-<span id="cb28-426"><a href="#cb28-426"></a>运行 <span class="in">`geom_area()`</span> 函数即可绘制面积图。</span>
-<span id="cb28-427"><a href="#cb28-427"></a></span>
-<span id="cb28-430"><a href="#cb28-430"></a><span class="in">```{r}</span></span>
-<span id="cb28-431"><a href="#cb28-431"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-432"><a href="#cb28-432"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-433"><a href="#cb28-433"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-434"><a href="#cb28-434"></a><span class="co">#| label: fig-15</span></span>
-<span id="cb28-435"><a href="#cb28-435"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-436"><a href="#cb28-436"></a><span class="co">#| fig.cap: "绘制面积图"</span></span>
-<span id="cb28-437"><a href="#cb28-437"></a></span>
-<span id="cb28-438"><a href="#cb28-438"></a><span class="co"># load package</span></span>
-<span id="cb28-439"><a href="#cb28-439"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-440"><a href="#cb28-440"></a></span>
-<span id="cb28-441"><a href="#cb28-441"></a><span class="co"># Convert the sunspot.year data set into a data frame for this example</span></span>
-<span id="cb28-442"><a href="#cb28-442"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb28-443"><a href="#cb28-443"></a>    <span class="at">Year     =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(sunspot.year)),</span>
-<span id="cb28-444"><a href="#cb28-444"></a>    <span class="at">Sunspots =</span> <span class="fu">as.numeric</span>(sunspot.year)</span>
-<span id="cb28-445"><a href="#cb28-445"></a>  )</span>
-<span id="cb28-446"><a href="#cb28-446"></a></span>
-<span id="cb28-447"><a href="#cb28-447"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
-<span id="cb28-448"><a href="#cb28-448"></a>  <span class="fu">geom_area</span>()</span>
-<span id="cb28-449"><a href="#cb28-449"></a><span class="in">```</span></span>
-<span id="cb28-450"><a href="#cb28-450"></a></span>
-<span id="cb28-451"><a href="#cb28-451"></a>默认情况下，面积图的填充色都是黑灰色且没有边框线，通过设定 <span class="in">`fill`</span> 可以修改面积图的填充色。</span>
-<span id="cb28-452"><a href="#cb28-452"></a></span>
-<span id="cb28-453"><a href="#cb28-453"></a>下图 @fig-16 将把填充色设定为蓝色，并通过 <span class="in">`alpha=0.2`</span> 将面积图的透明度设定为 80% ，另外，用户可以看到面积图的网格线，通过设置 <span class="in">`colour`</span> 为面积图添加边框线。</span>
-<span id="cb28-454"><a href="#cb28-454"></a></span>
-<span id="cb28-457"><a href="#cb28-457"></a><span class="in">```{r}</span></span>
-<span id="cb28-458"><a href="#cb28-458"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-459"><a href="#cb28-459"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-460"><a href="#cb28-460"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-461"><a href="#cb28-461"></a><span class="co">#| label: fig-16</span></span>
-<span id="cb28-462"><a href="#cb28-462"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-463"><a href="#cb28-463"></a><span class="co">#| fig.cap: "带半透明阴影区域和边框线的面积图"</span></span>
-<span id="cb28-464"><a href="#cb28-464"></a></span>
-<span id="cb28-465"><a href="#cb28-465"></a><span class="co"># load package</span></span>
-<span id="cb28-466"><a href="#cb28-466"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-467"><a href="#cb28-467"></a></span>
-<span id="cb28-468"><a href="#cb28-468"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb28-469"><a href="#cb28-469"></a>    <span class="at">Year     =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(sunspot.year)),</span>
-<span id="cb28-470"><a href="#cb28-470"></a>    <span class="at">Sunspots =</span> <span class="fu">as.numeric</span>(sunspot.year)</span>
-<span id="cb28-471"><a href="#cb28-471"></a>  )</span>
-<span id="cb28-472"><a href="#cb28-472"></a></span>
-<span id="cb28-473"><a href="#cb28-473"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
-<span id="cb28-474"><a href="#cb28-474"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
-<span id="cb28-475"><a href="#cb28-475"></a><span class="in">```</span></span>
-<span id="cb28-476"><a href="#cb28-476"></a></span>
-<span id="cb28-477"><a href="#cb28-477"></a>给整个面积图添加边框线后的效果可能并不十分令人满意，因为此时系统会在面积图的起点和终点位置分别绘制一条垂直线，且在底部绘制一条横线。</span>
-<span id="cb28-478"><a href="#cb28-478"></a></span>
-<span id="cb28-479"><a href="#cb28-479"></a>为了避免上述情况，可以先绘制不带框线的面积图（不设定 colour），然后添加图层，并用 <span class="in">`geom_line()`</span> 函数绘制轨迹线，如下图 @fig-17 。</span>
-<span id="cb28-480"><a href="#cb28-480"></a></span>
-<span id="cb28-483"><a href="#cb28-483"></a><span class="in">```{r}</span></span>
-<span id="cb28-484"><a href="#cb28-484"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-485"><a href="#cb28-485"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-486"><a href="#cb28-486"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-487"><a href="#cb28-487"></a><span class="co">#| label: fig-17</span></span>
-<span id="cb28-488"><a href="#cb28-488"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-489"><a href="#cb28-489"></a><span class="co">#| fig.cap: "不带下横线的面积图"</span></span>
-<span id="cb28-490"><a href="#cb28-490"></a></span>
-<span id="cb28-491"><a href="#cb28-491"></a><span class="co"># load package</span></span>
-<span id="cb28-492"><a href="#cb28-492"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-493"><a href="#cb28-493"></a></span>
-<span id="cb28-494"><a href="#cb28-494"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb28-495"><a href="#cb28-495"></a>    <span class="at">Year     =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(sunspot.year)),</span>
-<span id="cb28-496"><a href="#cb28-496"></a>    <span class="at">Sunspots =</span> <span class="fu">as.numeric</span>(sunspot.year)</span>
-<span id="cb28-497"><a href="#cb28-497"></a>  )</span>
-<span id="cb28-498"><a href="#cb28-498"></a></span>
-<span id="cb28-499"><a href="#cb28-499"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
-<span id="cb28-500"><a href="#cb28-500"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb28-501"><a href="#cb28-501"></a>  <span class="fu">geom_line</span>()</span>
-<span id="cb28-502"><a href="#cb28-502"></a><span class="in">```</span></span>
-<span id="cb28-503"><a href="#cb28-503"></a></span>
-<span id="cb28-504"><a href="#cb28-504"></a><span class="fu">## 绘制堆积面积图</span></span>
-<span id="cb28-505"><a href="#cb28-505"></a></span>
-<span id="cb28-506"><a href="#cb28-506"></a>依旧是运行 <span class="in">`geom_area()`</span> 函数，但是需要映射一个因子型变量到 <span class="in">`fill`</span> 即可，如下图 @fig-18 所示。</span>
-<span id="cb28-507"><a href="#cb28-507"></a></span>
-<span id="cb28-510"><a href="#cb28-510"></a><span class="in">```{r}</span></span>
-<span id="cb28-511"><a href="#cb28-511"></a><span class="co">#| eval: true</span></span>
-<span id="cb28-512"><a href="#cb28-512"></a><span class="co">#| echo: true</span></span>
-<span id="cb28-513"><a href="#cb28-513"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb28-514"><a href="#cb28-514"></a><span class="co">#| label: fig-18</span></span>
-<span id="cb28-515"><a href="#cb28-515"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb28-516"><a href="#cb28-516"></a><span class="co">#| fig.cap: "绘制堆积面积图"</span></span>
-<span id="cb28-517"><a href="#cb28-517"></a></span>
-<span id="cb28-518"><a href="#cb28-518"></a><span class="co"># load package</span></span>
-<span id="cb28-519"><a href="#cb28-519"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb28-520"><a href="#cb28-520"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
-<span id="cb28-521"><a href="#cb28-521"></a></span>
-<span id="cb28-522"><a href="#cb28-522"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
-<span id="cb28-523"><a href="#cb28-523"></a>  <span class="fu">geom_area</span>()</span>
-<span id="cb28-524"><a href="#cb28-524"></a><span class="in">```</span></span>
-<span id="cb28-525"><a href="#cb28-525"></a></span>
-<span id="cb28-526"><a href="#cb28-526"></a>堆积面积图对应的基础数据通常为宽格式（wide format），但 ggplot 要求数据必须是长格式（long format），两种格式之间需要进行转换。<span class="ot">[^2]</span></span>
-<span id="cb28-527"><a href="#cb28-527"></a></span>
-<span id="cb28-528"><a href="#cb28-528"></a><span class="ot">[^2]: </span>在 <span class="in">`ggplot2`</span> 中绘制堆积面积图时，确实需要将宽格式数据转换为长格式。这并不是 <span class="in">`ggplot2`</span> 独有的要求，而是 **"整洁数据"（Tidy Data）** 原则在数据可视化中的体现。</span>
-<span id="cb28-529"><a href="#cb28-529"></a></span>
-<span id="cb28-530"><a href="#cb28-530"></a><span class="in">    **为什么需要转换？**</span></span>
-<span id="cb28-531"><a href="#cb28-531"></a></span>
-<span id="cb28-532"><a href="#cb28-532"></a><span class="in">    1.  ggplot2 的设计哲学 (Grammar of Graphics)</span></span>
-<span id="cb28-533"><a href="#cb28-533"></a></span>
-<span id="cb28-534"><a href="#cb28-534"></a><span class="in">        ggplot2 基于 Leland Wilkinson 的 图形语法（Grammar of Graphics）。其核心思想是将图表分解为独立的组件：数据、几何对象（geoms）、统计变换（stats）、标度（scales）等。这种语法要求数据以特定的方式组织，以便它能直接映射到图表的视觉属性上。</span></span>
-<span id="cb28-535"><a href="#cb28-535"></a></span>
-<span id="cb28-536"><a href="#cb28-536"></a><span class="in">        -   **映射（Mapping）**: 在 `ggplot2` 中，你需要明确地将数据变量映射到美学属性（如 x 轴、y 轴、颜色、填充、大小等）。</span></span>
-<span id="cb28-537"><a href="#cb28-537"></a></span>
-<span id="cb28-538"><a href="#cb28-538"></a><span class="in">        -   **整洁数据**: `ggplot2` 最适合处理**整洁数据**。整洁数据的定义是：</span></span>
-<span id="cb28-539"><a href="#cb28-539"></a></span>
-<span id="cb28-540"><a href="#cb28-540"></a><span class="in">            -   **每个变量一列**：数据集中的每个变量都应该有自己的一列。</span></span>
-<span id="cb28-541"><a href="#cb28-541"></a></span>
-<span id="cb28-542"><a href="#cb28-542"></a><span class="in">            -   **每个观测值一行**：每个观测值（或案例）都应该有自己的一行。</span></span>
-<span id="cb28-543"><a href="#cb28-543"></a></span>
-<span id="cb28-544"><a href="#cb28-544"></a><span class="in">            -   **每个单元格一个值**：每个单元格只包含一个值。</span></span>
-<span id="cb28-545"><a href="#cb28-545"></a></span>
-<span id="cb28-546"><a href="#cb28-546"></a><span class="in">        对于堆积面积图，如果你有宽格式数据，例如：</span></span>
-<span id="cb28-547"><a href="#cb28-547"></a></span>
-<span id="cb28-548"><a href="#cb28-548"></a><span class="in">        |      |       |       |       |</span></span>
-<span id="cb28-549"><a href="#cb28-549"></a><span class="in">        |------|-------|-------|-------|</span></span>
-<span id="cb28-550"><a href="#cb28-550"></a><span class="in">        | 年份 | 产品A | 产品B | 产品C |</span></span>
-<span id="cb28-551"><a href="#cb28-551"></a><span class="in">        | 2020 | 100   | 50    | 20    |</span></span>
-<span id="cb28-552"><a href="#cb28-552"></a><span class="in">        | 2021 | 120   | 60    | 30    |</span></span>
-<span id="cb28-553"><a href="#cb28-553"></a></span>
-<span id="cb28-554"><a href="#cb28-554"></a><span class="in">        在这种格式下，"产品A"、"产品B"、"产品C" 都是独立的列。`ggplot2` 很难直接理解 "产品A"、"产品B"、"产品C" 应该被视为一个共同的“产品类型”变量，并且它们的数值应该被堆叠。</span></span>
-<span id="cb28-555"><a href="#cb28-555"></a></span>
-<span id="cb28-556"><a href="#cb28-556"></a><span class="in">    2.  堆积图的要求</span></span>
-<span id="cb28-557"><a href="#cb28-557"></a></span>
-<span id="cb28-558"><a href="#cb28-558"></a><span class="in">        堆积图的本质是按照某个分类变量（在堆积面积图通常是类别或分组）来对数值变量进行累加。为了实现这一点，ggplot2 需要一个明确的列来表示“类别”（例如，“产品类型”），以及另一个明确的列来表示“值”（例如，“销售额”）。</span></span>
-<span id="cb28-559"><a href="#cb28-559"></a></span>
-<span id="cb28-560"><a href="#cb28-560"></a><span class="in">        当数据是长格式时：</span></span>
-<span id="cb28-561"><a href="#cb28-561"></a></span>
-<span id="cb28-562"><a href="#cb28-562"></a><span class="in">        |      |          |        |</span></span>
-<span id="cb28-563"><a href="#cb28-563"></a><span class="in">        |------|----------|--------|</span></span>
-<span id="cb28-564"><a href="#cb28-564"></a><span class="in">        | 年份 | 产品类型 | 销售额 |</span></span>
-<span id="cb28-565"><a href="#cb28-565"></a><span class="in">        | 2020 | 产品A    | 100    |</span></span>
-<span id="cb28-566"><a href="#cb28-566"></a><span class="in">        | 2020 | 产品B    | 50     |</span></span>
-<span id="cb28-567"><a href="#cb28-567"></a><span class="in">        | 2020 | 产品C    | 20     |</span></span>
-<span id="cb28-568"><a href="#cb28-568"></a><span class="in">        | 2021 | 产品A    | 120    |</span></span>
-<span id="cb28-569"><a href="#cb28-569"></a><span class="in">        | 2021 | 产品B    | 60     |</span></span>
-<span id="cb28-570"><a href="#cb28-570"></a><span class="in">        | 2021 | 产品C    | 30     |</span></span>
-<span id="cb28-571"><a href="#cb28-571"></a></span>
-<span id="cb28-572"><a href="#cb28-572"></a><span class="in">        现在，`ggplot2` 可以清晰地识别：</span></span>
-<span id="cb28-573"><a href="#cb28-573"></a></span>
-<span id="cb28-574"><a href="#cb28-574"></a><span class="in">        -   **X 轴**: `年份`</span></span>
-<span id="cb28-575"><a href="#cb28-575"></a></span>
-<span id="cb28-576"><a href="#cb28-576"></a><span class="in">        -   **Y 轴**: `销售额`</span></span>
-<span id="cb28-577"><a href="#cb28-577"></a></span>
-<span id="cb28-578"><a href="#cb28-578"></a><span class="in">        -   **填充颜色（或分组）**: `产品类型`</span></span>
-<span id="cb28-579"><a href="#cb28-579"></a></span>
-<span id="cb28-580"><a href="#cb28-580"></a><span class="in">        它知道如何根据 `产品类型` 对 `销售额` 进行堆积。</span></span>
-<span id="cb28-581"><a href="#cb28-581"></a></span>
-<span id="cb28-582"><a href="#cb28-582"></a><span class="in">    **如何转换？**</span></span>
-<span id="cb28-583"><a href="#cb28-583"></a></span>
-<span id="cb28-584"><a href="#cb28-584"></a><span class="in">    在 R 语言中，最常用的数据转换包是 **`tidyr`**，它是 `tidyverse` 生态系统的一部分。`tidyr` 包提供了 `pivot_longer()`（以前是 `gather()`）函数，用于将宽格式数据转换为长格式。</span></span>
-<span id="cb28-585"><a href="#cb28-585"></a></span>
-<span id="cb28-586"><a href="#cb28-586"></a><span class="in">    假设我们有以下宽格式数据框 `df_wide`：</span></span>
-<span id="cb28-587"><a href="#cb28-587"></a></span>
-<span id="cb28-588"><a href="#cb28-588"></a><span class="in">    ``` r</span></span>
-<span id="cb28-589"><a href="#cb28-589"></a><span class="in">    # 创建一个示例宽格式数据 </span></span>
-<span id="cb28-590"><a href="#cb28-590"></a><span class="in">    df_wide &lt;- data.frame(   </span></span>
-<span id="cb28-591"><a href="#cb28-591"></a><span class="in">        Year = c(2020, 2021, 2022),   </span></span>
-<span id="cb28-592"><a href="#cb28-592"></a><span class="in">        ProductA = c(100, 120, 150),   </span></span>
-<span id="cb28-593"><a href="#cb28-593"></a><span class="in">        ProductB = c(50, 60, 70),   </span></span>
-<span id="cb28-594"><a href="#cb28-594"></a><span class="in">        ProductC = c(20, 30, 40) )  </span></span>
-<span id="cb28-595"><a href="#cb28-595"></a><span class="in">    print(df_wide) </span></span>
-<span id="cb28-596"><a href="#cb28-596"></a><span class="in">    ```</span></span>
-<span id="cb28-597"><a href="#cb28-597"></a></span>
-<span id="cb28-598"><a href="#cb28-598"></a><span class="in">    输出：</span></span>
-<span id="cb28-599"><a href="#cb28-599"></a></span>
-<span id="cb28-600"><a href="#cb28-600"></a><span class="in">    ``` r</span></span>
-<span id="cb28-601"><a href="#cb28-601"></a><span class="in">     Year ProductA ProductB ProductC </span></span>
-<span id="cb28-602"><a href="#cb28-602"></a><span class="in">    1 2020      100       50       20 </span></span>
-<span id="cb28-603"><a href="#cb28-603"></a><span class="in">    2 2021      120       60       30 </span></span>
-<span id="cb28-604"><a href="#cb28-604"></a><span class="in">    3 2022      150       70       40 </span></span>
-<span id="cb28-605"><a href="#cb28-605"></a><span class="in">    ```</span></span>
-<span id="cb28-606"><a href="#cb28-606"></a></span>
-<span id="cb28-607"><a href="#cb28-607"></a><span class="in">    现在，我们使用 `pivot_longer()` 将其转换为长格式：</span></span>
-<span id="cb28-608"><a href="#cb28-608"></a></span>
-<span id="cb28-609"><a href="#cb28-609"></a><span class="in">    ``` r</span></span>
-<span id="cb28-610"><a href="#cb28-610"></a><span class="in">    library(tidyr) </span></span>
-<span id="cb28-611"><a href="#cb28-611"></a><span class="in">    library(ggplot2) # 用于后续绘图  </span></span>
-<span id="cb28-612"><a href="#cb28-612"></a><span class="in">    df_long &lt;- df_wide %&gt;%   </span></span>
-<span id="cb28-613"><a href="#cb28-613"></a><span class="in">    pivot_longer(     </span></span>
-<span id="cb28-614"><a href="#cb28-614"></a><span class="in">        cols = starts_with("Product"), </span></span>
-<span id="cb28-615"><a href="#cb28-615"></a><span class="in">        # 选择以 "Product" 开头的列进行转换     </span></span>
-<span id="cb28-616"><a href="#cb28-616"></a><span class="in">        names_to = "ProductType",     </span></span>
-<span id="cb28-617"><a href="#cb28-617"></a><span class="in">        # 新的类别变量的名称     </span></span>
-<span id="cb28-618"><a href="#cb28-618"></a><span class="in">        values_to = "Sales"           </span></span>
-<span id="cb28-619"><a href="#cb28-619"></a><span class="in">        # 新的数值变量的名称   </span></span>
-<span id="cb28-620"><a href="#cb28-620"></a><span class="in">    )  </span></span>
-<span id="cb28-621"><a href="#cb28-621"></a><span class="in">    print(df_long) </span></span>
-<span id="cb28-622"><a href="#cb28-622"></a><span class="in">    ```</span></span>
-<span id="cb28-623"><a href="#cb28-623"></a></span>
-<span id="cb28-624"><a href="#cb28-624"></a><span class="in">    输出：</span></span>
-<span id="cb28-625"><a href="#cb28-625"></a></span>
-<span id="cb28-626"><a href="#cb28-626"></a><span class="in">    ```         </span></span>
-<span id="cb28-627"><a href="#cb28-627"></a><span class="in">    # A tibble: 9 × 3    </span></span>
-<span id="cb28-628"><a href="#cb28-628"></a><span class="in">    Year ProductType Sales   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; </span></span>
-<span id="cb28-629"><a href="#cb28-629"></a><span class="in">    1  2020 ProductA      100 </span></span>
-<span id="cb28-630"><a href="#cb28-630"></a><span class="in">    2  2020 ProductB       50 </span></span>
-<span id="cb28-631"><a href="#cb28-631"></a><span class="in">    3  2020 ProductC       20 </span></span>
-<span id="cb28-632"><a href="#cb28-632"></a><span class="in">    4  2021 ProductA      120 </span></span>
-<span id="cb28-633"><a href="#cb28-633"></a><span class="in">    5  2021 ProductB       60 </span></span>
-<span id="cb28-634"><a href="#cb28-634"></a><span class="in">    6  2021 ProductC       30 </span></span>
-<span id="cb28-635"><a href="#cb28-635"></a><span class="in">    7  2022 ProductA      150 </span></span>
-<span id="cb28-636"><a href="#cb28-636"></a><span class="in">    8  2022 ProductB       70 </span></span>
-<span id="cb28-637"><a href="#cb28-637"></a><span class="in">    9  2022 ProductC       40 </span></span>
-<span id="cb28-638"><a href="#cb28-638"></a><span class="in">    ```</span></span>
-<span id="cb28-639"><a href="#cb28-639"></a></span>
-<span id="cb28-640"><a href="#cb28-640"></a><span class="in">    **使用长格式数据绘制堆积面积图**</span></span>
-<span id="cb28-641"><a href="#cb28-641"></a></span>
-<span id="cb28-642"><a href="#cb28-642"></a><span class="in">    现在我们有了长格式数据 `df_long`，就可以轻松绘制堆积面积图了：</span></span>
-<span id="cb28-643"><a href="#cb28-643"></a></span>
-<span id="cb28-644"><a href="#cb28-644"></a><span class="in">    ``` r</span></span>
-<span id="cb28-645"><a href="#cb28-645"></a><span class="in">    ggplot(df_long, aes(x = Year, y = Sales, fill = ProductType)) +   </span></span>
-<span id="cb28-646"><a href="#cb28-646"></a><span class="in">    geom_area(alpha = 0.8) + </span></span>
-<span id="cb28-647"><a href="#cb28-647"></a><span class="in">    # alpha 用于调整透明度   </span></span>
-<span id="cb28-648"><a href="#cb28-648"></a><span class="in">    labs(title = "不同产品销售额堆积面积图",        </span></span>
-<span id="cb28-649"><a href="#cb28-649"></a><span class="in">    x = "年份",        </span></span>
-<span id="cb28-650"><a href="#cb28-650"></a><span class="in">    y = "销售额",        </span></span>
-<span id="cb28-651"><a href="#cb28-651"></a><span class="in">    fill = "产品类型") +   </span></span>
-<span id="cb28-652"><a href="#cb28-652"></a><span class="in">    theme_minimal() </span></span>
-<span id="cb28-653"><a href="#cb28-653"></a><span class="in">    ```</span></span>
-<span id="cb28-654"><a href="#cb28-654"></a></span>
-<span id="cb28-655"><a href="#cb28-655"></a><span class="in">    *总结来说，将宽格式数据转换为长格式是 `ggplot2` 绘制堆积图的关键步骤。这不仅符合 `ggplot2` 的图形语法和整洁数据原则，也使得数据能够清晰地映射到图表的视觉属性上，从而正确地进行堆积和可视化。*</span></span>
+<div class="sourceCode" id="cb36" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">---</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="an">title:</span><span class="co"> "04-ggplot2 绘图——折线图"</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb36-4"><a href="#cb36-4"></a><span class="an">date:</span><span class="co"> "2025-07-19"</span></span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb36-7"><a href="#cb36-7"></a><span class="co">    html:</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="co">        code-fold: true</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="co">        code-line-numbers: true</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a><span class="co">        code-highlight: true</span></span>
+<span id="cb36-11"><a href="#cb36-11"></a><span class="co">        fig_caption: true</span></span>
+<span id="cb36-12"><a href="#cb36-12"></a><span class="co">        number-sections: true</span></span>
+<span id="cb36-13"><a href="#cb36-13"></a><span class="co">        toc: true</span></span>
+<span id="cb36-14"><a href="#cb36-14"></a><span class="co">        toc-depth: 3</span></span>
+<span id="cb36-15"><a href="#cb36-15"></a><span class="co">---</span></span>
+<span id="cb36-16"><a href="#cb36-16"></a></span>
+<span id="cb36-17"><a href="#cb36-17"></a><span class="fu"># 折线图</span></span>
+<span id="cb36-18"><a href="#cb36-18"></a></span>
+<span id="cb36-19"><a href="#cb36-19"></a><span class="fu">## 绘制基本折线图</span></span>
+<span id="cb36-20"><a href="#cb36-20"></a></span>
+<span id="cb36-21"><a href="#cb36-21"></a>运行 <span class="in">`ggplot()`</span> 函数和 <span class="in">`geom_line()`</span> 函数，并分别指定一个变量映射到 <span class="in">`x`</span> 和 <span class="in">`y`</span> 。</span>
+<span id="cb36-22"><a href="#cb36-22"></a></span>
+<span id="cb36-25"><a href="#cb36-25"></a><span class="in">```{r}</span></span>
+<span id="cb36-26"><a href="#cb36-26"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-27"><a href="#cb36-27"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-28"><a href="#cb36-28"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-29"><a href="#cb36-29"></a><span class="co">#| label: fig-1</span></span>
+<span id="cb36-30"><a href="#cb36-30"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-31"><a href="#cb36-31"></a><span class="co">#| fig.cap: "基本折线图"</span></span>
+<span id="cb36-32"><a href="#cb36-32"></a></span>
+<span id="cb36-33"><a href="#cb36-33"></a><span class="co"># load package</span></span>
+<span id="cb36-34"><a href="#cb36-34"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-35"><a href="#cb36-35"></a><span class="co"># load dataset</span></span>
+<span id="cb36-36"><a href="#cb36-36"></a>BOD</span>
+<span id="cb36-37"><a href="#cb36-37"></a></span>
+<span id="cb36-38"><a href="#cb36-38"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<span id="cb36-39"><a href="#cb36-39"></a><span class="fu">geom_line</span>()</span>
+<span id="cb36-40"><a href="#cb36-40"></a><span class="in">```</span></span>
+<span id="cb36-41"><a href="#cb36-41"></a></span>
+<span id="cb36-42"><a href="#cb36-42"></a>折线图的 X 轴既可以对应于离散（分类）变量，也可以对应于连续（数值型）变量。</span>
+<span id="cb36-43"><a href="#cb36-43"></a></span>
+<span id="cb36-44"><a href="#cb36-44"></a>在上图中，Demand 变量为数值型变量，但我们可以借助于 <span class="in">`factor()`</span> 函数将其转换为因子型变量，然后，将其当作分类变量来处理。</span>
+<span id="cb36-45"><a href="#cb36-45"></a></span>
+<span id="cb36-46"><a href="#cb36-46"></a>当 X 对应于因子型变量时，必须使用命令 <span class="in">`aex(group = 1)`</span> 以确保 <span class="in">`ggplot`</span> 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。</span>
+<span id="cb36-47"><a href="#cb36-47"></a></span>
+<span id="cb36-50"><a href="#cb36-50"></a><span class="in">```{r}</span></span>
+<span id="cb36-51"><a href="#cb36-51"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-52"><a href="#cb36-52"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-53"><a href="#cb36-53"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-54"><a href="#cb36-54"></a><span class="co">#| label: fig-2</span></span>
+<span id="cb36-55"><a href="#cb36-55"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-56"><a href="#cb36-56"></a><span class="co">#| fig.cap: "因子型变量折线图"</span></span>
+<span id="cb36-57"><a href="#cb36-57"></a></span>
+<span id="cb36-58"><a href="#cb36-58"></a><span class="co"># load package</span></span>
+<span id="cb36-59"><a href="#cb36-59"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-60"><a href="#cb36-60"></a><span class="co"># load dataset and copy a dataset</span></span>
+<span id="cb36-61"><a href="#cb36-61"></a>BOD1 <span class="ot">&lt;-</span> BOD</span>
+<span id="cb36-62"><a href="#cb36-62"></a>BOD1<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">factor</span>(BOD1<span class="sc">$</span>Time)</span>
+<span id="cb36-63"><a href="#cb36-63"></a></span>
+<span id="cb36-64"><a href="#cb36-64"></a><span class="fu">ggplot</span>(BOD1,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,<span class="at">group =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
+<span id="cb36-65"><a href="#cb36-65"></a><span class="fu">geom_line</span>()</span>
+<span id="cb36-66"><a href="#cb36-66"></a><span class="in">```</span></span>
+<span id="cb36-67"><a href="#cb36-67"></a></span>
+<span id="cb36-68"><a href="#cb36-68"></a><span class="fu">## 向折线图添加数据标记</span></span>
+<span id="cb36-69"><a href="#cb36-69"></a></span>
+<span id="cb36-70"><a href="#cb36-70"></a>在代码中加上 <span class="in">`geom_point()`</span> 即可：</span>
+<span id="cb36-71"><a href="#cb36-71"></a></span>
+<span id="cb36-74"><a href="#cb36-74"></a><span class="in">```{r}</span></span>
+<span id="cb36-75"><a href="#cb36-75"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-76"><a href="#cb36-76"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-77"><a href="#cb36-77"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-78"><a href="#cb36-78"></a><span class="co">#| label: fig-3</span></span>
+<span id="cb36-79"><a href="#cb36-79"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-80"><a href="#cb36-80"></a><span class="co">#| fig.cap: "折线图添加标记"</span></span>
+<span id="cb36-81"><a href="#cb36-81"></a></span>
+<span id="cb36-82"><a href="#cb36-82"></a><span class="co"># load package</span></span>
+<span id="cb36-83"><a href="#cb36-83"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-84"><a href="#cb36-84"></a><span class="co"># load dataset</span></span>
+<span id="cb36-85"><a href="#cb36-85"></a>BOD</span>
+<span id="cb36-86"><a href="#cb36-86"></a></span>
+<span id="cb36-87"><a href="#cb36-87"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<span id="cb36-88"><a href="#cb36-88"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb36-89"><a href="#cb36-89"></a><span class="fu">geom_point</span>()</span>
+<span id="cb36-90"><a href="#cb36-90"></a><span class="in">```</span></span>
+<span id="cb36-91"><a href="#cb36-91"></a></span>
+<span id="cb36-92"><a href="#cb36-92"></a>有时候，在折线图上添加数据标记很有用。</span>
+<span id="cb36-93"><a href="#cb36-93"></a></span>
+<span id="cb36-94"><a href="#cb36-94"></a>当数据点的密度较低或数据采集频率不规则时，尤其有用。</span>
+<span id="cb36-95"><a href="#cb36-95"></a></span>
+<span id="cb36-96"><a href="#cb36-96"></a>例如，BOD 数据集中没有与 Time=6 相对应的输入，然而，这在一张单独的折线图中看起来并不明显。</span>
+<span id="cb36-97"><a href="#cb36-97"></a></span>
+<span id="cb36-98"><a href="#cb36-98"></a><span class="fu">### worldpop数据集</span></span>
+<span id="cb36-99"><a href="#cb36-99"></a></span>
+<span id="cb36-100"><a href="#cb36-100"></a>worldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。</span>
+<span id="cb36-101"><a href="#cb36-101"></a></span>
+<span id="cb36-102"><a href="#cb36-102"></a>折线图中的数据标记表明了数据的采集时间：</span>
+<span id="cb36-103"><a href="#cb36-103"></a></span>
+<span id="cb36-106"><a href="#cb36-106"></a><span class="in">```{r}</span></span>
+<span id="cb36-107"><a href="#cb36-107"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-108"><a href="#cb36-108"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-109"><a href="#cb36-109"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-110"><a href="#cb36-110"></a><span class="co">#| label: fig-4</span></span>
+<span id="cb36-111"><a href="#cb36-111"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-112"><a href="#cb36-112"></a><span class="co">#| fig.cap: "worldpop 数据集示例"</span></span>
+<span id="cb36-113"><a href="#cb36-113"></a></span>
+<span id="cb36-114"><a href="#cb36-114"></a><span class="co"># load package</span></span>
+<span id="cb36-115"><a href="#cb36-115"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-116"><a href="#cb36-116"></a><span class="co"># load dataset</span></span>
+<span id="cb36-117"><a href="#cb36-117"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb36-118"><a href="#cb36-118"></a></span>
+<span id="cb36-119"><a href="#cb36-119"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
+<span id="cb36-120"><a href="#cb36-120"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb36-121"><a href="#cb36-121"></a><span class="fu">geom_point</span>()</span>
+<span id="cb36-122"><a href="#cb36-122"></a></span>
+<span id="cb36-123"><a href="#cb36-123"></a><span class="co"># when Y axis turn to log()</span></span>
+<span id="cb36-124"><a href="#cb36-124"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
+<span id="cb36-125"><a href="#cb36-125"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb36-126"><a href="#cb36-126"></a><span class="fu">geom_point</span>()<span class="sc">+</span></span>
+<span id="cb36-127"><a href="#cb36-127"></a><span class="fu">scale_y_log10</span>()</span>
+<span id="cb36-128"><a href="#cb36-128"></a><span class="in">```</span></span>
+<span id="cb36-129"><a href="#cb36-129"></a></span>
+<span id="cb36-130"><a href="#cb36-130"></a><span class="fu">## 绘制多重折线图</span></span>
+<span id="cb36-131"><a href="#cb36-131"></a></span>
+<span id="cb36-132"><a href="#cb36-132"></a>除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：</span>
+<span id="cb36-133"><a href="#cb36-133"></a></span>
+<span id="cb36-136"><a href="#cb36-136"></a><span class="in">```{r}</span></span>
+<span id="cb36-137"><a href="#cb36-137"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-138"><a href="#cb36-138"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-139"><a href="#cb36-139"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-140"><a href="#cb36-140"></a><span class="co">#| label: fig-5</span></span>
+<span id="cb36-141"><a href="#cb36-141"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-142"><a href="#cb36-142"></a><span class="co">#| fig.cap: "绘制多重折线图"</span></span>
+<span id="cb36-143"><a href="#cb36-143"></a></span>
+<span id="cb36-144"><a href="#cb36-144"></a><span class="co"># load package</span></span>
+<span id="cb36-145"><a href="#cb36-145"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-146"><a href="#cb36-146"></a><span class="co"># load dataset</span></span>
+<span id="cb36-147"><a href="#cb36-147"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb36-148"><a href="#cb36-148"></a></span>
+<span id="cb36-149"><a href="#cb36-149"></a><span class="co">#colour</span></span>
+<span id="cb36-150"><a href="#cb36-150"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-151"><a href="#cb36-151"></a><span class="fu">geom_line</span>()</span>
+<span id="cb36-152"><a href="#cb36-152"></a></span>
+<span id="cb36-153"><a href="#cb36-153"></a><span class="co"># linetype</span></span>
+<span id="cb36-154"><a href="#cb36-154"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">linetype =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-155"><a href="#cb36-155"></a><span class="fu">geom_line</span>()</span>
+<span id="cb36-156"><a href="#cb36-156"></a><span class="in">```</span></span>
+<span id="cb36-157"><a href="#cb36-157"></a></span>
+<span id="cb36-158"><a href="#cb36-158"></a><span class="in">`tg`</span> 数据集共有三列，其中一列正是我们映射到 <span class="in">`colour`</span> 和 <span class="in">`linetype`</span> 的 <span class="in">`supp`</span> 因子（离散型变量），而将 <span class="in">`dose`</span> 作为 <span class="in">`x`</span> 轴，<span class="in">`length`</span> 作为 <span class="in">`y`</span> 轴（连续型变量）。</span>
+<span id="cb36-159"><a href="#cb36-159"></a></span>
+<span id="cb36-160"><a href="#cb36-160"></a>折线图的 X 轴既可以对应于连续变量也可以对应于分类变量。</span>
+<span id="cb36-161"><a href="#cb36-161"></a></span>
+<span id="cb36-162"><a href="#cb36-162"></a>有时候，映射到 X 的变量虽然被存储为数值型变量，但被看做分类变量来处理。</span>
+<span id="cb36-163"><a href="#cb36-163"></a></span>
+<span id="cb36-164"><a href="#cb36-164"></a>在上述的 tg 数据集中，dose 有三个取值：0.5、1.0和2.0。</span>
+<span id="cb36-165"><a href="#cb36-165"></a></span>
+<span id="cb36-166"><a href="#cb36-166"></a>或许用户更想将其当做分类变量而不是连续变量来处理，那么运行 <span class="in">`factor()`</span> 函数将其转换为因子型变量。</span>
+<span id="cb36-167"><a href="#cb36-167"></a></span>
+<span id="cb36-170"><a href="#cb36-170"></a><span class="in">```{r}</span></span>
+<span id="cb36-171"><a href="#cb36-171"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-172"><a href="#cb36-172"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-173"><a href="#cb36-173"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-174"><a href="#cb36-174"></a><span class="co">#| label: fig-6</span></span>
+<span id="cb36-175"><a href="#cb36-175"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-176"><a href="#cb36-176"></a><span class="co">#| fig.cap: "转换变量绘制折线图"</span></span>
+<span id="cb36-177"><a href="#cb36-177"></a></span>
+<span id="cb36-178"><a href="#cb36-178"></a><span class="co"># load package</span></span>
+<span id="cb36-179"><a href="#cb36-179"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-180"><a href="#cb36-180"></a><span class="co"># load dataset</span></span>
+<span id="cb36-181"><a href="#cb36-181"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb36-182"><a href="#cb36-182"></a></span>
+<span id="cb36-183"><a href="#cb36-183"></a><span class="co">#colour</span></span>
+<span id="cb36-184"><a href="#cb36-184"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(dose),<span class="at">y =</span> length, <span class="at">colour =</span> supp,<span class="at">group =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-185"><a href="#cb36-185"></a><span class="fu">geom_line</span>()</span>
+<span id="cb36-186"><a href="#cb36-186"></a><span class="in">```</span></span>
+<span id="cb36-187"><a href="#cb36-187"></a></span>
+<span id="cb36-188"><a href="#cb36-188"></a><span class="fu">### 数据标记</span></span>
+<span id="cb36-189"><a href="#cb36-189"></a></span>
+<span id="cb36-190"><a href="#cb36-190"></a>如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 <span class="in">`shape`</span> 和 <span class="in">`fill`</span> 等。</span>
+<span id="cb36-191"><a href="#cb36-191"></a></span>
+<span id="cb36-194"><a href="#cb36-194"></a><span class="in">```{r}</span></span>
+<span id="cb36-195"><a href="#cb36-195"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-196"><a href="#cb36-196"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-197"><a href="#cb36-197"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-198"><a href="#cb36-198"></a><span class="co">#| label: fig-7</span></span>
+<span id="cb36-199"><a href="#cb36-199"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-200"><a href="#cb36-200"></a><span class="co">#| fig.cap: "折线图数据标记"</span></span>
+<span id="cb36-201"><a href="#cb36-201"></a></span>
+<span id="cb36-202"><a href="#cb36-202"></a><span class="co"># load package</span></span>
+<span id="cb36-203"><a href="#cb36-203"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-204"><a href="#cb36-204"></a><span class="co"># load dataset</span></span>
+<span id="cb36-205"><a href="#cb36-205"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb36-206"><a href="#cb36-206"></a></span>
+<span id="cb36-207"><a href="#cb36-207"></a><span class="co">#shape</span></span>
+<span id="cb36-208"><a href="#cb36-208"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">shape =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-209"><a href="#cb36-209"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb36-210"><a href="#cb36-210"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>)</span>
+<span id="cb36-211"><a href="#cb36-211"></a></span>
+<span id="cb36-212"><a href="#cb36-212"></a><span class="co"># fill</span></span>
+<span id="cb36-213"><a href="#cb36-213"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">fill =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-214"><a href="#cb36-214"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb36-215"><a href="#cb36-215"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">21</span>)</span>
+<span id="cb36-216"><a href="#cb36-216"></a><span class="in">```</span></span>
+<span id="cb36-217"><a href="#cb36-217"></a></span>
+<span id="cb36-218"><a href="#cb36-218"></a><span class="fu">### 错开数据标记</span></span>
+<span id="cb36-219"><a href="#cb36-219"></a></span>
+<span id="cb36-222"><a href="#cb36-222"></a><span class="in">```{r}</span></span>
+<span id="cb36-223"><a href="#cb36-223"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-224"><a href="#cb36-224"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-225"><a href="#cb36-225"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-226"><a href="#cb36-226"></a><span class="co">#| label: fig-8</span></span>
+<span id="cb36-227"><a href="#cb36-227"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-228"><a href="#cb36-228"></a><span class="co">#| fig.cap: "折线图错开数据标记"</span></span>
+<span id="cb36-229"><a href="#cb36-229"></a></span>
+<span id="cb36-230"><a href="#cb36-230"></a><span class="co"># load package</span></span>
+<span id="cb36-231"><a href="#cb36-231"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-232"><a href="#cb36-232"></a><span class="co"># load dataset</span></span>
+<span id="cb36-233"><a href="#cb36-233"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb36-234"><a href="#cb36-234"></a></span>
+<span id="cb36-235"><a href="#cb36-235"></a><span class="co">#shape</span></span>
+<span id="cb36-236"><a href="#cb36-236"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">shape =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-237"><a href="#cb36-237"></a><span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>))<span class="sc">+</span></span>
+<span id="cb36-238"><a href="#cb36-238"></a><span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>),<span class="at">size =</span> <span class="dv">4</span>)</span>
+<span id="cb36-239"><a href="#cb36-239"></a><span class="in">```</span></span>
+<span id="cb36-240"><a href="#cb36-240"></a></span>
+<span id="cb36-241"><a href="#cb36-241"></a><span class="fu">## 修改线条样式</span></span>
+<span id="cb36-242"><a href="#cb36-242"></a></span>
+<span id="cb36-243"><a href="#cb36-243"></a>通过设置线型（<span class="in">`linetype`</span>）、线宽（<span class="in">`linewidth`</span>）和颜色（<span class="in">`colour`</span>或<span class="in">`color`</span>）参数可以分别修改折线的线性（实线、虚线、点线等），线宽（单位为毫米）和颜色。</span>
+<span id="cb36-244"><a href="#cb36-244"></a></span>
+<span id="cb36-245"><a href="#cb36-245"></a>将上述参数的值传递给 <span class="in">`geom_line()`</span> 函数可以设置折线图的对应属性。</span>
+<span id="cb36-246"><a href="#cb36-246"></a></span>
+<span id="cb36-249"><a href="#cb36-249"></a><span class="in">```{r}</span></span>
+<span id="cb36-250"><a href="#cb36-250"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-251"><a href="#cb36-251"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-252"><a href="#cb36-252"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-253"><a href="#cb36-253"></a><span class="co">#| label: fig-9</span></span>
+<span id="cb36-254"><a href="#cb36-254"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-255"><a href="#cb36-255"></a><span class="co">#| fig.cap: "修改折线图线条样式"</span></span>
+<span id="cb36-256"><a href="#cb36-256"></a></span>
+<span id="cb36-257"><a href="#cb36-257"></a><span class="co"># load package</span></span>
+<span id="cb36-258"><a href="#cb36-258"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-259"><a href="#cb36-259"></a></span>
+<span id="cb36-260"><a href="#cb36-260"></a><span class="co">#shape</span></span>
+<span id="cb36-261"><a href="#cb36-261"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,))<span class="sc">+</span></span>
+<span id="cb36-262"><a href="#cb36-262"></a><span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>,<span class="at">colour =</span> <span class="st">"blue"</span>)</span>
+<span id="cb36-263"><a href="#cb36-263"></a><span class="in">```</span></span>
+<span id="cb36-264"><a href="#cb36-264"></a></span>
+<span id="cb36-265"><a href="#cb36-265"></a><span class="fu">### 使用调色板</span></span>
+<span id="cb36-266"><a href="#cb36-266"></a></span>
+<span id="cb36-267"><a href="#cb36-267"></a>对于多重折线图而言，设定图形属性会对图上的所有折线产生影响。</span>
+<span id="cb36-268"><a href="#cb36-268"></a></span>
+<span id="cb36-269"><a href="#cb36-269"></a>而将变量映射到图形属性则会使图上的每条折线具有不同的外观。</span>
+<span id="cb36-270"><a href="#cb36-270"></a></span>
+<span id="cb36-271"><a href="#cb36-271"></a>折线图默认颜色并不是很吸引眼球，所以用户可以使用其他调色板<span class="ot">[^1]</span>着色，可以调用 <span class="in">`scale_colour_brewer()`</span> 函数和 <span class="in">`scale_colour_manual`</span> 函数实线。</span>
+<span id="cb36-272"><a href="#cb36-272"></a></span>
+<span id="cb36-273"><a href="#cb36-273"></a><span class="ot">[^1]: </span><span class="in">`ggplot2`</span> 本身内置了一些默认的调色板，但它也高度集成了其他 R 包和颜色系统的调色板，以提供更丰富的选择：</span>
+<span id="cb36-274"><a href="#cb36-274"></a></span>
+<span id="cb36-275"><a href="#cb36-275"></a><span class="in">    -   **R 语言内置颜色**: `ggplot2` 可以直接使用 R 语言中预定义的颜色名称（例如 "red", "blue"）或十六进制颜色代码（例如 "#FF0000"）。</span></span>
+<span id="cb36-276"><a href="#cb36-276"></a></span>
+<span id="cb36-277"><a href="#cb36-277"></a><span class="in">    -   **ColorBrewer**: 这是一个非常流行的调色板集合，由地理学家 Cynthia Brewer 开发，主要用于地图制作，但非常适用于各种数据可视化。ColorBrewer 的调色板设计考虑了**色彩感知**和**色盲友好性**，分为：</span></span>
+<span id="cb36-278"><a href="#cb36-278"></a></span>
+<span id="cb36-279"><a href="#cb36-279"></a><span class="in">        -   **顺序型 (Sequential)**：适用于表示有序数据，从低到高渐变。</span></span>
+<span id="cb36-280"><a href="#cb36-280"></a></span>
+<span id="cb36-281"><a href="#cb36-281"></a><span class="in">        -   **发散型 (Diverging)**：适用于表示有中间值的数据，例如正负值、同意/不同意等，颜色从中间值向两端发散。</span></span>
+<span id="cb36-282"><a href="#cb36-282"></a></span>
+<span id="cb36-283"><a href="#cb36-283"></a><span class="in">        -   **定性型 (Qualitative)**：适用于表示分类数据，颜色之间没有内在顺序。 `ggplot2` 通过 `scale_color_brewer()` 和 `scale_fill_brewer()` 函数来使用 ColorBrewer 调色板。</span></span>
+<span id="cb36-284"><a href="#cb36-284"></a></span>
+<span id="cb36-285"><a href="#cb36-285"></a><span class="in">    -   **viridis**: 这是一组在 ggplot2 中非常受欢迎的调色板（包括 `viridis`, `magma`, `inferno`, `plasma`, `cividis`）。它们的主要特点是**感知均匀性**和**色盲友好性**。这意味着无论颜色如何变化，人眼对颜色变化的感知是均匀的，并且即使是色盲人士也能区分不同的颜色。ggplot2 通过 `scale_color_viridis_d()` / `scale_fill_viridis_d()` （离散型）和 `scale_color_viridis_c()` / `scale_fill_viridis_c()` （连续型）来使用这些调色板。</span></span>
+<span id="cb36-286"><a href="#cb36-286"></a></span>
+<span id="cb36-287"><a href="#cb36-287"></a><span class="in">    -   **自定义调色板**: 用户可以根据需要创建自己的调色板，通过 `scale_color_manual()` 和 `scale_fill_manual()` 函数手动指定颜色。</span></span>
+<span id="cb36-288"><a href="#cb36-288"></a></span>
+<span id="cb36-289"><a href="#cb36-289"></a><span class="in">    -   **其他扩展包**: 还有许多其他 R 包提供了针对 `ggplot2` 的调色板，例如 `ggsci` 包提供了受科学期刊、数据可视化库等启发的调色板。</span></span>
+<span id="cb36-290"><a href="#cb36-290"></a></span>
+<span id="cb36-291"><a href="#cb36-291"></a><span class="in">        **功能**</span></span>
+<span id="cb36-292"><a href="#cb36-292"></a></span>
+<span id="cb36-293"><a href="#cb36-293"></a><span class="in">    ggplot2 调色板的主要功能是**将数据映射到视觉美学属性（特别是颜色和填充色）**，从而增强数据图表的可读性和信息传递效率。</span></span>
+<span id="cb36-294"><a href="#cb36-294"></a></span>
+<span id="cb36-295"><a href="#cb36-295"></a><span class="in">    -   **区分数据类别**: 当你的数据中有离散变量（分类数据）时，调色板会为每个类别分配不同的颜色，让观众能够轻松区分不同的组别。例如，在散点图中用不同颜色表示不同的物种。</span></span>
+<span id="cb36-296"><a href="#cb36-296"></a></span>
+<span id="cb36-297"><a href="#cb36-297"></a><span class="in">    -   **表示数据强度/趋势**: 对于连续变量，调色板通常使用颜色渐变来表示数值的大小或趋势。例如，颜色从浅到深表示数值从小到大。</span></span>
+<span id="cb36-298"><a href="#cb36-298"></a></span>
+<span id="cb36-299"><a href="#cb36-299"></a><span class="in">    -   **突出数据特征**: 通过选择合适的调色板，可以突出数据中的特定模式、异常值或重要区域。</span></span>
+<span id="cb36-300"><a href="#cb36-300"></a></span>
+<span id="cb36-301"><a href="#cb36-301"></a><span class="in">    -   **提高图表美观度**: 美观的颜色选择能够提升图表的整体视觉吸引力，使其更具专业性和易读性。</span></span>
+<span id="cb36-302"><a href="#cb36-302"></a></span>
+<span id="cb36-303"><a href="#cb36-303"></a><span class="in">    -   **支持色盲友好**: 许多调色板（如 viridis 和 ColorBrewer 的部分调色板）都经过设计，以确保色盲人士也能良好地区分颜色，从而提高图表的**可访问性**。</span></span>
+<span id="cb36-304"><a href="#cb36-304"></a></span>
+<span id="cb36-305"><a href="#cb36-305"></a><span class="in">    -   **映射离散和连续数据。**</span></span>
+<span id="cb36-306"><a href="#cb36-306"></a></span>
+<span id="cb36-309"><a href="#cb36-309"></a><span class="in">```{r}</span></span>
+<span id="cb36-310"><a href="#cb36-310"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-311"><a href="#cb36-311"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-312"><a href="#cb36-312"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-313"><a href="#cb36-313"></a><span class="co">#| label: fig-10</span></span>
+<span id="cb36-314"><a href="#cb36-314"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-315"><a href="#cb36-315"></a><span class="co">#| fig.cap: "使用调色板"</span></span>
+<span id="cb36-316"><a href="#cb36-316"></a></span>
+<span id="cb36-317"><a href="#cb36-317"></a><span class="co"># load package</span></span>
+<span id="cb36-318"><a href="#cb36-318"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-319"><a href="#cb36-319"></a><span class="co"># load dataset</span></span>
+<span id="cb36-320"><a href="#cb36-320"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb36-321"><a href="#cb36-321"></a></span>
+<span id="cb36-322"><a href="#cb36-322"></a><span class="co">#shape</span></span>
+<span id="cb36-323"><a href="#cb36-323"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-324"><a href="#cb36-324"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb36-325"><a href="#cb36-325"></a><span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb36-326"><a href="#cb36-326"></a><span class="in">```</span></span>
+<span id="cb36-327"><a href="#cb36-327"></a></span>
+<span id="cb36-328"><a href="#cb36-328"></a><span class="fu">### 进一步调整配色与线条</span></span>
+<span id="cb36-329"><a href="#cb36-329"></a></span>
+<span id="cb36-332"><a href="#cb36-332"></a><span class="in">```{r}</span></span>
+<span id="cb36-333"><a href="#cb36-333"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-334"><a href="#cb36-334"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-335"><a href="#cb36-335"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-336"><a href="#cb36-336"></a><span class="co">#| label: fig-11</span></span>
+<span id="cb36-337"><a href="#cb36-337"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-338"><a href="#cb36-338"></a><span class="co">#| fig.cap: "折线图高级配色与线条"</span></span>
+<span id="cb36-339"><a href="#cb36-339"></a></span>
+<span id="cb36-340"><a href="#cb36-340"></a><span class="co"># load package</span></span>
+<span id="cb36-341"><a href="#cb36-341"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-342"><a href="#cb36-342"></a><span class="co"># load dataset</span></span>
+<span id="cb36-343"><a href="#cb36-343"></a><span class="fu">library</span>(gcookbook)</span>
+<span id="cb36-344"><a href="#cb36-344"></a></span>
+<span id="cb36-345"><a href="#cb36-345"></a><span class="co"># 如果两条折线的图形属性相同，需要指定一个分组变量</span></span>
+<span id="cb36-346"><a href="#cb36-346"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">group =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-347"><a href="#cb36-347"></a><span class="fu">geom_line</span>(<span class="at">colour =</span> <span class="st">"darkgreen"</span>,<span class="at">size =</span> <span class="fl">1.5</span>)</span>
+<span id="cb36-348"><a href="#cb36-348"></a></span>
+<span id="cb36-349"><a href="#cb36-349"></a><span class="co"># 因为变量 supp 被映射到了颜色（colour）属性，所以它自动作为分组变量</span></span>
+<span id="cb36-350"><a href="#cb36-350"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
+<span id="cb36-351"><a href="#cb36-351"></a><span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
+<span id="cb36-352"><a href="#cb36-352"></a><span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">size =</span> <span class="dv">3</span>,<span class="at">fill =</span> <span class="st">"white"</span>)</span>
+<span id="cb36-353"><a href="#cb36-353"></a><span class="in">```</span></span>
+<span id="cb36-354"><a href="#cb36-354"></a></span>
+<span id="cb36-355"><a href="#cb36-355"></a><span class="fu">## 修改数据标记样式</span></span>
+<span id="cb36-356"><a href="#cb36-356"></a></span>
+<span id="cb36-357"><a href="#cb36-357"></a>在函数 <span class="in">`aes()`</span> 外部设定函数 <span class="in">`geom_point()`</span> 的参数 <span class="in">`size`</span>（大小）、<span class="in">`shape`</span>（形状）、<span class="in">`colour`</span>（颜色）和 <span class="in">`fill`</span>（填充色）即可。</span>
+<span id="cb36-358"><a href="#cb36-358"></a></span>
+<span id="cb36-361"><a href="#cb36-361"></a><span class="in">```{r}</span></span>
+<span id="cb36-362"><a href="#cb36-362"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-363"><a href="#cb36-363"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-364"><a href="#cb36-364"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-365"><a href="#cb36-365"></a><span class="co">#| label: fig-12</span></span>
+<span id="cb36-366"><a href="#cb36-366"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-367"><a href="#cb36-367"></a><span class="co">#| fig.cap: "折线图修改数据标记样式"</span></span>
+<span id="cb36-368"><a href="#cb36-368"></a></span>
+<span id="cb36-369"><a href="#cb36-369"></a><span class="co"># load package</span></span>
+<span id="cb36-370"><a href="#cb36-370"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-371"><a href="#cb36-371"></a></span>
+<span id="cb36-372"><a href="#cb36-372"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<span id="cb36-373"><a href="#cb36-373"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
+<span id="cb36-374"><a href="#cb36-374"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">colour =</span> <span class="st">"darkred"</span>,<span class="at">fill =</span> <span class="st">"pink"</span>)</span>
+<span id="cb36-375"><a href="#cb36-375"></a><span class="in">```</span></span>
+<span id="cb36-376"><a href="#cb36-376"></a></span>
+<span id="cb36-377"><a href="#cb36-377"></a>The default <span class="in">`shape`</span> for points is a solid circle, the default <span class="in">`size`</span> is 2, and the default <span class="in">`colour`</span> is black.The fill color is relevant only for some point shapes (numbered 21–25), which have separate outline and fill colors. The fill color is typically NA, or empty; you can fill it with white to get hollow-looking circles</span>
+<span id="cb36-378"><a href="#cb36-378"></a></span>
+<span id="cb36-381"><a href="#cb36-381"></a><span class="in">```{r}</span></span>
+<span id="cb36-382"><a href="#cb36-382"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-383"><a href="#cb36-383"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-384"><a href="#cb36-384"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-385"><a href="#cb36-385"></a><span class="co">#| label: fig-13</span></span>
+<span id="cb36-386"><a href="#cb36-386"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-387"><a href="#cb36-387"></a><span class="co">#| fig.cap: "修改折线图默认样式"</span></span>
+<span id="cb36-388"><a href="#cb36-388"></a></span>
+<span id="cb36-389"><a href="#cb36-389"></a><span class="co"># load package</span></span>
+<span id="cb36-390"><a href="#cb36-390"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-391"><a href="#cb36-391"></a></span>
+<span id="cb36-392"><a href="#cb36-392"></a><span class="fu">ggplot</span>(BOD, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> demand)) <span class="sc">+</span></span>
+<span id="cb36-393"><a href="#cb36-393"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb36-394"><a href="#cb36-394"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span>
+<span id="cb36-395"><a href="#cb36-395"></a><span class="in">```</span></span>
+<span id="cb36-396"><a href="#cb36-396"></a></span>
+<span id="cb36-397"><a href="#cb36-397"></a>如果要将数据标记和折线设定为不同的颜色，用户必须折线绘制完成后再设定数据标记的颜色，此时，数据标记被绘制在更上面的图层，以避免被折线遮盖。</span>
+<span id="cb36-398"><a href="#cb36-398"></a></span>
+<span id="cb36-399"><a href="#cb36-399"></a>这里定义了一个函数 <span class="in">`pd = position_dodge(0.2)`</span> 来将图形错开，原始用法可参照 @fig-8。</span>
+<span id="cb36-400"><a href="#cb36-400"></a></span>
+<span id="cb36-403"><a href="#cb36-403"></a><span class="in">```{r}</span></span>
+<span id="cb36-404"><a href="#cb36-404"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-405"><a href="#cb36-405"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-406"><a href="#cb36-406"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-407"><a href="#cb36-407"></a><span class="co">#| label: fig-14</span></span>
+<span id="cb36-408"><a href="#cb36-408"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-409"><a href="#cb36-409"></a><span class="co">#| fig.cap: "折线图复杂数据标记"</span></span>
+<span id="cb36-410"><a href="#cb36-410"></a></span>
+<span id="cb36-411"><a href="#cb36-411"></a><span class="co"># load package</span></span>
+<span id="cb36-412"><a href="#cb36-412"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-413"><a href="#cb36-413"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the tg data set</span></span>
+<span id="cb36-414"><a href="#cb36-414"></a></span>
+<span id="cb36-415"><a href="#cb36-415"></a><span class="co"># Save the position_dodge specification because we'll use it multiple times</span></span>
+<span id="cb36-416"><a href="#cb36-416"></a>pd <span class="ot">&lt;-</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>)</span>
+<span id="cb36-417"><a href="#cb36-417"></a></span>
+<span id="cb36-418"><a href="#cb36-418"></a><span class="fu">ggplot</span>(tg, <span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> length, <span class="at">fill =</span> supp)) <span class="sc">+</span></span>
+<span id="cb36-419"><a href="#cb36-419"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> pd) <span class="sc">+</span></span>
+<span id="cb36-420"><a href="#cb36-420"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
+<span id="cb36-421"><a href="#cb36-421"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"white"</span>))</span>
+<span id="cb36-422"><a href="#cb36-422"></a><span class="in">```</span></span>
+<span id="cb36-423"><a href="#cb36-423"></a></span>
+<span id="cb36-424"><a href="#cb36-424"></a><span class="fu">## 绘制面积图</span></span>
+<span id="cb36-425"><a href="#cb36-425"></a></span>
+<span id="cb36-426"><a href="#cb36-426"></a>运行 <span class="in">`geom_area()`</span> 函数即可绘制面积图。</span>
+<span id="cb36-427"><a href="#cb36-427"></a></span>
+<span id="cb36-430"><a href="#cb36-430"></a><span class="in">```{r}</span></span>
+<span id="cb36-431"><a href="#cb36-431"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-432"><a href="#cb36-432"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-433"><a href="#cb36-433"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-434"><a href="#cb36-434"></a><span class="co">#| label: fig-15</span></span>
+<span id="cb36-435"><a href="#cb36-435"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-436"><a href="#cb36-436"></a><span class="co">#| fig.cap: "绘制面积图"</span></span>
+<span id="cb36-437"><a href="#cb36-437"></a></span>
+<span id="cb36-438"><a href="#cb36-438"></a><span class="co"># load package</span></span>
+<span id="cb36-439"><a href="#cb36-439"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-440"><a href="#cb36-440"></a></span>
+<span id="cb36-441"><a href="#cb36-441"></a><span class="co"># Convert the sunspot.year data set into a data frame for this example</span></span>
+<span id="cb36-442"><a href="#cb36-442"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb36-443"><a href="#cb36-443"></a>    <span class="at">Year     =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(sunspot.year)),</span>
+<span id="cb36-444"><a href="#cb36-444"></a>    <span class="at">Sunspots =</span> <span class="fu">as.numeric</span>(sunspot.year)</span>
+<span id="cb36-445"><a href="#cb36-445"></a>  )</span>
+<span id="cb36-446"><a href="#cb36-446"></a></span>
+<span id="cb36-447"><a href="#cb36-447"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
+<span id="cb36-448"><a href="#cb36-448"></a>  <span class="fu">geom_area</span>()</span>
+<span id="cb36-449"><a href="#cb36-449"></a><span class="in">```</span></span>
+<span id="cb36-450"><a href="#cb36-450"></a></span>
+<span id="cb36-451"><a href="#cb36-451"></a>默认情况下，面积图的填充色都是黑灰色且没有边框线，通过设定 <span class="in">`fill`</span> 可以修改面积图的填充色。</span>
+<span id="cb36-452"><a href="#cb36-452"></a></span>
+<span id="cb36-453"><a href="#cb36-453"></a>下图 @fig-16 将把填充色设定为蓝色，并通过 <span class="in">`alpha=0.2`</span> 将面积图的透明度设定为 80% ，另外，用户可以看到面积图的网格线，通过设置 <span class="in">`colour`</span> 为面积图添加边框线。</span>
+<span id="cb36-454"><a href="#cb36-454"></a></span>
+<span id="cb36-457"><a href="#cb36-457"></a><span class="in">```{r}</span></span>
+<span id="cb36-458"><a href="#cb36-458"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-459"><a href="#cb36-459"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-460"><a href="#cb36-460"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-461"><a href="#cb36-461"></a><span class="co">#| label: fig-16</span></span>
+<span id="cb36-462"><a href="#cb36-462"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-463"><a href="#cb36-463"></a><span class="co">#| fig.cap: "带半透明阴影区域和边框线的面积图"</span></span>
+<span id="cb36-464"><a href="#cb36-464"></a></span>
+<span id="cb36-465"><a href="#cb36-465"></a><span class="co"># load package</span></span>
+<span id="cb36-466"><a href="#cb36-466"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-467"><a href="#cb36-467"></a></span>
+<span id="cb36-468"><a href="#cb36-468"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb36-469"><a href="#cb36-469"></a>    <span class="at">Year     =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(sunspot.year)),</span>
+<span id="cb36-470"><a href="#cb36-470"></a>    <span class="at">Sunspots =</span> <span class="fu">as.numeric</span>(sunspot.year)</span>
+<span id="cb36-471"><a href="#cb36-471"></a>  )</span>
+<span id="cb36-472"><a href="#cb36-472"></a></span>
+<span id="cb36-473"><a href="#cb36-473"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
+<span id="cb36-474"><a href="#cb36-474"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span>
+<span id="cb36-475"><a href="#cb36-475"></a><span class="in">```</span></span>
+<span id="cb36-476"><a href="#cb36-476"></a></span>
+<span id="cb36-477"><a href="#cb36-477"></a>给整个面积图添加边框线后的效果可能并不十分令人满意，因为此时系统会在面积图的起点和终点位置分别绘制一条垂直线，且在底部绘制一条横线。</span>
+<span id="cb36-478"><a href="#cb36-478"></a></span>
+<span id="cb36-479"><a href="#cb36-479"></a>为了避免上述情况，可以先绘制不带框线的面积图（不设定 colour），然后添加图层，并用 <span class="in">`geom_line()`</span> 函数绘制轨迹线，如下图 @fig-17 。</span>
+<span id="cb36-480"><a href="#cb36-480"></a></span>
+<span id="cb36-483"><a href="#cb36-483"></a><span class="in">```{r}</span></span>
+<span id="cb36-484"><a href="#cb36-484"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-485"><a href="#cb36-485"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-486"><a href="#cb36-486"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-487"><a href="#cb36-487"></a><span class="co">#| label: fig-17</span></span>
+<span id="cb36-488"><a href="#cb36-488"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-489"><a href="#cb36-489"></a><span class="co">#| fig.cap: "不带下横线的面积图"</span></span>
+<span id="cb36-490"><a href="#cb36-490"></a></span>
+<span id="cb36-491"><a href="#cb36-491"></a><span class="co"># load package</span></span>
+<span id="cb36-492"><a href="#cb36-492"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-493"><a href="#cb36-493"></a></span>
+<span id="cb36-494"><a href="#cb36-494"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb36-495"><a href="#cb36-495"></a>    <span class="at">Year     =</span> <span class="fu">as.numeric</span>(<span class="fu">time</span>(sunspot.year)),</span>
+<span id="cb36-496"><a href="#cb36-496"></a>    <span class="at">Sunspots =</span> <span class="fu">as.numeric</span>(sunspot.year)</span>
+<span id="cb36-497"><a href="#cb36-497"></a>  )</span>
+<span id="cb36-498"><a href="#cb36-498"></a></span>
+<span id="cb36-499"><a href="#cb36-499"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
+<span id="cb36-500"><a href="#cb36-500"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
+<span id="cb36-501"><a href="#cb36-501"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb36-502"><a href="#cb36-502"></a><span class="in">```</span></span>
+<span id="cb36-503"><a href="#cb36-503"></a></span>
+<span id="cb36-504"><a href="#cb36-504"></a><span class="fu">## 绘制堆积面积图</span></span>
+<span id="cb36-505"><a href="#cb36-505"></a></span>
+<span id="cb36-506"><a href="#cb36-506"></a>依旧是运行 <span class="in">`geom_area()`</span> 函数，但是需要映射一个因子型变量到 <span class="in">`fill`</span> 即可，如下图 @fig-18 所示。</span>
+<span id="cb36-507"><a href="#cb36-507"></a></span>
+<span id="cb36-510"><a href="#cb36-510"></a><span class="in">```{r}</span></span>
+<span id="cb36-511"><a href="#cb36-511"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-512"><a href="#cb36-512"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-513"><a href="#cb36-513"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-514"><a href="#cb36-514"></a><span class="co">#| label: fig-18</span></span>
+<span id="cb36-515"><a href="#cb36-515"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-516"><a href="#cb36-516"></a><span class="co">#| fig.cap: "绘制堆积面积图"</span></span>
+<span id="cb36-517"><a href="#cb36-517"></a></span>
+<span id="cb36-518"><a href="#cb36-518"></a><span class="co"># load package</span></span>
+<span id="cb36-519"><a href="#cb36-519"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-520"><a href="#cb36-520"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb36-521"><a href="#cb36-521"></a></span>
+<span id="cb36-522"><a href="#cb36-522"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
+<span id="cb36-523"><a href="#cb36-523"></a>  <span class="fu">geom_area</span>()</span>
+<span id="cb36-524"><a href="#cb36-524"></a><span class="in">```</span></span>
+<span id="cb36-525"><a href="#cb36-525"></a></span>
+<span id="cb36-526"><a href="#cb36-526"></a>堆积面积图对应的基础数据通常为宽格式（wide format），但 ggplot 要求数据必须是长格式（long format），两种格式之间需要进行转换。<span class="ot">[^2]</span></span>
+<span id="cb36-527"><a href="#cb36-527"></a></span>
+<span id="cb36-528"><a href="#cb36-528"></a><span class="ot">[^2]: </span>在 <span class="in">`ggplot2`</span> 中绘制堆积面积图时，确实需要将宽格式数据转换为长格式。这并不是 <span class="in">`ggplot2`</span> 独有的要求，而是 **"整洁数据"（Tidy Data）** 原则在数据可视化中的体现。</span>
+<span id="cb36-529"><a href="#cb36-529"></a></span>
+<span id="cb36-530"><a href="#cb36-530"></a><span class="in">    **为什么需要转换？**</span></span>
+<span id="cb36-531"><a href="#cb36-531"></a></span>
+<span id="cb36-532"><a href="#cb36-532"></a><span class="in">    1.  ggplot2 的设计哲学 (Grammar of Graphics)</span></span>
+<span id="cb36-533"><a href="#cb36-533"></a></span>
+<span id="cb36-534"><a href="#cb36-534"></a><span class="in">        ggplot2 基于 Leland Wilkinson 的 图形语法（Grammar of Graphics）。其核心思想是将图表分解为独立的组件：数据、几何对象（geoms）、统计变换（stats）、标度（scales）等。这种语法要求数据以特定的方式组织，以便它能直接映射到图表的视觉属性上。</span></span>
+<span id="cb36-535"><a href="#cb36-535"></a></span>
+<span id="cb36-536"><a href="#cb36-536"></a><span class="in">        -   **映射（Mapping）**: 在 `ggplot2` 中，你需要明确地将数据变量映射到美学属性（如 x 轴、y 轴、颜色、填充、大小等）。</span></span>
+<span id="cb36-537"><a href="#cb36-537"></a></span>
+<span id="cb36-538"><a href="#cb36-538"></a><span class="in">        -   **整洁数据**: `ggplot2` 最适合处理**整洁数据**。整洁数据的定义是：</span></span>
+<span id="cb36-539"><a href="#cb36-539"></a></span>
+<span id="cb36-540"><a href="#cb36-540"></a><span class="in">            -   **每个变量一列**：数据集中的每个变量都应该有自己的一列。</span></span>
+<span id="cb36-541"><a href="#cb36-541"></a></span>
+<span id="cb36-542"><a href="#cb36-542"></a><span class="in">            -   **每个观测值一行**：每个观测值（或案例）都应该有自己的一行。</span></span>
+<span id="cb36-543"><a href="#cb36-543"></a></span>
+<span id="cb36-544"><a href="#cb36-544"></a><span class="in">            -   **每个单元格一个值**：每个单元格只包含一个值。</span></span>
+<span id="cb36-545"><a href="#cb36-545"></a></span>
+<span id="cb36-546"><a href="#cb36-546"></a><span class="in">        对于堆积面积图，如果你有宽格式数据，例如：</span></span>
+<span id="cb36-547"><a href="#cb36-547"></a></span>
+<span id="cb36-548"><a href="#cb36-548"></a><span class="in">        |      |       |       |       |</span></span>
+<span id="cb36-549"><a href="#cb36-549"></a><span class="in">        |------|-------|-------|-------|</span></span>
+<span id="cb36-550"><a href="#cb36-550"></a><span class="in">        | 年份 | 产品A | 产品B | 产品C |</span></span>
+<span id="cb36-551"><a href="#cb36-551"></a><span class="in">        | 2020 | 100   | 50    | 20    |</span></span>
+<span id="cb36-552"><a href="#cb36-552"></a><span class="in">        | 2021 | 120   | 60    | 30    |</span></span>
+<span id="cb36-553"><a href="#cb36-553"></a></span>
+<span id="cb36-554"><a href="#cb36-554"></a><span class="in">        在这种格式下，"产品A"、"产品B"、"产品C" 都是独立的列。`ggplot2` 很难直接理解 "产品A"、"产品B"、"产品C" 应该被视为一个共同的“产品类型”变量，并且它们的数值应该被堆叠。</span></span>
+<span id="cb36-555"><a href="#cb36-555"></a></span>
+<span id="cb36-556"><a href="#cb36-556"></a><span class="in">    2.  堆积图的要求</span></span>
+<span id="cb36-557"><a href="#cb36-557"></a></span>
+<span id="cb36-558"><a href="#cb36-558"></a><span class="in">        堆积图的本质是按照某个分类变量（在堆积面积图通常是类别或分组）来对数值变量进行累加。为了实现这一点，ggplot2 需要一个明确的列来表示“类别”（例如，“产品类型”），以及另一个明确的列来表示“值”（例如，“销售额”）。</span></span>
+<span id="cb36-559"><a href="#cb36-559"></a></span>
+<span id="cb36-560"><a href="#cb36-560"></a><span class="in">        当数据是长格式时：</span></span>
+<span id="cb36-561"><a href="#cb36-561"></a></span>
+<span id="cb36-562"><a href="#cb36-562"></a><span class="in">        |      |          |        |</span></span>
+<span id="cb36-563"><a href="#cb36-563"></a><span class="in">        |------|----------|--------|</span></span>
+<span id="cb36-564"><a href="#cb36-564"></a><span class="in">        | 年份 | 产品类型 | 销售额 |</span></span>
+<span id="cb36-565"><a href="#cb36-565"></a><span class="in">        | 2020 | 产品A    | 100    |</span></span>
+<span id="cb36-566"><a href="#cb36-566"></a><span class="in">        | 2020 | 产品B    | 50     |</span></span>
+<span id="cb36-567"><a href="#cb36-567"></a><span class="in">        | 2020 | 产品C    | 20     |</span></span>
+<span id="cb36-568"><a href="#cb36-568"></a><span class="in">        | 2021 | 产品A    | 120    |</span></span>
+<span id="cb36-569"><a href="#cb36-569"></a><span class="in">        | 2021 | 产品B    | 60     |</span></span>
+<span id="cb36-570"><a href="#cb36-570"></a><span class="in">        | 2021 | 产品C    | 30     |</span></span>
+<span id="cb36-571"><a href="#cb36-571"></a></span>
+<span id="cb36-572"><a href="#cb36-572"></a><span class="in">        现在，`ggplot2` 可以清晰地识别：</span></span>
+<span id="cb36-573"><a href="#cb36-573"></a></span>
+<span id="cb36-574"><a href="#cb36-574"></a><span class="in">        -   **X 轴**: `年份`</span></span>
+<span id="cb36-575"><a href="#cb36-575"></a></span>
+<span id="cb36-576"><a href="#cb36-576"></a><span class="in">        -   **Y 轴**: `销售额`</span></span>
+<span id="cb36-577"><a href="#cb36-577"></a></span>
+<span id="cb36-578"><a href="#cb36-578"></a><span class="in">        -   **填充颜色（或分组）**: `产品类型`</span></span>
+<span id="cb36-579"><a href="#cb36-579"></a></span>
+<span id="cb36-580"><a href="#cb36-580"></a><span class="in">        它知道如何根据 `产品类型` 对 `销售额` 进行堆积。</span></span>
+<span id="cb36-581"><a href="#cb36-581"></a></span>
+<span id="cb36-582"><a href="#cb36-582"></a><span class="in">    **如何转换？**</span></span>
+<span id="cb36-583"><a href="#cb36-583"></a></span>
+<span id="cb36-584"><a href="#cb36-584"></a><span class="in">    在 R 语言中，最常用的数据转换包是 **`tidyr`**，它是 `tidyverse` 生态系统的一部分。`tidyr` 包提供了 `pivot_longer()`（以前是 `gather()`）函数，用于将宽格式数据转换为长格式。</span></span>
+<span id="cb36-585"><a href="#cb36-585"></a></span>
+<span id="cb36-586"><a href="#cb36-586"></a><span class="in">    假设我们有以下宽格式数据框 `df_wide`：</span></span>
+<span id="cb36-587"><a href="#cb36-587"></a></span>
+<span id="cb36-588"><a href="#cb36-588"></a><span class="in">    ``` r</span></span>
+<span id="cb36-589"><a href="#cb36-589"></a><span class="in">    # 创建一个示例宽格式数据 </span></span>
+<span id="cb36-590"><a href="#cb36-590"></a><span class="in">    df_wide &lt;- data.frame(   </span></span>
+<span id="cb36-591"><a href="#cb36-591"></a><span class="in">        Year = c(2020, 2021, 2022),   </span></span>
+<span id="cb36-592"><a href="#cb36-592"></a><span class="in">        ProductA = c(100, 120, 150),   </span></span>
+<span id="cb36-593"><a href="#cb36-593"></a><span class="in">        ProductB = c(50, 60, 70),   </span></span>
+<span id="cb36-594"><a href="#cb36-594"></a><span class="in">        ProductC = c(20, 30, 40) )  </span></span>
+<span id="cb36-595"><a href="#cb36-595"></a><span class="in">    print(df_wide) </span></span>
+<span id="cb36-596"><a href="#cb36-596"></a><span class="in">    ```</span></span>
+<span id="cb36-597"><a href="#cb36-597"></a></span>
+<span id="cb36-598"><a href="#cb36-598"></a><span class="in">    输出：</span></span>
+<span id="cb36-599"><a href="#cb36-599"></a></span>
+<span id="cb36-600"><a href="#cb36-600"></a><span class="in">    ``` r</span></span>
+<span id="cb36-601"><a href="#cb36-601"></a><span class="in">     Year ProductA ProductB ProductC </span></span>
+<span id="cb36-602"><a href="#cb36-602"></a><span class="in">    1 2020      100       50       20 </span></span>
+<span id="cb36-603"><a href="#cb36-603"></a><span class="in">    2 2021      120       60       30 </span></span>
+<span id="cb36-604"><a href="#cb36-604"></a><span class="in">    3 2022      150       70       40 </span></span>
+<span id="cb36-605"><a href="#cb36-605"></a><span class="in">    ```</span></span>
+<span id="cb36-606"><a href="#cb36-606"></a></span>
+<span id="cb36-607"><a href="#cb36-607"></a><span class="in">    现在，我们使用 `pivot_longer()` 将其转换为长格式：</span></span>
+<span id="cb36-608"><a href="#cb36-608"></a></span>
+<span id="cb36-609"><a href="#cb36-609"></a><span class="in">    ``` r</span></span>
+<span id="cb36-610"><a href="#cb36-610"></a><span class="in">    library(tidyr) </span></span>
+<span id="cb36-611"><a href="#cb36-611"></a><span class="in">    library(ggplot2) # 用于后续绘图  </span></span>
+<span id="cb36-612"><a href="#cb36-612"></a><span class="in">    df_long &lt;- df_wide %&gt;%   </span></span>
+<span id="cb36-613"><a href="#cb36-613"></a><span class="in">    pivot_longer(     </span></span>
+<span id="cb36-614"><a href="#cb36-614"></a><span class="in">        cols = starts_with("Product"), </span></span>
+<span id="cb36-615"><a href="#cb36-615"></a><span class="in">        # 选择以 "Product" 开头的列进行转换     </span></span>
+<span id="cb36-616"><a href="#cb36-616"></a><span class="in">        names_to = "ProductType",     </span></span>
+<span id="cb36-617"><a href="#cb36-617"></a><span class="in">        # 新的类别变量的名称     </span></span>
+<span id="cb36-618"><a href="#cb36-618"></a><span class="in">        values_to = "Sales"           </span></span>
+<span id="cb36-619"><a href="#cb36-619"></a><span class="in">        # 新的数值变量的名称   </span></span>
+<span id="cb36-620"><a href="#cb36-620"></a><span class="in">    )  </span></span>
+<span id="cb36-621"><a href="#cb36-621"></a><span class="in">    print(df_long) </span></span>
+<span id="cb36-622"><a href="#cb36-622"></a><span class="in">    ```</span></span>
+<span id="cb36-623"><a href="#cb36-623"></a></span>
+<span id="cb36-624"><a href="#cb36-624"></a><span class="in">    输出：</span></span>
+<span id="cb36-625"><a href="#cb36-625"></a></span>
+<span id="cb36-626"><a href="#cb36-626"></a><span class="in">    ```         </span></span>
+<span id="cb36-627"><a href="#cb36-627"></a><span class="in">    # A tibble: 9 × 3    </span></span>
+<span id="cb36-628"><a href="#cb36-628"></a><span class="in">    Year ProductType Sales   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; </span></span>
+<span id="cb36-629"><a href="#cb36-629"></a><span class="in">    1  2020 ProductA      100 </span></span>
+<span id="cb36-630"><a href="#cb36-630"></a><span class="in">    2  2020 ProductB       50 </span></span>
+<span id="cb36-631"><a href="#cb36-631"></a><span class="in">    3  2020 ProductC       20 </span></span>
+<span id="cb36-632"><a href="#cb36-632"></a><span class="in">    4  2021 ProductA      120 </span></span>
+<span id="cb36-633"><a href="#cb36-633"></a><span class="in">    5  2021 ProductB       60 </span></span>
+<span id="cb36-634"><a href="#cb36-634"></a><span class="in">    6  2021 ProductC       30 </span></span>
+<span id="cb36-635"><a href="#cb36-635"></a><span class="in">    7  2022 ProductA      150 </span></span>
+<span id="cb36-636"><a href="#cb36-636"></a><span class="in">    8  2022 ProductB       70 </span></span>
+<span id="cb36-637"><a href="#cb36-637"></a><span class="in">    9  2022 ProductC       40 </span></span>
+<span id="cb36-638"><a href="#cb36-638"></a><span class="in">    ```</span></span>
+<span id="cb36-639"><a href="#cb36-639"></a></span>
+<span id="cb36-640"><a href="#cb36-640"></a><span class="in">    **使用长格式数据绘制堆积面积图**</span></span>
+<span id="cb36-641"><a href="#cb36-641"></a></span>
+<span id="cb36-642"><a href="#cb36-642"></a><span class="in">    现在我们有了长格式数据 `df_long`，就可以轻松绘制堆积面积图了：</span></span>
+<span id="cb36-643"><a href="#cb36-643"></a></span>
+<span id="cb36-644"><a href="#cb36-644"></a><span class="in">    ``` r</span></span>
+<span id="cb36-645"><a href="#cb36-645"></a><span class="in">    ggplot(df_long, aes(x = Year, y = Sales, fill = ProductType)) +   </span></span>
+<span id="cb36-646"><a href="#cb36-646"></a><span class="in">    geom_area(alpha = 0.8) + </span></span>
+<span id="cb36-647"><a href="#cb36-647"></a><span class="in">    # alpha 用于调整透明度   </span></span>
+<span id="cb36-648"><a href="#cb36-648"></a><span class="in">    labs(title = "不同产品销售额堆积面积图",        </span></span>
+<span id="cb36-649"><a href="#cb36-649"></a><span class="in">    x = "年份",        </span></span>
+<span id="cb36-650"><a href="#cb36-650"></a><span class="in">    y = "销售额",        </span></span>
+<span id="cb36-651"><a href="#cb36-651"></a><span class="in">    fill = "产品类型") +   </span></span>
+<span id="cb36-652"><a href="#cb36-652"></a><span class="in">    theme_minimal() </span></span>
+<span id="cb36-653"><a href="#cb36-653"></a><span class="in">    ```</span></span>
+<span id="cb36-654"><a href="#cb36-654"></a></span>
+<span id="cb36-655"><a href="#cb36-655"></a><span class="in">    *总结来说，将宽格式数据转换为长格式是 `ggplot2` 绘制堆积图的关键步骤。这不仅符合 `ggplot2` 的图形语法和整洁数据原则，也使得数据能够清晰地映射到图表的视觉属性上，从而正确地进行堆积和可视化。*</span></span>
+<span id="cb36-656"><a href="#cb36-656"></a></span>
+<span id="cb36-657"><a href="#cb36-657"></a>将 @fig-18 的调色板设定为蓝色渐变色，并在各个区域之间添加细线（<span class="in">`size = .2`</span>），同时我们将填充区域设定为半透明（<span class="in">`alpha = .4`</span> )，这样可以透过填充区域看见网格线。</span>
+<span id="cb36-658"><a href="#cb36-658"></a></span>
+<span id="cb36-661"><a href="#cb36-661"></a><span class="in">```{r}</span></span>
+<span id="cb36-662"><a href="#cb36-662"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-663"><a href="#cb36-663"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-664"><a href="#cb36-664"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-665"><a href="#cb36-665"></a><span class="co">#| label: fig-19</span></span>
+<span id="cb36-666"><a href="#cb36-666"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-667"><a href="#cb36-667"></a><span class="co">#| fig.cap: "绘制渐变堆积面积图"</span></span>
+<span id="cb36-668"><a href="#cb36-668"></a></span>
+<span id="cb36-669"><a href="#cb36-669"></a><span class="co"># load package</span></span>
+<span id="cb36-670"><a href="#cb36-670"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-671"><a href="#cb36-671"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb36-672"><a href="#cb36-672"></a></span>
+<span id="cb36-673"><a href="#cb36-673"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
+<span id="cb36-674"><a href="#cb36-674"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb36-675"><a href="#cb36-675"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span>
+<span id="cb36-676"><a href="#cb36-676"></a><span class="in">```</span></span>
+<span id="cb36-677"><a href="#cb36-677"></a></span>
+<span id="cb36-678"><a href="#cb36-678"></a>因为堆积面积图中的各个部分是由多边形构成的，所以其具有左、右边框线，这样的绘图效果不尽人意且可能产生误导效果。</span>
+<span id="cb36-679"><a href="#cb36-679"></a></span>
+<span id="cb36-680"><a href="#cb36-680"></a>下图将绘制一个不带边框线的堆积面积图：</span>
+<span id="cb36-681"><a href="#cb36-681"></a></span>
+<span id="cb36-684"><a href="#cb36-684"></a><span class="in">```{r}</span></span>
+<span id="cb36-685"><a href="#cb36-685"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-686"><a href="#cb36-686"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-687"><a href="#cb36-687"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-688"><a href="#cb36-688"></a><span class="co">#| label: fig-20</span></span>
+<span id="cb36-689"><a href="#cb36-689"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-690"><a href="#cb36-690"></a><span class="co">#| fig.cap: "不带边框线的渐变堆积面积图"</span></span>
+<span id="cb36-691"><a href="#cb36-691"></a></span>
+<span id="cb36-692"><a href="#cb36-692"></a><span class="co"># load package</span></span>
+<span id="cb36-693"><a href="#cb36-693"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-694"><a href="#cb36-694"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb36-695"><a href="#cb36-695"></a></span>
+<span id="cb36-696"><a href="#cb36-696"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup, <span class="at">order =</span> dplyr<span class="sc">::</span><span class="fu">desc</span>(AgeGroup))) <span class="sc">+</span></span>
+<span id="cb36-697"><a href="#cb36-697"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb36-698"><a href="#cb36-698"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span></span>
+<span id="cb36-699"><a href="#cb36-699"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="st">"stack"</span>, <span class="at">size =</span> .<span class="dv">2</span>)</span>
+<span id="cb36-700"><a href="#cb36-700"></a><span class="in">```</span></span>
+<span id="cb36-701"><a href="#cb36-701"></a></span>
+<span id="cb36-702"><a href="#cb36-702"></a><span class="fu">## 绘制百分比堆积面积图</span></span>
+<span id="cb36-703"><a href="#cb36-703"></a></span>
+<span id="cb36-704"><a href="#cb36-704"></a>使用 <span class="in">`geom_area(position = "fill")`</span> 函数实现这一效果：</span>
+<span id="cb36-705"><a href="#cb36-705"></a></span>
+<span id="cb36-708"><a href="#cb36-708"></a><span class="in">```{r}</span></span>
+<span id="cb36-709"><a href="#cb36-709"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-710"><a href="#cb36-710"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-711"><a href="#cb36-711"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-712"><a href="#cb36-712"></a><span class="co">#| label: fig-21</span></span>
+<span id="cb36-713"><a href="#cb36-713"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-714"><a href="#cb36-714"></a><span class="co">#| fig.cap: "百分比堆积面积图"</span></span>
+<span id="cb36-715"><a href="#cb36-715"></a></span>
+<span id="cb36-716"><a href="#cb36-716"></a><span class="co"># load package</span></span>
+<span id="cb36-717"><a href="#cb36-717"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-718"><a href="#cb36-718"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb36-719"><a href="#cb36-719"></a></span>
+<span id="cb36-720"><a href="#cb36-720"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
+<span id="cb36-721"><a href="#cb36-721"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="st">"fill"</span>,<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb36-722"><a href="#cb36-722"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span>
+<span id="cb36-723"><a href="#cb36-723"></a><span class="in">```</span></span>
+<span id="cb36-724"><a href="#cb36-724"></a></span>
+<span id="cb36-725"><a href="#cb36-725"></a>带百分比标签的百分比堆积面积图，通过运行 <span class="in">`position = "fill"`</span> 可将 y 值的范围按比例调整为 0-1。</span>
+<span id="cb36-726"><a href="#cb36-726"></a></span>
+<span id="cb36-727"><a href="#cb36-727"></a>再运行 <span class="in">`scale_y_continuous(labels = scales::percent)`</span> 可输出百分比标签。</span>
+<span id="cb36-728"><a href="#cb36-728"></a></span>
+<span id="cb36-731"><a href="#cb36-731"></a><span class="in">```{r}</span></span>
+<span id="cb36-732"><a href="#cb36-732"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-733"><a href="#cb36-733"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-734"><a href="#cb36-734"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-735"><a href="#cb36-735"></a><span class="co">#| label: fig-22</span></span>
+<span id="cb36-736"><a href="#cb36-736"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-737"><a href="#cb36-737"></a><span class="co">#| fig.cap: "带百分比标签的百分比堆积面积图"</span></span>
+<span id="cb36-738"><a href="#cb36-738"></a></span>
+<span id="cb36-739"><a href="#cb36-739"></a><span class="co"># load package</span></span>
+<span id="cb36-740"><a href="#cb36-740"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-741"><a href="#cb36-741"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
+<span id="cb36-742"><a href="#cb36-742"></a></span>
+<span id="cb36-743"><a href="#cb36-743"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
+<span id="cb36-744"><a href="#cb36-744"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="st">"fill"</span>,<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb36-745"><a href="#cb36-745"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)<span class="sc">+</span></span>
+<span id="cb36-746"><a href="#cb36-746"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span>
+<span id="cb36-747"><a href="#cb36-747"></a><span class="in">```</span></span>
+<span id="cb36-748"><a href="#cb36-748"></a></span>
+<span id="cb36-749"><a href="#cb36-749"></a><span class="fu">## 为折线图添加置信域</span></span>
+<span id="cb36-750"><a href="#cb36-750"></a></span>
+<span id="cb36-751"><a href="#cb36-751"></a>使用 <span class="in">`geom_ribbon()`</span> 函数，然后分别映射一个变量到 <span class="in">`ymin`</span> 和 <span class="in">`ymax`</span> 即可。</span>
+<span id="cb36-752"><a href="#cb36-752"></a></span>
+<span id="cb36-753"><a href="#cb36-753"></a>这里使用的数据集为 <span class="in">`climate`</span> 数据集，其中 <span class="in">`Anomaly10y`</span> 变量表示了各年温度相对于 1950\~1980 年平均水平偏差（以摄氏度衡量）的 10 年移动平均。变量 <span class="in">`Unc10y`</span> 表示其 95% 置信水平下的置信区间。</span>
+<span id="cb36-754"><a href="#cb36-754"></a></span>
+<span id="cb36-755"><a href="#cb36-755"></a>这里设定 ymax 和 ymin 分别等于<span class="in">`Anomaly10y+Unc10y`</span> 和 <span class="in">`Anomaly10y-Unc10y`</span></span>
+<span id="cb36-756"><a href="#cb36-756"></a></span>
+<span id="cb36-759"><a href="#cb36-759"></a><span class="in">```{r}</span></span>
+<span id="cb36-760"><a href="#cb36-760"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-761"><a href="#cb36-761"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-762"><a href="#cb36-762"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-763"><a href="#cb36-763"></a><span class="co">#| label: fig-23</span></span>
+<span id="cb36-764"><a href="#cb36-764"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-765"><a href="#cb36-765"></a><span class="co">#| fig.cap: "折线图添加置信域示例"</span></span>
+<span id="cb36-766"><a href="#cb36-766"></a></span>
+<span id="cb36-767"><a href="#cb36-767"></a><span class="co"># load package</span></span>
+<span id="cb36-768"><a href="#cb36-768"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-769"><a href="#cb36-769"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
+<span id="cb36-770"><a href="#cb36-770"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb36-771"><a href="#cb36-771"></a></span>
+<span id="cb36-772"><a href="#cb36-772"></a><span class="co"># Grab a subset of the climate data</span></span>
+<span id="cb36-773"><a href="#cb36-773"></a>climate_mod <span class="ot">&lt;-</span> climate <span class="sc">%&gt;%</span></span>
+<span id="cb36-774"><a href="#cb36-774"></a>  <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">"Berkeley"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb36-775"><a href="#cb36-775"></a>  <span class="fu">select</span>(Year, Anomaly10y, Unc10y)</span>
+<span id="cb36-776"><a href="#cb36-776"></a></span>
+<span id="cb36-777"><a href="#cb36-777"></a><span class="fu">head</span>(climate_mod)</span>
+<span id="cb36-778"><a href="#cb36-778"></a><span class="co">#&gt;     Year Anomaly10y Unc10y</span></span>
+<span id="cb36-779"><a href="#cb36-779"></a><span class="co">#&gt; 1   1800     -0.435  0.505</span></span>
+<span id="cb36-780"><a href="#cb36-780"></a><span class="co">#&gt; 2   1801     -0.453  0.493</span></span>
+<span id="cb36-781"><a href="#cb36-781"></a><span class="co">#&gt; 3   1802     -0.460  0.486</span></span>
+<span id="cb36-782"><a href="#cb36-782"></a><span class="co">#&gt;  ...&lt;199 more rows&gt;...</span></span>
+<span id="cb36-783"><a href="#cb36-783"></a><span class="co">#&gt; 203 2002      0.856  0.028</span></span>
+<span id="cb36-784"><a href="#cb36-784"></a><span class="co">#&gt; 204 2003      0.869  0.028</span></span>
+<span id="cb36-785"><a href="#cb36-785"></a><span class="co">#&gt; 205 2004      0.884  0.029</span></span>
+<span id="cb36-786"><a href="#cb36-786"></a></span>
+<span id="cb36-787"><a href="#cb36-787"></a><span class="co"># Shaded region</span></span>
+<span id="cb36-788"><a href="#cb36-788"></a><span class="fu">ggplot</span>(climate_mod, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y)) <span class="sc">+</span></span>
+<span id="cb36-789"><a href="#cb36-789"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Anomaly10y <span class="sc">-</span> Unc10y, <span class="at">ymax =</span> Anomaly10y <span class="sc">+</span> Unc10y), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb36-790"><a href="#cb36-790"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb36-791"><a href="#cb36-791"></a><span class="in">```</span></span>
+<span id="cb36-792"><a href="#cb36-792"></a></span>
+<span id="cb36-793"><a href="#cb36-793"></a>阴影部分的颜色实际上是黑灰色，但是看起来几乎是半透明的，这是因为通过设定 <span class="in">`alpha = 0.2`</span> 将阴影部分的透明度设置为 80%。</span>
+<span id="cb36-794"><a href="#cb36-794"></a></span>
+<span id="cb36-795"><a href="#cb36-795"></a>需要注意的是，如果使用这种带阴影或颜色的置信域，应该将 <span class="in">`geom_line()`</span> 函数放在 <span class="in">`geom_ribbon()`</span> 之后，这样折线会被绘制在阴影区域上面的图层，如果反转顺序的话，阴影区域的颜色有可能使折线模糊不清。</span>
+<span id="cb36-796"><a href="#cb36-796"></a></span>
+<span id="cb36-797"><a href="#cb36-797"></a>但是用户可以选择使用虚线来表示置信域的上下边界，这样就不用考虑色域的问题，如下图 @fig-24 所示。</span>
+<span id="cb36-798"><a href="#cb36-798"></a></span>
+<span id="cb36-801"><a href="#cb36-801"></a><span class="in">```{r}</span></span>
+<span id="cb36-802"><a href="#cb36-802"></a><span class="co">#| eval: true</span></span>
+<span id="cb36-803"><a href="#cb36-803"></a><span class="co">#| echo: true</span></span>
+<span id="cb36-804"><a href="#cb36-804"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb36-805"><a href="#cb36-805"></a><span class="co">#| label: fig-24</span></span>
+<span id="cb36-806"><a href="#cb36-806"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb36-807"><a href="#cb36-807"></a><span class="co">#| fig.cap: "折线图的虚线置信域示例"</span></span>
+<span id="cb36-808"><a href="#cb36-808"></a></span>
+<span id="cb36-809"><a href="#cb36-809"></a><span class="co"># load package</span></span>
+<span id="cb36-810"><a href="#cb36-810"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb36-811"><a href="#cb36-811"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
+<span id="cb36-812"><a href="#cb36-812"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb36-813"><a href="#cb36-813"></a></span>
+<span id="cb36-814"><a href="#cb36-814"></a><span class="co"># With a dotted line for upper and lower bounds</span></span>
+<span id="cb36-815"><a href="#cb36-815"></a><span class="fu">ggplot</span>(climate_mod, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y)) <span class="sc">+</span></span>
+<span id="cb36-816"><a href="#cb36-816"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Anomaly10y <span class="sc">-</span> Unc10y), <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb36-817"><a href="#cb36-817"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Anomaly10y <span class="sc">+</span> Unc10y), <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
+<span id="cb36-818"><a href="#cb36-818"></a>  <span class="fu">geom_line</span>()</span>
+<span id="cb36-819"><a href="#cb36-819"></a><span class="in">```</span></span>
+<span id="cb36-820"><a href="#cb36-820"></a></span>
+<span id="cb36-821"><a href="#cb36-821"></a>end.</span>
 </code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

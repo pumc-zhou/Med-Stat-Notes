@@ -617,3 +617,157 @@ ggplot(uspopage, aes(x = Year, y = Thousands, fill = AgeGroup)) +
     ```
 
     *总结来说，将宽格式数据转换为长格式是 `ggplot2` 绘制堆积图的关键步骤。这不仅符合 `ggplot2` 的图形语法和整洁数据原则，也使得数据能够清晰地映射到图表的视觉属性上，从而正确地进行堆积和可视化。*
+
+将 @fig-18 的调色板设定为蓝色渐变色，并在各个区域之间添加细线（`size = .2`），同时我们将填充区域设定为半透明（`alpha = .4` )，这样可以透过填充区域看见网格线。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-19
+#| fig: TRUE
+#| fig.cap: "绘制渐变堆积面积图"
+
+# load package
+library(ggplot2)
+library(gcookbook) # Load gcookbook for the uspopage data set
+
+ggplot(uspopage, aes(x = Year, y = Thousands, fill = AgeGroup)) +
+  geom_area(colour = "black", size = .2, alpha = .4) +
+  scale_fill_brewer(palette = "Blues")
+```
+
+因为堆积面积图中的各个部分是由多边形构成的，所以其具有左、右边框线，这样的绘图效果不尽人意且可能产生误导效果。
+
+下图将绘制一个不带边框线的堆积面积图：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-20
+#| fig: TRUE
+#| fig.cap: "不带边框线的渐变堆积面积图"
+
+# load package
+library(ggplot2)
+library(gcookbook) # Load gcookbook for the uspopage data set
+
+ggplot(uspopage, aes(x = Year, y = Thousands, fill = AgeGroup, order = dplyr::desc(AgeGroup))) +
+  geom_area(colour = NA, alpha = .4) +
+  scale_fill_brewer(palette = "Blues") +
+  geom_line(position = "stack", size = .2)
+```
+
+## 绘制百分比堆积面积图
+
+使用 `geom_area(position = "fill")` 函数实现这一效果：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-21
+#| fig: TRUE
+#| fig.cap: "百分比堆积面积图"
+
+# load package
+library(ggplot2)
+library(gcookbook) # Load gcookbook for the uspopage data set
+
+ggplot(uspopage, aes(x = Year, y = Thousands, fill = AgeGroup)) +
+  geom_area(position = "fill",colour = "black", size = .2, alpha = .4) +
+  scale_fill_brewer(palette = "Blues")
+```
+
+带百分比标签的百分比堆积面积图，通过运行 `position = "fill"` 可将 y 值的范围按比例调整为 0-1。
+
+再运行 `scale_y_continuous(labels = scales::percent)` 可输出百分比标签。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-22
+#| fig: TRUE
+#| fig.cap: "带百分比标签的百分比堆积面积图"
+
+# load package
+library(ggplot2)
+library(gcookbook) # Load gcookbook for the uspopage data set
+
+ggplot(uspopage, aes(x = Year, y = Thousands, fill = AgeGroup)) +
+  geom_area(position = "fill",colour = "black", size = .2, alpha = .4) +
+  scale_fill_brewer(palette = "Blues")+
+  scale_y_continuous(labels = scales::percent)
+```
+
+## 为折线图添加置信域
+
+使用 `geom_ribbon()` 函数，然后分别映射一个变量到 `ymin` 和 `ymax` 即可。
+
+这里使用的数据集为 `climate` 数据集，其中 `Anomaly10y` 变量表示了各年温度相对于 1950\~1980 年平均水平偏差（以摄氏度衡量）的 10 年移动平均。变量 `Unc10y` 表示其 95% 置信水平下的置信区间。
+
+这里设定 ymax 和 ymin 分别等于`Anomaly10y+Unc10y` 和 `Anomaly10y-Unc10y`
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-23
+#| fig: TRUE
+#| fig.cap: "折线图添加置信域示例"
+
+# load package
+library(ggplot2)
+library(gcookbook) # Load gcookbook for the climate data set
+library(dplyr)
+
+# Grab a subset of the climate data
+climate_mod <- climate %>%
+  filter(Source == "Berkeley") %>%
+  select(Year, Anomaly10y, Unc10y)
+
+head(climate_mod)
+#>     Year Anomaly10y Unc10y
+#> 1   1800     -0.435  0.505
+#> 2   1801     -0.453  0.493
+#> 3   1802     -0.460  0.486
+#>  ...<199 more rows>...
+#> 203 2002      0.856  0.028
+#> 204 2003      0.869  0.028
+#> 205 2004      0.884  0.029
+
+# Shaded region
+ggplot(climate_mod, aes(x = Year, y = Anomaly10y)) +
+  geom_ribbon(aes(ymin = Anomaly10y - Unc10y, ymax = Anomaly10y + Unc10y), alpha = 0.2) +
+  geom_line()
+```
+
+阴影部分的颜色实际上是黑灰色，但是看起来几乎是半透明的，这是因为通过设定 `alpha = 0.2` 将阴影部分的透明度设置为 80%。
+
+需要注意的是，如果使用这种带阴影或颜色的置信域，应该将 `geom_line()` 函数放在 `geom_ribbon()` 之后，这样折线会被绘制在阴影区域上面的图层，如果反转顺序的话，阴影区域的颜色有可能使折线模糊不清。
+
+但是用户可以选择使用虚线来表示置信域的上下边界，这样就不用考虑色域的问题，如下图 @fig-24 所示。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-24
+#| fig: TRUE
+#| fig.cap: "折线图的虚线置信域示例"
+
+# load package
+library(ggplot2)
+library(gcookbook) # Load gcookbook for the climate data set
+library(dplyr)
+
+# With a dotted line for upper and lower bounds
+ggplot(climate_mod, aes(x = Year, y = Anomaly10y)) +
+  geom_line(aes(y = Anomaly10y - Unc10y), colour = "grey50", linetype = "dotted") +
+  geom_line(aes(y = Anomaly10y + Unc10y), colour = "grey50", linetype = "dotted") +
+  geom_line()
+```
+
+end.
