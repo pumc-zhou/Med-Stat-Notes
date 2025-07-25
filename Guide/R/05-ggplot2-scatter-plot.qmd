@@ -1,0 +1,224 @@
+---
+title: "05-ggplot2 绘图——散点图"
+author: "Simonzhou"
+date: "2025-07-25"
+date-modified: today
+format: 
+    html:
+        code-fold: true
+        code-line-numbers: true
+        code-highlight: true
+        fig_caption: true
+        number-sections: true
+        toc: true
+        toc-depth: 3
+---
+
+# 散点图
+
+散点图常用来刻画两个连续变量之间的关系。
+
+绘制散点图时，数据集中的每一个观测值都由散点图中的一个点来表示。通常，人们还会向散点图中添加一条直线，以用来表示基于某些统计模型的预测值。当散点图中的数据趋势难以用肉眼识别时，这些直线对我们理解数据的特征很有帮助。
+
+当数据集很大时，散点图上的数据点会相互重叠，此时，很难在图上清楚地显示出所有的数据点。为了解决重叠的问题，我们可以先对数据进行汇总，再绘制散点图。
+
+## 绘制基本散点图
+
+使用 `geom_point()` 函数，分别映射一个变量到 x 和一个变量到 y。
+
+这里使用 `heightweight` 数据集，这是一个多列数据集，接下来的例子我们只用到其中两列。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-1
+#| fig: TRUE
+#| fig.cap: "基本散点图"
+
+# load package
+library(ggplot2)
+library(gcookbook) # 加载gcookbook是为了使用heightweight数据集
+library(dplyr)
+
+# 列出我们绘制散点图要用到的两列的标题
+heightweight %>% 
+  select(ageYear, heightIn)
+#>     ageYear heightIn
+#> 1     11.92     56.3
+#> 2     12.92     62.3
+#> 3     12.75     63.3
+#>  ...<230 more rows>...
+#> 235   13.67     61.5
+#> 236   13.92     62.0
+#> 237   12.58     59.3
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn)) + 
+  geom_point()
+```
+
+通过设定形状（shape）参数可以在散点图中绘制点以外的形状。例如，我们常用空心圈 `shape=21`（图 @fig5-3 ）代替默认的实心圆 `shape=19`（图 @fig5-1 ）​。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-2
+#| fig: TRUE
+#| fig.cap: "基本散点图-修改形状"
+
+# load package
+library(ggplot2)
+library(gcookbook) # 加载gcookbook是为了使用heightweight数据集
+library(dplyr)
+
+# 列出我们绘制散点图要用到的两列的标题
+heightweight %>% 
+  select(ageYear, heightIn)
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn)) + 
+  geom_point(shape = 21)
+```
+
+修改点的大小（在默认实心圆点的情况下），默认点的大小为：`size=2`。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-3
+#| fig: TRUE
+#| fig.cap: "基本散点图-修改散点大小"
+
+# load package
+library(ggplot2)
+library(gcookbook) # 加载gcookbook是为了使用heightweight数据集
+library(dplyr)
+
+# 列出我们绘制散点图要用到的两列的标题
+heightweight %>% 
+  select(ageYear, heightIn)
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn)) + 
+  geom_point(size = 1.5)
+```
+
+## 使用点形或颜色属性对数据点进行分组
+
+将分组变量映射到点形（`shape`）或颜色（`colour`）属性。
+
+接下来的例子中，我们将用到 `heightweight` 数据集中的3列。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-4
+#| fig: TRUE
+#| fig-cap: "基本散点图-按形/色分组"
+#| fig-subcap:
+#|   - "按颜色分组"
+#|   - "按形状分组" 
+#| layout-ncol: 2
+#| column: page-right
+
+# load package
+library(ggplot2)
+library(gcookbook) # 加载gcookbook是为了使用heightweight数据集
+library(dplyr)
+
+# 列出要用到的3列的标题
+heightweight %>%
+  select(sex, ageYear, heightIn)
+#>     sex ageYear heightIn
+#> 1     f   11.92     56.3
+#> 2     f   12.92     62.3
+#> 3     f   12.75     63.3
+#>  ...<230 more rows>...
+#> 235   m   13.67     61.5
+#> 236   m   13.92     62.0
+#> 237   m   12.58     59.3
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn,color = sex)) + 
+  geom_point()
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn,shape = sex)) + 
+  geom_point()
+```
+
+选用的分组变量必须是分类变量，换言之，它必须是因子型或者字符型的向量。如果分组变量是数值型向量，则需要将它转化为因子型变量之后，才能以其作为分组变量。
+
+可以将一个变量同时映射到 `shape` 和 `colour` 属性。当有多个分组变量时，可以将它们分别映射到不同的图形属性。下面，我们把变量 `sex` 同时映射到 `shape` 和 `colour` 属性，见图 @fig5-5 。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-5
+#| fig: TRUE
+#| fig-cap: "基本散点图-按形和色分组"
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn,color = sex,shape = sex)) + 
+  geom_point()
+```
+
+有时需要使用不同于默认设置的点形和颜色。通过调用`scale_shape_manual()` 函数可以使用其他点形；
+
+调用 `scale_colour_brewer()` 函数或者 `scale_colour_manual()` 函数可以使用其他调色板，见图 @fig5-6 。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-6
+#| fig: TRUE
+#| fig-cap: "基本散点图-修改调色板"
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn, shape = sex, colour = sex)) + 
+  geom_point() +
+  scale_shape_manual(values = c(1,2)) + 
+  scale_colour_brewer(palette = "Set1")
+```
+
+## 使用不同于默认设置的点形
+
+通过指定 `geom_point()` 函数中的点形（`shape`）参数，可以同时设定散点图中所有数据点的点形，如图 @fig5-7 所示。
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-7
+#| fig: TRUE
+#| fig-cap: "指定散点形状"
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn)) + 
+  geom_point(shape = 3)
+```
+
+R系统绘图可以调用的图形较多，一些点形只有边框线（1～14）​；一些只有实心填充区域（15～20）​；还有一些则由可分离的边框线和具有填充色的实心区域共同组成（21～25）​，也可以用字符作点形。
+
+如果已将分组变量映射到 `shape`，则可以调用 `scale_shape_manual()` 函数来手动修改该分组变量不同水平的点形
+
+下图将使用略大且自定义点形的数据点：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig5-8
+#| fig: TRUE
+#| fig-cap: "自定义散点形状"
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn, shape = sex)) + 
+  geom_point(size = 3)+
+  scale_shape_manual(values = c(1,4))
+```
+
+-   点形1～20的点的颜色，包括实心区域的颜色都可由 `colour` 参数来控制。
+
+-   对于点形21～25而言，边框线和实心区域的颜色则分别由 `colour` 和 `fill` 参数来控制。
+
+我们可以将两个不同的变量分别由点形和填充色（空心或有填充）属性来表示。
+
+为了实现这一功能，首先需要选择一个同时具有 `colour` 和 `fill` 属性的点形，在 `scale_shape_manual` 中设定。之后需要在`scale_fill_manual()` 中选择一个包括 NA 和其他颜色的调色板（NA会生成一个空心的形状）​。

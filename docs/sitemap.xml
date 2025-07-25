@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-07-24T15:01:47.932Z</lastmod>
+    <lastmod>2025-07-25T15:09:57.453Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -399,5 +399,9 @@
   <url>
     <loc>www.lazyzhou.cn/Guide/R/04-ggplot2-folded-line.html</loc>
     <lastmod>2025-07-24T15:02:19.442Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/R/05-ggplot2-scatter-plot.html</loc>
+    <lastmod>2025-07-25T15:11:37.075Z</lastmod>
   </url>
 </urlset>
