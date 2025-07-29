@@ -1,7 +1,7 @@
 project:
   type: website
   preview:
-    port: 5000
+    port: 8889
   output-dir: "docs" # 输出（编译后的HTML文件、PDF文件以及运行code chunk后产生的图像、数据等）文件夹
   execute-dir: project
 editor: visual # 编辑使用visual模式

@@ -906,7 +906,7 @@
     "href": "index.html",
     "title": "医学统计学习笔记",
     "section": "",
-    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{zhou2025,\n  author = {ZHOU, LB},\n  title = {医学统计学习笔记},\n  date = {2025-07-25},\n  url = {https://github.com/pumc-zhou/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nZHOU, LB. 2025. “医学统计学习笔记.” July 25, 2025. https://github.com/pumc-zhou/Med-Stat-Notes.",
+    "text": "本书的前身是开始于23年夏天的Rmarkdown笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。\n现在重制这本学习笔记，按照初步构想，会继续完善卫生/医学统计学部分的内容，从低阶往高阶完善；再就是记录相关程序的使用技巧和学习记录（R、Python、SAS etc.）；还有有一部分的项目分享（如果顺利的话）和读书报告。\nEpidemiologists, in response to a health emergency or as a result of systematic surveillance, first obtain and analyze observed data. They use data, observations, science, and theory as they work at identifying a pathogen (when unknown) behind an observed disease outbreak or as they proceed to plan or implement policies that ameliorates its impact.\n按照大类再细分的话会有如下：\n\n统计学\n\n医学统计学（基础篇）\n高级医学统计学\n\n统计软件的使用\n\nR\nPython\nSAS\nStata\nQuarto\n\n项目记录\n\nKaggle\n\n读书笔记\n\n\n\n引用格式BibTeX@online{zhou2025,\n  author = {ZHOU, LB},\n  title = {医学统计学习笔记},\n  date = {2025-07-29},\n  url = {https://github.com/pumc-zhou/Med-Stat-Notes},\n  langid = {zh}\n}\n请按如下格式引用：\nZHOU, LB. 2025. “医学统计学习笔记.” July 29, 2025. https://github.com/pumc-zhou/Med-Stat-Notes.",
     "crumbs": [
       "Home",
       "主页"
@@ -7658,6 +7658,58 @@
       "Guide",
       "R",
       "05-ggplot2 绘图——散点图"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-07-29-liner-reg.html",
+    "href": "Guide/Stata/25-07-29-liner-reg.html",
+    "title": "25-因果推断中的线性回归",
+    "section": "",
+    "text": "代码\nimport stata_setup\nstata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "Stata",
+      "25-因果推断中的线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-07-29-liner-reg.html#简要的查看一下数据",
+    "href": "Guide/Stata/25-07-29-liner-reg.html#简要的查看一下数据",
+    "title": "25-因果推断中的线性回归",
+    "section": "1.1 简要的查看一下数据",
+    "text": "1.1 简要的查看一下数据\n\n\n代码\n%%stata\ndescribe\n\n\n\nContains data from ../../Data/causal-inference/cfps2010.dta\n Observations:         4,137                  \n    Variables:            12                  5 Aug 2022 19:25\n-------------------------------------------------------------------------------\nVariable      Storage   Display    Value\n    name         type    format    label      Variable label\n-------------------------------------------------------------------------------\npid             double  %12.0g     pid        个人id\nprovcd          double  %24.0g     provcd     省国标码\ngender          double  %12.0g     gender     性别\nage             float   %9.0g                 年龄\nage2            float   %9.0g                 年龄平方\nage3            float   %9.0g                 年龄三次方\nlninc           float   %9.0g                 收入对数\ncollege         double  %9.0g      yesorno    是否上大学\nhukou           double  %12.0g     hukou      3岁时户口性质\nsibling         float   %9.0g      yesorno    是否独生子女\nrace            double  %9.0g      yesorno    是否汉族\nfmedu           float   %9.0g      fmedu      父母是否上过高中\n-------------------------------------------------------------------------------\nSorted by: \n\n\n分析变量为收入对数 lninc，核心自变量为是否上大学 college，该变量取值为 1 表示研究对象读过大学，取值为 0 表示没有读过大学。\n基于上述两个变量，可以进行一元线性回归，具体如下：\n\n\n代码\n%%stata\nregress lninc college\n\n\n\n      Source |       SS           df       MS      Number of obs   =     4,137\n-------------+----------------------------------   F(1, 4135)      =    508.22\n       Model |  671.883317         1  671.883317   Prob &gt; F        =    0.0000\n    Residual |  5466.56371     4,135  1.32202266   R-squared       =    0.1095\n-------------+----------------------------------   Adj R-squared   =    0.1092\n       Total |  6138.44703     4,136  1.48415063   Root MSE        =    1.1498\n\n------------------------------------------------------------------------------\n       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     college |    .823612   .0365338    22.54   0.000     .7519861     .895238\n       _cons |   9.353189   .0230235   406.25   0.000     9.308051    9.398327\n------------------------------------------------------------------------------\n\n\n从分析结果可以看出，在不控制任何变量的情况下，college 的回归系数为 0.824 ，其标准误为 0.037。\n用回归系数除以标准误即可得到 t 统计量的值，为 22.54，它的 P 值在小数点后三位都是 0，说明 college 对 lninc 的影响是非常显著的。\n除此之外，Stata 还报告了置信度为 95% 的置信区间为 [0.752, 0.896]。\n需要注意的是，上述标准误以及统计检验结果都是基于独立同分布假定计算的，因此在实际应用中需要谨慎解读。\n在显示条件下，该假定通常不能得到满足，因此，建议使用更加稳健的标准误和统计检验。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "Stata",
+      "25-因果推断中的线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-07-29-liner-reg.html#使用稳健标准误",
+    "href": "Guide/Stata/25-07-29-liner-reg.html#使用稳健标准误",
+    "title": "25-因果推断中的线性回归",
+    "section": "1.2 使用稳健标准误",
+    "text": "1.2 使用稳健标准误\n使用怀特异方差稳健标准误来调整异方差的影响，使用方法在 regress 命令后使用选项 vce(robust)。\n\n\n代码\n%%stata\nregress lninc college, vce(robust)\n\n\n\nLinear regression                               Number of obs     =      4,137\n                                                F(1, 4135)        =     582.05\n                                                Prob &gt; F          =     0.0000\n                                                R-squared         =     0.1095\n                                                Root MSE          =     1.1498\n\n------------------------------------------------------------------------------\n             |               Robust\n       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n     college |    .823612   .0341385    24.13   0.000     .7566823    .8905418\n       _cons |   9.353189   .0256882   364.10   0.000     9.302826    9.403552\n------------------------------------------------------------------------------\n\n\n从结果中可以看到，使用稳健标准误后，college 的回归系数仍然为 0.824，但其标准误变为 0.034，相比之前略有下降，t 统计量变为 24.13，P 值在小数点后三位都是 0，说明 college 对 lninc 的影响仍然是非常显著的。\n由于异方差条件下的标准误和统计检验结果更加可信，因此建议用户在使用 regress 命令时，使用选项 vce(robust)。",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "Stata",
+      "25-因果推断中的线性回归"
+    ]
+  },
+  {
+    "objectID": "Guide/Stata/25-07-29-liner-reg.html#多阶段整群抽样",
+    "href": "Guide/Stata/25-07-29-liner-reg.html#多阶段整群抽样",
+    "title": "25-因果推断中的线性回归",
+    "section": "1.3 多阶段整群抽样",
+    "text": "1.3 多阶段整群抽样",
+    "crumbs": [
+      "Home",
+      "Guide",
+      "Stata",
+      "25-因果推断中的线性回归"
     ]
   }
 ]

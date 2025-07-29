@@ -1,0 +1,161 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: \"25-因果推断中的线性回归\"\n",
+        "author: \"Simonzhou\"\n",
+        "date: \"2025-07-29\"\n",
+        "date-modified: today\n",
+        "format: \n",
+        "    html:\n",
+        "        code-fold: true\n",
+        "        code-line-numbers: true\n",
+        "        code-highlight: true\n",
+        "        fig_caption: true\n",
+        "        number-sections: true\n",
+        "        toc: true\n",
+        "        toc-depth: 3\n",
+        "---"
+      ],
+      "id": "6ec866d9"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "#| eval: true\n",
+        "#| echo: true\n",
+        "#| code-fold: true\n",
+        "\n",
+        "import stata_setup\n",
+        "stata_setup.config('C:/Program Files/Stata18', 'mp', splash=False)"
+      ],
+      "id": "9ca69a11",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "# 线性回归\n",
+        "\n",
+        "这里将使用一个案例演示 regress 和 teffects ra 的用法。\n",
+        "\n",
+        "案例数据来自 “中国家庭追踪数据”（China Family Panel Studies, CFPS）2010年的数据，该数据集由中国社会科学院和北京大学共同开发，旨在收集中国家庭的社会、经济和人口信息。\n",
+        "\n",
+        "数据总共包括 4137 名年龄在25-55 岁之间的成年人，集体如下：\n"
+      ],
+      "id": "a62f9231"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "%%stata\n",
+        "use \"../../Data/causal-inference/cfps2010.dta\", clear\n",
+        "* 查看数据随机十个数据\n",
+        "list in 1/10"
+      ],
+      "id": "c6c15b96",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "简要的查看一下数据：\n"
+      ],
+      "id": "f3151e5b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "%%stata\n",
+        "describe"
+      ],
+      "id": "030a42bd",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "分析变量为收入对数 `lninc`，核心自变量为是否上大学 `college`，该变量取值为 1 表示研究对象读过大学，取值为 0 表示没有读过大学。\n",
+        "\n",
+        "基于上述两个变量，可以进行一元线性回归，具体如下：\n"
+      ],
+      "id": "abcc5a27"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "%%stata\n",
+        "regress lninc college"
+      ],
+      "id": "32eb1b2f",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "从分析结果可以看出，在不控制任何变量的情况下，college 的回归系数为 0.824 ，其标准误为 0.037。\n",
+        "\n",
+        "用回归系数除以标准误即可得到 t 统计量的值，为 22.54，它的 P 值在小数点后三位都是 0，说明 college 对 lninc 的影响是非常显著的。\n",
+        "\n",
+        "除此之外，Stata 还报告了置信度为 95% 的置信区间为 [0.752, 0.896]。\n",
+        "\n",
+        "需要注意的是，上述标准误以及统计检验结果都是基于独立同分布假定计算的，因此在实际应用中需要谨慎解读。\n",
+        "\n",
+        "在显示条件下，该假定通常不能得到满足，因此，建议使用更加稳健的标准误和统计检验。\n",
+        "\n",
+        "## 使用稳健标准误\n",
+        "\n",
+        "使用怀特异方差稳健标准误来调整异方差的影响，使用方法在 `regress` 命令后使用选项 `vce(robust)`。\n"
+      ],
+      "id": "d038dd1b"
+    },
+    {
+      "cell_type": "code",
+      "metadata": {},
+      "source": [
+        "%%stata\n",
+        "regress lninc college, vce(robust)"
+      ],
+      "id": "464fdda0",
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "从结果中可以看到，使用稳健标准误后，college 的回归系数仍然为 0.824，但其标准误变为 0.034，相比之前略有下降，t 统计量变为 24.13，P 值在小数点后三位都是 0，说明 college 对 lninc 的影响仍然是非常显著的。\n",
+        "\n",
+        "由于异方差条件下的标准误和统计检验结果更加可信，因此建议用户在使用 `regress` 命令时，使用选项 `vce(robust)`。\n",
+        "\n",
+        "## 多阶段整群抽样"
+      ],
+      "id": "15499c47"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "C:\\Users\\asus\\AppData\\Local\\Programs\\Python\\Python312\\share\\jupyter\\kernels\\python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}
