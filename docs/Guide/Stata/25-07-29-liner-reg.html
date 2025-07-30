@@ -861,6 +861,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
   <li><a href="#简要的查看一下数据" id="toc-简要的查看一下数据" class="nav-link" data-scroll-target="#简要的查看一下数据"><span class="header-section-number">1.1</span> 简要的查看一下数据</a></li>
   <li><a href="#使用稳健标准误" id="toc-使用稳健标准误" class="nav-link" data-scroll-target="#使用稳健标准误"><span class="header-section-number">1.2</span> 使用稳健标准误</a></li>
   <li><a href="#多阶段整群抽样" id="toc-多阶段整群抽样" class="nav-link" data-scroll-target="#多阶段整群抽样"><span class="header-section-number">1.3</span> 多阶段整群抽样</a></li>
+  <li><a href="#控制变量" id="toc-控制变量" class="nav-link" data-scroll-target="#控制变量"><span class="header-section-number">1.4</span> 控制变量</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/Stata/25-07-29-liner-reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
@@ -894,7 +895,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年7月29日</p>
+      <p class="date-modified">2025年7月30日</p>
     </div>
   </div>
     
@@ -1110,6 +1111,68 @@ Linear regression                               Number of obs     =      4,137
 </section>
 <section id="多阶段整群抽样" class="level2" data-number="1.3">
 <h2 data-number="1.3" class="anchored" data-anchor-id="多阶段整群抽样"><span class="header-section-number">1.3</span> 多阶段整群抽样</h2>
+<p>用户还可以使用选项 vce(cluster clustvar) 进一步放松误差项之间相互独立的假定。</p>
+<p>CFPS 采用的是以地理区域为抽样单位的多阶段整群抽样，这样会导致同一个抽样单位中的样本存在自相关。</p>
+<p>为了降低自相关的影响，以调查样本所在省（provcd）为聚类变量，使用选项 <code>vce(cluster provcd)</code>，计算聚类稳健标准误，命令和结果如下：</p>
+<div id="bab627f7" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2"></a>regress lninc college, vce(cluster provcd)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 24)          =     271.17
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1095
+                                                Root MSE          =     1.1498
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .823612   .0500155    16.47   0.000     .7203851     .926839
+       _cons |   9.353189   .1084703    86.23   0.000     9.129317    9.577061
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>在使用 <code>vce(cluster provcd)</code> 后，college 的回归系数仍然为 0.824，但其标准误变为 0.050，相比之前略有上升，t 统计量变为 16.47，P 值在小数点后三位都是 0，说明 college 对 lninc 的影响仍然是非常显著的。</p>
+<p>在这个聚类稳健标准误的结果中，统计检验结果没有受到影响，相比之前，使用聚类稳健标准误的结果最为稳健，因此，后续都将使用此类标准误的分析结果。</p>
+<p>上述分析都只包含 college 这一个自变量，在这种情况下，进行因果推断必须满足严格的可忽略性假定。即要求大学学历在研究对象中随机分配，这个假定显然与中国的实际情况相差很远，因此，上述分析结果仅能代表上大学的人和不上大学的人在收入对数上的平均差异，不能解释为大学对收入的因果影响。</p>
+</section>
+<section id="控制变量" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="控制变量"><span class="header-section-number">1.4</span> 控制变量</h2>
+<p>为了使回归分析结果具有因果解释的效应，需要在模型中纳入控制变量，以尽可能地满足条件独立假定。</p>
+<p>这里我们认为，就这个研究问题来说，研究对象出生时的户口性质（hukou）是一个非常重要的混杂变量。</p>
+<p>一方面，由于教育资源分布的城乡不均，城市人比农村人拥有更多考上大学的机会；另一方面，因为劳动力市场上的城乡分割，城市人也比农村人拥有更好的收入前景。</p>
+<p>综合这两个方面，有必要在模型分析时控制 hukou 变量。</p>
+<div id="dd02c155" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2"></a>regress lninc college hukou, vce(cluster provcd)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(2, 24)          =     219.69
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1169
+                                                Root MSE          =     1.1451
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .798281   .0451727    17.67   0.000     .7050491     .891513
+       hukou |   .2155333   .0611855     3.52   0.002     .0892526    .3418141
+       _cons |    9.27541   .0993474    93.36   0.000     9.070367    9.480453
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
 
 
 </section>
