@@ -895,6 +895,9 @@ window.Quarto = {
   <li><a href="#对遗漏变量偏差公式进行检验" id="toc-对遗漏变量偏差公式进行检验" class="nav-link" data-scroll-target="#对遗漏变量偏差公式进行检验"><span class="header-section-number">1.6</span> 对遗漏变量偏差公式进行检验</a></li>
   <li><a href="#纳入更多的控制变量" id="toc-纳入更多的控制变量" class="nav-link" data-scroll-target="#纳入更多的控制变量"><span class="header-section-number">1.7</span> 纳入更多的控制变量</a></li>
   <li><a href="#纳入分类变量" id="toc-纳入分类变量" class="nav-link" data-scroll-target="#纳入分类变量"><span class="header-section-number">1.8</span> 纳入分类变量</a></li>
+  <li><a href="#异质性对回归分析的影响" id="toc-异质性对回归分析的影响" class="nav-link" data-scroll-target="#异质性对回归分析的影响"><span class="header-section-number">1.9</span> 异质性对回归分析的影响</a></li>
+  <li><a href="#计算回归调整估计量" id="toc-计算回归调整估计量" class="nav-link" data-scroll-target="#计算回归调整估计量"><span class="header-section-number">1.10</span> 计算回归调整估计量</a></li>
+  <li><a href="#手动演示计算回归调整估计量" id="toc-手动演示计算回归调整估计量" class="nav-link" data-scroll-target="#手动演示计算回归调整估计量"><span class="header-section-number">1.11</span> 手动演示计算回归调整估计量</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/Stata/25-07-29-linear-reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
@@ -928,7 +931,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年7月31日</p>
+      <p class="date-modified">2025年8月1日</p>
     </div>
   </div>
     
@@ -939,7 +942,7 @@ window.Quarto = {
 </header>
 
 
-<div id="b9969c14" class="cell" data-execution_count="2">
+<div id="b9969c14" class="cell" data-execution_count="37">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> stata_setup</span>
@@ -951,7 +954,7 @@ window.Quarto = {
 <p>这里将使用一个案例演示 regress 和 teffects ra 的用法。</p>
 <p>案例数据来自 “中国家庭追踪数据”（China Family Panel Studies, CFPS）2010年的数据，该数据集由中国社会科学院和北京大学共同开发，旨在收集中国家庭的社会、经济和人口信息。</p>
 <p>数据总共包括 4137 名年龄在25-55 岁之间的成年人，集体如下：</p>
-<div id="ecb73c1b" class="cell" data-execution_count="3">
+<div id="ecb73c1b" class="cell" data-execution_count="38">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>stata</span>
@@ -1051,7 +1054,7 @@ window.Quarto = {
 </div>
 <section id="简要的查看一下数据" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="简要的查看一下数据"><span class="header-section-number">1.1</span> 简要的查看一下数据</h2>
-<div id="74c69965" class="cell" data-execution_count="4">
+<div id="74c69965" class="cell" data-execution_count="39">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>stata</span>
@@ -1084,7 +1087,7 @@ Sorted by: </code></pre>
 </div>
 <p>分析变量为收入对数 <code>lninc</code>，核心自变量为是否上大学 <code>college</code>，该变量取值为 1 表示研究对象读过大学，取值为 0 表示没有读过大学。</p>
 <p>基于上述两个变量，可以进行一元线性回归，具体如下：</p>
-<div id="e449faa5" class="cell" data-execution_count="5">
+<div id="e449faa5" class="cell" data-execution_count="40">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">%%</span>stata</span>
@@ -1116,7 +1119,7 @@ Sorted by: </code></pre>
 <section id="使用稳健标准误" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="使用稳健标准误"><span class="header-section-number">1.2</span> 使用稳健标准误</h2>
 <p>使用怀特异方差稳健标准误来调整异方差的影响，使用方法在 <code>regress</code> 命令后使用选项 <code>vce(robust)</code>。</p>
-<div id="a8836ff7" class="cell" data-execution_count="6">
+<div id="a8836ff7" class="cell" data-execution_count="41">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">%%</span>stata</span>
@@ -1147,7 +1150,7 @@ Linear regression                               Number of obs     =      4,137
 <p>用户还可以使用选项 vce(cluster clustvar) 进一步放松误差项之间相互独立的假定。</p>
 <p>CFPS 采用的是以地理区域为抽样单位的多阶段整群抽样，这样会导致同一个抽样单位中的样本存在自相关。</p>
 <p>为了降低自相关的影响，以调查样本所在省（provcd）为聚类变量，使用选项 <code>vce(cluster provcd)</code>，计算聚类稳健标准误，命令和结果如下：</p>
-<div id="bab627f7" class="cell" data-execution_count="7">
+<div id="bab627f7" class="cell" data-execution_count="42">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>stata</span>
@@ -1181,7 +1184,7 @@ Linear regression                               Number of obs     =      4,137
 <p>这里我们认为，就这个研究问题来说，研究对象出生时的户口性质（hukou）是一个非常重要的混杂变量。</p>
 <p>一方面，由于教育资源分布的城乡不均，城市人比农村人拥有更多考上大学的机会；另一方面，因为劳动力市场上的城乡分割，城市人也比农村人拥有更好的收入前景。</p>
 <p>综合这两个方面，有必要在模型分析时控制 hukou 变量。</p>
-<div id="dd02c155" class="cell" data-execution_count="8">
+<div id="dd02c155" class="cell" data-execution_count="43">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">%%</span>stata</span>
@@ -1212,7 +1215,7 @@ Linear regression                               Number of obs     =      4,137
 <h2 data-number="1.5" class="anchored" data-anchor-id="偏回归系数"><span class="header-section-number">1.5</span> 偏回归系数</h2>
 <p>在控制 hukou 后，college 的回归系数将变为一个偏回归系数，它可以通过两步线性回归得到。</p>
 <p>具体来说，第一步回归分析以 college 为因变量，hukou 为自变量，这一步回归分析的目的是获取 college 的残差。</p>
-<div id="0b73b362" class="cell" data-execution_count="9">
+<div id="0b73b362" class="cell" data-execution_count="44">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">%%</span>stata</span>
@@ -1237,7 +1240,7 @@ Linear regression                               Number of obs     =      4,137
 </div>
 </div>
 <p>接着，使用 <code>predict</code> 命令并结合选项 <code>residuals</code> 获得回归的残差 <span class="math inline">\(e\)</span> 。</p>
-<div id="c8544043" class="cell" data-execution_count="10">
+<div id="c8544043" class="cell" data-execution_count="45">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="op">%%</span>stata</span>
@@ -1245,7 +1248,7 @@ Linear regression                               Number of obs     =      4,137
 </details>
 </div>
 <p>再使用 lninc 作为因变量，<span class="math inline">\(e\)</span> 作为自变量进行第二步线性回归分析，这一步回归分析的结果就是 college 的偏回归系数。</p>
-<div id="285c675d" class="cell" data-execution_count="11">
+<div id="285c675d" class="cell" data-execution_count="46">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="op">%%</span>stata</span>
@@ -1281,7 +1284,7 @@ Linear regression                               Number of obs     =      4,137
 <p><span class="math display">\[\tau '-\tau = \beta_k \gamma_D\]</span></p>
 <p>根据这个公式，纳入 hukou 变量之后，college 的回归系数的变化量应等于 college 对 hukou 的回归系数与 hukou 与 lninc 的回归系数的乘积。</p>
 <p>为了对上述关系进行检验，我们首先将控制 hukou 和不控制 hukou 时 college 的回归系数相减，得到二者的差异：</p>
-<div id="07acb353" class="cell" data-execution_count="12">
+<div id="07acb353" class="cell" data-execution_count="47">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="op">%%</span>stata</span>
@@ -1293,7 +1296,7 @@ Linear regression                               Number of obs     =      4,137
 </div>
 <p>接下来，以 hukou 为因变量，college 为自变量拟合回归方程，这样就可以得到 college 对 hukou 的回归系数。</p>
 <p>然后，将该系数与多元线性回归中 hukou 对 lninc 的回归系数相乘，得到一个值。</p>
-<div id="fd8dcfa2" class="cell" data-execution_count="13">
+<div id="fd8dcfa2" class="cell" data-execution_count="48">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="op">%%</span>stata</span>
@@ -1317,7 +1320,7 @@ Linear regression                               Number of obs     =      4,137
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="d4924000" class="cell" data-execution_count="14">
+<div id="d4924000" class="cell" data-execution_count="49">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="op">%%</span>stata</span>
@@ -1336,7 +1339,7 @@ Linear regression                               Number of obs     =      4,137
 <p>在回归方程包含多个控制变量的情况下， 必须考虑模型的设定问题。</p>
 <p>以同时包含 hukou 和 age 两个控制变量为例，如何设定这两个变量的函数形式才能进行最充分的统计控制？</p>
 <p>针对这个问题，最简单的答案就是进行饱和回归，即针对 hukou 和 age 的每个取值和所有交互项均设置一个虚拟变量。具体如下：</p>
-<div id="dd6127eb" class="cell" data-execution_count="15">
+<div id="dd6127eb" class="cell" data-execution_count="50">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="op">%%</span>stata</span>
@@ -1432,7 +1435,7 @@ Linear regression                               Number of obs     =      4,137
 <p>但如上所示，饱和回归也会出现待估参数过多的问题。特别是其中包含像 age 这样连续取值的变量时，这个问题会变得更加严重。</p>
 <p>为了避免参数过多给模型估计和解释造成的困难，一个可行的解决方案是对控制变量影响因变量的方式进行参数限定，如使用幂函数来近似 age 对 lninc 的影响，不过需要对这种近似的效果进行评估。</p>
 <p>为此，用户需要先计算饱和回归的模型拟合指标，具体如下：</p>
-<div id="1e55652a" class="cell" data-execution_count="16">
+<div id="1e55652a" class="cell" data-execution_count="51">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="op">%%</span>stata</span>
@@ -1451,7 +1454,7 @@ Note: BIC uses N = number of observations. See [R] IC note.</code></pre>
 </div>
 </div>
 <p>接下来，使用年龄的一次项（age）、二次项（age3）和三次项（age3）替代虚拟变量，进行线性回归分析，同时计算这个模型的拟合指标：</p>
-<div id="72e6256a" class="cell" data-execution_count="17">
+<div id="72e6256a" class="cell" data-execution_count="52">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="op">%%</span>stata</span>
@@ -1491,7 +1494,7 @@ hukou#c.age3 |
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="daa4e244" class="cell" data-execution_count="20">
+<div id="daa4e244" class="cell" data-execution_count="53">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="op">%%</span>stata</span>
@@ -1504,14 +1507,14 @@ Akaike's information criterion and Bayesian information criterion
 -----------------------------------------------------------------------------
        Model |          N   ll(null)  ll(model)      df        AIC        BIC
 -------------+---------------------------------------------------------------
-           . |      4,137  -6686.381  -6397.289       6   12806.58   12844.54
+           . |      4,137  -6686.381  -6390.917       9   12799.83   12856.78
 -----------------------------------------------------------------------------
 Note: BIC uses N = number of observations. See [R] IC note.</code></pre>
 </div>
 </div>
 <p>可以发现，这个模型和之前的饱和回归模型相比，参数数量大大减少，但模型的AIC和BIC却比饱和模型更低，因此，从模型拟合的角度来说，这个模型更加简约，所以可以用年龄的三次函数近似其对 lninc 的影响。</p>
 <p>最后，进一步删除上述模型中 age、age2和age3 与 hukou 的交互项后再进行回归分析，同时计算模型拟合指标：</p>
-<div id="8321ddc3" class="cell" data-execution_count="21">
+<div id="8321ddc3" class="cell" data-execution_count="54">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="op">%%</span>stata</span>
@@ -1539,7 +1542,7 @@ Linear regression                               Number of obs     =      4,137
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="819be9f6" class="cell" data-execution_count="22">
+<div id="819be9f6" class="cell" data-execution_count="55">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="op">%%</span>stata</span>
@@ -1564,7 +1567,7 @@ Note: BIC uses N = number of observations. See [R] IC note.</code></pre>
 <section id="纳入分类变量" class="level2" data-number="1.8">
 <h2 data-number="1.8" class="anchored" data-anchor-id="纳入分类变量"><span class="header-section-number">1.8</span> 纳入分类变量</h2>
 <p>接下来，我们又在模型中纳入了性别（gender）、民族（race）、是否独生子女（sibling）和父母是否读过高中（fmedu）这四个控制变量，他们都是分类变量，因此都以虚拟变量的形式纳入回归方程。具体如下：</p>
-<div id="4858557a" class="cell" data-execution_count="23">
+<div id="4858557a" class="cell" data-execution_count="56">
 <details class="code-fold">
 <summary>代码</summary>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="op">%%</span>stata</span>
@@ -1601,6 +1604,420 @@ Linear regression                               Number of obs     =      4,137
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
+<p>在控制上述变量后，college 的回归系数下降到了 0.742，那么我们现在是否已经得到上大学对收入的因果影响了呢？</p>
+<p>这个问题的答案取决于上述模型是否满足条件独立假定。</p>
+<p>就目前来说，研究者依然有比较充分的理由拒绝这个假定，因为上述模型并未控制能力，而在关于教育回报的研究中，能力是一个不可忽视的混杂变量。</p>
+<p>不过，因为数据中没有研究对象在大学前的能力测量，这里分析只能到此为止。</p>
+<p>考虑到我们进行上述分析的主要目标是向读者演示如何使用线性回归进行因果分析的一般过程，因此，到这一步已经足够了。</p>
+</section>
+<section id="异质性对回归分析的影响" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="异质性对回归分析的影响"><span class="header-section-number">1.9</span> 异质性对回归分析的影响</h2>
+<p>为了使问题得以简化，我们先考虑只有 hukou 这一个控制变量的情况。</p>
+<p>我们可以分农村户口和城镇户口分别进行回归分析，具体如下：</p>
+<div id="7a4a325a" class="cell" data-execution_count="57">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="op">%%</span>stata</span>
+<span id="cb39-2"><a href="#cb39-2"></a>reg lninc college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">0</span>, vce(cluster provcd)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      2,451
+                                                F(1, 24)          =     477.21
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1018
+                                                Root MSE          =      1.238
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .873513   .0399865    21.85   0.000     .7909849    .9560412
+       _cons |   9.249105   .1050262    88.06   0.000     9.032342    9.465869
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="523000c4" class="cell" data-execution_count="58">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="op">%%</span>stata</span>
+<span id="cb41-2"><a href="#cb41-2"></a>reg lninc college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">1</span>, vce(cluster provcd)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,686
+                                                F(1, 24)          =      63.29
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1097
+                                                Root MSE          =     .99279
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .6983452   .0877811     7.96   0.000     .5171739    .8795166
+       _cons |   9.537533   .1003993    95.00   0.000     9.330319    9.744747
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，农村户口中 college 的回归系数为 0.874，大于城镇户口中 college 的回归系数 0.698，因此，college 对 lninc 的影响在城镇和农村确实存在异质性。</p>
+<p>如果因果效应存在异质性，那么线性回归会基于公式</p>
+<p><span class="math display">\[\tau'=\sum\frac{Var(D_i|X_i=x)p(X_i=x)}{\sum Var(D_i|X_i=x)p(X_i=x)}\tau'_x\]</span></p>
+<p>对异质性的回归系数进行加权平均。</p>
+<blockquote class="blockquote">
+<p>这个公式的含义是，线性回归会根据每个子群体的回归系数和该子群体的样本量对回归系数进行加权平均。</p>
+</blockquote>
+<p>首先，我们描述一下样本中农村户口和城镇户口的百分比以及两个样本中 college 的分布：</p>
+<div id="a807bd7a" class="cell" data-execution_count="59">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="op">%%</span>stata</span>
+<span id="cb43-2"><a href="#cb43-2"></a>tab hukou</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    3岁时户 |
+     口性质 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   农村户口 |      2,451       59.25       59.25
+   城镇户口 |      1,686       40.75      100.00
+------------+-----------------------------------
+      Total |      4,137      100.00</code></pre>
+</div>
+</div>
+<div id="2f400e9f" class="cell" data-execution_count="60">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="op">%%</span>stata</span>
+<span id="cb45-2"><a href="#cb45-2"></a>tab college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">0</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>tab college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">1</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. tab college if hukou==0
+
+     是否上 |
+       大学 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         否 |      1,594       65.03       65.03
+         是 |        857       34.97      100.00
+------------+-----------------------------------
+      Total |      2,451      100.00
+
+. tab college if hukou==1
+
+     是否上 |
+       大学 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         否 |        900       53.38       53.38
+         是 |        786       46.62      100.00
+------------+-----------------------------------
+      Total |      1,686      100.00
+
+. </code></pre>
+</div>
+</div>
+<p>然后根据公式 <span class="math inline">\(Var(D_i|X_i=x)p(X_i=x)\)</span> 计算农村户口和城镇户口的样本格子的权重。</p>
+<p>对于农村户口样本，其权重为：</p>
+<div id="35ae809e" class="cell" data-execution_count="61">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="op">%%</span>stata</span>
+<span id="cb47-2"><a href="#cb47-2"></a>dis <span class="fl">34.97</span><span class="op">*</span><span class="fl">65.03</span><span class="op">*</span><span class="fl">59.25</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>134740.37</code></pre>
+</div>
+</div>
+<p>对于城镇户口样本，其权重为：</p>
+<div id="a05dbb87" class="cell" data-execution_count="62">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a><span class="op">%%</span>stata</span>
+<span id="cb49-2"><a href="#cb49-2"></a>dis <span class="fl">53.38</span><span class="op">*</span><span class="fl">46.62</span><span class="op">*</span><span class="fl">40.75</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>101409.46</code></pre>
+</div>
+</div>
+<p>最后，根据公式</p>
+<p><span class="math display">\[\tau'-\tau=\beta_k \gamma_D\]</span></p>
+<p>计算加权后的回归系数，具体命令和结果如下：</p>
+<div id="2694d97c" class="cell" data-execution_count="63">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a><span class="op">%%</span>stata</span>
+<span id="cb51-2"><a href="#cb51-2"></a>dis <span class="fl">134740.37</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)</span>
+<span id="cb51-3"><a href="#cb51-3"></a>dis <span class="fl">101409.46</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)</span>
+<span id="cb51-4"><a href="#cb51-4"></a>dis <span class="fl">134740.37</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)<span class="op">*</span><span class="fl">.873513</span> <span class="op">+</span> <span class="fl">.6983452</span><span class="op">*</span><span class="fl">101409.46</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. dis 134740.37/(134740.37+101409.46)
+.57057153
+
+. dis 101409.46/(134740.37+101409.46)
+.42942847
+
+. dis 134740.37/(134740.37+101409.46)*.873513 + .6983452*101409.46/(134740.37+1
+&gt; 01409.46)
+.79829096
+
+. </code></pre>
+</div>
+</div>
+<p>可以发现，加权平均后的结果为 0.798，而之前在仅纳入 college 和 hukou 的回归分析中得到的 college 的回归系数也是 0.798。</p>
+<p>因此，通过上述分析，我们验证了异质性因果效应情况下的回归系数分解公式。</p>
+</section>
+<section id="计算回归调整估计量" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="计算回归调整估计量"><span class="header-section-number">1.10</span> 计算回归调整估计量</h2>
+<p>接下来，将演示如何使用 <code>teffects ra</code> 命令计算回归调整估计量。</p>
+<p>使用 <code>teffects ra</code> 命令计算 ATE（总体的平均干预效应） 的命令和结果如下：</p>
+<div id="2fb12f46" class="cell" data-execution_count="64">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a><span class="op">%%</span>stata</span>
+<span id="cb53-2"><a href="#cb53-2"></a>teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college),vce(robust)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  EE criterion =  2.620e-24  
+Iteration 1:  EE criterion =  9.251e-30  
+
+Treatment-effects estimation                    Number of obs     =      4,137
+Estimator      : regression adjustment
+Outcome model  : linear
+Treatment model: none
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7887353   .0373127    21.14   0.000     .7156038    .8618667
+-------------+----------------------------------------------------------------
+POmean       |
+     college |
+         否  |   9.413724   .0271812   346.33   0.000      9.36045    9.466998
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，在控制 hukou、age、age2、age3、gender、race、sibling 和 fmedu 这些变量后，college 对 lninc 的平均处理效应（ATE）为 0.798，标准误为 0.037，P 值在小数点后三位都是 0。</p>
+<p>如果要得到 ATT（干预组的平均干预效应），可以使用选项 <code>atet</code>，具体命令和结果如下：</p>
+<div id="c3b5a008" class="cell" data-execution_count="65">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a><span class="op">%%</span>stata</span>
+<span id="cb55-2"><a href="#cb55-2"></a>teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college),vce(robust) atet</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  EE criterion =  2.620e-24  
+Iteration 1:  EE criterion =  7.826e-30  
+
+Treatment-effects estimation                    Number of obs     =      4,137
+Estimator      : regression adjustment
+Outcome model  : linear
+Treatment model: none
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+     college |
+ (是 vs 否)  |   .6711883   .0416622    16.11   0.000      .589532    .7528446
+-------------+----------------------------------------------------------------
+POmean       |
+     college |
+         否  |   9.505613   .0359548   264.38   0.000     9.435143    9.576083
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，ATT 为 0.671，小于 ATE 的 0.798，这说明在控制了其他变量后，college 对收入的影响在干预组中更小。</p>
+<p>如果要得到 ATU（对照组的平均处理效应），需要做一些小调整。</p>
+<p>具体来说，我们需要使用选项 <code>control()</code> 和 <code>tlevel()</code> 将干预组和控制组的位置进行交换，即将 college=0 的组作为干预组，college=1 的组作为控制组，这样就可以通过选项 <code>atet</code> 得到 ATU 的估计，相关命令和结果如下：</p>
+<div id="ed7ec9be" class="cell" data-execution_count="66">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="op">%%</span>stata</span>
+<span id="cb57-2"><a href="#cb57-2"></a>teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college),vce(robust) control(<span class="dv">1</span>) tlevel(<span class="dv">0</span>) atet</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  EE criterion =  2.620e-24  
+Iteration 1:  EE criterion =  1.079e-29  
+
+Treatment-effects estimation                    Number of obs     =      4,137
+Estimator      : regression adjustment
+Outcome model  : linear
+Treatment model: none
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+     college |
+ (否 vs 是)  |   -.866173   .0405392   -21.37   0.000    -.9456283   -.7867176
+-------------+----------------------------------------------------------------
+POmean       |
+     college |
+         是  |   10.21936   .0317611   321.76   0.000     10.15711    10.28161
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，在将干预组和控制组对调位置之后，ATT 为 -0.866，这实际上表明，上大学对 college=0 的那一组人的平均影响为 0.866，即 ATU=0.866。</p>
+<p>最后，为了帮助用户更好地理解回归调整估计量，我们将借助 regress 这个命令手动演示其计算过程。</p>
+</section>
+<section id="手动演示计算回归调整估计量" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="手动演示计算回归调整估计量"><span class="header-section-number">1.11</span> 手动演示计算回归调整估计量</h2>
+<p>第一步，我们针对 college=0 的样本拟合回归方程，并使用这个方程预测 college=1 的样本在不上大学情况下的反事实结果，具体如下：</p>
+<div id="a828af50" class="cell" data-execution_count="67">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a><span class="op">%%</span>stata</span>
+<span id="cb59-2"><a href="#cb59-2"></a>reg lninc hukou age age2 age3 gender race sibling i.fmedu <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a>predict y0hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. reg lninc hukou age age2 age3 gender race sibling i.fmedu if college==0
+
+      Source |       SS           df       MS      Number of obs   =     2,494
+-------------+----------------------------------   F(9, 2484)      =     21.72
+       Model |  299.291704         9  33.2546338   Prob &gt; F        =    0.0000
+    Residual |  3803.21617     2,484  1.53108541   R-squared       =    0.0730
+-------------+----------------------------------   Adj R-squared   =    0.0696
+       Total |  4102.50787     2,493  1.64561086   Root MSE        =    1.2374
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hukou |   .3400725   .0536769     6.34   0.000     .2348163    .4453286
+         age |   .5876334   .2255975     2.60   0.009     .1452547    1.030012
+        age2 |  -.0140172   .0056768    -2.47   0.014    -.0251491   -.0028854
+        age3 |    .000105   .0000465     2.26   0.024     .0000138    .0001963
+      gender |   .5032089   .0511487     9.84   0.000     .4029104    .6035073
+        race |   .1929442   .1168315     1.65   0.099    -.0361529    .4220413
+     sibling |   .2414546   .0893476     2.70   0.007     .0662513     .416658
+             |
+       fmedu |
+         是  |   .0178976   .0790321     0.23   0.821     -.137078    .1728732
+       缺失  |   .0028774   .0613876     0.05   0.963    -.1174987    .1232535
+             |
+       _cons |   1.072145   2.916684     0.37   0.713    -4.647238    6.791527
+------------------------------------------------------------------------------
+
+. predict y0hat if college==1
+(option xb assumed; fitted values)
+(2,494 missing values generated)
+
+. </code></pre>
+</div>
+</div>
+<p>第二步，我们再针对 college=1 的样本拟合同样的回归方程，并使用该方程预测 college=0 的样本在上大学情况下的反事实结果，具体如下：</p>
+<div id="4ae9b0f6" class="cell" data-execution_count="68">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="op">%%</span>stata</span>
+<span id="cb61-2"><a href="#cb61-2"></a>reg lninc hukou age age2 age3 gender race sibling i.fmedu <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>predict y1hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. reg lninc hukou age age2 age3 gender race sibling i.fmedu if college==1
+
+      Source |       SS           df       MS      Number of obs   =     1,643
+-------------+----------------------------------   F(9, 1633)      =     12.17
+       Model |  85.7486412         9   9.5276268   Prob &gt; F        =    0.0000
+    Residual |  1278.30719     1,633  .782796812   R-squared       =    0.0629
+-------------+----------------------------------   Adj R-squared   =    0.0577
+       Total |  1364.05584     1,642   .83072828   Root MSE        =    .88476
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hukou |   .0484465   .0485173     1.00   0.318    -.0467162    .1436091
+         age |   .6205456   .1870398     3.32   0.001     .2536824    .9874087
+        age2 |  -.0143115   .0049184    -2.91   0.004    -.0239586   -.0046644
+        age3 |   .0001088    .000042     2.59   0.010     .0000264    .0001912
+      gender |   .2153348    .044547     4.83   0.000     .1279596      .30271
+        race |   .1548971   .0931465     1.66   0.097    -.0278021    .3375962
+     sibling |   .2273577   .0611421     3.72   0.000     .1074325     .347283
+             |
+       fmedu |
+         是  |    .091336   .0511668     1.79   0.074    -.0090234    .1916954
+       缺失  |   .0564651   .0651018     0.87   0.386    -.0712268     .184157
+             |
+       _cons |    1.06923   2.310655     0.46   0.644    -3.462931     5.60139
+------------------------------------------------------------------------------
+
+. predict y1hat if college==0
+(option xb assumed; fitted values)
+(1,643 missing values generated)
+
+. </code></pre>
+</div>
+</div>
+<p>第三步，计算潜在结果 y1 和 y0。</p>
+<ul>
+<li>对于 college=0 的样本，其lninc 的观测值即 y0，而 y1 可用预测值 y1hat 估计；</li>
+<li>对于 college=1 的样本，其lninc 的观测值即 y1，而 y1 可用预测值 y0hat 估计。</li>
+</ul>
+<p>具体如下：</p>
+<div id="a7939d30" class="cell" data-execution_count="69">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a><span class="op">%%</span>stata</span>
+<span id="cb63-2"><a href="#cb63-2"></a>gen y0<span class="op">=</span>lninc <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a>replace y0<span class="op">=</span>y0hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>gen y1<span class="op">=</span>lninc <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span>
+<span id="cb63-5"><a href="#cb63-5"></a>replace y1<span class="op">=</span>y1hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. gen y0=lninc if college==0
+(1,643 missing values generated)
+
+. replace y0=y0hat if college==1
+(1,643 real changes made)
+
+. gen y1=lninc if college==1
+(2,494 missing values generated)
+
+. replace y1=y1hat if college==0
+(2,494 real changes made)
+
+. </code></pre>
+</div>
+</div>
+<p>第四步，计算个体层面的干预效应 effect，然后对不同样本求平均，即可得到 ATE、ATT和ATU的估计值。具体如下：</p>
+<div id="fc4ab8ec" class="cell" data-execution_count="70">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a><span class="op">%%</span>stata</span>
+<span id="cb65-2"><a href="#cb65-2"></a>gen effect<span class="op">=</span>y1<span class="op">-</span>y0</span>
+<span id="cb65-3"><a href="#cb65-3"></a>tab college,<span class="bu">sum</span>(effect)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. gen effect=y1-y0
+
+. tab college,sum(effect)
+
+     是否上 |          Summary of effect
+       大学 |        Mean   Std. dev.       Freq.
+------------+------------------------------------
+         否 |   .86617296   1.2711443       2,494
+         是 |    .6711883   .92538643       1,643
+------------+------------------------------------
+      Total |   .78873525   1.1502225       4,137
+
+. </code></pre>
+</div>
+</div>
+<p>分析结果显示，ATE为0.789，ATT为0.671，ATU为0.866，这三个结果均与使用 <code>teffect ra</code> 命令计算得到的结果完全一致。</p>
 
 
 </section>
