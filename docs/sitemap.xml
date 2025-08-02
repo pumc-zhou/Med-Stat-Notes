@@ -74,7 +74,7 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-08-01T13:16:16.702Z</lastmod>
+    <lastmod>2025-08-02T14:36:10.738Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Learn/Basic/01-preview.html</loc>
@@ -410,6 +410,10 @@
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/Stata/25-07-29-linear-reg.html</loc>
-    <lastmod>2025-08-01T13:20:29.964Z</lastmod>
+    <lastmod>2025-08-02T09:52:55.270Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/Stata/25-08-02-covariate-matching.html</loc>
+    <lastmod>2025-08-02T14:35:44.528Z</lastmod>
   </url>
 </urlset>

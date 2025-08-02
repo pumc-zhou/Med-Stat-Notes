@@ -8,7 +8,7 @@
 
 <meta name="author" content="Simonzhou">
 
-<title>00-Stata Intro and Record – Medical Statistics Notes</title>
+<title>26-因果推断中的协变量匹配 – Medical Statistics Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,8 +65,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Stata/25-03-11-ITSA.html" rel="next">
-<link href="../../Guide/SAS/25-06-10-poisson-reg.html" rel="prev">
+<link href="../../Quarto/config-giscus-github.html" rel="next">
+<link href="../../Guide/Stata/25-07-29-linear-reg.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -117,16 +117,16 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <style>html{ scroll-behavior: smooth; }</style>
 
 
-<meta property="og:title" content="00-Stata Intro and Record – Medical Statistics Notes">
+<meta property="og:title" content="26-因果推断中的协变量匹配 – Medical Statistics Notes">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Guide/Stata/images/logo.png">
 <meta property="og:site_name" content="Medical Statistics Notes">
-<meta name="twitter:title" content="00-Stata Intro and Record – Medical Statistics Notes">
+<meta name="twitter:title" content="26-因果推断中的协变量匹配 – Medical Statistics Notes">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-sidebar docked nav-fixed fullcontent">
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -242,7 +242,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-08-02-covariate-matching.html">26-因果推断中的协变量匹配</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
@@ -653,7 +653,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00-Stata Intro and Record</span></a>
   </div>
 </li>
@@ -815,7 +815,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-08-02-covariate-matching.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/Stata/25-08-02-covariate-matching.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">26-因果推断中的协变量匹配</span></a>
   </div>
 </li>
@@ -857,13 +857,15 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">00-Stata Intro and Record</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Guide</li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-03-09-Stata-intro.html">Stata</a></li><li class="breadcrumb-item"><a href="../../Guide/Stata/25-08-02-covariate-matching.html">26-因果推断中的协变量匹配</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">00-Stata Intro and Record</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
+<h1 class="title">26-因果推断中的协变量匹配</h1>
 </div>
 
 
@@ -880,7 +882,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">发布于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2025年3月9日</p>
+      <p class="date">2025年8月2日</p>
     </div>
   </div>
   
@@ -898,16 +900,178 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<p>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</p>
-<p>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</p>
-<p>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</p>
-<p>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</p>
-<p>回归正题，<strong>Stata 是一款用于数据科学的统计软件，</strong>其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</p>
-<p>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</p>
-<p>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</p>
+<div id="53cf96d7" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>这里将继续使用 <code>cfps2010.dta</code> 这个数据演示上述命令的使用方法。对该数据基本情况的介绍请参见第四章第五节。</p>
+<p>与第四章演示线性回归时相同，本章分析的因变量仍为 <code>lninc</code>，干预变量为 <code>college</code>。</p>
+<p>一元线性回归结果显示，在不控制任何变量的情况下，<code>college</code> 对 <code>lninc</code> 的回归系数为 0.824，这意味着，考上大学的样本和没有考上大学的样本在 <code>lninc</code> 上的均值差为 0.824。不过，考虑到这两个子样本在 <code>hukou</code>、<code>age</code>、<code>gender</code>、<code>race</code>、<code>sib-ling</code> 和 <code>fmedu</code> 这几个协变量上存在很大差异，上述结果很可能是有偏的。</p>
+<p>下面，我们将通过匹配法来校正干预组和控制组在这些协变量上的差异。</p>
+<div id="77bb8cb0" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2"></a>use <span class="st">"../../Data/causal-inference/cfps2010.dta"</span>, clear</span>
+<span id="cb2-3"><a href="#cb2-3"></a>reg lninc college,vce(cluster provcd)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. use "../../Data/causal-inference/cfps2010.dta", clear
 
+. reg lninc college,vce(cluster provcd)
 
-<!-- -->
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 24)          =     271.17
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1095
+                                                Root MSE          =     1.1498
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .823612   .0500155    16.47   0.000     .7203851     .926839
+       _cons |   9.353189   .1084703    86.23   0.000     9.129317    9.577061
+------------------------------------------------------------------------------
+
+. </code></pre>
+</div>
+</div>
+<p>我们使用的第一种方法是精确匹配。首先，我们仅对 hukou 这一个变量实施精确匹配，具体如下：</p>
+<div id="ac244dc7" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2"></a>teffects nnmatch (lninc) (college),ematch(hukou)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          1
+Outcome model  : matching                                     min =        786
+Distance metric: Mahalanobis                                  max =       1594
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .8021249   .0337823    23.74   0.000     .7359127     .868337
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>可以发现，在对 hukou 实施了精确匹配之后，college 对 lninc 的平均干预效应下降到了 0.802。</p>
+<p>如果我们同时对 hukou、age、gender、race、sibling 和 fmedu 实施精确匹配，其结果又会如何呢？</p>
+<div id="e348bbed" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2"></a>teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">SystemError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[12], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">stata</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\IPython\core\interactiveshell.py:2543</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg ansi-bold">(self, magic_name, line, cell)</span>
+<span class="ansi-green-fg">   2541</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>builtin_trap:
+<span class="ansi-green-fg">   2542</span>     args <span style="color:rgb(98,98,98)">=</span> (magic_arg_s, cell)
+<span class="ansi-green-fg ansi-bold">-&gt; 2543</span>     result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   2545</span> <span style="font-style:italic;color:rgb(95,135,135)"># The code below prevents the output from being displayed</span>
+<span class="ansi-green-fg">   2546</span> <span style="font-style:italic;color:rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
+<span class="ansi-green-fg">   2547</span> <span style="font-style:italic;color:rgb(95,135,135)"># when the last Python token in the expression is a ';'.</span>
+<span class="ansi-green-fg">   2548</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(fn, magic<span style="color:rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\ipython\stpymagic.py:276</span>, in <span class="ansi-cyan-fg">PyStataMagic.stata</span><span class="ansi-blue-fg ansi-bold">(self, line, cell, local_ns)</span>
+<span class="ansi-green-fg">    274</span>     _stata<span style="color:rgb(98,98,98)">.</span>run(cell, quietly<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, inline<span style="color:rgb(98,98,98)">=</span>_config<span style="color:rgb(98,98,98)">.</span>stconfig[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">grshow</span><span style="color:rgb(175,0,0)">'</span>])
+<span class="ansi-green-fg">    275</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg ansi-bold">--&gt; 276</span>     <span class="ansi-yellow-bg">_stata</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cell</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">quietly</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">inline</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">_config</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">stconfig</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">grshow</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    278</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gw</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gh</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args:
+<span class="ansi-green-fg">    279</span>     _config<span style="color:rgb(98,98,98)">.</span>set_graph_size(gwidth, gheight)
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:313</span>, in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg ansi-bold">(cmd, quietly, echo, inline)</span>
+<span class="ansi-green-fg">    311</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">qui </span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)"> + cmds[0], echo)</span>
+<span class="ansi-green-fg">    312</span> <span style="color:rgb(175,0,0)">        else:</span>
+<span class="ansi-green-fg ansi-bold">--&gt; 313</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(cmds[0], echo)</span>
+<span class="ansi-green-fg">    314</span> <span style="color:rgb(175,0,0)">else:</span>
+<span class="ansi-green-fg">    315</span> <span style="color:rgb(175,0,0)">    if inline:</span>
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:71</span>, in <span class="ansi-cyan-fg">_stata_wrk1</span><span class="ansi-blue-fg ansi-bold">(cmd, echo)</span>
+<span class="ansi-green-fg">     69</span>         err <span style="color:rgb(98,98,98)">=</span> callback[<span style="color:rgb(98,98,98)">0</span>]
+<span class="ansi-green-fg">     70</span>         callback<span style="color:rgb(98,98,98)">.</span>clear()
+<span class="ansi-green-fg ansi-bold">---&gt; 71</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">SystemError</span>(err)
+<span class="ansi-green-fg">     72</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyboardInterrupt</span>:
+<span class="ansi-green-fg">     73</span>     outputter<span style="color:rgb(98,98,98)">.</span>done()
+
+<span class="ansi-red-fg ansi-bold">SystemError</span>: no exact matches for observation 4; use option osample() to identify all
+observations with deficient matches
+r(459);
+</pre>
+</div>
+</div>
+</div>
+<p>从结果的输出看，Stata 给出了一个错误提示，提示内容无法为所有个案找到在所有协变量上取值都相同的匹配对象。</p>
+<p>于此同时，Stata 还给出了一个建议，即使用 option <code>osample()</code> 去标记那些匹配失败的个案。</p>
+<p>参照这个建议，我们在增加选项 <code>osample()</code> 后重新执行了上述命令。输出结果显示，有 593 名个案无法按照我们设定的要求实施精确匹配。</p>
+<p>对标识变量 <code>overlap</code> 进行统计描述也可以发现，有 593 名个案违反了共同取值范围假定。</p>
+<div id="bd33a1ea" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">%%</span>stata</span>
+<span id="cb7-2"><a href="#cb7-2"></a>teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu) osample(overlap)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">SystemError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[13], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">stata</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu) osample(overlap)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\IPython\core\interactiveshell.py:2543</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg ansi-bold">(self, magic_name, line, cell)</span>
+<span class="ansi-green-fg">   2541</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>builtin_trap:
+<span class="ansi-green-fg">   2542</span>     args <span style="color:rgb(98,98,98)">=</span> (magic_arg_s, cell)
+<span class="ansi-green-fg ansi-bold">-&gt; 2543</span>     result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   2545</span> <span style="font-style:italic;color:rgb(95,135,135)"># The code below prevents the output from being displayed</span>
+<span class="ansi-green-fg">   2546</span> <span style="font-style:italic;color:rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
+<span class="ansi-green-fg">   2547</span> <span style="font-style:italic;color:rgb(95,135,135)"># when the last Python token in the expression is a ';'.</span>
+<span class="ansi-green-fg">   2548</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(fn, magic<span style="color:rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\ipython\stpymagic.py:276</span>, in <span class="ansi-cyan-fg">PyStataMagic.stata</span><span class="ansi-blue-fg ansi-bold">(self, line, cell, local_ns)</span>
+<span class="ansi-green-fg">    274</span>     _stata<span style="color:rgb(98,98,98)">.</span>run(cell, quietly<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, inline<span style="color:rgb(98,98,98)">=</span>_config<span style="color:rgb(98,98,98)">.</span>stconfig[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">grshow</span><span style="color:rgb(175,0,0)">'</span>])
+<span class="ansi-green-fg">    275</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg ansi-bold">--&gt; 276</span>     <span class="ansi-yellow-bg">_stata</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cell</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">quietly</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">inline</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">_config</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">stconfig</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">grshow</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    278</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gw</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gh</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args:
+<span class="ansi-green-fg">    279</span>     _config<span style="color:rgb(98,98,98)">.</span>set_graph_size(gwidth, gheight)
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:313</span>, in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg ansi-bold">(cmd, quietly, echo, inline)</span>
+<span class="ansi-green-fg">    311</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">qui </span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)"> + cmds[0], echo)</span>
+<span class="ansi-green-fg">    312</span> <span style="color:rgb(175,0,0)">        else:</span>
+<span class="ansi-green-fg ansi-bold">--&gt; 313</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(cmds[0], echo)</span>
+<span class="ansi-green-fg">    314</span> <span style="color:rgb(175,0,0)">else:</span>
+<span class="ansi-green-fg">    315</span> <span style="color:rgb(175,0,0)">    if inline:</span>
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:71</span>, in <span class="ansi-cyan-fg">_stata_wrk1</span><span class="ansi-blue-fg ansi-bold">(cmd, echo)</span>
+<span class="ansi-green-fg">     69</span>         err <span style="color:rgb(98,98,98)">=</span> callback[<span style="color:rgb(98,98,98)">0</span>]
+<span class="ansi-green-fg">     70</span>         callback<span style="color:rgb(98,98,98)">.</span>clear()
+<span class="ansi-green-fg ansi-bold">---&gt; 71</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">SystemError</span>(err)
+<span class="ansi-green-fg">     72</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyboardInterrupt</span>:
+<span class="ansi-green-fg">     73</span>     outputter<span style="color:rgb(98,98,98)">.</span>done()
+
+<span class="ansi-red-fg ansi-bold">SystemError</span>: 593 observations have no exact matches; they are identified in the osample()
+variable
+r(459);
+</pre>
+</div>
+</div>
+</div>
+<div id="5329d2fa" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2"></a>tab overlap</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    overlap |
+  violation |
+  indicator |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      3,544       85.67       85.67
+          1 |        593       14.33      100.00
+------------+-----------------------------------
+      Total |      4,137      100.00</code></pre>
+</div>
+</div>
+
 
 
 </main> <!-- /main -->
@@ -1534,39 +1698,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <input type="hidden" id="giscus-alt-theme" value="dark">
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../Guide/SAS/25-06-10-poisson-reg.html" class="pagination-link" aria-label="19-SAS Poisson 回归与负二项回归">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">19-SAS Poisson 回归与负二项回归</span>
+      <a href="../../Guide/Stata/25-07-29-linear-reg.html" class="pagination-link" aria-label="25-因果推断中的线性回归">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">25-因果推断中的线性回归</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Stata/25-03-11-ITSA.html" class="pagination-link" aria-label="11-Stata 做 ITSA 分析">
-        <span class="nav-page-text">11-Stata 做 ITSA 分析</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Quarto/config-giscus-github.html" class="pagination-link" aria-label="Qmd config giscus">
+        <span class="nav-page-text">Qmd config giscus</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "00-Stata Intro and Record"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-03-09"</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">number-sections:</span><span class="co"> false</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>关于 Stata 大二上统计学课的时候，老师在课上提了一嘴，说：“等你们以后读研了，就不用 SPSS 这种工具了，就会开始用 Stata、R 这些工具了“。也确实，本科期间确实就是一个 SPSS 管了四年，因为实在脱离他的应用场景，加之，老师就只会 SPSS ，那就没办法咯。</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>想起那时候，专业两个班的 SPSS 软件基本上都是我去装的，老师弄不会，同学们更不会，我比较喜欢摸索，所以摸索出了这些，找到了安装包和密钥，然后拷在 U盘 里，课前课后课中就是给他们装软件，有时候，有些系统还装不上，某为就是，同学的某为一直装不上，当时看是因为缺 Java 环境，但是装了 Java JDK 还是不行，遂放弃。</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>等到毕业的时候，想着看能不能用 Stata 做一下毕业论文的数据分析，最后太忙，没时间也没精力，用了 SPSS 结束。</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>老师也是到了我大四的时候在哪里自学 Stata ，不过要说的是，在 AI 成熟以前，没有 AI 的辅助情况下，从0开始去学一门技能或程序，没有捷径，耗时耗力。现在逐渐理解，因为自己当时抱着 Python 的几本书，看了两三年也没有啥进展，等到 AI 出来了，不懂的就问 AI，节省了很多时间和精力；也和理解力的提升有关，进展迅速。</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>回归正题，**Stata 是一款用于数据科学的统计软件，**其功能强大，但是对比 Python、R、MATLAB等程序或软件，还是略显不足，但是对于一般情况的数据分析，Stata 是够用的，其主要的优点是语法简洁和有诸多可以拿来即用的包，同时作为一款商业软件，其价格相较于 SAS 是很低的（但是换算RMB仍然很高），其支持相较于 R 等也可以说是较为丰富的（庞大的社区），还有跨平台使用等优势，这里不一一列举。</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Stata 的安装很简单，互联网上有很多教程，但是关键的一点是获得 Key (许可证和激活秘钥)，当然互联网亦有诸多的资源可供选择。</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>然后根据研究目的，选择合适的模型，找到前辈们写的代码，拿来增删改查，再结合 AI 的辅助，跑通，分析，写作。</span></code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
-</div></div></div></div></div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -1579,7 +1720,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, LB.ZHOU</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/Stata/25-03-09-Stata-intro.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/Stata/25-08-02-covariate-matching.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
