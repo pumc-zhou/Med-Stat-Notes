@@ -121,6 +121,35 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script>
 <style>html{ scroll-behavior: smooth; }</style>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <meta property="og:title" content="26-因果推断中的协变量匹配 – Medical Statistics Notes">
 <meta property="og:description" content="This is a Note site.">
@@ -1029,8 +1058,15 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#粗化精确匹配" id="toc-粗化精确匹配" class="nav-link active" data-scroll-target="#粗化精确匹配"><span class="header-section-number">1</span> 粗化精确匹配</a></li>
+  <li><a href="#使用权重进行回归分析" id="toc-使用权重进行回归分析" class="nav-link" data-scroll-target="#使用权重进行回归分析"><span class="header-section-number">2</span> 使用权重进行回归分析</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/Stata/25-08-02-covariate-matching.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1062,7 +1098,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年8月2日</p>
+      <p class="date-modified">2025年8月3日</p>
     </div>
   </div>
     
@@ -1073,7 +1109,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </header>
 
 
-<div id="53cf96d7" class="cell" data-execution_count="9">
+<div id="53cf96d7" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> stata_setup</span>
 <span id="cb1-2"><a href="#cb1-2"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
@@ -1081,7 +1117,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>与第四章演示线性回归时相同，本章分析的因变量仍为 <code>lninc</code>，干预变量为 <code>college</code>。</p>
 <p>一元线性回归结果显示，在不控制任何变量的情况下，<code>college</code> 对 <code>lninc</code> 的回归系数为 0.824，这意味着，考上大学的样本和没有考上大学的样本在 <code>lninc</code> 上的均值差为 0.824。不过，考虑到这两个子样本在 <code>hukou</code>、<code>age</code>、<code>gender</code>、<code>race</code>、<code>sib-ling</code> 和 <code>fmedu</code> 这几个协变量上存在很大差异，上述结果很可能是有偏的。</p>
 <p>下面，我们将通过匹配法来校正干预组和控制组在这些协变量上的差异。</p>
-<div id="77bb8cb0" class="cell" data-execution_count="10">
+<div id="77bb8cb0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>stata</span>
 <span id="cb2-2"><a href="#cb2-2"></a>use <span class="st">"../../Data/causal-inference/cfps2010.dta"</span>, clear</span>
 <span id="cb2-3"><a href="#cb2-3"></a>reg lninc college,vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1109,8 +1145,8 @@ Linear regression                               Number of obs     =      4,137
 . </code></pre>
 </div>
 </div>
-<p>我们使用的第一种方法是精确匹配。首先，我们仅对 hukou 这一个变量实施精确匹配，具体如下：</p>
-<div id="ac244dc7" class="cell" data-execution_count="11">
+<p>我们使用的第一种方法是精确匹配。首先，我们仅对 <code>hukou</code> 这一个变量实施精确匹配，具体如下：</p>
+<div id="ac244dc7" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>stata</span>
 <span id="cb4-2"><a href="#cb4-2"></a>teffects nnmatch (lninc) (college),ematch(hukou)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1129,16 +1165,16 @@ ATE          |
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<p>可以发现，在对 hukou 实施了精确匹配之后，college 对 lninc 的平均干预效应下降到了 0.802。</p>
-<p>如果我们同时对 hukou、age、gender、race、sibling 和 fmedu 实施精确匹配，其结果又会如何呢？</p>
-<div id="e348bbed" class="cell" data-execution_count="12">
+<p>可以发现，在对 <code>hukou</code> 实施了精确匹配之后，<code>college</code> 对 <code>lninc</code> 的平均干预效应下降到了 0.802。</p>
+<p>如果我们同时对 <code>hukou</code>、<code>age</code>、<code>gender</code>、<code>race</code>、<code>sibling</code> 和 <code>fmedu</code> 实施精确匹配，其结果又会如何呢？</p>
+<div id="e348bbed" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">%%</span>stata</span>
 <span id="cb6-2"><a href="#cb6-2"></a>teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg ansi-bold">SystemError</span>                               Traceback (most recent call last)
-Cell <span class="ansi-green-fg ansi-bold">In[12], line 1</span>
+Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
 <span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">stata</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
 
 File <span class="ansi-green-fg ansi-bold">c:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\IPython\core\interactiveshell.py:2543</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg ansi-bold">(self, magic_name, line, cell)</span>
@@ -1182,14 +1218,14 @@ r(459);
 <p>于此同时，Stata 还给出了一个建议，即使用 option <code>osample()</code> 去标记那些匹配失败的个案。</p>
 <p>参照这个建议，我们在增加选项 <code>osample()</code> 后重新执行了上述命令。输出结果显示，有 593 名个案无法按照我们设定的要求实施精确匹配。</p>
 <p>对标识变量 <code>overlap</code> 进行统计描述也可以发现，有 593 名个案违反了共同取值范围假定。</p>
-<div id="bd33a1ea" class="cell" data-execution_count="13">
+<div id="bd33a1ea" class="cell" data-execution_count="6">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">%%</span>stata</span>
 <span id="cb7-2"><a href="#cb7-2"></a>teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu) osample(overlap)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <div class="ansi-escaped-output">
 <pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg ansi-bold">SystemError</span>                               Traceback (most recent call last)
-Cell <span class="ansi-green-fg ansi-bold">In[13], line 1</span>
+Cell <span class="ansi-green-fg ansi-bold">In[6], line 1</span>
 <span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">stata</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu) osample(overlap)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
 
 File <span class="ansi-green-fg ansi-bold">c:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\IPython\core\interactiveshell.py:2543</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg ansi-bold">(self, magic_name, line, cell)</span>
@@ -1229,7 +1265,7 @@ r(459);
 </div>
 </div>
 </div>
-<div id="5329d2fa" class="cell" data-execution_count="14">
+<div id="5329d2fa" class="cell" data-execution_count="7">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">%%</span>stata</span>
 <span id="cb8-2"><a href="#cb8-2"></a>tab overlap</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -1244,8 +1280,296 @@ r(459);
       Total |      4,137      100.00</code></pre>
 </div>
 </div>
+<p>在同时对多个变量实施精确匹配，且变量中包含像 <code>age</code> 这样的连续变量的时候，精确匹配必然会遭遇维度诅咒，其最直接的表现就是匹配后的样本量大为下降。</p>
+<p>为了避免损失过多样本，我们尝试对 <code>age</code>、<code>race</code> 和 <code>sibling</code> 这三个变量实施马氏匹配，其余变量依然采用精确匹配。具体如下：</p>
+<div id="586b911e" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          1
+Outcome model  : matching                                     min =          1
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7699847    .041446    18.58   0.000     .6887521    .8512174
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>可以发现，在对 <code>age</code>、<code>race</code> 和 <code>sibling</code> 这三个变量实施马氏匹配以后，软件不再提示有匹配失败的问题，且给出了 ATE 的估计值为 0.770.</p>
+<p>上面演示的马氏匹配采用的是默认的 1 对 1 匹配，若要采用 1 对多匹配，需要使用选项 <code>nneighbor()</code>。具体来说，我们可以参照阿巴迪和因本斯的建议采用 1 对 4 匹配，同时使用 1 对 4 匹配下的稳健标准误，具体如下：</p>
+<div id="b43bebae" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu) nneighbor(<span class="dv">4</span>) vce(robust,nn(<span class="dv">4</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          4
+Outcome model  : matching                                     min =          4
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7936157   .0392848    20.20   0.000     .7166189    .8706125
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>可以发现，1 对 4 匹配时的 ATE 为 0.794，与 1 对 1 匹配是很接近，因此分析结果总体上来说是稳健的。</p>
+<p>不过，马氏匹配并不能完全消除干预组和对照组在协变量上的差异。为了解决这个问题，研究者最好使用阿巴迪和因本斯提出的方法对估计结果进行偏差校正。</p>
+<p>对 <code>age</code>、<code>race</code> 和 <code>sibling</code> 这三个变量实施偏差校正后的 1 对 4 匹配估计结果如下：</p>
+<div id="8328befb" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu) nneighbor(<span class="dv">4</span>) vce(robust,nn(<span class="dv">4</span>)) biasadj(age race sibling)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          4
+Outcome model  : matching                                     min =          4
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7949957   .0392914    20.23   0.000      .717986    .8720054
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，偏差校正后的估计值为 0.795，与偏差校正前的结果几乎没有差异，这说明在这个例子中，马氏匹配的偏差很小，可以忽略不计。</p>
+<p>最后，对上述命令使用选项 <code>atet</code>，即可得到偏差校正后得 ATT。分析结果显示，其估计值为 0.699，小于 ATE：</p>
+<div id="e1f6bf36" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu) nneighbor(<span class="dv">4</span>) vce(robust,nn(<span class="dv">4</span>)) biasadj(age race sibling) atet</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          4
+Outcome model  : matching                                     min =          4
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+     college |
+ (是 vs 否)  |   .6993424   .0475923    14.69   0.000     .6060633    .7926215
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>接下来，我们将演示粗化精确匹配。在使用这种方法之前，我们可以先用命令 <code>imb</code> 计算干预组和控制组在所有协变量上的不平衡性：</p>
+<div id="eef5d0f9" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="op">%%</span>stata</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># 使用 imb 命令需要下载 cem 程序包，</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>ssc install cem,replace</span>
+<span id="cb18-4"><a href="#cb18-4"></a>imb hukou age gender race sibling fmedu,treatment(college)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. # 使用 imb 命令需要下载 cem 程序包，
+Unknown #command
+. ssc install cem,replace
+checking cem consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. imb hukou age gender race sibling fmedu,treatment(college)
+
+Multivariate L1 distance: .42932057
+
+Univariate imbalance:
+
+              L1     mean      min      25%      50%      75%      max
+  hukou   .11753   .11753        0        0        0        0        0
+    age   .32978  -6.5436        0       -6       -9       -9        0
+ gender   .04055  -.04055        0        0        0        0        0
+   race   .01072  -.01072        0        0        0        0        0
+sibling   .13284   .13284        0        0        0        0        0
+  fmedu   .22349   .01915        0        0        1       -1        0
+
+. </code></pre>
+</div>
+</div>
+<p>分析结果显示，干预组和控制组在所有 6 个协变量上的总体不平衡指数 <span class="math inline">\(L_1\)</span> 为0.429 。此外，Stata 还汇报了干预组和控制组在每个协变量上的不平衡指数以及两组人在每个协变量的均值、最小值、25%分位数、50%分位数、75%分位数和最大值上的差异。</p>
+<p>一般来说，在比较数据不平衡程度的时候，总体不平衡指数最重要，因此，接下来我们主要根据这个指标来评估匹配效果。</p>
+<section id="粗化精确匹配" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="粗化精确匹配"><span class="header-section-number">1</span> 粗化精确匹配</h2>
+<p>现在，我们尝试对数据进行粗化精确匹配。</p>
+<p>首先，我们以30、35、40、45和50为分割点，将年龄粗化为一个 6 分类变量；而其他变量则使用软件默认的方式进行粗化。</p>
+<p>需要注意的是，fmedu 有 3 个取值：初中及以下、高中及以上和数据缺失。考虑到这 3 个类别不宜合并，因此，我们在其变量名后的括号中使用 <code>#0</code> 表示不对该变量进行粗化。</p>
+<p>采用上述设置的命令和结果如下：</p>
+<div id="55cb00a7" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="op">%%</span>stata</span>
+<span id="cb20-2"><a href="#cb20-2"></a>local cut <span class="op">=</span> <span class="st">"#0"</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>cem hukou age(<span class="dv">30</span> <span class="dv">35</span> <span class="dv">40</span> <span class="dv">45</span> <span class="dv">50</span>) gender race sibling fmedu (`cut<span class="st">'),treatment(college)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. local cut = "#0"
+
+. cem hukou age(30 35 40 45 50) gender race sibling fmedu (`cut'),treatment(col
+&gt; lege)
+
+Matching Summary:
+-----------------
+Number of strata: 206
+Number of matched strata: 133
+
+              0     1
+      All  2494  1643
+  Matched  2409  1583
+Unmatched    85    60
 
 
+Multivariate L1 distance: .20630897
+
+Univariate imbalance:
+
+               L1      mean       min       25%       50%       75%       max
+  hukou   8.3e-16   1.1e-16         0         0         0         0         0
+    age    .07527    -.1677         0         0         1         0         0
+ gender   1.4e-15   6.7e-16         0         0         0         0         0
+   race   9.0e-16   1.8e-15         0         0         0         0         0
+sibling   2.4e-15  -1.9e-16         0         0         0         0         0
+  fmedu   3.7e-16   2.8e-15         0         0         0         0         0
+
+. </code></pre>
+</div>
+</div>
+<p>输出结果显示，按照上述方法进行粗化精确匹配之后，大多数干预组个案和控制组个案找到了与之精确匹配的对象，匹配失败的个案之后 145 个。其中干预组个案60个，控制组个案85个。</p>
+<p>匹配之后，干预组和控制组在所有6个协变量上的总体不平衡指数下降到了 0.206，且单个协变量的不平衡指数都非常接近 0。</p>
+<p>这说明与匹配之前相比，匹配后的样本在平衡性上有很大的提升。</p>
+<p>以上所示的命令将 <code>age</code> 粗化为一个等间距的 6 分类变量。此外，我们也可以根据分位数将 <code>age</code> 粗化为等规模的 6 分类变量。具体命令和结果如下：</p>
+<div id="498308e6" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="op">%%</span>stata</span>
+<span id="cb22-2"><a href="#cb22-2"></a>cem hukou age(<span class="co">#6) gender race sibling fmedu (#0),treatment(college)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(using the scott break method for imbalance)
+
+Matching Summary:
+-----------------
+Number of strata: 179
+Number of matched strata: 118
+
+              0     1
+      All  2494  1643
+  Matched  2421  1579
+Unmatched    73    64
+
+
+Multivariate L1 distance: .22223609
+
+Univariate imbalance:
+
+              L1     mean      min      25%      50%      75%      max
+  hukou  5.3e-15  4.6e-15        0        0        0        0        0
+    age   .08636  -.24076        0        0        0        0        0
+ gender  6.0e-15  7.2e-15        0        0        0        0        0
+   race  1.2e-15  2.1e-15        0        0        0        0        0
+sibling  4.1e-15  1.7e-15        0        0        0        0        0
+  fmedu  7.4e-15  5.3e-15        0        0        0        0        0</code></pre>
+</div>
+</div>
+<p>分析结果显示，通过上述方法保留的匹配样本略多于前一种方法，但平衡性指数却比之前高。所以综合来看，匹配效果与之前相当。</p>
+<p>最后，我们演示根据 <code>cem</code> 的自动粗化算法得到的匹配结果：</p>
+<div id="e2310b6e" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="op">%%</span>stata</span>
+<span id="cb24-2"><a href="#cb24-2"></a>cem hukou age gender race sibling fmedu (<span class="co">#0),treatment(college)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(using the scott break method for imbalance)
+
+Matching Summary:
+-----------------
+Number of strata: 369
+Number of matched strata: 214
+
+              0     1
+      All  2494  1643
+  Matched  2330  1523
+Unmatched   164   120
+
+
+Multivariate L1 distance: .09076546
+
+Univariate imbalance:
+
+               L1      mean       min       25%       50%       75%       max
+  hukou   1.1e-15  -6.7e-16         0         0         0         0         0
+    age    .02518   -.02531         0         0         0         0         0
+ gender   1.8e-15  -2.3e-15         0         0         0         0         0
+   race   8.7e-18         0         0         0         0         0         0
+sibling   1.3e-15  -3.1e-16         0         0         0         0         0
+  fmedu   1.6e-15   1.2e-15         0         0         0         0         0</code></pre>
+</div>
+</div>
+<p>可以发现，使用这种方法损失的样本量很多，但不平衡指数却比之前两种方法有大幅下降。</p>
+<p>这体现了在粗化精确匹配过程中经常出现的一个现象，即排除在外的极端样本越多，匹配样本的平衡性通常就越能够得到保证。考虑到第三章方法的平衡性指数最小，且样本损失依然在可接受的范围内，我们接下来将用该方法生成的权重 <code>cem_weights</code> 进行后续分析</p>
+</section>
+<section id="使用权重进行回归分析" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="使用权重进行回归分析"><span class="header-section-number">2</span> 使用权重进行回归分析</h2>
+<p>首先，我们可以使用该权重进行加权后的一元线性回归：</p>
+<div id="a96825c9" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="op">%%</span>stata</span>
+<span id="cb26-2"><a href="#cb26-2"></a>reg lninc college [iw<span class="op">=</span>cem_weights]</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     3,852
+-------------+----------------------------------   F(1, 3850)      =    333.41
+       Model |  450.866614         1  450.866614   Prob &gt; F        =    0.0000
+    Residual |  5207.69062     3,850  1.35264691   R-squared       =    0.0797
+-------------+----------------------------------   Adj R-squared   =    0.0797
+       Total |  5658.55723     3,851  1.46937347   Root MSE        =    1.1629
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .6996738   .0383184    18.26   0.000     .6245475    .7748001
+       _cons |    9.47577   .0240912   393.33   0.000     9.428537    9.523003
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，通过这种方法得到的 <code>college</code> 的回归系数为 0.700，或者说 ATT（干预组的平均干预效应）为 0.700.这与之前偏差校正以后得到的 1 对 4 马氏匹配的估计结果非常接近。</p>
+<p>接下来，我们可以在回归方程中纳入原始的协变量，以进一步消除匹配样本在这些变量上的不平衡性。</p>
+<p>分析结果显示，纳入更多控制变量以后，<code>college</code> 的回归系数只发生了非常细微的变化。这主要是因为，粗化精确匹配已经在很大程度上消除了干预组和控制组在原始协变量上的不平衡性（匹配后 <span class="math inline">\(L_1\)</span> 从 0.429 下降到了 0.091），此时，在回归方程中纳入更多控制变量的意义已经不大。</p>
+<p>不过在统计分析时控制这些协变量是一种更加稳健的做法，因此，这里建议研究者在回归分析时始终对原始协变量进行统计控制。</p>
+<div id="d32b8774" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="op">%%</span>stata</span>
+<span id="cb28-2"><a href="#cb28-2"></a>reg lninc college hukou age gender race sibling i.fmedu [iw<span class="op">=</span>cem_weights]</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     3,853
+-------------+----------------------------------   F(8, 3844)      =     59.25
+       Model |  621.146148         8  77.6432685   Prob &gt; F        =    0.0000
+    Residual |  5037.41109     3,844  1.31046074   R-squared       =    0.1098
+-------------+----------------------------------   Adj R-squared   =    0.1079
+       Total |  5658.55723     3,852  1.46899201   Root MSE        =    1.1448
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .699765   .0377211    18.55   0.000     .6258097    .7737203
+       hukou |   .1384669   .0417004     3.32   0.001     .0567099    .2202238
+         age |   .0036032    .002706     1.33   0.183    -.0017021    .0089086
+      gender |   .3631285   .0378722     9.59   0.000     .2888771    .4373799
+        race |   .1562387   .1279194     1.22   0.222    -.0945576    .4070351
+     sibling |   .1464629   .0537444     2.73   0.006     .0410927    .2518332
+             |
+       fmedu |
+         是  |   .0025106    .043347     0.06   0.954    -.0824748     .087496
+       缺失  |   .0241171   .0565652     0.43   0.670    -.0867836    .1350179
+             |
+       _cons |   8.892506    .162912    54.58   0.000     8.573104    9.211908
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1772,7 +2096,7 @@ r(459);
     </div>   
     <div class="nav-footer-center">
 <p>Copyright 2023-2025, LB.ZHOU</p>
-<div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/Stata/25-08-02-covariate-matching.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/Stata/25-08-02-covariate-matching.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

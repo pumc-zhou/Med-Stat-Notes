@@ -6,3 +6,6 @@ docs/ linguist-generated
 
 # 将 .qmd 文件识别为 R
 *.qmd linguist-language=R
+
+# python
+*.py linguist-language=Python
