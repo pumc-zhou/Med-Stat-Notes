@@ -2,7 +2,7 @@
 title: "用Python做桑基图"
 output: 
   html:
-    code-fold: true
+    code-fold: false
     code-tools: true
 number-sections: true
 toc: true
@@ -149,16 +149,16 @@ if __name__ == "__main__":
 ### 安装 jupyter-dash
 
 ```{python}
-#| eval: False
+#| eval: false
 pip install jupyter-dash
 ```
 
 ### 运行程序
 
 ```{python}
-#| echo = true
-#| cache = true
-#| eval = false
+#| echo: true
+#| cache: true
+#| eval: false
 
 # -*- coding: utf-8 -*-
 """
@@ -230,8 +230,8 @@ app.run_server(mode='inline')
 2.  改用静态图形
 
 ```{python}
-#| echo = true
-#| cache = true
+#| echo: true
+#| cache: true
 
 import plotly.graph_objects as go
 
@@ -256,6 +256,6 @@ fig.write_html("sankey.html", include_plotlyjs='cdn')
 
 1.  难以精确表达数据(大小)
 2.  一般实在宏观层面上进行分析，难以照顾到微观部分
-3.  由于是从宏观上进行分析，因此容易误导用户
+3.  由于是从宏s观上进行分析，因此容易误导用户
 
 end.

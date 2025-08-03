@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.8.18">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Simonzhou">
 <title>04-ggplot2 绘图——折线图 – Medical Statistics Notes</title>
@@ -19,8 +19,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +32,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -64,17 +65,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../Guide/R/05-ggplot2-scatter-plot.html" rel="next">
 <link href="../../Guide/R/03-ggplot2-barplot.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5c1f7a6a2802c248a2ccc243aab7b5c3.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c10fc78dcbf6a5f009fadeb270c5b5ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -115,13 +120,175 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <meta name="twitter:image-width" content="1344">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/logo.png" alt="" class="navbar-logo"></a>
+    <img src="../../images/logo.png" alt="" class="navbar-logo light-content"><img src="../../images/logo.png" alt="" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">医学统计学习笔记</span>
     </a>
@@ -235,7 +402,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="mt-2 flex-shrink-0 align-items-center">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
         <div class="sidebar-search">
         <div id="quarto-search" class="" title="搜索"></div>
         </div>
@@ -787,6 +958,18 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="menu-text">24-双重差分(DID)</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-07-29-linear-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">25-因果推断中的线性回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-08-02-covariate-matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26-因果推断中的协变量匹配</span></a>
+  </div>
+</li>
       </ul>
 </li>
       </ul>
@@ -887,7 +1070,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年7月25日</p>
+      <p class="date-modified">2025年8月3日</p>
     </div>
   </div>
     
@@ -901,10 +1084,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.1</span> 绘制基本折线图</h2>
 <p>运行 <code>ggplot()</code> 函数和 <code>geom_line()</code> 函数，并分别指定一个变量映射到 <code>x</code> 和 <code>y</code> 。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># load package</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co"># load dataset</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>BOD</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-4"><a href="#cb1-4"></a>BOD</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Time demand
 1    1    8.3
@@ -914,8 +1097,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 5    5   15.6
 6    7   19.8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="fu">geom_line</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-1" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -931,14 +1114,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>在上图中，Demand 变量为数值型变量，但我们可以借助于 <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> 函数将其转换为因子型变量，然后，将其当作分类变量来处理。</p>
 <p>当 X 对应于因子型变量时，必须使用命令 <code>aex(group = 1)</code> 以确保 <code>ggplot</code> 知道这些数据点属于同一个分组，应该用一条折现将他们连在一起。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># load package</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co"># load dataset and copy a dataset</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a>BOD1 <span class="ot">&lt;-</span> BOD</span>
 <span id="cb4-5"><a href="#cb4-5"></a>BOD1<span class="sc">$</span>Time <span class="ot">&lt;-</span> <span class="fu">factor</span>(BOD1<span class="sc">$</span>Time)</span>
 <span id="cb4-6"><a href="#cb4-6"></a></span>
 <span id="cb4-7"><a href="#cb4-7"></a><span class="fu">ggplot</span>(BOD1,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,<span class="at">group =</span> <span class="dv">1</span>))<span class="sc">+</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="fu">geom_line</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-2" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -954,10 +1137,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.2</span> 向折线图添加数据标记</h2>
 <p>在代码中加上 <code>geom_point()</code> 即可：</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># load package</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co"># load dataset</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>BOD</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4"></a>BOD</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Time demand
 1    1    8.3
@@ -967,9 +1150,9 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 5    5   15.6
 6    7   19.8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">geom_point</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="fu">geom_point</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-3" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -989,7 +1172,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>worldpop数据集对应的采集时间间隔不是常数，时间距今较久远的数据采集频率比新近不久的数据采集频率低。</p>
 <p>折线图中的数据标记表明了数据的采集时间：</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># load package</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb8-3"><a href="#cb8-3"></a><span class="co"># load dataset</span></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="fu">library</span>(gcookbook)</span>
@@ -1002,7 +1185,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb8-11"><a href="#cb8-11"></a><span class="fu">ggplot</span>(worldpop,<span class="fu">aes</span>(<span class="at">x =</span> Year,<span class="at">y =</span> Population))<span class="sc">+</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
 <span id="cb8-13"><a href="#cb8-13"></a><span class="fu">geom_point</span>()<span class="sc">+</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="fu">scale_y_log10</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="fu">scale_y_log10</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-4-1" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1028,7 +1211,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.3</span> 绘制多重折线图</h2>
 <p>除了分别设定一个映射到 x 和 y 的变量，再将另一个（离散）变量映射到颜色（colour）或者线性（linetype）即可：</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># load package</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="co"># load dataset</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a><span class="fu">library</span>(gcookbook)</span>
@@ -1039,7 +1222,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb9-9"><a href="#cb9-9"></a></span>
 <span id="cb9-10"><a href="#cb9-10"></a><span class="co"># linetype</span></span>
 <span id="cb9-11"><a href="#cb9-11"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">linetype =</span> supp))<span class="sc">+</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="fu">geom_line</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-5-1" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-5-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1067,14 +1250,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>在上述的 tg 数据集中，dose 有三个取值：0.5、1.0和2.0。</p>
 <p>或许用户更想将其当做分类变量而不是连续变量来处理，那么运行 <code><a href="https://rdrr.io/r/base/factor.html">factor()</a></code> 函数将其转换为因子型变量。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># load package</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="co"># load dataset</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="fu">library</span>(gcookbook)</span>
 <span id="cb10-5"><a href="#cb10-5"></a></span>
 <span id="cb10-6"><a href="#cb10-6"></a><span class="co">#colour</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(dose),<span class="at">y =</span> length, <span class="at">colour =</span> supp,<span class="at">group =</span> supp))<span class="sc">+</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="fu">geom_line</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-6" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-6-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1090,7 +1273,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.3.1</span> 数据标记</h3>
 <p>如果折线图上有数据标记，你也可以将分组变量映射到数据标记的属性，如 <code>shape</code> 和 <code>fill</code> 等。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># load package</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co"># load dataset</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a><span class="fu">library</span>(gcookbook)</span>
@@ -1103,7 +1286,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb11-11"><a href="#cb11-11"></a><span class="co"># fill</span></span>
 <span id="cb11-12"><a href="#cb11-12"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">fill =</span> supp))<span class="sc">+</span></span>
 <span id="cb11-13"><a href="#cb11-13"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">21</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">21</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-7-1" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-7-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1128,7 +1311,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </section><section id="错开数据标记" class="level3" data-number="1.3.2"><h3 data-number="1.3.2" class="anchored" data-anchor-id="错开数据标记">
 <span class="header-section-number">1.3.2</span> 错开数据标记</h3>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># load package</span></span>
 <span id="cb12-2"><a href="#cb12-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb12-3"><a href="#cb12-3"></a><span class="co"># load dataset</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a><span class="fu">library</span>(gcookbook)</span>
@@ -1136,7 +1319,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb12-6"><a href="#cb12-6"></a><span class="co">#shape</span></span>
 <span id="cb12-7"><a href="#cb12-7"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">shape =</span> supp))<span class="sc">+</span></span>
 <span id="cb12-8"><a href="#cb12-8"></a><span class="fu">geom_line</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>))<span class="sc">+</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>),<span class="at">size =</span> <span class="dv">4</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.2</span>),<span class="at">size =</span> <span class="dv">4</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-8" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-8-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1153,12 +1336,12 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>通过设置线型（<code>linetype</code>）、线宽（<code>linewidth</code>）和颜色（<code>colour</code>或<code>color</code>）参数可以分别修改折线的线性（实线、虚线、点线等），线宽（单位为毫米）和颜色。</p>
 <p>将上述参数的值传递给 <code>geom_line()</code> 函数可以设置折线图的对应属性。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># load package</span></span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb13-3"><a href="#cb13-3"></a></span>
 <span id="cb13-4"><a href="#cb13-4"></a><span class="co">#shape</span></span>
 <span id="cb13-5"><a href="#cb13-5"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand,))<span class="sc">+</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>,<span class="at">colour =</span> <span class="st">"blue"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>,<span class="at">linewidth =</span> <span class="dv">1</span>,<span class="at">colour =</span> <span class="st">"blue"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-9" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-9-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1176,7 +1359,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>而将变量映射到图形属性则会使图上的每条折线具有不同的外观。</p>
 <p>折线图默认颜色并不是很吸引眼球，所以用户可以使用其他调色板<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>着色，可以调用 <code>scale_colour_brewer()</code> 函数和 <code>scale_colour_manual</code> 函数实线。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># load package</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="co"># load dataset</span></span>
 <span id="cb14-4"><a href="#cb14-4"></a><span class="fu">library</span>(gcookbook)</span>
@@ -1184,7 +1367,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb14-6"><a href="#cb14-6"></a><span class="co">#shape</span></span>
 <span id="cb14-7"><a href="#cb14-7"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
 <span id="cb14-8"><a href="#cb14-8"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-10" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-10-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1199,7 +1382,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </section><section id="进一步调整配色与线条" class="level3" data-number="1.4.2"><h3 data-number="1.4.2" class="anchored" data-anchor-id="进一步调整配色与线条">
 <span class="header-section-number">1.4.2</span> 进一步调整配色与线条</h3>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># load package</span></span>
 <span id="cb15-2"><a href="#cb15-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="co"># load dataset</span></span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="fu">library</span>(gcookbook)</span>
@@ -1211,7 +1394,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb15-10"><a href="#cb15-10"></a><span class="co"># 因为变量 supp 被映射到了颜色（colour）属性，所以它自动作为分组变量</span></span>
 <span id="cb15-11"><a href="#cb15-11"></a><span class="fu">ggplot</span>(tg,<span class="fu">aes</span>(<span class="at">x =</span> dose,<span class="at">y =</span> length, <span class="at">colour =</span> supp))<span class="sc">+</span></span>
 <span id="cb15-12"><a href="#cb15-12"></a><span class="fu">geom_line</span>(<span class="at">linetype =</span> <span class="st">"dashed"</span>)<span class="sc">+</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">size =</span> <span class="dv">3</span>,<span class="at">fill =</span> <span class="st">"white"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">size =</span> <span class="dv">3</span>,<span class="at">fill =</span> <span class="st">"white"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-11-1" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-11-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1237,12 +1420,12 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.5</span> 修改数据标记样式</h2>
 <p>在函数 <code>aes()</code> 外部设定函数 <code>geom_point()</code> 的参数 <code>size</code>（大小）、<code>shape</code>（形状）、<code>colour</code>（颜色）和 <code>fill</code>（填充色）即可。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># load package</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb16-3"><a href="#cb16-3"></a></span>
 <span id="cb16-4"><a href="#cb16-4"></a><span class="fu">ggplot</span>(BOD,<span class="fu">aes</span>(<span class="at">x =</span> Time,<span class="at">y =</span> demand))<span class="sc">+</span></span>
 <span id="cb16-5"><a href="#cb16-5"></a><span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">colour =</span> <span class="st">"darkred"</span>,<span class="at">fill =</span> <span class="st">"pink"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>,<span class="at">shape =</span> <span class="dv">22</span>,<span class="at">colour =</span> <span class="st">"darkred"</span>,<span class="at">fill =</span> <span class="st">"pink"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-12" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-12-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1256,12 +1439,12 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 <p>The default <code>shape</code> for points is a solid circle, the default <code>size</code> is 2, and the default <code>colour</code> is black.The fill color is relevant only for some point shapes (numbered 21–25), which have separate outline and fill colors. The fill color is typically NA, or empty; you can fill it with white to get hollow-looking circles</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># load package</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
 <span id="cb17-4"><a href="#cb17-4"></a><span class="fu">ggplot</span>(BOD, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> demand)) <span class="sc">+</span></span>
 <span id="cb17-5"><a href="#cb17-5"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-6"><a href="#cb17-6"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">fill =</span> <span class="st">"white"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-13" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-13-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1276,7 +1459,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>如果要将数据标记和折线设定为不同的颜色，用户必须折线绘制完成后再设定数据标记的颜色，此时，数据标记被绘制在更上面的图层，以避免被折线遮盖。</p>
 <p>这里定义了一个函数 <code>pd = position_dodge(0.2)</code> 来将图形错开，原始用法可参照 <a href="#fig-8" class="quarto-xref">图&nbsp;11</a>。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># load package</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="fu">library</span>(gcookbook)  <span class="co"># Load gcookbook for the tg data set</span></span>
 <span id="cb18-4"><a href="#cb18-4"></a></span>
@@ -1286,7 +1469,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb18-8"><a href="#cb18-8"></a><span class="fu">ggplot</span>(tg, <span class="fu">aes</span>(<span class="at">x =</span> dose, <span class="at">y =</span> length, <span class="at">fill =</span> supp)) <span class="sc">+</span></span>
 <span id="cb18-9"><a href="#cb18-9"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> pd) <span class="sc">+</span></span>
 <span id="cb18-10"><a href="#cb18-10"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">position =</span> pd) <span class="sc">+</span></span>
-<span id="cb18-11"><a href="#cb18-11"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"white"</span>))</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb18-11"><a href="#cb18-11"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"black"</span>,<span class="st">"white"</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-14" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-14-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1302,7 +1485,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.6</span> 绘制面积图</h2>
 <p>运行 <code>geom_area()</code> 函数即可绘制面积图。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># load package</span></span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb19-3"><a href="#cb19-3"></a></span>
 <span id="cb19-4"><a href="#cb19-4"></a><span class="co"># Convert the sunspot.year data set into a data frame for this example</span></span>
@@ -1312,7 +1495,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb19-8"><a href="#cb19-8"></a>  )</span>
 <span id="cb19-9"><a href="#cb19-9"></a></span>
 <span id="cb19-10"><a href="#cb19-10"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a>  <span class="fu">geom_area</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb19-11"><a href="#cb19-11"></a>  <span class="fu">geom_area</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-15" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-15-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1327,7 +1510,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>默认情况下，面积图的填充色都是黑灰色且没有边框线，通过设定 <code>fill</code> 可以修改面积图的填充色。</p>
 <p>下图 <a href="#fig-16" class="quarto-xref">图&nbsp;20</a> 将把填充色设定为蓝色，并通过 <code>alpha=0.2</code> 将面积图的透明度设定为 80% ，另外，用户可以看到面积图的网格线，通过设置 <code>colour</code> 为面积图添加边框线。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># load package</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb20-3"><a href="#cb20-3"></a></span>
 <span id="cb20-4"><a href="#cb20-4"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -1336,7 +1519,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb20-7"><a href="#cb20-7"></a>  )</span>
 <span id="cb20-8"><a href="#cb20-8"></a></span>
 <span id="cb20-9"><a href="#cb20-9"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
-<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-10"><a href="#cb20-10"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-16" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-16-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1351,7 +1534,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>给整个面积图添加边框线后的效果可能并不十分令人满意，因为此时系统会在面积图的起点和终点位置分别绘制一条垂直线，且在底部绘制一条横线。</p>
 <p>为了避免上述情况，可以先绘制不带框线的面积图（不设定 colour），然后添加图层，并用 <code>geom_line()</code> 函数绘制轨迹线，如下图 <a href="#fig-17" class="quarto-xref">图&nbsp;21</a> 。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># load package</span></span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb21-3"><a href="#cb21-3"></a></span>
 <span id="cb21-4"><a href="#cb21-4"></a>sunspotyear <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
@@ -1361,7 +1544,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb21-8"><a href="#cb21-8"></a></span>
 <span id="cb21-9"><a href="#cb21-9"></a><span class="fu">ggplot</span>(sunspotyear, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sunspots)) <span class="sc">+</span></span>
 <span id="cb21-10"><a href="#cb21-10"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"blue"</span>, <span class="at">alpha =</span> .<span class="dv">2</span>)<span class="sc">+</span></span>
-<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb21-11"><a href="#cb21-11"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-17" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-17-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1377,12 +1560,12 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.7</span> 绘制堆积面积图</h2>
 <p>依旧是运行 <code>geom_area()</code> 函数，但是需要映射一个因子型变量到 <code>fill</code> 即可，如下图 <a href="#fig-18" class="quarto-xref">图&nbsp;22</a> 所示。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># load package</span></span>
 <span id="cb22-2"><a href="#cb22-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb22-3"><a href="#cb22-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
 <span id="cb22-4"><a href="#cb22-4"></a></span>
 <span id="cb22-5"><a href="#cb22-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
-<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">geom_area</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-6"><a href="#cb22-6"></a>  <span class="fu">geom_area</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-18" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-18-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1397,13 +1580,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>堆积面积图对应的基础数据通常为宽格式（wide format），但 ggplot 要求数据必须是长格式（long format），两种格式之间需要进行转换。<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
 <p>将 <a href="#fig-18" class="quarto-xref">图&nbsp;22</a> 的调色板设定为蓝色渐变色，并在各个区域之间添加细线（<code>size = .2</code>），同时我们将填充区域设定为半透明（<code>alpha = .4</code> )，这样可以透过填充区域看见网格线。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># load package</span></span>
 <span id="cb28-2"><a href="#cb28-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb28-3"><a href="#cb28-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
 <span id="cb28-4"><a href="#cb28-4"></a></span>
 <span id="cb28-5"><a href="#cb28-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
 <span id="cb28-6"><a href="#cb28-6"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-7"><a href="#cb28-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-19" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-19-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1418,14 +1601,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>因为堆积面积图中的各个部分是由多边形构成的，所以其具有左、右边框线，这样的绘图效果不尽人意且可能产生误导效果。</p>
 <p>下图将绘制一个不带边框线的堆积面积图：</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># load package</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb29-3"><a href="#cb29-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
 <span id="cb29-4"><a href="#cb29-4"></a></span>
 <span id="cb29-5"><a href="#cb29-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup, <span class="at">order =</span> dplyr<span class="sc">::</span><span class="fu">desc</span>(AgeGroup))) <span class="sc">+</span></span>
 <span id="cb29-6"><a href="#cb29-6"></a>  <span class="fu">geom_area</span>(<span class="at">colour =</span> <span class="cn">NA</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
 <span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>) <span class="sc">+</span></span>
-<span id="cb29-8"><a href="#cb29-8"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="st">"stack"</span>, <span class="at">size =</span> .<span class="dv">2</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb29-8"><a href="#cb29-8"></a>  <span class="fu">geom_line</span>(<span class="at">position =</span> <span class="st">"stack"</span>, <span class="at">size =</span> .<span class="dv">2</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-20" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-20-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1441,13 +1624,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.8</span> 绘制百分比堆积面积图</h2>
 <p>使用 <code>geom_area(position = "fill")</code> 函数实现这一效果：</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># load package</span></span>
 <span id="cb30-2"><a href="#cb30-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb30-3"><a href="#cb30-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
 <span id="cb30-4"><a href="#cb30-4"></a></span>
 <span id="cb30-5"><a href="#cb30-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
 <span id="cb30-6"><a href="#cb30-6"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="st">"fill"</span>,<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-7"><a href="#cb30-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-21" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-21-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1462,14 +1645,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>带百分比标签的百分比堆积面积图，通过运行 <code>position = "fill"</code> 可将 y 值的范围按比例调整为 0-1。</p>
 <p>再运行 <code>scale_y_continuous(labels = scales::percent)</code> 可输出百分比标签。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="co"># load package</span></span>
 <span id="cb31-2"><a href="#cb31-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb31-3"><a href="#cb31-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the uspopage data set</span></span>
 <span id="cb31-4"><a href="#cb31-4"></a></span>
 <span id="cb31-5"><a href="#cb31-5"></a><span class="fu">ggplot</span>(uspopage, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Thousands, <span class="at">fill =</span> AgeGroup)) <span class="sc">+</span></span>
 <span id="cb31-6"><a href="#cb31-6"></a>  <span class="fu">geom_area</span>(<span class="at">position =</span> <span class="st">"fill"</span>,<span class="at">colour =</span> <span class="st">"black"</span>, <span class="at">size =</span> .<span class="dv">2</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
 <span id="cb31-7"><a href="#cb31-7"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)<span class="sc">+</span></span>
-<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-8"><a href="#cb31-8"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-22" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-22-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1487,7 +1670,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>这里使用的数据集为 <code>climate</code> 数据集，其中 <code>Anomaly10y</code> 变量表示了各年温度相对于 1950~1980 年平均水平偏差（以摄氏度衡量）的 10 年移动平均。变量 <code>Unc10y</code> 表示其 95% 置信水平下的置信区间。</p>
 <p>这里设定 ymax 和 ymin 分别等于<code>Anomaly10y+Unc10y</code> 和 <code>Anomaly10y-Unc10y</code></p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># load package</span></span>
 <span id="cb32-2"><a href="#cb32-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb32-3"><a href="#cb32-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
 <span id="cb32-4"><a href="#cb32-4"></a><span class="fu">library</span>(dplyr)</span>
@@ -1497,7 +1680,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb32-8"><a href="#cb32-8"></a>  <span class="fu">filter</span>(Source <span class="sc">==</span> <span class="st">"Berkeley"</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb32-9"><a href="#cb32-9"></a>  <span class="fu">select</span>(Year, Anomaly10y, Unc10y)</span>
 <span id="cb32-10"><a href="#cb32-10"></a></span>
-<span id="cb32-11"><a href="#cb32-11"></a><span class="fu">head</span>(climate_mod)</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb32-11"><a href="#cb32-11"></a><span class="fu">head</span>(climate_mod)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  Year Anomaly10y Unc10y
 1 1800     -0.435  0.505
@@ -1507,7 +1690,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 5 1804     -0.536  0.483
 6 1805     -0.541  0.475</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">#&gt;     Year Anomaly10y Unc10y</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">#&gt;     Year Anomaly10y Unc10y</span></span>
 <span id="cb34-2"><a href="#cb34-2"></a><span class="co">#&gt; 1   1800     -0.435  0.505</span></span>
 <span id="cb34-3"><a href="#cb34-3"></a><span class="co">#&gt; 2   1801     -0.453  0.493</span></span>
 <span id="cb34-4"><a href="#cb34-4"></a><span class="co">#&gt; 3   1802     -0.460  0.486</span></span>
@@ -1519,7 +1702,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb34-10"><a href="#cb34-10"></a><span class="co"># Shaded region</span></span>
 <span id="cb34-11"><a href="#cb34-11"></a><span class="fu">ggplot</span>(climate_mod, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y)) <span class="sc">+</span></span>
 <span id="cb34-12"><a href="#cb34-12"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> Anomaly10y <span class="sc">-</span> Unc10y, <span class="at">ymax =</span> Anomaly10y <span class="sc">+</span> Unc10y), <span class="at">alpha =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb34-13"><a href="#cb34-13"></a>  <span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb34-13"><a href="#cb34-13"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-23" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-23-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1535,7 +1718,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>需要注意的是，如果使用这种带阴影或颜色的置信域，应该将 <code>geom_line()</code> 函数放在 <code>geom_ribbon()</code> 之后，这样折线会被绘制在阴影区域上面的图层，如果反转顺序的话，阴影区域的颜色有可能使折线模糊不清。</p>
 <p>但是用户可以选择使用虚线来表示置信域的上下边界，这样就不用考虑色域的问题，如下图 <a href="#fig-24" class="quarto-xref">图&nbsp;28</a> 所示。</p>
 <div class="cell" data-fig="true">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># load package</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># load package</span></span>
 <span id="cb35-2"><a href="#cb35-2"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb35-3"><a href="#cb35-3"></a><span class="fu">library</span>(gcookbook) <span class="co"># Load gcookbook for the climate data set</span></span>
 <span id="cb35-4"><a href="#cb35-4"></a><span class="fu">library</span>(dplyr)</span>
@@ -1544,7 +1727,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb35-7"><a href="#cb35-7"></a><span class="fu">ggplot</span>(climate_mod, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Anomaly10y)) <span class="sc">+</span></span>
 <span id="cb35-8"><a href="#cb35-8"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Anomaly10y <span class="sc">-</span> Unc10y), <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
 <span id="cb35-9"><a href="#cb35-9"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> Anomaly10y <span class="sc">+</span> Unc10y), <span class="at">colour =</span> <span class="st">"grey50"</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>) <span class="sc">+</span></span>
-<span id="cb35-10"><a href="#cb35-10"></a>  <span class="fu">geom_line</span>()</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-10"><a href="#cb35-10"></a>  <span class="fu">geom_line</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-24" class="quarto-float quarto-figure quarto-figure-left anchored">
 <figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-24-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -1687,20 +1870,20 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p><strong>如何转换？</strong></p>
 <p>在 R 语言中，最常用的数据转换包是 <strong><code>tidyr</code></strong>，它是 <code>tidyverse</code> 生态系统的一部分。<code>tidyr</code> 包提供了 <code>pivot_longer()</code>（以前是 <code>gather()</code>）函数，用于将宽格式数据转换为长格式。</p>
 <p>假设我们有以下宽格式数据框 <code>df_wide</code>：</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># 创建一个示例宽格式数据 </span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># 创建一个示例宽格式数据 </span></span>
 <span id="cb23-2"><a href="#cb23-2"></a>df_wide <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(   </span>
 <span id="cb23-3"><a href="#cb23-3"></a>    <span class="at">Year =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2021</span>, <span class="dv">2022</span>),   </span>
 <span id="cb23-4"><a href="#cb23-4"></a>    <span class="at">ProductA =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">120</span>, <span class="dv">150</span>),   </span>
 <span id="cb23-5"><a href="#cb23-5"></a>    <span class="at">ProductB =</span> <span class="fu">c</span>(<span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>),   </span>
 <span id="cb23-6"><a href="#cb23-6"></a>    <span class="at">ProductC =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>) )  </span>
-<span id="cb23-7"><a href="#cb23-7"></a><span class="fu">print</span>(df_wide) </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="fu">print</span>(df_wide) </span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <p>输出：</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a> Year ProductA ProductB ProductC </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a> Year ProductA ProductB ProductC </span>
 <span id="cb24-2"><a href="#cb24-2"></a><span class="dv">1</span> <span class="dv">2020</span>      <span class="dv">100</span>       <span class="dv">50</span>       <span class="dv">20</span> </span>
 <span id="cb24-3"><a href="#cb24-3"></a><span class="dv">2</span> <span class="dv">2021</span>      <span class="dv">120</span>       <span class="dv">60</span>       <span class="dv">30</span> </span>
-<span id="cb24-4"><a href="#cb24-4"></a><span class="dv">3</span> <span class="dv">2022</span>      <span class="dv">150</span>       <span class="dv">70</span>       <span class="dv">40</span> </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="dv">3</span> <span class="dv">2022</span>      <span class="dv">150</span>       <span class="dv">70</span>       <span class="dv">40</span> </span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <p>现在，我们使用 <code>pivot_longer()</code> 将其转换为长格式：</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">library</span>(tidyr) </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">library</span>(tidyr) </span>
 <span id="cb25-2"><a href="#cb25-2"></a><span class="fu">library</span>(ggplot2) <span class="co"># 用于后续绘图  </span></span>
 <span id="cb25-3"><a href="#cb25-3"></a>df_long <span class="ot">&lt;-</span> df_wide <span class="sc">%&gt;%</span>   </span>
 <span id="cb25-4"><a href="#cb25-4"></a><span class="fu">pivot_longer</span>(     </span>
@@ -1711,7 +1894,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb25-9"><a href="#cb25-9"></a>    <span class="at">values_to =</span> <span class="st">"Sales"</span>           </span>
 <span id="cb25-10"><a href="#cb25-10"></a>    <span class="co"># 新的数值变量的名称   </span></span>
 <span id="cb25-11"><a href="#cb25-11"></a>)  </span>
-<span id="cb25-12"><a href="#cb25-12"></a><span class="fu">print</span>(df_long) </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb25-12"><a href="#cb25-12"></a><span class="fu">print</span>(df_long) </span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <p>输出：</p>
 <pre><code># A tibble: 9 × 3    
 Year ProductType Sales   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt; 
@@ -1726,447 +1909,322 @@ Year ProductType Sales   &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;
 9  2022 ProductC       40 </code></pre>
 <p><strong>使用长格式数据绘制堆积面积图</strong></p>
 <p>现在我们有了长格式数据 <code>df_long</code>，就可以轻松绘制堆积面积图了：</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sales, <span class="at">fill =</span> ProductType)) <span class="sc">+</span>   </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> Year, <span class="at">y =</span> Sales, <span class="at">fill =</span> ProductType)) <span class="sc">+</span>   </span>
 <span id="cb27-2"><a href="#cb27-2"></a><span class="fu">geom_area</span>(<span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span> </span>
 <span id="cb27-3"><a href="#cb27-3"></a><span class="co"># alpha 用于调整透明度   </span></span>
 <span id="cb27-4"><a href="#cb27-4"></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"不同产品销售额堆积面积图"</span>,        </span>
 <span id="cb27-5"><a href="#cb27-5"></a><span class="at">x =</span> <span class="st">"年份"</span>,        </span>
 <span id="cb27-6"><a href="#cb27-6"></a><span class="at">y =</span> <span class="st">"销售额"</span>,        </span>
 <span id="cb27-7"><a href="#cb27-7"></a><span class="at">fill =</span> <span class="st">"产品类型"</span>) <span class="sc">+</span>   </span>
-<span id="cb27-8"><a href="#cb27-8"></a><span class="fu">theme_minimal</span>() </span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="fu">theme_minimal</span>() </span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <p><em>总结来说，将宽格式数据转换为长格式是 <code>ggplot2</code> 绘制堆积图的关键步骤。这不仅符合 <code>ggplot2</code> 的图形语法和整洁数据原则，也使得数据能够清晰地映射到图表的视觉属性上，从而正确地进行堆积和可视化。</em><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p>
 </li>
 </ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
     }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
     }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
       }
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
     }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("www\.lazyzhou\.cn");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "已复制");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "已复制");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("www\.lazyzhou\.cn");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -2174,186 +2232,190 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "pumc-zhou/comments";
+    script.dataset.repoId = "R_kgDON9RmWA";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDON9RmWM4CnLUH";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
   }
-});
-</script><script src="https://giscus.app/client.js" data-repo="pumc-zhou/comments" data-repo-id="R_kgDON9RmWA" data-category="General" data-category-id="DIC_kwDON9RmWM4CnLUH" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
-</script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  loadGiscus();
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../../Guide/R/03-ggplot2-barplot.html" class="pagination-link" aria-label="03-ggplot2 绘图——条形图">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">03-ggplot2 绘图——条形图</span>
       </a>          
@@ -2364,14 +2426,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb36" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb36-1"><a href="#cb36-1"></a><span class="co">---</span></span>
 <span id="cb36-2"><a href="#cb36-2"></a><span class="an">title:</span><span class="co"> "04-ggplot2 绘图——折线图"</span></span>
 <span id="cb36-3"><a href="#cb36-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
 <span id="cb36-4"><a href="#cb36-4"></a><span class="an">date:</span><span class="co"> "2025-07-19"</span></span>
 <span id="cb36-5"><a href="#cb36-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
 <span id="cb36-6"><a href="#cb36-6"></a><span class="an">format:</span><span class="co"> </span></span>
 <span id="cb36-7"><a href="#cb36-7"></a><span class="co">    html:</span></span>
-<span id="cb36-8"><a href="#cb36-8"></a><span class="co">        code-fold: true</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="co">        code-fold: false</span></span>
 <span id="cb36-9"><a href="#cb36-9"></a><span class="co">        code-line-numbers: true</span></span>
 <span id="cb36-10"><a href="#cb36-10"></a><span class="co">        code-highlight: true</span></span>
 <span id="cb36-11"><a href="#cb36-11"></a><span class="co">        fig_caption: true</span></span>
@@ -3137,7 +3199,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb36-819"><a href="#cb36-819"></a><span class="in">```</span></span>
 <span id="cb36-820"><a href="#cb36-820"></a></span>
 <span id="cb36-821"><a href="#cb36-821"></a>end.</span>
-</code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">

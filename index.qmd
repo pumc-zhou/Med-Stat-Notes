@@ -13,23 +13,24 @@ number-sections: false
 code-tools: false
 page-layout: full
 #image: images/logo.png
-image-title: "just simonzhou"
+image-title: "just keep learning"
 
 about:
   template: solana
   image: images/profile_dog.jpg
   image-shape: round
-  
+
   links:
-    - icon: book-fill # 添加logo（https://icons.getbootstrap.com）
-      text: Bookdown
-      href: https://bookdown.org
-    - icon: github
-      text: Github项目
-      href: https://github.com/pumc-zhou/Med-Stat-Notes
-    - icon: envelope-fill
-      text: Email
-      href: mailto::simonzhou01@outlook.com
+  - icon: linkedin
+    text: LinkedIn
+    href: https://www.linkedin.com/in/lyubang-zhou-5499b0314
+  - icon: github
+    text: GitHub
+    href: https://github.com/pumc-zhou/Med-Stat-Notes
+  - icon: envelope-fill
+    text: Email
+    href: mailto:simonzhou01@outlook.com
+# 添加logo（https://icons.getbootstrap.com）,linkedin 图标在其中已有支持（无需额外配置）
 ---
 
 本书的前身是开始于23年夏天的`Rmarkdown`笔记的制作，在考研的过程中，一些无聊又不想学习的时间被用来整理这些笔记和制作文档与网页，由于Quarto的出现和发展，感觉到它的强大与便利，遂用Quarto重制。

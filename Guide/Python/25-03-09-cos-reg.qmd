@@ -2,7 +2,7 @@
 title: "用Python做生存分析和COX回归"
 output: 
   html:
-    code-fold: true
+    code-fold: false
     code-tools: true
 number-sections: true
 toc: true

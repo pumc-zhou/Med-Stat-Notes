@@ -5,7 +5,7 @@ date: "2025-07-25"
 date-modified: today
 format: 
     html:
-        code-fold: true
+        code-fold: false
         code-line-numbers: true
         code-highlight: true
         fig_caption: true
@@ -32,7 +32,7 @@ format:
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-1
+#| label: fig-1
 #| fig: TRUE
 #| fig.cap: "基本散点图"
 
@@ -57,13 +57,13 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn)) +
   geom_point()
 ```
 
-通过设定形状（shape）参数可以在散点图中绘制点以外的形状。例如，我们常用空心圈 `shape=21`（图 @fig5-3 ）代替默认的实心圆 `shape=19`（图 @fig5-1 ）​。
+通过设定形状（shape）参数可以在散点图中绘制点以外的形状。例如，我们常用空心圈 `shape=21`（图 @fig-3 ）代替默认的实心圆 `shape=19`（图 @fig-1 ）​。
 
 ```{r}
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-2
+#| label: fig-2
 #| fig: TRUE
 #| fig.cap: "基本散点图-修改形状"
 
@@ -86,7 +86,7 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn)) +
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-3
+#| label: fig-3
 #| fig: TRUE
 #| fig.cap: "基本散点图-修改散点大小"
 
@@ -113,7 +113,7 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn)) +
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-4
+#| label: fig-4
 #| fig: TRUE
 #| fig-cap: "基本散点图-按形/色分组"
 #| fig-subcap:
@@ -148,13 +148,13 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn,shape = sex)) +
 
 选用的分组变量必须是分类变量，换言之，它必须是因子型或者字符型的向量。如果分组变量是数值型向量，则需要将它转化为因子型变量之后，才能以其作为分组变量。
 
-可以将一个变量同时映射到 `shape` 和 `colour` 属性。当有多个分组变量时，可以将它们分别映射到不同的图形属性。下面，我们把变量 `sex` 同时映射到 `shape` 和 `colour` 属性，见图 @fig5-5 。
+可以将一个变量同时映射到 `shape` 和 `colour` 属性。当有多个分组变量时，可以将它们分别映射到不同的图形属性。下面，我们把变量 `sex` 同时映射到 `shape` 和 `colour` 属性，见图 @fig-5 。
 
 ```{r}
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-5
+#| label: fig-5
 #| fig: TRUE
 #| fig-cap: "基本散点图-按形和色分组"
 
@@ -164,13 +164,13 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn,color = sex,shape = sex)) +
 
 有时需要使用不同于默认设置的点形和颜色。通过调用`scale_shape_manual()` 函数可以使用其他点形；
 
-调用 `scale_colour_brewer()` 函数或者 `scale_colour_manual()` 函数可以使用其他调色板，见图 @fig5-6 。
+调用 `scale_colour_brewer()` 函数或者 `scale_colour_manual()` 函数可以使用其他调色板，见图 @fig-6 。
 
 ```{r}
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-6
+#| label: fig-6
 #| fig: TRUE
 #| fig-cap: "基本散点图-修改调色板"
 
@@ -182,13 +182,13 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn, shape = sex, colour = sex)) 
 
 ## 使用不同于默认设置的点形
 
-通过指定 `geom_point()` 函数中的点形（`shape`）参数，可以同时设定散点图中所有数据点的点形，如图 @fig5-7 所示。
+通过指定 `geom_point()` 函数中的点形（`shape`）参数，可以同时设定散点图中所有数据点的点形，如图 @fig-7 所示。
 
 ```{r}
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-7
+#| label: fig-7
 #| fig: TRUE
 #| fig-cap: "指定散点形状"
 
@@ -206,7 +206,7 @@ R系统绘图可以调用的图形较多，一些点形只有边框线（1～14�
 #| eval: true
 #| echo: true
 #| code-fold: false
-#| label: fig5-8
+#| label: fig-8
 #| fig: TRUE
 #| fig-cap: "自定义散点形状"
 

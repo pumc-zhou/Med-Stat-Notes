@@ -5,7 +5,7 @@ date: "2025-06-08"
 date-modified: today
 format: 
     html:
-        code-fold: true
+        code-fold: false
         code-line-numbers: true
         code-highlight: true
         fig_caption: true
@@ -258,7 +258,7 @@ geom_col()
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -274,7 +274,7 @@ hist(mtcars$mpg,breaks = 10)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -297,7 +297,7 @@ geom_histogram(binwidth = 4)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -310,7 +310,7 @@ plot(ToothGrowth$supp,ToothGrowth$len)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -324,7 +324,7 @@ boxplot(len ~ supp,data = ToothGrowth)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -338,7 +338,7 @@ boxplot(len ~ supp + dose,data = ToothGrowth)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -353,7 +353,7 @@ geom_boxplot()
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -370,7 +370,7 @@ geom_boxplot()
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -383,7 +383,7 @@ curve(x^3 - 5*x,from = -4,to = 4)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -399,7 +399,7 @@ curve(1 - myfun(x),add = TRUE,col = "red")
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 

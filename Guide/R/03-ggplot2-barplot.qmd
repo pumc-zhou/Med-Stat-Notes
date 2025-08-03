@@ -5,7 +5,7 @@ date: "2025-06-14"
 date-modified: today
 format: 
     html:
-        code-fold: true
+        code-fold: false
         code-line-numbers: true
         code-highlight: true
         fig_caption: true
@@ -22,7 +22,7 @@ format:
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -40,7 +40,7 @@ ggplot(pg_mean, aes(x = group, y = weight)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -64,7 +64,7 @@ ggplot(BOD, aes(x = Time, y = demand)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -86,7 +86,7 @@ ggplot(BOD, aes(x = factor(Time), y = demand)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -104,7 +104,7 @@ ggplot(pg_mean, aes(x = group, y = weight)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -124,7 +124,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -147,7 +147,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -175,7 +175,7 @@ ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -190,7 +190,7 @@ ggplot(diamonds, aes(x = cut)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -211,7 +211,7 @@ upc
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -227,7 +227,7 @@ ggplot(upc, aes(x = Abb, y = Change, fill = Region)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -249,7 +249,7 @@ ggplot(upc, aes(x = reorder(Abb, Change), y = Change, fill = Region)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -271,7 +271,7 @@ head(climate_sub, 10)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -294,7 +294,7 @@ ggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -311,7 +311,7 @@ ggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -330,7 +330,7 @@ ggplot(climate_sub, aes(x = Year, y = Anomaly10y, fill = pos)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -346,7 +346,7 @@ ggplot(pg_mean, aes(x = group, y = weight)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -364,7 +364,7 @@ ggplot(pg_mean, aes(x = group, y = weight)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -384,7 +384,7 @@ ggplot(pg_mean, aes(x = group, y = weight)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -398,7 +398,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -427,7 +427,7 @@ geom_bar(width = 0.9, position = position_dodge(width=0.9))
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -445,7 +445,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -464,7 +464,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -485,7 +485,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -501,7 +501,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -516,7 +516,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -536,7 +536,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -559,7 +559,7 @@ ggplot(cabbage_exp, aes(x = interaction(Date, Cultivar), y = Weight)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -577,7 +577,7 @@ ggplot(mtcars, aes(x = factor(cyl))) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -600,7 +600,7 @@ ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -630,7 +630,7 @@ ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -661,7 +661,7 @@ ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -681,7 +681,7 @@ Cleveland点图是条形图的替代方案，它可以减少图形造成的视�
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -706,7 +706,7 @@ ggplot(tophit, aes(x = avg, y = name)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -731,7 +731,7 @@ ggplot(tophit, aes(x = avg, y = reorder(name, avg))) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -756,7 +756,7 @@ ggplot(tophit, aes(x = reorder(name, avg), y = avg)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -775,7 +775,7 @@ tophit$name <- factor(tophit$name, levels = nameorder)
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 
@@ -800,7 +800,7 @@ ggplot(tophit, aes(x = avg, y = name)) +
 #| echo: true
 #| output: true
 #| cache: true
-#| fig-show: true  # 确保图形显示
+#| fig-show: asis  # 确保图形显示
 #| fig-width: 8    # 设置图形宽度
 #| fig-height: 6   # 设置图形高度
 

@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.40">
+<meta name="generator" content="quarto-1.8.18">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 <meta name="author" content="Simonzhou">
-<title>贝叶斯与概率图模型（PGM） – 医学统计学笔记</title>
+<title>贝叶斯与概率图模型（PGM） – Medical Statistics Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,8 +19,9 @@ ul.task-list li input[type="checkbox"] {
   vertical-align: middle;
 }
 /* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -31,7 +32,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -61,20 +62,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../Guide/Guide-intro.html" rel="next">
+<link href="../../Guide/R/00-R-install.html" rel="next">
 <link href="../../Learn/Bayes/00-About-Bayes.html" rel="prev">
 <link href="../../images/logo.png" rel="icon" type="image/png">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-8ea72dc5fed832574809a9c94082fbbb.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-5c1f7a6a2802c248a2ccc243aab7b5c3.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-471db41ce322a552900897f16bd8eadd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-39599dd41c217de25ded3edcfc388f1c.min.css" rel="prefetch" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark"><script id="quarto-search-options" type="application/json">{
+<link href="../../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-c10fc78dcbf6a5f009fadeb270c5b5ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
@@ -106,24 +111,186 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </script><style>html{ scroll-behavior: smooth; }</style>
-<meta property="og:title" content="贝叶斯与概率图模型（PGM） – 医学统计学笔记">
+<meta property="og:title" content="贝叶斯与概率图模型（PGM） – Medical Statistics Notes">
 <meta property="og:description" content="This is a Note site.">
 <meta property="og:image" content="www.lazyzhou.cn/Learn/Bayes/images/logo.png">
-<meta property="og:site_name" content="医学统计学笔记">
-<meta name="twitter:title" content="贝叶斯与概率图模型（PGM） – 医学统计学笔记">
+<meta property="og:site_name" content="Medical Statistics Notes">
+<meta name="twitter:title" content="贝叶斯与概率图模型（PGM） – Medical Statistics Notes">
 <meta name="twitter:description" content="This is a Note site.">
 <meta name="twitter:image" content="www.lazyzhou.cn/Learn/Bayes/01-Bayes-PGM_files/figure-html/unnamed-chunk-6-1.png">
 <meta name="twitter:image-height" content="960">
 <meta name="twitter:image-width" content="1344">
 <meta name="twitter:card" content="summary_large_image">
 </head>
-<body class="nav-sidebar docked nav-fixed">
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="navbar navbar-expand-lg " data-bs-theme="dark"><div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    <img src="../../images/logo.png" alt="" class="navbar-logo"></a>
+    <img src="../../images/logo.png" alt="" class="navbar-logo light-content"><img src="../../images/logo.png" alt="" class="navbar-logo dark-content"></a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">医学统计学习笔记</span>
     </a>
@@ -148,6 +315,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="dropdown-text">Basic</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../Learn/Advance/00-advance.html">
+ <span class="dropdown-text">Advance</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../Learn/Bayes/00-About-Bayes.html">
  <span class="dropdown-text">Bayes</span></a>
   </li>  
@@ -167,15 +338,15 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
  <span class="dropdown-text">Python</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/R/R-intro.html">
+    <a class="dropdown-item" href="../../Guide/R/01-R-intro.html">
  <span class="dropdown-text">R</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/SAS/SAS-intro.html">
+    <a class="dropdown-item" href="../../Guide/SAS/25-02-16-SAS-intro.html">
  <span class="dropdown-text">SAS</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../Guide/Stata/Stata-intro.html">
+    <a class="dropdown-item" href="../../Guide/Stata/25-03-09-Stata-intro.html">
  <span class="dropdown-text">Stata</span></a>
   </li>  
     </ul>
@@ -193,14 +364,25 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
 </ul>
 <ul class="navbar-nav navbar-nav-scroll ms-auto">
-<li class="nav-item">
-    <a class="nav-link" href="../../navbar/book.html"> 
-<span class="menu-text">Books</span></a>
+<li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">
+<li>
+    <a class="dropdown-item" href="../../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+</li>
 </ul>
 </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools tools-wide">
-    <a href="https://github.com/zhoulvbang" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+    <a href="https://github.com/pumc-zhou" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
   <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="切换阅读器模式">
   <div class="quarto-reader-toggle-btn">
@@ -213,13 +395,25 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Learn/Basic/00-basic.html">医学统计学基础</a></li><li class="breadcrumb-item"><a href="../../Learn/Bayes/00-About-Bayes.html">贝叶斯与概率推理</a></li><li class="breadcrumb-item"><a href="../../Learn/Bayes/01-Bayes-PGM.html">贝叶斯与概率图模型（PGM）</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Learn</li><li class="breadcrumb-item"><a href="../../Learn/Bayes/00-About-Bayes.html">Bayes</a></li><li class="breadcrumb-item"><a href="../../Learn/Bayes/01-Bayes-PGM.html">贝叶斯与概率图模型（PGM）</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
     </div>
   </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="sidebar-menu-container"> 
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
@@ -229,8 +423,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">医学统计学基础</span></a>
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learn</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -238,8 +432,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">医学统计学基础</span></a>
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Basic</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -321,13 +515,36 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">贝叶斯与概率推理</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Advance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 show">
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Learn/Advance/00-advance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-医学统计学（伪）高级部分</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Learn/Advance/01-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-负二项分布</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Bayes</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
@@ -346,51 +563,69 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/Guide-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">统计软件使用历程</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guide</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
  <span class="menu-text">R</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/R/2025-02-22-CLHLS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">CLHLS Data Analysis by R</span></a>
+  <a href="../../Guide/R/00-R-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-R 安装</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/R/R-install.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">MacOS安装 R 和 Rstudio</span></a>
+  <a href="../../Guide/R/01-R-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-R 相关介绍与记录</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/R/R-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">R</span></a>
+  <a href="../../Guide/R/02-ggplot2-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-ggplot2 绘图基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/R/03-ggplot2-barplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-ggplot2 绘图——条形图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/R/04-ggplot2-folded-line.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-ggplot2 绘图——折线图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/R/05-ggplot2-scatter-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-ggplot2 绘图——散点图</span></a>
   </div>
 </li>
       </ul>
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
  <span class="menu-text">Python</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
@@ -411,6 +646,18 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../Guide/Python/25-04-28-DID.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID 双重差分模型</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Python/25-04-28-DID-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use the DID in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Python</span></a>
   </div>
@@ -419,37 +666,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
  <span class="menu-text">SAS</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
-            <i class="bi bi-chevron-right ms-2"></i>
-          </a> 
-      </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">
-<li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/2025-02-16-CLHLS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">使用SAS处理CLHLS数据</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/SAS-install.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SAS Install</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../Guide/SAS/SAS-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">SAS</span></a>
-  </div>
-</li>
-      </ul>
-</li>
-          <li class="sidebar-item sidebar-item-section">
-      <div class="sidebar-item-container"> 
-            <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Stata</span></a>
           <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -457,14 +675,301 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Stata 做 ITSA 分析</span></a>
+  <a href="../../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-SAS-Intro and Record</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../Guide/Stata/Stata-intro.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-SAS 安装与vscode 扩展</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-05-SAS-install-connect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-SAS 在 Jupyter Notebook 中使用</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-22-SAS-Base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-SAS Base</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-SAS 程序基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-25-SAS-DATA-LIB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-SAS 数据库与数据集</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-26-SAS-DATA-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06-SAS 数据集的整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-28-SAS-function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-SAS 运算符与常用函数</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-29-SAS-function-example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-SAS 运算符与常用函数示例</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-29-SAS-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-SAS 计量资料的单变量分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-05-31-two-sample-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-SAS 两样本均数的比较分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-01-multi-sample-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-08-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16-SAS 对泊松分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-09-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17-SAS 与负二项分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-10-Goodness-of-Fit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18-SAS 拟合优度检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/SAS/25-06-10-poisson-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19-SAS Poisson 回归与负二项回归</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false">
  <span class="menu-text">Stata</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth2 ">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-03-09-Stata-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-Stata Intro and Record</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-03-11-ITSA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-Stata 做 ITSA 分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-04-29-Stata-PY.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-Use Stata in Quarto(ipynb)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-02-stata-obs.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-数据的初步观测</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-03-describe-index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-统计描述指标</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-04-CI.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-置信区间（CI）</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-05-log-do.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06-代码的可复现性与文件管理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-05-scatter-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-双变量作图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-05-ttest.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-t检验（t-test）</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-06-chi2-fisher-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-卡方检验与Fisher精确检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-06-RR-CAL.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-RR值与OR值的计算</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-07-1-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-单因素方差分析（ANOVA）</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-07-2-simple-line-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-简单线性回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-07-3-multi-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-多元线性回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-07-4-log-binary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-二分类Logistic回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-1-GLM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-广义线性模型（GLM）</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-2-survival-ana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-生存分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-3-Cox-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16-Cox回归与比例风险假定检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-4-GEE.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17-广义估计方程(GEE)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-08-5-Ord-Logistic-Reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18-有序多分类Logistic回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-09-1-multinomail-logistic-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19-无序多分类Logistic回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-09-2-data-manage.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">20-数据清洗与整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-10-advanced-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">21-复杂与精准绘图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-10-coefplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">22-coefplot</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-11-1-empirical-ana.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">23-Empericial Analysis Intro</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-05-11-2-DID.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">24-双重差分(DID)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-07-29-linear-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">25-因果推断中的线性回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Guide/Stata/25-08-02-covariate-matching.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">26-因果推断中的协变量匹配</span></a>
   </div>
 </li>
       </ul>
@@ -473,13 +978,13 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Quarto introduction</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Quarto</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
@@ -527,10 +1032,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </li>
   </ul>
 </li>
-  </ul><div class="toc-actions"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Learn/Bayes/01-Bayes-PGM.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+  </ul><div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Learn/Bayes/01-Bayes-PGM.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Learn/Basic/00-basic.html">医学统计学基础</a></li><li class="breadcrumb-item"><a href="../../Learn/Bayes/00-About-Bayes.html">贝叶斯与概率推理</a></li><li class="breadcrumb-item"><a href="../../Learn/Bayes/01-Bayes-PGM.html">贝叶斯与概率图模型（PGM）</a></li></ol></nav><div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Learn</li><li class="breadcrumb-item"><a href="../../Learn/Bayes/00-About-Bayes.html">Bayes</a></li><li class="breadcrumb-item"><a href="../../Learn/Bayes/01-Bayes-PGM.html">贝叶斯与概率图模型（PGM）</a></li></ol></nav><div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">贝叶斯与概率图模型（PGM）</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> 代码</button></div></div>
 </div>
 
@@ -555,7 +1060,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年4月28日</p>
+      <p class="date-modified">2025年8月3日</p>
     </div>
   </div>
     
@@ -578,16 +1083,16 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span class="header-section-number">1.2.1</span> 使用R程序包<code>gRain</code>。</h3>
 <p>安装：</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gRain"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"gRain"</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>加载：</p>
 <div class="cell">
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://people.math.aau.dk/~sorenh/software/gR/">"gRbase"</a></span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://people.math.aau.dk/~sorenh/software/gR/">"gRbase"</a></span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>首先定义一个带有变量的A、B、C、D、E的简单无向图</p>
 <div class="cell">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRbase/man/graph-create.html">ug</a></span><span class="op">(</span><span class="st">"A:B:E + C:E:D"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRbase/man/graph-create.html">ug</a></span><span class="op">(</span><span class="st">"A:B:E + C:E:D"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "igraph"</code></pre>
 </div>
@@ -595,17 +1100,17 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>安装可视化程序包，使用流行的<code>Rgraphviz</code></p>
 <p><code>Rgraphviz</code>是 Bioconductor 生态系统的一部分，所以可以通过 Bioconductor 来安装它。首先要确保已经安装了<code>BiocManager</code>，若未安装，可使用以下代码进行安装：</p>
 <div class="cell">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>安装好<code>BiocManager</code>之后，使用它来安装<code>Rgraphviz</code>：</p>
 <div class="cell">
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>载入并使用：</p>
 <div class="cell">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">graph</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="01-Bayes-PGM_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
@@ -615,14 +1120,14 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 <p>定义有向图：</p>
 <div class="cell">
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRbase/man/graph-create.html">dag</a></span><span class="op">(</span><span class="st">"A + B:A + C:B + D:B + E:C:D"</span><span class="op">)</span></span>
-<span><span class="va">dag</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">dag</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRbase/man/graph-create.html">dag</a></span><span class="op">(</span><span class="st">"A + B:A + C:B + D:B + E:C:D"</span><span class="op">)</span></span>
+<span><span class="va">dag</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>IGRAPH 28898ca DN-- 1 0 -- 
 + attr: name (v/c)
 + edges from 28898ca (vertex names):</code></pre>
 </div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dag</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">dag</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure"><p><img src="01-Bayes-PGM_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
@@ -636,7 +1141,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <p>原因：<code>Rgraphviz</code> 没有被正确的安装。</p>
 <p>需要从 <code>bioconductor</code> 中安装：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> install.packages<span class="kw">(</span><span class="st">"Rgraphviz"</span><span class="kw">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> install.packages<span class="kw">(</span><span class="st">"Rgraphviz"</span><span class="kw">)</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Installing</span> package into <span class="st">'C:/Users/asus/AppData/Local/R/win-library/4.4'</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">as</span> <span class="st">'lib'</span> is unspecified<span class="kw">)</span></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning</span> message:</span>
@@ -644,11 +1149,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> version of this package for your version of R might be available elsewhere,</span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="ex">see</span> the ideas at</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="ex">https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>当使用 <code>bidconductor</code> 源来安装 <code>Rgraphviz</code> ，首先安装 <code>BiocManager</code> ：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> if <span class="kw">(</span><span class="ex">!require</span><span class="er">(</span><span class="st">"BiocManager"</span><span class="ex">,</span> quietly = TRUE<span class="kw">))</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> if <span class="kw">(</span><span class="ex">!require</span><span class="er">(</span><span class="st">"BiocManager"</span><span class="ex">,</span> quietly = TRUE<span class="kw">))</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">+</span>     install.packages<span class="er">(</span><span class="st">"BiocManager"</span><span class="kw">)</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Installing</span> package into <span class="st">'C:/Users/asus/AppData/Local/R/win-library/4.4'</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">as</span> <span class="st">'lib'</span> is unspecified<span class="kw">)</span></span>
@@ -659,11 +1164,11 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'BiocManager'</span> successfully unpacked and MD5 sums checked</span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="ex">The</span> downloaded binary packages are in</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>        <span class="ex">C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>然后使用 <code>BiocManager</code> 安装 <code>Rgraphviz</code> ，需要安装的配套程序包很多，需要几分钟，但是这里出现了报错。</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> BiocManager::install<span class="kw">(</span><span class="st">"Rgraphviz"</span><span class="kw">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> BiocManager::install<span class="kw">(</span><span class="st">"Rgraphviz"</span><span class="kw">)</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="st">'getOption("repos")'</span> replaces Bioconductor standard repositories, see</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="st">'help("repositories", package = "BiocManager")'</span> for details.</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Replacement</span> repositories:</span>
@@ -728,7 +1233,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>        <span class="ex">C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span>
 <span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning</span> message:</span>
 <span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a><span class="ex">In</span> file.copy<span class="er">(</span><span class="ex">savedcopy,</span> lib, recursive = TRUE<span class="kw">)</span> <span class="bu">:</span></span>
-<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>  <span class="ex">problem</span> copying C:<span class="dt">\U</span>sers<span class="dt">\a</span>sus<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\R\w</span>in-library<span class="dt">\4</span>.4<span class="dt">\0</span>0LOCK<span class="dt">\r</span>eadxl<span class="dt">\l</span>ibs<span class="dt">\x</span>64<span class="dt">\r</span>eadxl.dll to C:<span class="dt">\U</span>sers<span class="dt">\a</span>sus<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\R\w</span>in-library<span class="dt">\4</span>.4<span class="dt">\r</span>eadxl<span class="dt">\l</span>ibs<span class="dt">\x</span>64<span class="dt">\r</span>eadxl.dll: Permission denied</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>  <span class="ex">problem</span> copying C:<span class="dt">\U</span>sers<span class="dt">\a</span>sus<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\R\w</span>in-library<span class="dt">\4</span>.4<span class="dt">\0</span>0LOCK<span class="dt">\r</span>eadxl<span class="dt">\l</span>ibs<span class="dt">\x</span>64<span class="dt">\r</span>eadxl.dll to C:<span class="dt">\U</span>sers<span class="dt">\a</span>sus<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\R\w</span>in-library<span class="dt">\4</span>.4<span class="dt">\r</span>eadxl<span class="dt">\l</span>ibs<span class="dt">\x</span>64<span class="dt">\r</span>eadxl.dll: Permission denied</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>主要问题是没有写入权限，这可能和在 vscode 中安装有关，因此，换到 R 的终端中进行安装（注意，可能需要使用管理员权限），但是仍然免不了一系列的包冲突问题，需要根据提示选择操作：</p>
 <ol type="1">
@@ -737,7 +1242,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <li>
 <p>处理有冲突的包（卸载），或者重新创建一个 env 。</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="co"># 删除 readxl 包</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span> <span class="co"># 删除 readxl 包</span></span>
 <span> <span class="va">readxl_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"readxl"</span><span class="op">)</span></span>
 <span> <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">readxl_path</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span> <span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">readxl_path</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -748,20 +1253,20 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span> <span class="fu"><a href="https://rdrr.io/r/base/unlink.html">unlink</a></span><span class="op">(</span><span class="va">cli_path</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span> <span class="op">}</span></span>
 <span> <span class="co"># 再次尝试安装 Rgraphviz</span></span>
-<span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span> <span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </li>
 <li><p>强制更新，忽略冲突</p></li>
 </ol>
 <p>有些包的版本已经是最新的，但安装过程仍然提示需要更新，你可以使用 <code>force = TRUE</code> 参数强制重新安装。</p>
 <div class="cell">
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html">install</a></span><span class="op">(</span><span class="st">"Rgraphviz"</span>, force <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="5" type="1">
 <li>
 <p>具体信息如下：</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Rgraphviz"</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Rgraphviz"</span>)</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="st">'getOption("repos")'</span> replaces Bioconductor standard repositories, see</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="st">'help("repositories", package = "BiocManager")'</span> <span class="cf">for</span> details.</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Replacement repositories<span class="sc">:</span></span>
@@ -784,36 +1289,36 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>package ‘Rgraphviz’ successfully unpacked and MD5 sums checked</span>
 <span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>The downloaded binary packages are <span class="cf">in</span></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>        C<span class="sc">:</span>\Users\asus\AppData\Local\Temp\Rtmp2j7SlA\downloaded_packages</span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>        C<span class="sc">:</span>\Users\asus\AppData\Local\Temp\Rtmp2j7SlA\downloaded_packages</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </li>
 </ol></section><section id="灯泡机的简单概率图模型" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="灯泡机的简单概率图模型">
 <span class="header-section-number">1.4</span> 灯泡机的简单概率图模型</h2>
 <p>首先，为每一个节点定义取值：</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">machine_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"working"</span>, <span class="st">"broken"</span><span class="op">)</span></span>
-<span><span class="va">light_bulb_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"good"</span>, <span class="st">"bad"</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">machine_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"working"</span>, <span class="st">"broken"</span><span class="op">)</span></span>
+<span><span class="va">light_bulb_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"good"</span>, <span class="st">"bad"</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>为两个随机变量定义百分比数值：</p>
 <div class="cell">
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">machine_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">99</span>,<span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">light_bulb_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">99</span>,<span class="fl">1</span>,<span class="fl">60</span>,<span class="fl">40</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">machine_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">99</span>,<span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">light_bulb_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">99</span>,<span class="fl">1</span>,<span class="fl">60</span>,<span class="fl">40</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>使用 gRain 定义随机变量：</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://people.math.aau.dk/~sorenh/software/gR/">gRain</a></span><span class="op">)</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://people.math.aau.dk/~sorenh/software/gR/">gRain</a></span><span class="op">)</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRain/man/cpt.html">cptable</a></span><span class="op">(</span><span class="op">~</span><span class="va">machine</span>, values <span class="op">=</span> <span class="va">machine_prob</span>,</span>
 <span>            levels <span class="op">=</span> <span class="va">machine_val</span><span class="op">)</span></span>
 <span><span class="va">L</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRain/man/cpt.html">cptable</a></span><span class="op">(</span><span class="op">~</span><span class="va">light_bulb</span> <span class="op">|</span> <span class="va">machine</span>,</span>
 <span>            values <span class="op">=</span> <span class="va">light_bulb_prob</span>,</span>
-<span>            levels <span class="op">=</span> <span class="va">light_bulb_val</span><span class="op">)</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span>            levels <span class="op">=</span> <span class="va">light_bulb_val</span><span class="op">)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>这里的 <code>cptable</code> 表示条件概率表<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>：它是离散型随机变量概率分布的内存表示<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。</p>
 <section id="构建新的概率图模型" class="level3" data-number="1.4.1"><h3 data-number="1.4.1" class="anchored" data-anchor-id="构建新的概率图模型">
 <span class="header-section-number">1.4.1</span> 构建新的概率图模型</h3>
 <div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRain/man/old_components_gather.html">compileCPT</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">M</span>,<span class="va">L</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">plist</span></span></code><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">plist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/gRain/man/old_components_gather.html">compileCPT</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">M</span>,<span class="va">L</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">plist</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>输出结果如上，这里可以清楚地看到之前定义的概率分布</p>
 <p>2025.04.05 再次尝试复现程序，失败，暂时停止概率图R程序的复现工作。</p>
@@ -827,436 +1332,311 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <li id="fn1"><p>条件概率表（Conditional Probability Table, CPT），是一种表格形式的数据结构，用来描述离散型随机变量之间的概率关系。通常用于表示一个变量（或一组变量）的概率分布，可能依赖于其他变量（条件变量）。<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>“内存表示”指的是在计算机程序中，这种概率分布被组织和存储为一种数据结构（例如表格、数组或矩阵），以便程序可以高效地访问和操作这些概率值。具体来说，<code>cptable</code> 函数会根据你提供的参数（如 <code>values</code> 和 <code>levels</code>）生成一个对象，这个对象在内存中以某种形式存储了变量的概率分布。<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol></section></div></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
     }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
     }
-  }
-  toggleBodyColorPrimary();  
-  const disableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'prefetch';
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
     }
-  }
-  const enableStylesheet = (stylesheets) => {
-    for (let i=0; i < stylesheets.length; i++) {
-      const stylesheet = stylesheets[i];
-      stylesheet.rel = 'stylesheet';
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
     }
-  }
-  const manageTransitions = (selector, allowTransitions) => {
-    const els = window.document.querySelectorAll(selector);
-    for (let i=0; i < els.length; i++) {
-      const el = els[i];
-      if (allowTransitions) {
-        el.classList.remove('notransition');
-      } else {
-        el.classList.add('notransition');
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
       }
     }
-  }
-  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
-    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
-    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
-    let newTheme = '';
-    if(darkModeDefault) {
-      newTheme = isAlternate ? baseTheme : alternateTheme;
-    } else {
-      newTheme = isAlternate ? alternateTheme : baseTheme;
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
     }
-    const changeGiscusTheme = () => {
-      // From: https://github.com/giscus/giscus/issues/336
-      const sendMessage = (message) => {
-        const iframe = document.querySelector('iframe.giscus-frame');
-        if (!iframe) return;
-        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("www\.lazyzhou\.cn");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-      sendMessage({
-        setConfig: {
-          theme: newTheme
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
       });
     }
-    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
-    if (isGiscussLoaded) {
-      changeGiscusTheme();
-    }
-  }
-  const toggleColorMode = (alternate) => {
-    // Switch the stylesheets
-    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
-    manageTransitions('#quarto-margin-sidebar .nav-link', false);
-    if (alternate) {
-      enableStylesheet(alternateStylesheets);
-      for (const sheetNode of alternateStylesheets) {
-        if (sheetNode.id === "quarto-bootstrap") {
-          toggleBodyColorMode(sheetNode);
-        }
-      }
-    } else {
-      disableStylesheet(alternateStylesheets);
-      toggleBodyColorPrimary();
-    }
-    manageTransitions('#quarto-margin-sidebar .nav-link', true);
-    // Switch the toggles
-    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
-    for (let i=0; i < toggles.length; i++) {
-      const toggle = toggles[i];
-      if (toggle) {
-        if (alternate) {
-          toggle.classList.add("alternate");     
-        } else {
-          toggle.classList.remove("alternate");
-        }
-      }
-    }
-    // Hack to workaround the fact that safari doesn't
-    // properly recolor the scrollbar when toggling (#1455)
-    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
-      manageTransitions("body", false);
-      window.scrollTo(0, 1);
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-        manageTransitions("body", true);
-      }, 40);  
-    }
-  }
-  const isFileUrl = () => { 
-    return window.location.protocol === 'file:';
-  }
-  const hasAlternateSentinel = () => {  
-    let styleSentinel = getColorSchemeSentinel();
-    if (styleSentinel !== null) {
-      return styleSentinel === "alternate";
-    } else {
-      return false;
-    }
-  }
-  const setStyleSentinel = (alternate) => {
-    const value = alternate ? "alternate" : "default";
-    if (!isFileUrl()) {
-      window.localStorage.setItem("quarto-color-scheme", value);
-    } else {
-      localAlternateSentinel = value;
-    }
-  }
-  const getColorSchemeSentinel = () => {
-    if (!isFileUrl()) {
-      const storageValue = window.localStorage.getItem("quarto-color-scheme");
-      return storageValue != null ? storageValue : localAlternateSentinel;
-    } else {
-      return localAlternateSentinel;
-    }
-  }
-  const darkModeDefault = false;
-  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
-  // Dark / light mode switch
-  window.quartoToggleColorScheme = () => {
-    // Read the current dark / light value 
-    let toAlternate = !hasAlternateSentinel();
-    toggleColorMode(toAlternate);
-    setStyleSentinel(toAlternate);
-    toggleGiscusIfUsed(toAlternate, darkModeDefault);
-  };
-  // Ensure there is a toggle, if there isn't float one in the top right
-  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-    const a = window.document.createElement('a');
-    a.classList.add('top-right');
-    a.classList.add('quarto-color-scheme-toggle');
-    a.href = "";
-    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
-    const i = window.document.createElement("i");
-    i.classList.add('bi');
-    a.appendChild(i);
-    window.document.body.appendChild(a);
-  }
-  // Switch to dark mode if need be
-  if (hasAlternateSentinel()) {
-    toggleColorMode(true);
-  } else {
-    toggleColorMode(false);
-  }
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "已复制");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "已复制");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
-    });
-    clipboardModal.on('success', onCopySuccess);
-  }
-  const viewSource = window.document.getElementById('quarto-view-source') ||
-                     window.document.getElementById('quarto-code-tools-source');
-  if (viewSource) {
-    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
-    viewSource.addEventListener("click", function(e) {
-      if (sourceUrl) {
-        // rstudio viewer pane
-        if (/\bcapabilities=\b/.test(window.location)) {
-          window.open(sourceUrl);
-        } else {
-          window.location.href = sourceUrl;
-        }
-      } else {
-        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
-        modal.show();
-      }
-      return false;
-    });
-  }
-  function toggleCodeHandler(show) {
-    return function(e) {
-      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
-      for (let i=0; i<detailsSrc.length; i++) {
-        const details = detailsSrc[i].parentElement;
-        if (show) {
-          details.open = true;
-        } else {
-          details.removeAttribute("open");
-        }
-      }
-      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
-      const fromCls = show ? "hidden" : "unhidden";
-      const toCls = show ? "unhidden" : "hidden";
-      for (let i=0; i<cellCodeDivs.length; i++) {
-        const codeDiv = cellCodeDivs[i];
-        if (codeDiv.classList.contains(fromCls)) {
-          codeDiv.classList.remove(fromCls);
-          codeDiv.classList.add(toCls);
-        } 
-      }
-      return false;
-    }
-  }
-  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
-  if (hideAllCode) {
-    hideAllCode.addEventListener("click", toggleCodeHandler(false));
-  }
-  const showAllCode = window.document.getElementById("quarto-show-all-code");
-  if (showAllCode) {
-    showAllCode.addEventListener("click", toggleCodeHandler(true));
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("www\.lazyzhou\.cn");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-          // target, if specified
-          link.setAttribute("target", "_blank");
-          if (link.getAttribute("rel") === null) {
-            link.setAttribute("rel", "noopener");
-          }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
         }
-        return container.innerHTML
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1264,197 +1644,201 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "pumc-zhou/comments";
+    script.dataset.repoId = "R_kgDON9RmWA";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDON9RmWM4CnLUH";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
   }
-});
-</script><script src="https://giscus.app/client.js" data-repo="zhoulvbang/comments" data-repo-id="R_kgDON9RmWA" data-category="General" data-category-id="DIC_kwDON9RmWM4CnLUH" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
-</script><input type="hidden" id="giscus-base-theme" value="light"><input type="hidden" id="giscus-alt-theme" value="dark"><nav class="page-navigation"><div class="nav-page nav-page-previous">
+  loadGiscus();
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="../../Learn/Bayes/00-About-Bayes.html" class="pagination-link" aria-label="贝叶斯与概率推理">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">贝叶斯与概率推理</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../Guide/Guide-intro.html" class="pagination-link" aria-label="统计软件使用历程">
-        <span class="nav-page-text">统计软件使用历程</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../Guide/R/00-R-install.html" class="pagination-link" aria-label="00-R 安装">
+        <span class="nav-page-text">00-R 安装</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "贝叶斯与概率图模型（PGM）"</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> "2025-02-28"</span></span>
@@ -1490,7 +1874,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>安装：</span>
 <span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval = FALSE}</span></span>
-<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="in">install.packages("gRain")</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"gRain"</span>)</span>
 <span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-39"><a href="#cb21-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-40"><a href="#cb21-40" aria-hidden="true" tabindex="-1"></a>加载：</span>
@@ -1511,14 +1895,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-59"><a href="#cb21-59" aria-hidden="true" tabindex="-1"></a><span class="in">`Rgraphviz`</span>是 Bioconductor 生态系统的一部分，所以可以通过 Bioconductor 来安装它。首先要确保已经安装了<span class="in">`BiocManager`</span>，若未安装，可使用以下代码进行安装：</span>
 <span id="cb21-60"><a href="#cb21-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-61"><a href="#cb21-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a><span class="in">if (!require("BiocManager", quietly = TRUE))</span></span>
-<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a><span class="in">    install.packages("BiocManager")</span></span>
+<span id="cb21-62"><a href="#cb21-62" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"BiocManager"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb21-63"><a href="#cb21-63" aria-hidden="true" tabindex="-1"></a>    <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
 <span id="cb21-64"><a href="#cb21-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-65"><a href="#cb21-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-66"><a href="#cb21-66" aria-hidden="true" tabindex="-1"></a>安装好<span class="in">`BiocManager`</span>之后，使用它来安装<span class="in">`Rgraphviz`</span>：</span>
 <span id="cb21-67"><a href="#cb21-67" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-68"><a href="#cb21-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a><span class="in">BiocManager::install("Rgraphviz")</span></span>
+<span id="cb21-69"><a href="#cb21-69" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Rgraphviz"</span>)</span>
 <span id="cb21-70"><a href="#cb21-70" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-71"><a href="#cb21-71" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-72"><a href="#cb21-72" aria-hidden="true" tabindex="-1"></a>载入并使用：</span>
@@ -1545,103 +1929,103 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-97"><a href="#cb21-97" aria-hidden="true" tabindex="-1"></a>需要从 <span class="in">`bioconductor`</span> 中安装：</span>
 <span id="cb21-98"><a href="#cb21-98" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-99"><a href="#cb21-99" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash,eval = FALSE}</span></span>
-<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a><span class="in">&gt; install.packages("Rgraphviz")</span></span>
-<span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a><span class="in">Installing package into 'C:/Users/asus/AppData/Local/R/win-library/4.4'</span></span>
-<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a><span class="in">(as 'lib' is unspecified)</span></span>
-<span id="cb21-103"><a href="#cb21-103" aria-hidden="true" tabindex="-1"></a><span class="in">Warning message:</span></span>
-<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a><span class="in">package 'Rgraphviz' is not available for this version of R</span></span>
+<span id="cb21-100"><a href="#cb21-100" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> install.packages<span class="kw">(</span><span class="st">"Rgraphviz"</span><span class="kw">)</span></span>
+<span id="cb21-101"><a href="#cb21-101" aria-hidden="true" tabindex="-1"></a><span class="ex">Installing</span> package into <span class="st">'C:/Users/asus/AppData/Local/R/win-library/4.4'</span></span>
+<span id="cb21-102"><a href="#cb21-102" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">as</span> <span class="st">'lib'</span> is unspecified<span class="kw">)</span></span>
+<span id="cb21-103"><a href="#cb21-103" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning</span> message:</span>
+<span id="cb21-104"><a href="#cb21-104" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'Rgraphviz'</span> is not available for this version of R</span>
 <span id="cb21-105"><a href="#cb21-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a><span class="in">A version of this package for your version of R might be available elsewhere,</span></span>
-<span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a><span class="in">see the ideas at</span></span>
-<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a><span class="in">https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</span></span>
+<span id="cb21-106"><a href="#cb21-106" aria-hidden="true" tabindex="-1"></a><span class="ex">A</span> version of this package for your version of R might be available elsewhere,</span>
+<span id="cb21-107"><a href="#cb21-107" aria-hidden="true" tabindex="-1"></a><span class="ex">see</span> the ideas at</span>
+<span id="cb21-108"><a href="#cb21-108" aria-hidden="true" tabindex="-1"></a><span class="ex">https://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installing-packages</span></span>
 <span id="cb21-109"><a href="#cb21-109" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-110"><a href="#cb21-110" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-111"><a href="#cb21-111" aria-hidden="true" tabindex="-1"></a>当使用 <span class="in">`bidconductor`</span> 源来安装 <span class="in">`Rgraphviz`</span> ，首先安装 <span class="in">`BiocManager`</span> ：</span>
 <span id="cb21-112"><a href="#cb21-112" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-113"><a href="#cb21-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash, eval = FALSE}</span></span>
-<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a><span class="in">&gt; if (!require("BiocManager", quietly = TRUE))</span></span>
-<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a><span class="in">+     install.packages("BiocManager")</span></span>
-<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a><span class="in">Installing package into 'C:/Users/asus/AppData/Local/R/win-library/4.4'</span></span>
-<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a><span class="in">(as 'lib' is unspecified)</span></span>
-<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/BiocManager_1.30.25.zip'</span></span>
-<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 506482 bytes (494 KB)</span></span>
-<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 494 KB</span></span>
+<span id="cb21-114"><a href="#cb21-114" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> if <span class="kw">(</span><span class="ex">!require</span><span class="er">(</span><span class="st">"BiocManager"</span><span class="ex">,</span> quietly = TRUE<span class="kw">))</span></span>
+<span id="cb21-115"><a href="#cb21-115" aria-hidden="true" tabindex="-1"></a><span class="ex">+</span>     install.packages<span class="er">(</span><span class="st">"BiocManager"</span><span class="kw">)</span></span>
+<span id="cb21-116"><a href="#cb21-116" aria-hidden="true" tabindex="-1"></a><span class="ex">Installing</span> package into <span class="st">'C:/Users/asus/AppData/Local/R/win-library/4.4'</span></span>
+<span id="cb21-117"><a href="#cb21-117" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="fu">as</span> <span class="st">'lib'</span> is unspecified<span class="kw">)</span></span>
+<span id="cb21-118"><a href="#cb21-118" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/BiocManager_1.30.25.zip'</span></span>
+<span id="cb21-119"><a href="#cb21-119" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 506482 bytes <span class="er">(</span><span class="ex">494</span> KB<span class="kw">)</span></span>
+<span id="cb21-120"><a href="#cb21-120" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 494 KB</span>
 <span id="cb21-121"><a href="#cb21-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a><span class="in">package 'BiocManager' successfully unpacked and MD5 sums checked</span></span>
+<span id="cb21-122"><a href="#cb21-122" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'BiocManager'</span> successfully unpacked and MD5 sums checked</span>
 <span id="cb21-123"><a href="#cb21-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-124"><a href="#cb21-124" aria-hidden="true" tabindex="-1"></a><span class="in">The downloaded binary packages are in</span></span>
-<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a><span class="in">        C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span>
+<span id="cb21-124"><a href="#cb21-124" aria-hidden="true" tabindex="-1"></a><span class="ex">The</span> downloaded binary packages are in</span>
+<span id="cb21-125"><a href="#cb21-125" aria-hidden="true" tabindex="-1"></a>        <span class="ex">C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span>
 <span id="cb21-126"><a href="#cb21-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-127"><a href="#cb21-127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-128"><a href="#cb21-128" aria-hidden="true" tabindex="-1"></a>然后使用 <span class="in">`BiocManager`</span> 安装 <span class="in">`Rgraphviz`</span> ，需要安装的配套程序包很多，需要几分钟，但是这里出现了报错。</span>
 <span id="cb21-129"><a href="#cb21-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-130"><a href="#cb21-130" aria-hidden="true" tabindex="-1"></a><span class="in">```{bash, eval = FALSE}</span></span>
-<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a><span class="in">&gt; BiocManager::install("Rgraphviz")</span></span>
-<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a><span class="in">'getOption("repos")' replaces Bioconductor standard repositories, see</span></span>
-<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a><span class="in">'help("repositories", package = "BiocManager")' for details.</span></span>
-<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a><span class="in">Replacement repositories:</span></span>
-<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a><span class="in">    CRAN: https://mirrors.sustech.edu.cn/CRAN</span></span>
-<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a><span class="in">Bioconductor version 3.20 (BiocManager 1.30.25), R 4.4.2 (2024-10-31 ucrt)</span></span>
-<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a><span class="in">Installing package(s) 'BiocVersion', 'Rgraphviz'</span></span>
-<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a><span class="in">also installing the dependencies 'BiocGenerics', 'graph'</span></span>
+<span id="cb21-131"><a href="#cb21-131" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;</span> BiocManager::install<span class="kw">(</span><span class="st">"Rgraphviz"</span><span class="kw">)</span></span>
+<span id="cb21-132"><a href="#cb21-132" aria-hidden="true" tabindex="-1"></a><span class="st">'getOption("repos")'</span> replaces Bioconductor standard repositories, see</span>
+<span id="cb21-133"><a href="#cb21-133" aria-hidden="true" tabindex="-1"></a><span class="st">'help("repositories", package = "BiocManager")'</span> for details.</span>
+<span id="cb21-134"><a href="#cb21-134" aria-hidden="true" tabindex="-1"></a><span class="ex">Replacement</span> repositories:</span>
+<span id="cb21-135"><a href="#cb21-135" aria-hidden="true" tabindex="-1"></a>    <span class="ex">CRAN:</span> https://mirrors.sustech.edu.cn/CRAN</span>
+<span id="cb21-136"><a href="#cb21-136" aria-hidden="true" tabindex="-1"></a><span class="ex">Bioconductor</span> version 3.20 <span class="er">(</span><span class="ex">BiocManager</span> 1.30.25<span class="kw">)</span><span class="ex">,</span> R 4.4.2 <span class="er">(</span><span class="ex">2024-10-31</span> ucrt<span class="kw">)</span></span>
+<span id="cb21-137"><a href="#cb21-137" aria-hidden="true" tabindex="-1"></a><span class="ex">Installing</span> package<span class="er">(</span><span class="ex">s</span><span class="kw">)</span> <span class="st">'BiocVersion'</span><span class="ex">,</span> <span class="st">'Rgraphviz'</span></span>
+<span id="cb21-138"><a href="#cb21-138" aria-hidden="true" tabindex="-1"></a><span class="ex">also</span> installing the dependencies <span class="st">'BiocGenerics'</span>, <span class="st">'graph'</span></span>
 <span id="cb21-139"><a href="#cb21-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/BiocGenerics_0.52.0.zip'</span></span>
-<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a><span class="in">libpng warning: iCCP: known incorrect sRGB profile</span></span>
-<span id="cb21-142"><a href="#cb21-142" aria-hidden="true" tabindex="-1"></a><span class="in">libpng warning: iCCP: known incorrect sRGB profile</span></span>
-<span id="cb21-143"><a href="#cb21-143" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 639558 bytes (624 KB)</span></span>
-<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 624 KB</span></span>
+<span id="cb21-140"><a href="#cb21-140" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/BiocGenerics_0.52.0.zip'</span></span>
+<span id="cb21-141"><a href="#cb21-141" aria-hidden="true" tabindex="-1"></a><span class="ex">libpng</span> warning: iCCP: known incorrect sRGB profile</span>
+<span id="cb21-142"><a href="#cb21-142" aria-hidden="true" tabindex="-1"></a><span class="ex">libpng</span> warning: iCCP: known incorrect sRGB profile</span>
+<span id="cb21-143"><a href="#cb21-143" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 639558 bytes <span class="er">(</span><span class="ex">624</span> KB<span class="kw">)</span></span>
+<span id="cb21-144"><a href="#cb21-144" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 624 KB</span>
 <span id="cb21-145"><a href="#cb21-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/graph_1.84.1.zip'</span></span>
-<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 2173761 bytes (2.1 MB)</span></span>
-<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 2.1 MB</span></span>
+<span id="cb21-146"><a href="#cb21-146" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/graph_1.84.1.zip'</span></span>
+<span id="cb21-147"><a href="#cb21-147" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 2173761 bytes <span class="er">(</span><span class="ex">2.1</span> MB<span class="kw">)</span></span>
+<span id="cb21-148"><a href="#cb21-148" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 2.1 MB</span>
 <span id="cb21-149"><a href="#cb21-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/BiocVersion_3.20.0.zip'</span></span>
-<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 8386 bytes</span></span>
-<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 8386 bytes</span></span>
+<span id="cb21-150"><a href="#cb21-150" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/BiocVersion_3.20.0.zip'</span></span>
+<span id="cb21-151"><a href="#cb21-151" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 8386 bytes</span>
+<span id="cb21-152"><a href="#cb21-152" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 8386 bytes</span>
 <span id="cb21-153"><a href="#cb21-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/Rgraphviz_2.50.0.zip'</span></span>
-<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 1457153 bytes (1.4 MB)</span></span>
-<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 1.4 MB</span></span>
+<span id="cb21-154"><a href="#cb21-154" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/Rgraphviz_2.50.0.zip'</span></span>
+<span id="cb21-155"><a href="#cb21-155" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 1457153 bytes <span class="er">(</span><span class="ex">1.4</span> MB<span class="kw">)</span></span>
+<span id="cb21-156"><a href="#cb21-156" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 1.4 MB</span>
 <span id="cb21-157"><a href="#cb21-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a><span class="in">package 'BiocGenerics' successfully unpacked and MD5 sums checked</span></span>
-<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a><span class="in">package 'graph' successfully unpacked and MD5 sums checked</span></span>
-<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a><span class="in">package 'BiocVersion' successfully unpacked and MD5 sums checked</span></span>
-<span id="cb21-161"><a href="#cb21-161" aria-hidden="true" tabindex="-1"></a><span class="in">package 'Rgraphviz' successfully unpacked and MD5 sums checked</span></span>
+<span id="cb21-158"><a href="#cb21-158" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'BiocGenerics'</span> successfully unpacked and MD5 sums checked</span>
+<span id="cb21-159"><a href="#cb21-159" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'graph'</span> successfully unpacked and MD5 sums checked</span>
+<span id="cb21-160"><a href="#cb21-160" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'BiocVersion'</span> successfully unpacked and MD5 sums checked</span>
+<span id="cb21-161"><a href="#cb21-161" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'Rgraphviz'</span> successfully unpacked and MD5 sums checked</span>
 <span id="cb21-162"><a href="#cb21-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a><span class="in">The downloaded binary packages are in</span></span>
-<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a><span class="in">        C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span>
-<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a><span class="in">Installation paths not writeable, unable to update packages</span></span>
-<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a><span class="in">  path: C:/Program Files/R/R-4.4.2/library</span></span>
-<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a><span class="in">  packages:</span></span>
-<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a><span class="in">    class, cli, cluster, curl, data.table, foreign, glue, jsonlite, KernSmooth,</span></span>
-<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a><span class="in">    lintr, MASS, Matrix, nlme, nnet, processx, ps, purrr, R.utils, R6, renv,</span></span>
-<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a><span class="in">    reticulate, rlang, rpart, sessioninfo, spatial, survival, tinytex, xfun,</span></span>
-<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a><span class="in">    xml2, zoo</span></span>
-<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a><span class="in">Old packages: 'httpgd', 'readxl', 'unigd'</span></span>
-<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a><span class="in">apdate all/some/none? [a/s/n]:</span></span>
-<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/httpgd_2.0.3.zip'</span></span>
-<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 874316 bytes (853 KB)</span></span>
-<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 853 KB</span></span>
+<span id="cb21-163"><a href="#cb21-163" aria-hidden="true" tabindex="-1"></a><span class="ex">The</span> downloaded binary packages are in</span>
+<span id="cb21-164"><a href="#cb21-164" aria-hidden="true" tabindex="-1"></a>        <span class="ex">C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span>
+<span id="cb21-165"><a href="#cb21-165" aria-hidden="true" tabindex="-1"></a><span class="ex">Installation</span> paths not writeable, unable to update packages</span>
+<span id="cb21-166"><a href="#cb21-166" aria-hidden="true" tabindex="-1"></a>  <span class="ex">path:</span> C:/Program Files/R/R-4.4.2/library</span>
+<span id="cb21-167"><a href="#cb21-167" aria-hidden="true" tabindex="-1"></a>  <span class="ex">packages:</span></span>
+<span id="cb21-168"><a href="#cb21-168" aria-hidden="true" tabindex="-1"></a>    <span class="ex">class,</span> cli, cluster, curl, data.table, foreign, glue, jsonlite, KernSmooth,</span>
+<span id="cb21-169"><a href="#cb21-169" aria-hidden="true" tabindex="-1"></a>    <span class="ex">lintr,</span> MASS, Matrix, nlme, nnet, processx, ps, purrr, R.utils, R6, renv,</span>
+<span id="cb21-170"><a href="#cb21-170" aria-hidden="true" tabindex="-1"></a>    <span class="ex">reticulate,</span> rlang, rpart, sessioninfo, spatial, survival, tinytex, xfun,</span>
+<span id="cb21-171"><a href="#cb21-171" aria-hidden="true" tabindex="-1"></a>    <span class="ex">xml2,</span> zoo</span>
+<span id="cb21-172"><a href="#cb21-172" aria-hidden="true" tabindex="-1"></a><span class="ex">Old</span> packages: <span class="st">'httpgd'</span>, <span class="st">'readxl'</span>, <span class="st">'unigd'</span></span>
+<span id="cb21-173"><a href="#cb21-173" aria-hidden="true" tabindex="-1"></a><span class="ex">apdate</span> all/some/none<span class="pp">?</span> <span class="pp">[</span><span class="ss">a/s/n</span><span class="pp">]</span>:</span>
+<span id="cb21-174"><a href="#cb21-174" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/httpgd_2.0.3.zip'</span></span>
+<span id="cb21-175"><a href="#cb21-175" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 874316 bytes <span class="er">(</span><span class="ex">853</span> KB<span class="kw">)</span></span>
+<span id="cb21-176"><a href="#cb21-176" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 853 KB</span>
 <span id="cb21-177"><a href="#cb21-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/readxl_1.4.4.zip' </span></span>
-<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 750422 bytes (732 KB)</span></span>
-<span id="cb21-180"><a href="#cb21-180" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 732 KB</span></span>
+<span id="cb21-178"><a href="#cb21-178" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/readxl_1.4.4.zip'</span> </span>
+<span id="cb21-179"><a href="#cb21-179" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 750422 bytes <span class="er">(</span><span class="ex">732</span> KB<span class="kw">)</span></span>
+<span id="cb21-180"><a href="#cb21-180" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 732 KB</span>
 <span id="cb21-181"><a href="#cb21-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-182"><a href="#cb21-182" aria-hidden="true" tabindex="-1"></a><span class="in">trying URL 'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/unigd_0.1.3.zip'</span></span>
-<span id="cb21-183"><a href="#cb21-183" aria-hidden="true" tabindex="-1"></a><span class="in">Content type 'application/zip' length 5591347 bytes (5.3 MB)</span></span>
-<span id="cb21-184"><a href="#cb21-184" aria-hidden="true" tabindex="-1"></a><span class="in">downloaded 5.3 MB</span></span>
+<span id="cb21-182"><a href="#cb21-182" aria-hidden="true" tabindex="-1"></a><span class="ex">trying</span> URL <span class="st">'https://mirrors.sustech.edu.cn/CRAN/bin/windows/contrib/4.4/unigd_0.1.3.zip'</span></span>
+<span id="cb21-183"><a href="#cb21-183" aria-hidden="true" tabindex="-1"></a><span class="ex">Content</span> type <span class="st">'application/zip'</span> length 5591347 bytes <span class="er">(</span><span class="ex">5.3</span> MB<span class="kw">)</span></span>
+<span id="cb21-184"><a href="#cb21-184" aria-hidden="true" tabindex="-1"></a><span class="ex">downloaded</span> 5.3 MB</span>
 <span id="cb21-185"><a href="#cb21-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-186"><a href="#cb21-186" aria-hidden="true" tabindex="-1"></a><span class="in">package 'httpgd' successfully unpacked and MD5 sums checked</span></span>
-<span id="cb21-187"><a href="#cb21-187" aria-hidden="true" tabindex="-1"></a><span class="in">package 'readxl' successfully unpacked and MD5 sums checked</span></span>
-<span id="cb21-188"><a href="#cb21-188" aria-hidden="true" tabindex="-1"></a><span class="in">Warning: cannot remove prior installation of package 'readxl'</span></span>
-<span id="cb21-189"><a href="#cb21-189" aria-hidden="true" tabindex="-1"></a><span class="in">Warning: restored 'readxl'</span></span>
-<span id="cb21-190"><a href="#cb21-190" aria-hidden="true" tabindex="-1"></a><span class="in">package 'unigd' successfully unpacked and MD5 sums checked</span></span>
+<span id="cb21-186"><a href="#cb21-186" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'httpgd'</span> successfully unpacked and MD5 sums checked</span>
+<span id="cb21-187"><a href="#cb21-187" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'readxl'</span> successfully unpacked and MD5 sums checked</span>
+<span id="cb21-188"><a href="#cb21-188" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning:</span> cannot remove prior installation of package <span class="st">'readxl'</span></span>
+<span id="cb21-189"><a href="#cb21-189" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning:</span> restored <span class="st">'readxl'</span></span>
+<span id="cb21-190"><a href="#cb21-190" aria-hidden="true" tabindex="-1"></a><span class="ex">package</span> <span class="st">'unigd'</span> successfully unpacked and MD5 sums checked</span>
 <span id="cb21-191"><a href="#cb21-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-192"><a href="#cb21-192" aria-hidden="true" tabindex="-1"></a><span class="in">The downloaded binary packages are in</span></span>
-<span id="cb21-193"><a href="#cb21-193" aria-hidden="true" tabindex="-1"></a><span class="in">        C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span>
-<span id="cb21-194"><a href="#cb21-194" aria-hidden="true" tabindex="-1"></a><span class="in">Warning message:</span></span>
-<span id="cb21-195"><a href="#cb21-195" aria-hidden="true" tabindex="-1"></a><span class="in">In file.copy(savedcopy, lib, recursive = TRUE) :</span></span>
-<span id="cb21-196"><a href="#cb21-196" aria-hidden="true" tabindex="-1"></a><span class="in">  problem copying C:\Users\asus\AppData\Local\R\win-library\4.4\00LOCK\readxl\libs\x64\readxl.dll to C:\Users\asus\AppData\Local\R\win-library\4.4\readxl\libs\x64\readxl.dll: Permission denied</span></span>
+<span id="cb21-192"><a href="#cb21-192" aria-hidden="true" tabindex="-1"></a><span class="ex">The</span> downloaded binary packages are in</span>
+<span id="cb21-193"><a href="#cb21-193" aria-hidden="true" tabindex="-1"></a>        <span class="ex">C:\Users\asus\AppData\Local\Temp\RtmpSCcZNG\downloaded_packages</span></span>
+<span id="cb21-194"><a href="#cb21-194" aria-hidden="true" tabindex="-1"></a><span class="ex">Warning</span> message:</span>
+<span id="cb21-195"><a href="#cb21-195" aria-hidden="true" tabindex="-1"></a><span class="ex">In</span> file.copy<span class="er">(</span><span class="ex">savedcopy,</span> lib, recursive = TRUE<span class="kw">)</span> <span class="bu">:</span></span>
+<span id="cb21-196"><a href="#cb21-196" aria-hidden="true" tabindex="-1"></a>  <span class="ex">problem</span> copying C:<span class="dt">\U</span>sers<span class="dt">\a</span>sus<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\R\w</span>in-library<span class="dt">\4</span>.4<span class="dt">\0</span>0LOCK<span class="dt">\r</span>eadxl<span class="dt">\l</span>ibs<span class="dt">\x</span>64<span class="dt">\r</span>eadxl.dll to C:<span class="dt">\U</span>sers<span class="dt">\a</span>sus<span class="dt">\A</span>ppData<span class="dt">\L</span>ocal<span class="dt">\R\w</span>in-library<span class="dt">\4</span>.4<span class="dt">\r</span>eadxl<span class="dt">\l</span>ibs<span class="dt">\x</span>64<span class="dt">\r</span>eadxl.dll: Permission denied</span>
 <span id="cb21-197"><a href="#cb21-197" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-198"><a href="#cb21-198" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-199"><a href="#cb21-199" aria-hidden="true" tabindex="-1"></a>主要问题是没有写入权限，这可能和在 vscode 中安装有关，因此，换到 R 的终端中进行安装（注意，可能需要使用管理员权限），但是仍然免不了一系列的包冲突问题，需要根据提示选择操作：</span>
@@ -1653,82 +2037,82 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-205"><a href="#cb21-205" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>处理有冲突的包（卸载），或者重新创建一个 env 。</span>
 <span id="cb21-206"><a href="#cb21-206" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-207"><a href="#cb21-207" aria-hidden="true" tabindex="-1"></a>    <span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a><span class="in">     # 删除 readxl 包</span></span>
-<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a><span class="in">     readxl_path &lt;- system.file(package = "readxl")</span></span>
-<span id="cb21-210"><a href="#cb21-210" aria-hidden="true" tabindex="-1"></a><span class="in">     if (!is.na(readxl_path)) {</span></span>
-<span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a><span class="in">     unlink(readxl_path, recursive = TRUE)</span></span>
-<span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a><span class="in">     }</span></span>
-<span id="cb21-213"><a href="#cb21-213" aria-hidden="true" tabindex="-1"></a><span class="in">     # 删除 cli 包</span></span>
-<span id="cb21-214"><a href="#cb21-214" aria-hidden="true" tabindex="-1"></a><span class="in">     cli_path &lt;- system.file(package = "cli")</span></span>
-<span id="cb21-215"><a href="#cb21-215" aria-hidden="true" tabindex="-1"></a><span class="in">     if (!is.na(cli_path)) {</span></span>
-<span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a><span class="in">     unlink(cli_path, recursive = TRUE)</span></span>
-<span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a><span class="in">     }</span></span>
-<span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a><span class="in">     # 再次尝试安装 Rgraphviz</span></span>
-<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a><span class="in">     BiocManager::install("Rgraphviz")</span></span>
-<span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb21-208"><a href="#cb21-208" aria-hidden="true" tabindex="-1"></a>     <span class="co"># 删除 readxl 包</span></span>
+<span id="cb21-209"><a href="#cb21-209" aria-hidden="true" tabindex="-1"></a>     readxl_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="at">package =</span> <span class="st">"readxl"</span>)</span>
+<span id="cb21-210"><a href="#cb21-210" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(readxl_path)) {</span>
+<span id="cb21-211"><a href="#cb21-211" aria-hidden="true" tabindex="-1"></a>     <span class="fu">unlink</span>(readxl_path, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-212"><a href="#cb21-212" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb21-213"><a href="#cb21-213" aria-hidden="true" tabindex="-1"></a>     <span class="co"># 删除 cli 包</span></span>
+<span id="cb21-214"><a href="#cb21-214" aria-hidden="true" tabindex="-1"></a>     cli_path <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="at">package =</span> <span class="st">"cli"</span>)</span>
+<span id="cb21-215"><a href="#cb21-215" aria-hidden="true" tabindex="-1"></a>     <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.na</span>(cli_path)) {</span>
+<span id="cb21-216"><a href="#cb21-216" aria-hidden="true" tabindex="-1"></a>     <span class="fu">unlink</span>(cli_path, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-217"><a href="#cb21-217" aria-hidden="true" tabindex="-1"></a>     }</span>
+<span id="cb21-218"><a href="#cb21-218" aria-hidden="true" tabindex="-1"></a>     <span class="co"># 再次尝试安装 Rgraphviz</span></span>
+<span id="cb21-219"><a href="#cb21-219" aria-hidden="true" tabindex="-1"></a>     BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Rgraphviz"</span>)</span>
+<span id="cb21-220"><a href="#cb21-220" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
 <span id="cb21-221"><a href="#cb21-221" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-222"><a href="#cb21-222" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>强制更新，忽略冲突</span>
 <span id="cb21-223"><a href="#cb21-223" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-224"><a href="#cb21-224" aria-hidden="true" tabindex="-1"></a>有些包的版本已经是最新的，但安装过程仍然提示需要更新，你可以使用 <span class="in">`force = TRUE`</span> 参数强制重新安装。</span>
 <span id="cb21-225"><a href="#cb21-225" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-226"><a href="#cb21-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb21-227"><a href="#cb21-227" aria-hidden="true" tabindex="-1"></a><span class="in">BiocManager::install("Rgraphviz", force = TRUE)</span></span>
+<span id="cb21-227"><a href="#cb21-227" aria-hidden="true" tabindex="-1"></a>BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Rgraphviz"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb21-228"><a href="#cb21-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-229"><a href="#cb21-229" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-230"><a href="#cb21-230" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>具体信息如下：</span>
 <span id="cb21-231"><a href="#cb21-231" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-232"><a href="#cb21-232" aria-hidden="true" tabindex="-1"></a>    <span class="in">```{r, eval = FALSE}</span></span>
-<span id="cb21-233"><a href="#cb21-233" aria-hidden="true" tabindex="-1"></a><span class="in">    &gt; BiocManager::install("Rgraphviz")</span></span>
-<span id="cb21-234"><a href="#cb21-234" aria-hidden="true" tabindex="-1"></a><span class="in">    'getOption("repos")' replaces Bioconductor standard repositories, see</span></span>
-<span id="cb21-235"><a href="#cb21-235" aria-hidden="true" tabindex="-1"></a><span class="in">    'help("repositories", package = "BiocManager")' for details.</span></span>
-<span id="cb21-236"><a href="#cb21-236" aria-hidden="true" tabindex="-1"></a><span class="in">    Replacement repositories:</span></span>
-<span id="cb21-237"><a href="#cb21-237" aria-hidden="true" tabindex="-1"></a><span class="in">        CRAN: https://mirrors.nju.edu.cn/CRAN</span></span>
-<span id="cb21-238"><a href="#cb21-238" aria-hidden="true" tabindex="-1"></a><span class="in">    Bioconductor version 3.20 (BiocManager 1.30.25), R 4.4.2 (2024-10-31 ucrt)</span></span>
-<span id="cb21-239"><a href="#cb21-239" aria-hidden="true" tabindex="-1"></a><span class="in">    Warning message:</span></span>
-<span id="cb21-240"><a href="#cb21-240" aria-hidden="true" tabindex="-1"></a><span class="in">    package(s) not installed when version(s) same as or greater than current; use</span></span>
-<span id="cb21-241"><a href="#cb21-241" aria-hidden="true" tabindex="-1"></a><span class="in">      `force = TRUE` to re-install: 'Rgraphviz' </span></span>
-<span id="cb21-242"><a href="#cb21-242" aria-hidden="true" tabindex="-1"></a><span class="in">    &gt; BiocManager::install("Rgraphviz", force = TRUE)</span></span>
-<span id="cb21-243"><a href="#cb21-243" aria-hidden="true" tabindex="-1"></a><span class="in">    'getOption("repos")' replaces Bioconductor standard repositories, see</span></span>
-<span id="cb21-244"><a href="#cb21-244" aria-hidden="true" tabindex="-1"></a><span class="in">    'help("repositories", package = "BiocManager")' for details.</span></span>
-<span id="cb21-245"><a href="#cb21-245" aria-hidden="true" tabindex="-1"></a><span class="in">    Replacement repositories:</span></span>
-<span id="cb21-246"><a href="#cb21-246" aria-hidden="true" tabindex="-1"></a><span class="in">        CRAN: https://mirrors.nju.edu.cn/CRAN</span></span>
-<span id="cb21-247"><a href="#cb21-247" aria-hidden="true" tabindex="-1"></a><span class="in">    Bioconductor version 3.20 (BiocManager 1.30.25), R 4.4.2 (2024-10-31 ucrt)</span></span>
-<span id="cb21-248"><a href="#cb21-248" aria-hidden="true" tabindex="-1"></a><span class="in">    Installing package(s) 'Rgraphviz'</span></span>
-<span id="cb21-249"><a href="#cb21-249" aria-hidden="true" tabindex="-1"></a><span class="in">    trying URL 'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/Rgraphviz_2.50.0.zip'</span></span>
-<span id="cb21-250"><a href="#cb21-250" aria-hidden="true" tabindex="-1"></a><span class="in">    Content type 'application/zip' length 1457153 bytes (1.4 MB)</span></span>
-<span id="cb21-251"><a href="#cb21-251" aria-hidden="true" tabindex="-1"></a><span class="in">    downloaded 1.4 MB</span></span>
+<span id="cb21-233"><a href="#cb21-233" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&gt;</span> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Rgraphviz"</span>)</span>
+<span id="cb21-234"><a href="#cb21-234" aria-hidden="true" tabindex="-1"></a>    <span class="st">'getOption("repos")'</span> replaces Bioconductor standard repositories, see</span>
+<span id="cb21-235"><a href="#cb21-235" aria-hidden="true" tabindex="-1"></a>    <span class="st">'help("repositories", package = "BiocManager")'</span> <span class="cf">for</span> details.</span>
+<span id="cb21-236"><a href="#cb21-236" aria-hidden="true" tabindex="-1"></a>    Replacement repositories<span class="sc">:</span></span>
+<span id="cb21-237"><a href="#cb21-237" aria-hidden="true" tabindex="-1"></a>        CRAN<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>mirrors.nju.edu.cn<span class="sc">/</span>CRAN</span>
+<span id="cb21-238"><a href="#cb21-238" aria-hidden="true" tabindex="-1"></a>    Bioconductor version <span class="fl">3.20</span> (BiocManager <span class="dv">1</span>.<span class="fl">30.25</span>), R <span class="dv">4</span>.<span class="fl">4.2</span> (<span class="dv">2024-10-31</span> ucrt)</span>
+<span id="cb21-239"><a href="#cb21-239" aria-hidden="true" tabindex="-1"></a>    Warning message<span class="sc">:</span></span>
+<span id="cb21-240"><a href="#cb21-240" aria-hidden="true" tabindex="-1"></a>    <span class="fu">package</span>(s) not installed when <span class="fu">version</span>(s) same as or greater than current; use</span>
+<span id="cb21-241"><a href="#cb21-241" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">force = TRUE</span><span class="st">`</span> to re<span class="sc">-</span>install<span class="sc">:</span> <span class="st">'Rgraphviz'</span> </span>
+<span id="cb21-242"><a href="#cb21-242" aria-hidden="true" tabindex="-1"></a>    <span class="sc">&gt;</span> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"Rgraphviz"</span>, <span class="at">force =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb21-243"><a href="#cb21-243" aria-hidden="true" tabindex="-1"></a>    <span class="st">'getOption("repos")'</span> replaces Bioconductor standard repositories, see</span>
+<span id="cb21-244"><a href="#cb21-244" aria-hidden="true" tabindex="-1"></a>    <span class="st">'help("repositories", package = "BiocManager")'</span> <span class="cf">for</span> details.</span>
+<span id="cb21-245"><a href="#cb21-245" aria-hidden="true" tabindex="-1"></a>    Replacement repositories<span class="sc">:</span></span>
+<span id="cb21-246"><a href="#cb21-246" aria-hidden="true" tabindex="-1"></a>        CRAN<span class="sc">:</span> https<span class="sc">:</span><span class="er">//</span>mirrors.nju.edu.cn<span class="sc">/</span>CRAN</span>
+<span id="cb21-247"><a href="#cb21-247" aria-hidden="true" tabindex="-1"></a>    Bioconductor version <span class="fl">3.20</span> (BiocManager <span class="dv">1</span>.<span class="fl">30.25</span>), R <span class="dv">4</span>.<span class="fl">4.2</span> (<span class="dv">2024-10-31</span> ucrt)</span>
+<span id="cb21-248"><a href="#cb21-248" aria-hidden="true" tabindex="-1"></a>    Installing <span class="fu">package</span>(s) <span class="st">'Rgraphviz'</span></span>
+<span id="cb21-249"><a href="#cb21-249" aria-hidden="true" tabindex="-1"></a>    trying URL <span class="st">'https://bioconductor.org/packages/3.20/bioc/bin/windows/contrib/4.4/Rgraphviz_2.50.0.zip'</span></span>
+<span id="cb21-250"><a href="#cb21-250" aria-hidden="true" tabindex="-1"></a>    Content type <span class="st">'application/zip'</span> length <span class="dv">1457153</span> <span class="fu">bytes</span> (<span class="fl">1.4</span> MB)</span>
+<span id="cb21-251"><a href="#cb21-251" aria-hidden="true" tabindex="-1"></a>    downloaded <span class="fl">1.4</span> MB</span>
 <span id="cb21-252"><a href="#cb21-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-253"><a href="#cb21-253" aria-hidden="true" tabindex="-1"></a><span class="in">    package ‘Rgraphviz’ successfully unpacked and MD5 sums checked</span></span>
+<span id="cb21-253"><a href="#cb21-253" aria-hidden="true" tabindex="-1"></a>    package ‘Rgraphviz’ successfully unpacked and MD5 sums checked</span>
 <span id="cb21-254"><a href="#cb21-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-255"><a href="#cb21-255" aria-hidden="true" tabindex="-1"></a><span class="in">    The downloaded binary packages are in</span></span>
-<span id="cb21-256"><a href="#cb21-256" aria-hidden="true" tabindex="-1"></a><span class="in">            C:\Users\asus\AppData\Local\Temp\Rtmp2j7SlA\downloaded_packages</span></span>
-<span id="cb21-257"><a href="#cb21-257" aria-hidden="true" tabindex="-1"></a><span class="in">    ```</span></span>
+<span id="cb21-255"><a href="#cb21-255" aria-hidden="true" tabindex="-1"></a>    The downloaded binary packages are <span class="cf">in</span></span>
+<span id="cb21-256"><a href="#cb21-256" aria-hidden="true" tabindex="-1"></a>            C<span class="sc">:</span>\Users\asus\AppData\Local\Temp\Rtmp2j7SlA\downloaded_packages</span>
+<span id="cb21-257"><a href="#cb21-257" aria-hidden="true" tabindex="-1"></a>    <span class="in">```</span></span>
 <span id="cb21-258"><a href="#cb21-258" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-259"><a href="#cb21-259" aria-hidden="true" tabindex="-1"></a><span class="fu">## 灯泡机的简单概率图模型</span></span>
 <span id="cb21-260"><a href="#cb21-260" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-261"><a href="#cb21-261" aria-hidden="true" tabindex="-1"></a>首先，为每一个节点定义取值：</span>
 <span id="cb21-262"><a href="#cb21-262" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-263"><a href="#cb21-263" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval = FALSE}</span></span>
-<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a><span class="in">machine_val &lt;- c("working", "broken")</span></span>
-<span id="cb21-265"><a href="#cb21-265" aria-hidden="true" tabindex="-1"></a><span class="in">light_bulb_val &lt;- c("good", "bad")</span></span>
+<span id="cb21-264"><a href="#cb21-264" aria-hidden="true" tabindex="-1"></a>machine_val <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"working"</span>, <span class="st">"broken"</span>)</span>
+<span id="cb21-265"><a href="#cb21-265" aria-hidden="true" tabindex="-1"></a>light_bulb_val <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"good"</span>, <span class="st">"bad"</span>)</span>
 <span id="cb21-266"><a href="#cb21-266" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-267"><a href="#cb21-267" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-268"><a href="#cb21-268" aria-hidden="true" tabindex="-1"></a>为两个随机变量定义百分比数值：</span>
 <span id="cb21-269"><a href="#cb21-269" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-270"><a href="#cb21-270" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval = FALSE}</span></span>
-<span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a><span class="in">machine_val &lt;- c(99,1)</span></span>
-<span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a><span class="in">light_bulb_val &lt;- c(99,1,60,40)</span></span>
+<span id="cb21-271"><a href="#cb21-271" aria-hidden="true" tabindex="-1"></a>machine_val <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">99</span>,<span class="dv">1</span>)</span>
+<span id="cb21-272"><a href="#cb21-272" aria-hidden="true" tabindex="-1"></a>light_bulb_val <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">99</span>,<span class="dv">1</span>,<span class="dv">60</span>,<span class="dv">40</span>)</span>
 <span id="cb21-273"><a href="#cb21-273" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-274"><a href="#cb21-274" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-275"><a href="#cb21-275" aria-hidden="true" tabindex="-1"></a>使用 gRain 定义随机变量：</span>
 <span id="cb21-276"><a href="#cb21-276" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-277"><a href="#cb21-277" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval=FALSE}</span></span>
-<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a><span class="in">library(gRain)</span></span>
-<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a><span class="in">M &lt;- cptable(~machine, values = machine_prob,</span></span>
-<span id="cb21-280"><a href="#cb21-280" aria-hidden="true" tabindex="-1"></a><span class="in">            levels = machine_val)</span></span>
-<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a><span class="in">L &lt;- cptable(~light_bulb | machine,</span></span>
-<span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a><span class="in">            values = light_bulb_prob,</span></span>
-<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a><span class="in">            levels = light_bulb_val)</span></span>
+<span id="cb21-278"><a href="#cb21-278" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gRain)</span>
+<span id="cb21-279"><a href="#cb21-279" aria-hidden="true" tabindex="-1"></a>M <span class="ot">&lt;-</span> <span class="fu">cptable</span>(<span class="sc">~</span>machine, <span class="at">values =</span> machine_prob,</span>
+<span id="cb21-280"><a href="#cb21-280" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> machine_val)</span>
+<span id="cb21-281"><a href="#cb21-281" aria-hidden="true" tabindex="-1"></a>L <span class="ot">&lt;-</span> <span class="fu">cptable</span>(<span class="sc">~</span>light_bulb <span class="sc">|</span> machine,</span>
+<span id="cb21-282"><a href="#cb21-282" aria-hidden="true" tabindex="-1"></a>            <span class="at">values =</span> light_bulb_prob,</span>
+<span id="cb21-283"><a href="#cb21-283" aria-hidden="true" tabindex="-1"></a>            <span class="at">levels =</span> light_bulb_val)</span>
 <span id="cb21-284"><a href="#cb21-284" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-285"><a href="#cb21-285" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-286"><a href="#cb21-286" aria-hidden="true" tabindex="-1"></a>这里的 <span class="in">`cptable`</span> 表示条件概率表<span class="ot">[^1]</span>：它是离散型随机变量概率分布的内存表示<span class="ot">[^2]</span>。</span>
@@ -1740,8 +2124,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-292"><a href="#cb21-292" aria-hidden="true" tabindex="-1"></a><span class="fu">### 构建新的概率图模型</span></span>
 <span id="cb21-293"><a href="#cb21-293" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-294"><a href="#cb21-294" aria-hidden="true" tabindex="-1"></a><span class="in">```{r,eval=FALSE}</span></span>
-<span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a><span class="in">plist &lt;- compileCPT(list(M,L))</span></span>
-<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a><span class="in">plist</span></span>
+<span id="cb21-295"><a href="#cb21-295" aria-hidden="true" tabindex="-1"></a>plist <span class="ot">&lt;-</span> <span class="fu">compileCPT</span>(<span class="fu">list</span>(M,L))</span>
+<span id="cb21-296"><a href="#cb21-296" aria-hidden="true" tabindex="-1"></a>plist</span>
 <span id="cb21-297"><a href="#cb21-297" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb21-298"><a href="#cb21-298" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-299"><a href="#cb21-299" aria-hidden="true" tabindex="-1"></a>输出结果如上，这里可以清楚地看到之前定义的概率分布</span>
@@ -1749,7 +2133,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb21-301"><a href="#cb21-301" aria-hidden="true" tabindex="-1"></a>2025.04.05 再次尝试复现程序，失败，暂时停止概率图R程序的复现工作。</span>
 <span id="cb21-302"><a href="#cb21-302" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-303"><a href="#cb21-303" aria-hidden="true" tabindex="-1"></a>end.</span>
-</code><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer"><div class="nav-footer">
@@ -1761,12 +2145,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </ul>
 </div>   
     <div class="nav-footer-center">
-<p>Copyright 2023-2025, simonzhou</p>
-<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/blob/main/Learn/Bayes/01-Bayes-PGM.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/zhoulvbang/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+<p>Copyright 2023-2025, LB.ZHOU</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Learn/Bayes/01-Bayes-PGM.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
 <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/zhoulvbang">
+    <a class="nav-link" href="https://github.com/pumc-zhou/Med-Stat-Notes">
       <i class="bi bi-github" role="img">
 </i> 
     </a>
