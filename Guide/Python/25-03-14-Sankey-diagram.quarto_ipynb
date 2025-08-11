@@ -74,7 +74,7 @@
         "\n",
         "安装相关的包和库："
       ],
-      "id": "5047da16"
+      "id": "0e51e516"
     },
     {
       "cell_type": "code",
@@ -84,7 +84,7 @@
         "pip install dash\n",
         "pip install numpy"
       ],
-      "id": "0e2439d0",
+      "id": "7d611402",
       "execution_count": null,
       "outputs": []
     },
@@ -96,7 +96,7 @@
         "\n",
         "在 `Python` 终端或编辑器运行后，可以在浏览器中输入 <http://127.0.0.1:8051/> 进行查看。"
       ],
-      "id": "5eef54db"
+      "id": "61fb1aac"
     },
     {
       "cell_type": "code",
@@ -164,7 +164,7 @@
         "if __name__ == \"__main__\":\n",
         "    app.run_server(debug=True, port=8051)"
       ],
-      "id": "a9ce1bce",
+      "id": "0c647c4d",
       "execution_count": null,
       "outputs": []
     },
@@ -178,7 +178,7 @@
         "\n",
         "### 安装 jupyter-dash"
       ],
-      "id": "351225d9"
+      "id": "790ab6c9"
     },
     {
       "cell_type": "code",
@@ -187,7 +187,7 @@
         "#| eval: false\n",
         "pip install jupyter-dash"
       ],
-      "id": "481c4fed",
+      "id": "8f183def",
       "execution_count": null,
       "outputs": []
     },
@@ -197,7 +197,7 @@
       "source": [
         "### 运行程序"
       ],
-      "id": "88252423"
+      "id": "4a53972e"
     },
     {
       "cell_type": "code",
@@ -266,7 +266,7 @@
         "# 在 Jupyter 中运行，mode='inline' 将图形嵌入笔记本\n",
         "app.run_server(mode='inline')"
       ],
-      "id": "5dabc6c2",
+      "id": "f827a73d",
       "execution_count": null,
       "outputs": []
     },
@@ -284,7 +284,7 @@
         "\n",
         "2.  改用静态图形"
       ],
-      "id": "7b422bc6"
+      "id": "13e85840"
     },
     {
       "cell_type": "code",
@@ -312,7 +312,7 @@
         "fig = create_complex_sankey()\n",
         "fig.write_html(\"sankey.html\", include_plotlyjs='cdn')"
       ],
-      "id": "d3c809a4",
+      "id": "b821b528",
       "execution_count": null,
       "outputs": []
     },
@@ -328,7 +328,7 @@
         "\n",
         "end."
       ],
-      "id": "7a21a1e0"
+      "id": "8b820a8c"
     }
   ],
   "metadata": {

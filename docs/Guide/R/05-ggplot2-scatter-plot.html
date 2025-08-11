@@ -1019,6 +1019,8 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 <li><a href="#%E7%BB%98%E5%88%B6%E5%9F%BA%E6%9C%AC%E6%95%A3%E7%82%B9%E5%9B%BE" id="toc-绘制基本散点图" class="nav-link" data-scroll-target="#%E7%BB%98%E5%88%B6%E5%9F%BA%E6%9C%AC%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="header-section-number">1.1</span> 绘制基本散点图</a></li>
   <li><a href="#%E4%BD%BF%E7%94%A8%E7%82%B9%E5%BD%A2%E6%88%96%E9%A2%9C%E8%89%B2%E5%B1%9E%E6%80%A7%E5%AF%B9%E6%95%B0%E6%8D%AE%E7%82%B9%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84" id="toc-使用点形或颜色属性对数据点进行分组" class="nav-link" data-scroll-target="#%E4%BD%BF%E7%94%A8%E7%82%B9%E5%BD%A2%E6%88%96%E9%A2%9C%E8%89%B2%E5%B1%9E%E6%80%A7%E5%AF%B9%E6%95%B0%E6%8D%AE%E7%82%B9%E8%BF%9B%E8%A1%8C%E5%88%86%E7%BB%84"><span class="header-section-number">1.2</span> 使用点形或颜色属性对数据点进行分组</a></li>
   <li><a href="#%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E4%BA%8E%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE%E7%9A%84%E7%82%B9%E5%BD%A2" id="toc-使用不同于默认设置的点形" class="nav-link" data-scroll-target="#%E4%BD%BF%E7%94%A8%E4%B8%8D%E5%90%8C%E4%BA%8E%E9%BB%98%E8%AE%A4%E8%AE%BE%E7%BD%AE%E7%9A%84%E7%82%B9%E5%BD%A2"><span class="header-section-number">1.3</span> 使用不同于默认设置的点形</a></li>
+  <li><a href="#%E5%B0%86%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F%E6%98%A0%E5%B0%84%E5%88%B0%E9%A2%9C%E8%89%B2%E6%88%96%E5%A4%A7%E5%B0%8F" id="toc-将连续变量映射到颜色或大小" class="nav-link" data-scroll-target="#%E5%B0%86%E8%BF%9E%E7%BB%AD%E5%8F%98%E9%87%8F%E6%98%A0%E5%B0%84%E5%88%B0%E9%A2%9C%E8%89%B2%E6%88%96%E5%A4%A7%E5%B0%8F"><span class="header-section-number">1.4</span> 将连续变量映射到颜色或大小</a></li>
+  <li><a href="#dealing-with-overplotting" id="toc-dealing-with-overplotting" class="nav-link" data-scroll-target="#dealing-with-overplotting"><span class="header-section-number">1.5</span> Dealing with Overplotting</a></li>
   </ul>
 </li>
   </ul><div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Guide/R/05-ggplot2-scatter-plot.qmd" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
@@ -1049,7 +1051,7 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
     <div>
     <div class="quarto-title-meta-heading">修改于</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">2025年8月3日</p>
+      <p class="date-modified">2025年8月11日</p>
     </div>
   </div>
     
@@ -2208,6 +2210,10 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </div>
 </div>
 <p>R系统绘图可以调用的图形较多，一些点形只有边框线（1～14）​；一些只有实心填充区域（15～20）​；还有一些则由可分离的边框线和具有填充色的实心区域共同组成（21～25）​，也可以用字符作点形。</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure"><p><img src="images/FIG-SCATTER-SHAPES-CHART-1.png" class="img-fluid figure-img"></p>
+<figcaption>Shapes in R graphics</figcaption></figure>
+</div>
 <p>如果已将分组变量映射到 <code>shape</code>，则可以调用 <code>scale_shape_manual()</code> 函数来手动修改该分组变量不同水平的点形</p>
 <p>下图将使用略大且自定义点形的数据点：</p>
 <div class="cell" data-fig="true">
@@ -2231,6 +2237,351 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
 </ul>
 <p>我们可以将两个不同的变量分别由点形和填充色（空心或有填充）属性来表示。</p>
 <p>为了实现这一功能，首先需要选择一个同时具有 <code>colour</code> 和 <code>fill</code> 属性的点形，在 <code>scale_shape_manual</code> 中设定。之后需要在<code>scale_fill_manual()</code> 中选择一个包括 NA 和其他颜色的调色板（NA会生成一个空心的形状）​。</p>
+</section><section id="将连续变量映射到颜色或大小" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="将连续变量映射到颜色或大小">
+<span class="header-section-number">1.4</span> 将连续变量映射到颜色或大小</h2>
+<p>将该连续变量映射到 <code>size</code> 或 <code>colour</code>。示例数据使用 <code>gcookbook</code> 包中的 <code>heightweight</code>（仅保留四列：性别、年龄、身高、体重）：</p>
+<div class="cell" data-fig="true">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载示例数据 </span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>heightweight <span class="sc">%&gt;%</span> <span class="fu">select</span>(sex, ageYear, heightIn, weightLb)  <span class="co"># 映射到颜色 </span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    sex ageYear heightIn weightLb
+1     f   11.92     56.3     85.0
+2     f   12.92     62.3    105.0
+3     f   12.75     63.3    108.0
+4     f   13.42     59.0     92.0
+5     f   15.92     62.5    112.5
+6     f   14.25     62.5    112.0
+7     f   15.42     59.0    104.0
+8     f   11.83     56.5     69.0
+9     f   13.33     62.0     94.5
+10    f   11.67     53.8     68.5
+11    f   11.58     61.5    104.0
+12    f   14.83     61.5    103.5
+13    f   13.08     64.5    123.5
+14    f   12.42     58.3     93.0
+15    f   11.92     51.3     50.5
+16    f   12.08     58.8     89.0
+17    f   15.92     65.3    107.0
+18    f   12.50     59.5     78.5
+19    f   12.25     61.3    115.0
+20    f   15.00     63.3    114.0
+21    f   11.75     61.8     85.0
+22    f   11.67     53.5     81.0
+23    f   13.67     58.0     83.5
+24    f   14.67     61.3    112.0
+25    f   15.42     63.3    101.0
+26    f   13.83     61.5    103.5
+27    f   14.58     60.8     93.5
+28    f   15.00     59.0    112.0
+29    f   17.50     65.5    140.0
+30    f   12.17     56.3     83.5
+31    f   14.17     64.3     90.0
+32    f   13.50     58.0     84.0
+33    f   12.42     64.3    110.5
+34    f   11.58     57.5     96.0
+35    f   15.50     57.8     95.0
+36    f   16.42     61.5    121.0
+37    f   14.08     62.3     99.5
+38    f   14.75     61.8    142.5
+39    f   15.42     65.3    118.0
+40    f   15.17     58.3    104.5
+41    f   14.42     62.8    102.5
+42    f   13.83     59.3     89.5
+43    f   14.00     61.5     95.0
+44    f   14.08     62.0     98.5
+45    f   12.50     61.3     94.0
+46    f   15.33     62.3    108.0
+47    f   11.58     52.8     63.5
+48    f   12.25     59.8     84.5
+49    f   12.00     59.5     93.5
+50    f   14.75     61.3    112.0
+51    f   14.83     63.5    148.5
+52    f   16.42     64.8    112.0
+53    f   12.17     60.0    109.0
+54    f   12.08     59.0     91.5
+55    f   12.25     55.8     75.0
+56    f   12.08     57.8     84.0
+57    f   12.92     61.3    107.0
+58    f   13.92     62.3     92.5
+59    f   15.25     64.3    109.5
+60    f   11.92     55.5     84.0
+61    f   15.25     64.5    102.5
+62    f   15.42     60.0    106.0
+63    f   12.33     56.3     77.0
+64    f   12.25     58.3    111.5
+65    f   12.83     60.0    114.0
+66    f   13.00     54.5     75.0
+67    f   12.00     55.8     73.5
+68    f   12.83     62.8     93.5
+69    f   12.67     60.5    105.0
+70    f   15.92     63.3    113.5
+71    f   15.83     66.8    140.0
+72    f   11.67     60.0     77.0
+73    f   12.33     60.5     84.5
+74    f   15.75     64.3    113.5
+75    f   11.92     58.3     77.5
+76    f   14.83     66.5    117.5
+77    f   13.67     65.3     98.0
+78    f   13.08     60.5    112.0
+79    f   12.25     59.5    101.0
+80    f   12.33     59.0     95.0
+81    f   14.75     61.3     81.0
+82    f   14.25     61.5     91.0
+83    f   14.33     64.8    142.0
+84    f   15.83     56.8     98.5
+85    f   15.25     66.5    112.0
+86    f   11.92     61.5    116.5
+87    f   14.92     63.0     98.5
+88    f   15.50     57.0     83.5
+89    f   15.17     65.5    133.0
+90    f   15.17     62.0     91.5
+91    f   11.83     56.0     72.5
+92    f   13.75     61.3    106.5
+93    f   13.75     55.5     67.0
+94    f   12.83     61.0    122.5
+95    f   12.50     54.5     74.0
+96    f   12.92     66.0    144.5
+97    f   13.58     56.5     84.0
+98    f   11.75     56.0     72.5
+99    f   12.25     51.5     64.0
+100   f   17.50     62.0    116.0
+101   f   14.25     63.0     84.0
+102   f   13.92     61.0     93.5
+103   f   15.17     64.0    111.5
+104   f   12.00     61.0     92.0
+105   f   16.08     59.8    115.0
+106   f   11.75     61.3     85.0
+107   f   13.67     63.3    108.0
+108   f   15.50     63.5    108.0
+109   f   14.08     61.5     85.0
+110   f   14.58     60.3     86.0
+111   f   15.00     61.3    110.5
+112   m   13.75     64.8     98.0
+113   m   13.08     60.5    105.0
+114   m   12.00     57.3     76.5
+115   m   12.50     59.5     84.0
+116   m   12.50     60.8    128.0
+117   m   11.58     60.5     87.0
+118   m   15.75     67.0    128.0
+119   m   15.25     64.8    111.0
+120   m   12.25     50.5     79.0
+121   m   12.17     57.5     90.0
+122   m   13.33     60.5     84.0
+123   m   13.00     61.8    112.0
+124   m   14.42     61.3     93.0
+125   m   12.58     66.3    117.0
+126   m   11.75     53.3     84.0
+127   m   12.50     59.0     99.5
+128   m   13.67     57.8     95.0
+129   m   12.75     60.0     84.0
+130   m   17.17     68.3    134.0
+132   m   14.67     63.8     98.5
+133   m   14.67     65.0    118.5
+134   m   11.67     59.5     94.5
+135   m   15.42     66.0    105.0
+136   m   15.00     61.8    104.0
+137   m   12.17     57.3     83.0
+138   m   15.25     66.0    105.5
+139   m   11.67     56.5     84.0
+140   m   12.58     58.3     86.0
+141   m   12.58     61.0     81.0
+142   m   12.00     62.8     94.0
+143   m   13.33     59.3     78.5
+144   m   14.83     67.3    119.5
+145   m   16.08     66.3    133.0
+146   m   13.50     64.5    119.0
+147   m   13.67     60.5     95.0
+148   m   15.50     66.0    112.0
+149   m   11.92     57.5     75.0
+150   m   14.58     64.0     92.0
+151   m   14.58     68.0    112.0
+152   m   14.58     63.5     98.5
+153   m   14.42     69.0    112.5
+154   m   14.17     63.8    112.5
+155   m   14.50     66.0    108.0
+156   m   13.67     63.5    108.0
+157   m   12.00     59.5     88.0
+158   m   13.00     66.3    106.0
+159   m   12.42     57.0     92.0
+160   m   12.00     60.0    117.5
+161   m   12.25     57.0     84.0
+162   m   15.67     67.3    112.0
+163   m   14.08     62.0    100.0
+164   m   14.33     65.0    112.0
+165   m   12.50     59.5     84.0
+166   m   16.08     67.8    127.5
+167   m   13.08     58.0     80.5
+168   m   14.00     60.0     93.5
+169   m   11.67     58.5     86.5
+170   m   13.00     58.3     92.5
+171   m   13.00     61.5    108.5
+172   m   13.17     65.0    121.0
+173   m   15.33     66.5    112.0
+174   m   13.00     68.5    114.0
+175   m   12.00     57.0     84.0
+176   m   14.67     61.5     81.0
+177   m   14.00     66.5    111.5
+178   m   12.42     52.5     81.0
+179   m   11.83     55.0     70.0
+180   m   15.67     71.0    140.0
+181   m   16.92     66.5    117.0
+182   m   11.83     58.8     84.0
+183   m   15.75     66.3    112.0
+184   m   15.67     65.8    150.5
+185   m   16.67     71.0    147.0
+186   m   12.67     59.5    105.0
+187   m   14.50     69.8    119.5
+188   m   13.83     62.5     84.0
+189   m   12.08     56.5     91.0
+190   m   11.92     57.5    101.0
+191   m   13.58     65.3    117.5
+192   m   13.83     67.3    121.0
+193   m   15.17     67.0    133.0
+194   m   14.42     66.0    112.0
+195   m   12.92     61.8     91.5
+196   m   13.50     60.0    105.0
+197   m   14.75     63.0    111.0
+198   m   14.75     60.5    112.0
+199   m   14.58     65.5    114.0
+200   m   13.83     62.0     91.0
+201   m   12.50     59.0     98.0
+202   m   12.50     61.8    118.0
+203   m   15.67     63.3    115.5
+204   m   13.58     66.0    112.0
+205   m   14.25     61.8    112.0
+206   m   13.50     63.0     91.0
+207   m   11.75     57.5     85.0
+208   m   14.50     63.0    112.0
+209   m   11.83     56.0     87.5
+210   m   12.33     60.5    118.0
+211   m   11.67     56.8     83.5
+212   m   13.33     64.0    116.0
+213   m   12.00     60.0     89.0
+214   m   17.17     69.5    171.5
+215   m   13.25     63.3    112.0
+216   m   12.42     56.3     72.0
+217   m   16.08     72.0    150.0
+218   m   16.17     65.3    134.5
+219   m   12.67     60.8     97.0
+220   m   12.17     55.0     71.5
+221   m   11.58     55.0     73.5
+222   m   15.50     66.5    112.0
+223   m   13.42     56.8     75.0
+224   m   12.75     64.8    128.0
+225   m   16.33     64.5     98.0
+226   m   13.67     58.0     84.0
+227   m   13.25     62.8     99.0
+228   m   14.83     63.8    112.0
+229   m   12.75     57.8     79.5
+230   m   12.92     57.3     80.5
+231   m   14.83     63.5    102.5
+232   m   11.83     55.0     76.0
+233   m   13.67     66.5    112.0
+234   m   15.75     65.0    114.0
+235   m   13.67     61.5    140.0
+236   m   13.92     62.0    107.5
+237   m   12.58     59.3     87.0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">colour =</span> weightLb)) <span class="sc">+</span>   </span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="fu">geom_point</span>()  <span class="co"># 映射到大小 </span></span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">size =</span> weightLb)) <span class="sc">+</span>   </span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="fu">geom_point</span>() </span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-9-1" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-9-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2-scatter-plot_files/figure-html/fig-9-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-9-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;9: 将连续变量映射到颜色或大小中
+</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-9-2" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-9-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2-scatter-plot_files/figure-html/fig-9-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-9-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;10: 将连续变量映射到颜色或大小中
+</figcaption></figure>
+</div>
+</div>
+</div>
+<ul>
+<li>
+<p><strong>感知差异</strong></p>
+<p>人类对位置变化最敏感（x、y 坐标），对颜色和大小的精度感知较低。</p>
+<p>因此，映射到颜色或大小的变量适合用于精度要求不高的场景。</p>
+</li>
+<li>
+<p><strong>大小映射的误差</strong></p>
+<p>ggplot2 默认点直径范围为 1–6 mm，与数据值范围无关，这会造成面积比例失真（直径差 6 倍 → 面积差 36 倍）。</p>
+<p>如果需要准确反映比例，可使用：</p>
+</li>
+</ul>
+<div class="cell" data-fig="true">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># 按直径缩放 </span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="fu">range</span>(heightweight<span class="sc">$</span>weightLb)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  50.5 171.5</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co">#&gt; [1]  50.5 171.5</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>size_range <span class="ot">&lt;-</span> <span class="fu">range</span>(heightweight<span class="sc">$</span>weightLb) <span class="sc">/</span> <span class="fu">max</span>(heightweight<span class="sc">$</span>weightLb) <span class="sc">*</span>  <span class="dv">6</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a>size_range</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.766764 6.000000</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co">#&gt; [1] 1.766764 6.000000</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">size =</span> weightLb)) <span class="sc">+</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> size_range)</span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="co"># 按面积缩放 </span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">size =</span> weightLb)) <span class="sc">+</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>  <span class="fu">scale_size_area</span>()</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-10-1" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2-scatter-plot_files/figure-html/fig-10-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-10-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;11: 散点图的缩放
+</figcaption></figure>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="fig-10-2" class="quarto-float quarto-figure quarto-figure-left anchored">
+<figure class="quarto-float quarto-float-fig figure"><div aria-describedby="fig-10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="05-ggplot2-scatter-plot_files/figure-html/fig-10-2.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-10-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+图&nbsp;12: 散点图的缩放
+</figcaption></figure>
+</div>
+</div>
+</div>
+<p><strong>图 5.9</strong>：左为直径映射，右为面积映射。</p>
+<ul>
+<li>
+<p><strong>颜色与填充</strong></p>
+<ul>
+<li><p><code>colour</code> 控制边框颜色，<code>fill</code> 控制实心部分颜色（适用于形状 21–25）。</p></li>
+<li><p>浅色配色时可用带边框的形状增强可读性。</p></li>
+</ul>
+</li>
+<li>
+<p><strong>多变量映射</strong></p>
+<ul>
+<li><p>可同时映射：连续变量 → 大小，分类变量 → 颜色，并通过 <code>alpha</code> 设置透明度减少重叠（图 5.11）。</p></li>
+<li><p>不建议同时映射大小和形状，因为形状大小比较不直观，且不同形状视觉面积不一致。</p></li>
+</ul>
+</li>
+</ul></section><section id="dealing-with-overplotting" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="dealing-with-overplotting">
+<span class="header-section-number">1.5</span> Dealing with Overplotting</h2>
 
 
 <!-- -->
@@ -2742,230 +3093,307 @@ gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">源代码</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1"></a><span class="co">---</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a><span class="an">title:</span><span class="co"> "05-ggplot2 绘图——散点图"</span></span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="an">date:</span><span class="co"> "2025-07-25"</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="an">format:</span><span class="co"> </span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co">    html:</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co">        code-fold: false</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="co">        code-line-numbers: true</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="co">        code-highlight: true</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="co">        fig_caption: true</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a><span class="co">        number-sections: true</span></span>
-<span id="cb16-13"><a href="#cb16-13"></a><span class="co">        toc: true</span></span>
-<span id="cb16-14"><a href="#cb16-14"></a><span class="co">        toc-depth: 3</span></span>
-<span id="cb16-15"><a href="#cb16-15"></a><span class="co">---</span></span>
-<span id="cb16-16"><a href="#cb16-16"></a></span>
-<span id="cb16-17"><a href="#cb16-17"></a><span class="fu"># 散点图</span></span>
-<span id="cb16-18"><a href="#cb16-18"></a></span>
-<span id="cb16-19"><a href="#cb16-19"></a>散点图常用来刻画两个连续变量之间的关系。</span>
-<span id="cb16-20"><a href="#cb16-20"></a></span>
-<span id="cb16-21"><a href="#cb16-21"></a>绘制散点图时，数据集中的每一个观测值都由散点图中的一个点来表示。通常，人们还会向散点图中添加一条直线，以用来表示基于某些统计模型的预测值。当散点图中的数据趋势难以用肉眼识别时，这些直线对我们理解数据的特征很有帮助。</span>
-<span id="cb16-22"><a href="#cb16-22"></a></span>
-<span id="cb16-23"><a href="#cb16-23"></a>当数据集很大时，散点图上的数据点会相互重叠，此时，很难在图上清楚地显示出所有的数据点。为了解决重叠的问题，我们可以先对数据进行汇总，再绘制散点图。</span>
-<span id="cb16-24"><a href="#cb16-24"></a></span>
-<span id="cb16-25"><a href="#cb16-25"></a><span class="fu">## 绘制基本散点图</span></span>
-<span id="cb16-26"><a href="#cb16-26"></a></span>
-<span id="cb16-27"><a href="#cb16-27"></a>使用 <span class="in">`geom_point()`</span> 函数，分别映射一个变量到 x 和一个变量到 y。</span>
-<span id="cb16-28"><a href="#cb16-28"></a></span>
-<span id="cb16-29"><a href="#cb16-29"></a>这里使用 <span class="in">`heightweight`</span> 数据集，这是一个多列数据集，接下来的例子我们只用到其中两列。</span>
-<span id="cb16-30"><a href="#cb16-30"></a></span>
-<span id="cb16-33"><a href="#cb16-33"></a><span class="in">```{r}</span></span>
-<span id="cb16-34"><a href="#cb16-34"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-35"><a href="#cb16-35"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-36"><a href="#cb16-36"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-37"><a href="#cb16-37"></a><span class="co">#| label: fig-1</span></span>
-<span id="cb16-38"><a href="#cb16-38"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-39"><a href="#cb16-39"></a><span class="co">#| fig.cap: "基本散点图"</span></span>
-<span id="cb16-40"><a href="#cb16-40"></a></span>
-<span id="cb16-41"><a href="#cb16-41"></a><span class="co"># load package</span></span>
-<span id="cb16-42"><a href="#cb16-42"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-43"><a href="#cb16-43"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
-<span id="cb16-44"><a href="#cb16-44"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb16-45"><a href="#cb16-45"></a></span>
-<span id="cb16-46"><a href="#cb16-46"></a><span class="co"># 列出我们绘制散点图要用到的两列的标题</span></span>
-<span id="cb16-47"><a href="#cb16-47"></a>heightweight <span class="sc">%&gt;%</span> </span>
-<span id="cb16-48"><a href="#cb16-48"></a>  <span class="fu">select</span>(ageYear, heightIn)</span>
-<span id="cb16-49"><a href="#cb16-49"></a><span class="co">#&gt;     ageYear heightIn</span></span>
-<span id="cb16-50"><a href="#cb16-50"></a><span class="co">#&gt; 1     11.92     56.3</span></span>
-<span id="cb16-51"><a href="#cb16-51"></a><span class="co">#&gt; 2     12.92     62.3</span></span>
-<span id="cb16-52"><a href="#cb16-52"></a><span class="co">#&gt; 3     12.75     63.3</span></span>
-<span id="cb16-53"><a href="#cb16-53"></a><span class="co">#&gt;  ...&lt;230 more rows&gt;...</span></span>
-<span id="cb16-54"><a href="#cb16-54"></a><span class="co">#&gt; 235   13.67     61.5</span></span>
-<span id="cb16-55"><a href="#cb16-55"></a><span class="co">#&gt; 236   13.92     62.0</span></span>
-<span id="cb16-56"><a href="#cb16-56"></a><span class="co">#&gt; 237   12.58     59.3</span></span>
-<span id="cb16-57"><a href="#cb16-57"></a></span>
-<span id="cb16-58"><a href="#cb16-58"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
-<span id="cb16-59"><a href="#cb16-59"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb16-60"><a href="#cb16-60"></a><span class="in">```</span></span>
-<span id="cb16-61"><a href="#cb16-61"></a></span>
-<span id="cb16-62"><a href="#cb16-62"></a>通过设定形状（shape）参数可以在散点图中绘制点以外的形状。例如，我们常用空心圈 <span class="in">`shape=21`</span>（图 @fig-3 ）代替默认的实心圆 <span class="in">`shape=19`</span>（图 @fig-1 ）​。</span>
-<span id="cb16-63"><a href="#cb16-63"></a></span>
-<span id="cb16-66"><a href="#cb16-66"></a><span class="in">```{r}</span></span>
-<span id="cb16-67"><a href="#cb16-67"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-68"><a href="#cb16-68"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-69"><a href="#cb16-69"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-70"><a href="#cb16-70"></a><span class="co">#| label: fig-2</span></span>
-<span id="cb16-71"><a href="#cb16-71"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-72"><a href="#cb16-72"></a><span class="co">#| fig.cap: "基本散点图-修改形状"</span></span>
-<span id="cb16-73"><a href="#cb16-73"></a></span>
-<span id="cb16-74"><a href="#cb16-74"></a><span class="co"># load package</span></span>
-<span id="cb16-75"><a href="#cb16-75"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-76"><a href="#cb16-76"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
-<span id="cb16-77"><a href="#cb16-77"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb16-78"><a href="#cb16-78"></a></span>
-<span id="cb16-79"><a href="#cb16-79"></a><span class="co"># 列出我们绘制散点图要用到的两列的标题</span></span>
-<span id="cb16-80"><a href="#cb16-80"></a>heightweight <span class="sc">%&gt;%</span> </span>
-<span id="cb16-81"><a href="#cb16-81"></a>  <span class="fu">select</span>(ageYear, heightIn)</span>
-<span id="cb16-82"><a href="#cb16-82"></a></span>
-<span id="cb16-83"><a href="#cb16-83"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
-<span id="cb16-84"><a href="#cb16-84"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>)</span>
-<span id="cb16-85"><a href="#cb16-85"></a><span class="in">```</span></span>
-<span id="cb16-86"><a href="#cb16-86"></a></span>
-<span id="cb16-87"><a href="#cb16-87"></a>修改点的大小（在默认实心圆点的情况下），默认点的大小为：<span class="in">`size=2`</span>。</span>
-<span id="cb16-88"><a href="#cb16-88"></a></span>
-<span id="cb16-91"><a href="#cb16-91"></a><span class="in">```{r}</span></span>
-<span id="cb16-92"><a href="#cb16-92"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-93"><a href="#cb16-93"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-94"><a href="#cb16-94"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-95"><a href="#cb16-95"></a><span class="co">#| label: fig-3</span></span>
-<span id="cb16-96"><a href="#cb16-96"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-97"><a href="#cb16-97"></a><span class="co">#| fig.cap: "基本散点图-修改散点大小"</span></span>
-<span id="cb16-98"><a href="#cb16-98"></a></span>
-<span id="cb16-99"><a href="#cb16-99"></a><span class="co"># load package</span></span>
-<span id="cb16-100"><a href="#cb16-100"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-101"><a href="#cb16-101"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
-<span id="cb16-102"><a href="#cb16-102"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb16-103"><a href="#cb16-103"></a></span>
-<span id="cb16-104"><a href="#cb16-104"></a><span class="co"># 列出我们绘制散点图要用到的两列的标题</span></span>
-<span id="cb16-105"><a href="#cb16-105"></a>heightweight <span class="sc">%&gt;%</span> </span>
-<span id="cb16-106"><a href="#cb16-106"></a>  <span class="fu">select</span>(ageYear, heightIn)</span>
-<span id="cb16-107"><a href="#cb16-107"></a></span>
-<span id="cb16-108"><a href="#cb16-108"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
-<span id="cb16-109"><a href="#cb16-109"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>)</span>
-<span id="cb16-110"><a href="#cb16-110"></a><span class="in">```</span></span>
-<span id="cb16-111"><a href="#cb16-111"></a></span>
-<span id="cb16-112"><a href="#cb16-112"></a><span class="fu">## 使用点形或颜色属性对数据点进行分组</span></span>
-<span id="cb16-113"><a href="#cb16-113"></a></span>
-<span id="cb16-114"><a href="#cb16-114"></a>将分组变量映射到点形（<span class="in">`shape`</span>）或颜色（<span class="in">`colour`</span>）属性。</span>
-<span id="cb16-115"><a href="#cb16-115"></a></span>
-<span id="cb16-116"><a href="#cb16-116"></a>接下来的例子中，我们将用到 <span class="in">`heightweight`</span> 数据集中的3列。</span>
-<span id="cb16-117"><a href="#cb16-117"></a></span>
-<span id="cb16-120"><a href="#cb16-120"></a><span class="in">```{r}</span></span>
-<span id="cb16-121"><a href="#cb16-121"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-122"><a href="#cb16-122"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-123"><a href="#cb16-123"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-124"><a href="#cb16-124"></a><span class="co">#| label: fig-4</span></span>
-<span id="cb16-125"><a href="#cb16-125"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-126"><a href="#cb16-126"></a><span class="co">#| fig-cap: "基本散点图-按形/色分组"</span></span>
-<span id="cb16-127"><a href="#cb16-127"></a><span class="co">#| fig-subcap:</span></span>
-<span id="cb16-128"><a href="#cb16-128"></a><span class="co">#|   - "按颜色分组"</span></span>
-<span id="cb16-129"><a href="#cb16-129"></a><span class="co">#|   - "按形状分组" </span></span>
-<span id="cb16-130"><a href="#cb16-130"></a><span class="co">#| layout-ncol: 2</span></span>
-<span id="cb16-131"><a href="#cb16-131"></a><span class="co">#| column: page-right</span></span>
-<span id="cb16-132"><a href="#cb16-132"></a></span>
-<span id="cb16-133"><a href="#cb16-133"></a><span class="co"># load package</span></span>
-<span id="cb16-134"><a href="#cb16-134"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-135"><a href="#cb16-135"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
-<span id="cb16-136"><a href="#cb16-136"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb16-137"><a href="#cb16-137"></a></span>
-<span id="cb16-138"><a href="#cb16-138"></a><span class="co"># 列出要用到的3列的标题</span></span>
-<span id="cb16-139"><a href="#cb16-139"></a>heightweight <span class="sc">%&gt;%</span></span>
-<span id="cb16-140"><a href="#cb16-140"></a>  <span class="fu">select</span>(sex, ageYear, heightIn)</span>
-<span id="cb16-141"><a href="#cb16-141"></a><span class="co">#&gt;     sex ageYear heightIn</span></span>
-<span id="cb16-142"><a href="#cb16-142"></a><span class="co">#&gt; 1     f   11.92     56.3</span></span>
-<span id="cb16-143"><a href="#cb16-143"></a><span class="co">#&gt; 2     f   12.92     62.3</span></span>
-<span id="cb16-144"><a href="#cb16-144"></a><span class="co">#&gt; 3     f   12.75     63.3</span></span>
-<span id="cb16-145"><a href="#cb16-145"></a><span class="co">#&gt;  ...&lt;230 more rows&gt;...</span></span>
-<span id="cb16-146"><a href="#cb16-146"></a><span class="co">#&gt; 235   m   13.67     61.5</span></span>
-<span id="cb16-147"><a href="#cb16-147"></a><span class="co">#&gt; 236   m   13.92     62.0</span></span>
-<span id="cb16-148"><a href="#cb16-148"></a><span class="co">#&gt; 237   m   12.58     59.3</span></span>
-<span id="cb16-149"><a href="#cb16-149"></a></span>
-<span id="cb16-150"><a href="#cb16-150"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn,<span class="at">color =</span> sex)) <span class="sc">+</span> </span>
-<span id="cb16-151"><a href="#cb16-151"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb16-152"><a href="#cb16-152"></a></span>
-<span id="cb16-153"><a href="#cb16-153"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn,<span class="at">shape =</span> sex)) <span class="sc">+</span> </span>
-<span id="cb16-154"><a href="#cb16-154"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb16-155"><a href="#cb16-155"></a><span class="in">```</span></span>
-<span id="cb16-156"><a href="#cb16-156"></a></span>
-<span id="cb16-157"><a href="#cb16-157"></a>选用的分组变量必须是分类变量，换言之，它必须是因子型或者字符型的向量。如果分组变量是数值型向量，则需要将它转化为因子型变量之后，才能以其作为分组变量。</span>
-<span id="cb16-158"><a href="#cb16-158"></a></span>
-<span id="cb16-159"><a href="#cb16-159"></a>可以将一个变量同时映射到 <span class="in">`shape`</span> 和 <span class="in">`colour`</span> 属性。当有多个分组变量时，可以将它们分别映射到不同的图形属性。下面，我们把变量 <span class="in">`sex`</span> 同时映射到 <span class="in">`shape`</span> 和 <span class="in">`colour`</span> 属性，见图 @fig-5 。</span>
-<span id="cb16-160"><a href="#cb16-160"></a></span>
-<span id="cb16-163"><a href="#cb16-163"></a><span class="in">```{r}</span></span>
-<span id="cb16-164"><a href="#cb16-164"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-165"><a href="#cb16-165"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-166"><a href="#cb16-166"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-167"><a href="#cb16-167"></a><span class="co">#| label: fig-5</span></span>
-<span id="cb16-168"><a href="#cb16-168"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-169"><a href="#cb16-169"></a><span class="co">#| fig-cap: "基本散点图-按形和色分组"</span></span>
-<span id="cb16-170"><a href="#cb16-170"></a></span>
-<span id="cb16-171"><a href="#cb16-171"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn,<span class="at">color =</span> sex,<span class="at">shape =</span> sex)) <span class="sc">+</span> </span>
-<span id="cb16-172"><a href="#cb16-172"></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb16-173"><a href="#cb16-173"></a><span class="in">```</span></span>
-<span id="cb16-174"><a href="#cb16-174"></a></span>
-<span id="cb16-175"><a href="#cb16-175"></a>有时需要使用不同于默认设置的点形和颜色。通过调用<span class="in">`scale_shape_manual()`</span> 函数可以使用其他点形；</span>
-<span id="cb16-176"><a href="#cb16-176"></a></span>
-<span id="cb16-177"><a href="#cb16-177"></a>调用 <span class="in">`scale_colour_brewer()`</span> 函数或者 <span class="in">`scale_colour_manual()`</span> 函数可以使用其他调色板，见图 @fig-6 。</span>
-<span id="cb16-178"><a href="#cb16-178"></a></span>
-<span id="cb16-181"><a href="#cb16-181"></a><span class="in">```{r}</span></span>
-<span id="cb16-182"><a href="#cb16-182"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-183"><a href="#cb16-183"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-184"><a href="#cb16-184"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-185"><a href="#cb16-185"></a><span class="co">#| label: fig-6</span></span>
-<span id="cb16-186"><a href="#cb16-186"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-187"><a href="#cb16-187"></a><span class="co">#| fig-cap: "基本散点图-修改调色板"</span></span>
-<span id="cb16-188"><a href="#cb16-188"></a></span>
-<span id="cb16-189"><a href="#cb16-189"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">shape =</span> sex, <span class="at">colour =</span> sex)) <span class="sc">+</span> </span>
-<span id="cb16-190"><a href="#cb16-190"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb16-191"><a href="#cb16-191"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">+</span> </span>
-<span id="cb16-192"><a href="#cb16-192"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
-<span id="cb16-193"><a href="#cb16-193"></a><span class="in">```</span></span>
-<span id="cb16-194"><a href="#cb16-194"></a></span>
-<span id="cb16-195"><a href="#cb16-195"></a><span class="fu">## 使用不同于默认设置的点形</span></span>
-<span id="cb16-196"><a href="#cb16-196"></a></span>
-<span id="cb16-197"><a href="#cb16-197"></a>通过指定 <span class="in">`geom_point()`</span> 函数中的点形（<span class="in">`shape`</span>）参数，可以同时设定散点图中所有数据点的点形，如图 @fig-7 所示。</span>
-<span id="cb16-198"><a href="#cb16-198"></a></span>
-<span id="cb16-201"><a href="#cb16-201"></a><span class="in">```{r}</span></span>
-<span id="cb16-202"><a href="#cb16-202"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-203"><a href="#cb16-203"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-204"><a href="#cb16-204"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-205"><a href="#cb16-205"></a><span class="co">#| label: fig-7</span></span>
-<span id="cb16-206"><a href="#cb16-206"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-207"><a href="#cb16-207"></a><span class="co">#| fig-cap: "指定散点形状"</span></span>
-<span id="cb16-208"><a href="#cb16-208"></a></span>
-<span id="cb16-209"><a href="#cb16-209"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
-<span id="cb16-210"><a href="#cb16-210"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">3</span>)</span>
-<span id="cb16-211"><a href="#cb16-211"></a><span class="in">```</span></span>
-<span id="cb16-212"><a href="#cb16-212"></a></span>
-<span id="cb16-213"><a href="#cb16-213"></a>R系统绘图可以调用的图形较多，一些点形只有边框线（1～14）​；一些只有实心填充区域（15～20）​；还有一些则由可分离的边框线和具有填充色的实心区域共同组成（21～25）​，也可以用字符作点形。</span>
-<span id="cb16-214"><a href="#cb16-214"></a></span>
-<span id="cb16-215"><a href="#cb16-215"></a>如果已将分组变量映射到 <span class="in">`shape`</span>，则可以调用 <span class="in">`scale_shape_manual()`</span> 函数来手动修改该分组变量不同水平的点形</span>
-<span id="cb16-216"><a href="#cb16-216"></a></span>
-<span id="cb16-217"><a href="#cb16-217"></a>下图将使用略大且自定义点形的数据点：</span>
-<span id="cb16-218"><a href="#cb16-218"></a></span>
-<span id="cb16-221"><a href="#cb16-221"></a><span class="in">```{r}</span></span>
-<span id="cb16-222"><a href="#cb16-222"></a><span class="co">#| eval: true</span></span>
-<span id="cb16-223"><a href="#cb16-223"></a><span class="co">#| echo: true</span></span>
-<span id="cb16-224"><a href="#cb16-224"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb16-225"><a href="#cb16-225"></a><span class="co">#| label: fig-8</span></span>
-<span id="cb16-226"><a href="#cb16-226"></a><span class="co">#| fig: TRUE</span></span>
-<span id="cb16-227"><a href="#cb16-227"></a><span class="co">#| fig-cap: "自定义散点形状"</span></span>
-<span id="cb16-228"><a href="#cb16-228"></a></span>
-<span id="cb16-229"><a href="#cb16-229"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">shape =</span> sex)) <span class="sc">+</span> </span>
-<span id="cb16-230"><a href="#cb16-230"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
-<span id="cb16-231"><a href="#cb16-231"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>))</span>
-<span id="cb16-232"><a href="#cb16-232"></a><span class="in">```</span></span>
-<span id="cb16-233"><a href="#cb16-233"></a></span>
-<span id="cb16-234"><a href="#cb16-234"></a><span class="ss">-   </span>点形1～20的点的颜色，包括实心区域的颜色都可由 <span class="in">`colour`</span> 参数来控制。</span>
-<span id="cb16-235"><a href="#cb16-235"></a></span>
-<span id="cb16-236"><a href="#cb16-236"></a><span class="ss">-   </span>对于点形21～25而言，边框线和实心区域的颜色则分别由 <span class="in">`colour`</span> 和 <span class="in">`fill`</span> 参数来控制。</span>
-<span id="cb16-237"><a href="#cb16-237"></a></span>
-<span id="cb16-238"><a href="#cb16-238"></a>我们可以将两个不同的变量分别由点形和填充色（空心或有填充）属性来表示。</span>
-<span id="cb16-239"><a href="#cb16-239"></a></span>
-<span id="cb16-240"><a href="#cb16-240"></a>为了实现这一功能，首先需要选择一个同时具有 <span class="in">`colour`</span> 和 <span class="in">`fill`</span> 属性的点形，在 <span class="in">`scale_shape_manual`</span> 中设定。之后需要在<span class="in">`scale_fill_manual()`</span> 中选择一个包括 NA 和其他颜色的调色板（NA会生成一个空心的形状）​。</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24" data-shortcodes="false"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="#cb24-1"></a><span class="co">---</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="an">title:</span><span class="co"> "05-ggplot2 绘图——散点图"</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="an">author:</span><span class="co"> "Simonzhou"</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a><span class="an">date:</span><span class="co"> "2025-07-25"</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="an">date-modified:</span><span class="co"> today</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="co">    html:</span></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="co">        code-fold: false</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="co">        code-line-numbers: true</span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co">        code-highlight: true</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="co">        fig_caption: true</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="co">        number-sections: true</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="co">        toc: true</span></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="co">        toc-depth: 3</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="co">---</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a></span>
+<span id="cb24-17"><a href="#cb24-17"></a><span class="fu"># 散点图</span></span>
+<span id="cb24-18"><a href="#cb24-18"></a></span>
+<span id="cb24-19"><a href="#cb24-19"></a>散点图常用来刻画两个连续变量之间的关系。</span>
+<span id="cb24-20"><a href="#cb24-20"></a></span>
+<span id="cb24-21"><a href="#cb24-21"></a>绘制散点图时，数据集中的每一个观测值都由散点图中的一个点来表示。通常，人们还会向散点图中添加一条直线，以用来表示基于某些统计模型的预测值。当散点图中的数据趋势难以用肉眼识别时，这些直线对我们理解数据的特征很有帮助。</span>
+<span id="cb24-22"><a href="#cb24-22"></a></span>
+<span id="cb24-23"><a href="#cb24-23"></a>当数据集很大时，散点图上的数据点会相互重叠，此时，很难在图上清楚地显示出所有的数据点。为了解决重叠的问题，我们可以先对数据进行汇总，再绘制散点图。</span>
+<span id="cb24-24"><a href="#cb24-24"></a></span>
+<span id="cb24-25"><a href="#cb24-25"></a><span class="fu">## 绘制基本散点图</span></span>
+<span id="cb24-26"><a href="#cb24-26"></a></span>
+<span id="cb24-27"><a href="#cb24-27"></a>使用 <span class="in">`geom_point()`</span> 函数，分别映射一个变量到 x 和一个变量到 y。</span>
+<span id="cb24-28"><a href="#cb24-28"></a></span>
+<span id="cb24-29"><a href="#cb24-29"></a>这里使用 <span class="in">`heightweight`</span> 数据集，这是一个多列数据集，接下来的例子我们只用到其中两列。</span>
+<span id="cb24-30"><a href="#cb24-30"></a></span>
+<span id="cb24-33"><a href="#cb24-33"></a><span class="in">```{r}</span></span>
+<span id="cb24-34"><a href="#cb24-34"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-35"><a href="#cb24-35"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-36"><a href="#cb24-36"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-37"><a href="#cb24-37"></a><span class="co">#| label: fig-1</span></span>
+<span id="cb24-38"><a href="#cb24-38"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-39"><a href="#cb24-39"></a><span class="co">#| fig.cap: "基本散点图"</span></span>
+<span id="cb24-40"><a href="#cb24-40"></a></span>
+<span id="cb24-41"><a href="#cb24-41"></a><span class="co"># load package</span></span>
+<span id="cb24-42"><a href="#cb24-42"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-43"><a href="#cb24-43"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
+<span id="cb24-44"><a href="#cb24-44"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-45"><a href="#cb24-45"></a></span>
+<span id="cb24-46"><a href="#cb24-46"></a><span class="co"># 列出我们绘制散点图要用到的两列的标题</span></span>
+<span id="cb24-47"><a href="#cb24-47"></a>heightweight <span class="sc">%&gt;%</span> </span>
+<span id="cb24-48"><a href="#cb24-48"></a>  <span class="fu">select</span>(ageYear, heightIn)</span>
+<span id="cb24-49"><a href="#cb24-49"></a><span class="co">#&gt;     ageYear heightIn</span></span>
+<span id="cb24-50"><a href="#cb24-50"></a><span class="co">#&gt; 1     11.92     56.3</span></span>
+<span id="cb24-51"><a href="#cb24-51"></a><span class="co">#&gt; 2     12.92     62.3</span></span>
+<span id="cb24-52"><a href="#cb24-52"></a><span class="co">#&gt; 3     12.75     63.3</span></span>
+<span id="cb24-53"><a href="#cb24-53"></a><span class="co">#&gt;  ...&lt;230 more rows&gt;...</span></span>
+<span id="cb24-54"><a href="#cb24-54"></a><span class="co">#&gt; 235   13.67     61.5</span></span>
+<span id="cb24-55"><a href="#cb24-55"></a><span class="co">#&gt; 236   13.92     62.0</span></span>
+<span id="cb24-56"><a href="#cb24-56"></a><span class="co">#&gt; 237   12.58     59.3</span></span>
+<span id="cb24-57"><a href="#cb24-57"></a></span>
+<span id="cb24-58"><a href="#cb24-58"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
+<span id="cb24-59"><a href="#cb24-59"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb24-60"><a href="#cb24-60"></a><span class="in">```</span></span>
+<span id="cb24-61"><a href="#cb24-61"></a></span>
+<span id="cb24-62"><a href="#cb24-62"></a>通过设定形状（shape）参数可以在散点图中绘制点以外的形状。例如，我们常用空心圈 <span class="in">`shape=21`</span>（图 @fig-3 ）代替默认的实心圆 <span class="in">`shape=19`</span>（图 @fig-1 ）​。</span>
+<span id="cb24-63"><a href="#cb24-63"></a></span>
+<span id="cb24-66"><a href="#cb24-66"></a><span class="in">```{r}</span></span>
+<span id="cb24-67"><a href="#cb24-67"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-68"><a href="#cb24-68"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-69"><a href="#cb24-69"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-70"><a href="#cb24-70"></a><span class="co">#| label: fig-2</span></span>
+<span id="cb24-71"><a href="#cb24-71"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-72"><a href="#cb24-72"></a><span class="co">#| fig.cap: "基本散点图-修改形状"</span></span>
+<span id="cb24-73"><a href="#cb24-73"></a></span>
+<span id="cb24-74"><a href="#cb24-74"></a><span class="co"># load package</span></span>
+<span id="cb24-75"><a href="#cb24-75"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-76"><a href="#cb24-76"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
+<span id="cb24-77"><a href="#cb24-77"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-78"><a href="#cb24-78"></a></span>
+<span id="cb24-79"><a href="#cb24-79"></a><span class="co"># 列出我们绘制散点图要用到的两列的标题</span></span>
+<span id="cb24-80"><a href="#cb24-80"></a>heightweight <span class="sc">%&gt;%</span> </span>
+<span id="cb24-81"><a href="#cb24-81"></a>  <span class="fu">select</span>(ageYear, heightIn)</span>
+<span id="cb24-82"><a href="#cb24-82"></a></span>
+<span id="cb24-83"><a href="#cb24-83"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
+<span id="cb24-84"><a href="#cb24-84"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">21</span>)</span>
+<span id="cb24-85"><a href="#cb24-85"></a><span class="in">```</span></span>
+<span id="cb24-86"><a href="#cb24-86"></a></span>
+<span id="cb24-87"><a href="#cb24-87"></a>修改点的大小（在默认实心圆点的情况下），默认点的大小为：<span class="in">`size=2`</span>。</span>
+<span id="cb24-88"><a href="#cb24-88"></a></span>
+<span id="cb24-91"><a href="#cb24-91"></a><span class="in">```{r}</span></span>
+<span id="cb24-92"><a href="#cb24-92"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-93"><a href="#cb24-93"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-94"><a href="#cb24-94"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-95"><a href="#cb24-95"></a><span class="co">#| label: fig-3</span></span>
+<span id="cb24-96"><a href="#cb24-96"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-97"><a href="#cb24-97"></a><span class="co">#| fig.cap: "基本散点图-修改散点大小"</span></span>
+<span id="cb24-98"><a href="#cb24-98"></a></span>
+<span id="cb24-99"><a href="#cb24-99"></a><span class="co"># load package</span></span>
+<span id="cb24-100"><a href="#cb24-100"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-101"><a href="#cb24-101"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
+<span id="cb24-102"><a href="#cb24-102"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-103"><a href="#cb24-103"></a></span>
+<span id="cb24-104"><a href="#cb24-104"></a><span class="co"># 列出我们绘制散点图要用到的两列的标题</span></span>
+<span id="cb24-105"><a href="#cb24-105"></a>heightweight <span class="sc">%&gt;%</span> </span>
+<span id="cb24-106"><a href="#cb24-106"></a>  <span class="fu">select</span>(ageYear, heightIn)</span>
+<span id="cb24-107"><a href="#cb24-107"></a></span>
+<span id="cb24-108"><a href="#cb24-108"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
+<span id="cb24-109"><a href="#cb24-109"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="fl">1.5</span>)</span>
+<span id="cb24-110"><a href="#cb24-110"></a><span class="in">```</span></span>
+<span id="cb24-111"><a href="#cb24-111"></a></span>
+<span id="cb24-112"><a href="#cb24-112"></a><span class="fu">## 使用点形或颜色属性对数据点进行分组</span></span>
+<span id="cb24-113"><a href="#cb24-113"></a></span>
+<span id="cb24-114"><a href="#cb24-114"></a>将分组变量映射到点形（<span class="in">`shape`</span>）或颜色（<span class="in">`colour`</span>）属性。</span>
+<span id="cb24-115"><a href="#cb24-115"></a></span>
+<span id="cb24-116"><a href="#cb24-116"></a>接下来的例子中，我们将用到 <span class="in">`heightweight`</span> 数据集中的3列。</span>
+<span id="cb24-117"><a href="#cb24-117"></a></span>
+<span id="cb24-120"><a href="#cb24-120"></a><span class="in">```{r}</span></span>
+<span id="cb24-121"><a href="#cb24-121"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-122"><a href="#cb24-122"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-123"><a href="#cb24-123"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-124"><a href="#cb24-124"></a><span class="co">#| label: fig-4</span></span>
+<span id="cb24-125"><a href="#cb24-125"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-126"><a href="#cb24-126"></a><span class="co">#| fig-cap: "基本散点图-按形/色分组"</span></span>
+<span id="cb24-127"><a href="#cb24-127"></a><span class="co">#| fig-subcap:</span></span>
+<span id="cb24-128"><a href="#cb24-128"></a><span class="co">#|   - "按颜色分组"</span></span>
+<span id="cb24-129"><a href="#cb24-129"></a><span class="co">#|   - "按形状分组" </span></span>
+<span id="cb24-130"><a href="#cb24-130"></a><span class="co">#| layout-ncol: 2</span></span>
+<span id="cb24-131"><a href="#cb24-131"></a><span class="co">#| column: page-right</span></span>
+<span id="cb24-132"><a href="#cb24-132"></a></span>
+<span id="cb24-133"><a href="#cb24-133"></a><span class="co"># load package</span></span>
+<span id="cb24-134"><a href="#cb24-134"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-135"><a href="#cb24-135"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载gcookbook是为了使用heightweight数据集</span></span>
+<span id="cb24-136"><a href="#cb24-136"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-137"><a href="#cb24-137"></a></span>
+<span id="cb24-138"><a href="#cb24-138"></a><span class="co"># 列出要用到的3列的标题</span></span>
+<span id="cb24-139"><a href="#cb24-139"></a>heightweight <span class="sc">%&gt;%</span></span>
+<span id="cb24-140"><a href="#cb24-140"></a>  <span class="fu">select</span>(sex, ageYear, heightIn)</span>
+<span id="cb24-141"><a href="#cb24-141"></a><span class="co">#&gt;     sex ageYear heightIn</span></span>
+<span id="cb24-142"><a href="#cb24-142"></a><span class="co">#&gt; 1     f   11.92     56.3</span></span>
+<span id="cb24-143"><a href="#cb24-143"></a><span class="co">#&gt; 2     f   12.92     62.3</span></span>
+<span id="cb24-144"><a href="#cb24-144"></a><span class="co">#&gt; 3     f   12.75     63.3</span></span>
+<span id="cb24-145"><a href="#cb24-145"></a><span class="co">#&gt;  ...&lt;230 more rows&gt;...</span></span>
+<span id="cb24-146"><a href="#cb24-146"></a><span class="co">#&gt; 235   m   13.67     61.5</span></span>
+<span id="cb24-147"><a href="#cb24-147"></a><span class="co">#&gt; 236   m   13.92     62.0</span></span>
+<span id="cb24-148"><a href="#cb24-148"></a><span class="co">#&gt; 237   m   12.58     59.3</span></span>
+<span id="cb24-149"><a href="#cb24-149"></a></span>
+<span id="cb24-150"><a href="#cb24-150"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn,<span class="at">color =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb24-151"><a href="#cb24-151"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb24-152"><a href="#cb24-152"></a></span>
+<span id="cb24-153"><a href="#cb24-153"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn,<span class="at">shape =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb24-154"><a href="#cb24-154"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb24-155"><a href="#cb24-155"></a><span class="in">```</span></span>
+<span id="cb24-156"><a href="#cb24-156"></a></span>
+<span id="cb24-157"><a href="#cb24-157"></a>选用的分组变量必须是分类变量，换言之，它必须是因子型或者字符型的向量。如果分组变量是数值型向量，则需要将它转化为因子型变量之后，才能以其作为分组变量。</span>
+<span id="cb24-158"><a href="#cb24-158"></a></span>
+<span id="cb24-159"><a href="#cb24-159"></a>可以将一个变量同时映射到 <span class="in">`shape`</span> 和 <span class="in">`colour`</span> 属性。当有多个分组变量时，可以将它们分别映射到不同的图形属性。下面，我们把变量 <span class="in">`sex`</span> 同时映射到 <span class="in">`shape`</span> 和 <span class="in">`colour`</span> 属性，见图 @fig-5 。</span>
+<span id="cb24-160"><a href="#cb24-160"></a></span>
+<span id="cb24-163"><a href="#cb24-163"></a><span class="in">```{r}</span></span>
+<span id="cb24-164"><a href="#cb24-164"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-165"><a href="#cb24-165"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-166"><a href="#cb24-166"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-167"><a href="#cb24-167"></a><span class="co">#| label: fig-5</span></span>
+<span id="cb24-168"><a href="#cb24-168"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-169"><a href="#cb24-169"></a><span class="co">#| fig-cap: "基本散点图-按形和色分组"</span></span>
+<span id="cb24-170"><a href="#cb24-170"></a></span>
+<span id="cb24-171"><a href="#cb24-171"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn,<span class="at">color =</span> sex,<span class="at">shape =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb24-172"><a href="#cb24-172"></a>  <span class="fu">geom_point</span>()</span>
+<span id="cb24-173"><a href="#cb24-173"></a><span class="in">```</span></span>
+<span id="cb24-174"><a href="#cb24-174"></a></span>
+<span id="cb24-175"><a href="#cb24-175"></a>有时需要使用不同于默认设置的点形和颜色。通过调用<span class="in">`scale_shape_manual()`</span> 函数可以使用其他点形；</span>
+<span id="cb24-176"><a href="#cb24-176"></a></span>
+<span id="cb24-177"><a href="#cb24-177"></a>调用 <span class="in">`scale_colour_brewer()`</span> 函数或者 <span class="in">`scale_colour_manual()`</span> 函数可以使用其他调色板，见图 @fig-6 。</span>
+<span id="cb24-178"><a href="#cb24-178"></a></span>
+<span id="cb24-181"><a href="#cb24-181"></a><span class="in">```{r}</span></span>
+<span id="cb24-182"><a href="#cb24-182"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-183"><a href="#cb24-183"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-184"><a href="#cb24-184"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-185"><a href="#cb24-185"></a><span class="co">#| label: fig-6</span></span>
+<span id="cb24-186"><a href="#cb24-186"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-187"><a href="#cb24-187"></a><span class="co">#| fig-cap: "基本散点图-修改调色板"</span></span>
+<span id="cb24-188"><a href="#cb24-188"></a></span>
+<span id="cb24-189"><a href="#cb24-189"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">shape =</span> sex, <span class="at">colour =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb24-190"><a href="#cb24-190"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-191"><a href="#cb24-191"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)) <span class="sc">+</span> </span>
+<span id="cb24-192"><a href="#cb24-192"></a>  <span class="fu">scale_colour_brewer</span>(<span class="at">palette =</span> <span class="st">"Set1"</span>)</span>
+<span id="cb24-193"><a href="#cb24-193"></a><span class="in">```</span></span>
+<span id="cb24-194"><a href="#cb24-194"></a></span>
+<span id="cb24-195"><a href="#cb24-195"></a><span class="fu">## 使用不同于默认设置的点形</span></span>
+<span id="cb24-196"><a href="#cb24-196"></a></span>
+<span id="cb24-197"><a href="#cb24-197"></a>通过指定 <span class="in">`geom_point()`</span> 函数中的点形（<span class="in">`shape`</span>）参数，可以同时设定散点图中所有数据点的点形，如图 @fig-7 所示。</span>
+<span id="cb24-198"><a href="#cb24-198"></a></span>
+<span id="cb24-201"><a href="#cb24-201"></a><span class="in">```{r}</span></span>
+<span id="cb24-202"><a href="#cb24-202"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-203"><a href="#cb24-203"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-204"><a href="#cb24-204"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-205"><a href="#cb24-205"></a><span class="co">#| label: fig-7</span></span>
+<span id="cb24-206"><a href="#cb24-206"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-207"><a href="#cb24-207"></a><span class="co">#| fig-cap: "指定散点形状"</span></span>
+<span id="cb24-208"><a href="#cb24-208"></a></span>
+<span id="cb24-209"><a href="#cb24-209"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn)) <span class="sc">+</span> </span>
+<span id="cb24-210"><a href="#cb24-210"></a>  <span class="fu">geom_point</span>(<span class="at">shape =</span> <span class="dv">3</span>)</span>
+<span id="cb24-211"><a href="#cb24-211"></a><span class="in">```</span></span>
+<span id="cb24-212"><a href="#cb24-212"></a></span>
+<span id="cb24-213"><a href="#cb24-213"></a>R系统绘图可以调用的图形较多，一些点形只有边框线（1～14）​；一些只有实心填充区域（15～20）​；还有一些则由可分离的边框线和具有填充色的实心区域共同组成（21～25）​，也可以用字符作点形。</span>
+<span id="cb24-214"><a href="#cb24-214"></a></span>
+<span id="cb24-215"><a href="#cb24-215"></a><span class="al">![Shapes in R graphics](images/FIG-SCATTER-SHAPES-CHART-1.png)</span></span>
+<span id="cb24-216"><a href="#cb24-216"></a></span>
+<span id="cb24-217"><a href="#cb24-217"></a>如果已将分组变量映射到 <span class="in">`shape`</span>，则可以调用 <span class="in">`scale_shape_manual()`</span> 函数来手动修改该分组变量不同水平的点形</span>
+<span id="cb24-218"><a href="#cb24-218"></a></span>
+<span id="cb24-219"><a href="#cb24-219"></a>下图将使用略大且自定义点形的数据点：</span>
+<span id="cb24-220"><a href="#cb24-220"></a></span>
+<span id="cb24-223"><a href="#cb24-223"></a><span class="in">```{r}</span></span>
+<span id="cb24-224"><a href="#cb24-224"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-225"><a href="#cb24-225"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-226"><a href="#cb24-226"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-227"><a href="#cb24-227"></a><span class="co">#| label: fig-8</span></span>
+<span id="cb24-228"><a href="#cb24-228"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-229"><a href="#cb24-229"></a><span class="co">#| fig-cap: "自定义散点形状"</span></span>
+<span id="cb24-230"><a href="#cb24-230"></a></span>
+<span id="cb24-231"><a href="#cb24-231"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">shape =</span> sex)) <span class="sc">+</span> </span>
+<span id="cb24-232"><a href="#cb24-232"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)<span class="sc">+</span></span>
+<span id="cb24-233"><a href="#cb24-233"></a>  <span class="fu">scale_shape_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">4</span>))</span>
+<span id="cb24-234"><a href="#cb24-234"></a><span class="in">```</span></span>
+<span id="cb24-235"><a href="#cb24-235"></a></span>
+<span id="cb24-236"><a href="#cb24-236"></a><span class="ss">-   </span>点形1～20的点的颜色，包括实心区域的颜色都可由 <span class="in">`colour`</span> 参数来控制。</span>
+<span id="cb24-237"><a href="#cb24-237"></a></span>
+<span id="cb24-238"><a href="#cb24-238"></a><span class="ss">-   </span>对于点形21～25而言，边框线和实心区域的颜色则分别由 <span class="in">`colour`</span> 和 <span class="in">`fill`</span> 参数来控制。</span>
+<span id="cb24-239"><a href="#cb24-239"></a></span>
+<span id="cb24-240"><a href="#cb24-240"></a>我们可以将两个不同的变量分别由点形和填充色（空心或有填充）属性来表示。</span>
+<span id="cb24-241"><a href="#cb24-241"></a></span>
+<span id="cb24-242"><a href="#cb24-242"></a>为了实现这一功能，首先需要选择一个同时具有 <span class="in">`colour`</span> 和 <span class="in">`fill`</span> 属性的点形，在 <span class="in">`scale_shape_manual`</span> 中设定。之后需要在<span class="in">`scale_fill_manual()`</span> 中选择一个包括 NA 和其他颜色的调色板（NA会生成一个空心的形状）​。</span>
+<span id="cb24-243"><a href="#cb24-243"></a></span>
+<span id="cb24-244"><a href="#cb24-244"></a><span class="fu">## 将连续变量映射到颜色或大小</span></span>
+<span id="cb24-245"><a href="#cb24-245"></a></span>
+<span id="cb24-246"><a href="#cb24-246"></a>将该连续变量映射到 <span class="in">`size`</span> 或 <span class="in">`colour`</span>。示例数据使用 <span class="in">`gcookbook`</span> 包中的 <span class="in">`heightweight`</span>（仅保留四列：性别、年龄、身高、体重）：</span>
+<span id="cb24-247"><a href="#cb24-247"></a></span>
+<span id="cb24-250"><a href="#cb24-250"></a><span class="in">```{r}</span></span>
+<span id="cb24-251"><a href="#cb24-251"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-252"><a href="#cb24-252"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-253"><a href="#cb24-253"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-254"><a href="#cb24-254"></a><span class="co">#| label: fig-9</span></span>
+<span id="cb24-255"><a href="#cb24-255"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-256"><a href="#cb24-256"></a><span class="co">#| fig-cap: "将连续变量映射到颜色或大小中"</span></span>
+<span id="cb24-257"><a href="#cb24-257"></a></span>
+<span id="cb24-258"><a href="#cb24-258"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb24-259"><a href="#cb24-259"></a><span class="fu">library</span>(gcookbook) <span class="co"># 加载示例数据 </span></span>
+<span id="cb24-260"><a href="#cb24-260"></a>heightweight <span class="sc">%&gt;%</span> <span class="fu">select</span>(sex, ageYear, heightIn, weightLb)  <span class="co"># 映射到颜色 </span></span>
+<span id="cb24-261"><a href="#cb24-261"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">colour =</span> weightLb)) <span class="sc">+</span>   </span>
+<span id="cb24-262"><a href="#cb24-262"></a><span class="fu">geom_point</span>()  <span class="co"># 映射到大小 </span></span>
+<span id="cb24-263"><a href="#cb24-263"></a></span>
+<span id="cb24-264"><a href="#cb24-264"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">size =</span> weightLb)) <span class="sc">+</span>   </span>
+<span id="cb24-265"><a href="#cb24-265"></a><span class="fu">geom_point</span>() </span>
+<span id="cb24-266"><a href="#cb24-266"></a><span class="in">```</span></span>
+<span id="cb24-267"><a href="#cb24-267"></a></span>
+<span id="cb24-268"><a href="#cb24-268"></a><span class="ss">-   </span>**感知差异**</span>
+<span id="cb24-269"><a href="#cb24-269"></a></span>
+<span id="cb24-270"><a href="#cb24-270"></a>    人类对位置变化最敏感（x、y 坐标），对颜色和大小的精度感知较低。</span>
+<span id="cb24-271"><a href="#cb24-271"></a></span>
+<span id="cb24-272"><a href="#cb24-272"></a>    因此，映射到颜色或大小的变量适合用于精度要求不高的场景。</span>
+<span id="cb24-273"><a href="#cb24-273"></a></span>
+<span id="cb24-274"><a href="#cb24-274"></a><span class="ss">-   </span>**大小映射的误差**</span>
+<span id="cb24-275"><a href="#cb24-275"></a></span>
+<span id="cb24-276"><a href="#cb24-276"></a>    ggplot2 默认点直径范围为 1–6 mm，与数据值范围无关，这会造成面积比例失真（直径差 6 倍 → 面积差 36 倍）。</span>
+<span id="cb24-277"><a href="#cb24-277"></a></span>
+<span id="cb24-278"><a href="#cb24-278"></a>    如果需要准确反映比例，可使用：</span>
+<span id="cb24-279"><a href="#cb24-279"></a></span>
+<span id="cb24-282"><a href="#cb24-282"></a><span class="in">```{r}</span></span>
+<span id="cb24-283"><a href="#cb24-283"></a><span class="co">#| eval: true</span></span>
+<span id="cb24-284"><a href="#cb24-284"></a><span class="co">#| echo: true</span></span>
+<span id="cb24-285"><a href="#cb24-285"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb24-286"><a href="#cb24-286"></a><span class="co">#| label: fig-10</span></span>
+<span id="cb24-287"><a href="#cb24-287"></a><span class="co">#| fig: TRUE</span></span>
+<span id="cb24-288"><a href="#cb24-288"></a><span class="co">#| fig-cap: "散点图的缩放"</span></span>
+<span id="cb24-289"><a href="#cb24-289"></a></span>
+<span id="cb24-290"><a href="#cb24-290"></a><span class="co"># 按直径缩放 </span></span>
+<span id="cb24-291"><a href="#cb24-291"></a><span class="fu">range</span>(heightweight<span class="sc">$</span>weightLb)</span>
+<span id="cb24-292"><a href="#cb24-292"></a><span class="co">#&gt; [1]  50.5 171.5</span></span>
+<span id="cb24-293"><a href="#cb24-293"></a>size_range <span class="ot">&lt;-</span> <span class="fu">range</span>(heightweight<span class="sc">$</span>weightLb) <span class="sc">/</span> <span class="fu">max</span>(heightweight<span class="sc">$</span>weightLb) <span class="sc">*</span>  <span class="dv">6</span></span>
+<span id="cb24-294"><a href="#cb24-294"></a>size_range</span>
+<span id="cb24-295"><a href="#cb24-295"></a><span class="co">#&gt; [1] 1.766764 6.000000</span></span>
+<span id="cb24-296"><a href="#cb24-296"></a></span>
+<span id="cb24-297"><a href="#cb24-297"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">size =</span> weightLb)) <span class="sc">+</span></span>
+<span id="cb24-298"><a href="#cb24-298"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-299"><a href="#cb24-299"></a>  <span class="fu">scale_size_continuous</span>(<span class="at">range =</span> size_range)</span>
+<span id="cb24-300"><a href="#cb24-300"></a></span>
+<span id="cb24-301"><a href="#cb24-301"></a><span class="co"># 按面积缩放 </span></span>
+<span id="cb24-302"><a href="#cb24-302"></a><span class="fu">ggplot</span>(heightweight, <span class="fu">aes</span>(<span class="at">x =</span> ageYear, <span class="at">y =</span> heightIn, <span class="at">size =</span> weightLb)) <span class="sc">+</span></span>
+<span id="cb24-303"><a href="#cb24-303"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb24-304"><a href="#cb24-304"></a>  <span class="fu">scale_size_area</span>()</span>
+<span id="cb24-305"><a href="#cb24-305"></a><span class="in">```</span></span>
+<span id="cb24-306"><a href="#cb24-306"></a></span>
+<span id="cb24-307"><a href="#cb24-307"></a>**图 5.9**：左为直径映射，右为面积映射。</span>
+<span id="cb24-308"><a href="#cb24-308"></a></span>
+<span id="cb24-309"><a href="#cb24-309"></a><span class="ss">-   </span>**颜色与填充**</span>
+<span id="cb24-310"><a href="#cb24-310"></a></span>
+<span id="cb24-311"><a href="#cb24-311"></a><span class="ss">    -   </span><span class="in">`colour`</span> 控制边框颜色，<span class="in">`fill`</span> 控制实心部分颜色（适用于形状 21–25）。</span>
+<span id="cb24-312"><a href="#cb24-312"></a></span>
+<span id="cb24-313"><a href="#cb24-313"></a><span class="ss">    -   </span>浅色配色时可用带边框的形状增强可读性。</span>
+<span id="cb24-314"><a href="#cb24-314"></a></span>
+<span id="cb24-315"><a href="#cb24-315"></a><span class="ss">-   </span>**多变量映射**</span>
+<span id="cb24-316"><a href="#cb24-316"></a></span>
+<span id="cb24-317"><a href="#cb24-317"></a><span class="ss">    -   </span>可同时映射：连续变量 → 大小，分类变量 → 颜色，并通过 <span class="in">`alpha`</span> 设置透明度减少重叠（图 5.11）。</span>
+<span id="cb24-318"><a href="#cb24-318"></a></span>
+<span id="cb24-319"><a href="#cb24-319"></a><span class="ss">    -   </span>不建议同时映射大小和形状，因为形状大小比较不直观，且不同形状视觉面积不一致。</span>
+<span id="cb24-320"><a href="#cb24-320"></a></span>
+<span id="cb24-321"><a href="#cb24-321"></a><span class="fu">## Dealing with Overplotting</span></span>
 </code></pre></div><button title="复制到剪贴板" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

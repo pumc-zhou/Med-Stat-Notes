@@ -198,6 +198,8 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn)) +
 
 R系统绘图可以调用的图形较多，一些点形只有边框线（1～14）​；一些只有实心填充区域（15～20）​；还有一些则由可分离的边框线和具有填充色的实心区域共同组成（21～25）​，也可以用字符作点形。
 
+![Shapes in R graphics](images/FIG-SCATTER-SHAPES-CHART-1.png)
+
 如果已将分组变量映射到 `shape`，则可以调用 `scale_shape_manual()` 函数来手动修改该分组变量不同水平的点形
 
 下图将使用略大且自定义点形的数据点：
@@ -222,3 +224,78 @@ ggplot(heightweight, aes(x = ageYear, y = heightIn, shape = sex)) +
 我们可以将两个不同的变量分别由点形和填充色（空心或有填充）属性来表示。
 
 为了实现这一功能，首先需要选择一个同时具有 `colour` 和 `fill` 属性的点形，在 `scale_shape_manual` 中设定。之后需要在`scale_fill_manual()` 中选择一个包括 NA 和其他颜色的调色板（NA会生成一个空心的形状）​。
+
+## 将连续变量映射到颜色或大小
+
+将该连续变量映射到 `size` 或 `colour`。示例数据使用 `gcookbook` 包中的 `heightweight`（仅保留四列：性别、年龄、身高、体重）：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-9
+#| fig: TRUE
+#| fig-cap: "将连续变量映射到颜色或大小中"
+
+library(ggplot2)
+library(gcookbook) # 加载示例数据 
+heightweight %>% select(sex, ageYear, heightIn, weightLb)  # 映射到颜色 
+ggplot(heightweight, aes(x = ageYear, y = heightIn, colour = weightLb)) +   
+geom_point()  # 映射到大小 
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn, size = weightLb)) +   
+geom_point() 
+```
+
+-   **感知差异**
+
+    人类对位置变化最敏感（x、y 坐标），对颜色和大小的精度感知较低。
+
+    因此，映射到颜色或大小的变量适合用于精度要求不高的场景。
+
+-   **大小映射的误差**
+
+    ggplot2 默认点直径范围为 1–6 mm，与数据值范围无关，这会造成面积比例失真（直径差 6 倍 → 面积差 36 倍）。
+
+    如果需要准确反映比例，可使用：
+
+```{r}
+#| eval: true
+#| echo: true
+#| code-fold: false
+#| label: fig-10
+#| fig: TRUE
+#| fig-cap: "散点图的缩放"
+
+# 按直径缩放 
+range(heightweight$weightLb)
+#> [1]  50.5 171.5
+size_range <- range(heightweight$weightLb) / max(heightweight$weightLb) *  6
+size_range
+#> [1] 1.766764 6.000000
+
+ggplot(heightweight, aes(x = ageYear, y = heightIn, size = weightLb)) +
+  geom_point() +
+  scale_size_continuous(range = size_range)
+
+# 按面积缩放 
+ggplot(heightweight, aes(x = ageYear, y = heightIn, size = weightLb)) +
+  geom_point() +
+  scale_size_area()
+```
+
+**图 5.9**：左为直径映射，右为面积映射。
+
+-   **颜色与填充**
+
+    -   `colour` 控制边框颜色，`fill` 控制实心部分颜色（适用于形状 21–25）。
+
+    -   浅色配色时可用带边框的形状增强可读性。
+
+-   **多变量映射**
+
+    -   可同时映射：连续变量 → 大小，分类变量 → 颜色，并通过 `alpha` 设置透明度减少重叠（图 5.11）。
+
+    -   不建议同时映射大小和形状，因为形状大小比较不直观，且不同形状视觉面积不一致。
+
+## Dealing with Overplotting

@@ -723,7 +723,7 @@
         "\n",
         "这里首先按照基本的结构组装了一个程序，但是运行后报错"
       ],
-      "id": "ca669d7a"
+      "id": "990f2e10"
     },
     {
       "cell_type": "code",
@@ -760,7 +760,7 @@
         "         ^\n",
         "SyntaxError: invalid syntax"
       ],
-      "id": "62cc334c",
+      "id": "eadc1af0",
       "execution_count": null,
       "outputs": []
     },
@@ -776,7 +776,7 @@
         "\n",
         "### 修改"
       ],
-      "id": "1e4d20c5"
+      "id": "14e72875"
     },
     {
       "cell_type": "code",
@@ -787,7 +787,7 @@
         "import saspy\n",
         "%load_ext saspy.sas_magic"
       ],
-      "id": "4f8bba55",
+      "id": "c9d5beb7",
       "execution_count": null,
       "outputs": []
     },
@@ -801,7 +801,7 @@
         "proc print data=sashelp.iris(obs=10);\n",
         "run;"
       ],
-      "id": "614771b8",
+      "id": "8a72a99d",
       "execution_count": null,
       "outputs": []
     },
@@ -823,7 +823,7 @@
         "\n",
         "和 AI 多聊了一下这个问题，不是很好解决，涉及到不同的 html 格式版本和 html 格式的完整程度的不同，因为 Stata 输出的格式要干净许多，所以不会和 Quarto 的格式发生冲突，但是 SAS 不行。"
       ],
-      "id": "871d0ab1"
+      "id": "361da4b0"
     }
   ],
   "metadata": {
