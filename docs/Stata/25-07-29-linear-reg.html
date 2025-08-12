@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Simonzhou">
+
+<title>25-因果推断中的线性回归 – Medical Statistics Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-5c1f7a6a2802c248a2ccc243aab7b5c3.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c10fc78dcbf6a5f009fadeb270c5b5ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G2HZEXHNCE"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="25-因果推断中的线性回归 – Medical Statistics Notes">
+<meta property="og:description" content="This is a Note site.">
+<meta property="og:image" content="www.lazyzhou.cn/Stata/images/logo.png">
+<meta property="og:site_name" content="Medical Statistics Notes">
+<meta name="twitter:title" content="25-因果推断中的线性回归 – Medical Statistics Notes">
+<meta name="twitter:description" content="This is a Note site.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../images/logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">医学统计学习笔记</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learn" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learn</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">    
+        <li>
+    <a class="dropdown-item" href="../Learn/Basic/00-basic.html">
+ <span class="dropdown-text">Basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Learn/Advance/00-advance.html">
+ <span class="dropdown-text">Advance</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Learn/Bayes/00-About-Bayes.html">
+ <span class="dropdown-text">Bayes</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Guide</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">    
+        <li>
+    <a class="dropdown-item" href="../Guide/Guide-intro.html">
+ <span class="dropdown-text">Guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/Python/Python-intro.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/R/01-R-intro.html">
+ <span class="dropdown-text">R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/SAS/25-02-16-SAS-intro.html">
+ <span class="dropdown-text">SAS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Guide/Stata/25-03-09-Stata-intro.qmd"> 
+<span class="menu-text">Stata</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-quarto" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Quarto</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">    
+        <li>
+    <a class="dropdown-item" href="../Quarto/quarto-intro.html">
+ <span class="dropdown-text">Intro</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
+        <li>
+    <a class="dropdown-item" href="../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/pumc-zhou" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="切换阅读器模式">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">25-因果推断中的线性回归</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">主页</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learn</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Basic</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">医学统计学基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">关于卫生统计学</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/02-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">不同资料的统计描述</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/03-Random-events-probabilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">随机事件的概率</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/04-discrete-type-random-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">离散型随机变量的概率分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/05-random-variable-of-continuous-type.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">连续型随机变量的概率分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/06-parameter-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参数估计</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/07-parameter-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参数检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/08-anova-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">非参数检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">简单线性相关和回归</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Advance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Advance/00-advance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-医学统计学（伪）高级部分</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Advance/01-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-负二项分布</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bayes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">贝叶斯与概率推理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Bayes/01-Bayes-PGM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">贝叶斯与概率图模型（PGM）</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guide</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/00-R-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-R 安装</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/01-R-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-R 相关介绍与记录</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/02-ggplot2-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-ggplot2 绘图基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/03-ggplot2-barplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-ggplot2 绘图——条形图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/04-ggplot2-folded-line.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-ggplot2 绘图——折线图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/05-ggplot2-scatter-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-ggplot2 绘图——散点图</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python和Stata处理一份卫生费用数据</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做生存分析和COX回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做桑基图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-04-28-DID.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID 双重差分模型</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-04-28-DID-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use the DID in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">SAS</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-SAS-Intro and Record</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-SAS 安装与vscode 扩展</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-05-SAS-install-connect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-SAS 在 Jupyter Notebook 中使用</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-22-SAS-Base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-SAS Base</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-SAS 程序基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-25-SAS-DATA-LIB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-SAS 数据库与数据集</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-26-SAS-DATA-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06-SAS 数据集的整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-28-SAS-function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-SAS 运算符与常用函数</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-29-SAS-function-example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-SAS 运算符与常用函数示例</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-29-SAS-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-SAS 计量资料的单变量分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-31-two-sample-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-SAS 两样本均数的比较分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-01-multi-sample-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-08-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16-SAS 对泊松分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-09-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17-SAS 与负二项分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-10-Goodness-of-Fit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18-SAS 拟合优度检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-10-poisson-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19-SAS Poisson 回归与负二项回归</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Stata</span></span>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Quarto</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qmd config giscus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/quarto-LaTeX.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto与LaTeX的记录</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#线性回归" id="toc-线性回归" class="nav-link active" data-scroll-target="#线性回归"><span class="header-section-number">1</span> 线性回归</a>
+  <ul class="collapse">
+  <li><a href="#简要的查看一下数据" id="toc-简要的查看一下数据" class="nav-link" data-scroll-target="#简要的查看一下数据"><span class="header-section-number">1.1</span> 简要的查看一下数据</a></li>
+  <li><a href="#使用稳健标准误" id="toc-使用稳健标准误" class="nav-link" data-scroll-target="#使用稳健标准误"><span class="header-section-number">1.2</span> 使用稳健标准误</a></li>
+  <li><a href="#多阶段整群抽样" id="toc-多阶段整群抽样" class="nav-link" data-scroll-target="#多阶段整群抽样"><span class="header-section-number">1.3</span> 多阶段整群抽样</a></li>
+  <li><a href="#控制变量" id="toc-控制变量" class="nav-link" data-scroll-target="#控制变量"><span class="header-section-number">1.4</span> 控制变量</a></li>
+  <li><a href="#偏回归系数" id="toc-偏回归系数" class="nav-link" data-scroll-target="#偏回归系数"><span class="header-section-number">1.5</span> 偏回归系数</a></li>
+  <li><a href="#对遗漏变量偏差公式进行检验" id="toc-对遗漏变量偏差公式进行检验" class="nav-link" data-scroll-target="#对遗漏变量偏差公式进行检验"><span class="header-section-number">1.6</span> 对遗漏变量偏差公式进行检验</a></li>
+  <li><a href="#纳入更多的控制变量" id="toc-纳入更多的控制变量" class="nav-link" data-scroll-target="#纳入更多的控制变量"><span class="header-section-number">1.7</span> 纳入更多的控制变量</a></li>
+  <li><a href="#纳入分类变量" id="toc-纳入分类变量" class="nav-link" data-scroll-target="#纳入分类变量"><span class="header-section-number">1.8</span> 纳入分类变量</a></li>
+  <li><a href="#异质性对回归分析的影响" id="toc-异质性对回归分析的影响" class="nav-link" data-scroll-target="#异质性对回归分析的影响"><span class="header-section-number">1.9</span> 异质性对回归分析的影响</a></li>
+  <li><a href="#计算回归调整估计量" id="toc-计算回归调整估计量" class="nav-link" data-scroll-target="#计算回归调整估计量"><span class="header-section-number">1.10</span> 计算回归调整估计量</a></li>
+  <li><a href="#手动演示计算回归调整估计量" id="toc-手动演示计算回归调整估计量" class="nav-link" data-scroll-target="#手动演示计算回归调整估计量"><span class="header-section-number">1.11</span> 手动演示计算回归调整估计量</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Stata/25-07-29-linear-reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">25-因果推断中的线性回归</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>Simonzhou </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025年7月29日</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">修改于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年8月1日</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="b9969c14" class="cell" data-execution_count="37">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<section id="线性回归" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> 线性回归</h1>
+<p>这里将使用一个案例演示 regress 和 teffects ra 的用法。</p>
+<p>案例数据来自 “中国家庭追踪数据”（China Family Panel Studies, CFPS）2010年的数据，该数据集由中国社会科学院和北京大学共同开发，旨在收集中国家庭的社会、经济和人口信息。</p>
+<p>数据总共包括 4137 名年龄在25-55 岁之间的成年人，集体如下：</p>
+<div id="ecb73c1b" class="cell" data-execution_count="38">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2"></a>use <span class="st">"../../Data/causal-inference/cfps2010.dta"</span>, clear</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="op">*</span> 查看数据随机十个数据</span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="bu">list</span> <span class="kw">in</span> <span class="dv">1</span><span class="op">/</span><span class="dv">10</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. use "../../Data/causal-inference/cfps2010.dta", clear
+
+. * 查看数据随机十个数据
+. list in 1/10
+
+     +------------------------------------------------------------------------+
+  1. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110003101 | 北京市 |     男 |  39 | 1521 |  59319 | 11.51293 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     农村户口      |          否      |       是      |       缺失      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  2. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110005102 | 北京市 |     男 |  48 | 2304 | 110592 | 9.392662 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          否      |       是      |         否      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  3. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110006101 | 北京市 |     男 |  50 | 2500 | 125000 | 10.30895 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     农村户口      |          否      |       是      |       缺失      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  4. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110009102 | 北京市 |     男 |  53 | 2809 | 148877 | 9.392662 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          否      |       是      |         否      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  5. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110009105 | 北京市 |     男 |  26 |  676 |  17576 | 8.699514 |      是 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          是      |       是      |         是      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  6. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110015104 | 北京市 |     男 |  45 | 2025 |  91125 | 10.12663 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          否      |       是      |       缺失      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  7. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110020103 | 北京市 |     男 |  42 | 1764 |  74088 | 9.680344 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          否      |       是      |         否      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  8. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110020104 | 北京市 |     男 |  36 | 1296 |  46656 | 10.30895 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          否      |       是      |         否      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+  9. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110020105 | 北京市 |     女 |  40 | 1600 |  64000 | 9.546813 |      是 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          否      |       是      |         是      |
+     +------------------------------------------------------------------------+
+
+     +------------------------------------------------------------------------+
+ 10. |       pid | provcd | gender | age | age2 |   age3 |    lninc | college |
+     | 110020106 | 北京市 |     女 |  34 | 1156 |  39304 | 8.006368 |      否 |
+     |------------------------------------------------------------------------|
+     |        hukou      |     sibling      |     race      |      fmedu      |
+     |     城镇户口      |          否      |       是      |       缺失      |
+     +------------------------------------------------------------------------+
+
+. </code></pre>
+</div>
+</div>
+<section id="简要的查看一下数据" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="简要的查看一下数据"><span class="header-section-number">1.1</span> 简要的查看一下数据</h2>
+<div id="74c69965" class="cell" data-execution_count="39">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2"></a>describe</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Contains data from ../../Data/causal-inference/cfps2010.dta
+ Observations:         4,137                  
+    Variables:            12                  5 Aug 2022 19:25
+-------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+-------------------------------------------------------------------------------
+pid             double  %12.0g     pid        个人id
+provcd          double  %24.0g     provcd     省国标码
+gender          double  %12.0g     gender     性别
+age             float   %9.0g                 年龄
+age2            float   %9.0g                 年龄平方
+age3            float   %9.0g                 年龄三次方
+lninc           float   %9.0g                 收入对数
+college         double  %9.0g      yesorno    是否上大学
+hukou           double  %12.0g     hukou      3岁时户口性质
+sibling         float   %9.0g      yesorno    是否独生子女
+race            double  %9.0g      yesorno    是否汉族
+fmedu           float   %9.0g      fmedu      父母是否上过高中
+-------------------------------------------------------------------------------
+Sorted by: </code></pre>
+</div>
+</div>
+<p>分析变量为收入对数 <code>lninc</code>，核心自变量为是否上大学 <code>college</code>，该变量取值为 1 表示研究对象读过大学，取值为 0 表示没有读过大学。</p>
+<p>基于上述两个变量，可以进行一元线性回归，具体如下：</p>
+<div id="e449faa5" class="cell" data-execution_count="40">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2"></a>regress lninc college</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     4,137
+-------------+----------------------------------   F(1, 4135)      =    508.22
+       Model |  671.883317         1  671.883317   Prob &gt; F        =    0.0000
+    Residual |  5466.56371     4,135  1.32202266   R-squared       =    0.1095
+-------------+----------------------------------   Adj R-squared   =    0.1092
+       Total |  6138.44703     4,136  1.48415063   Root MSE        =    1.1498
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .823612   .0365338    22.54   0.000     .7519861     .895238
+       _cons |   9.353189   .0230235   406.25   0.000     9.308051    9.398327
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>从分析结果可以看出，在不控制任何变量的情况下，college 的回归系数为 0.824 ，其标准误为 0.037。</p>
+<p>用回归系数除以标准误即可得到 t 统计量的值，为 22.54，它的 P 值在小数点后三位都是 0，说明 college 对 lninc 的影响是非常显著的。</p>
+<p>除此之外，Stata 还报告了置信度为 95% 的置信区间为 [0.752, 0.896]。</p>
+<p>需要注意的是，上述标准误以及统计检验结果都是基于独立同分布假定计算的，因此在实际应用中需要谨慎解读。</p>
+<p>在显示条件下，该假定通常不能得到满足，因此，建议使用更加稳健的标准误和统计检验。</p>
+</section>
+<section id="使用稳健标准误" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="使用稳健标准误"><span class="header-section-number">1.2</span> 使用稳健标准误</h2>
+<p>使用怀特异方差稳健标准误来调整异方差的影响，使用方法在 <code>regress</code> 命令后使用选项 <code>vce(robust)</code>。</p>
+<div id="a8836ff7" class="cell" data-execution_count="41">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2"></a>regress lninc college, vce(robust)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 4135)        =     582.05
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1095
+                                                Root MSE          =     1.1498
+
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .823612   .0341385    24.13   0.000     .7566823    .8905418
+       _cons |   9.353189   .0256882   364.10   0.000     9.302826    9.403552
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>从结果中可以看到，使用稳健标准误后，college 的回归系数仍然为 0.824，但其标准误变为 0.034，相比之前略有下降，t 统计量变为 24.13，P 值在小数点后三位都是 0，说明 college 对 lninc 的影响仍然是非常显著的。</p>
+<p>由于异方差条件下的标准误和统计检验结果更加可信，因此建议用户在使用 <code>regress</code> 命令时，使用选项 <code>vce(robust)</code>。</p>
+</section>
+<section id="多阶段整群抽样" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="多阶段整群抽样"><span class="header-section-number">1.3</span> 多阶段整群抽样</h2>
+<p>用户还可以使用选项 vce(cluster clustvar) 进一步放松误差项之间相互独立的假定。</p>
+<p>CFPS 采用的是以地理区域为抽样单位的多阶段整群抽样，这样会导致同一个抽样单位中的样本存在自相关。</p>
+<p>为了降低自相关的影响，以调查样本所在省（provcd）为聚类变量，使用选项 <code>vce(cluster provcd)</code>，计算聚类稳健标准误，命令和结果如下：</p>
+<div id="bab627f7" class="cell" data-execution_count="42">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2"></a>regress lninc college, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 24)          =     271.17
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1095
+                                                Root MSE          =     1.1498
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .823612   .0500155    16.47   0.000     .7203851     .926839
+       _cons |   9.353189   .1084703    86.23   0.000     9.129317    9.577061
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>在使用 <code>vce(cluster provcd)</code> 后，college 的回归系数仍然为 0.824，但其标准误变为 0.050，相比之前略有上升，t 统计量变为 16.47，P 值在小数点后三位都是 0，说明 college 对 lninc 的影响仍然是非常显著的。</p>
+<p>在这个聚类稳健标准误的结果中，统计检验结果没有受到影响，相比之前，使用聚类稳健标准误的结果最为稳健，因此，后续都将使用此类标准误的分析结果。</p>
+<p>上述分析都只包含 college 这一个自变量，在这种情况下，进行因果推断必须满足严格的可忽略性假定。即要求大学学历在研究对象中随机分配，这个假定显然与中国的实际情况相差很远，因此，上述分析结果仅能代表上大学的人和不上大学的人在收入对数上的平均差异，不能解释为大学对收入的因果影响。</p>
+</section>
+<section id="控制变量" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="控制变量"><span class="header-section-number">1.4</span> 控制变量</h2>
+<p>为了使回归分析结果具有因果解释的效应，需要在模型中纳入控制变量，以尽可能地满足条件独立假定。</p>
+<p>这里我们认为，就这个研究问题来说，研究对象出生时的户口性质（hukou）是一个非常重要的混杂变量。</p>
+<p>一方面，由于教育资源分布的城乡不均，城市人比农村人拥有更多考上大学的机会；另一方面，因为劳动力市场上的城乡分割，城市人也比农村人拥有更好的收入前景。</p>
+<p>综合这两个方面，有必要在模型分析时控制 hukou 变量。</p>
+<div id="dd02c155" class="cell" data-execution_count="43">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2"></a>regress lninc college hukou, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(2, 24)          =     219.69
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1169
+                                                Root MSE          =     1.1451
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .798281   .0451727    17.67   0.000     .7050491     .891513
+       hukou |   .2155333   .0611855     3.52   0.002     .0892526    .3418141
+       _cons |    9.27541   .0993474    93.36   0.000     9.070367    9.480453
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>从上述多元线性回归分析结果可以发现，在控制了 hukou 变量后，college 的回归系数有所下降，变为 0.798，说明之前使用的一元线性回归确实高估了上大学对收入的影响。</p>
+</section>
+<section id="偏回归系数" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="偏回归系数"><span class="header-section-number">1.5</span> 偏回归系数</h2>
+<p>在控制 hukou 后，college 的回归系数将变为一个偏回归系数，它可以通过两步线性回归得到。</p>
+<p>具体来说，第一步回归分析以 college 为因变量，hukou 为自变量，这一步回归分析的目的是获取 college 的残差。</p>
+<div id="0b73b362" class="cell" data-execution_count="44">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2"></a>reg college hukou, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 24)          =      27.84
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.0137
+                                                Root MSE          =     .48606
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+     college | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hukou |    .116539   .0220861     5.28   0.000     .0709555    .1621224
+       _cons |   .3496532   .0161816    21.61   0.000     .3162561    .3830504
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>接着，使用 <code>predict</code> 命令并结合选项 <code>residuals</code> 获得回归的残差 <span class="math inline">\(e\)</span> 。</p>
+<div id="c8544043" class="cell" data-execution_count="45">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2"></a>predict e, residuals</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>再使用 lninc 作为因变量，<span class="math inline">\(e\)</span> 作为自变量进行第二步线性回归分析，这一步回归分析的结果就是 college 的偏回归系数。</p>
+<div id="285c675d" class="cell" data-execution_count="46">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="op">%%</span>stata</span>
+<span id="cb17-2"><a href="#cb17-2"></a>reg lninc e, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 24)          =     321.05
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1014
+                                                Root MSE          =      1.155
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+           e |    .798281    .044552    17.92   0.000     .7063302    .8902318
+       _cons |   9.680285   .1232655    78.53   0.000     9.425877    9.934692
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>从这一步回归的分析结果来看，e 的回归系数与之前控制 hukou 以后得到的 college 对 lninc 的回归系数完全相同。</p>
+<p>由此可知，通过两步法可以再现多元线性回归张的统计过程。</p>
+<p>不过，通过两步法得到的回归系数的标准误是错误的，因为第二步回归无法自动对完整模型中的参数数量进行校正，因此，这里建议用户直接使用多元线性回归进行统计控制。</p>
+<p>这里，使用两步法只是为了帮助用户更好地理解多元线性回归的统计控制和偏回归系数的含义。</p>
+</section>
+<section id="对遗漏变量偏差公式进行检验" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="对遗漏变量偏差公式进行检验"><span class="header-section-number">1.6</span> 对遗漏变量偏差公式进行检验</h2>
+<p>在多元线性回归中，遗漏变量偏差公式是一个重要的概念，它可以帮助我们理解控制变量对回归系数的影响。</p>
+<p>遗漏变量偏差公式（omitted variable bias formula）为：</p>
+<p><span class="math display">\[\tau '-\tau = \beta_k \gamma_D\]</span></p>
+<p>根据这个公式，纳入 hukou 变量之后，college 的回归系数的变化量应等于 college 对 hukou 的回归系数与 hukou 与 lninc 的回归系数的乘积。</p>
+<p>为了对上述关系进行检验，我们首先将控制 hukou 和不控制 hukou 时 college 的回归系数相减，得到二者的差异：</p>
+<div id="07acb353" class="cell" data-execution_count="47">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a><span class="op">%%</span>stata</span>
+<span id="cb19-2"><a href="#cb19-2"></a>dis <span class="fl">.823612</span><span class="op">-</span><span class="fl">.798281</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.025331</code></pre>
+</div>
+</div>
+<p>接下来，以 hukou 为因变量，college 为自变量拟合回归方程，这样就可以得到 college 对 hukou 的回归系数。</p>
+<p>然后，将该系数与多元线性回归中 hukou 对 lninc 的回归系数相乘，得到一个值。</p>
+<div id="fd8dcfa2" class="cell" data-execution_count="48">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a><span class="op">%%</span>stata</span>
+<span id="cb21-2"><a href="#cb21-2"></a>reg hukou college, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 24)          =      33.17
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.0137
+                                                Root MSE          =     .48812
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       hukou | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .1175271   .0204066     5.76   0.000     .0754099    .1596443
+       _cons |   .3608661   .0559186     6.45   0.000     .2454558    .4762764
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="d4924000" class="cell" data-execution_count="49">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a><span class="op">%%</span>stata</span>
+<span id="cb23-2"><a href="#cb23-2"></a>dis <span class="fl">.1175271</span><span class="op">*</span><span class="fl">.2155333</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>.025331</code></pre>
+</div>
+</div>
+<p>这个乘积与 college 的系数变化完全相同，也是 0.025.</p>
+<p>这充分说明，遗漏变量偏差计算公式在实践中是完全正确的。</p>
+</section>
+<section id="纳入更多的控制变量" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="纳入更多的控制变量"><span class="header-section-number">1.7</span> 纳入更多的控制变量</h2>
+<p>在上大学对收入的影响这个例子中，hukou 虽然是一个重要的混杂变量，但很可能不是唯一的混杂变量。因此，有必要在回归方程中纳入更多的控制变量。</p>
+<p>在回归方程包含多个控制变量的情况下， 必须考虑模型的设定问题。</p>
+<p>以同时包含 hukou 和 age 两个控制变量为例，如何设定这两个变量的函数形式才能进行最充分的统计控制？</p>
+<p>针对这个问题，最简单的答案就是进行饱和回归，即针对 hukou 和 age 的每个取值和所有交互项均设置一个虚拟变量。具体如下：</p>
+<div id="dd6127eb" class="cell" data-execution_count="50">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a><span class="op">%%</span>stata</span>
+<span id="cb25-2"><a href="#cb25-2"></a>reg lninc college hukou<span class="co">##i.age, vce(cluster provcd)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(23, 24)         =          .
+                                                Prob &gt; F          =          .
+                                                R-squared         =     0.1501
+                                                Root MSE          =     1.1316
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .7477749   .0544757    13.73   0.000     .6353425    .8602073
+             |
+       hukou |
+   城镇户口  |  -.0787305   .1418798    -0.55   0.584    -.3715559    .2140949
+             |
+         age |
+         26  |   .3980867   .1481415     2.69   0.013     .0923376    .7038358
+         27  |   .2684265   .2134622     1.26   0.221    -.1721377    .7089908
+         28  |   .4034527   .1960134     2.06   0.051    -.0010991    .8080045
+         29  |   .3063752   .2061596     1.49   0.150    -.1191172    .7318677
+         30  |    .808574    .138855     5.82   0.000     .5219914    1.095157
+         31  |   .6390432   .1597057     4.00   0.001     .3094269    .9686596
+         32  |   .3162257   .1835314     1.72   0.098    -.0625646    .6950159
+         33  |   .5423168   .1908591     2.84   0.009      .148403    .9362305
+         34  |   .4480384   .1642828     2.73   0.012     .1089753    .7871016
+         35  |   .4871379   .1332159     3.66   0.001     .2121937     .762082
+         36  |   .7649181   .1431828     5.34   0.000     .4694033    1.060433
+         37  |   .5898895   .1644897     3.59   0.001     .2503994    .9293797
+         38  |   .4446396   .1414918     3.14   0.004     .1526149    .7366642
+         39  |   .3132889   .2152405     1.46   0.158    -.1309457    .7575234
+         40  |   .6295174   .1203586     5.23   0.000     .3811094    .8779254
+         41  |   .7413657   .1649781     4.49   0.000     .4008676    1.081864
+         42  |   .6440224   .1854795     3.47   0.002     .2612115    1.026833
+         43  |   .1100458    .261421     0.42   0.678    -.4295006    .6495921
+         44  |   .3310236   .1953046     1.69   0.103    -.0720652    .7341124
+         45  |   .2092177   .2516651     0.83   0.414    -.3101935    .7286288
+         46  |   .5989884   .1833996     3.27   0.003     .2204702    .9775067
+         47  |   .2833783   .1619895     1.75   0.093    -.0509517    .6177083
+         48  |   .2354062   .1468512     1.60   0.122    -.0676798    .5384923
+         49  |   .4378188    .164764     2.66   0.014     .0977627    .7778749
+         50  |   .0167503   .1750601     0.10   0.925     -.344556    .3780566
+         51  |  -.1610867   .1851799    -0.87   0.393    -.5432792    .2211059
+         52  |  -.1302052    .286344    -0.45   0.653    -.7211901    .4607797
+         53  |  -.0033811   .2062946    -0.02   0.987    -.4291521      .42239
+         54  |   .2233507   .1566927     1.43   0.167    -.1000471    .5467486
+         55  |    .216386   .2374876     0.91   0.371    -.2737643    .7065363
+             |
+   hukou#age |
+城镇户口#26  |  -.0602352   .2412837    -0.25   0.805    -.5582202    .4377497
+城镇户口#27  |   .4551441   .2638459     1.73   0.097    -.0894072    .9996953
+城镇户口#28  |   .3544994   .2567836     1.38   0.180    -.1754758    .8844747
+城镇户口#29  |   .3823274    .297972     1.28   0.212    -.2326564    .9973113
+城镇户口#30  |  -.0193147   .2555672    -0.08   0.940    -.5467794      .50815
+城镇户口#31  |  -.0932038   .2561528    -0.36   0.719    -.6218772    .4354696
+城镇户口#32  |   .6327651   .2259055     2.80   0.010      .166519    1.099011
+城镇户口#33  |   .1374474   .2483846     0.55   0.585    -.3751932     .650088
+城镇户口#34  |   .4132721   .2550715     1.62   0.118    -.1131696    .9397139
+城镇户口#35  |   .2141665   .1854107     1.16   0.259    -.1685025    .5968354
+城镇户口#36  |   .0205633   .2148722     0.10   0.925    -.4229113    .4640378
+城镇户口#37  |  -.0448259   .2031256    -0.22   0.827    -.4640566    .3744048
+城镇户口#38  |   .3187681   .1745486     1.83   0.080    -.0414825    .6790186
+城镇户口#39  |   .4006106    .234722     1.71   0.101    -.0838317    .8850529
+城镇户口#40  |   .0135196   .2054592     0.07   0.948    -.4105273    .4375666
+城镇户口#41  |  -.0207122   .2451003    -0.08   0.933    -.5265743    .4851499
+城镇户口#42  |   .0024452   .2642466     0.01   0.993    -.5429331    .5478234
+城镇户口#43  |   .8893687   .3581507     2.48   0.020     .1501819    1.628555
+城镇户口#44  |   .3810794   .2435123     1.56   0.131    -.1215052     .883664
+城镇户口#45  |   .5548028   .3701405     1.50   0.147    -.2091297    1.318735
+城镇户口#46  |  -.0202823   .2068561    -0.10   0.923    -.4472122    .4066477
+城镇户口#47  |   .1388032   .3315924     0.42   0.679    -.5455699    .8231762
+城镇户口#48  |   .4089894   .2048096     2.00   0.057    -.0137169    .8316956
+城镇户口#49  |   .3254708   .2237488     1.45   0.159    -.1363241    .7872657
+城镇户口#50  |     .65057   .2474684     2.63   0.015     .1398203     1.16132
+城镇户口#51  |   .7067489   .3553651     1.99   0.058    -.0266886    1.440186
+城镇户口#52  |   .7470444   .3445403     2.17   0.040     .0359482    1.458141
+城镇户口#53  |    .694888   .2878366     2.41   0.024     .1008224    1.288954
+城镇户口#54  |   .4754364   .2742435     1.73   0.096    -.0905744    1.041447
+城镇户口#55  |   .2745935   .3227371     0.85   0.403    -.3915031    .9406901
+             |
+       _cons |   8.937311   .1616701    55.28   0.000      8.60364    9.270982
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>这样做的好处是不存在模型设定的偏差。</p>
+<p>但如上所示，饱和回归也会出现待估参数过多的问题。特别是其中包含像 age 这样连续取值的变量时，这个问题会变得更加严重。</p>
+<p>为了避免参数过多给模型估计和解释造成的困难，一个可行的解决方案是对控制变量影响因变量的方式进行参数限定，如使用幂函数来近似 age 对 lninc 的影响，不过需要对这种近似的效果进行评估。</p>
+<p>为此，用户需要先计算饱和回归的模型拟合指标，具体如下：</p>
+<div id="1e55652a" class="cell" data-execution_count="51">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a><span class="op">%%</span>stata</span>
+<span id="cb27-2"><a href="#cb27-2"></a>estat ic</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |      4,137  -6686.381  -6349.885      24   12747.77   12899.63
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.</code></pre>
+</div>
+</div>
+<p>接下来，使用年龄的一次项（age）、二次项（age3）和三次项（age3）替代虚拟变量，进行线性回归分析，同时计算这个模型的拟合指标：</p>
+<div id="72e6256a" class="cell" data-execution_count="52">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a><span class="op">%%</span>stata</span>
+<span id="cb29-2"><a href="#cb29-2"></a>reg lninc college hukou<span class="co">##(c.age c.age2 c.age3), vce(cluster provcd)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(8, 24)          =      88.50
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1331
+                                                Root MSE          =     1.1354
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .7547539   .0501103    15.06   0.000     .6513314    .8581763
+             |
+       hukou |
+   城镇户口  |  -.5628695   3.164092    -0.18   0.860    -7.093234    5.967495
+         age |   .6604027   .2081753     3.17   0.004       .23075    1.090055
+        age2 |  -.0152886    .005478    -2.79   0.010    -.0265947   -.0039824
+        age3 |   .0001114   .0000469     2.38   0.026     .0000147    .0002082
+             |
+ hukou#c.age |
+   城镇户口  |   .0697643   .2557794     0.27   0.787    -.4581385    .5976671
+             |
+hukou#c.age2 |
+   城镇户口  |  -.0023666   .0067435    -0.35   0.729    -.0162844    .0115512
+             |
+hukou#c.age3 |
+   城镇户口  |   .0000268   .0000577     0.46   0.646    -.0000923    .0001459
+             |
+       _cons |    .358661   2.584047     0.14   0.891    -4.974549    5.691871
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="daa4e244" class="cell" data-execution_count="53">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a><span class="op">%%</span>stata</span>
+<span id="cb31-2"><a href="#cb31-2"></a>estat ic</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |      4,137  -6686.381  -6390.917       9   12799.83   12856.78
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.</code></pre>
+</div>
+</div>
+<p>可以发现，这个模型和之前的饱和回归模型相比，参数数量大大减少，但模型的AIC和BIC却比饱和模型更低，因此，从模型拟合的角度来说，这个模型更加简约，所以可以用年龄的三次函数近似其对 lninc 的影响。</p>
+<p>最后，进一步删除上述模型中 age、age2和age3 与 hukou 的交互项后再进行回归分析，同时计算模型拟合指标：</p>
+<div id="8321ddc3" class="cell" data-execution_count="54">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a><span class="op">%%</span>stata</span>
+<span id="cb33-2"><a href="#cb33-2"></a>reg lninc college hukou age age2 age3, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      4,137
+                                                F(5, 24)          =     130.17
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1304
+                                                Root MSE          =     1.1367
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .7483616   .0474037    15.79   0.000     .6505252    .8461981
+       hukou |   .2233219   .0657661     3.40   0.002     .0875874    .3590565
+         age |   .6884785    .143905     4.78   0.000     .3914732    .9854838
+        age2 |  -.0162254   .0037903    -4.28   0.000    -.0240482   -.0084026
+        age3 |    .000122   .0000326     3.74   0.001     .0000546    .0001893
+       _cons |   .0389147   1.813509     0.02   0.983    -3.703984    3.781814
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="819be9f6" class="cell" data-execution_count="55">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a><span class="op">%%</span>stata</span>
+<span id="cb35-2"><a href="#cb35-2"></a>estat ic</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Akaike's information criterion and Bayesian information criterion
+
+-----------------------------------------------------------------------------
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
+-------------+---------------------------------------------------------------
+           . |      4,137  -6686.381  -6397.289       6   12806.58   12844.54
+-----------------------------------------------------------------------------
+Note: BIC uses N = number of observations. See [R] IC note.</code></pre>
+</div>
+</div>
+<p>可以发现，这个模型是三个模型中最简约的，同时其AIC和BIC也是三个模型中最小的。</p>
+<p>这说明，只要在模型中纳入 hukou、age、age2 和 age3 这四个主效应项就可以很好近似 hukou 和 age 对 lninc 的影响。</p>
+<p>而且，对比这个模型中 college 的回归系数与之前饱和回归中的系数，可以发现二者几乎不存在任何差异（若保留三位小数都是0.748），所以，从统计控制角度来说，这个更加简约的模型与之前的复杂模型几乎也是等价的。</p>
+</section>
+<section id="纳入分类变量" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="纳入分类变量"><span class="header-section-number">1.8</span> 纳入分类变量</h2>
+<p>接下来，我们又在模型中纳入了性别（gender）、民族（race）、是否独生子女（sibling）和父母是否读过高中（fmedu）这四个控制变量，他们都是分类变量，因此都以虚拟变量的形式纳入回归方程。具体如下：</p>
+<div id="4858557a" class="cell" data-execution_count="56">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a><span class="op">%%</span>stata</span>
+<span id="cb37-2"><a href="#cb37-2"></a>reg lninc college hukou age age2 age gender race sibling i.fmedu, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>note: age omitted because of collinearity.
+
+Linear regression                               Number of obs     =      4,137
+                                                F(9, 24)          =     234.58
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1574
+                                                Root MSE          =     1.1195
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .7445286   .0441545    16.86   0.000     .6533982     .835659
+       hukou |   .2210093   .0577399     3.83   0.001     .1018401    .3401785
+         age |   .1415978   .0245026     5.78   0.000      .091027    .1921686
+        age2 |   -.001847    .000325    -5.68   0.000    -.0025177   -.0011763
+         age |          0  (omitted)
+      gender |   .3974689   .0411983     9.65   0.000     .3124397     .482498
+        race |   .1726838   .1016948     1.70   0.102    -.0372039    .3825716
+     sibling |   .1844962    .078748     2.34   0.028     .0219682    .3470241
+             |
+       fmedu |
+         是  |   .0219876   .0362712     0.61   0.550    -.0528725    .0968478
+       缺失  |   .0086198   .0391502     0.22   0.828    -.0721823    .0894219
+             |
+       _cons |   6.306768   .4785392    13.18   0.000     5.319111    7.294424
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>在控制上述变量后，college 的回归系数下降到了 0.742，那么我们现在是否已经得到上大学对收入的因果影响了呢？</p>
+<p>这个问题的答案取决于上述模型是否满足条件独立假定。</p>
+<p>就目前来说，研究者依然有比较充分的理由拒绝这个假定，因为上述模型并未控制能力，而在关于教育回报的研究中，能力是一个不可忽视的混杂变量。</p>
+<p>不过，因为数据中没有研究对象在大学前的能力测量，这里分析只能到此为止。</p>
+<p>考虑到我们进行上述分析的主要目标是向读者演示如何使用线性回归进行因果分析的一般过程，因此，到这一步已经足够了。</p>
+</section>
+<section id="异质性对回归分析的影响" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="异质性对回归分析的影响"><span class="header-section-number">1.9</span> 异质性对回归分析的影响</h2>
+<p>为了使问题得以简化，我们先考虑只有 hukou 这一个控制变量的情况。</p>
+<p>我们可以分农村户口和城镇户口分别进行回归分析，具体如下：</p>
+<div id="7a4a325a" class="cell" data-execution_count="57">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1"></a><span class="op">%%</span>stata</span>
+<span id="cb39-2"><a href="#cb39-2"></a>reg lninc college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">0</span>, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      2,451
+                                                F(1, 24)          =     477.21
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1018
+                                                Root MSE          =      1.238
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .873513   .0399865    21.85   0.000     .7909849    .9560412
+       _cons |   9.249105   .1050262    88.06   0.000     9.032342    9.465869
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="523000c4" class="cell" data-execution_count="58">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1"></a><span class="op">%%</span>stata</span>
+<span id="cb41-2"><a href="#cb41-2"></a>reg lninc college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">1</span>, vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Linear regression                               Number of obs     =      1,686
+                                                F(1, 24)          =      63.29
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1097
+                                                Root MSE          =     .99279
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .6983452   .0877811     7.96   0.000     .5171739    .8795166
+       _cons |   9.537533   .1003993    95.00   0.000     9.330319    9.744747
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，农村户口中 college 的回归系数为 0.874，大于城镇户口中 college 的回归系数 0.698，因此，college 对 lninc 的影响在城镇和农村确实存在异质性。</p>
+<p>如果因果效应存在异质性，那么线性回归会基于公式</p>
+<p><span class="math display">\[\tau'=\sum\frac{Var(D_i|X_i=x)p(X_i=x)}{\sum Var(D_i|X_i=x)p(X_i=x)}\tau'_x\]</span></p>
+<p>对异质性的回归系数进行加权平均。</p>
+<blockquote class="blockquote">
+<p>这个公式的含义是，线性回归会根据每个子群体的回归系数和该子群体的样本量对回归系数进行加权平均。</p>
+</blockquote>
+<p>首先，我们描述一下样本中农村户口和城镇户口的百分比以及两个样本中 college 的分布：</p>
+<div id="a807bd7a" class="cell" data-execution_count="59">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1"></a><span class="op">%%</span>stata</span>
+<span id="cb43-2"><a href="#cb43-2"></a>tab hukou</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    3岁时户 |
+     口性质 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+   农村户口 |      2,451       59.25       59.25
+   城镇户口 |      1,686       40.75      100.00
+------------+-----------------------------------
+      Total |      4,137      100.00</code></pre>
+</div>
+</div>
+<div id="2f400e9f" class="cell" data-execution_count="60">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1"></a><span class="op">%%</span>stata</span>
+<span id="cb45-2"><a href="#cb45-2"></a>tab college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">0</span></span>
+<span id="cb45-3"><a href="#cb45-3"></a>tab college <span class="cf">if</span> hukou<span class="op">==</span><span class="dv">1</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. tab college if hukou==0
+
+     是否上 |
+       大学 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         否 |      1,594       65.03       65.03
+         是 |        857       34.97      100.00
+------------+-----------------------------------
+      Total |      2,451      100.00
+
+. tab college if hukou==1
+
+     是否上 |
+       大学 |      Freq.     Percent        Cum.
+------------+-----------------------------------
+         否 |        900       53.38       53.38
+         是 |        786       46.62      100.00
+------------+-----------------------------------
+      Total |      1,686      100.00
+
+. </code></pre>
+</div>
+</div>
+<p>然后根据公式 <span class="math inline">\(Var(D_i|X_i=x)p(X_i=x)\)</span> 计算农村户口和城镇户口的样本格子的权重。</p>
+<p>对于农村户口样本，其权重为：</p>
+<div id="35ae809e" class="cell" data-execution_count="61">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1"></a><span class="op">%%</span>stata</span>
+<span id="cb47-2"><a href="#cb47-2"></a>dis <span class="fl">34.97</span><span class="op">*</span><span class="fl">65.03</span><span class="op">*</span><span class="fl">59.25</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>134740.37</code></pre>
+</div>
+</div>
+<p>对于城镇户口样本，其权重为：</p>
+<div id="a05dbb87" class="cell" data-execution_count="62">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1"></a><span class="op">%%</span>stata</span>
+<span id="cb49-2"><a href="#cb49-2"></a>dis <span class="fl">53.38</span><span class="op">*</span><span class="fl">46.62</span><span class="op">*</span><span class="fl">40.75</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>101409.46</code></pre>
+</div>
+</div>
+<p>最后，根据公式</p>
+<p><span class="math display">\[\tau'-\tau=\beta_k \gamma_D\]</span></p>
+<p>计算加权后的回归系数，具体命令和结果如下：</p>
+<div id="2694d97c" class="cell" data-execution_count="63">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1"></a><span class="op">%%</span>stata</span>
+<span id="cb51-2"><a href="#cb51-2"></a>dis <span class="fl">134740.37</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)</span>
+<span id="cb51-3"><a href="#cb51-3"></a>dis <span class="fl">101409.46</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)</span>
+<span id="cb51-4"><a href="#cb51-4"></a>dis <span class="fl">134740.37</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)<span class="op">*</span><span class="fl">.873513</span> <span class="op">+</span> <span class="fl">.6983452</span><span class="op">*</span><span class="fl">101409.46</span><span class="op">/</span>(<span class="fl">134740.37</span><span class="op">+</span><span class="fl">101409.46</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. dis 134740.37/(134740.37+101409.46)
+.57057153
+
+. dis 101409.46/(134740.37+101409.46)
+.42942847
+
+. dis 134740.37/(134740.37+101409.46)*.873513 + .6983452*101409.46/(134740.37+1
+&gt; 01409.46)
+.79829096
+
+. </code></pre>
+</div>
+</div>
+<p>可以发现，加权平均后的结果为 0.798，而之前在仅纳入 college 和 hukou 的回归分析中得到的 college 的回归系数也是 0.798。</p>
+<p>因此，通过上述分析，我们验证了异质性因果效应情况下的回归系数分解公式。</p>
+</section>
+<section id="计算回归调整估计量" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="计算回归调整估计量"><span class="header-section-number">1.10</span> 计算回归调整估计量</h2>
+<p>接下来，将演示如何使用 <code>teffects ra</code> 命令计算回归调整估计量。</p>
+<p>使用 <code>teffects ra</code> 命令计算 ATE（总体的平均干预效应） 的命令和结果如下：</p>
+<div id="2fb12f46" class="cell" data-execution_count="64">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1"></a><span class="op">%%</span>stata</span>
+<span id="cb53-2"><a href="#cb53-2"></a>teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college),vce(robust)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  EE criterion =  2.620e-24  
+Iteration 1:  EE criterion =  9.251e-30  
+
+Treatment-effects estimation                    Number of obs     =      4,137
+Estimator      : regression adjustment
+Outcome model  : linear
+Treatment model: none
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7887353   .0373127    21.14   0.000     .7156038    .8618667
+-------------+----------------------------------------------------------------
+POmean       |
+     college |
+         否  |   9.413724   .0271812   346.33   0.000      9.36045    9.466998
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，在控制 hukou、age、age2、age3、gender、race、sibling 和 fmedu 这些变量后，college 对 lninc 的平均处理效应（ATE）为 0.798，标准误为 0.037，P 值在小数点后三位都是 0。</p>
+<p>如果要得到 ATT（干预组的平均干预效应），可以使用选项 <code>atet</code>，具体命令和结果如下：</p>
+<div id="c3b5a008" class="cell" data-execution_count="65">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1"></a><span class="op">%%</span>stata</span>
+<span id="cb55-2"><a href="#cb55-2"></a>teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college),vce(robust) atet</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  EE criterion =  2.620e-24  
+Iteration 1:  EE criterion =  7.826e-30  
+
+Treatment-effects estimation                    Number of obs     =      4,137
+Estimator      : regression adjustment
+Outcome model  : linear
+Treatment model: none
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+     college |
+ (是 vs 否)  |   .6711883   .0416622    16.11   0.000      .589532    .7528446
+-------------+----------------------------------------------------------------
+POmean       |
+     college |
+         否  |   9.505613   .0359548   264.38   0.000     9.435143    9.576083
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，ATT 为 0.671，小于 ATE 的 0.798，这说明在控制了其他变量后，college 对收入的影响在干预组中更小。</p>
+<p>如果要得到 ATU（对照组的平均处理效应），需要做一些小调整。</p>
+<p>具体来说，我们需要使用选项 <code>control()</code> 和 <code>tlevel()</code> 将干预组和控制组的位置进行交换，即将 college=0 的组作为干预组，college=1 的组作为控制组，这样就可以通过选项 <code>atet</code> 得到 ATU 的估计，相关命令和结果如下：</p>
+<div id="ed7ec9be" class="cell" data-execution_count="66">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1"></a><span class="op">%%</span>stata</span>
+<span id="cb57-2"><a href="#cb57-2"></a>teffects ra (lninc hukou age age2 age3 gender race sibling i.fmedu) (college),vce(robust) control(<span class="dv">1</span>) tlevel(<span class="dv">0</span>) atet</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:  EE criterion =  2.620e-24  
+Iteration 1:  EE criterion =  1.079e-29  
+
+Treatment-effects estimation                    Number of obs     =      4,137
+Estimator      : regression adjustment
+Outcome model  : linear
+Treatment model: none
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+     college |
+ (否 vs 是)  |   -.866173   .0405392   -21.37   0.000    -.9456283   -.7867176
+-------------+----------------------------------------------------------------
+POmean       |
+     college |
+         是  |   10.21936   .0317611   321.76   0.000     10.15711    10.28161
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，在将干预组和控制组对调位置之后，ATT 为 -0.866，这实际上表明，上大学对 college=0 的那一组人的平均影响为 0.866，即 ATU=0.866。</p>
+<p>最后，为了帮助用户更好地理解回归调整估计量，我们将借助 regress 这个命令手动演示其计算过程。</p>
+</section>
+<section id="手动演示计算回归调整估计量" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="手动演示计算回归调整估计量"><span class="header-section-number">1.11</span> 手动演示计算回归调整估计量</h2>
+<p>第一步，我们针对 college=0 的样本拟合回归方程，并使用这个方程预测 college=1 的样本在不上大学情况下的反事实结果，具体如下：</p>
+<div id="a828af50" class="cell" data-execution_count="67">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1"></a><span class="op">%%</span>stata</span>
+<span id="cb59-2"><a href="#cb59-2"></a>reg lninc hukou age age2 age3 gender race sibling i.fmedu <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a>predict y0hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. reg lninc hukou age age2 age3 gender race sibling i.fmedu if college==0
+
+      Source |       SS           df       MS      Number of obs   =     2,494
+-------------+----------------------------------   F(9, 2484)      =     21.72
+       Model |  299.291704         9  33.2546338   Prob &gt; F        =    0.0000
+    Residual |  3803.21617     2,484  1.53108541   R-squared       =    0.0730
+-------------+----------------------------------   Adj R-squared   =    0.0696
+       Total |  4102.50787     2,493  1.64561086   Root MSE        =    1.2374
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hukou |   .3400725   .0536769     6.34   0.000     .2348163    .4453286
+         age |   .5876334   .2255975     2.60   0.009     .1452547    1.030012
+        age2 |  -.0140172   .0056768    -2.47   0.014    -.0251491   -.0028854
+        age3 |    .000105   .0000465     2.26   0.024     .0000138    .0001963
+      gender |   .5032089   .0511487     9.84   0.000     .4029104    .6035073
+        race |   .1929442   .1168315     1.65   0.099    -.0361529    .4220413
+     sibling |   .2414546   .0893476     2.70   0.007     .0662513     .416658
+             |
+       fmedu |
+         是  |   .0178976   .0790321     0.23   0.821     -.137078    .1728732
+       缺失  |   .0028774   .0613876     0.05   0.963    -.1174987    .1232535
+             |
+       _cons |   1.072145   2.916684     0.37   0.713    -4.647238    6.791527
+------------------------------------------------------------------------------
+
+. predict y0hat if college==1
+(option xb assumed; fitted values)
+(2,494 missing values generated)
+
+. </code></pre>
+</div>
+</div>
+<p>第二步，我们再针对 college=1 的样本拟合同样的回归方程，并使用该方程预测 college=0 的样本在上大学情况下的反事实结果，具体如下：</p>
+<div id="4ae9b0f6" class="cell" data-execution_count="68">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1"></a><span class="op">%%</span>stata</span>
+<span id="cb61-2"><a href="#cb61-2"></a>reg lninc hukou age age2 age3 gender race sibling i.fmedu <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span>
+<span id="cb61-3"><a href="#cb61-3"></a>predict y1hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. reg lninc hukou age age2 age3 gender race sibling i.fmedu if college==1
+
+      Source |       SS           df       MS      Number of obs   =     1,643
+-------------+----------------------------------   F(9, 1633)      =     12.17
+       Model |  85.7486412         9   9.5276268   Prob &gt; F        =    0.0000
+    Residual |  1278.30719     1,633  .782796812   R-squared       =    0.0629
+-------------+----------------------------------   Adj R-squared   =    0.0577
+       Total |  1364.05584     1,642   .83072828   Root MSE        =    .88476
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+       hukou |   .0484465   .0485173     1.00   0.318    -.0467162    .1436091
+         age |   .6205456   .1870398     3.32   0.001     .2536824    .9874087
+        age2 |  -.0143115   .0049184    -2.91   0.004    -.0239586   -.0046644
+        age3 |   .0001088    .000042     2.59   0.010     .0000264    .0001912
+      gender |   .2153348    .044547     4.83   0.000     .1279596      .30271
+        race |   .1548971   .0931465     1.66   0.097    -.0278021    .3375962
+     sibling |   .2273577   .0611421     3.72   0.000     .1074325     .347283
+             |
+       fmedu |
+         是  |    .091336   .0511668     1.79   0.074    -.0090234    .1916954
+       缺失  |   .0564651   .0651018     0.87   0.386    -.0712268     .184157
+             |
+       _cons |    1.06923   2.310655     0.46   0.644    -3.462931     5.60139
+------------------------------------------------------------------------------
+
+. predict y1hat if college==0
+(option xb assumed; fitted values)
+(1,643 missing values generated)
+
+. </code></pre>
+</div>
+</div>
+<p>第三步，计算潜在结果 y1 和 y0。</p>
+<ul>
+<li>对于 college=0 的样本，其lninc 的观测值即 y0，而 y1 可用预测值 y1hat 估计；</li>
+<li>对于 college=1 的样本，其lninc 的观测值即 y1，而 y1 可用预测值 y0hat 估计。</li>
+</ul>
+<p>具体如下：</p>
+<div id="a7939d30" class="cell" data-execution_count="69">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1"></a><span class="op">%%</span>stata</span>
+<span id="cb63-2"><a href="#cb63-2"></a>gen y0<span class="op">=</span>lninc <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span>
+<span id="cb63-3"><a href="#cb63-3"></a>replace y0<span class="op">=</span>y0hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span>
+<span id="cb63-4"><a href="#cb63-4"></a>gen y1<span class="op">=</span>lninc <span class="cf">if</span> college<span class="op">==</span><span class="dv">1</span></span>
+<span id="cb63-5"><a href="#cb63-5"></a>replace y1<span class="op">=</span>y1hat <span class="cf">if</span> college<span class="op">==</span><span class="dv">0</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. gen y0=lninc if college==0
+(1,643 missing values generated)
+
+. replace y0=y0hat if college==1
+(1,643 real changes made)
+
+. gen y1=lninc if college==1
+(2,494 missing values generated)
+
+. replace y1=y1hat if college==0
+(2,494 real changes made)
+
+. </code></pre>
+</div>
+</div>
+<p>第四步，计算个体层面的干预效应 effect，然后对不同样本求平均，即可得到 ATE、ATT和ATU的估计值。具体如下：</p>
+<div id="fc4ab8ec" class="cell" data-execution_count="70">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1"></a><span class="op">%%</span>stata</span>
+<span id="cb65-2"><a href="#cb65-2"></a>gen effect<span class="op">=</span>y1<span class="op">-</span>y0</span>
+<span id="cb65-3"><a href="#cb65-3"></a>tab college,<span class="bu">sum</span>(effect)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. gen effect=y1-y0
+
+. tab college,sum(effect)
+
+     是否上 |          Summary of effect
+       大学 |        Mean   Std. dev.       Freq.
+------------+------------------------------------
+         否 |   .86617296   1.2711443       2,494
+         是 |    .6711883   .92538643       1,643
+------------+------------------------------------
+      Total |   .78873525   1.1502225       4,137
+
+. </code></pre>
+</div>
+</div>
+<p>分析结果显示，ATE为0.789，ATT为0.671，ATU为0.866，这三个结果均与使用 <code>teffect ra</code> 命令计算得到的结果完全一致。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("www\.lazyzhou\.cn");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "pumc-zhou/comments";
+    script.dataset.repoId = "R_kgDON9RmWA";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDON9RmWM4CnLUH";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ This website was built with Quarto
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2023-2025, LB.ZHOU</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Stata/25-07-29-linear-reg.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pumc-zhou/Med-Stat-Notes">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

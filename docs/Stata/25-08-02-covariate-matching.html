@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Simonzhou">
+
+<title>26-因果推断中的协变量匹配 – Medical Statistics Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-5c1f7a6a2802c248a2ccc243aab7b5c3.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c10fc78dcbf6a5f009fadeb270c5b5ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G2HZEXHNCE"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="26-因果推断中的协变量匹配 – Medical Statistics Notes">
+<meta property="og:description" content="This is a Note site.">
+<meta property="og:image" content="www.lazyzhou.cn/Stata/images/logo.png">
+<meta property="og:site_name" content="Medical Statistics Notes">
+<meta name="twitter:title" content="26-因果推断中的协变量匹配 – Medical Statistics Notes">
+<meta name="twitter:description" content="This is a Note site.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../images/logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">医学统计学习笔记</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learn" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learn</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">    
+        <li>
+    <a class="dropdown-item" href="../Learn/Basic/00-basic.html">
+ <span class="dropdown-text">Basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Learn/Advance/00-advance.html">
+ <span class="dropdown-text">Advance</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Learn/Bayes/00-About-Bayes.html">
+ <span class="dropdown-text">Bayes</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Guide</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">    
+        <li>
+    <a class="dropdown-item" href="../Guide/Guide-intro.html">
+ <span class="dropdown-text">Guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/Python/Python-intro.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/R/01-R-intro.html">
+ <span class="dropdown-text">R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/SAS/25-02-16-SAS-intro.html">
+ <span class="dropdown-text">SAS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Guide/Stata/25-03-09-Stata-intro.qmd"> 
+<span class="menu-text">Stata</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-quarto" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Quarto</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">    
+        <li>
+    <a class="dropdown-item" href="../Quarto/quarto-intro.html">
+ <span class="dropdown-text">Intro</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
+        <li>
+    <a class="dropdown-item" href="../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/pumc-zhou" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="切换阅读器模式">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">26-因果推断中的协变量匹配</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">主页</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learn</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Basic</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">医学统计学基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">关于卫生统计学</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/02-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">不同资料的统计描述</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/03-Random-events-probabilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">随机事件的概率</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/04-discrete-type-random-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">离散型随机变量的概率分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/05-random-variable-of-continuous-type.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">连续型随机变量的概率分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/06-parameter-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参数估计</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/07-parameter-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参数检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/08-anova-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">非参数检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">简单线性相关和回归</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Advance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Advance/00-advance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-医学统计学（伪）高级部分</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Advance/01-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-负二项分布</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bayes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">贝叶斯与概率推理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Bayes/01-Bayes-PGM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">贝叶斯与概率图模型（PGM）</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guide</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/00-R-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-R 安装</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/01-R-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-R 相关介绍与记录</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/02-ggplot2-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-ggplot2 绘图基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/03-ggplot2-barplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-ggplot2 绘图——条形图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/04-ggplot2-folded-line.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-ggplot2 绘图——折线图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/05-ggplot2-scatter-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-ggplot2 绘图——散点图</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python和Stata处理一份卫生费用数据</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做生存分析和COX回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做桑基图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-04-28-DID.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID 双重差分模型</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-04-28-DID-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use the DID in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">SAS</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-SAS-Intro and Record</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-SAS 安装与vscode 扩展</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-05-SAS-install-connect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-SAS 在 Jupyter Notebook 中使用</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-22-SAS-Base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-SAS Base</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-SAS 程序基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-25-SAS-DATA-LIB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-SAS 数据库与数据集</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-26-SAS-DATA-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06-SAS 数据集的整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-28-SAS-function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-SAS 运算符与常用函数</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-29-SAS-function-example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-SAS 运算符与常用函数示例</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-29-SAS-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-SAS 计量资料的单变量分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-31-two-sample-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-SAS 两样本均数的比较分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-01-multi-sample-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-08-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16-SAS 对泊松分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-09-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17-SAS 与负二项分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-10-Goodness-of-Fit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18-SAS 拟合优度检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-10-poisson-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19-SAS Poisson 回归与负二项回归</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Stata</span></span>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Quarto</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qmd config giscus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/quarto-LaTeX.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto与LaTeX的记录</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul>
+  <li><a href="#粗化精确匹配" id="toc-粗化精确匹配" class="nav-link active" data-scroll-target="#粗化精确匹配"><span class="header-section-number">1</span> 粗化精确匹配</a></li>
+  <li><a href="#使用权重进行回归分析" id="toc-使用权重进行回归分析" class="nav-link" data-scroll-target="#使用权重进行回归分析"><span class="header-section-number">2</span> 使用权重进行回归分析</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Stata/25-08-02-covariate-matching.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">26-因果推断中的协变量匹配</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>Simonzhou </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025年8月2日</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">修改于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">2025年8月3日</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="53cf96d7" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>这里将继续使用 <code>cfps2010.dta</code> 这个数据演示上述命令的使用方法。对该数据基本情况的介绍请参见第四章第五节。</p>
+<p>与第四章演示线性回归时相同，本章分析的因变量仍为 <code>lninc</code>，干预变量为 <code>college</code>。</p>
+<p>一元线性回归结果显示，在不控制任何变量的情况下，<code>college</code> 对 <code>lninc</code> 的回归系数为 0.824，这意味着，考上大学的样本和没有考上大学的样本在 <code>lninc</code> 上的均值差为 0.824。不过，考虑到这两个子样本在 <code>hukou</code>、<code>age</code>、<code>gender</code>、<code>race</code>、<code>sib-ling</code> 和 <code>fmedu</code> 这几个协变量上存在很大差异，上述结果很可能是有偏的。</p>
+<p>下面，我们将通过匹配法来校正干预组和控制组在这些协变量上的差异。</p>
+<div id="77bb8cb0" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2"></a>use <span class="st">"../../Data/causal-inference/cfps2010.dta"</span>, clear</span>
+<span id="cb2-3"><a href="#cb2-3"></a>reg lninc college,vce(cluster provcd)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. use "../../Data/causal-inference/cfps2010.dta", clear
+
+. reg lninc college,vce(cluster provcd)
+
+Linear regression                               Number of obs     =      4,137
+                                                F(1, 24)          =     271.17
+                                                Prob &gt; F          =     0.0000
+                                                R-squared         =     0.1095
+                                                Root MSE          =     1.1498
+
+                                (Std. err. adjusted for 25 clusters in provcd)
+------------------------------------------------------------------------------
+             |               Robust
+       lninc | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .823612   .0500155    16.47   0.000     .7203851     .926839
+       _cons |   9.353189   .1084703    86.23   0.000     9.129317    9.577061
+------------------------------------------------------------------------------
+
+. </code></pre>
+</div>
+</div>
+<p>我们使用的第一种方法是精确匹配。首先，我们仅对 <code>hukou</code> 这一个变量实施精确匹配，具体如下：</p>
+<div id="ac244dc7" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a><span class="op">%%</span>stata</span>
+<span id="cb4-2"><a href="#cb4-2"></a>teffects nnmatch (lninc) (college),ematch(hukou)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          1
+Outcome model  : matching                                     min =        786
+Distance metric: Mahalanobis                                  max =       1594
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .8021249   .0337823    23.74   0.000     .7359127     .868337
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>可以发现，在对 <code>hukou</code> 实施了精确匹配之后，<code>college</code> 对 <code>lninc</code> 的平均干预效应下降到了 0.802。</p>
+<p>如果我们同时对 <code>hukou</code>、<code>age</code>、<code>gender</code>、<code>race</code>、<code>sibling</code> 和 <code>fmedu</code> 实施精确匹配，其结果又会如何呢？</p>
+<div id="e348bbed" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a><span class="op">%%</span>stata</span>
+<span id="cb6-2"><a href="#cb6-2"></a>teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">SystemError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[5], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">stata</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\IPython\core\interactiveshell.py:2543</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg ansi-bold">(self, magic_name, line, cell)</span>
+<span class="ansi-green-fg">   2541</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>builtin_trap:
+<span class="ansi-green-fg">   2542</span>     args <span style="color:rgb(98,98,98)">=</span> (magic_arg_s, cell)
+<span class="ansi-green-fg ansi-bold">-&gt; 2543</span>     result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   2545</span> <span style="font-style:italic;color:rgb(95,135,135)"># The code below prevents the output from being displayed</span>
+<span class="ansi-green-fg">   2546</span> <span style="font-style:italic;color:rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
+<span class="ansi-green-fg">   2547</span> <span style="font-style:italic;color:rgb(95,135,135)"># when the last Python token in the expression is a ';'.</span>
+<span class="ansi-green-fg">   2548</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(fn, magic<span style="color:rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\ipython\stpymagic.py:276</span>, in <span class="ansi-cyan-fg">PyStataMagic.stata</span><span class="ansi-blue-fg ansi-bold">(self, line, cell, local_ns)</span>
+<span class="ansi-green-fg">    274</span>     _stata<span style="color:rgb(98,98,98)">.</span>run(cell, quietly<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, inline<span style="color:rgb(98,98,98)">=</span>_config<span style="color:rgb(98,98,98)">.</span>stconfig[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">grshow</span><span style="color:rgb(175,0,0)">'</span>])
+<span class="ansi-green-fg">    275</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg ansi-bold">--&gt; 276</span>     <span class="ansi-yellow-bg">_stata</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cell</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">quietly</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">inline</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">_config</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">stconfig</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">grshow</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    278</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gw</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gh</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args:
+<span class="ansi-green-fg">    279</span>     _config<span style="color:rgb(98,98,98)">.</span>set_graph_size(gwidth, gheight)
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:313</span>, in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg ansi-bold">(cmd, quietly, echo, inline)</span>
+<span class="ansi-green-fg">    311</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">qui </span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)"> + cmds[0], echo)</span>
+<span class="ansi-green-fg">    312</span> <span style="color:rgb(175,0,0)">        else:</span>
+<span class="ansi-green-fg ansi-bold">--&gt; 313</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(cmds[0], echo)</span>
+<span class="ansi-green-fg">    314</span> <span style="color:rgb(175,0,0)">else:</span>
+<span class="ansi-green-fg">    315</span> <span style="color:rgb(175,0,0)">    if inline:</span>
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:71</span>, in <span class="ansi-cyan-fg">_stata_wrk1</span><span class="ansi-blue-fg ansi-bold">(cmd, echo)</span>
+<span class="ansi-green-fg">     69</span>         err <span style="color:rgb(98,98,98)">=</span> callback[<span style="color:rgb(98,98,98)">0</span>]
+<span class="ansi-green-fg">     70</span>         callback<span style="color:rgb(98,98,98)">.</span>clear()
+<span class="ansi-green-fg ansi-bold">---&gt; 71</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">SystemError</span>(err)
+<span class="ansi-green-fg">     72</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyboardInterrupt</span>:
+<span class="ansi-green-fg">     73</span>     outputter<span style="color:rgb(98,98,98)">.</span>done()
+
+<span class="ansi-red-fg ansi-bold">SystemError</span>: no exact matches for observation 4; use option osample() to identify all
+observations with deficient matches
+r(459);
+</pre>
+</div>
+</div>
+</div>
+<p>从结果的输出看，Stata 给出了一个错误提示，提示内容无法为所有个案找到在所有协变量上取值都相同的匹配对象。</p>
+<p>于此同时，Stata 还给出了一个建议，即使用 option <code>osample()</code> 去标记那些匹配失败的个案。</p>
+<p>参照这个建议，我们在增加选项 <code>osample()</code> 后重新执行了上述命令。输出结果显示，有 593 名个案无法按照我们设定的要求实施精确匹配。</p>
+<p>对标识变量 <code>overlap</code> 进行统计描述也可以发现，有 593 名个案违反了共同取值范围假定。</p>
+<div id="bd33a1ea" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">%%</span>stata</span>
+<span id="cb7-2"><a href="#cb7-2"></a>teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu) osample(overlap)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg ansi-bold">SystemError</span>                               Traceback (most recent call last)
+Cell <span class="ansi-green-fg ansi-bold">In[6], line 1</span>
+<span class="ansi-green-fg ansi-bold">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_cell_magic</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">stata</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">teffects nnmatch (lninc) (college),ematch(hukou age gender race sibling fmedu) osample(overlap)</span><span style="font-weight:bold;color:rgb(175,95,0)" class="ansi-yellow-bg">\n</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+File <span class="ansi-green-fg ansi-bold">c:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\IPython\core\interactiveshell.py:2543</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_cell_magic</span><span class="ansi-blue-fg ansi-bold">(self, magic_name, line, cell)</span>
+<span class="ansi-green-fg">   2541</span> <span style="font-weight:bold;color:rgb(0,135,0)">with</span> <span style="color:rgb(0,135,0)">self</span><span style="color:rgb(98,98,98)">.</span>builtin_trap:
+<span class="ansi-green-fg">   2542</span>     args <span style="color:rgb(98,98,98)">=</span> (magic_arg_s, cell)
+<span class="ansi-green-fg ansi-bold">-&gt; 2543</span>     result <span style="color:rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   2545</span> <span style="font-style:italic;color:rgb(95,135,135)"># The code below prevents the output from being displayed</span>
+<span class="ansi-green-fg">   2546</span> <span style="font-style:italic;color:rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
+<span class="ansi-green-fg">   2547</span> <span style="font-style:italic;color:rgb(95,135,135)"># when the last Python token in the expression is a ';'.</span>
+<span class="ansi-green-fg">   2548</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(0,135,0)">getattr</span>(fn, magic<span style="color:rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span style="font-weight:bold;color:rgb(0,135,0)">False</span>):
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\ipython\stpymagic.py:276</span>, in <span class="ansi-cyan-fg">PyStataMagic.stata</span><span class="ansi-blue-fg ansi-bold">(self, line, cell, local_ns)</span>
+<span class="ansi-green-fg">    274</span>     _stata<span style="color:rgb(98,98,98)">.</span>run(cell, quietly<span style="color:rgb(98,98,98)">=</span><span style="font-weight:bold;color:rgb(0,135,0)">True</span>, inline<span style="color:rgb(98,98,98)">=</span>_config<span style="color:rgb(98,98,98)">.</span>stconfig[<span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">grshow</span><span style="color:rgb(175,0,0)">'</span>])
+<span class="ansi-green-fg">    275</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg ansi-bold">--&gt; 276</span>     <span class="ansi-yellow-bg">_stata</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">cell</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">quietly</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span style="font-weight:bold;color:rgb(0,135,0)" class="ansi-yellow-bg">False</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">inline</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">_config</span><span style="color:rgb(98,98,98)" class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">stconfig</span><span class="ansi-yellow-bg">[</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">grshow</span><span style="color:rgb(175,0,0)" class="ansi-yellow-bg">'</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    278</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gw</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args <span style="font-weight:bold;color:rgb(175,0,255)">or</span> <span style="color:rgb(175,0,0)">'</span><span style="color:rgb(175,0,0)">-gh</span><span style="color:rgb(175,0,0)">'</span> <span style="font-weight:bold;color:rgb(175,0,255)">in</span> args:
+<span class="ansi-green-fg">    279</span>     _config<span style="color:rgb(98,98,98)">.</span>set_graph_size(gwidth, gheight)
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:313</span>, in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg ansi-bold">(cmd, quietly, echo, inline)</span>
+<span class="ansi-green-fg">    311</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(</span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)">qui </span><span style="color:rgb(175,0,0)">"</span><span style="color:rgb(175,0,0)"> + cmds[0], echo)</span>
+<span class="ansi-green-fg">    312</span> <span style="color:rgb(175,0,0)">        else:</span>
+<span class="ansi-green-fg ansi-bold">--&gt; 313</span> <span style="color:rgb(175,0,0)">            _stata_wrk1(cmds[0], echo)</span>
+<span class="ansi-green-fg">    314</span> <span style="color:rgb(175,0,0)">else:</span>
+<span class="ansi-green-fg">    315</span> <span style="color:rgb(175,0,0)">    if inline:</span>
+
+File <span class="ansi-green-fg ansi-bold">C:\Program Files/Stata18\utilities\pystata\stata.py:71</span>, in <span class="ansi-cyan-fg">_stata_wrk1</span><span class="ansi-blue-fg ansi-bold">(cmd, echo)</span>
+<span class="ansi-green-fg">     69</span>         err <span style="color:rgb(98,98,98)">=</span> callback[<span style="color:rgb(98,98,98)">0</span>]
+<span class="ansi-green-fg">     70</span>         callback<span style="color:rgb(98,98,98)">.</span>clear()
+<span class="ansi-green-fg ansi-bold">---&gt; 71</span>         <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">SystemError</span>(err)
+<span class="ansi-green-fg">     72</span> <span style="font-weight:bold;color:rgb(0,135,0)">except</span> <span style="font-weight:bold;color:rgb(215,95,95)">KeyboardInterrupt</span>:
+<span class="ansi-green-fg">     73</span>     outputter<span style="color:rgb(98,98,98)">.</span>done()
+
+<span class="ansi-red-fg ansi-bold">SystemError</span>: 593 observations have no exact matches; they are identified in the osample()
+variable
+r(459);
+</pre>
+</div>
+</div>
+</div>
+<div id="5329d2fa" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2"></a>tab overlap</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    overlap |
+  violation |
+  indicator |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |      3,544       85.67       85.67
+          1 |        593       14.33      100.00
+------------+-----------------------------------
+      Total |      4,137      100.00</code></pre>
+</div>
+</div>
+<p>在同时对多个变量实施精确匹配，且变量中包含像 <code>age</code> 这样的连续变量的时候，精确匹配必然会遭遇维度诅咒，其最直接的表现就是匹配后的样本量大为下降。</p>
+<p>为了避免损失过多样本，我们尝试对 <code>age</code>、<code>race</code> 和 <code>sibling</code> 这三个变量实施马氏匹配，其余变量依然采用精确匹配。具体如下：</p>
+<div id="586b911e" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          1
+Outcome model  : matching                                     min =          1
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7699847    .041446    18.58   0.000     .6887521    .8512174
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>可以发现，在对 <code>age</code>、<code>race</code> 和 <code>sibling</code> 这三个变量实施马氏匹配以后，软件不再提示有匹配失败的问题，且给出了 ATE 的估计值为 0.770.</p>
+<p>上面演示的马氏匹配采用的是默认的 1 对 1 匹配，若要采用 1 对多匹配，需要使用选项 <code>nneighbor()</code>。具体来说，我们可以参照阿巴迪和因本斯的建议采用 1 对 4 匹配，同时使用 1 对 4 匹配下的稳健标准误，具体如下：</p>
+<div id="b43bebae" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu) nneighbor(<span class="dv">4</span>) vce(robust,nn(<span class="dv">4</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          4
+Outcome model  : matching                                     min =          4
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7936157   .0392848    20.20   0.000     .7166189    .8706125
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>可以发现，1 对 4 匹配时的 ATE 为 0.794，与 1 对 1 匹配是很接近，因此分析结果总体上来说是稳健的。</p>
+<p>不过，马氏匹配并不能完全消除干预组和对照组在协变量上的差异。为了解决这个问题，研究者最好使用阿巴迪和因本斯提出的方法对估计结果进行偏差校正。</p>
+<p>对 <code>age</code>、<code>race</code> 和 <code>sibling</code> 这三个变量实施偏差校正后的 1 对 4 匹配估计结果如下：</p>
+<div id="8328befb" class="cell" data-execution_count="10">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu) nneighbor(<span class="dv">4</span>) vce(robust,nn(<span class="dv">4</span>)) biasadj(age race sibling)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          4
+Outcome model  : matching                                     min =          4
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATE          |
+     college |
+ (是 vs 否)  |   .7949957   .0392914    20.23   0.000      .717986    .8720054
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，偏差校正后的估计值为 0.795，与偏差校正前的结果几乎没有差异，这说明在这个例子中，马氏匹配的偏差很小，可以忽略不计。</p>
+<p>最后，对上述命令使用选项 <code>atet</code>，即可得到偏差校正后得 ATT。分析结果显示，其估计值为 0.699，小于 ATE：</p>
+<div id="e1f6bf36" class="cell" data-execution_count="11">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2"></a>teffects nnmatch (lninc age race sibling) (college),ematch(hukou gender fmedu) nneighbor(<span class="dv">4</span>) vce(robust,nn(<span class="dv">4</span>)) biasadj(age race sibling) atet</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Treatment-effects estimation                   Number of obs      =      4,137
+Estimator      : nearest-neighbor matching     Matches: requested =          4
+Outcome model  : matching                                     min =          4
+Distance metric: Mahalanobis                                  max =         50
+------------------------------------------------------------------------------
+             |              AI robust
+       lninc | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ATET         |
+     college |
+ (是 vs 否)  |   .6993424   .0475923    14.69   0.000     .6060633    .7926215
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>接下来，我们将演示粗化精确匹配。在使用这种方法之前，我们可以先用命令 <code>imb</code> 计算干预组和控制组在所有协变量上的不平衡性：</p>
+<div id="eef5d0f9" class="cell" data-execution_count="12">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a><span class="op">%%</span>stata</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># 使用 imb 命令需要下载 cem 程序包，</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>ssc install cem,replace</span>
+<span id="cb18-4"><a href="#cb18-4"></a>imb hukou age gender race sibling fmedu,treatment(college)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. # 使用 imb 命令需要下载 cem 程序包，
+Unknown #command
+. ssc install cem,replace
+checking cem consistency and verifying not already installed...
+all files already exist and are up to date.
+
+. imb hukou age gender race sibling fmedu,treatment(college)
+
+Multivariate L1 distance: .42932057
+
+Univariate imbalance:
+
+              L1     mean      min      25%      50%      75%      max
+  hukou   .11753   .11753        0        0        0        0        0
+    age   .32978  -6.5436        0       -6       -9       -9        0
+ gender   .04055  -.04055        0        0        0        0        0
+   race   .01072  -.01072        0        0        0        0        0
+sibling   .13284   .13284        0        0        0        0        0
+  fmedu   .22349   .01915        0        0        1       -1        0
+
+. </code></pre>
+</div>
+</div>
+<p>分析结果显示，干预组和控制组在所有 6 个协变量上的总体不平衡指数 <span class="math inline">\(L_1\)</span> 为0.429 。此外，Stata 还汇报了干预组和控制组在每个协变量上的不平衡指数以及两组人在每个协变量的均值、最小值、25%分位数、50%分位数、75%分位数和最大值上的差异。</p>
+<p>一般来说，在比较数据不平衡程度的时候，总体不平衡指数最重要，因此，接下来我们主要根据这个指标来评估匹配效果。</p>
+<section id="粗化精确匹配" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="粗化精确匹配"><span class="header-section-number">1</span> 粗化精确匹配</h2>
+<p>现在，我们尝试对数据进行粗化精确匹配。</p>
+<p>首先，我们以30、35、40、45和50为分割点，将年龄粗化为一个 6 分类变量；而其他变量则使用软件默认的方式进行粗化。</p>
+<p>需要注意的是，fmedu 有 3 个取值：初中及以下、高中及以上和数据缺失。考虑到这 3 个类别不宜合并，因此，我们在其变量名后的括号中使用 <code>#0</code> 表示不对该变量进行粗化。</p>
+<p>采用上述设置的命令和结果如下：</p>
+<div id="55cb00a7" class="cell" data-execution_count="22">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a><span class="op">%%</span>stata</span>
+<span id="cb20-2"><a href="#cb20-2"></a>local cut <span class="op">=</span> <span class="st">"#0"</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>cem hukou age(<span class="dv">30</span> <span class="dv">35</span> <span class="dv">40</span> <span class="dv">45</span> <span class="dv">50</span>) gender race sibling fmedu (`cut<span class="st">'),treatment(college)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. local cut = "#0"
+
+. cem hukou age(30 35 40 45 50) gender race sibling fmedu (`cut'),treatment(col
+&gt; lege)
+
+Matching Summary:
+-----------------
+Number of strata: 206
+Number of matched strata: 133
+
+              0     1
+      All  2494  1643
+  Matched  2409  1583
+Unmatched    85    60
+
+
+Multivariate L1 distance: .20630897
+
+Univariate imbalance:
+
+               L1      mean       min       25%       50%       75%       max
+  hukou   8.3e-16   1.1e-16         0         0         0         0         0
+    age    .07527    -.1677         0         0         1         0         0
+ gender   1.4e-15   6.7e-16         0         0         0         0         0
+   race   9.0e-16   1.8e-15         0         0         0         0         0
+sibling   2.4e-15  -1.9e-16         0         0         0         0         0
+  fmedu   3.7e-16   2.8e-15         0         0         0         0         0
+
+. </code></pre>
+</div>
+</div>
+<p>输出结果显示，按照上述方法进行粗化精确匹配之后，大多数干预组个案和控制组个案找到了与之精确匹配的对象，匹配失败的个案之后 145 个。其中干预组个案60个，控制组个案85个。</p>
+<p>匹配之后，干预组和控制组在所有6个协变量上的总体不平衡指数下降到了 0.206，且单个协变量的不平衡指数都非常接近 0。</p>
+<p>这说明与匹配之前相比，匹配后的样本在平衡性上有很大的提升。</p>
+<p>以上所示的命令将 <code>age</code> 粗化为一个等间距的 6 分类变量。此外，我们也可以根据分位数将 <code>age</code> 粗化为等规模的 6 分类变量。具体命令和结果如下：</p>
+<div id="498308e6" class="cell" data-execution_count="23">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a><span class="op">%%</span>stata</span>
+<span id="cb22-2"><a href="#cb22-2"></a>cem hukou age(<span class="co">#6) gender race sibling fmedu (#0),treatment(college)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(using the scott break method for imbalance)
+
+Matching Summary:
+-----------------
+Number of strata: 179
+Number of matched strata: 118
+
+              0     1
+      All  2494  1643
+  Matched  2421  1579
+Unmatched    73    64
+
+
+Multivariate L1 distance: .22223609
+
+Univariate imbalance:
+
+              L1     mean      min      25%      50%      75%      max
+  hukou  5.3e-15  4.6e-15        0        0        0        0        0
+    age   .08636  -.24076        0        0        0        0        0
+ gender  6.0e-15  7.2e-15        0        0        0        0        0
+   race  1.2e-15  2.1e-15        0        0        0        0        0
+sibling  4.1e-15  1.7e-15        0        0        0        0        0
+  fmedu  7.4e-15  5.3e-15        0        0        0        0        0</code></pre>
+</div>
+</div>
+<p>分析结果显示，通过上述方法保留的匹配样本略多于前一种方法，但平衡性指数却比之前高。所以综合来看，匹配效果与之前相当。</p>
+<p>最后，我们演示根据 <code>cem</code> 的自动粗化算法得到的匹配结果：</p>
+<div id="e2310b6e" class="cell" data-execution_count="24">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a><span class="op">%%</span>stata</span>
+<span id="cb24-2"><a href="#cb24-2"></a>cem hukou age gender race sibling fmedu (<span class="co">#0),treatment(college)</span></span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(using the scott break method for imbalance)
+
+Matching Summary:
+-----------------
+Number of strata: 369
+Number of matched strata: 214
+
+              0     1
+      All  2494  1643
+  Matched  2330  1523
+Unmatched   164   120
+
+
+Multivariate L1 distance: .09076546
+
+Univariate imbalance:
+
+               L1      mean       min       25%       50%       75%       max
+  hukou   1.1e-15  -6.7e-16         0         0         0         0         0
+    age    .02518   -.02531         0         0         0         0         0
+ gender   1.8e-15  -2.3e-15         0         0         0         0         0
+   race   8.7e-18         0         0         0         0         0         0
+sibling   1.3e-15  -3.1e-16         0         0         0         0         0
+  fmedu   1.6e-15   1.2e-15         0         0         0         0         0</code></pre>
+</div>
+</div>
+<p>可以发现，使用这种方法损失的样本量很多，但不平衡指数却比之前两种方法有大幅下降。</p>
+<p>这体现了在粗化精确匹配过程中经常出现的一个现象，即排除在外的极端样本越多，匹配样本的平衡性通常就越能够得到保证。考虑到第三章方法的平衡性指数最小，且样本损失依然在可接受的范围内，我们接下来将用该方法生成的权重 <code>cem_weights</code> 进行后续分析</p>
+</section>
+<section id="使用权重进行回归分析" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="使用权重进行回归分析"><span class="header-section-number">2</span> 使用权重进行回归分析</h2>
+<p>首先，我们可以使用该权重进行加权后的一元线性回归：</p>
+<div id="a96825c9" class="cell" data-execution_count="25">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="op">%%</span>stata</span>
+<span id="cb26-2"><a href="#cb26-2"></a>reg lninc college [iw<span class="op">=</span>cem_weights]</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     3,852
+-------------+----------------------------------   F(1, 3850)      =    333.41
+       Model |  450.866614         1  450.866614   Prob &gt; F        =    0.0000
+    Residual |  5207.69062     3,850  1.35264691   R-squared       =    0.0797
+-------------+----------------------------------   Adj R-squared   =    0.0797
+       Total |  5658.55723     3,851  1.46937347   Root MSE        =    1.1629
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |   .6996738   .0383184    18.26   0.000     .6245475    .7748001
+       _cons |    9.47577   .0240912   393.33   0.000     9.428537    9.523003
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>分析结果显示，通过这种方法得到的 <code>college</code> 的回归系数为 0.700，或者说 ATT（干预组的平均干预效应）为 0.700.这与之前偏差校正以后得到的 1 对 4 马氏匹配的估计结果非常接近。</p>
+<p>接下来，我们可以在回归方程中纳入原始的协变量，以进一步消除匹配样本在这些变量上的不平衡性。</p>
+<p>分析结果显示，纳入更多控制变量以后，<code>college</code> 的回归系数只发生了非常细微的变化。这主要是因为，粗化精确匹配已经在很大程度上消除了干预组和控制组在原始协变量上的不平衡性（匹配后 <span class="math inline">\(L_1\)</span> 从 0.429 下降到了 0.091），此时，在回归方程中纳入更多控制变量的意义已经不大。</p>
+<p>不过在统计分析时控制这些协变量是一种更加稳健的做法，因此，这里建议研究者在回归分析时始终对原始协变量进行统计控制。</p>
+<div id="d32b8774" class="cell" data-execution_count="26">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a><span class="op">%%</span>stata</span>
+<span id="cb28-2"><a href="#cb28-2"></a>reg lninc college hukou age gender race sibling i.fmedu [iw<span class="op">=</span>cem_weights]</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+      Source |       SS           df       MS      Number of obs   =     3,853
+-------------+----------------------------------   F(8, 3844)      =     59.25
+       Model |  621.146148         8  77.6432685   Prob &gt; F        =    0.0000
+    Residual |  5037.41109     3,844  1.31046074   R-squared       =    0.1098
+-------------+----------------------------------   Adj R-squared   =    0.1079
+       Total |  5658.55723     3,852  1.46899201   Root MSE        =    1.1448
+
+------------------------------------------------------------------------------
+       lninc | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+     college |    .699765   .0377211    18.55   0.000     .6258097    .7737203
+       hukou |   .1384669   .0417004     3.32   0.001     .0567099    .2202238
+         age |   .0036032    .002706     1.33   0.183    -.0017021    .0089086
+      gender |   .3631285   .0378722     9.59   0.000     .2888771    .4373799
+        race |   .1562387   .1279194     1.22   0.222    -.0945576    .4070351
+     sibling |   .1464629   .0537444     2.73   0.006     .0410927    .2518332
+             |
+       fmedu |
+         是  |   .0025106    .043347     0.06   0.954    -.0824748     .087496
+       缺失  |   .0241171   .0565652     0.43   0.670    -.0867836    .1350179
+             |
+       _cons |   8.892506    .162912    54.58   0.000     8.573104    9.211908
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("www\.lazyzhou\.cn");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "pumc-zhou/comments";
+    script.dataset.repoId = "R_kgDON9RmWA";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDON9RmWM4CnLUH";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ This website was built with Quarto
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2023-2025, LB.ZHOU</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Stata/25-08-02-covariate-matching.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pumc-zhou/Med-Stat-Notes">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

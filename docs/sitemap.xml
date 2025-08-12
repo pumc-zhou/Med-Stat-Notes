@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-08-11T13:21:29.066Z</lastmod>
+    <lastmod>2025-08-12T13:40:43.491Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/Python/25-03-14-Sankey-diagram.html</loc>
@@ -299,5 +299,117 @@
   <url>
     <loc>www.lazyzhou.cn/Quarto/quarto-intro.html</loc>
     <lastmod>2025-03-04T13:25:36.151Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-08-02-covariate-matching.html</loc>
+    <lastmod>2025-08-03T12:41:35.942Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-11-2-DID.html</loc>
+    <lastmod>2025-06-08T11:39:14.719Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-10-coefplot.html</loc>
+    <lastmod>2025-05-11T06:54:15.728Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-09-2-data-manage.html</loc>
+    <lastmod>2025-05-10T10:54:27.172Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-08-5-Ord-Logistic-Reg.html</loc>
+    <lastmod>2025-05-09T04:27:50.800Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-08-3-Cox-reg.html</loc>
+    <lastmod>2025-05-08T09:16:19.931Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-08-1-GLM.html</loc>
+    <lastmod>2025-05-07T14:00:51.682Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-07-3-multi-reg.html</loc>
+    <lastmod>2025-05-07T08:08:31.448Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-07-1-ANOVA.html</loc>
+    <lastmod>2025-05-07T05:07:50.546Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-06-chi2-fisher-test.html</loc>
+    <lastmod>2025-05-07T06:34:16.815Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-05-scatter-plot.html</loc>
+    <lastmod>2025-05-07T07:06:02.190Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-04-CI.html</loc>
+    <lastmod>2025-05-06T08:38:46.757Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-02-stata-obs.html</loc>
+    <lastmod>2025-05-06T08:38:48.486Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-03-11-ITSA.html</loc>
+    <lastmod>2025-05-06T08:37:58.301Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-03-09-Stata-intro.html</loc>
+    <lastmod>2025-05-06T08:39:58.734Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-04-29-Stata-PY.html</loc>
+    <lastmod>2025-05-06T08:38:55.260Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-03-describe-index.html</loc>
+    <lastmod>2025-05-07T06:50:12.123Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-05-log-do.html</loc>
+    <lastmod>2025-05-06T08:38:46.127Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-05-ttest.html</loc>
+    <lastmod>2025-05-06T08:38:43.780Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-06-RR-CAL.html</loc>
+    <lastmod>2025-05-07T10:56:07.984Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-07-2-simple-line-reg.html</loc>
+    <lastmod>2025-05-07T07:35:31.613Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-07-4-log-binary.html</loc>
+    <lastmod>2025-05-07T13:47:57.251Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-08-2-survival-ana.html</loc>
+    <lastmod>2025-05-08T08:23:20.985Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-08-4-GEE.html</loc>
+    <lastmod>2025-05-08T10:00:28.236Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-09-1-multinomail-logistic-reg.html</loc>
+    <lastmod>2025-05-09T07:00:49.002Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-10-advanced-plot.html</loc>
+    <lastmod>2025-05-10T11:50:50.496Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-05-11-1-empirical-ana.html</loc>
+    <lastmod>2025-05-11T08:20:56.817Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Stata/25-07-29-linear-reg.html</loc>
+    <lastmod>2025-08-02T09:52:55.270Z</lastmod>
   </url>
 </urlset>

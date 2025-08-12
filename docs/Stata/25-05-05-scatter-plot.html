@@ -1,0 +1,2152 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-Hans" xml:lang="zh-Hans"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Simon Zhou">
+
+<title>05-双变量作图 – Medical Statistics Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/logo.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-5c1f7a6a2802c248a2ccc243aab7b5c3.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-f98ea211b99fe8356d6469e598480a52.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-c10fc78dcbf6a5f009fadeb270c5b5ed.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-38290126b76a4b9536b36799e04cc93f.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "没有结果",
+    "search-matching-documents-text": "匹配的文档",
+    "search-copy-link-title": "复制搜索链接",
+    "search-hide-matches-text": "隐藏其它匹配结果",
+    "search-more-match-text": "更多匹配结果",
+    "search-more-matches-text": "更多匹配结果",
+    "search-clear-button-title": "清除",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "取消",
+    "search-submit-button-title": "提交",
+    "search-label": "搜索"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-G2HZEXHNCE"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-G2HZEXHNCE', { 'anonymize_ip': true});
+</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+<meta property="og:title" content="05-双变量作图 – Medical Statistics Notes">
+<meta property="og:description" content="This is a Note site.">
+<meta property="og:image" content="www.lazyzhou.cn/Stata/images/logo.png">
+<meta property="og:site_name" content="Medical Statistics Notes">
+<meta name="twitter:title" content="05-双变量作图 – Medical Statistics Notes">
+<meta name="twitter:description" content="This is a Note site.">
+<meta name="twitter:image" content="www.lazyzhou.cn/Stata/25-05-05-scatter-plot_files/figure-html/cell-4-output-1.svg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../images/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../images/logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">医学统计学习笔记</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="搜索"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="展开或折叠导航栏" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-learn" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Learn</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-learn">    
+        <li>
+    <a class="dropdown-item" href="../Learn/Basic/00-basic.html">
+ <span class="dropdown-text">Basic</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Learn/Advance/00-advance.html">
+ <span class="dropdown-text">Advance</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Learn/Bayes/00-About-Bayes.html">
+ <span class="dropdown-text">Bayes</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-guide" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Guide</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-guide">    
+        <li>
+    <a class="dropdown-item" href="../Guide/Guide-intro.html">
+ <span class="dropdown-text">Guide</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/Python/Python-intro.html">
+ <span class="dropdown-text">Python</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/R/01-R-intro.html">
+ <span class="dropdown-text">R</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../Guide/SAS/25-02-16-SAS-intro.html">
+ <span class="dropdown-text">SAS</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../Guide/Stata/25-03-09-Stata-intro.qmd"> 
+<span class="menu-text">Stata</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-quarto" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Quarto</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-quarto">    
+        <li>
+    <a class="dropdown-item" href="../Quarto/quarto-intro.html">
+ <span class="dropdown-text">Intro</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-books" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Books</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-books">    
+        <li>
+    <a class="dropdown-item" href="../navbar/small_talk/book.html">
+ <span class="dropdown-text">Small Talk</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../navbar/translation/medicine.html">
+ <span class="dropdown-text">Translation</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools tools-wide">
+    <a href="https://github.com/pumc-zhou" title="" class="quarto-navigation-tool px-1" aria-label=""><i class="bi bi-github"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="切换深色模式"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="切换阅读器模式">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">05-双变量作图</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="展开或折叠侧边栏导航" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="搜索" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="搜索"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">主页</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Learn</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false">
+ <span class="menu-text">Basic</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/00-basic.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">医学统计学基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/01-preview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">关于卫生统计学</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/02-descriptive-statistics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">不同资料的统计描述</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/03-Random-events-probabilities.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">随机事件的概率</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/04-discrete-type-random-variable.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">离散型随机变量的概率分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/05-random-variable-of-continuous-type.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">连续型随机变量的概率分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/06-parameter-estimation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参数估计</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/07-parameter-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">参数检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/08-anova-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/09-chi2-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/10-non-parameter-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">非参数检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Basic/11-regression-correlation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">简单线性相关和回归</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false">
+ <span class="menu-text">Advance</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Advance/00-advance.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-医学统计学（伪）高级部分</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Advance/01-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-负二项分布</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false">
+ <span class="menu-text">Bayes</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Bayes/00-About-Bayes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">贝叶斯与概率推理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Learn/Bayes/01-Bayes-PGM.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">贝叶斯与概率图模型（PGM）</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Guide</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">R</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/00-R-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-R 安装</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/01-R-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-R 相关介绍与记录</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/02-ggplot2-base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-ggplot2 绘图基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/03-ggplot2-barplot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-ggplot2 绘图——条形图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/04-ggplot2-folded-line.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-ggplot2 绘图——折线图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/R/05-ggplot2-scatter-plot.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-ggplot2 绘图——散点图</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false">
+ <span class="menu-text">Python</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/2025-02-20-Medical-expenses.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python和Stata处理一份卫生费用数据</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-03-09-cos-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做生存分析和COX回归</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-03-14-Sankey-diagram.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">用Python做桑基图</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-04-28-DID.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID 双重差分模型</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/25-04-28-DID-test.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">How to Use the DID in Python</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/Python/Python-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false">
+ <span class="menu-text">SAS</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="false" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-02-16-SAS-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">00-SAS-Intro and Record</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-03-11-SAS-install.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01-SAS 安装与vscode 扩展</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-05-SAS-install-connect.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02-SAS 在 Jupyter Notebook 中使用</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-22-SAS-Base.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03-SAS Base</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-24-SAS-program.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">04-SAS 程序基础</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-25-SAS-DATA-LIB.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">05-SAS 数据库与数据集</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-26-SAS-DATA-tidy.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">06-SAS 数据集的整理</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-28-SAS-function.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">07-SAS 运算符与常用函数</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-29-SAS-function-example.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">08-SAS 运算符与常用函数示例</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-29-SAS-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">09-SAS 计量资料的单变量分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-05-31-two-sample-univariate.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">10-SAS 两样本均数的比较分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-01-multi-sample-ANOVA.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11-SAS 多个样本均数比较的方差分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-04-SAS-corr-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">12-SAS 相关与回归分析</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-06-chi2-1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">13-SAS 卡方检验1-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-06-chi2-2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">14-SAS 卡方检验2-四格表资料卡方检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-07-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">15-SAS 对二项分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-08-poisson.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">16-SAS 对泊松分布的概率计算与假设检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-09-negative-binomial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">17-SAS 与负二项分布</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-10-Goodness-of-Fit.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">18-SAS 拟合优度检验</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Guide/SAS/25-06-10-poisson-reg.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">19-SAS Poisson 回归与负二项回归</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Stata</span></span>
+  </li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Quarto</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="展开或折叠此栏">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/config-giscus-github.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Qmd config giscus</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/quarto-intro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto introduction</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../Quarto/quarto-LaTeX.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto与LaTeX的记录</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="1">
+    <h2 id="toc-title">该页面内容</h2>
+   
+  <ul class="collapse">
+  <li><a href="#scatt-plots散点图" id="toc-scatt-plots散点图" class="nav-link active" data-scroll-target="#scatt-plots散点图"><span class="header-section-number">1</span> scatt plots(散点图)</a>
+  <ul class="collapse">
+  <li><a href="#stata的scheme主题" id="toc-stata的scheme主题" class="nav-link" data-scroll-target="#stata的scheme主题"><span class="header-section-number">1.1</span> Stata的scheme（主题）</a></li>
+  <li><a href="#scatter命令" id="toc-scatter命令" class="nav-link" data-scroll-target="#scatter命令"><span class="header-section-number">1.2</span> scatter命令</a></li>
+  <li><a href="#option-by" id="toc-option-by" class="nav-link" data-scroll-target="#option-by"><span class="header-section-number">1.3</span> Option: by</a></li>
+  </ul></li>
+  <li><a href="#平滑曲线" id="toc-平滑曲线" class="nav-link" data-scroll-target="#平滑曲线"><span class="header-section-number">2</span> 平滑曲线</a>
+  <ul class="collapse">
+  <li><a href="#lowess命令的语法" id="toc-lowess命令的语法" class="nav-link" data-scroll-target="#lowess命令的语法"><span class="header-section-number">2.1</span> lowess命令的语法：</a></li>
+  <li><a href="#lowess-命令的示例" id="toc-lowess-命令的示例" class="nav-link" data-scroll-target="#lowess-命令的示例"><span class="header-section-number">2.2</span> <code>lowess</code> 命令的示例：</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul class="collapse"><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Stata/25-05-05-scatter-plot.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">05-双变量作图</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> 代码</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">显示所有代码</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">隐藏所有代码</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">作者</div>
+    <div class="quarto-title-meta-contents">
+             <p>Simon Zhou </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">发布于</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">2025年5月5日</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div id="8cbe299b" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> stata_setup</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>stata_setup.config(<span class="st">'C:/Program Files/Stata18'</span>, <span class="st">'mp'</span>, splash<span class="op">=</span><span class="va">False</span>)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="scatt-plots散点图" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> scatt plots(散点图)</h1>
+<p>散点图是一种用于可视化两个变量之间关系的图形。它通过在二维坐标系中绘制点来表示数据点的位置，横轴和纵轴分别表示两个变量的值。散点图可以帮助我们识别变量之间的相关性、趋势和异常值。</p>
+<p>散点图通常用于探索性数据分析（EDA）阶段。</p>
+<div id="b3d7bf8d" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">//</span> 载入数据集，使用 Stata 的内置数据集 auto.dta</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sysuse auto, clear</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. // 载入数据集，使用 Stata 的内置数据集 auto.dta
+. sysuse auto, clear
+(1978 automobile data)
+
+. </code></pre>
+</div>
+</div>
+<section id="stata的scheme主题" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="stata的scheme主题"><span class="header-section-number">1.1</span> Stata的scheme（主题）</h2>
+<p>Stata提供了多种 scheme （style）来美化图形。可以使用<code>set scheme</code>命令来设置主题。以下是一些常用的主题：</p>
+<ul>
+<li><code>s1color</code>：适用于需要强调数据点的情况，具有鲜艳的颜色。</li>
+<li><code>s2color</code>：默认主题，适用于需要强调数据点的情况。</li>
+<li><code>s1mono</code>：单色主题，适用于打印或黑白显示。</li>
+<li><code>s2mono</code>：单色主题，适用于强调数据点的情况。</li>
+<li><code>economist</code>：适用于经济学和社会科学领域的主题。</li>
+<li><code>journal</code>：适用于学术期刊的主题，具有简洁和专业的外观。</li>
+<li><code>s1manual</code>：手动主题，适用于需要自定义颜色和样式的情况。</li>
+<li><code>s2manual</code>：手动主题，适用于强调数据点的情况。</li>
+<li><code>s2color8</code>：适用于需要强调数据点的情况，具有8种颜色的主题。</li>
+<li><code>plotplain</code>：适用于需要强调数据点的情况，具有简单和清晰的外观。</li>
+</ul>
+<p>更好的主题？</p>
+<p><code>simono</code>：适用于需要强调数据点的情况，具有简洁和专业的外观。</p>
+<section id="scheme-的设置" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="scheme-的设置"><span class="header-section-number">1.1.1</span> scheme 的设置</h3>
+<p><code>set scheme s1mono</code> : 当前会话中设置主题为<code>s1mono</code>。</p>
+<p><code>set scheme s1mono, perm</code> : 永久设置主题为<code>s1mono</code>, <code>perm</code> 为 <code>permanent</code> 的缩写。</p>
+</section>
+</section>
+<section id="scatter命令" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="scatter命令"><span class="header-section-number">1.2</span> scatter命令</h2>
+<p><code>scatter</code>命令用于绘制散点图。基本语法如下：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>[<span class="kw">twoway</span>] <span class="kw">scatter</span> yvar xvar [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>] [, options]</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p>最基础的形式：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> yvar xvar</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p>进阶形式：</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> y1 y2 y3 x1 <span class="kw">x2</span> x3 [<span class="kw">if</span>] [<span class="kw">in</span>] [<span class="kw">weight</span>], options</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="4dcf2c4d" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>twoway scatter mpg weight</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-4-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="ee87d859" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>twoway scatter weight length price</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-5-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="改变散点图的样式" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="改变散点图的样式"><span class="header-section-number">1.2.1</span> 改变散点图的样式</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> <span class="fu">y</span> x,<span class="bn">msymbol</span>(oh) mcolor(<span class="kw">red</span>) msize(medium) <span class="dv">scheme</span>(s1mono)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>msymbol</code>:改变形状(<code>help symbolstyle</code>)</li>
+<li><code>mcolor</code>:改变颜色(<code>help colorstyle</code>)</li>
+<li><code>msize</code>:改变大小(<code>help markerstyle</code>)</li>
+</ul>
+<div id="11d9f8e6" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span> symbolstyle</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[G-4] symbolstyle -- Choices for the shape of markers
+                     (View complete PDF manual entry)
+
+
+Syntax
+------
+
+                        Synonym
+        symbolstyle     (if any)     Description
+        -------------------------------------------------------
+        circle             O         solid
+        diamond            D         solid
+        triangle           T         solid
+        square             S         solid
+        plus               +
+        X                  X
+        arrowf             A         filled arrow head
+        arrow              a
+        pipe               |
+        V                  V
+
+        smcircle           o         solid
+        smdiamond          d         solid
+        smsquare           s         solid
+        smtriangle         t         solid
+        smplus
+        smx                x
+        smv                v
+
+        circle_hollow      Oh        hollow
+        diamond_hollow     Dh        hollow
+        triangle_hollow    Th        hollow
+        square_hollow      Sh        hollow
+
+        smcircle_hollow    oh        hollow
+        smdiamond_hollow   dh        hollow
+        smtriangle_hollow  th        hollow
+        smsquare_hollow    sh        hollow
+
+        point              p         a small dot
+        none               i         a symbol that is invisible
+        -------------------------------------------------------
+
+        For a symbol palette displaying each of the above symbols, type
+
+            . palette symbolpalette [, scheme(schemename)]
+
+        Other symbolstyles may be available; type
+
+            . graph query symbolstyle
+
+        to obtain the complete list of symbolstyles installed on your
+        computer.
+
+
+Description
+-----------
+
+    Markers are the ink used to mark where points are on a plot; see [G-3]
+    marker_options.  symbolstyle specifies the shape of the marker.
+
+    You specify the symbolstyle inside the msymbol() option allowed with many
+    of the graph commands:
+
+        . graph twoway ..., msymbol(symbolstyle) ...
+
+    Sometimes you will see that a symbolstylelist is allowed:
+
+        . scatter ..., msymbol(symbolstylelist) ...
+
+    A symbolstylelist is a sequence of symbolstyles separated by spaces.
+    Shorthands are allowed to make specifying the list easier; see [G-4]
+    stylelists.
+
+
+Links to PDF documentation
+--------------------------
+
+        Remarks and examples
+
+    The above sections are not included in this help file.
+
+
+Remarks
+-------
+
+    Remarks are presented under the following headings:
+
+        Typical use
+        Filled and hollow symbols
+        Size of symbols
+
+
+Typical use
+-----------
+
+    msymbol(symbolstyle) is one of the more commonly specified options.  For
+    instance, you may not be satisfied with the default rendition of
+
+        . scatter mpg weight if foreign ||
+          scatter mpg weight if !foreign
+
+    and prefer
+
+        . scatter mpg weight if foreign, msymbol(oh) ||
+          scatter mpg weight if !foreign, msymbol(x)
+
+    When you are graphing multiple y variables in the same plot, you can
+    specify a list of symbolstyles inside the msymbol() option:
+
+        . scatter mpg1 mpg2 weight, msymbol(oh x)
+
+    The result is the same as typing
+
+        . scatter mpg1 weight, msymbol(oh) ||
+          scatter mpg2 weight, msymbol(x)
+
+    Also, in the above, we specified the symbol-style synonyms.  Whether you
+    type
+
+        . scatter mpg1 weight, msymbol(oh) ||
+          scatter mpg2 weight, msymbol(x)
+
+    or
+
+        . scatter mpg1 weight, msymbol(smcircle_hollow) ||
+          scatter mpg2 weight, msymbol(smx)
+
+    makes no difference.
+
+
+Filled and hollow symbols
+-------------------------
+
+    The symbolstyle specifies the shape of the symbol, and in that sense, one
+    of the styles circle and hcircle -- and diamond and hdiamond, etc. -- is
+    unnecessary in that each is a different rendition of the same shape.  The
+    option mfcolor(colorstyle) (see [G-3] marker_options) specifies how the
+    inside of the symbol is to be filled.  hcircle(), hdiamond, etc., are
+    included for convenience and are equivalent to specifying
+
+        msymbol(Oh): msymbol(O) mfcolor(none)
+
+        msymbol(dh): msymbol(d) mfcolor(none)
+
+        etc.
+
+    Using mfcolor() to fill the inside of a symbol with different colors
+    sometimes creates what are effectively new symbols.  For instance, if you
+    take msymbol(O) and fill its interior with a lighter shade of the same
+    color used to outline the shape, you obtain a pleasing result.  For
+    instance, you might try
+
+        msymbol(O) mlcolor(yellow) mfcolor(.5*yellow)
+
+    or
+
+        msymbol(O) mlcolor(gs5) mfcolor(gs12)
+
+    as in
+
+        . scatter mpg weight, msymbol(O) mlcolor(gs5) mfcolor(gs14)
+          (click to run)
+
+
+Size of symbols
+---------------
+
+    Just as msymbol(O) and msymbol(Oh) differ only in mfcolor(), msymbol(O)
+    and msymbol(o) -- symbols circle and smcircle -- differ only in msize().
+    In particular,
+
+        msymbol(O): msymbol(O) msize(medium)
+
+        msymbol(o): msymbol(O) msize(small)
+
+    and the same is true for all the other large and small symbol pairs.
+
+    msize() is interpreted as being relative to the size of the graph region
+    (see [G-3] region_options), so the same symbol size will in fact be a
+    little different in
+
+        . scatter mpg weight
+
+    and
+
+        . scatter mpg weight, by(foreign total)</code></pre>
+</div>
+</div>
+<div id="8d38ddd8" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span> colorstyle</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[G-4] colorstyle -- Choices for color
+                    (View complete PDF manual entry)
+
+
+Syntax
+------
+
+    Set color of &lt;object&gt; to colorstyle
+
+        &lt;object&gt;color(colorstyle)
+
+
+    Set color of all affected objects to colorstyle
+
+        color(colorstyle)
+
+
+    Set opacity of &lt;object&gt; to #, where # is a percentage of 100% opacity
+
+        &lt;object&gt;color(%#)
+
+
+    Set opacity for all affected objects colors to #
+
+        color(%#)
+
+
+    Set both color and opacity of &lt;object&gt;
+
+        &lt;object&gt;color(colorstyle%#)
+
+
+    Set both color and opacity of all affected objects
+
+        &lt;object&gt;color(colorstyle%#)
+
+
+    colorstyle            Description
+    -------------------------------------------------------------------------
+    black                 
+
+    stc1                  color used by scheme stcolor
+    stc2                  color used by scheme stcolor
+    .                     
+    .                     
+    stc15                 color used by scheme stcolor
+    stblue                blue used by scheme stcolor
+    stgreen               green used by scheme stcolor
+    stred                 red used by scheme stcolor
+    styellow              yellow used by scheme stcolor
+
+    gs0                   gray scale: 0 = black
+    gs1                   gray scale: very dark gray
+    gs2                   
+    .                     
+    .                     
+    gs15                  gray scale: very light gray
+    gs16                  gray scale: 16 = white
+
+    white                 
+
+    blue                  
+    bluishgray            
+    brown                 
+    cranberry             
+    cyan                  
+    dimgray               between gs14 and gs15
+    dkgreen               dark green
+    dknavy                dark navy blue
+    dkorange              dark orange
+    eggshell              
+    emerald               
+    forest_green          
+    gold                  
+    gray                  equivalent to gs8
+    green                 
+    khaki                 
+    lavender              
+    lime                  
+    ltblue                light blue
+    ltbluishgray          light blue-gray, used by scheme s2color
+    ltkhaki               light khaki
+    magenta               
+    maroon                
+    midblue               
+    midgreen              
+    mint                  
+    navy                  
+    olive                 
+    olive_teal            
+    orange                
+    orange_red            
+    pink                  
+    purple                
+    red                   
+    sand                  
+    sandb                 bright sand
+    sienna                
+    stone                 
+    teal                  
+    yellow                
+
+                          colors used by The Economist magazine:
+    ebg                           background color
+    ebblue                        bright blue
+    edkblue                       dark blue
+    eltblue                       light blue
+    eltgreen                      light green
+    emidblue                      midblue
+    erose                         rose
+
+    none                  no color; invisible; draws nothing
+    background or bg      same color as background
+    foreground or fg      same color as foreground
+
+    "# # #"               RGB value; white = "255 255 255"
+
+    "# # # #"             CMYK value; yellow = "0 0 255 0"
+
+    "hsv # # #"           HSV value; white = "hsv 0 0 1"
+
+    colorstyle*#          color with adjusted intensity; #'s range from 0 to
+                            255
+
+    colorstyle%#          color with adjusted opacity; #s range from 0 to 100
+
+    *#                    default color with adjusted intensity
+    %#                    default color with adjusted opacity
+    -------------------------------------------------------------------------
+    When specifying RGB, CMYK, or HSV values, it is best to enclose the
+      values in quotes; type "128 128 128" not 128 128 128.
+
+
+Description
+-----------
+
+    colorstyle sets the color and opacity of graph components such as lines,
+    backgrounds, and bars.  Some options allow a sequence of colorstyles with
+    colorstylelist; see [G-4] stylelists.
+
+
+Links to PDF documentation
+--------------------------
+
+        Remarks and examples
+
+    The above sections are not included in this help file.
+
+
+Remarks
+-------
+
+    colorstyle sets the color and opacity of graph components such as lines,
+    backgrounds, and bars.  Colors can be specified with a named color, such
+    as black, olive, and yellow, or with a color value in the RGB, CMYK, or
+    HSV format.  colorstyle can also set a component to match the background
+    color or foreground color.  Additionally, colorstyle can modify color
+    intensity, making the color lighter or darker.  Some options allow a
+    sequence of colorstyles with colorstylelist; see [G-4] stylelists.
+
+    To see a list of named colors, use graph query colorstyle.  See [G-2]
+    graph query.  For a color palette showing an individual color or
+    comparing two colors, use palette color.  See [G-2] palette.
+
+    Remarks are presented under the following headings:
+
+        Adjust opacity
+        Adjust intensity
+        Specify RGB values
+        Specify CMYK values
+        Specify HSV values
+        Export custom colors
+
+
+Adjust opacity
+--------------
+
+    Opacity is the percentage of a color that covers the background color.
+    That is, 100% means that the color fully hides the background, and 0%
+    means that the color has no coverage and is fully transparent.  If you
+    prefer to think about transparency, opacity is the inverse of
+    transparency.  Adjust opacity with the % modifier.  For example, type
+
+        green%50
+        "0 255 0%50"
+        %30
+
+    Omitting the color specification in the command adjusts the opacity of
+    the object while retaining the default color.  For instance, specify
+    mcolor(%30) with graph twoway scatter to use the default fill color at
+    30% opacity.
+
+    Specifying color%0 makes the object completely transparent and is
+    equivalent to color none.
+
+
+Adjust intensity
+----------------
+
+    Color intensity (brightness) can be modified by specifying a color, *,
+    and a multiplier value.  For example, type
+
+        green*.8
+        purple*1.5
+        "0 255 255*1.2"
+        "hsv 240 1 1*.5"
+
+    A value of 1 leaves the color unchanged, a value greater than 1 makes the
+    color darker, and a value less than 1 makes the color lighter.  Note that
+    there is no space between color and *, even when color is a numerical
+    value for RGB or CMYK.
+
+    Omitting the color specification in the command adjusts the intensity of
+    the object's default color.  For instance, specify bcolor(*.7) with graph
+    twoway bar to use the default fill color at reduced brightness, or
+    specify bcolor(*2) to increase the brightness of the default color.
+
+    Specifying color*0 makes the color as light as possible, but it is not
+    equivalent to color none.  color*255 makes the color as dark as possible,
+    although values much smaller than 255 usually achieve the same result.
+
+    For an example using the intensity adjustment, see Typical use in [G-2]
+    graph twoway kdensity.
+
+
+RGB values
+----------
+
+    In addition to specifying named colors such as yellow, you can specify
+    colors with RGB values.  An RGB value is a triplet of numbers ranging
+    from 0 to 255 that describes the level of red, green, and blue light that
+    must be emitted to produce a given color.  RGB is used to define colors
+    for on-screen display and in nonprofessional printing.  Examples of RGB
+    values are
+
+        red     =   255    0    0
+        green   =     0  255    0
+        blue    =     0    0  255
+        white   =   255  255  255
+        black   =     0    0    0
+        gray    =   128  128  128
+        navy    =    26   71  111
+
+
+CMYK values
+-----------
+
+    You can specify colors using CMYK values.  You will probably only use
+    CMYK values when they are provided by a journal or publisher.  You can
+    specify CMYK values either as integers from 0 to 255 or as proportions of
+    ink using real numbers from 0.0 to 1.0.  If all four values are 1 or
+    less, the numbers are taken to be proportions of ink.  For example,
+
+        red     =     0  255  255    0   or, equivalently,     0     1  1     0
+        green   =   255    0  255    0   or, equivalently,     1     0  1     0
+        blue    =   255  255    0    0   or, equivalently,     1     1  0     0
+        white   =     0    0    0    0   or, equivalently,     0     0  0     0
+        black   =     0    0    0  255   or, equivalently,     0     0  0     1
+        gray    =     0    0    0  128   or, equivalently,     0     0  0    .5
+        navy    =    85   40    0  144   or, equivalently,  .334  .157  0  .565
+
+
+HSV values
+----------
+
+    You can specify colors with HSV (hue, saturation, and value), also called
+    HSL (hue, saturation, and luminance) and HSB (hue, saturation, and
+    brightness).  HSV is often used in image editing software.  An HSV value
+    is a triplet of numbers.  So that Stata can differentiate them from RGB
+    values, HSV colors must be prefaced with hsv.  The first number specifies
+    the hue from 0 to 360, the second number specifies the saturation from 0
+    to 1, and the third number specifies the value (luminance or brightness)
+    from 0 to 1.  For example,
+
+        red     =   hsv   0     1     1
+        green   =   hsv 120     1  .502
+        blue    =   hsv 240     1     1
+        white   =   hsv   0     0     1
+        black   =   hsv   0     0     0
+        navy    =   hsv 209  .766  .435
+
+
+Export custom colors
+--------------------
+
+    graph export stores all colors as RGB+opacity values, that is, RGB values
+    0-255 and opacity values 0-1.  If you need color values from Stata in
+    CMYK format, use the graph export command with the cmyk(on) option, and
+    save the graph in one of the following formats: PostScript, Encapsulated
+    PostScript, or PDF.
+
+    You can set Stata to permanently use CMYK colors for PostScript export
+    files by typing translator set Graph2ps cmyk on and for EPS export files
+    by typing translator set Graph2eps cmyk on.
+
+    The CMYK values returned in graph export may differ from the CMYK values
+    that you entered.  This is because Stata normalizes CMYK values by
+    reducing all CMY values until one value is 0.  The difference is added to
+    the K (black) value.  For example, Stata normalizes the CMYK value 10 10
+    5 0 to 5 5 0 5.  Stata subtracts 5 from the CMY values so that Y is 0 and
+    then adds 5 to K.
+
+
+Video example
+-------------
+
+        Transparency in Stata graphs</code></pre>
+</div>
+</div>
+<div id="70b566fe" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>twoway scatter mpg weight,msymbol(D) mcolor(red) msize(medium)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-8-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="option-by" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="option-by"><span class="header-section-number">1.3</span> Option: by</h2>
+<p>按照某个变量分组绘制散点图，可以使用<code>by</code>选项。<code>by</code>选项可以将数据按照指定变量进行分组，并为每个组绘制单独的散点图。</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> <span class="fu">y</span> x, <span class="kw">by</span>(groupvar)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="58b7acac" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>twoway scatter mpg weight,by(foreign)</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-9-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="13d287f6" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>twoway(scatter mpg weight <span class="cf">if</span> foreign <span class="op">==</span><span class="dv">0</span>)(scatter mpg weight <span class="cf">if</span> foreign <span class="op">==</span><span class="dv">1</span>),legend(label(<span class="dv">1</span> <span class="st">"Domestic"</span>) label(<span class="dv">2</span> <span class="st">"Foreign"</span>))</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-10-output-1.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="平滑曲线" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> 平滑曲线</h1>
+<p>平滑曲线可以用来描述数据的变化趋势或者揭示数据中的隐藏模式。</p>
+<p>在Stata中，绘制光滑曲线的命令主要有以下几种：<code>lowess</code>、<code>loess</code>、<code>lowess2</code>、<code>lpoly</code>和<code>bspline</code>。它们各自具有不同的特点和适用范围，可以根据具体的数据类型和分析目的选择使用。</p>
+<p>lowess是一种局部加权回归平滑方法，它可以通过对数据集进行局部加权回归来生成光滑曲线。</p>
+<section id="lowess命令的语法" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="lowess命令的语法"><span class="header-section-number">2.1</span> lowess命令的语法：</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">lowess</span> yvar xvar [<span class="kw">if</span>] [<span class="kw">in</span>] [, options]</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+<p>其中，<code>yvar</code> 是因变量，<code>xvar</code> 是自变量。<code>options</code> 是一些可选参数，用来进一步调整光滑曲线的形状和拟合效果。例如，可以通过指定 <code>span</code> 参数来控制局部回归的窗口大小，较小的 <code>span</code> 值会导致更平滑的曲线，而较大的 <code>span</code> 值会导致更接近原始数据的曲线。</p>
+<p><code>options</code> 有如下选项：</p>
+<div class="quarto-figure quarto-figure-left">
+<figure class="figure">
+<p><img src="images/lowess-main.png" class="img-fluid figure-img"></p>
+<figcaption>Lowess-syntax</figcaption>
+</figure>
+</div>
+<p><code>lowess</code> 命令生成的光滑曲线可以通过绘图命令来展示，例如使用 <code>twoway scatter</code> 命令可以在散点图上叠加绘制光滑曲线。<a href="https://www.stata.com/manuals14/rlowess.pdf">lowess — Lowess smoothing</a></p>
+</section>
+<section id="lowess-命令的示例" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="lowess-命令的示例"><span class="header-section-number">2.2</span> <code>lowess</code> 命令的示例：</h2>
+<div id="f6dea29f" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>代码</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="op">%%</span>stata</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>sysuse auto</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>lowess mpg weight, gen(lowess_mpg)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>twoway scatter mpg weight <span class="op">||</span> line lowess_mpg weight</span></code></pre></div><button title="复制到剪贴板" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. sysuse auto
+(1978 automobile data)
+
+. lowess mpg weight, gen(lowess_mpg)
+
+. twoway scatter mpg weight || line lowess_mpg weight
+
+. </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="25-05-05-scatter-plot_files/figure-html/cell-11-output-2.svg" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>上述代码首先载入Stata自带的汽车数据集auto，然后使用lowess命令生成一个光滑曲线，将结果保存在变量lowess_mpg中。最后利用twoway scatter命令绘制散点图，并使用line命令在散点图上叠加绘制光滑曲线。</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "已复制");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "已复制");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+    const viewSource = window.document.getElementById('quarto-view-source') ||
+                       window.document.getElementById('quarto-code-tools-source');
+    if (viewSource) {
+      const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+      viewSource.addEventListener("click", function(e) {
+        if (sourceUrl) {
+          // rstudio viewer pane
+          if (/\bcapabilities=\b/.test(window.location)) {
+            window.open(sourceUrl);
+          } else {
+            window.location.href = sourceUrl;
+          }
+        } else {
+          const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+          modal.show();
+        }
+        return false;
+      });
+    }
+    function toggleCodeHandler(show) {
+      return function(e) {
+        const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+        for (let i=0; i<detailsSrc.length; i++) {
+          const details = detailsSrc[i].parentElement;
+          if (show) {
+            details.open = true;
+          } else {
+            details.removeAttribute("open");
+          }
+        }
+        const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+        const fromCls = show ? "hidden" : "unhidden";
+        const toCls = show ? "unhidden" : "hidden";
+        for (let i=0; i<cellCodeDivs.length; i++) {
+          const codeDiv = cellCodeDivs[i];
+          if (codeDiv.classList.contains(fromCls)) {
+            codeDiv.classList.remove(fromCls);
+            codeDiv.classList.add(toCls);
+          } 
+        }
+        return false;
+      }
+    }
+    const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+    if (hideAllCode) {
+      hideAllCode.addEventListener("click", toggleCodeHandler(false));
+    }
+    const showAllCode = window.document.getElementById("quarto-show-all-code");
+    if (showAllCode) {
+      showAllCode.addEventListener("click", toggleCodeHandler(true));
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("www\.lazyzhou\.cn");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      if (authorPrefersDark) {
+          [baseTheme, altTheme] = [altTheme, baseTheme];
+      }
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "pumc-zhou/comments";
+    script.dataset.repoId = "R_kgDON9RmWA";
+    script.dataset.category = "General";
+    script.dataset.categoryId = "DIC_kwDON9RmWM4CnLUH";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ This website was built with Quarto
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+<p>Copyright 2023-2025, LB.ZHOU</p>
+<div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/blob/main/Stata/25-05-05-scatter-plot.ipynb" class="toc-action"><i class="bi bi-github"></i>查看代码</a></li><li><a href="https://github.com/pumc-zhou/Med-Stat-Notes/issues/new" class="toc-action"><i class="bi empty"></i>反馈问题</a></li></ul></div></div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/pumc-zhou/Med-Stat-Notes">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

@@ -79,8 +79,8 @@ website:
             file: Guide/R/01-R-intro.qmd
           - text: "SAS"
             file: Guide/SAS/25-02-16-SAS-intro.qmd
-          - text: "Stata"
-            file: Guide/Stata/25-03-09-Stata-intro.qmd
+      - text: "Stata"
+        file: Stata/25-03-09-Stata-intro.qmd
       - text: "Quarto"
         menu:
           - text: "Intro"
@@ -125,8 +125,8 @@ website:
             contents: Guide/Python/*.{qmd,ipynb}
           - section: SAS
             contents: Guide/SAS/*.{qmd,ipynb}
-          - section: Stata
-            contents: Guide/Stata/*.{qmd,ipynb}
+      - section: Stata
+        contents: Stata/*.{qmd,ipynb}
       - section: Quarto
         contents: Quarto/*.qmd
 
