@@ -46,15 +46,15 @@ website:
   site-url: www.lazyzhou.cn
   repo-url: https://github.com/pumc-zhou/Med-Stat-Notes # GitHub仓库的链接
   repo-actions: [source, issue] # 在页面右侧显示导航到GitHub仓库的链接
-  favicon: images/logo.png # 网页的logo
+  favicon: images/logo.svg # 网页的logo
   open-graph: 
-    image: images/logo.png
+    image: images/logo.svg
   search:
     location: navbar
     type: textbox # overlay or textbox
 
   navbar:
-    logo: images/logo.png
+    logo: images/logo.svg
     title: "医学统计学习笔记"
     background: light # 顶栏背景色（默认为primary，网页主色）
     search: true
