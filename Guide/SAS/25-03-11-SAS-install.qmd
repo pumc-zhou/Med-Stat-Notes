@@ -148,6 +148,12 @@ Available kernels:
 C:\Users\asus\AppData\Local\Programs\Python\Python312\Lib\site-packages\saspy
 ```
 
+在新电脑中，使用conda配置python解释器后，具体路径在：
+
+``` bash
+C:\Software\miniconda3\envs\work311\Lib\site-packages\saspy\sascfg.py
+```
+
 在这个文件路径下找到 `sascfg.py` 文件，该文件中需要配置连接SAS的信息。可以配置连接本地机器的SAS；也可以配置连接远程机器的SAS Server，无论是Linux Server还是Windows Server都可以。此处就以连接本地SAS为例进行说明。
 
 1.  打开该文件，首先是一大段注释；

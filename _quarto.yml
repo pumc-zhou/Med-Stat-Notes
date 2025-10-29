@@ -7,7 +7,7 @@ project:
 editor: visual # 编辑使用visual模式
 
 jupyter: 
-  path: "C:/Users/asus/AppData/Local/Programs/Python/Python312/python.exe"
+  path: "C:/Software/miniconda3/envs/work311/python.exe"
   kernelspec:
     name: "python3"
     language: "python"
@@ -17,7 +17,7 @@ jupyter:
     environment: base
     
 execute:
-  python: "C:/Users/asus/AppData/Local/Programs/Python/Python312/python.exe"
+  python: "C:/Software/miniconda3/envs/work311/python.exe"
   eval: true
   warning: false
   cache: true # 开启运算结果缓存。将会在文件目录中生成后缀“_cache”的文件夹。
