@@ -645,6 +645,69 @@ C:\Program Files\SASHome\SASFoundation\9.4\core\sasext
 %%sas
 ```
 
+## 选择正确的 kernel！
+
+![](images/paste-4.png)
+
+在选择内核前需要安装 `saspy`
+
+``` python
+(base) PS C:\Users\zhou> conda install saspy
+3 channel Terms of Service accepted
+Retrieving notices: done
+Channels:
+ - defaults
+Platform: win-64
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+
+==> WARNING: A newer version of conda exists. <==
+    current version: 25.9.1
+    latest version: 25.11.1
+
+Please update conda by running
+
+    $ conda update -n base -c defaults conda
+
+
+
+## Package Plan ##
+
+  environment location: C:\Software\miniconda3
+
+  added / updated specs:
+    - saspy
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    ca-certificates-2025.12.2  |       haa95532_0         125 KB
+    saspy-5.102.1              |   py39haa95532_0         9.3 MB
+    ------------------------------------------------------------
+                                           Total:         9.4 MB
+
+The following NEW packages will be INSTALLED:
+
+  saspy              pkgs/main/win-64::saspy-5.102.1-py39haa95532_0
+
+The following packages will be UPDATED:
+
+  ca-certificates                       2025.9.9-haa95532_0 --> 2025.12.2-haa95532_0
+
+
+Proceed ([y]/n)? y
+
+
+Downloading and Extracting Packages:
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+```
+
 使用语法如下所示：
 
 ``` sas

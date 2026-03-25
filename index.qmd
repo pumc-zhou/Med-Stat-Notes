@@ -1,6 +1,6 @@
 ---
 title: "医学统计学习笔记"
-author: LB ZHOU
+author: LyuB ZHOU
 date: today
 date-format: "YYYY[年]M[月]D[日]"
 author-title: Author # 作者栏的标签。默认标签为“AUTHOR”。
@@ -53,3 +53,5 @@ Epidemiologists, in response to a health emergency or as a result of systematic 
 -   项目记录
     -   Kaggle
 -   读书笔记
+
+2026-03-25，项目都快过去两年了，现在最大的感慨就是 AI 的进展与应用实在是太快了， 快到就算跟随，只要两三天不关注，就落后一代了，笔记的作用越来越只是给自己工作留痕与方便以后复现，很多问题都是问 AI 就可以得到高质量的答案，不需要再去翻哪些无聊且晦涩的各种各样的经验分享或笔记，这是好事，但或许也是一种坏事，因为 AI 在给我们喂内容，而新的内容，会在哪里生长呢？

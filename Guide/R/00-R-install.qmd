@@ -12,6 +12,8 @@ format:
         number-sections: true
         toc: true
         toc-depth: 3
+        grid:
+          margin-width: 350px
 ---
 
 1.  进入官网：<https://www.r-project.org/>

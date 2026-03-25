@@ -74,7 +74,7 @@
         "\n",
         "安装相关的包和库："
       ],
-      "id": "b42c3f4b"
+      "id": "9b27b083"
     },
     {
       "cell_type": "code",
@@ -84,7 +84,7 @@
         "pip install dash\n",
         "pip install numpy"
       ],
-      "id": "7c533769",
+      "id": "508fa30a",
       "execution_count": null,
       "outputs": []
     },
@@ -96,7 +96,7 @@
         "\n",
         "在 `Python` 终端或编辑器运行后，可以在浏览器中输入 <http://127.0.0.1:8051/> 进行查看。"
       ],
-      "id": "4ead36af"
+      "id": "b50c44bc"
     },
     {
       "cell_type": "code",
@@ -164,7 +164,7 @@
         "if __name__ == \"__main__\":\n",
         "    app.run_server(debug=True, port=8051)"
       ],
-      "id": "d3120e83",
+      "id": "4c0da7d8",
       "execution_count": null,
       "outputs": []
     },
@@ -178,7 +178,7 @@
         "\n",
         "### 安装 jupyter-dash"
       ],
-      "id": "0eed16bb"
+      "id": "7d480c78"
     },
     {
       "cell_type": "code",
@@ -187,7 +187,7 @@
         "#| eval: false\n",
         "pip install jupyter-dash"
       ],
-      "id": "ee757bb4",
+      "id": "62be2339",
       "execution_count": null,
       "outputs": []
     },
@@ -197,7 +197,7 @@
       "source": [
         "### 运行程序"
       ],
-      "id": "cd9ffd8c"
+      "id": "fe51d28f"
     },
     {
       "cell_type": "code",
@@ -266,7 +266,7 @@
         "# 在 Jupyter 中运行，mode='inline' 将图形嵌入笔记本\n",
         "app.run_server(mode='inline')"
       ],
-      "id": "cf393422",
+      "id": "e2ef9773",
       "execution_count": null,
       "outputs": []
     },
@@ -284,7 +284,7 @@
         "\n",
         "2.  改用静态图形"
       ],
-      "id": "98ac11ce"
+      "id": "25724c32"
     },
     {
       "cell_type": "code",
@@ -312,7 +312,7 @@
         "fig = create_complex_sankey()\n",
         "fig.write_html(\"sankey.html\", include_plotlyjs='cdn')"
       ],
-      "id": "630d4f30",
+      "id": "43069d3a",
       "execution_count": null,
       "outputs": []
     },
@@ -328,7 +328,7 @@
         "\n",
         "end."
       ],
-      "id": "af78806c"
+      "id": "d42c8d8e"
     }
   ],
   "metadata": {
