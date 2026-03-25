@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>www.lazyzhou.cn/index.html</loc>
-    <lastmod>2025-10-29T07:50:12.277Z</lastmod>
+    <lastmod>2026-03-25T09:01:04.328Z</lastmod>
   </url>
   <url>
     <loc>www.lazyzhou.cn/Guide/Python/25-03-14-Sankey-diagram.html</loc>
@@ -411,5 +411,13 @@
   <url>
     <loc>www.lazyzhou.cn/Stata/25-07-29-linear-reg.html</loc>
     <lastmod>2025-08-02T09:52:55.270Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/R/00-R-install.html</loc>
+    <lastmod>2026-03-25T09:01:04.328Z</lastmod>
+  </url>
+  <url>
+    <loc>www.lazyzhou.cn/Guide/R/01-R-intro.html</loc>
+    <lastmod>2026-03-25T09:01:04.328Z</lastmod>
   </url>
 </urlset>
